@@ -1,0 +1,621 @@
+<?xml version="1.0"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Application\Application.cpp">
+			<Filter>addons\ofxPiMapper\src\Application</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\ApplicationBaseMode.cpp">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\PresentationMode.cpp">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\ProjectionMappingMode.cpp">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\SourceSelectionMode.cpp">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\TextureMappingMode.cpp">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Application\SettingsLoader.cpp">
+			<Filter>addons\ofxPiMapper\src\Application</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\AddGridColCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\AddGridRowCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\AddSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\ClearSurfacesCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\CmdManager.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\DeselectSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\DeselectTexCoordCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\DuplicateSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\MvAllTexCoordsCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\MvLayerDnCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\MvLayerUpCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\MvSelectionCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\MvSurfaceVertCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\MvTexCoordCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\RmGridColCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\RmGridRowCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\RmSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SaveTexCoordPosCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\ScaleSurfaceFromToCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelNextSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelNextTexCoordCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelNextVertexCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelPrevSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelPrevTexCoordCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelPrevVertexCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelTexCoordCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SelVertexCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SetApplicationModeCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SetNextSourceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SetPresetCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SetSourceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\SetTexMapDrawModeCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\StartDragSurfaceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\ToggleAnimatedSourceCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\TogglePerspectiveCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Commands\TranslateCanvasCmd.cpp">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Gui.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\LayerPanelWidget.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\ProjectionEditorWidget.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\ScaleWidget.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\SourcesEditorWidget.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\SurfaceHighlightWidget.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\TextureEditorWidget.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\TextureHighlightWidget.cpp">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Info\Info.cpp">
+			<Filter>addons\ofxPiMapper\src\Info</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\MediaServer\DirectoryWatcher.cpp">
+			<Filter>addons\ofxPiMapper\src\MediaServer</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\MediaServer\MediaServer.cpp">
+			<Filter>addons\ofxPiMapper\src\MediaServer</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\ofxPiMapper.cpp">
+			<Filter>addons\ofxPiMapper\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\BaseSource.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\FboSource.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\ImageSource.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\OMXPlayerCache.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\VideoSource.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\BaseSurface.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\GridWarpSurface.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\HexagonSurface.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\QuadSurface.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\SurfaceFactory.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\SurfaceManager.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\SurfaceStack.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\TriangleSurface.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\UserInterface\BaseJoint.cpp">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\UserInterface\CircleJoint.cpp">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\UserInterface\RadioList.cpp">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Utils\HomographyHelper.cpp">
+			<Filter>addons\ofxPiMapper\src\Utils</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.cpp">
+			<Filter>addons\ofxXmlSettings\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.cpp">
+			<Filter>addons\ofxXmlSettings\libs</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlerror.cpp">
+			<Filter>addons\ofxXmlSettings\libs</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
+			<Filter>addons\ofxXmlSettings\libs</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="src">
+			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxGui">
+			<UniqueIdentifier>{4F2A59AF-5F4E-704B-D067-EC13}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxGui\src">
+			<UniqueIdentifier>{645E9533-4DCD-6179-1CDF-CB65}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper">
+			<UniqueIdentifier>{786179B9-4746-74D2-5CA2-7FE7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src">
+			<UniqueIdentifier>{41C93DC6-1560-1818-0159-BBCF}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Application">
+			<UniqueIdentifier>{F2E80125-10C3-56DC-A3F8-629F}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Application\Modes">
+			<UniqueIdentifier>{E9164E21-C2F3-6887-C35F-6F85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Commands">
+			<UniqueIdentifier>{C44595A0-AFB4-0BC1-498F-2F69}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Gui">
+			<UniqueIdentifier>{B705A182-1D28-4D03-3766-46C5}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Gui\Widgets">
+			<UniqueIdentifier>{E409D990-E9A0-0CF6-EC21-ED4A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Info">
+			<UniqueIdentifier>{030FAE43-DC7E-FF6C-C8BB-E2DF}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\MediaServer">
+			<UniqueIdentifier>{4E60C459-54DB-EBE6-BF91-D32E}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Sources">
+			<UniqueIdentifier>{009BC0DF-C95B-1A9C-4A45-720B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Surfaces">
+			<UniqueIdentifier>{BE960821-ADA7-3D52-D23C-9EBA}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\UserInterface">
+			<UniqueIdentifier>{C1A8C1ED-CEAF-9302-802C-C509}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Utils">
+			<UniqueIdentifier>{31018051-CA03-DF14-F73E-7D6F}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxXmlSettings">
+			<UniqueIdentifier>{877F005D-13E6-0592-1D97-F2E3}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxXmlSettings\src">
+			<UniqueIdentifier>{CCB2AC63-49D2-977C-CFE8-AEAD}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxXmlSettings\libs">
+			<UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Application\Application.h">
+			<Filter>addons\ofxPiMapper\src\Application</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\ApplicationBaseMode.h">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\PresentationMode.h">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\ProjectionMappingMode.h">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\SourceSelectionMode.h">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Application\Modes\TextureMappingMode.h">
+			<Filter>addons\ofxPiMapper\src\Application\Modes</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Application\SettingsLoader.h">
+			<Filter>addons\ofxPiMapper\src\Application</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\AddGridColCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\AddGridRowCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\AddSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\BaseCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\ClearSurfacesCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\CmdManager.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\DeselectSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\DeselectTexCoordCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\DuplicateSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\MvAllTexCoordsCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\MvLayerDnCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\MvLayerUpCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\MvSelectionCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\MvSurfaceVertCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\MvTexCoordCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\RmGridColCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\RmGridRowCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\RmSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SaveTexCoordPosCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\ScaleSurfaceFromToCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelNextSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelNextTexCoordCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelNextVertexCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelPrevSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelPrevTexCoordCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelPrevVertexCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelTexCoordCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SelVertexCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SetApplicationModeCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SetNextSourceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SetPresetCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SetSourceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\SetTexMapDrawModeCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\StartDragSurfaceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\ToggleAnimatedSourceCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\TogglePerspectiveCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Commands\TranslateCanvasCmd.h">
+			<Filter>addons\ofxPiMapper\src\Commands</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Gui.h">
+			<Filter>addons\ofxPiMapper\src\Gui</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\GuiBaseWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\LayerPanelWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\ProjectionEditorWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\ScaleWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\SourcesEditorWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\SurfaceHighlightWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\TextureEditorWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Gui\Widgets\TextureHighlightWidget.h">
+			<Filter>addons\ofxPiMapper\src\Gui\Widgets</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Info\Info.h">
+			<Filter>addons\ofxPiMapper\src\Info</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\MediaServer\DirectoryWatcher.h">
+			<Filter>addons\ofxPiMapper\src\MediaServer</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\MediaServer\MediaServer.h">
+			<Filter>addons\ofxPiMapper\src\MediaServer</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Mode.h">
+			<Filter>addons\ofxPiMapper\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\ofxPiMapper.h">
+			<Filter>addons\ofxPiMapper\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\BaseSource.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\FboSource.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\ImageSource.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\OMXPlayerCache.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\SourceType.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\SourceTypeHelper.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\VideoSource.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\BaseSurface.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\GridWarpSurface.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\HexagonSurface.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\QuadSurface.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\SurfaceFactory.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\SurfaceManager.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\SurfaceStack.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\SurfaceType.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\TriangleSurface.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\UserInterface\BaseJoint.h">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\UserInterface\CircleJoint.h">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\UserInterface\EditorType.h">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\UserInterface\GuiMode.h">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\UserInterface\RadioList.h">
+			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Utils\HomographyHelper.h">
+			<Filter>addons\ofxPiMapper\src\Utils</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxXmlSettings\src\ofxXmlSettings.h">
+			<Filter>addons\ofxXmlSettings\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
+			<Filter>addons\ofxXmlSettings\libs</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="icon.rc" />
+	</ItemGroup>
+</Project>
