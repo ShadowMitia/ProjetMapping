@@ -261,6 +261,12 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ClInclude Include="src\ofApp.h" />
+		<ClInclude Include="src\Scene1.h" />
+		<ClInclude Include="src\Scene2.h" />
+		<ClInclude Include="src\Scene3.h" />
+		<ClInclude Include="src\Scene4.h" />
+		<ClInclude Include="src\Scene5.h" />
+		<ClInclude Include="src\Scene6.h" />
 		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
 		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
 		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h" />

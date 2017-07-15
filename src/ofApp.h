@@ -3,60 +3,13 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxPiMapper.h"
-#include "FboSource.h"
 
-class Scene : public ofx::piMapper::FboSource
-{
-public:
-	Scene()
-	{
-		name = "Scene FBO Source";
-		allocate(500, 500);
-	}
-
-	void draw()
-	{
-		ofClear(0);
-		ofSetColor(255, 255, 0, 255);
-
-		ofDrawRectangle(0, 0, getWidth(), getHeight());
-
-		ofSetColor(0, 0, 0, 255);
-		ofSetLineWidth(5);
-
-		float y = sin(float(ofGetFrameNum()) / 10.0f) * 100.0f;
-
-		ofPoint startPoint = ofPoint(10, y);
-		ofPoint endPoint = ofPoint(getWidth() - 10, getHeight() - y);
-
-		ofDrawLine(startPoint, endPoint);
-
-		float tempY = startPoint.y;
-		startPoint.y = endPoint.y;
-		endPoint.y = tempY;
-
-		ofDrawLine(startPoint, endPoint);
-	}
-};
-
-class SceneAlex : public ofx::piMapper::FboSource
-{
-public:
-	SceneAlex()
-	{
-		name = "Scene Alex FBO Source";
-		allocate(500, 500);
-
-		img.load("tigrou.jpg");
-	}
-
-	void draw()
-	{
-		img.draw(0, 0, 300, 300);
-	}
-
-	ofImage img;
-};
+#include "Scene1.h"
+#include "Scene2.h"
+#include "Scene3.h"
+#include "Scene4.h"
+#include "Scene5.h"
+#include "Scene6.h"
 
 class ofApp : public ofBaseApp{
 
@@ -79,7 +32,11 @@ class ofApp : public ofBaseApp{
 
 		ofxPiMapper mapping;
 
-		Scene* scene;
-		SceneAlex* sceneAlex;
+		Scene1* scene1;
+		Scene2* scene2;
+		Scene3* scene3;
+		Scene4* scene4;
+		Scene5* scene5;
+		Scene6* scene6;
 		
 };

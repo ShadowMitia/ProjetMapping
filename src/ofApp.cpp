@@ -4,10 +4,19 @@
 void ofApp::setup(){
 	ofBackground(0);
 
-	scene = new Scene();
-	sceneAlex = new SceneAlex();
-	mapping.registerFboSource(scene);
-	mapping.registerFboSource(sceneAlex);
+	scene1 = new Scene1();
+	scene2 = new Scene2();
+	scene3 = new Scene3();
+	scene4 = new Scene4();
+	scene5 = new Scene5();
+	scene6 = new Scene6();
+
+	mapping.registerFboSource(scene1);
+	mapping.registerFboSource(scene2);
+	mapping.registerFboSource(scene3);
+	mapping.registerFboSource(scene4);
+	mapping.registerFboSource(scene5);
+	mapping.registerFboSource(scene6);
 
 	mapping.setup();
 }
