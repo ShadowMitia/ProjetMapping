@@ -3,8 +3,11 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofBackground(0);
-
-	scene1 = new Scene1();
+    
+    worlds =new WorldsBox2d;
+    worlds->initWordldsBox2d();
+    
+	scene1 = new Scene1(worlds);
 	scene2 = new Scene2();
 	scene3 = new Scene3();
 	scene4 = new Scene4();
@@ -19,10 +22,13 @@ void ofApp::setup(){
 	mapping.registerFboSource(scene6);
 
 	mapping.setup();
+    
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    worlds->updateWorldsBox2d();
 	mapping.update();
 }
 
@@ -34,6 +40,9 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	mapping.keyPressed(key);
+    if (key=='c') {
+        worlds->creatCircle(mouseX, mouseY);
+    }
 }
 
 //--------------------------------------------------------------

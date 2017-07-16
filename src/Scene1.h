@@ -10,20 +10,22 @@ public:
 	Scene1()
 	{
 		name = "Scene One FBO Source";
-		allocate(500, 500);
+		allocate(600, 300);
 
-		font.load("arial.ttf", 64);
 	}
 
 	void draw()
 	{
 		ofClear(0);
-		ofBackground(255, 0, 0, 255);
-
-		ofSetColor(255);
-		ofScale(100, 100, 100);
-		font.drawString("1", 250, 250);
+		ofBackground(200, 0, 0, 255);
+        //ofDrawBitmapString("1", 50, 50);
+        ofSetColor(ofColor::white);
+        ofSetLineWidth(1);
+        for (int i=0; i<=600; i+=50) {
+            ofDrawLine(i, 0, i, 300);
+        }
+        for (int i=0; i<=300; i+=50) {
+            ofDrawLine(0, i, 1200, i);
+        }
 	}
-
-	ofTrueTypeFont font;
 };

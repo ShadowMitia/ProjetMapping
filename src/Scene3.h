@@ -10,7 +10,7 @@ public:
 	Scene3()
 	{
 		name = "Scene Three FBO Source";
-		allocate(500, 500);
+		allocate(100, 100);
 	}
 
 	void draw()
@@ -19,6 +19,6 @@ public:
 		ofBackground(0, 0, 255, 255);
 
 		ofSetColor(255);
-		ofDrawBitmapString("3", 250, 250);
+		ofDrawBitmapString("3", 50, 50);
 	}
 };

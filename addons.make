@@ -1,3 +1,4 @@
+ofxBox2d
 ofxGui
 ofxPiMapper
 ofxXmlSettings

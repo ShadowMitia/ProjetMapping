@@ -3,13 +3,10 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxPiMapper.h"
+#include "ofxBox2d.h"
 
-#include "Scene1.h"
-#include "Scene2.h"
-#include "Scene3.h"
-#include "Scene4.h"
-#include "Scene5.h"
-#include "Scene6.h"
+#include "ScenesMapping.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -31,6 +28,7 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		ofxPiMapper mapping;
+        WorldsBox2d* worlds; // les mondes Box2d
 
 		Scene1* scene1;
 		Scene2* scene2;
