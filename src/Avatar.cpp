@@ -19,14 +19,14 @@ vector <ofPoint> loadPoints(string file) {
     return pts;
 }
 /////////////////////////////////////////// LoadPoints FIN ////////////////////////////
-void avatar::create(b2World* _b2World){
-    vector <ofPoint> pts = loadPoints("avatar.dat");
+void Avatar::setup(b2World* _b2World){
+    vector <ofPoint> pts = loadPoints("Avatar.dat");
     polygon.addVertices(pts);
     polygon.triangulatePoly();
-    polygon.setPhysics(3.0, 0.53, 0.1);// <<<------------------ propiétées physique
+    polygon.setPhysics(3.0, 0.53, 0.1);
     polygon.create(_b2World);
 }
-void avatar::update()
+void Avatar::update()
 {
     rect.set(this->polygon.getPosition(),10,10); // modif ici + 10 10 a changer.
 
@@ -36,7 +36,7 @@ void avatar::update()
     }
 };
 
-void avatar::draw() {
+void Avatar::draw() {
     polygon.draw();
     if (clone) {
         ofSetColor(ofColor::red);
@@ -44,10 +44,10 @@ void avatar::draw() {
     }
 }
 
-void avatar::createClone(ofVec3f cloneTranslation) {
+void Avatar::createClone(ofVec3f cloneTranslation) {
     if (clone) { return; }
     this->cloneTranslation = cloneTranslation;
-    clone = std::make_unique<avatar>();
+    clone = std::make_unique<Avatar>();
     clone->polygon.setPhysics(this->polygon.density, this->polygon.bounce, this->polygon.friction);
     clone->polygon.addVertices(polygon.getVertices());
     clone->polygon.triangulatePoly();
@@ -55,20 +55,21 @@ void avatar::createClone(ofVec3f cloneTranslation) {
     clone->polygon.create(polygon.getWorld());
     clone->polygon.setVelocity(polygon.getVelocity());
 }
-void avatar::removeClone() {
+void Avatar::removeClone() {
     clone = nullptr;
     cloneTranslation.zero();
 }
-void avatar::teleportTo(ofVec2f destination) {
+void Avatar::teleportTo(ofVec2f destination) {
     polygon.setPosition(destination);
     
 }
-void avatar::teleportToClone() {
+void Avatar::teleportToClone() {
     auto pos = clone->polygon.getPosition();
     polygon.setPosition(pos);
 }
-bool avatar::hasClone() { return clone ? true : false; }
-void avatar::handleInputs(int _key){
+bool Avatar::hasClone() { return clone ? true : false; }
+
+void Avatar::handleInputs(int _key){
     if (_key == OF_KEY_LEFT) {
         polygon.setVelocity(-3, 0);
     }

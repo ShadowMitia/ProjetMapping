@@ -11,7 +11,7 @@
 #include "ofxBox2d.h"
 #include "Light2D.h"
 
-class avatar{
+class Avatar {
 public:
     
     ofxBox2dPolygon polygon;

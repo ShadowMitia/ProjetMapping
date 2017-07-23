@@ -19,7 +19,7 @@ public:
         if (ori == Orientation::HORIZONTAL) {
             entranceA = ofVec2f(x - 10, y - 50);
             entranceB = ofVec2f(x - 10, y + height + 50);
-            
+            A
             exitA = ofVec2f(x + width + 10, y - 50);
             exitB = ofVec2f(x + width + 10, y + height + 50);
         }
