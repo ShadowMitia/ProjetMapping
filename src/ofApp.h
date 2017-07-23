@@ -6,6 +6,7 @@
 #include "ofxBox2d.h"
 
 #include "ScenesMapping.h"
+#include "Avatar.h"
 
 
 class ofApp : public ofBaseApp{
@@ -29,6 +30,7 @@ class ofApp : public ofBaseApp{
 
 		ofxPiMapper mapping;
         WorldsBox2d* worlds; // les mondes Box2d
+    
 
 		Scene1* scene1;
 		Scene2* scene2;

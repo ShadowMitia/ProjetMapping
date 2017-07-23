@@ -39,15 +39,18 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	mapping.keyPressed(key);
+	//mapping.keyPressed(key);
     if (key=='c') {
-        worlds->creatCircle(mouseX, mouseY);
+        worlds->creatAvatar();
+        //worlds->creatCircle(mouseX, mouseY);
     }
+   // worlds->avatar[0]->handleInputs(key);
+    worlds->avatars.at(0)->handleInputs(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-	mapping.keyReleased(key);
+	//mapping.keyReleased(key);
 }
 
 //--------------------------------------------------------------
@@ -57,17 +60,17 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	mapping.mouseDragged(x, y, button);
+	//mapping.mouseDragged(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	mapping.mousePressed(x, y, button);
+	//mapping.mousePressed(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-	mapping.mouseReleased(x, y, button);
+	//mapping.mouseReleased(x, y, button);
 }
 
 //--------------------------------------------------------------
