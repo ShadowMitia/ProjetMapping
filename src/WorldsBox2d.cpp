@@ -55,7 +55,7 @@ void WorldsBox2d::updateWorldsBox2d(){
 }
 
 void WorldsBox2d::creatAvatar(){
-    avatars.push_back(shared_ptr<class avatar>(new class avatar));
+    avatars.push_back(shared_ptr<class Avatar>(new class Avatar));
     avatars.back()->create(world.getWorld());
     avatars.back()->polygon.setPosition(ofGetMouseX(), ofGetMouseY());
 }

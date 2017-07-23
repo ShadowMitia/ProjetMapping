@@ -19,7 +19,6 @@ public:
         if (ori == Orientation::HORIZONTAL) {
             entranceA = ofVec2f(x - 10, y - 50);
             entranceB = ofVec2f(x - 10, y + height + 50);
-            A
             exitA = ofVec2f(x + width + 10, y - 50);
             exitB = ofVec2f(x + width + 10, y + height + 50);
         }
@@ -32,7 +31,7 @@ public:
         }
     }
     
-    void update(std::vector<std::shared_ptr<avatar> > & objects);
+    void update(std::vector<std::shared_ptr<Avatar> > & objects);
         
     void draw();
     void linkTo(Portal* p);

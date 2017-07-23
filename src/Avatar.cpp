@@ -19,7 +19,7 @@ vector <ofPoint> loadPoints(string file) {
     return pts;
 }
 /////////////////////////////////////////// LoadPoints FIN ////////////////////////////
-void Avatar::setup(b2World* _b2World){
+void Avatar::create(b2World* _b2World){
     vector <ofPoint> pts = loadPoints("Avatar.dat");
     polygon.addVertices(pts);
     polygon.triangulatePoly();

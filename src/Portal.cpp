@@ -8,8 +8,8 @@
 
 #include "Portal.h"
 
-void Portal::update(std::vector<std::shared_ptr<avatar> > & objects) {
-    std::vector<std::shared_ptr<avatar>> clones;
+void Portal::update(std::vector<std::shared_ptr<Avatar> > & objects) {
+    std::vector<std::shared_ptr<Avatar>> clones;
     
     for (auto &obj : objects){
         

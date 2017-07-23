@@ -15,7 +15,7 @@ public:
     ofxBox2d                 world;
     ofRectangle              bounds;
     vector<shared_ptr<ofxBox2dCircle>>	circles;
-    std::vector< std::shared_ptr<avatar> > avatars;
+    std::vector< std::shared_ptr<Avatar> > avatars;
     std::vector< std::shared_ptr<Portal> > portals;
     
     

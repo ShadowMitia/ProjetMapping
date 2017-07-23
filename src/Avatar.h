@@ -15,11 +15,11 @@ class Avatar {
 public:
     
     ofxBox2dPolygon polygon;
-    //ofx::Light2D    light;
+    ofx::Light2D    light;
     ofRectangle     rect;
     
 private:
-    std::unique_ptr<avatar> clone = nullptr;
+    std::unique_ptr<Avatar> clone = nullptr;
     ofVec2f cloneTranslation;
     
 public:
