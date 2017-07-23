@@ -15,7 +15,7 @@ class Avatar {
 public:
     
     ofxBox2dPolygon polygon;
-    ofx::Light2D    light;
+    //ofx::Light2D    light;
     ofRectangle     rect;
     
 private:
