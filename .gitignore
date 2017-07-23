@@ -200,7 +200,7 @@ xcuserdata/
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
-!bin/data/*
+
 
 # Build results
 [Dd]ebug/
@@ -213,7 +213,6 @@ bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
-
 
 
 # Visual Studio 2015 cache/options directory
@@ -485,3 +484,10 @@ __pycache__/
 # should be stored in the .pubxml.user file.
 
 # End of https://www.gitignore.io/api/osx,xcode,linux,emacs,windows,notepadpp,sublimetext,visualstudio,visualstudiocode
+
+
+# Openframeworks data
+!bin
+bin/*
+!bin/data/
+!bin/data/*
