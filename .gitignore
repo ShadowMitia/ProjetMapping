@@ -200,6 +200,8 @@ xcuserdata/
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+!bin/data/*
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -212,7 +214,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 
-!bin/data/*
+
 
 # Visual Studio 2015 cache/options directory
 .vs/
