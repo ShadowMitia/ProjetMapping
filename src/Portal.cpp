@@ -8,32 +8,28 @@
 
 #include "Portal.h"
 
-void Portal::update(std::vector<std::shared_ptr<Avatar> > & objects) {
-    std::vector<std::shared_ptr<Avatar>> clones;
+void Portal::update(std::vector<Avatar> & objects) {
+    std::vector<Avatar> clones;
     
     for (auto &obj : objects){
         
-        bool intersects = obj->rect.intersects(rect);
-        bool cloned = obj->hasClone();
-        bool inside = obj->rect.inside(rect);
-        
-        if (obj->rect.intersects(entranceA, entranceB)) {
-            std::cout << "Entrance\n";
-        }
+        bool intersects = obj.rect.intersects(rect);
+        bool cloned = obj.hasClone();
+        bool inside = obj.rect.inside(rect);
         
         if (intersects && !cloned) {
             std::cout << "Clone\n";
-            obj->createClone(portal->rect.getCenter() - rect.getCenter());
+            obj.createClone(portal->rect.getCenter() - rect.getCenter());
         }
         
-        if (!intersects && !inside && cloned && obj->rect.intersects(entranceA, entranceB)) {
+        if (!intersects && !inside && cloned && obj.rect.intersects(entranceA, entranceB)) {
             std::cout << "Back\n";
-            obj->removeClone();
+            obj.removeClone();
         }
-        else if (!intersects && !inside && cloned && obj->rect.intersects(exitA, exitB)) {
+        else if (!intersects && !inside && cloned && obj.rect.intersects(exitA, exitB)) {
             std::cout << "Exit\n";
-            obj->teleportToClone();
-            obj->removeClone();
+            obj.teleportToClone();
+            obj.removeClone();
         }
     }
     
@@ -55,6 +51,7 @@ void Portal::draw() {
 }
 
 void Portal::linkTo(Portal* p) {
+	if (portal != nullptr) { return; }
     portal = p;
     
     portal->portal = this;

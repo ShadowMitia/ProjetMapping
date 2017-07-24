@@ -20,7 +20,7 @@ public:
     Scene1(WorldsBox2d* _worldsBox2d)
     {
         name = "Scene One FBO Source";
-        allocate(1000, 600);
+        allocate(2000, 600);
         worldsBox2d =_worldsBox2d;
         
     }
@@ -32,14 +32,13 @@ public:
         //ofDrawBitmapString("1", 50, 50);
         ofSetColor(ofColor::white);
         ofSetLineWidth(1);
-        for (int i=0; i<=1000; i+=200) {
+        for (int i=0; i<=2000; i+=200) {
             ofDrawLine(i, 0, i, 600);
         }
         for (int i=0; i<=600; i+=200) {
-            ofDrawLine(0, i, 1000, i);
+            ofDrawLine(0, i, 2000, i);
         }
-        worldsBox2d->drawCircles();
-        //worldsBox2d->avatar->draw();
+        worldsBox2d->draw();
     
     }
 };

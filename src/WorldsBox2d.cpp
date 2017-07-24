@@ -8,7 +8,7 @@
 
 #include "WorldsBox2d.h"
 
-void WorldsBox2d::initWordldsBox2d(){
+void WorldsBox2d::setup(){
     
     world.init();
     world.setGravity(0, 10);
@@ -18,46 +18,59 @@ void WorldsBox2d::initWordldsBox2d(){
     world.registerGrabbing();
 
     /////// Portal ///////
-    portals.push_back( std::shared_ptr<Portal>(new Portal(Portal::Orientation::HORIZONTAL, 50, 525, 50, 75, world)) );
-    portals.push_back( std::shared_ptr<Portal>(new Portal(Portal::Orientation::HORIZONTAL, 200, 525, 50, 75, world)) );
+    portals.emplace_back( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
+    portals.emplace_back( Portal::Orientation::HORIZONTAL, 200, 525, 35, 75, world );
+
+	portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75, world);
+	portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75, world);
     
-    portals[0]->linkTo(portals[1].get());
+    portals[0].linkTo(&portals[1]);
+	portals[3].linkTo(&portals[2]);
     ///// Portal /////////
 
 }
-void WorldsBox2d::creatCircle(float _x,float _y){
+void WorldsBox2d::createCircle(float _x,float _y){
     float r = ofRandom(4, 20);
-    circles.push_back(shared_ptr<ofxBox2dCircle>(new ofxBox2dCircle));
+    circles.push_back(std::make_shared<ofxBox2dCircle>());
     circles.back().get()->setPhysics(0.0, 0.53, 0.1);
     circles.back().get()->setup(world.getWorld(), _x, _y, r);
 }
-void WorldsBox2d::drawCircles(){
-    for(int i=0; i<circles.size(); i++) {
-        ofFill();
-        ofSetHexColor(0xf6c738);
-        circles[i].get()->draw();
+
+void WorldsBox2d::draw(){
+	for (auto &portal : portals) {
+		portal.draw();
+	}
+
+	for (int i = 0; i < circles.size(); i++) {
+		ofFill();
+		ofSetHexColor(0xf6c738);
+		circles[i].get()->draw();
+	}
+
+    for (auto &avatar : avatars) {
+        avatar.draw();
     }
-    for (auto const &avatar : avatars) {
-        avatar->draw();
-    }
-    for (auto const &portal : portals) {
-        portal->draw();
-    }
-}
-void WorldsBox2d::updateWorldsBox2d(){
-    for (auto const &avatar : avatars) {
-        avatar->update();
-    }
-    for (auto const &portal : portals) {
-        portal->update(avatars);
-    }
-    world.update();
+  
 }
 
-void WorldsBox2d::creatAvatar(){
-    avatars.push_back(shared_ptr<class Avatar>(new class Avatar));
-    avatars.back()->create(world.getWorld());
-    avatars.back()->polygon.setPosition(ofGetMouseX(), ofGetMouseY());
+void WorldsBox2d::update(){
+
+	world.update();
+
+    for (auto &avatar : avatars) {
+        avatar.update();
+    }
+
+    for (auto &portal : portals) {
+        portal.update(avatars);
+    }
+
+}
+
+void WorldsBox2d::createAvatar(){
+	avatars.emplace_back();
+    avatars.back().create(world.getWorld());
+    avatars.back().polygon.setPosition(ofGetMouseX(), ofGetMouseY());
 }
 
 

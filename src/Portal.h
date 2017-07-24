@@ -31,7 +31,7 @@ public:
         }
     }
     
-    void update(std::vector<std::shared_ptr<Avatar> > & objects);
+    void update(std::vector<Avatar> &objects);
         
     void draw();
     void linkTo(Portal* p);

@@ -16,11 +16,12 @@ public:
     
     ofxBox2dPolygon polygon;
     ofx::Light2D    light;
-    ofRectangle     rect;
+	ofRectangle rect;
     
 private:
     std::unique_ptr<Avatar> clone = nullptr;
     ofVec2f cloneTranslation;
+	
     
 public:
     

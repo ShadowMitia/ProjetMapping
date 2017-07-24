@@ -10,20 +10,20 @@
 #include "Avatar.h"
 #include "Portal.h"
 
-class WorldsBox2d{
+class WorldsBox2d {
 public:
     ofxBox2d                 world;
     ofRectangle              bounds;
     vector<shared_ptr<ofxBox2dCircle>>	circles;
-    std::vector< std::shared_ptr<Avatar> > avatars;
-    std::vector< std::shared_ptr<Portal> > portals;
+    std::vector< Avatar > avatars;
+    std::vector< Portal > portals;
     
     
-    void initWordldsBox2d();
-    void creatCircle(float _x,float _y);
-    void drawCircles();
-    void updateWorldsBox2d();
+    void setup();
+    void createCircle(float _x,float _y);
+    void draw();
+    void update();
     
-    void creatAvatar();
+    void createAvatar();
     
 };

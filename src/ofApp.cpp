@@ -5,7 +5,7 @@ void ofApp::setup(){
 	ofBackground(0);
     
     worlds =new WorldsBox2d;
-    worlds->initWordldsBox2d();
+    worlds->setup();
     
 	scene1 = new Scene1(worlds);
 	scene2 = new Scene2();
@@ -28,7 +28,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    worlds->updateWorldsBox2d();
+    worlds->update();
 	mapping.update();
 }
 
@@ -40,12 +40,15 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 	//mapping.keyPressed(key);
-    if (key=='c') {
-        worlds->creatAvatar();
+    if (key == 'c') {
+        worlds->createAvatar();
         //worlds->creatCircle(mouseX, mouseY);
     }
    // worlds->avatar[0]->handleInputs(key);
-    worlds->avatars.at(0)->handleInputs(key);
+
+	for (auto &avatar : worlds->avatars) {
+		avatar.handleInputs(key);
+	}
 }
 
 //--------------------------------------------------------------
