@@ -14,12 +14,15 @@ class EditorPlatform{
     
 public:
     
-    ofPolyline              polyline;
+    ofPolyline              polyline, polylineFinal;
+    ofPath                  path;
     ofxXmlSettings          XmlSetting;
     int                     idPolyline;
-    
+    float                   scalePoly,rotatPoly;
     void importFile();
     void selectPolyline();
     void draw();
+    void update();
+    void keyPressed(int key);
     
 };
