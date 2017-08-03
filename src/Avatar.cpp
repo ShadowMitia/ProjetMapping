@@ -28,6 +28,7 @@ void Avatar::create(b2World* _b2World){
     polygon.triangulatePoly();
     polygon.setPhysics(3.0, 0.53, 0.1);
     polygon.create(_b2World);
+    //foot.setup(<#b2World *b2dworld#>, <#float x#>, <#float y#>, <#float w#>, <#float h#>)
 }
 
 void Avatar::update()
@@ -37,6 +38,10 @@ void Avatar::update()
     if (clone) {
         clone->polygon.setVelocity(polygon.getVelocity());
         clone->polygon.setPosition(polygon.getPosition() + cloneTranslation);
+    }
+    if (polygon.getVelocity() == ofVec2f()) /// <<  c est moche, je ne cromprend pas;
+    {
+        jumping = false;
     }
 };
 
@@ -87,10 +92,30 @@ bool Avatar::hasClone() { return clone ? true : false; }
 
 void Avatar::handleInputs(int _key){
     if (_key == OF_KEY_LEFT) {
-        polygon.setVelocity(-3, 0);
+        if (!jumping){
+        polygon.setVelocity(-10, polygon.body->GetLinearVelocity().y);
+        }
+        else{
+            polygon.addForce({-200,0}, 1);
+        }
+
     }
     else if (_key == OF_KEY_RIGHT) {
-        polygon.setVelocity(3, 0);
+        if (!jumping){
+            polygon.setVelocity(10, polygon.body->GetLinearVelocity().y);
+        }
+        else{
+            polygon.addForce({200,0}, 1);
+        }
+    }
+    else if (_key == ' ')
+    {
+        if (!jumping)
+        {
+            //float impulse = polygon.body->GetMass() * 500;
+            polygon.addForce({ 0, -2000 }, 1.0);
+        }
+        jumping = true;
     }
 
 }

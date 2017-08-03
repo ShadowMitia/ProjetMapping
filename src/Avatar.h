@@ -15,13 +15,16 @@ class Avatar {
 public:
     
     ofxBox2dPolygon polygon;
+    ofxBox2dRect    foot;
     ofx::Light2D    light;
 	ofRectangle rect;
     
 private:
     std::unique_ptr<Avatar> clone = nullptr;
     ofVec2f cloneTranslation;
-	
+    bool jumping = false;
+    int cont;
+    int forceJump, speed;
     
 public:
     

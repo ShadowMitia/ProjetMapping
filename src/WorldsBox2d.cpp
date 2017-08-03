@@ -54,25 +54,29 @@ void WorldsBox2d::draw(){
 }
 
 void WorldsBox2d::update(){
-
+    
 	world.update();
-
     for (auto &avatar : avatars) {
         avatar.update();
     }
-
     for (auto &portal : portals) {
         portal.update(avatars);
     }
-
 }
 
 void WorldsBox2d::createAvatar(){
 	avatars.emplace_back();
     avatars.back().create(world.getWorld());
+    avatars.back().polygon.setData(new typeBox2d);
+    typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
+    sd->type = typeBox2d::Type::AVATAR;
     avatars.back().polygon.setPosition(ofGetMouseX(), ofGetMouseY());
 }
 
-
+void WorldsBox2d::createPlatform(ofPolyline _polyline){
+    platforms.emplace_back();
+    platforms.back().create(world.getWorld(), _polyline);
+    
+}
 
 
