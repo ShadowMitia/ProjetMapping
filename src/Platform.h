@@ -7,11 +7,14 @@
 
 #pragma once
 #include "ofxBox2d.h"
+#include "Shape2D.h"
 
 class Platform {
 public:
     
     ofxBox2dEdge ground;
+    ofx::Shape2D Shape;
+    
     
     
 private:

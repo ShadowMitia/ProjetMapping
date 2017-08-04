@@ -11,17 +11,20 @@
 #include "ofxPiMapper.h"
 #include "FboSource.h"
 #include "WorldsBox2d.h"
+#include "Avatar.h"
 
 class Scene1 : public ofx::piMapper::FboSource
 {
 public:
     WorldsBox2d *worldsBox2d;
+    vector<Avatar>  *avatars;
     
     Scene1(WorldsBox2d* _worldsBox2d)
     {
         name = "Scene One FBO Source";
         allocate(2000, 600);
         worldsBox2d =_worldsBox2d;
+        avatars = &_worldsBox2d->avatars;
         
     }
     
@@ -39,6 +42,10 @@ public:
             ofDrawLine(0, i, 2000, i);
         }
         worldsBox2d->draw();
+        
+        for (auto &avatar : *avatars) {
+            avatar.light.draw();
+        }
     
     }
 };

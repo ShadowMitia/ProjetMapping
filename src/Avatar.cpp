@@ -27,13 +27,15 @@ void Avatar::create(b2World* _b2World){
     polygon.addVertices(pts);
     polygon.triangulatePoly();
     polygon.setPhysics(3.0, 0.53, 0.1);
+    //polygon.ofxBox2dBaseShape::body->SetGravityScale((Float32) 0.0); je ne comprend pas pourquoi cela ne marche pas 
     polygon.create(_b2World);
     //foot.setup(<#b2World *b2dworld#>, <#float x#>, <#float y#>, <#float w#>, <#float h#>)
 }
 
 void Avatar::update()
 {
-	rect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
+    
+    rect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 
     if (clone) {
         clone->polygon.setVelocity(polygon.getVelocity());
@@ -43,6 +45,7 @@ void Avatar::update()
     {
         jumping = false;
     }
+    jumping = false; // saut tout le temp
 };
 
 void Avatar::draw() {

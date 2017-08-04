@@ -22,7 +22,7 @@ public:
     ofRectangle              bounds;
     vector<shared_ptr<ofxBox2dCircle>>	circles;
     std::vector< Avatar > avatars;
-    std::vector< Portal > portals;
+    std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
     
     void setup();

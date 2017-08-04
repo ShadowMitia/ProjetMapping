@@ -77,12 +77,12 @@ void EditorPlatform::keyPressed(int key){
             p.x = XmlSetting.getValue("X", 0);
             p.y = XmlSetting.getValue("Y", 0);
             polyline.addVertex(p);
-            polyline.close();
             XmlSetting.popTag();
         }
         XmlSetting.popTag();
         XmlSetting.popTag();
         cout << idPolyline << endl;
+        polyline.addVertex(polyline[0]);
         path = polyToPath(polyline);
     }
     if (key == '+') {scalePoly= scalePoly + 0.2;cout << translate << endl;}
@@ -92,7 +92,7 @@ void EditorPlatform::keyPressed(int key){
 }
 
 void EditorPlatform::platformWordExport(vector<Platform*> _platforms){
-    
+    XmlPlapformWord.clear();
     XmlPlapformWord.addTag("WordPlatform");
     XmlPlapformWord.pushTag("WordPlatform");
     for (int i = 0; i < _platforms.size(); i++) {
@@ -112,6 +112,7 @@ void EditorPlatform::platformWordExport(vector<Platform*> _platforms){
 }
 
 vector<ofPolyline> EditorPlatform::platformWordImport(){
+    XmlPlapformWord.clear();
     ofFileDialogResult result = ofSystemLoadDialog("Load file : WordPlatform");
     if(result.bSuccess) {
         string path = result.getPath();

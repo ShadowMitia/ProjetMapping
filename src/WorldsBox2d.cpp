@@ -18,7 +18,7 @@ void WorldsBox2d::setup(){
     //world.registerGrabbing();
 
 
-    /////// Portal ///////
+    /*/////// Portal ///////
     portals.emplace_back( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
     portals.emplace_back( Portal::Orientation::HORIZONTAL, 200, 525, 35, 75, world );
 
@@ -27,7 +27,7 @@ void WorldsBox2d::setup(){
     
     portals[0].linkTo(&portals[1]);
 	portals[3].linkTo(&portals[2]);
-    ///// Portal /////////
+    ///// Portal /////////*/
 
 }
 void WorldsBox2d::createCircle(float _x,float _y){
@@ -39,7 +39,7 @@ void WorldsBox2d::createCircle(float _x,float _y){
 
 void WorldsBox2d::draw(){
 	for (auto &portal : portals) {
-		portal.draw();
+		portal->draw();
 	}
 
 	for (int i = 0; i < circles.size(); i++) {
@@ -66,7 +66,7 @@ void WorldsBox2d::update(){
         avatar.update();
     }
     for (auto &portal : portals) {
-        portal.update(avatars);
+        portal->update(avatars);
     }
 
 }
