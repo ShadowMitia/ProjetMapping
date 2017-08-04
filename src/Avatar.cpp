@@ -22,18 +22,27 @@ std::vector <ofPoint> loadPoints(std::string file) {
     return pts;
 }
 /////////////////////////////////////////// LoadPoints FIN ////////////////////////////
-void Avatar::create(b2World* _b2World){
+void Avatar::create(b2World* _b2World, ofx::LightSystem2D * _lightSystem2D){
+    lightSystem2D = _lightSystem2D;
     std::vector <ofPoint> pts = loadPoints("Avatar.dat");
     polygon.addVertices(pts);
     polygon.triangulatePoly();
     polygon.setPhysics(3.0, 0.53, 0.1);
     //polygon.ofxBox2dBaseShape::body->SetGravityScale((Float32) 0.0); je ne comprend pas pourquoi cela ne marche pas 
     polygon.create(_b2World);
-    //foot.setup(<#b2World *b2dworld#>, <#float x#>, <#float y#>, <#float w#>, <#float h#>)
+    ////  Light2D ////////
+    light = std::make_shared<ofx::Light2D>();
+    //light->setViewAngle(ofDegToRad(121));
+    //light->setColor(ofColor::azure);
+    light->setRadius(700);
+    //light->setBleed(0.1);
+    lightSystem2D->add(light);
 }
 
 void Avatar::update()
 {
+    light->setPosition(polygon.getPosition());
+    
     
     rect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 

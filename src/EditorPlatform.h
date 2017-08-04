@@ -11,6 +11,7 @@
 #include "ofxXmlSettings.h"
 #include "Platform.h"
 
+
 class EditorPlatform{
     
 public:

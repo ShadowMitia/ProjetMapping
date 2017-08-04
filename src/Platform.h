@@ -8,13 +8,15 @@
 #pragma once
 #include "ofxBox2d.h"
 #include "Shape2D.h"
+#include "LightSystem2D.h"
+
 
 class Platform {
 public:
     
     ofxBox2dEdge ground;
-    ofx::Shape2D Shape;
-    
+    ofx::Shape2D::SharedPtr shape;
+    ofx::LightSystem2D* LightSystem;
     
     
 private:
@@ -25,7 +27,7 @@ private:
     
 public:
     
-    void create(b2World* _b2World, ofPolyline _groundLine);
+    void create(b2World* _b2World, ofPolyline _groundLine,ofx::LightSystem2D* _LightSystem);
     void draw();
     
 };

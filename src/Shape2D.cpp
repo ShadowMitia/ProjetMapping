@@ -16,6 +16,7 @@ namespace ofx {
     
     
     Shape2D::Shape2D():
+    bVisible(false),
     _color(.5, 1),
     _isMeshDirty(true)
     {

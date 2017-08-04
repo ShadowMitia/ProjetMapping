@@ -8,7 +8,7 @@
 
 #include "ScenesMapping.h"
 #include "Avatar.h"
-
+#include "LightSystem2D.h"
 
 class ofApp : public ofBaseApp{
 
@@ -31,15 +31,12 @@ class ofApp : public ofBaseApp{
 
 		ofxPiMapper mapping;
         WorldsBox2d* worlds; // les mondes Box2d
+        ofx::LightSystem2D* lightSystem;
+    
     
 
 		Scene1* scene1;
 		Scene2* scene2;
-		Scene3* scene3;
-		Scene4* scene4;
-		Scene5* scene5;
-		Scene6* scene6;
-    
         EditorPlatform editorPlatform;
 		
 };

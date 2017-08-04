@@ -8,16 +8,16 @@
 
 #include "WorldsBox2d.h"
 
-void WorldsBox2d::setup(){
+void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
+    
+    lightSystem2D = _lightSystem2D;
     
     world.init();
     world.setGravity(0, 10);
     //world.createGround(0,0,1000, 600);
     world.createBounds();
     world.setFPS(60.0);
-    //world.registerGrabbing();
-
-
+    
     /*/////// Portal ///////
     portals.emplace_back( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
     portals.emplace_back( Portal::Orientation::HORIZONTAL, 200, 525, 35, 75, world );
@@ -73,7 +73,7 @@ void WorldsBox2d::update(){
 
 void WorldsBox2d::createAvatar(){
 	avatars.emplace_back();
-    avatars.back().create(world.getWorld());
+    avatars.back().create(world.getWorld(), lightSystem2D);
     avatars.back().polygon.setData(new typeBox2d);
     typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
@@ -83,9 +83,7 @@ void WorldsBox2d::createAvatar(){
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     
     Platform *edge = new Platform;
-    edge->ground.addVertexes(_polyline);
-    edge->ground.setPhysics(0.0, 0.1, 0.7);
-    edge->ground.create(world.getWorld());
+    edge->create(world.getWorld(), _polyline, lightSystem2D);
     platforms.push_back(edge);
 
 }

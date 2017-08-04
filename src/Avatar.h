@@ -10,13 +10,14 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Light2D.h"
+#include "LightSystem2D.h"
 
 class Avatar {
 public:
     
     ofxBox2dPolygon polygon;
     ofxBox2dRect    foot;
-    ofx::Light2D    light;
+    ofx::Light2D::SharedPtr   light;
 	ofRectangle rect;
     
 private:
@@ -25,10 +26,11 @@ private:
     bool jumping = false;
     int cont;
     int forceJump, speed;
+    ofx::LightSystem2D *lightSystem2D;
     
 public:
     
-    void create(b2World* _b2World);
+    void create(b2World* _b2World, ofx::LightSystem2D * _lightSystem2D);
     void update();
     void draw();
     void handleInputs(int key);

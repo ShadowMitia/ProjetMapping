@@ -5,21 +5,16 @@ void ofApp::setup(){
 	ofBackground(0);
     
     worlds =new WorldsBox2d;
-    worlds->setup();
+    lightSystem = new ofx::LightSystem2D;
+    lightSystem->setup();
+    worlds->setup(lightSystem);
     
-	scene1 = new Scene1(worlds);
+	scene1 = new Scene1(worlds,lightSystem);
 	scene2 = new Scene2();
-	scene3 = new Scene3();
-	scene4 = new Scene4();
-	scene5 = new Scene5();
-	scene6 = new Scene6();
 
 	mapping.registerFboSource(scene1);
 	mapping.registerFboSource(scene2);
-	mapping.registerFboSource(scene3);
-	mapping.registerFboSource(scene4);
-	mapping.registerFboSource(scene5);
-	mapping.registerFboSource(scene6);
+
 
 	mapping.setup();
     
@@ -33,6 +28,7 @@ void ofApp::update(){
 
     editorPlatform.update();
     worlds->update();
+    lightSystem->update();
     //mapping.update();
 
 

@@ -10,6 +10,8 @@
 #include "Avatar.h"
 #include "Portal.h"
 #include "Platform.h"
+#include "LightSystem2D.h"
+
 class typeBox2d{
 public:
     enum class Type { AVATAR, PLATFORM,FOOT};
@@ -24,8 +26,9 @@ public:
     std::vector< Avatar > avatars;
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
+    ofx::LightSystem2D * lightSystem2D;
     
-    void setup();
+    void setup(ofx::LightSystem2D * _lightSystem2D);
     void createCircle(float _x,float _y);
     void draw();
     void update();
