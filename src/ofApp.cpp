@@ -2,58 +2,50 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	ofBackground(0);
+  ofBackground(0);
     
-    worlds =new WorldsBox2d;
-    worlds->setup();
+  worlds = new WorldsBox2d();
+  worlds->setup();
     
-	scene1 = new Scene1(worlds);
-	scene2 = new Scene2();
-	scene3 = new Scene3();
-	scene4 = new Scene4();
-	scene5 = new Scene5();
-	scene6 = new Scene6();
+  scene1 = new Scene1(worlds);
+  scene2 = new Scene2();
+  scene3 = new Scene3();
+  scene4 = new Scene4();
+  scene5 = new Scene5();
+  scene6 = new Scene6();
 
-	mapping.registerFboSource(scene1);
-	mapping.registerFboSource(scene2);
-	mapping.registerFboSource(scene3);
-	mapping.registerFboSource(scene4);
-	mapping.registerFboSource(scene5);
-	mapping.registerFboSource(scene6);
+  mapping.registerFboSource(scene1);
+  mapping.registerFboSource(scene2);
+  mapping.registerFboSource(scene3);
+  mapping.registerFboSource(scene4);
+  mapping.registerFboSource(scene5);
+  mapping.registerFboSource(scene6);
 
-	mapping.setup();
-    
+  mapping.setup();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    worlds->update();
-	mapping.update();
+  worlds->update();
+  mapping.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	mapping.draw();
+  mapping.draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	//mapping.keyPressed(key);
-    if (key == 'c') {
-        worlds->createAvatar();
-        //worlds->creatCircle(mouseX, mouseY);
-    }
-   // worlds->avatar[0]->handleInputs(key);
-
-	for (auto &avatar : worlds->avatars) {
-		avatar.handleInputs(key);
-	}
+  for (auto &avatar : worlds->avatars) {
+    avatar.handleInputs(key);
+  }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-	//mapping.keyReleased(key);
+  //mapping.keyReleased(key);
 }
 
 //--------------------------------------------------------------
@@ -63,17 +55,17 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	//mapping.mouseDragged(x, y, button);
+  //mapping.mouseDragged(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	//mapping.mousePressed(x, y, button);
+  //mapping.mousePressed(x, y, button);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-	//mapping.mouseReleased(x, y, button);
+  //mapping.mouseReleased(x, y, button);
 }
 
 //--------------------------------------------------------------

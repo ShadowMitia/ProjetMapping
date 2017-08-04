@@ -17,18 +17,24 @@ void WorldsBox2d::setup(){
     world.setFPS(60.0);
     world.registerGrabbing();
 
-    /////// Portal ///////
-    portals.emplace_back( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
-    portals.emplace_back( Portal::Orientation::HORIZONTAL, 200, 525, 35, 75, world );
+    portals.emplace_back(Portal::Orientation::HORIZONTAL,  50, 525, 35, 75, world);
+    portals.emplace_back(Portal::Orientation::HORIZONTAL, 200, 525, 35, 75, world);
 
-	portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75, world);
-	portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75, world);
+    portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75, world);
+    portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75, world);
     
     portals[0].linkTo(&portals[1]);
-	portals[3].linkTo(&portals[2]);
-    ///// Portal /////////
+    portals[3].linkTo(&portals[2]);
+
+    for (unsigned int i = 0; i < 1; i++)
+      {
+	createAvatar(800 + i * 50, 500);
+      }
+
+    wiimotes.startThread();
 
 }
+
 void WorldsBox2d::createCircle(float _x,float _y){
     float r = ofRandom(4, 20);
     circles.push_back(std::make_shared<ofxBox2dCircle>());
@@ -37,42 +43,39 @@ void WorldsBox2d::createCircle(float _x,float _y){
 }
 
 void WorldsBox2d::draw(){
-	for (auto &portal : portals) {
-		portal.draw();
-	}
+  for (auto &portal : portals) {
+    portal.draw();
+  }
 
-	for (int i = 0; i < circles.size(); i++) {
-		ofFill();
-		ofSetHexColor(0xf6c738);
-		circles[i].get()->draw();
-	}
+  for (int i = 0; i < circles.size(); i++) {
+    ofFill();
+    ofSetHexColor(0xf6c738);
+    circles[i]->draw();
+    ofSetHexColor(0xFFFFFF);
+  }
 
-    for (auto &avatar : avatars) {
-        avatar.draw();
-    }
+  for (auto &avatar : avatars) {
+    avatar.draw();
+  }
   
 }
 
 void WorldsBox2d::update(){
 
-	world.update();
+  world.update();
 
-    for (auto &avatar : avatars) {
-        avatar.update();
-    }
+  for (auto &avatar : avatars) {
+    avatar.update();
+  }
 
-    for (auto &portal : portals) {
-        portal.update(avatars);
-    }
+  for (auto &portal : portals) {
+    portal.update(avatars);
+  }
 
 }
 
-void WorldsBox2d::createAvatar(){
-	avatars.emplace_back();
-    avatars.back().create(world.getWorld());
-    avatars.back().polygon.setPosition(ofGetMouseX(), ofGetMouseY());
+void WorldsBox2d::createAvatar(int x, int y) {
+  avatars.emplace_back(world, lightSystem);
+  avatars.back().setPosition(x, y);
 }
-
-
-
 

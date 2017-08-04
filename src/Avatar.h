@@ -9,30 +9,39 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
-#include "Light2D.h"
+#include "LightSystem2D.h"
 
 class Avatar {
 public:
-    
-    ofxBox2dPolygon polygon;
-    ofx::Light2D    light;
-	ofRectangle rect;
+
+  Avatar(ofxBox2d& box2d, ofx::LightSystem2D& lightSystem);
+
+  ofxBox2dPolygon polygon;
+  //ofx::Light2D    light;
+  ofRectangle rect;
     
 private:
-    std::unique_ptr<Avatar> clone = nullptr;
-    ofVec2f cloneTranslation;
-	
-    
+  std::unique_ptr<Avatar> clone = nullptr;
+  ofVec2f cloneTranslation;
+  ofx::LightSystem2D& lightSystemRef;
+  ofxBox2d box2dRef;
+
+  bool jumping = false;
+
 public:
-    
-    void create(b2World* _b2World);
-    void update();
-    void draw();
-    void handleInputs(int key);
-    void createClone(ofVec3f cloneTranslation);
-    void removeClone();
-    void teleportTo(ofVec2f destination);
-    void teleportToClone();
-    bool hasClone();
+
+  void update();
+  void draw();
+  void handleInputs(int key);
+  void createClone(ofVec3f cloneTranslation);
+  void removeClone();
+  void teleportToClone();
+  bool hasClone();
+
+
+  void setPosition(int x, int y);
+  void goingLeft(bool isPressed);
+  void goingRight(bool isPressed);
+  void jump();
     
 };

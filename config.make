@@ -77,7 +77,8 @@
 # add a runtime path to search for those shared libraries, since they aren't 
 # incorporated directly into the final executable application binary.
 # TODO: should this be a default setting?
-# PROJECT_LDFLAGS=-Wl,-rpath=./libs
+ #PROJECT_LDFLAGS=-Wl,-rpath=./libs
+PROJECT_LDFLAGS= -lwiiuse
 
 ################################################################################
 # PROJECT DEFINES
@@ -105,7 +106,7 @@
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-# PROJECT_CFLAGS = 
+#PROJECT_CFLAGS =
 
 ################################################################################
 # PROJECT OPTIMIZATION CFLAGS

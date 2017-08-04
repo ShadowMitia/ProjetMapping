@@ -38,7 +38,7 @@ public:
     ofRectangle rect;
     
 private:
-    Portal* portal = nullptr;
+    Portal* connectedPortal = nullptr;
     ofxBox2d &world;
     ofVec2f entranceA, entranceB;
     ofVec2f exitA, exitB;
