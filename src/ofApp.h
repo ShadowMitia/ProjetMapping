@@ -4,6 +4,7 @@
 #include "ofxGui.h"
 #include "ofxPiMapper.h"
 #include "ofxBox2d.h"
+#include "EditorPlatform.h"
 
 #include "ScenesMapping.h"
 #include "Avatar.h"
@@ -38,5 +39,7 @@ class ofApp : public ofBaseApp{
 		Scene4* scene4;
 		Scene5* scene5;
 		Scene6* scene6;
+    
+        EditorPlatform editorPlatform;
 		
 };

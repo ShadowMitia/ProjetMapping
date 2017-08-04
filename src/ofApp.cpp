@@ -23,57 +23,102 @@ void ofApp::setup(){
 
 	mapping.setup();
     
+    worlds->createAvatar();
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    
+
+    editorPlatform.update();
     worlds->update();
-	mapping.update();
+    //mapping.update();
+
+
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	mapping.draw();
+
+    scene1->draw();
+    ofSetColor(ofColor::aqua);
+    editorPlatform.polylineFinal.draw();
+
+
+    //mapping.draw();
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	//mapping.keyPressed(key);
-    if (key == 'c') {
-        worlds->createAvatar();
-        //worlds->creatCircle(mouseX, mouseY);
+    
+#ifdef DEBUGTOTAL
+    #ifdef Debug_World
+        for (auto &avatar : worlds->avatars) {
+        avatar.handleInputs(key);
     }
-   // worlds->avatar[0]->handleInputs(key);
-
-	for (auto &avatar : worlds->avatars) {
-		avatar.handleInputs(key);
-	}
+    #else
+        mapping.keyPressed(key);
+    #endif
+    #else
+        for (auto &avatar : worlds->avatars) {
+        avatar.handleInputs(key);
+    }
+#endif
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-	//mapping.keyReleased(key);
+
+    if (key == 'C') {
+        worlds->createPlatform(editorPlatform.getPoly());
+    }
+    if (key == 'E') {
+        editorPlatform.platformWordExport(worlds->platforms);
+    }
+    if (key == 'I') {
+        worlds->platforms.clear();
+        vector<ofPolyline>  platforms = editorPlatform.platformWordImport();
+        for (int i =0; i < platforms.size(); i++) {
+            worlds->createPlatform(platforms[i]);
+        }
+    }
+    
+    editorPlatform.keyPressed(key);
+
+    //mapping.keyReleased(key);
+
+
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
+    editorPlatform.mouseMoved(x, y);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-	//mapping.mouseDragged(x, y, button);
+
+    //mapping.mouseDragged(x, y, button);
+
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	//mapping.mousePressed(x, y, button);
+
+    //mapping.mousePressed(x, y, button);
+
+	
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-	//mapping.mouseReleased(x, y, button);
+
+    //mapping.mouseReleased(x, y, button);
+
+
 }
 
 //--------------------------------------------------------------

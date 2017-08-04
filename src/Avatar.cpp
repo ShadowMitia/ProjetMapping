@@ -65,12 +65,14 @@ void Avatar::createClone(ofVec3f cloneTranslation) {
     if (clone) { return; }
     this->cloneTranslation = cloneTranslation;
     clone = std::make_unique<Avatar>();
-    clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
+    //clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
     clone->polygon.addVertices(polygon.getVertices());
-    clone->polygon.triangulatePoly();
+    //clone->polygon.triangulatePoly();
     clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
-    clone->polygon.create(polygon.getWorld());
     clone->polygon.setVelocity(polygon.getVelocity());
+    clone->polygon.create(polygon.getWorld());
+    clone->polygon.setPosition(100, 100);
+
 }
 
 void Avatar::removeClone() {

@@ -21,7 +21,7 @@ ofPath polyToPath(ofPolyline polyline) {
 }
 
 void EditorPlatform::importFile(){
-    ofFileDialogResult result = ofSystemLoadDialog("Load file");
+    ofFileDialogResult result = ofSystemLoadDialog("Load file : Platform");
     if(result.bSuccess) {
         string path = result.getPath();
         XmlSetting.load(path);
@@ -49,8 +49,8 @@ void EditorPlatform::selectPolyline(){
 
 
 void EditorPlatform::draw(){
-    ofSetColor(ofColor::blue);
-    polyline.draw();
+    ofSetColor(ofColor::white);
+    path.draw();
     ofSetColor(ofColor::white);
 }
 
@@ -59,7 +59,7 @@ void EditorPlatform::update(){
     path = polyToPath(polyline);
     path.scale(scalePoly, scalePoly);
     path.rotate(rotatPoly, ofVec3f(0,0,1));
-    path.translate(ofPoint(ofGetMouseX(),ofGetMouseY()));
+    path.translate(translate);
     polylineFinal = path.getOutline()[0];
 }
 
@@ -85,9 +85,64 @@ void EditorPlatform::keyPressed(int key){
         cout << idPolyline << endl;
         path = polyToPath(polyline);
     }
-    if (key == '+') {scalePoly= scalePoly + 0.2;}
+    if (key == '+') {scalePoly= scalePoly + 0.2;cout << translate << endl;}
     if (key == '-') {scalePoly= scalePoly - 0.2;}
     if (key == 'r') {rotatPoly = rotatPoly + 20;}
+    if (key == 'i') {importFile();}
+}
+
+void EditorPlatform::platformWordExport(vector<Platform*> _platforms){
     
+    XmlPlapformWord.addTag("WordPlatform");
+    XmlPlapformWord.pushTag("WordPlatform");
+    for (int i = 0; i < _platforms.size(); i++) {
+        XmlPlapformWord.addTag("Platform");
+        XmlPlapformWord.pushTag("Platform",i);
+        for (int j = 0; j  < _platforms[i]->ground.size(); j++) {
+            XmlPlapformWord.addTag("point");
+            XmlPlapformWord.pushTag("point",j);
+            XmlPlapformWord.addValue("X", _platforms[i]->ground[j].x);
+            XmlPlapformWord.addValue("Y", _platforms[i]->ground[j].y);
+            XmlPlapformWord.popTag();
+        }
+        XmlPlapformWord.popTag();
+    }
+    XmlPlapformWord.popTag();
+    XmlPlapformWord.save("WordPlatform.xml");
+}
+
+vector<ofPolyline> EditorPlatform::platformWordImport(){
+    ofFileDialogResult result = ofSystemLoadDialog("Load file : WordPlatform");
+    if(result.bSuccess) {
+        string path = result.getPath();
+        XmlPlapformWord.load(path);
+    }
+    
+    XmlPlapformWord.pushTag("WordPlatform");
+    int nbPlatform = XmlPlapformWord.getNumTags("Platform");
+    vector<ofPolyline> _Platform(nbPlatform);
+    
+    for (int i = 0; i < nbPlatform; i++) {
+        XmlPlapformWord.pushTag("Platform",i);
+        ofPolyline line;
+        int nbPoint = XmlPlapformWord.getNumTags("point");
+        for (int j = 0; j < nbPoint; j++) {
+            XmlPlapformWord.pushTag("point",j);
+            ofPoint p;
+            p.x = XmlPlapformWord.getValue("X", 0);
+            p.y = XmlPlapformWord.getValue("Y", 0);
+            line.addVertex(p);
+            XmlPlapformWord.popTag();
+        }
+        _Platform[i] = line;
+        XmlPlapformWord.popTag();
+        
+    }
+    XmlPlapformWord.popTag();
+    
+    return _Platform;
     
 }
+
+
+

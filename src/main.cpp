@@ -1,7 +1,12 @@
+
+
 #include "ofMain.h"
 #include "ofApp.h"
 
-#define Debug_scene 1
+#define DEBUGTOTAL 1
+#define Debug_World 1
+
+
 
 
 

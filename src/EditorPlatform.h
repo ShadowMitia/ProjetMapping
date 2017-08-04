@@ -9,6 +9,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
+#include "Platform.h"
 
 class EditorPlatform{
     
@@ -17,12 +18,20 @@ public:
     ofPolyline              polyline, polylineFinal;
     ofPath                  path;
     ofxXmlSettings          XmlSetting;
+    ofxXmlSettings          XmlPlapformWord;
     int                     idPolyline;
     float                   scalePoly,rotatPoly;
+    ofPoint                 translate;
     void importFile();
     void selectPolyline();
     void draw();
     void update();
     void keyPressed(int key);
+    ofPolyline getPoly(){ return polylineFinal; };
+    void mouseMoved(int _x, int _y){
+        translate = ofPoint(_x,_y);
+    }
     
+    void platformWordExport(vector<Platform*> _platforms);
+    vector<ofPolyline> platformWordImport();
 };

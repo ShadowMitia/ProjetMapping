@@ -23,7 +23,7 @@ public:
     vector<shared_ptr<ofxBox2dCircle>>	circles;
     std::vector< Avatar > avatars;
     std::vector< Portal > portals;
-    std::vector< Platform > platforms;
+    std::vector< Platform * > platforms;
     
     void setup();
     void createCircle(float _x,float _y);
@@ -32,6 +32,5 @@ public:
     
     void createAvatar();
     void createPlatform(ofPolyline _polyline);
-    
     
 };

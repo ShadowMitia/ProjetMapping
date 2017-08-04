@@ -13,9 +13,10 @@ void WorldsBox2d::setup(){
     world.init();
     world.setGravity(0, 10);
     //world.createGround(0,0,1000, 600);
-    world.createBounds(ofRectangle(0, 0, 1000, 600));
+    world.createBounds();
     world.setFPS(60.0);
-    world.registerGrabbing();
+    //world.registerGrabbing();
+
 
     /////// Portal ///////
     portals.emplace_back( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
@@ -50,6 +51,11 @@ void WorldsBox2d::draw(){
     for (auto &avatar : avatars) {
         avatar.draw();
     }
+
+    
+    for (auto &platform : platforms) {
+        platform->draw();
+    }
   
 }
 
@@ -62,6 +68,7 @@ void WorldsBox2d::update(){
     for (auto &portal : portals) {
         portal.update(avatars);
     }
+
 }
 
 void WorldsBox2d::createAvatar(){
@@ -70,13 +77,17 @@ void WorldsBox2d::createAvatar(){
     avatars.back().polygon.setData(new typeBox2d);
     typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
-    avatars.back().polygon.setPosition(ofGetMouseX(), ofGetMouseY());
+    avatars.back().polygon.setPosition(100, 100);
 }
 
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
-    platforms.emplace_back();
-    platforms.back().create(world.getWorld(), _polyline);
     
+    Platform *edge = new Platform;
+    edge->ground.addVertexes(_polyline);
+    edge->ground.setPhysics(0.0, 0.1, 0.7);
+    edge->ground.create(world.getWorld());
+    platforms.push_back(edge);
+
 }
 
 
