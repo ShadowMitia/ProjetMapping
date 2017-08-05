@@ -88,4 +88,11 @@ void WorldsBox2d::createPlatform(ofPolyline _polyline){
 
 }
 
+void WorldsBox2d::createPortal(){
+    
+    Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
+    portals.push_back(plat);
+    
+}
+
 

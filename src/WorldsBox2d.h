@@ -35,5 +35,6 @@ public:
     
     void createAvatar();
     void createPlatform(ofPolyline _polyline);
+    void createPortal();
     
 };

@@ -10,7 +10,7 @@
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
 #include "Platform.h"
-
+#include "Portal.h"
 
 class EditorPlatform{
     
@@ -20,6 +20,7 @@ public:
     ofPath                  path;
     ofxXmlSettings          XmlSetting;
     ofxXmlSettings          XmlPlapformWord;
+    ofxXmlSettings          XmlPortal;
     int                     idPolyline;
     float                   scalePoly,rotatPoly;
     ofPoint                 translate;
@@ -35,4 +36,5 @@ public:
     
     void platformWordExport(vector<Platform*> _platforms);
     vector<ofPolyline> platformWordImport();
+    //vector<Portal*>    portalImport();
 };

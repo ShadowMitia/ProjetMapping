@@ -145,5 +145,26 @@ vector<ofPolyline> EditorPlatform::platformWordImport(){
     
 }
 
+/*
+vector<Portal*> EditorPlatform::portalImport(){
+    
+    XmlPortal.clear();
+    cout << "Importation Portals" << endl;
+    ofFileDialogResult result = ofSystemLoadDialog("Load file : WordPlatform");
+    if(result.bSuccess) {
+        string path = result.getPath();
+        XmlPortal.load(path);
+    }
+    
+    
+    
+    
+    
+}
+*/
+
+
+
+
 
 

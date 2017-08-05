@@ -19,6 +19,7 @@ void ofApp::setup(){
 	mapping.setup();
     
     worlds->createAvatar();
+    //importPortial();
 
 }
 

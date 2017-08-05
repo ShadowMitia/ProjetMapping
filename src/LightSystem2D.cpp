@@ -15,8 +15,6 @@
 
 
 namespace ofx {
-    
-    
     LightSystem2D::LightSystem2D()
     {
         //ofAddListener(ofEvents().setup, this, &LightSystem2D::setup);
@@ -85,7 +83,7 @@ namespace ofx {
             {
                 ofVec3f lightPosision = lightIter->get()->getPosition();
                 ofVec3f shapePosition = shapeIter->get()->getCenter();
-                if (fabs(lightPosision.x-shapePosition.x)<200 && fabs(lightPosision.y-shapePosition.y)<200) {
+                if (fabs(lightPosision.x-shapePosition.x)<250 && fabs(lightPosision.y-shapePosition.y)<250) {
                     ofMesh mesh;
                     makeMask(*lightIter, *shapeIter, mesh);
                     mesh.draw();
