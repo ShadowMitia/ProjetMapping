@@ -36,5 +36,5 @@ public:
     
     void platformWordExport(vector<Platform*> _platforms);
     vector<ofPolyline> platformWordImport();
-    //vector<Portal*>    portalImport();
+    vector<Portal*>    portalImport( ofxBox2d * _world );
 };

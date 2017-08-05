@@ -37,6 +37,7 @@ public:
     void draw();
     void linkTo(Portal* p);
     ofRectangle rect;
+    int id;
     
 private:
     Portal* portal = nullptr;

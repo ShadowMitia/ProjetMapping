@@ -145,8 +145,7 @@ vector<ofPolyline> EditorPlatform::platformWordImport(){
     
 }
 
-/*
-vector<Portal*> EditorPlatform::portalImport(){
+vector<Portal*> EditorPlatform::portalImport( ofxBox2d * _world){
     
     XmlPortal.clear();
     cout << "Importation Portals" << endl;
@@ -156,12 +155,39 @@ vector<Portal*> EditorPlatform::portalImport(){
         XmlPortal.load(path);
     }
     
+    int nbPortal = XmlPortal.getNumTags("Platform");
+    vector<Portal*> tempPortals(nbPortal);
+    
+    for (int i = 0; i< nbPortal; i++) {
+        XmlPortal.pushTag("Portal",i);
+        
+        ofPoint pt;
+        pt.x = XmlPortal.getValue("X", 0);
+        pt.y = XmlPortal.getValue("Y", 0);
+        int height, width;
+        height = XmlPortal.getValue("height", 0);
+        width = XmlPortal.getValue("width", 0);
+        
+        string tempOri = XmlPortal.getValue("Orientation", "salut");
+        Portal::Orientation ori;
+        if (tempOri == "HORIZONTAL") {
+            ori =  Portal::Orientation::HORIZONTAL;
+        }
+        else{
+            ori = Portal::Orientation::VERTICAL;
+        }
+        
+        Portal * tempPort = new Portal(ori, pt.x, pt.y, width, height, *_world);
+        tempPort->id = i;
+        
+    }
+    
     
     
     
     
 }
-*/
+
 
 
 

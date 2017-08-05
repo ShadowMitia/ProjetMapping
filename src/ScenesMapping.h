@@ -8,6 +8,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Constant.h"
 #include "ofxPiMapper.h"
 #include "FboSource.h"
 #include "WorldsBox2d.h"
@@ -26,7 +27,7 @@ public:
     Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D * _lightSystem2D)
     {
         name = "Scene One FBO Source";
-        allocate(2000, 600);
+        allocate(WidthWord2D, HeightWord2D);
         worldsBox2d =_worldsBox2d;
         lightSystem2D =_lightSystem2D;
         avatars = &_worldsBox2d->avatars;
