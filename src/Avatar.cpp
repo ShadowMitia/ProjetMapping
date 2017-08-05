@@ -94,6 +94,8 @@ bool Avatar::hasClone() { return clone ? true : false; }
 
 
 void Avatar::handleInputs(int key){
+  std::cout << "Key: " << key << " [" << (char)key <<"]\n";
+
   if (key == OF_KEY_LEFT)
     {
       goingLeft(true);
@@ -121,6 +123,7 @@ void Avatar::handleInputs(int key){
 
 void Avatar::goingLeft(bool isPressed) {
   if (isPressed) {
+    std::cout << "Left\n";
     polygon.setVelocity(-10, polygon.body->GetLinearVelocity().y);
   } else {
     polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);
@@ -129,6 +132,7 @@ void Avatar::goingLeft(bool isPressed) {
 
 void Avatar::goingRight(bool isPressed) {
   if (isPressed) {
+    std::cout << "Right\n";
     polygon.setVelocity(10, polygon.body->GetLinearVelocity().y);
   } else {
     polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);

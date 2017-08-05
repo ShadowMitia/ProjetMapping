@@ -44,7 +44,7 @@ public:
     void createCircle(float _x,float _y);
     void draw();
     void update();
-    void createAvatar();
+    void createAvatar(int x, int y);
     void createPlatform(ofPolyline _polyline);
     void createPortal();
 

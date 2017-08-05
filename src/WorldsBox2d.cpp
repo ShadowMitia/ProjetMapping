@@ -69,12 +69,12 @@ void WorldsBox2d::draw(){
   
 }
 
-void WorldsBox2d::createAvatar(){
+void WorldsBox2d::createAvatar(int x, int y){
     avatars.emplace_back(&world, lightSystem2D);
     avatars.back().polygon.setData(new typeBox2d);
     typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
-    avatars.back().polygon.setPosition(100, 100);
+    avatars.back().setPosition(x, y);
 }
 
 void WorldsBox2d::update(){

@@ -18,7 +18,7 @@ void ofApp::setup(){
 
 	mapping.setup();
     
-	worlds->createAvatar();
+	worlds->createAvatar(100, 100);
     //importPortial();
 
 
@@ -46,26 +46,40 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
+void ofApp::keyPressed(int key) {
 
-    
-#ifdef DEBUGTOTAL
-    #ifdef Debug_World
+  std::cout << "Hello\n";
   for (auto &avatar : worlds->avatars) {
-    avatar.handleInputs(key);
+    if (key == OF_KEY_LEFT || key == 'q')
+      {
+	std::cout << "Left\n";
+	avatar.goingLeft(true);
+      }
+
+    if (key == OF_KEY_RIGHT || key == 'd')
+      {
+	std::cout << "Right\n";
+	avatar.goingRight(true);
+      }
   }
-#else
-  mapping.keyPressed(key);
-#endif
-    #else
-  for (auto &avatar : worlds->avatars) {
-    avatar.handleInputs(key);
-  }
-#endif
+
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
+
+
+  for (auto &avatar : worlds->avatars) {
+    if (key == OF_KEY_LEFT || key == 'q')
+      {
+	avatar.goingLeft(false);
+      }
+
+      if (key == OF_KEY_RIGHT || key == 'd')
+      {
+	avatar.goingRight(false);
+      }
+  }
 
     if (key == 'C') {
         worlds->createPlatform(editorPlatform.getPoly());

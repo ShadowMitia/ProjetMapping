@@ -26,7 +26,7 @@ private:
   std::unique_ptr<Avatar> clone = nullptr;
   ofVec2f cloneTranslation;
   ofx::LightSystem2D* lightSystemRef;
-  ofxBox2d* box2dRef; // ici conerie
+  ofxBox2d* box2dRef;
 
   bool jumping = false;
 

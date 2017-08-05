@@ -3,8 +3,8 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
-#define DEBUGTOTAL 1
-#define Debug_World 1
+#define DEBUGTOTAL
+#define Debug_World
 
 
 //========================================================================
