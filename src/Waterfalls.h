@@ -22,9 +22,19 @@ public:
 
 class Waterfalls{
 public:
-    
-    vector < Water* > Waters;
+    Waterfalls(ofxBox2d* _box2d);
+    vector < Water* > waters;
     ofRectangle       spawn,despawn;
+    void update();
+    ofPolyline polyWater;
+private:
+    
+    ofxBox2d* box2d;
+    int  timeDead;
+    
+    void spawnWater();
+    void despawnWater();
+    
     
     
 };

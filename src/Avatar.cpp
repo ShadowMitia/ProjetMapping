@@ -28,8 +28,9 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(3.0, 0.53, 0.1);
-    //polygon.ofxBox2dBaseShape::body->SetGravityScale((Float32) 0.0); je ne comprend pas pourquoi cela ne marche pas
     polygon.create(box2d->getWorld());
+    //polygon.body->SetGravityScale((Float32) 0.0); //je ne comprend pas pourquoi cela ne marche pas
+
     light = std::make_shared<ofx::Light2D>();
     light->setRadius(700);
     lightSystem->add(light);
