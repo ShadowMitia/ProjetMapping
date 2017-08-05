@@ -9,6 +9,7 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
+#include "Light2D.h"
 #include "LightSystem2D.h"
 
 class Avatar {
@@ -17,7 +18,7 @@ public:
   Avatar(ofxBox2d& box2d, ofx::LightSystem2D& lightSystem);
 
   ofxBox2dPolygon polygon;
-  //ofx::Light2D    light;
+  std::shared_ptr<ofx::Light2D>    light;
   ofRectangle rect;
     
 private:
@@ -29,6 +30,7 @@ private:
   bool jumping = false;
 
 public:
+
 
   void update();
   void draw();
@@ -43,5 +45,6 @@ public:
   void goingLeft(bool isPressed);
   void goingRight(bool isPressed);
   void jump();
-    
+
+
 };

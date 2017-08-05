@@ -25,6 +25,8 @@ namespace ofx {
         typedef std::shared_ptr<Shape2D> SharedPtr;
         typedef std::vector<SharedPtr> List;
         
+        bool   bVisible;
+        
         Shape2D();
         virtual ~Shape2D();
         
@@ -41,9 +43,7 @@ namespace ofx {
         
     protected:
         ofVec3f _position;
-        
         ofFloatColor _color;
-        
         ofPolyline _shape;
         
         void createMesh() const;

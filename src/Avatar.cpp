@@ -17,24 +17,30 @@ std::vector <ofPoint> loadPoints(std::string file) {
         pts.push_back(ofPoint(x, y));
     }
 
-    std::cout << ptsStr.size() << " " << pts.size();
-
     return pts;
 }
+
 
 
 Avatar::Avatar(ofxBox2d& box2d, ofx::LightSystem2D& lightSystem) : lightSystemRef(lightSystem), box2dRef(box2d)
 {
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
-    polygon.triangulatePoly();
+    //polygon.triangulatePoly();
     polygon.setPhysics(3.0, 0.53, 0.1);
     polygon.create(box2d.getWorld());
+    light = std::make_shared<ofx::Light2D>();
+    light->setRadius(700);
+    lightSystem.add(light);
 }
 
 void Avatar::update()
 {
-  rect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
+
+    light->setPosition(polygon.getPosition());
+    
+    
+    rect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 
   if (clone)
     {
@@ -42,7 +48,12 @@ void Avatar::update()
       clone->polygon.setPosition(polygon.getPosition() + cloneTranslation);
     }
 
+    if (polygon.getVelocity() == ofVec2f())
+    {
+        jumping = false;
+    }
   //std::cout << "Position: " << rect.x << " " << rect.y << '\n';
+
 };
 
 void Avatar::draw() {
@@ -54,14 +65,16 @@ void Avatar::draw() {
 }
 
 void Avatar::createClone(ofVec3f cloneTranslation) {
-  if (clone) { return; }
-  this->cloneTranslation = cloneTranslation;
-  clone = std::make_unique<Avatar>(box2dRef, lightSystemRef);
-  clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
-  clone->polygon.addVertices(polygon.getVertices());
-  clone->polygon.triangulatePoly();
-  clone->polygon.create(box2dRef.getWorld());
-  clone->polygon.setVelocity(polygon.getVelocity());
+    if (clone) { return; }
+    this->cloneTranslation = cloneTranslation;
+    clone = std::make_unique<Avatar>(box2dRef, lightSystemRef);
+    //clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
+    clone->polygon.addVertices(polygon.getVertices());
+    //clone->polygon.triangulatePoly();
+    clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
+    clone->polygon.setVelocity(polygon.getVelocity());
+    clone->polygon.create(polygon.getWorld());
+    //clone->polygon.setPosition(100, 100);
 }
 
 void Avatar::removeClone() {
@@ -77,6 +90,7 @@ void Avatar::teleportToClone() {
 }
 
 bool Avatar::hasClone() { return clone ? true : false; }
+
 
 void Avatar::handleInputs(int key){
   if (key == OF_KEY_LEFT)
@@ -136,5 +150,5 @@ void Avatar::setPosition(int x, int y)
 {
   polygon.setPosition(x, y);
   rect.setPosition(x, y);
-  //light.setPosition(x, y);
+  light->setPosition(ofVec2f(x, y));
 }

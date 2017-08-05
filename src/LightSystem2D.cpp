@@ -15,8 +15,6 @@
 
 
 namespace ofx {
-    
-    
     LightSystem2D::LightSystem2D()
     {
         //ofAddListener(ofEvents().setup, this, &LightSystem2D::setup);
@@ -85,11 +83,15 @@ namespace ofx {
             {
                 ofVec3f lightPosision = lightIter->get()->getPosition();
                 ofVec3f shapePosition = shapeIter->get()->getCenter();
-                if (fabs(lightPosision.x-shapePosition.x)<100 && fabs(lightPosision.y-shapePosition.y)<100) {
+                if (fabs(lightPosision.x-shapePosition.x)<250 && fabs(lightPosision.y-shapePosition.y)<250) {
                     ofMesh mesh;
                     makeMask(*lightIter, *shapeIter, mesh);
                     mesh.draw();
+                    shapeIter->get()->bVisible = true;
                     
+                }
+                else{
+                shapeIter->get()->bVisible = false;
                 }
                 ++shapeIter;
                 
@@ -107,8 +109,8 @@ namespace ofx {
             
             ++lightIter;
         }
-        
-        /* _sceneComp.begin();
+        /*
+         _sceneComp.begin();
          
          Shape2D::List::const_iterator shapeIter = _shapes.begin();
          
@@ -117,8 +119,8 @@ namespace ofx {
          (*shapeIter)->draw();
          ++shapeIter;
          }
-         _sceneComp.end();*/
-        
+         _sceneComp.end();
+        */
         _sceneComp.draw(0, 0);
         
     }
@@ -133,6 +135,7 @@ namespace ofx {
     void LightSystem2D::add(Shape2D::SharedPtr shape)
     {
         _shapes.push_back(shape);
+        _shapes.back().get()->bVisible=false;
     }
     
     
