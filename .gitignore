@@ -491,3 +491,7 @@ __pycache__/
 bin/*
 !bin/data/
 !bin/data/*
+
+compile_commands.json
+vgcore.*
+
