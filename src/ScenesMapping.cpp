@@ -35,6 +35,6 @@ void Scene1::draw(){
 }
 
 void Scene1::update(){
-    
-    
+
 }
+

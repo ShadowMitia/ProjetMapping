@@ -9,7 +9,6 @@
 #include "Portal.h"
 
 void Portal::update(std::vector<Avatar> & objects) {
-    std::vector<Avatar> clones;
     
     for (auto &obj : objects){
         
@@ -18,22 +17,21 @@ void Portal::update(std::vector<Avatar> & objects) {
         bool inside = obj.rect.inside(rect);
         
         if (intersects && !cloned) {
-            std::cout << "Clone\n";
-            obj.createClone(portal->rect.getCenter() - rect.getCenter());
+	  //std::cout << "Clone\n";
+            obj.createClone(connectedPortal->rect.getCenter() - rect.getCenter());
         }
         
         if (!intersects && !inside && cloned && obj.rect.intersects(entranceA, entranceB)) {
-            std::cout << "Back\n";
+	  //std::cout << "Back\n";
             obj.removeClone();
         }
         else if (!intersects && !inside && cloned && obj.rect.intersects(exitA, exitB)) {
-            std::cout << "Exit\n";
+	  //std::cout << "Exit\n";
             obj.teleportToClone();
             obj.removeClone();
         }
     }
-    
-    objects.insert(objects.end(), std::make_move_iterator(clones.begin()), std::make_move_iterator(clones.end()));
+
 }
 
 void Portal::draw() {
@@ -51,29 +49,30 @@ void Portal::draw() {
 }
 
 void Portal::linkTo(Portal* p) {
-	if (portal != nullptr) { return; }
-    portal = p;
-    
-    portal->portal = this;
-    
-    long first, second;
-    
-    if (orientation == Orientation::HORIZONTAL) {
-        first = rect.getPosition().x;
-        second = portal->rect.getPosition().x;
-    }
-    else {
-        first = rect.getPosition().y;
-        second = portal->rect.getPosition().y;
-    }
-    
-    if (first > second) {
-        std::swap(entranceA, exitA);
+  if (connectedPortal != nullptr) { return; }
+
+  connectedPortal = p;
+
+  connectedPortal->connectedPortal = this;
+
+  long first, second;
+
+  if (orientation == Orientation::HORIZONTAL) {
+    first = rect.getPosition().x;
+    second = connectedPortal->rect.getPosition().x;
+  }
+  else {
+    first = rect.getPosition().y;
+    second = connectedPortal->rect.getPosition().y;
+  }
+
+  if (first > second) {
+    std::swap(entranceA, exitA);
         std::swap(entranceB, exitB);
-    }
-    else {
-        std::swap(portal->entranceA, portal->exitA);
-        std::swap(portal->entranceB, portal->exitB);
-    }
+  }
+  else {
+    std::swap(connectedPortal->entranceA, connectedPortal->exitA);
+    std::swap(connectedPortal->entranceB, connectedPortal->exitB);
+  }
 }
 

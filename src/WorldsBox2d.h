@@ -6,11 +6,18 @@
 //
 //
 #pragma once
+
 #include "ofxBox2d.h"
 #include "Avatar.h"
 #include "Portal.h"
+
+#include "Wiimotes.h"
+#include "Light2D.h"
+
 #include "Platform.h"
 #include "LightSystem2D.h"
+
+constexpr int const MAX_WIIMOTES = 4;
 
 class typeBox2d{
 public:
@@ -20,6 +27,11 @@ public:
 
 class WorldsBox2d {
 public:
+
+
+
+
+
     ofxBox2d                 world;
     ofRectangle              bounds;
     vector<shared_ptr<ofxBox2dCircle>>	circles;
@@ -32,9 +44,13 @@ public:
     void createCircle(float _x,float _y);
     void draw();
     void update();
-    
     void createAvatar();
     void createPlatform(ofPolyline _polyline);
     void createPortal();
-    
+
+  //Wiimotes wiimotes;
+
+
+//ofx::LightSystem2D lightSystem;
+
 };

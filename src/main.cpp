@@ -7,9 +7,6 @@
 #define Debug_World 1
 
 
-
-
-
 //========================================================================
 int main( ){
 	ofSetupOpenGL(2000,600,OF_WINDOW);			// <-------- setup the GL context

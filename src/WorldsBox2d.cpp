@@ -8,9 +8,10 @@
 
 #include "WorldsBox2d.h"
 
+
 void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
-    
-    lightSystem2D = _lightSystem2D;
+        
+        lightSystem2D = _lightSystem2D;
     
     world.init();
     world.setGravity(0, 10);
@@ -22,14 +23,23 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     portals.emplace_back( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
     portals.emplace_back( Portal::Orientation::HORIZONTAL, 200, 525, 35, 75, world );
 
-	portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75, world);
-	portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75, world);
+
+    portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75, world);
+    portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75, world);
     
     portals[0].linkTo(&portals[1]);
-	portals[3].linkTo(&portals[2]);
-    ///// Portal /////////*/
 
+    for (unsigned int i = 0; i < 1; i++)
+      {
+	createAvatar(800 + i * 50, 500);
+      }
+
+    wiimotes.startThread();
+    */
+
+    //createAvatar(100, 100);
 }
+
 void WorldsBox2d::createCircle(float _x,float _y){
     float r = ofRandom(4, 20);
     circles.push_back(std::make_shared<ofxBox2dCircle>());
@@ -38,29 +48,36 @@ void WorldsBox2d::createCircle(float _x,float _y){
 }
 
 void WorldsBox2d::draw(){
-	for (auto &portal : portals) {
-		portal->draw();
-	}
+  for (auto &portal : portals) {
+    portal->draw();
+  }
 
-	for (int i = 0; i < circles.size(); i++) {
-		ofFill();
-		ofSetHexColor(0xf6c738);
-		circles[i].get()->draw();
-	}
+  for (int i = 0; i < circles.size(); i++) {
+    ofFill();
+    ofSetHexColor(0xf6c738);
+    circles[i].get()->draw();
+  }
 
-    for (auto &avatar : avatars) {
+  for (auto &avatar : avatars) {
         avatar.draw();
-    }
+  }
 
-    
-    for (auto &platform : platforms) {
+
+  for (auto &platform : platforms) {
         platform->draw();
-    }
+  }
   
 }
 
+void WorldsBox2d::createAvatar(){
+    avatars.emplace_back(&world, lightSystem2D);
+    avatars.back().polygon.setData(new typeBox2d);
+    typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
+    sd->type = typeBox2d::Type::AVATAR;
+    avatars.back().polygon.setPosition(100, 100);
+}
+
 void WorldsBox2d::update(){
-    
 	world.update();
     for (auto &avatar : avatars) {
         avatar.update();
@@ -69,15 +86,6 @@ void WorldsBox2d::update(){
         portal->update(avatars);
     }
 
-}
-
-void WorldsBox2d::createAvatar(){
-	avatars.emplace_back();
-    avatars.back().create(world.getWorld(), lightSystem2D);
-    avatars.back().polygon.setData(new typeBox2d);
-    typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
-    sd->type = typeBox2d::Type::AVATAR;
-    avatars.back().polygon.setPosition(100, 100);
 }
 
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
@@ -94,5 +102,3 @@ void WorldsBox2d::createPortal(){
     portals.push_back(plat);
     
 }
-
-

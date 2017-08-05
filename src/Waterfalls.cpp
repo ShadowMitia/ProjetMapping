@@ -6,4 +6,4 @@
 //
 //
 
-#include "waterfalls.h"
+#include "Waterfalls.h"

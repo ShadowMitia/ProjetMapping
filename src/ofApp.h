@@ -10,33 +10,37 @@
 #include "Avatar.h"
 #include "LightSystem2D.h"
 
+
+
 class ofApp : public ofBaseApp{
 
-	public:
-		void setup();
-		void update();
-		void draw();
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void mouseEntered(int x, int y);
-		void mouseExited(int x, int y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
+ public:
+  
+  void setup();
+  void update();
+  void draw();
 
-		ofxPiMapper mapping;
-        WorldsBox2d* worlds; // les mondes Box2d
-        ofx::LightSystem2D* lightSystem;
-    
-    
+  void keyPressed(int key);
+  void keyReleased(int key);
+  void mouseMoved(int x, int y );
+  void mouseDragged(int x, int y, int button);
+  void mousePressed(int x, int y, int button);
+  void mouseReleased(int x, int y, int button);
+  void mouseEntered(int x, int y);
+  void mouseExited(int x, int y);
+  void windowResized(int w, int h);
+  void dragEvent(ofDragInfo dragInfo);
+  void gotMessage(ofMessage msg);
 
-		Scene1* scene1;
-		Scene2* scene2;
-        EditorPlatform editorPlatform;
-		
+  ofxPiMapper mapping;
+  WorldsBox2d* worlds; // les mondes Box2d
+
+  ofx::LightSystem2D* lightSystem;
+
+
+  
+  Scene1* scene1;
+  Scene2* scene2;
+  EditorPlatform editorPlatform;
 };

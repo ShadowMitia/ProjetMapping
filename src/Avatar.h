@@ -14,30 +14,38 @@
 
 class Avatar {
 public:
-    
+
+  Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
+
     ofxBox2dPolygon polygon;
     ofxBox2dRect    foot;
     ofx::Light2D::SharedPtr   light;
-	ofRectangle rect;
+    ofRectangle rect;
     
 private:
-    std::unique_ptr<Avatar> clone = nullptr;
-    ofVec2f cloneTranslation;
-    bool jumping = false;
-    int cont;
-    int forceJump, speed;
-    ofx::LightSystem2D *lightSystem2D;
-    
+  std::unique_ptr<Avatar> clone = nullptr;
+  ofVec2f cloneTranslation;
+  ofx::LightSystem2D* lightSystemRef;
+  ofxBox2d* box2dRef; // ici conerie
+
+  bool jumping = false;
+
 public:
-    
-    void create(b2World* _b2World, ofx::LightSystem2D * _lightSystem2D);
-    void update();
-    void draw();
-    void handleInputs(int key);
-    void createClone(ofVec3f cloneTranslation);
-    void removeClone();
-    void teleportTo(ofVec2f destination);
-    void teleportToClone();
-    bool hasClone();
-    
+
+
+  void update();
+  void draw();
+  void handleInputs(int key);
+  void createClone(ofVec3f cloneTranslation);
+  void removeClone();
+  void teleportToClone();
+  bool hasClone();
+
+
+  void setPosition(int x, int y);
+  void goingLeft(bool isPressed);
+  void goingRight(bool isPressed);
+  void jump();
+
+
 };
