@@ -6,7 +6,6 @@
 //
 //
 #pragma once
-
 #include "ofxBox2d.h"
 #include "Avatar.h"
 #include "Portal.h"
@@ -16,9 +15,16 @@
 
 #include "Platform.h"
 #include "LightSystem2D.h"
+
 #include "Block.h"
 
+#include "Constant.h"
+
+
 constexpr int const MAX_WIIMOTES = 4;
+
+template<class T>
+class data : public T , public dataSprite{};
 
 class typeBox2d{
 public:
@@ -28,7 +34,6 @@ public:
 
 class WorldsBox2d {
 public:
-
 
     ofxBox2d                 world;
     ofRectangle              bounds;
@@ -46,9 +51,13 @@ public:
     void createCircle(float _x,float _y);
     void draw();
     void update();
+    void createBoundsModif(float x, float y, float w, float h);
     void createAvatar(int x, int y);
     void createPlatform(ofPolyline _polyline);
     void createPortal();
+    
+
+
 
     //Wiimotes wiimotes;
 

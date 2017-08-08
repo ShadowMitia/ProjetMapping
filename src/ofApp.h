@@ -5,10 +5,11 @@
 #include "ofxPiMapper.h"
 #include "ofxBox2d.h"
 #include "EditorPlatform.h"
-
+#include "WorldsBox2d.h"
 #include "ScenesMapping.h"
 #include "Avatar.h"
 #include "LightSystem2D.h"
+#include "Constant.h"
 
 
 
@@ -32,6 +33,10 @@ class ofApp : public ofBaseApp{
   void windowResized(int w, int h);
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
+    
+    //template<class Temp>
+    void contactStart(ofxBox2dContactArgs &e);
+    void contactEnd(ofxBox2dContactArgs &e);
 
   ofxPiMapper mapping;
   WorldsBox2d* worlds; // les mondes Box2d
@@ -43,4 +48,7 @@ class ofApp : public ofBaseApp{
   Scene1* scene1;
   Scene2* scene2;
   EditorPlatform editorPlatform;
+    
+
+    
 };

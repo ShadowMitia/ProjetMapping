@@ -19,24 +19,21 @@
 class Scene1 : public ofx::piMapper::FboSource
 {
 public:
-    WorldsBox2d *worldsBox2d;
+    WorldsBox2d *       worldsBox2d;
     ofx::LightSystem2D* lightSystem2D;
-    vector<Avatar>  *avatars;
+    vector<Avatar>*     avatars;
     
     
     Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D){
         name = "Scene One FBO Source";
-        allocate(WidthWord2D, HeightWord2D);
+        allocate(WidthWorld2D, HeightWorld2D);
         worldsBox2d =_worldsBox2d;
         avatars = &_worldsBox2d->avatars;
         lightSystem2D = _lightSystem2D;
     }
     void update();
     void draw();
-    
-    
 };
-
 
 
 class Scene2 : public ofx::piMapper::FboSource
@@ -50,7 +47,7 @@ public:
       lightSystem2D(lightSystem2D)
     {
         name = "Scene Two FBO Source";
-        allocate(WidthWord2D, HeightWord2D);
+        allocate(WidthWorld2D, HeightWorld2D);
     }
 
     void draw();

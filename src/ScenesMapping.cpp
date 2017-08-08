@@ -18,20 +18,21 @@ void Scene1::draw(){
     //ofDrawBitmapString("1", 50, 50);
     ofSetColor(ofColor::white);
     ofSetLineWidth(1);
-    for (int i=0; i<=WidthWord2D; i+=UNIT) {
-        ofDrawLine(i, 0, i, HeightWord2D);
+    for (int i=0; i<=WidthWorld2D; i+=UNIT) {
+        ofDrawLine(i, 0, i, HeightWorld2D);
     }
-    for (int i=0; i<=HeightWord2D; i+=UNIT) {
-        ofDrawLine(0, i, WidthWord2D, i);
+    for (int i=0; i<=HeightWorld2D; i+=UNIT) {
+        ofDrawLine(0, i, WidthWorld2D, i);
     }
     //worldsBox2d->draw();
     ofSetColor(ofColor::white);
     for (auto &platforms: worldsBox2d->platforms) {
         if (platforms->shape->bVisible) {
-            platforms->ground.draw();
+            //platforms->ground.draw();
         }
     }
-    lightSystem2D->draw();
+    //lightSystem2D->draw();
+    worldsBox2d->draw();
 }
 
 void Scene1::update(){

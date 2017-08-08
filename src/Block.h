@@ -14,6 +14,7 @@
 
 #include "Teleportable.h"
 
+#include "Constant.h"
 
 class Block : public Teleportable {
 
@@ -27,9 +28,11 @@ public:
     box.setup(box2d->getWorld(), x, y, width, height);
     collisionRect.set(box.getPosition().x, box.getPosition().y, box.getWidth(), box.getHeight());
     box.body->SetFixedRotation(true);
+    dataSprite* data = new dataSprite;
+    data->setSprite(Sprite::BLOCK);
+    box.setData(data);
 
     this->box2d = box2d;
-
   }
 
   void update() override
