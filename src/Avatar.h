@@ -14,14 +14,6 @@
 
 
 
-class dataAvatar: public dataSprite {
-public:
-    dataAvatar(){
-        setSprite(Sprite::AVATRA);
-    }
-    bool jumping = false;
-};
-
 class Avatar {
 public:
 
@@ -30,6 +22,7 @@ public:
     ofxBox2dRect    foot;
     ofx::Light2D::SharedPtr   light;
     ofRectangle rect;
+    bool jumping = false;
     
 private:
     std::unique_ptr<Avatar> clone = nullptr;
@@ -37,7 +30,7 @@ private:
     ofx::LightSystem2D* lightSystemRef;
     ofxBox2d* box2dRef;
     bool top =false;
-    bool jumping = false;
+    
     int countAirControl;
 
 public:
@@ -59,4 +52,20 @@ public:
     void move(Direction _direction);
     void airControl(Direction _direction);
 
+};
+
+class dataAvatar: public dataSprite {
+public:
+    dataAvatar(){
+        setSprite(Sprite::AVATRA);
+    }
+    
+};
+class dataFoot: public dataSprite {
+public:
+    dataFoot(){
+        setSprite(Sprite::FOOT);
+    }
+    bool jumping = false;
+    Avatar* avatarPtr;
 };

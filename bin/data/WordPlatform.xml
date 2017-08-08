@@ -1,0 +1,24 @@
+<WordPlatform>
+    <Platform>
+        <point>
+            <X>0.000000000</X>
+            <Y>0.000000000</Y>
+        </point>
+        <point>
+            <X>800.000000000</X>
+            <Y>0.000000000</Y>
+        </point>
+        <point>
+            <X>800.000000000</X>
+            <Y>600.000000000</Y>
+        </point>
+        <point>
+            <X>0.000000000</X>
+            <Y>600.000000000</Y>
+        </point>
+        <point>
+            <X>0.000000000</X>
+            <Y>0.000000000</Y>
+        </point>
+    </Platform>
+</WordPlatform>

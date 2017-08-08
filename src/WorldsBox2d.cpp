@@ -16,7 +16,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     world.init();
     world.setGravity(0, 10);
     //world.createGround(0,0,1000, 600);
-    createBoundsModif(0, 0, WidthWord2D, 600);
+    createBoundsModif(0, 0, 800, 600); // modif monde ici 
     world.setFPS(60.0);
     
     /*/////// Portal ///////
@@ -66,7 +66,7 @@ void WorldsBox2d::draw(){
   for (auto &platform : platforms) {
         platform->draw();
   }
-  
+    world.draw();
 }
 
 void WorldsBox2d::createAvatar(int x, int y){
@@ -104,45 +104,13 @@ void WorldsBox2d::createPortal(){
 }
 
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
-    
-    b2Body*	 ground;
-    if(world.world == NULL) {
-        ofLog(OF_LOG_WARNING, "ofxBox2d:: - Need a world, call init first! -");
-        return;
-    }
-    //if(ground!=NULL) world.world->DestroyBody(ground);
-    
-    b2BodyDef bd;
-    bd.position.Set(0, 0);
-    ground = world.world->CreateBody(&bd);
-    
-    b2EdgeShape shape;
-    
-    ofRectangle rec(x/OFX_BOX2D_SCALE, y/OFX_BOX2D_SCALE, w/OFX_BOX2D_SCALE, h/OFX_BOX2D_SCALE);
-    
-    dataPlatform * data = new dataPlatform;
-    data->setSprite(Sprite::PLATFORM);
-    
-    //right wall
-    shape.Set(b2Vec2(rec.x+rec.width, rec.y), b2Vec2(rec.x+rec.width, rec.y+rec.height));
-    ground->CreateFixture(&shape, 0.0f);
-    ground->SetUserData(data);
-    
-    //left wall
-    shape.Set(b2Vec2(rec.x, rec.y), b2Vec2(rec.x, rec.y+rec.height));
-    ground->CreateFixture(&shape, 0.0f);
-    ground->SetUserData(data);
-    
-    // top wall
-    shape.Set(b2Vec2(rec.x, rec.y), b2Vec2(rec.x+rec.width, rec.y));
-    ground->CreateFixture(&shape, 0.0f);
-    ground->SetUserData(data);
-    
-    // bottom wall
-    shape.Set(b2Vec2(rec.x, rec.y+rec.height), b2Vec2(rec.x+rec.width, rec.y+rec.height));
-    ground->CreateFixture(&shape, 0.0f);
-    ground->SetUserData(data);
-    
+    ofPolyline temp;
+    temp.addVertex(ofPoint(x,y));
+    temp.addVertex(ofPoint(w,y));
+    temp.addVertex(ofPoint(w,h));
+    temp.addVertex(ofPoint(x,h));
+    temp.addVertex(ofPoint(x,y));
+    createPlatform(temp);
 }
 
 

@@ -18,12 +18,17 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine,ofx::LightSystem
     dataPlatform * data = new dataPlatform;
     data->setSprite(Sprite::PLATFORM);
     ground.setData(data);
+    b2Filter tempFilter;
+    tempFilter.categoryBits = 0x0004;
+    tempFilter.maskBits = 0x0002 | 0x0001;
+    ground.setFilterData(tempFilter);
+    
+    
     shape = std::make_shared<ofx::Shape2D>();
     shape->setShape(_groundLine);
     shape->setColor(ofColor::white);
     shape->bVisible = false;
     LightSystem->add(shape);
-    
 }
 
 void Platform::draw(){
