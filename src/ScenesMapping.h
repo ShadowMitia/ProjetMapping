@@ -42,19 +42,18 @@ public:
 class Scene2 : public ofx::piMapper::FboSource
 {
 public:
-    Scene2()
+    WorldsBox2d *worldsBox2d;
+    ofx::LightSystem2D* lightSystem2D;
+
+    Scene2(WorldsBox2d* worldsBox2d,ofx::LightSystem2D* lightSystem2D)
+      : worldsBox2d(worldsBox2d),
+      lightSystem2D(lightSystem2D)
     {
         name = "Scene Two FBO Source";
-        allocate(100, 100);
+        allocate(WidthWord2D, HeightWord2D);
     }
-    
-    void draw()
-    {
-        ofClear(0);
-        ofBackground(0, 255, 0, 255);
-        
-        ofSetColor(255);
-        ofDrawBitmapString("2", 50, 50);
-    }
-};
 
+    void draw();
+
+
+};

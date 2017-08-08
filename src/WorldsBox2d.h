@@ -16,20 +16,18 @@
 
 #include "Platform.h"
 #include "LightSystem2D.h"
+#include "Block.h"
 
 constexpr int const MAX_WIIMOTES = 4;
 
 class typeBox2d{
 public:
-    enum class Type { AVATAR, PLATFORM,FOOT};
+    enum class Type { AVATAR, PLATFORM, FOOT };
     Type type;
 };
 
 class WorldsBox2d {
 public:
-
-
-
 
 
     ofxBox2d                 world;
@@ -38,6 +36,10 @@ public:
     std::vector< Avatar > avatars;
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
+    std::vector< Block > blocks;
+
+    std::vector<Teleportable*> teleportables;
+
     ofx::LightSystem2D * lightSystem2D;
     
     void setup(ofx::LightSystem2D * _lightSystem2D);
@@ -48,9 +50,9 @@ public:
     void createPlatform(ofPolyline _polyline);
     void createPortal();
 
-  //Wiimotes wiimotes;
+    //Wiimotes wiimotes;
 
 
-//ofx::LightSystem2D lightSystem;
+    //ofx::LightSystem2D lightSystem;
 
 };

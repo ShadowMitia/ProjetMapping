@@ -177,7 +177,7 @@ vector<Portal*> EditorPlatform::portalImport( ofxBox2d * _world){
             ori = Portal::Orientation::VERTICAL;
         }
         
-        Portal * tempPort = new Portal(ori, pt.x, pt.y, width, height, *_world);
+        Portal * tempPort = new Portal(ori, pt.x, pt.y, width, height);
         tempPort->id = i;
         
     }

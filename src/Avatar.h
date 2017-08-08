@@ -11,16 +11,17 @@
 #include "ofxBox2d.h"
 #include "Light2D.h"
 #include "LightSystem2D.h"
+#include "Teleportable.h"
 
-class Avatar {
+class Avatar : public Teleportable {
 public:
 
   Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
 
+
     ofxBox2dPolygon polygon;
     ofxBox2dRect    foot;
-    ofx::Light2D::SharedPtr   light;
-    ofRectangle rect;
+  //ofx::Light2D::SharedPtr   light;
     
 private:
   std::unique_ptr<Avatar> clone = nullptr;
@@ -33,15 +34,16 @@ private:
 public:
 
 
-  void update();
-  void draw();
+  void update() override;
+  void draw() override;
   void handleInputs(int key);
-  void createClone(ofVec3f cloneTranslation);
-  void removeClone();
-  void teleportToClone();
-  bool hasClone();
+  void createClone(ofVec2f cloneTranslation) override;
+  void removeClone() override;
+  void teleportToClone() override;
+  bool hasClone() override;
 
 
+  void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
   void goingLeft(bool isPressed);
   void goingRight(bool isPressed);

@@ -20,8 +20,6 @@ std::vector <ofPoint> loadPoints(std::string file) {
     return pts;
 }
 
-
-
 Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRef(lightSystem), box2dRef(box2d)
 {
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
@@ -29,30 +27,33 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     //polygon.triangulatePoly();
     polygon.setPhysics(3.0, 0.53, 0.1);
     polygon.create(box2d->getWorld());
-    //polygon.body->SetGravityScale((Float32) 0.0); //je ne comprend pas pourquoi cela ne marche pas
+    //polygon.body->SetGravityScale( 0.0);
 
+    polygon.body->SetFixedRotation(true);
+    /*
     light = std::make_shared<ofx::Light2D>();
     light->setRadius(700);
     lightSystem->add(light);
+    */
 }
 
 void Avatar::update()
 {
 
-    light->setPosition(polygon.getPosition());
-    
-    
-    rect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
+  //light->setPosition(polygon.getPosition());
+
+
+  collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 
   if (clone)
     {
       clone->polygon.setVelocity(polygon.getVelocity());
-      clone->polygon.setPosition(polygon.getPosition() + cloneTranslation);
+      clone->setPosition(polygon.getPosition() + cloneTranslation);
     }
 
-    if (polygon.getVelocity() == ofVec2f())
+  if (polygon.getVelocity() == ofVec2f())
     {
-        jumping = false;
+      jumping = false;
     }
   //std::cout << "Position: " << rect.x << " " << rect.y << '\n';
 
@@ -66,29 +67,29 @@ void Avatar::draw() {
   }
 }
 
-void Avatar::createClone(ofVec3f cloneTranslation) {
+void Avatar::createClone(ofVec2f cloneTranslation) {
     if (clone) { return; }
+
     this->cloneTranslation = cloneTranslation;
+
     clone = std::make_unique<Avatar>(box2dRef, lightSystemRef);
-    //clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
-    clone->polygon.addVertices(polygon.getVertices());
-    //clone->polygon.triangulatePoly();
-    clone->polygon.setPhysics(polygon.density, polygon.bounce, polygon.friction);
     clone->polygon.setVelocity(polygon.getVelocity());
     clone->polygon.create(polygon.getWorld());
-    //clone->polygon.setPosition(100, 100);
+    clone->setPosition(cloneTranslation);
 }
 
 void Avatar::removeClone() {
+  //lightSystemRef->remove(clone->light);
   clone = nullptr;
   cloneTranslation.zero();
+
 }
 
 
 void Avatar::teleportToClone() {
-  auto vel = polygon.body->GetLinearVelocity();
+  auto vel = polygon.getVelocity();
   polygon.setPosition(clone->polygon.getPosition());
-  polygon.body->SetLinearVelocity(vel);
+  polygon.setVelocity(vel);
 }
 
 bool Avatar::hasClone() { return clone ? true : false; }
@@ -124,7 +125,6 @@ void Avatar::handleInputs(int key){
 
 void Avatar::goingLeft(bool isPressed) {
   if (isPressed) {
-    std::cout << "Left\n";
     polygon.setVelocity(-10, polygon.body->GetLinearVelocity().y);
   } else {
     polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);
@@ -133,7 +133,6 @@ void Avatar::goingLeft(bool isPressed) {
 
 void Avatar::goingRight(bool isPressed) {
   if (isPressed) {
-    std::cout << "Right\n";
     polygon.setVelocity(10, polygon.body->GetLinearVelocity().y);
   } else {
     polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);
@@ -144,17 +143,21 @@ void Avatar::jump() {
   if (!jumping)
     {
       float impulse = polygon.body->GetMass() * 500;
-      ofVec2f size{ rect.getWidth() / 2, rect.getHeight() / 2 };
+      ofVec2f size{ collisionRect.getWidth() / 2, collisionRect.getHeight() / 2 };
       polygon.addForce({ 0, -impulse }, 1.0);
     }
 
   jumping = true;
 }
 
+void Avatar::setPosition(ofVec2f vec)
+{
+  setPosition(vec.x, vec.y);
+}
 
 void Avatar::setPosition(int x, int y)
 {
   polygon.setPosition(x, y);
-  rect.setPosition(x, y);
-  light->setPosition(ofVec2f(x, y));
+  collisionRect.setPosition(x, y);
+  //light->setPosition(ofVec2f(x, y));
 }

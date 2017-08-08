@@ -10,15 +10,14 @@ void ofApp::setup(){
     worlds->setup(lightSystem);
     
 	scene1 = new Scene1(worlds, lightSystem);
-	scene2 = new Scene2();
+	scene2 = new Scene2(worlds, lightSystem);
 
 	mapping.registerFboSource(scene1);
 	mapping.registerFboSource(scene2);
 
 
 	mapping.setup();
-    
-	worlds->createAvatar(100, 100);
+
     //importPortial();
 
 
@@ -26,8 +25,6 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
-
     editorPlatform.update();
     worlds->update();
     lightSystem->update();
@@ -37,7 +34,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    scene1->draw();
+    scene2->draw();
     ofSetColor(ofColor::aqua);
     editorPlatform.polylineFinal.draw();
 
@@ -48,18 +45,21 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
 
-  std::cout << "Hello\n";
   for (auto &avatar : worlds->avatars) {
     if (key == OF_KEY_LEFT || key == 'q')
       {
-	std::cout << "Left\n";
 	avatar.goingLeft(true);
       }
 
     if (key == OF_KEY_RIGHT || key == 'd')
       {
-	std::cout << "Right\n";
+
 	avatar.goingRight(true);
+      }
+
+    if (key == ' ')
+      {
+	avatar.jump();
       }
   }
 

@@ -11,7 +11,7 @@
 
 void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
         
-        lightSystem2D = _lightSystem2D;
+  lightSystem2D = _lightSystem2D;
     
     world.init();
     world.setGravity(0, 10);
@@ -19,25 +19,40 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     world.createBounds();
     world.setFPS(60.0);
     
-    /*/////// Portal ///////
-    portals.emplace_back( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
-    portals.emplace_back( Portal::Orientation::HORIZONTAL, 200, 525, 35, 75, world );
+
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 50, 525, 35, 75));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 200, 525, 35, 75));
 
 
-    portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75, world);
-    portals.emplace_back(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75, world);
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75));
     
-    portals[0].linkTo(&portals[1]);
+    portals[0]->linkTo(portals[1]);
+    portals[1]->linkTo(portals[0]);
+
+    portals[2]->linkTo(portals[3]);
+    portals[3]->linkTo(portals[2]);
 
     for (unsigned int i = 0; i < 1; i++)
       {
 	createAvatar(800 + i * 50, 500);
       }
 
-    wiimotes.startThread();
-    */
+    //wiimotes.startThread();
 
     //createAvatar(100, 100);
+
+    for (auto &avatar : avatars)
+      teleportables.push_back(&avatar);
+
+    blocks.emplace_back(&world, 600, 500, 100, 100);
+
+    for (auto &block : blocks)
+      teleportables.push_back(&block);
+
+
+
+
 }
 
 void WorldsBox2d::createCircle(float _x,float _y){
@@ -52,20 +67,34 @@ void WorldsBox2d::draw(){
     portal->draw();
   }
 
+  for (auto &platform : platforms) {
+    ofSetHexColor(0xFF0000);
+    if (platform->shape->bVisible) {
+      platform->ground.draw();
+    }
+  }
+
   for (int i = 0; i < circles.size(); i++) {
     ofFill();
     ofSetHexColor(0xf6c738);
     circles[i].get()->draw();
   }
 
-  for (auto &avatar : avatars) {
-        avatar.draw();
+
+  for (auto &block : blocks)
+    {
+      ofSetHexColor(0xFFFFF);
+      block.draw();
+    }
+
+    for (auto &avatar : avatars) {
+    ofSetHexColor(0x00FF00);
+    avatar.draw();
   }
 
 
-  for (auto &platform : platforms) {
-        platform->draw();
-  }
+
+
   
 }
 
@@ -78,13 +107,22 @@ void WorldsBox2d::createAvatar(int x, int y){
 }
 
 void WorldsBox2d::update(){
-	world.update();
-    for (auto &avatar : avatars) {
-        avatar.update();
+  world.update();
+  for (auto &avatar : avatars)
+    {
+      avatar.update();
     }
-    for (auto &portal : portals) {
-        portal->update(avatars);
+
+  for (auto &block : blocks)
+    {
+      block.update();
     }
+
+  for (auto &portal : portals)
+    {
+      portal->update(teleportables);
+    }
+
 
 }
 
@@ -98,7 +136,7 @@ void WorldsBox2d::createPlatform(ofPolyline _polyline){
 
 void WorldsBox2d::createPortal(){
     
-    Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75, world );
+    Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
     portals.push_back(plat);
     
 }
