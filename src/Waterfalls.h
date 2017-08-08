@@ -9,6 +9,9 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxBox2d.h"
+#include "Constant.h"
+
+
 
 class Water{
 public:
@@ -28,13 +31,17 @@ public:
     void update();
     ofPolyline polyWater;
 private:
-    
     ofxBox2d* box2d;
     int  timeDead;
-    
     void spawnWater();
     void despawnWater();
-    
-    
-    
 };
+
+class dataWater: public dataSprite {
+public:
+    dataWater(){
+        setSprite(Sprite::WATER);
+    }
+    Water* WaterPtr;
+};
+

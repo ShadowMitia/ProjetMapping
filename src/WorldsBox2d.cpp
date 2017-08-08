@@ -106,7 +106,6 @@ void WorldsBox2d::createAvatar(int x, int y){
     sd->type = typeBox2d::Type::AVATAR;
     avatars.back().setPosition(x, y);
 }
-
 void WorldsBox2d::update(){
   world.update();
   for (auto &avatar : avatars)
@@ -126,7 +125,6 @@ void WorldsBox2d::update(){
 
 
 }
-
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     
     Platform *edge = new Platform;
@@ -134,14 +132,12 @@ void WorldsBox2d::createPlatform(ofPolyline _polyline){
     platforms.push_back(edge);
 
 }
-
 void WorldsBox2d::createPortal(){
     
     Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
     portals.push_back(plat);
     
 }
-
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     ofPolyline temp;
     temp.addVertex(ofPoint(x,y));
