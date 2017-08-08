@@ -33,6 +33,12 @@ void ofApp::update(){
     lightSystem->update();
     //mapping.update();
 
+    /*
+    for (auto &avatar : worlds->avatars) {
+    cout << avatar.jumping << endl;
+    
+    }*/
+
 }
 
 //--------------------------------------------------------------
@@ -52,12 +58,14 @@ void ofApp::keyPressed(int key) {
     for (auto &avatar : worlds->avatars) {
         if (key == OF_KEY_LEFT || key == 'q')
         {
-            avatar.move(Direction::LEFT);
+            if (avatar.jumping) avatar.airControl(Direction::LEFT);
+            else avatar.move(Direction::LEFT);
         }
         
         if (key == OF_KEY_RIGHT || key == 'd')
         {
-            avatar.move(Direction::RIGHT);
+            if (avatar.jumping) avatar.airControl(Direction::RIGHT);
+            else avatar.move(Direction::RIGHT);
         }
 
   }
@@ -68,10 +76,10 @@ void ofApp::keyPressed(int key) {
 void ofApp::keyReleased(int key){
     
   for (auto &avatar : worlds->avatars) {
-      dataAvatar * data = (dataAvatar*) avatar.polygon.getData();
-      cout << data->jumping << endl;
-      if (key == ' ' && data->jumping == false){
+
+      if (key == ' ' && avatar.jumping == false){
           avatar.move(Direction::JUMP);
+
       }
   }
 
@@ -158,16 +166,17 @@ void ofApp::contactStart(ofxBox2dContactArgs &e) {
     if (aSprite == nullptr || bSprite == nullptr) {
       return;
     }
-    
-    
-    if (aSprite->getSprite() == Sprite::AVATAR && bSprite->getSprite() == Sprite::PLATFORM) {
-        dataAvatar* aData = (dataAvatar*)e.a->GetBody()->GetUserData();
-        aData->jumping=false;
-    }
 
-    if (bSprite->getSprite() == Sprite::AVATAR && aSprite->getSprite() == Sprite::PLATFORM) {
-        dataAvatar* bData = (dataAvatar*)e.b->GetBody()->GetUserData();
-        bData->jumping=false;
+    
+    if (aSprite->getSprite() == Sprite::FOOT && bSprite->getSprite() == Sprite::PLATFORM) {
+        dataFoot* aData = (dataFoot*)e.a->GetBody()->GetUserData();
+        aData->avatarPtr->jumping = false;
+        cout << "false a " << endl;
+    }
+    if (bSprite->getSprite() == Sprite::FOOT && aSprite->getSprite() == Sprite::PLATFORM) {
+        dataFoot* bData = (dataFoot*)e.b->GetBody()->GetUserData();
+        bData->avatarPtr->jumping = false;
+        cout << "false b " << endl;
     }
     
 }
@@ -177,19 +186,22 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e){
 
     dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
     dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
-    
+
     if (aSprite == nullptr || bSprite == nullptr) {
       return;
     }
 
 
-    if (aSprite->getSprite() == Sprite::AVATAR && bSprite->getSprite() == Sprite::PLATFORM) {
-        dataAvatar* aData = (dataAvatar*)e.a->GetBody()->GetUserData();
-        aData->jumping=true;
+    if (aSprite->getSprite() == Sprite::FOOT && bSprite->getSprite() == Sprite::PLATFORM) {
+        dataFoot* aData = (dataFoot*)e.a->GetBody()->GetUserData();
+        aData->avatarPtr->jumping = true;
     }
-    if (bSprite->getSprite() == Sprite::AVATAR && aSprite->getSprite() == Sprite::PLATFORM) {
-        dataAvatar* bData = (dataAvatar*)e.b->GetBody()->GetUserData();
-        bData->jumping=true;
+
+    if (bSprite->getSprite() == Sprite::FOOT && aSprite->getSprite() == Sprite::PLATFORM) {
+        dataFoot* bData = (dataFoot*)e.b->GetBody()->GetUserData();
+        bData->avatarPtr->jumping = true;
     }
+
+    
 }
 

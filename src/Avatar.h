@@ -15,24 +15,19 @@
 
 #include "Constant.h"
 
-
-
-class dataAvatar: public dataSprite {
-public:
-    dataAvatar(){
-        setSprite(Sprite::AVATAR);
-    }
-    bool jumping = false;
-};
-
 class Avatar : public Teleportable {
+
 public:
 
   Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
 
     ofxBox2dPolygon polygon;
     ofxBox2dRect    foot;
-  //ofx::Light2D::SharedPtr   light;
+
+    ofx::Light2D::SharedPtr   light;
+    ofRectangle rect;
+    bool jumping = false;
+
     
 private:
     std::unique_ptr<Avatar> clone = nullptr;
@@ -40,7 +35,7 @@ private:
     ofx::LightSystem2D* lightSystemRef;
     ofxBox2d* box2dRef;
     bool top =false;
-    bool jumping = false;
+    
     int countAirControl;
 
 public:
@@ -65,4 +60,20 @@ public:
   void airControl(Direction _direction);
 
 
+};
+
+class dataAvatar: public dataSprite {
+public:
+    dataAvatar(){
+        setSprite(Sprite::AVATAR);
+    }
+    
+};
+class dataFoot: public dataSprite {
+public:
+    dataFoot(){
+        setSprite(Sprite::FOOT);
+    }
+    bool jumping = false;
+    Avatar* avatarPtr;
 };

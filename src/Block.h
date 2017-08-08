@@ -37,7 +37,8 @@ public:
 
   void update() override
   {
-    collisionRect.set(box.getPosition().x, box.getPosition().y, box.getWidth(), box.getHeight());
+
+    collisionRect.set(box.getPosition().x - box.getWidth() / 2, box.getPosition().y - box.getHeight() / 2, box.getWidth(), box.getHeight());
 
     if (clone)
       {
@@ -49,6 +50,9 @@ public:
   void draw() override
   {
     box.draw();
+
+    //ofSetColor(ofColor::orange);
+    //ofDrawRectangle(collisionRect);
 
     if (clone)
       {

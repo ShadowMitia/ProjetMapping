@@ -26,7 +26,7 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
-    polygon.setPhysics(3.0, 0.53, 0.1);
+    polygon.setPhysics(10.0, 0.03, 4.0);
     polygon.create(box2d->getWorld());
 
     b2Filter tempFilter;
@@ -36,20 +36,34 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     /////////////// FOOT ///////////////
     ofRectangle temp = polygon.getBoundingBox();
     temp.height = 5;
-    foot.setPhysics(0.0, 0.0, 0.0);
+    temp.width = temp.width-2;
+    foot.setPhysics(3.0, 0.53, 0.1);
     foot.setup(box2d->getWorld(), temp);
     foot.body->SetGravityScale(0);
     tempFilter.categoryBits = 0x0002;
-    tempFilter.maskBits = 0x0000;
+    tempFilter.maskBits =  0x0004;
     foot.setFilterData(tempFilter);
+
+    polygon.body->SetFixedRotation(true);
+
     /////////////////////////  Data /////////////////
     dataAvatar* data = new dataAvatar;
     data->setSprite(Sprite::AVATAR);
     polygon.setData(data);
     foot.setData(data);
 
-    polygon.body->SetFixedRotation(true);
+
     /*
+
+/////////////////////////  Data /////////////////
+    dataAvatar* dataAv = new dataAvatar;
+    dataAv->setSprite(Sprite::AVATRA);
+    polygon.setData(dataAv);
+    dataFoot* dataFo = new dataFoot;
+    dataFo->setSprite(Sprite::FOOT);
+    dataFo->avatarPtr = this;
+    foot.setData(dataFo);
+
     light = std::make_shared<ofx::Light2D>();
     light->setRadius(700);
     lightSystem->add(light);
@@ -60,7 +74,7 @@ void Avatar::update(){
     
     
     
-    foot.setPosition(polygon.getPosition()+ofVec2f(0,20));
+    foot.setPosition(polygon.getPosition()+ofVec2f(0,21));
     
     if (!jumping) {
         this->polygon.setRotation(0);
@@ -75,20 +89,19 @@ void Avatar::update(){
       clone->setPosition(polygon.getPosition() + cloneTranslation);
     }
 
-  if (polygon.getVelocity() == ofVec2f())
-    {
-      jumping = false;
-    }
   //std::cout << "Position: " << rect.x << " " << rect.y << '\n';
 
 }
 
 void Avatar::draw() {
+
     ofSetColor(ofColor::blue);
     polygon.draw();
     ofSetColor(ofColor::violet);
     foot.draw();
     ofSetColor(ofColor::white);
+    //ofSetColor(ofColor::orange);
+    //ofDrawRectangle(collisionRect);
     
   if (clone) {
     clone->draw();
@@ -124,61 +137,6 @@ void Avatar::teleportToClone() {
 }
 
 bool Avatar::hasClone() { return clone ? true : false; }
-
-void Avatar::handleInputs(int key){
-  std::cout << "Key: " << key << " [" << (char)key <<"]\n";
-
-  if (key == OF_KEY_LEFT)
-    {
-      goingLeft(true);
-    }
-  else
-    {
-      goingLeft(false);
-    }
-
-  if (key == OF_KEY_RIGHT)
-    {
-      goingRight(true);
-    }
-  else
-    {
-      goingRight(false);
-    }
-
-  if (key == ' ')
-    {
-      jump();
-    }
-}
-
-void Avatar::goingLeft(bool isPressed) {
-  if (isPressed) {
-    polygon.setVelocity(-10, polygon.body->GetLinearVelocity().y);
-  } else {
-    polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);
-  }
-}
-
-void Avatar::goingRight(bool isPressed) {
-  if (isPressed) {
-    polygon.setVelocity(10, polygon.body->GetLinearVelocity().y);
-  } else {
-    polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);
-  }
-}
-
-void Avatar::jump() {
-  if (!jumping)
-    {
-      float impulse = polygon.body->GetMass() * 500;
-      ofVec2f size{ collisionRect.getWidth() / 2, collisionRect.getHeight() / 2 };
-      polygon.addForce({ 0, -impulse }, 1.0);
-    }
-
-  jumping = false;
-}
-
 
 void Avatar::setPosition(ofVec2f vec)
 {
@@ -218,20 +176,23 @@ void Avatar::move(Direction _direction){
                 break;
             case Direction::JUMP:
                 polygon.setVelocity(polygon.getVelocity().x, -10);
+	default:
+	  break;
         }
     }
 }
 
 void Avatar::airControl(Direction _direction){
-    
+    countAirControl = 10;
     if (countAirControl>0) {
         switch (_direction) {
             case Direction::LEFT:
-                polygon.addForce(ofVec2f(-10,0), 1);
+                cout << "ici" << endl;
+                polygon.addForce(ofVec2f(-1000,0), 1);
                 countAirControl --;
                 break;
             case Direction::RIGHT:
-                polygon.addForce(ofVec2f(10,0), 1);
+                polygon.addForce(ofVec2f(1000,0), 1);
                 countAirControl --;
                 break;
             default:
