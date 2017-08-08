@@ -28,10 +28,11 @@ void Scene1::draw(){
     ofSetColor(ofColor::white);
     for (auto &platforms: worldsBox2d->platforms) {
         if (platforms->shape->bVisible) {
-            platforms->ground.draw();
+            //platforms->ground.draw();
         }
     }
-    lightSystem2D->draw();
+    //lightSystem2D->draw();
+    worldsBox2d->draw();
 }
 
 void Scene1::update(){

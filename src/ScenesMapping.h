@@ -19,9 +19,9 @@
 class Scene1 : public ofx::piMapper::FboSource
 {
 public:
-    WorldsBox2d *worldsBox2d;
+    WorldsBox2d *       worldsBox2d;
     ofx::LightSystem2D* lightSystem2D;
-    vector<Avatar>  *avatars;
+    vector<Avatar>*     avatars;
     
     
     Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D){
@@ -33,10 +33,7 @@ public:
     }
     void update();
     void draw();
-    
-    
 };
-
 
 
 class Scene2 : public ofx::piMapper::FboSource

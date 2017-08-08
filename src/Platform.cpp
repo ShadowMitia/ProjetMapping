@@ -15,6 +15,9 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine,ofx::LightSystem
     ground.addVertexes(_groundLine);
     ground.setPhysics(0, 0, 0); // (0.0, 0.1, 0.7)
     ground.create(_b2World);
+    dataPlatform * data = new dataPlatform;
+    data->setSprite(Sprite::PLATFORM);
+    ground.setData(data);
     shape = std::make_shared<ofx::Shape2D>();
     shape->setShape(_groundLine);
     shape->setColor(ofColor::white);

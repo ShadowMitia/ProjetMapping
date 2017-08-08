@@ -20,28 +20,49 @@ std::vector <ofPoint> loadPoints(std::string file) {
     return pts;
 }
 
-
-
 Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRef(lightSystem), box2dRef(box2d)
 {
+////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(3.0, 0.53, 0.1);
     polygon.create(box2d->getWorld());
-    //polygon.body->SetGravityScale((Float32) 0.0); //je ne comprend pas pourquoi cela ne marche pas
+    b2Filter tempFilter;
+    tempFilter.categoryBits = 0x0001;
+    tempFilter.maskBits = 0xFFFF;
+    polygon.setFilterData(tempFilter);
+    /////////////// FOOT ///////////////
+    ofRectangle temp = polygon.getBoundingBox();
+    temp.height = 5;
+    foot.setPhysics(0.0, 0.0, 0.0);
+    foot.setup(box2d->getWorld(), temp);
+    foot.body->SetGravityScale(0);
+    tempFilter.categoryBits = 0x0002;
+    tempFilter.maskBits = 0x0000;
+    foot.setFilterData(tempFilter);
+/////////////////////////  Data /////////////////
+    dataAvatar* data = new dataAvatar;
+    data->setSprite(Sprite::AVATRA);
+    polygon.setData(data);
+    foot.setData(data);
+    
 
     light = std::make_shared<ofx::Light2D>();
     light->setRadius(700);
     lightSystem->add(light);
 }
 
-void Avatar::update()
-{
-
+void Avatar::update(){
+    
+    
+    
+    foot.setPosition(polygon.getPosition()+ofVec2f(0,20));
+    
+    if (!jumping) {
+        this->polygon.setRotation(0);
+    }
     light->setPosition(polygon.getPosition());
-    
-    
     rect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 
   if (clone)
@@ -56,11 +77,15 @@ void Avatar::update()
     }
   //std::cout << "Position: " << rect.x << " " << rect.y << '\n';
 
-};
+}
 
 void Avatar::draw() {
-  polygon.draw();
-
+    ofSetColor(ofColor::blue);
+    polygon.draw();
+    ofSetColor(ofColor::violet);
+    foot.draw();
+    ofSetColor(ofColor::white);
+    
   if (clone) {
     clone->draw();
   }
@@ -84,7 +109,6 @@ void Avatar::removeClone() {
   cloneTranslation.zero();
 }
 
-
 void Avatar::teleportToClone() {
   auto vel = polygon.body->GetLinearVelocity();
   polygon.setPosition(clone->polygon.getPosition());
@@ -92,7 +116,6 @@ void Avatar::teleportToClone() {
 }
 
 bool Avatar::hasClone() { return clone ? true : false; }
-
 
 void Avatar::handleInputs(int key){
   std::cout << "Key: " << key << " [" << (char)key <<"]\n";
@@ -121,10 +144,8 @@ void Avatar::handleInputs(int key){
     }
 }
 
-
 void Avatar::goingLeft(bool isPressed) {
   if (isPressed) {
-    std::cout << "Left\n";
     polygon.setVelocity(-10, polygon.body->GetLinearVelocity().y);
   } else {
     polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);
@@ -133,7 +154,6 @@ void Avatar::goingLeft(bool isPressed) {
 
 void Avatar::goingRight(bool isPressed) {
   if (isPressed) {
-    std::cout << "Right\n";
     polygon.setVelocity(10, polygon.body->GetLinearVelocity().y);
   } else {
     polygon.setVelocity(0, polygon.body->GetLinearVelocity().y);
@@ -148,13 +168,60 @@ void Avatar::jump() {
       polygon.addForce({ 0, -impulse }, 1.0);
     }
 
-  jumping = true;
+  jumping = false;
 }
 
-
-void Avatar::setPosition(int x, int y)
-{
+void Avatar::setPosition(int x, int y){
   polygon.setPosition(x, y);
   rect.setPosition(x, y);
   light->setPosition(ofVec2f(x, y));
+}
+
+void Avatar::move(Direction _direction){
+    if (top) {
+        switch (_direction) {
+            case Direction::TOP:
+                polygon.setVelocity(polygon.getVelocity().x, -10);
+                break;
+            case Direction::LEFT:
+                polygon.setVelocity(-10, polygon.getVelocity().y);
+                break;
+            case Direction::RIGHT:
+                polygon.setVelocity(10, polygon.getVelocity().y);
+                break;
+            case Direction::LOW:
+                polygon.setVelocity(polygon.getVelocity().x, 10);
+        }
+    }
+    else{
+        switch (_direction) {
+            case Direction::LEFT:
+                polygon.setVelocity(-10, polygon.getVelocity().y);
+                break;
+            case Direction::RIGHT:
+                polygon.setVelocity(10, polygon.getVelocity().y);
+                break;
+            case Direction::JUMP:
+                polygon.setVelocity(polygon.getVelocity().x, -10);
+        }
+    }
+}
+void Avatar::airControl(Direction _direction){
+    
+    if (countAirControl>0) {
+        switch (_direction) {
+            case Direction::LEFT:
+                polygon.addForce(ofVec2f(-10,0), 1);
+                countAirControl --;
+                break;
+            case Direction::RIGHT:
+                polygon.addForce(ofVec2f(10,0), 1);
+                countAirControl --;
+                break;
+            default:
+                break;
+        }
+
+    }
+    
 }

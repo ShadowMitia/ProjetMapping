@@ -9,7 +9,12 @@
 #include "ofxBox2d.h"
 #include "Shape2D.h"
 #include "LightSystem2D.h"
+#include "Constant.h"
 
+class dataPlatform: public dataSprite {
+public:
+    int alex; 
+};
 
 class Platform {
 public:
