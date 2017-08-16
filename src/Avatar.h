@@ -35,6 +35,7 @@ private:
     bool top =false;
     
     int countAirControl;
+	float moveInputX;
 
 public:
 
@@ -54,7 +55,11 @@ public:
   void goingRight(bool isPressed);
   void jump();
   void move(Direction _direction);
+  void move(float inputX); 
   void airControl(Direction _direction);
+
+  void keyPressed(int key);
+  void keyReleased(int key);
 
 
 };

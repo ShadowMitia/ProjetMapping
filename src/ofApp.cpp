@@ -53,37 +53,22 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key) {
-
-    for (auto &avatar : worlds->avatars) {
-        if (key == OF_KEY_LEFT || key == 'q')
-        {
-            if (avatar.jumping) avatar.airControl(Direction::LEFT);
-            else avatar.move(Direction::LEFT);
-        }
-        
-        if (key == OF_KEY_RIGHT || key == 'd')
-        {
-            if (avatar.jumping) avatar.airControl(Direction::RIGHT);
-            else avatar.move(Direction::RIGHT);
-        }
-
-  }
+void ofApp::keyPressed(int key) 
+{
+	for (auto &avatar : worlds->avatars) 
+	{
+		avatar.keyPressed(key);
+	}
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
-    
-    
-    for (auto &avatar : worlds->avatars) {
-        
-        if (key == ' ' && avatar.jumping == false){
-            avatar.move(Direction::JUMP);
-            
-        }
-    }
-    
+
+	for (auto &avatar : worlds->avatars)
+	{
+		avatar.keyReleased(key);
+	}
     if (key == 'C') {
         worlds->createPlatform(editorPlatform.getPoly());
     }

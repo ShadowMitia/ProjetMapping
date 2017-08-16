@@ -27,6 +27,10 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     polygon.setPhysics(10.0, 0.03, 4.0);
     polygon.create(box2d->getWorld());
 
+	polygon.body->SetType(b2BodyType::b2_dynamicBody);
+	polygon.body->SetFixedRotation(true);
+
+
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;
     tempFilter.maskBits = 0xFFFF;
@@ -41,9 +45,8 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     tempFilter.categoryBits = 0x0002;
     tempFilter.maskBits =  0x0004;
     foot.setFilterData(tempFilter);
-
-    polygon.body->SetFixedRotation(true);
-
+	moveInputX = 0.0f;
+	
 /////////////////////////  Data /////////////////
     dataAvatar* dataAv = new dataAvatar;
     dataAv->setSprite(Sprite::AVATAR);
@@ -60,16 +63,18 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     
 }
 
-void Avatar::update(){
-    
-    
-    
+void Avatar::update()
+{
     foot.setPosition(polygon.getPosition()+ofVec2f(0,21));
     
-    if (!jumping) {
+    if (!jumping)
+	{
         this->polygon.setRotation(0);
     }
-    light->setPosition(polygon.getPosition());
+	if (light)
+	{
+		light->setPosition(polygon.getPosition());
+	}
     collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 
 
@@ -154,8 +159,10 @@ void Avatar::move(Direction _direction){
                 polygon.setVelocity(polygon.getVelocity().x, 10);
         }
     }
-    else{
-        switch (_direction) {
+    else
+	{
+        switch (_direction) 
+		{
             case Direction::LEFT:
                 polygon.setVelocity(-10, polygon.getVelocity().y);
                 break;
@@ -164,11 +171,21 @@ void Avatar::move(Direction _direction){
                 break;
             case Direction::JUMP:
                 polygon.setVelocity(polygon.getVelocity().x, -10);
-	default:
-	  break;
+			default:
+			  break;
         }
     }
 }
+
+void Avatar::move(float inputX)
+{
+	float speed = 10;
+
+	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
+	
+	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
+}
+
 void Avatar::airControl(Direction _direction){
     countAirControl = 10;
     if (countAirControl>0) {
@@ -188,4 +205,36 @@ void Avatar::airControl(Direction _direction){
 
     }
     
+}
+
+void Avatar::keyPressed(int key)
+{
+	if (key == OF_KEY_LEFT || key == 'q')
+	{
+		if (jumping) airControl(Direction::LEFT);
+		else move(Direction::LEFT);
+		//moveInputX  = -1.0f;
+	}
+	if (key == OF_KEY_RIGHT || key == 'd')
+	{
+		if (jumping) airControl(Direction::RIGHT);
+		else move(Direction::RIGHT);
+		//moveInputX = 1.0f;
+	}
+
+	if (key == ' ' && jumping == false) 
+	{
+		move(Direction::JUMP);
+	}
+}
+void Avatar::keyReleased(int key)
+{
+	if (key == OF_KEY_LEFT || key == 'q')
+	{
+		moveInputX = 0.0f;
+	}
+	if (key == OF_KEY_RIGHT || key == 'd')
+	{
+		moveInputX = 0.0f;
+	}
 }
