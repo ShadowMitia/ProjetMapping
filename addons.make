@@ -1,4 +1,4 @@
-ofxBox2d
 ofxGui
+ofxLiquidFun
 ofxPiMapper
 ofxXmlSettings
