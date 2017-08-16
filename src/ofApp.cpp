@@ -75,34 +75,32 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
     
-  for (auto &avatar : worlds->avatars) {
-
-      if (key == ' ' && avatar.jumping == false){
-          avatar.move(Direction::JUMP);
-
-      }
-  }
-
-  if (key == 'C') {
-    worlds->createPlatform(editorPlatform.getPoly());
-  }
-
-  if (key == 'E') {
-    editorPlatform.platformWordExport(worlds->platforms);
-  }
-
-  if (key == 'I') {
-    worlds->platforms.clear();
-    vector<ofPolyline>  platforms = editorPlatform.platformWordImport();
-    for (int i =0; i < platforms.size(); i++) {
-      worlds->createPlatform(platforms[i]);
+    
+    for (auto &avatar : worlds->avatars) {
+        
+        if (key == ' ' && avatar.jumping == false){
+            avatar.move(Direction::JUMP);
+            
+        }
     }
-  }
-
-  editorPlatform.keyPressed(key);
-
+    
+    if (key == 'C') {
+        worlds->createPlatform(editorPlatform.getPoly());
+    }
+    if (key == 'E') {
+        editorPlatform.platformWordExport(worlds->platforms);
+    }
+    if (key == 'I') {
+        worlds->platforms.clear();
+        vector<ofPolyline>  platforms = editorPlatform.platformWordImport();
+        for (int i =0; i < platforms.size(); i++) {
+            worlds->createPlatform(platforms[i]);
+        }
+    }
+    
+    editorPlatform.keyPressed(key);
+    
     //mapping.keyReleased(key);
-
 }
 
 //--------------------------------------------------------------
@@ -167,7 +165,6 @@ void ofApp::contactStart(ofxBox2dContactArgs &e) {
       return;
     }
 
-    
     if (aSprite->getSprite() == Sprite::FOOT && bSprite->getSprite() == Sprite::PLATFORM) {
         dataFoot* aData = (dataFoot*)e.a->GetBody()->GetUserData();
         aData->avatarPtr->jumping = false;

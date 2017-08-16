@@ -182,10 +182,6 @@ vector<Portal*> EditorPlatform::portalImport( ofxBox2d * _world){
         
     }
     
-    
-    
-    
-    
 }
 
 

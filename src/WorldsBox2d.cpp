@@ -21,7 +21,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 
     world.setFPS(60.0);
     
-
+    /*
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 50, 525, 35, 75));
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 200, 525, 35, 75));
 
@@ -34,7 +34,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 
     portals[2]->linkTo(portals[3]);
     portals[3]->linkTo(portals[2]);
-
+     */
     for (unsigned int i = 0; i < 1; i++)
       {
 	createAvatar(800 + i * 50, 500);
@@ -47,7 +47,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     for (auto &avatar : avatars)
       teleportables.push_back(&avatar);
 
-    blocks.emplace_back(&world, 600, 500, 100, 100);
+    //blocks.emplace_back(world, 600, 500, 100, 100);
 
     for (auto &block : blocks)
       teleportables.push_back(&block);

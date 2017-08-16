@@ -26,15 +26,13 @@ public:
 
  Portal(Orientation ori, ofRectangle rect)
      : rect(rect), orientation(ori) {
-        if (ori == Orientation::HORIZONTAL)
-	  {
+        if (ori == Orientation::HORIZONTAL){
             entranceA = ofVec2f(rect.x - 10, rect.y - 50);
             entranceB = ofVec2f(rect.x - 10, rect.y + rect.height + 50);
             exitA = ofVec2f(rect.x + rect.width + 10, rect.y - 50);
             exitB = ofVec2f(rect.x + rect.width + 10, rect.y + rect.height + 50);
 	  }
-        else
-	  {
+        else{
             entranceA = ofVec2f(rect.x - 50, rect.y - 10);
             entranceB = ofVec2f(rect.x + rect.width + 50, rect.y - 10);
 
@@ -45,9 +43,7 @@ public:
     
  Portal(Orientation ori, int x, int y, int width, int height)
       : Portal(ori, ofRectangle(x, y, width, height))
-	  {
-
-	  }
+	  {}
     
     void update(std::vector<Teleportable*> &objects);
         

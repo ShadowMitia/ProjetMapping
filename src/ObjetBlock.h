@@ -5,25 +5,20 @@
 //  Created by FatDazz_mac on 05/08/2017.
 //
 //
-
-#ifndef Block_hpp
-#define Block_hpp
+#pragma once
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
-
 #include "Teleportable.h"
-
 #include "Constant.h"
 
-class Block : public Teleportable {
+class ObjetBlock : public Teleportable {
 
 public:
 
 
-  Block(ofxBox2d* box2d, int x, int y, int width, int height)
+  ObjetBlock(ofxBox2d* _box2d, int x, int y, int width, int height)
   {
-
     box.setPhysics(3.0, 0.53, 0.1);
     box.setup(box2d->getWorld(), x, y, width, height);
     collisionRect.set(box.getPosition().x, box.getPosition().y, box.getWidth(), box.getHeight());
@@ -31,8 +26,7 @@ public:
     dataSprite* data = new dataSprite;
     data->setSprite(Sprite::BLOCK);
     box.setData(data);
-
-    this->box2d = box2d;
+    this->box2d = _box2d;
   }
 
   void update() override
@@ -66,7 +60,7 @@ public:
 
     this->cloneTranslation = translateClone;
 
-    clone = std::make_unique<Block>(box2d, static_cast<int>(translateClone.x), static_cast<int>(translateClone.y), 100, 100);
+    clone = std::make_unique<ObjetBlock>(box2d, static_cast<int>(translateClone.x), static_cast<int>(translateClone.y), 100, 100);
   }
 
   void removeClone() override
@@ -90,7 +84,7 @@ public:
 private:
   ofxBox2dRect box;
 
-  std::unique_ptr<Block> clone;
+  std::unique_ptr<ObjetBlock> clone;
 
   ofxBox2d* box2d;
 
@@ -98,4 +92,3 @@ private:
 
 };
 
-#endif /* Block_hpp */

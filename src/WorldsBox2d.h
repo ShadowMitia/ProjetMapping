@@ -9,15 +9,11 @@
 #include "ofxBox2d.h"
 #include "Avatar.h"
 #include "Portal.h"
-
 #include "Wiimotes.h"
 #include "Light2D.h"
-
 #include "Platform.h"
 #include "LightSystem2D.h"
-
-#include "Block.h"
-
+#include "ObjetBlock.h"
 #include "Constant.h"
 
 
@@ -41,7 +37,7 @@ public:
     std::vector< Avatar > avatars;
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
-    std::vector< Block > blocks;
+    std::vector< ObjetBlock > blocks;
 
     std::vector<Teleportable*> teleportables;
 
@@ -57,11 +53,11 @@ public:
     void createPortal();
     
 
-
-
     //Wiimotes wiimotes;
 
 
     //ofx::LightSystem2D lightSystem;
+private:
+    
 
 };

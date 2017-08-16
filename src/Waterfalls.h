@@ -10,10 +10,11 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Constant.h"
+#include "Teleportable.h"
 
 
 
-class Water{
+class Water {
 public:
     
     ofxBox2dPolygon water;
@@ -22,6 +23,7 @@ public:
     ofTimer time;
     
 };
+
 
 class Waterfalls{
 public:

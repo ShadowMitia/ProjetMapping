@@ -10,9 +10,7 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "LightSystem2D.h"
-
 #include "Teleportable.h"
-
 #include "Constant.h"
 
 class Avatar : public Teleportable {
@@ -49,8 +47,7 @@ public:
   void teleportToClone() override;
   bool hasClone() override;
 
-
-
+    
   void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
   void goingLeft(bool isPressed);
@@ -61,7 +58,6 @@ public:
 
 
 };
-
 class dataAvatar: public dataSprite {
 public:
     dataAvatar(){
