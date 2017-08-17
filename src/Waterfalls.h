@@ -11,24 +11,14 @@
 #include "ofxBox2d.h"
 #include "Constant.h"
 #include "Teleportable.h"
+#include "ofxLiquidFun.h"
 
-
-
-class Water {
-public:
-    
-    ofxBox2dPolygon water;
-    float size;
-    ofColor color;
-    ofTimer time;
-    
-};
 
 
 class Waterfalls{
 public:
     Waterfalls(ofxBox2d* _box2d);
-    vector < Water* > waters;
+    ofxBox2dParticleSystem waters;
     ofRectangle       spawn,despawn;
     void update();
     ofPolyline polyWater;
@@ -44,6 +34,6 @@ public:
     dataWater(){
         setSprite(Sprite::WATER);
     }
-    Water* WaterPtr;
+    //Water* WaterPtr;
 };
 
