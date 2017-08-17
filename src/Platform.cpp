@@ -13,7 +13,7 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine,ofx::LightSystem
     //ground.clear();
     LightSystem =_LightSystem;
     ground.addVertexes(_groundLine);
-    ground.setPhysics(0, 0, 0); // (0.0, 0.1, 0.7)
+    ground.setPhysics(0, 0, 0.5f); // (0.0, 0.1, 0.7)
     ground.create(_b2World);
     dataPlatform * data = new dataPlatform;
     data->setSprite(Sprite::PLATFORM);
