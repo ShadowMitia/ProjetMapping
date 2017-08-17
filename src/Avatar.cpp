@@ -65,6 +65,8 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
 
 void Avatar::update()
 {
+	move(moveInputX);
+
     foot.setPosition(polygon.getPosition()+ofVec2f(0,21));
     
     if (!jumping)
@@ -180,9 +182,13 @@ void Avatar::move(Direction _direction){
 void Avatar::move(float inputX)
 {
 	float speed = 10;
-
+	float maxSpeed = 20;
 	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
-	
+	cout << polygon.getVelocity().length() << endl;
+
+	impulse *= (1 - polygon.getVelocity().length() / maxSpeed);
+
+	//if(polygon.getVelocity() )
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
 
@@ -211,15 +217,15 @@ void Avatar::keyPressed(int key)
 {
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
-		if (jumping) airControl(Direction::LEFT);
-		else move(Direction::LEFT);
-		//moveInputX  = -1.0f;
+		//if (jumping) airControl(Direction::LEFT);
+		//else move(Direction::LEFT);
+		moveInputX  = -1.0f;
 	}
 	if (key == OF_KEY_RIGHT || key == 'd')
 	{
-		if (jumping) airControl(Direction::RIGHT);
-		else move(Direction::RIGHT);
-		//moveInputX = 1.0f;
+		//if (jumping) airControl(Direction::RIGHT);
+		//else move(Direction::RIGHT);
+		moveInputX = 1.0f;
 	}
 
 	if (key == ' ' && jumping == false) 
