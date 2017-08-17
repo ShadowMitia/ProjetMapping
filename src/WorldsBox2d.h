@@ -15,6 +15,7 @@
 #include "LightSystem2D.h"
 #include "ObjetBlock.h"
 #include "Constant.h"
+#include "Waterfalls.h"
 
 
 constexpr int const MAX_WIIMOTES = 4;
@@ -38,7 +39,9 @@ public:
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
     std::vector< ObjetBlock > blocks;
-
+    Waterfalls*               warterfalls;
+    
+    
     std::vector<Teleportable*> teleportables;
 
     ofx::LightSystem2D * lightSystem2D;

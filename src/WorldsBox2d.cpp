@@ -52,7 +52,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     for (auto &block : blocks)
       teleportables.push_back(&block);
 
-
+    warterfalls = new Waterfalls(&world);
 
 
 }
@@ -94,7 +94,7 @@ void WorldsBox2d::draw(){
     avatar.draw();
   }
 
-
+    warterfalls->draw();
     //world.draw();
 
 }
@@ -123,7 +123,8 @@ void WorldsBox2d::update(){
       portal->update(teleportables);
     }
 
-
+    ofFill();
+    warterfalls->update();
 }
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     

@@ -21,6 +21,7 @@ public:
     ofxBox2dParticleSystem waters;
     ofRectangle       spawn,despawn;
     void update();
+    void draw();
     ofPolyline polyWater;
 private:
     ofxBox2d* box2d;

@@ -184,7 +184,7 @@ void Avatar::move(float inputX)
 	float speed = 10;
 	float maxSpeed = 20;
 	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
-	cout << polygon.getVelocity().length() << endl;
+	//cout << polygon.getVelocity().length() << endl;
 
 	impulse *= (1 - polygon.getVelocity().length() / maxSpeed);
 

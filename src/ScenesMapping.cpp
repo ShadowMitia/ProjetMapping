@@ -43,5 +43,5 @@ void Scene2::draw(){
 
     ofSetColor(ofColor::white);
     worldsBox2d->draw();
-    lightSystem2D->draw();
+    //lightSystem2D->draw();
 }
