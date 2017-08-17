@@ -65,8 +65,9 @@ void ofxBox2dParticleSystem::draw(){
     ofDisablePointSprites();
 }
 
-int32 ofxBox2dParticleSystem::createParticle(ofVec2f position , ofVec2f velocity){
-    createParticle(position.x, position.y, velocity.x, velocity.y);
+int32 ofxBox2dParticleSystem::createParticle(ofVec2f position , ofVec2f velocity)
+{
+    return createParticle(position.x, position.y, velocity.x, velocity.y);
 }
 
 int32 ofxBox2dParticleSystem::createParticle(float posx, float posy, float velx, float vely){
