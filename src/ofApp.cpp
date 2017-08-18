@@ -44,7 +44,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    scene2->draw();
+    scene1->draw();
     ofSetColor(ofColor::aqua);
     editorPlatform.polylineFinal.draw();
 
@@ -170,6 +170,7 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e){
     dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
 
     if (aSprite == nullptr || bSprite == nullptr) {
+        cout << "i" << endl;
       return;
     }
 

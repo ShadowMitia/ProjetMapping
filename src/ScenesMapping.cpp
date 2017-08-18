@@ -13,7 +13,7 @@ void Scene1::draw(){
 
     ofClear(0);
     ofBackgroundGradient(ofColor(10), ofColor(0));
-    
+    /*
     ofBackground(200, 0, 0, 255);
     //ofDrawBitmapString("1", 50, 50);
     ofSetColor(ofColor::white);
@@ -26,12 +26,13 @@ void Scene1::draw(){
     }
     //worldsBox2d->draw();
     ofSetColor(ofColor::white);
+    */
     for (auto &platforms: worldsBox2d->platforms) {
         if (platforms->shape->bVisible) {
-            //platforms->ground.draw();
+            platforms->ground.draw();
         }
     }
-    //lightSystem2D->draw();
+    lightSystem2D->draw();
     worldsBox2d->draw();
 }
 
