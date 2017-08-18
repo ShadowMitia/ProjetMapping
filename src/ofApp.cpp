@@ -23,6 +23,9 @@ void ofApp::setup(){
 
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
+#ifdef CUSTOM_BOX2D_TIM
+	ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
+#endif // CUSTOM_BOX2D_TIM
 
 }
 
@@ -156,11 +159,11 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
 
 		if (aPhysicalizedElement)
 		{
-			aPhysicalizedElement->contactStart(bSprite);
+			//aPhysicalizedElement->contactStart(bSprite);
 		}
 		if (bPhysicalizedElement)
 		{
-			bPhysicalizedElement->contactStart(aSprite);
+			//bPhysicalizedElement->contactStart(aSprite);
 		}
 	}
 }
@@ -190,4 +193,32 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 		}
 	}
 }
+
+#ifdef CUSTOM_BOX2D_TIM
+void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
+{
+	if (e.a != nullptr && e.b != nullptr && e.impulse != nullptr)
+	{
+		dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
+		dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
+
+		if (aSprite == nullptr || bSprite == nullptr)
+		{
+			return;
+		}
+
+		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
+		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
+
+		if (aPhysicalizedElement)
+		{
+			aPhysicalizedElement->PostSolve(bSprite, e.impulse);
+		}
+		if (bPhysicalizedElement)
+		{
+			bPhysicalizedElement->PostSolve(aSprite, e.impulse);
+		}
+	}
+}
+#endif //CUSTOM_BOX2D_TIM
 

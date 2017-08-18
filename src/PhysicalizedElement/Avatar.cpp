@@ -249,3 +249,13 @@ void Avatar::contactEnd(dataSprite* OtherSprite)
 		jumping = true;
 	}
 }
+
+void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
+{
+	PhysicalizedElement::PostSolve(OtherSprite, impulse);
+
+	if (OtherSprite->getSprite() == Sprite::PLATFORM)
+	{
+		jumping = false;
+	}
+}

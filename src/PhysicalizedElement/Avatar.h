@@ -59,6 +59,7 @@ public:
 
   virtual void contactStart(dataSprite* OtherSprite) override;
   virtual void contactEnd(dataSprite* OtherSprite) override;
+  virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
 
 };
 class dataAvatar: public dataSprite {
