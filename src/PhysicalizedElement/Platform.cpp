@@ -17,6 +17,7 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine,ofx::LightSystem
     ground.create(_b2World);
     dataPlatform * data = new dataPlatform;
     data->setSprite(Sprite::PLATFORM);
+	data->Element = this;
     ground.setData(data);
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0004;

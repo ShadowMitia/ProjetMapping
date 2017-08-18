@@ -6,6 +6,7 @@
 //
 //
 #pragma once
+#include "PhysicalizedElement/PhysicalizedElement.h"
 
 namespace VarConst
 {
@@ -32,8 +33,10 @@ public:
 
   void setSprite(Sprite _sprite)
   {
-    sprite = _sprite;
+	sprite = _sprite;
   }
+
+  PhysicalizedElement* Element;
 
 private:
   Sprite sprite = Sprite::UNKNOWN;

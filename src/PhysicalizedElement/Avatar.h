@@ -57,6 +57,8 @@ public:
   void keyPressed(int key);
   void keyReleased(int key);
 
+  virtual void contactStart(dataSprite* OtherSprite) override;
+  virtual void contactEnd(dataSprite* OtherSprite) override;
 
 };
 class dataAvatar: public dataSprite {
@@ -71,6 +73,4 @@ public:
     dataFoot(){
         setSprite(Sprite::FOOT);
     }
-    bool jumping = false;
-    Avatar* avatarPtr;
 };

@@ -139,52 +139,55 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 }
 
 
-//template<class Temp>
-void ofApp::contactStart(ofxBox2dContactArgs &e) {
-    if(e.a != nullptr && e.b != nullptr) {}
-    
-    dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
-    dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
+void ofApp::contactStart(ofxBox2dContactArgs &e) 
+{
+	if (e.a != nullptr && e.b != nullptr)
+	{
+		dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
+		dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
 
-    if (aSprite == nullptr || bSprite == nullptr) {
-      return;
-    }
+		if (aSprite == nullptr || bSprite == nullptr) 
+		{
+			return;
+		}
 
-    if (aSprite->getSprite() == Sprite::FOOT && bSprite->getSprite() == Sprite::PLATFORM) {
-        dataFoot* aData = (dataFoot*)e.a->GetBody()->GetUserData();
-        aData->avatarPtr->jumping = false;
-        cout << "false a " << endl;
-    }
-    if (bSprite->getSprite() == Sprite::FOOT && aSprite->getSprite() == Sprite::PLATFORM) {
-        dataFoot* bData = (dataFoot*)e.b->GetBody()->GetUserData();
-        bData->avatarPtr->jumping = false;
-        cout << "false b " << endl;
-    }
-    
+		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
+		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
+
+		if (aPhysicalizedElement)
+		{
+			aPhysicalizedElement->contactStart(bSprite);
+		}
+		if (bPhysicalizedElement)
+		{
+			bPhysicalizedElement->contactStart(aSprite);
+		}
+	}
 }
 
-void ofApp::contactEnd(ofxBox2dContactArgs &e){
-    if(e.a != nullptr && e.b != nullptr) {}
+void ofApp::contactEnd(ofxBox2dContactArgs &e)
+{
+	if (e.a != nullptr && e.b != nullptr)
+	{
+		dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
+		dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
 
-    dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
-    dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
+		if (aSprite == nullptr || bSprite == nullptr)
+		{
+			return;
+		}
 
-    if (aSprite == nullptr || bSprite == nullptr) {
-        cout << "i" << endl;
-      return;
-    }
+		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
+		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
 
-
-    if (aSprite->getSprite() == Sprite::FOOT && bSprite->getSprite() == Sprite::PLATFORM) {
-        dataFoot* aData = (dataFoot*)e.a->GetBody()->GetUserData();
-        aData->avatarPtr->jumping = true;
-    }
-
-    if (bSprite->getSprite() == Sprite::FOOT && aSprite->getSprite() == Sprite::PLATFORM) {
-        dataFoot* bData = (dataFoot*)e.b->GetBody()->GetUserData();
-        bData->avatarPtr->jumping = true;
-    }
-
-    
+		if (aPhysicalizedElement)
+		{
+			aPhysicalizedElement->contactEnd(bSprite);
+		}
+		if (bPhysicalizedElement)
+		{
+			bPhysicalizedElement->contactEnd(aSprite);
+		}
+	}
 }
 

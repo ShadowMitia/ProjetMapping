@@ -6,6 +6,7 @@
 //
 //
 #include "Avatar.h"
+#include "Platform.h"
 
 std::vector <ofPoint> loadPoints(std::string file) {
     std::vector <ofPoint> pts;
@@ -53,7 +54,7 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     polygon.setData(dataAv);
     dataFoot* dataFo = new dataFoot;
     dataFo->setSprite(Sprite::FOOT);
-    dataFo->avatarPtr = this;
+    dataFo->Element = this;
     foot.setData(dataFo);
     
     light = std::make_shared<ofx::Light2D>();
@@ -226,5 +227,25 @@ void Avatar::keyReleased(int key)
 	if (key == OF_KEY_RIGHT || key == 'd')
 	{
 		moveInputX = 0.0f;
+	}
+}
+
+void Avatar::contactStart(dataSprite* OtherSprite)
+{
+	PhysicalizedElement::contactStart(OtherSprite);
+
+	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
+	{
+		jumping = false;
+	}
+}
+
+void Avatar::contactEnd(dataSprite* OtherSprite)
+{
+	PhysicalizedElement::contactEnd(OtherSprite);
+
+	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
+	{
+		jumping = true;
 	}
 }
