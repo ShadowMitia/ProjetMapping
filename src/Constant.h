@@ -22,6 +22,7 @@ namespace VarConst
 
 enum class Sprite { AVATAR, FOOT, WATER, PLATFORM, BLOCK, UNKNOWN };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
+enum class Viewpoint { MODE_1, MODE_2 };
 
 class dataSprite {
 public:

@@ -136,7 +136,9 @@ void Avatar::teleportToClone() {
 
 bool Avatar::hasClone() 
 { 
-	return (clone == nullptr); 
+
+    return clone ? true : false;
+    //return (clone == nullptr);
 }
 
 void Avatar::setPosition(ofVec2f vec)

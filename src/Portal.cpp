@@ -18,7 +18,6 @@ void Portal::update(std::vector<Teleportable*>& objects)
         bool intersects = obj->collisionRect.intersects(rect);
         bool cloned = obj->hasClone();
         bool inside = obj->collisionRect.inside(rect);
-
 	// std::cout << std::boolalpha << "Intersects " << intersects << ' '
 	// 	  << std::boolalpha << "Cloned " << cloned << ' '
 	// 	  << std::boolalpha << "Inside " << inside << '\n';
