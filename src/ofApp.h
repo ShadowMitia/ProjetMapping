@@ -7,7 +7,7 @@
 #include "EditorPlatform.h"
 #include "WorldsBox2d.h"
 #include "ScenesMapping.h"
-#include "Avatar.h"
+#include "PhysicalizedElement/Avatar.h"
 #include "LightSystem2D.h"
 #include "Constant.h"
 

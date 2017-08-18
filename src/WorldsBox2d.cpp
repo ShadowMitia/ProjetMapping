@@ -44,13 +44,17 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 
     //createAvatar(100, 100);
 
-    for (auto &avatar : avatars)
-      teleportables.push_back(&avatar);
+	for (auto &avatar : avatars)
+	{
+		teleportables.push_back(&avatar);
+	}
 
     //blocks.emplace_back(world, 600, 500, 100, 100);
 
-    for (auto &block : blocks)
-      teleportables.push_back(&block);
+	for (auto &block : blocks)
+	{
+		teleportables.push_back(&block);
+	}
 
     warterfalls = new Waterfalls(&world);
 

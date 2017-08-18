@@ -10,7 +10,8 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Teleportable.h"
-#include "Constant.h"
+#include "../Constant.h"
+#include "PhysicalizedElement.h"
 
 class ObjetBlock : public Teleportable {
 

@@ -8,8 +8,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "PhysicalizedElement.h"
 
-class Teleportable {
+class Teleportable : public PhysicalizedElement {
 public:
     virtual void update() = 0;
     virtual void draw() = 0;

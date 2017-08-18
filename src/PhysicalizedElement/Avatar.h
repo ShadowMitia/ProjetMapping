@@ -9,9 +9,9 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
-#include "LightSystem2D.h"
+#include "../LightSystem2D.h"
 #include "Teleportable.h"
-#include "Constant.h"
+#include "../Constant.h"
 
 class Avatar : public Teleportable {
 

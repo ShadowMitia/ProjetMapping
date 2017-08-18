@@ -7,13 +7,13 @@
 //
 #pragma once
 #include "ofxBox2d.h"
-#include "Avatar.h"
+#include "PhysicalizedElement/Avatar.h"
 #include "Portal.h"
 #include "Wiimotes.h"
 #include "Light2D.h"
-#include "Platform.h"
+#include "PhysicalizedElement/Platform.h"
 #include "LightSystem2D.h"
-#include "ObjetBlock.h"
+#include "PhysicalizedElement/ObjetBlock.h"
 #include "Constant.h"
 #include "Waterfalls.h"
 

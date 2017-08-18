@@ -9,7 +9,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxXmlSettings.h"
-#include "Platform.h"
+#include "PhysicalizedElement/Platform.h"
 #include "Portal.h"
 
 class EditorPlatform{

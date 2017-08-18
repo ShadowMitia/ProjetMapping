@@ -7,16 +7,17 @@
 
 #pragma once
 #include "ofxBox2d.h"
-#include "Shape2D.h"
-#include "LightSystem2D.h"
-#include "Constant.h"
+#include "../Shape2D.h"
+#include "../LightSystem2D.h"
+#include "../Constant.h"
+#include "PhysicalizedElement.h"
 
 class dataPlatform: public dataSprite {
 public:
     int alex; 
 };
 
-class Platform {
+class Platform : public PhysicalizedElement {
 public:
     
     ofxBox2dEdge ground;
