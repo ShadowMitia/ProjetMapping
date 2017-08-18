@@ -17,7 +17,7 @@ class Avatar : public Teleportable {
 
 public:
 
-  Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
+	Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
 
     ofxBox2dPolygon polygon;
     ofxBox2dRect    foot;
@@ -42,7 +42,6 @@ public:
 
   void update() override;
   void draw() override;
-  void handleInputs(int key);
   void createClone(ofVec2f cloneTranslation) override;
   void removeClone() override;
   void teleportToClone() override;
@@ -51,12 +50,9 @@ public:
     
   void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
-  void goingLeft(bool isPressed);
-  void goingRight(bool isPressed);
   void jump();
   void move(Direction _direction);
   void move(float inputX); 
-  void airControl(Direction _direction);
 
   void keyPressed(int key);
   void keyReleased(int key);

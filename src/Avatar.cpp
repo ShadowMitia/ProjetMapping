@@ -133,11 +133,14 @@ void Avatar::teleportToClone() {
   cloneTranslation.zero();
 }
 
-bool Avatar::hasClone() { return clone ? true : false; }
+bool Avatar::hasClone() 
+{ 
+	return (clone == nullptr); 
+}
 
 void Avatar::setPosition(ofVec2f vec)
 {
-  setPosition(vec.x, vec.y);
+	setPosition(vec.x, vec.y);
 }
 void Avatar::setPosition(int x, int y)
 {
@@ -181,56 +184,37 @@ void Avatar::move(Direction _direction){
 
 void Avatar::move(float inputX)
 {
-	float speed = 10;
-	float maxSpeed = 20;
-	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
-	//cout << polygon.getVelocity().length() << endl;
+	b2Vec2 impulse = VarConst::speedAvatar * inputX * b2Vec2(1.0f, 0.0f);
 
-	impulse *= (1 - polygon.getVelocity().length() / maxSpeed);
+	impulse *= (1 - polygon.getVelocity().length() / VarConst::speedAvatarMax);
 
-	//if(polygon.getVelocity() )
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
 
-void Avatar::airControl(Direction _direction){
-    countAirControl = 10;
-    if (countAirControl>0) {
-        switch (_direction) {
-            case Direction::LEFT:
-                cout << "ici" << endl;
-                polygon.addForce(ofVec2f(-1000,0), 1);
-                countAirControl --;
-                break;
-            case Direction::RIGHT:
-                polygon.addForce(ofVec2f(1000,0), 1);
-                countAirControl --;
-                break;
-            default:
-                break;
-        }
+void Avatar::jump()
+{
+	b2Vec2 impulse = VarConst::impulseJumpAvatar * b2Vec2(0.0f, -1.0f);
 
-    }
-    
+	if (!jumping)
+	{
+		polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
+	}
 }
 
 void Avatar::keyPressed(int key)
 {
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
-		//if (jumping) airControl(Direction::LEFT);
-		//else move(Direction::LEFT);
 		moveInputX  = -1.0f;
 	}
 	if (key == OF_KEY_RIGHT || key == 'd')
 	{
-		//if (jumping) airControl(Direction::RIGHT);
-		//else move(Direction::RIGHT);
 		moveInputX = 1.0f;
 	}
 
-	if (key == ' ' && jumping == false) 
+	if (key == ' ')
 	{
-		move(Direction::JUMP);
+		jump();
 	}
 }
 void Avatar::keyReleased(int key)

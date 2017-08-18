@@ -18,11 +18,11 @@ void Scene1::draw(){
     //ofDrawBitmapString("1", 50, 50);
     ofSetColor(ofColor::white);
     ofSetLineWidth(1);
-    for (int i=0; i<=WidthWorld2D; i+=UNIT) {
-        ofDrawLine(i, 0, i, HeightWorld2D);
+    for (int i=0; i<= VarConst::WidthWorld2D; i+= VarConst::UNIT) {
+        ofDrawLine(i, 0, i, VarConst::HeightWorld2D);
     }
-    for (int i=0; i<=HeightWorld2D; i+=UNIT) {
-        ofDrawLine(0, i, WidthWorld2D, i);
+    for (int i=0; i<= VarConst::HeightWorld2D; i+= VarConst::UNIT) {
+        ofDrawLine(0, i, VarConst::WidthWorld2D, i);
     }
     //worldsBox2d->draw();
     ofSetColor(ofColor::white);

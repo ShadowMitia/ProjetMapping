@@ -26,7 +26,7 @@ public:
     
     Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D){
         name = "Scene One FBO Source";
-        allocate(WidthWorld2D, HeightWorld2D);
+        allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
         worldsBox2d =_worldsBox2d;
         avatars = &_worldsBox2d->avatars;
         lightSystem2D = _lightSystem2D;
@@ -47,7 +47,7 @@ public:
       lightSystem2D(lightSystem2D)
     {
         name = "Scene Two FBO Source";
-        allocate(WidthWorld2D, HeightWorld2D);
+        allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
     }
 
     void draw();
