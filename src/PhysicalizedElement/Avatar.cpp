@@ -187,9 +187,16 @@ void Avatar::move(Direction _direction){
 
 void Avatar::move(float inputX)
 {
-	b2Vec2 impulse = VarConst::speedAvatar * inputX * b2Vec2(1.0f, 0.0f);
+	float speed = VarConst::speedAvatar;
+	float speedMax = VarConst::speedAvatarMax;
+	if (jumping)
+	{
+		speed = VarConst::speedAvatarAirControl;
+		speedMax = VarConst::speedAvatarAirControlMax;
+	}
+	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
 
-	impulse *= (1 - polygon.getVelocity().length() / VarConst::speedAvatarMax);
+	impulse *= (1 - polygon.getVelocity().length() / speedMax);
 
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
