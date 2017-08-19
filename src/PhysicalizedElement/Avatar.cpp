@@ -30,6 +30,7 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
 
 	polygon.body->SetType(b2BodyType::b2_dynamicBody);
 	polygon.body->SetFixedRotation(true);
+    polygon.body->SetGravityScale(0);
 
 
     b2Filter tempFilter;
@@ -68,7 +69,7 @@ void Avatar::update()
 {
 	move(moveInputX);
 
-    foot.setPosition(polygon.getPosition()+ofVec2f(0,21));
+    foot.setPosition(polygon.getPosition()+ofVec2f(0,10));
     
     if (!jumping)
 	{

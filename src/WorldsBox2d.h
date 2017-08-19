@@ -5,6 +5,7 @@
 //  Created by FatDazz_mac on 16/07/2017.
 //
 //
+
 #pragma once
 #include "ofxBox2d.h"
 #include "PhysicalizedElement/Avatar.h"
@@ -17,7 +18,6 @@
 #include "Constant.h"
 #include "Waterfalls.h"
 
-
 constexpr int const MAX_WIIMOTES = 4;
 
 template<class T>
@@ -29,9 +29,10 @@ public:
     Type type;
 };
 
+
 class WorldsBox2d {
 public:
-
+    
     ofxBox2d                 world;
     ofRectangle              bounds;
     vector<shared_ptr<ofxBox2dCircle>>	circles;
@@ -55,12 +56,8 @@ public:
     void createPlatform(ofPolyline _polyline);
     void createPortal();
     
-
     //Wiimotes wiimotes;
 
-
-    //ofx::LightSystem2D lightSystem;
 private:
-    
 
 };

@@ -11,12 +11,14 @@
 namespace VarConst
 {
 	constexpr const int UNIT = 240;
-	constexpr const int WidthWorld2D = 20 * UNIT;
-	constexpr const int HeightWorld2D = 4 * UNIT;
+	//constexpr const int WidthWorld2D = 20 * UNIT;
+	//constexpr const int HeightWorld2D = 4 * UNIT;
+    constexpr const int WidthWorld2D = 3520;
+    constexpr const int HeightWorld2D = 800;
 
-	constexpr const float speedAvatar = 15.0f;
-	constexpr const float speedAvatarMax = 30.0f;
-	constexpr const float impulseJumpAvatar = 200.0f;
+	constexpr const float speedAvatar = 3.0f;
+	constexpr const float speedAvatarMax = 5.0f;
+	constexpr const float impulseJumpAvatar = 15.0f;
 
 }
 

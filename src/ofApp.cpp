@@ -26,6 +26,7 @@ void ofApp::setup(){
 #ifdef CUSTOM_BOX2D_TIM
 	ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
 #endif // CUSTOM_BOX2D_TIM
+    //worlds->createPlatform(editorPlatform.getPoly());
 
 }
 
@@ -80,9 +81,13 @@ void ofApp::keyReleased(int key){
     }
     if (key == 'I') {
         worlds->platforms.clear();
-        vector<ofPolyline>  platforms = editorPlatform.platformWordImport();
+        vector<ofPolyline>  platforms = editorPlatform.importImage();
         for (int i =0; i < platforms.size(); i++) {
             worlds->createPlatform(platforms[i]);
+        }
+        for (auto &avatar : worlds->avatars)
+        {
+            avatar.polygon.body->SetGravityScale(1.0f);
         }
     }
     

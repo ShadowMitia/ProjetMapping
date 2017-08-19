@@ -22,9 +22,16 @@ public:
     WorldsBox2d *       worldsBox2d;
     ofx::LightSystem2D* lightSystem2D;
     vector<Avatar>*     avatars;
-    
+    ofImage image;
     
     Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D){
+        cout << " Load file : Image" << endl;
+        ofFileDialogResult result = ofSystemLoadDialog("Load file : Image");
+        if(result.bSuccess) {
+            string path = result.getPath();
+            image.load(path);
+        }
+        
         name = "Scene One FBO Source";
         allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
         worldsBox2d =_worldsBox2d;

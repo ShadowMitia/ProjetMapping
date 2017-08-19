@@ -11,6 +11,7 @@
 #include "ofxXmlSettings.h"
 #include "PhysicalizedElement/Platform.h"
 #include "Portal.h"
+#include "ofxCv.h"
 
 class EditorPlatform{
     
@@ -37,4 +38,6 @@ public:
     void platformWordExport(vector<Platform*> _platforms);
     vector<ofPolyline> platformWordImport();
     vector<Portal*>    portalImport( ofxBox2d * _world );
+    vector<ofPolyline> importImage();
+    
 };

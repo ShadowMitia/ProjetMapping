@@ -1,4 +1,6 @@
+ofxCv
 ofxGui
 ofxLiquidFun
+ofxOpenCv
 ofxPiMapper
 ofxXmlSettings

@@ -33,6 +33,7 @@ void Scene1::draw(){
         }
     }
     //lightSystem2D->draw();
+    image.draw(0, 0);
     worldsBox2d->draw();
 }
 

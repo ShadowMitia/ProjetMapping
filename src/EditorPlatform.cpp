@@ -185,6 +185,35 @@ vector<Portal*> EditorPlatform::portalImport( ofxBox2d * _world){
 	return tempPortals;
 }
 
+vector<ofPolyline> EditorPlatform::importImage(){
+    ofImage image;
+    vector<ofPolyline> poly;
+    cout << " Load file : Image" << endl;
+    ofFileDialogResult result = ofSystemLoadDialog("Load file : Image");
+    if(result.bSuccess) {
+        string path = result.getPath();
+        image.load(path);
+    }
+    
+    ofxCv::ContourFinder contourFinder;
+    
+    contourFinder.setMinAreaRadius(0);
+    contourFinder.setMaxAreaRadius(1000);
+    contourFinder.setThreshold(100);
+    contourFinder.setFindHoles(true);
+    contourFinder.findContours(image);
+    
+    for (int i =0 ; i<contourFinder.getPolylines().size(); i++){
+        ofPolyline tempPoly;
+        tempPoly = contourFinder.getPolyline(i);
+        tempPoly.addVertex(tempPoly.getVertices().at(0));
+        poly.push_back(tempPoly);
+    }
+    
+    return poly;
+    
+    
+}
 
 
 
