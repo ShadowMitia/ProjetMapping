@@ -14,10 +14,11 @@ void Scene1::draw(){
     ofClear(0);
     ofBackgroundGradient(ofColor(10), ofColor(0));
     
-    ofBackground(200, 0, 0, 255);
+    ofBackground(255,255,255, 255);
     //ofDrawBitmapString("1", 50, 50);
     ofSetColor(ofColor::white);
     ofSetLineWidth(1);
+    /*
     for (int i=0; i<= VarConst::WidthWorld2D; i+= VarConst::UNIT) {
         ofDrawLine(i, 0, i, VarConst::HeightWorld2D);
     }
@@ -32,6 +33,7 @@ void Scene1::draw(){
             //platforms->ground.draw();
         }
     }
+    */
     //lightSystem2D->draw();
     image.draw(0, 0);
     worldsBox2d->draw();

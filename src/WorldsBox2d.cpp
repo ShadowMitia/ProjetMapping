@@ -20,14 +20,18 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     world.setFPS(60.0);
     
     
-    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 50, 525, 35, 75));
-    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 200, 525, 35, 75));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 2319, 560, 30, 160));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 80, 560, 30, 160));
+    
+    
 
     //portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75));
     //portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75));
     
     portals[0]->linkTo(portals[1]);
     portals[1]->linkTo(portals[0]);
+    
+    
     //portals[2]->linkTo(portals[3]);
     //portals[3]->linkTo(portals[2]);
     
@@ -51,7 +55,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 		teleportables.push_back(&block);
 	}
 
-    warterfalls = new Waterfalls(&world);
+    //warterfalls = new Waterfalls(&world);
 
 
 }
@@ -62,6 +66,7 @@ void WorldsBox2d::createCircle(float _x,float _y){
     circles.back().get()->setup(world.getWorld(), _x, _y, r);
 }
 void WorldsBox2d::draw(){
+    
   for (auto &portal : portals) {
     portal->draw();
   }
@@ -91,7 +96,7 @@ void WorldsBox2d::draw(){
     avatar.draw();
   }
 
-    warterfalls->draw();
+    //warterfalls->draw();
     //world.draw();
 
 }
@@ -119,7 +124,7 @@ void WorldsBox2d::update(){
       portal->update(teleportables);
     }
 
-    warterfalls->update();
+    //warterfalls->update();
 }
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     

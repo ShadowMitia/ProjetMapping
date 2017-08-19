@@ -45,9 +45,10 @@ void Portal::update(std::vector<Teleportable*>& objects)
 
 void Portal::draw() {
     
+    ofSetLineWidth(3);
     ofSetColor(ofColor::blue);
     ofDrawLine(entranceA, entranceB);
-
+    ofSetLineWidth(3);
     ofSetColor(ofColor::red);
     ofDrawLine(exitA, exitB);
     

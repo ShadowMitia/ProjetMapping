@@ -15,12 +15,16 @@ namespace VarConst
 	//constexpr const int HeightWorld2D = 4 * UNIT;
     constexpr const int WidthWorld2D = 3520;
     constexpr const int HeightWorld2D = 800;
-
-	constexpr const float speedAvatar = 3.0f;
+    
+    
+	constexpr const float speedAvatar = 3.0f; // impul
 	constexpr const float speedAvatarMax = 5.0f;
 	constexpr const float speedAvatarAirControl = 3.0f;
-	constexpr const float speedAvatarAirControlMax = 5.0f;
-	constexpr const float impulseJumpAvatar = 15.0f;
+	constexpr const float speedAvatarAirControlMax = 10.0f;
+    constexpr const float impulseJumpAvatar = 10.0f;
+	constexpr const float densityAvatar = 10.0f;
+    constexpr const float bounceAvatar = 0.03f;
+    constexpr const float frictionAvatar = 4.0f;
 
 }
 

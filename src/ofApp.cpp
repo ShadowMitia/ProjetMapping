@@ -40,21 +40,15 @@ void ofApp::setup(){
 void ofApp::update(){
     editorPlatform.update();
     worlds->update();
-    lightSystem->update();
-    //mapping.update();
-
-
+    //lightSystem->update();
+    mapping.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-    scene1->draw();
-    ofSetColor(ofColor::aqua);
-    editorPlatform.polylineFinal.draw();
-
-
-    //mapping.draw();
+    //scene1->draw();
+    mapping.draw();
 }
 
 //--------------------------------------------------------------
@@ -64,7 +58,7 @@ void ofApp::keyPressed(int key)
 	{
 		avatar.keyPressed(key);
 	}
-
+    mapping.keyPressed(key);
 }
 
 //--------------------------------------------------------------
@@ -75,7 +69,7 @@ void ofApp::keyReleased(int key){
 		avatar.keyReleased(key);
 	}
     
-    //mapping.keyReleased(key);
+    mapping.keyReleased(key);
 }
 
 //--------------------------------------------------------------
@@ -84,21 +78,21 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-    //mapping.mouseDragged(x, y, button);
+    mapping.mouseDragged(x, y, button);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 
-    //mapping.mousePressed(x, y, button);
+    mapping.mousePressed(x, y, button);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
 
-    //mapping.mouseReleased(x, y, button);
+    mapping.mouseReleased(x, y, button);
 
 }
 

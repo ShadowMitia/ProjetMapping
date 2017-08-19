@@ -25,7 +25,7 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
-    polygon.setPhysics(10.0, 0.03, 4.0);
+    polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, VarConst::frictionAvatar);
     polygon.create(box2d->getWorld());
 
 	polygon.body->SetType(b2BodyType::b2_dynamicBody);
@@ -68,7 +68,7 @@ void Avatar::update()
 {
 	move(moveInputX);
 
-    foot.setPosition(polygon.getPosition()+ofVec2f(0,10));
+    foot.setPosition(polygon.getPosition()+ofVec2f(0,9));
     
     if (!jumping)
 	{
@@ -171,6 +171,7 @@ void Avatar::move(Direction _direction){
 	{
         switch (_direction) 
 		{
+            /*
             case Direction::LEFT:
                 polygon.setVelocity(-10, polygon.getVelocity().y);
                 break;
@@ -178,7 +179,7 @@ void Avatar::move(Direction _direction){
                 polygon.setVelocity(10, polygon.getVelocity().y);
                 break;
             case Direction::JUMP:
-                polygon.setVelocity(polygon.getVelocity().x, -10);
+                polygon.setVelocity(polygon.getVelocity().x, -10);*/
 			default:
 			  break;
         }
@@ -197,7 +198,6 @@ void Avatar::move(float inputX)
 	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
 
 	impulse *= (1 - polygon.getVelocity().length() / speedMax);
-
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
 
