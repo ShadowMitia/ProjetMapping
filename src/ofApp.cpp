@@ -26,7 +26,13 @@ void ofApp::setup(){
 #ifdef CUSTOM_BOX2D_TIM
 	ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
 #endif // CUSTOM_BOX2D_TIM
-    //worlds->createPlatform(editorPlatform.getPoly());
+    
+    ////   Import Platform   /////
+    worlds->platforms.clear();
+    vector<ofPolyline>  platforms = editorPlatform.importImage();
+    for (int i =0; i < platforms.size(); i++) {
+        worlds->createPlatform(platforms[i]);
+    }
 
 }
 
@@ -37,11 +43,6 @@ void ofApp::update(){
     lightSystem->update();
     //mapping.update();
 
-    /*
-    for (auto &avatar : worlds->avatars) {
-    cout << avatar.jumping << endl;
-    
-    }*/
 
 }
 
@@ -73,32 +74,12 @@ void ofApp::keyReleased(int key){
 	{
 		avatar.keyReleased(key);
 	}
-    if (key == 'C') {
-        worlds->createPlatform(editorPlatform.getPoly());
-    }
-    if (key == 'E') {
-        editorPlatform.platformWordExport(worlds->platforms);
-    }
-    if (key == 'I') {
-        worlds->platforms.clear();
-        vector<ofPolyline>  platforms = editorPlatform.importImage();
-        for (int i =0; i < platforms.size(); i++) {
-            worlds->createPlatform(platforms[i]);
-        }
-        for (auto &avatar : worlds->avatars)
-        {
-            avatar.polygon.body->SetGravityScale(1.0f);
-        }
-    }
-    
-    editorPlatform.keyPressed(key);
     
     //mapping.keyReleased(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-    editorPlatform.mouseMoved(x, y);
 }
 
 //--------------------------------------------------------------

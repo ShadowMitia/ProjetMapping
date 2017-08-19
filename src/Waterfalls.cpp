@@ -12,7 +12,7 @@
 
 Waterfalls::Waterfalls(ofxBox2d* _box2d):box2d(_box2d){
     waters.setParticleFlag(b2ParticleFlag::b2_waterParticle);
-    waters.setup(_box2d->getWorld() , 20000, 30.0, 6.0, 4.0, ofColor::red);
+    waters.setup(_box2d->getWorld() , 20000, 30.0, 2.0, 4.0, ofColor::red);
     spawnWater();
 }
 

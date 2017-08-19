@@ -30,7 +30,6 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
 
 	polygon.body->SetType(b2BodyType::b2_dynamicBody);
 	polygon.body->SetFixedRotation(true);
-    polygon.body->SetGravityScale(0);
 
 
     b2Filter tempFilter;

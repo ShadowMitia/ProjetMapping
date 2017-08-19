@@ -46,8 +46,6 @@ void EditorPlatform::selectPolyline(){
     XmlSetting.popTag();
 }
 
-
-
 void EditorPlatform::draw(){
     ofSetColor(ofColor::white);
     path.draw();
@@ -188,7 +186,7 @@ vector<Portal*> EditorPlatform::portalImport( ofxBox2d * _world){
 vector<ofPolyline> EditorPlatform::importImage(){
     ofImage image;
     vector<ofPolyline> poly;
-    cout << " Load file : Image" << endl;
+    cout << " Load file : Map Platforms <---------------" << endl;
     ofFileDialogResult result = ofSystemLoadDialog("Load file : Image");
     if(result.bSuccess) {
         string path = result.getPath();
@@ -214,9 +212,3 @@ vector<ofPolyline> EditorPlatform::importImage(){
     
     
 }
-
-
-
-
-
-

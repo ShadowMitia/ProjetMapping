@@ -25,7 +25,7 @@ public:
     ofImage image;
     
     Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D){
-        cout << " Load file : Image" << endl;
+        cout << " Load file : IMAGE FOND <---------" << endl;
         ofFileDialogResult result = ofSystemLoadDialog("Load file : Image");
         if(result.bSuccess) {
             string path = result.getPath();
