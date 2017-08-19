@@ -21,11 +21,11 @@
         <texCoords>
             <texCoord>
                 <x>0.0</x>
-                <y>0.50</y>
+                <y>0.0</y>
             </texCoord>
             <texCoord>
                 <x>1.0</x>
-                <y>0.50</y>
+                <y>0.0</y>
             </texCoord>
             <texCoord>
                 <x>1.0</x>

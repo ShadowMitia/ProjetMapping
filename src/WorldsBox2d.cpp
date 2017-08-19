@@ -20,20 +20,30 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     world.setFPS(60.0);
     
     
-    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 2319, 560, 30, 160));
-    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 80, 560, 30, 160));
-    
-    
-
-    //portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 400, 525, 35, 75));
-    //portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, 400, 325, 35, 75));
-    
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 2319, 560, 30, 160));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 80, 560, 30, 160));
     portals[0]->linkTo(portals[1]);
     portals[1]->linkTo(portals[0]);
     
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 2319, 320, 30, 160));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 80, 320, 30, 160));
+    portals[2]->linkTo(portals[3]);
+    portals[3]->linkTo(portals[2]);
     
-    //portals[2]->linkTo(portals[3]);
-    //portals[3]->linkTo(portals[2]);
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 80, 80, 30, 160));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 719, 80, 30, 160));
+    portals[4]->linkTo(portals[5]);
+    portals[5]->linkTo(portals[4]);
+    
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 1200, 80, 30, 160));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 2479, 80, 30, 160));
+    portals[6]->linkTo(portals[7]);
+    portals[7]->linkTo(portals[6]);
+    
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 800, 80, 30, 80));
+    portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 1119, 80, 30, 80));
+    portals[8]->linkTo(portals[9]);
+    portals[9]->linkTo(portals[8]);
     
     for (unsigned int i = 0; i < 1; i++)
       {
@@ -68,7 +78,7 @@ void WorldsBox2d::createCircle(float _x,float _y){
 void WorldsBox2d::draw(){
     
   for (auto &portal : portals) {
-    portal->draw();
+    //portal->draw();
   }
 
   for (auto &platform : platforms) {
@@ -113,12 +123,10 @@ void WorldsBox2d::update(){
     {
       avatar.update();
     }
-
   for (auto &block : blocks)
     {
       block.update();
     }
-
   for (auto &portal : portals)
     {
       portal->update(teleportables);
@@ -134,8 +142,8 @@ void WorldsBox2d::createPlatform(ofPolyline _polyline){
 
 }
 void WorldsBox2d::createPortal(){
-    Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
-    portals.push_back(plat);
+    //Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
+    //portals.push_back(plat);
 }
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     ofPolyline temp;

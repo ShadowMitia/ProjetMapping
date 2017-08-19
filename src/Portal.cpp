@@ -66,7 +66,7 @@ void Portal::linkTo(Portal* p) {
   connectedPortal = p;
 
   connectedPortal->connectedPortal = this;
-
+  /*
   int portalDistance = 0;
 
   if (orientation == Orientation::HORIZONTAL)
@@ -87,6 +87,6 @@ void Portal::linkTo(Portal* p) {
     {
       std::swap(connectedPortal->entranceA, connectedPortal->exitA);
       std::swap(connectedPortal->entranceB, connectedPortal->exitB);
-    }
+    }*/
 }
 

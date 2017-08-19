@@ -24,25 +24,29 @@ public:
   enum class Direction {LEFT, RIGHT};
   enum class Orientation { VERTICAL, HORIZONTAL };
 
- Portal(Orientation ori, ofRectangle rect)
-     : rect(rect), orientation(ori) {
+ Portal(Orientation ori, Direction _direction, ofRectangle rect)
+     : rect(rect), orientation(ori), direction(_direction)  {
         if (ori == Orientation::HORIZONTAL){
-            entranceA = ofVec2f(rect.x - 10, rect.y - 50);
-            entranceB = ofVec2f(rect.x - 10, rect.y + rect.height + 50);
-            exitA = ofVec2f(rect.x + rect.width + 10, rect.y - 50);
-            exitB = ofVec2f(rect.x + rect.width + 10, rect.y + rect.height + 50);
+            entranceA = ofVec2f(rect.x - 10 , rect.y );
+            entranceB = ofVec2f(rect.x - 10 , rect.y + rect.height );
+            exitA = ofVec2f(rect.x + rect.width  + 10, rect.y);
+            exitB = ofVec2f(rect.x + rect.width + 10, rect.y + rect.height);
 	  }
         else{
-            entranceA = ofVec2f(rect.x - 50, rect.y - 10);
-            entranceB = ofVec2f(rect.x + rect.width + 50, rect.y - 10);
+            entranceA = ofVec2f(rect.x , rect.y - 10);
+            entranceB = ofVec2f(rect.x + rect.width , rect.y - 10);
 
-            exitA = ofVec2f(rect.x - 50, rect.y + rect.height + 10);
-            exitB = ofVec2f(rect.x + rect.width + 50, rect.y + rect.height + 10);
+            exitA = ofVec2f(rect.x , rect.y + rect.height + 10);
+            exitB = ofVec2f(rect.x + rect.width , rect.y + rect.height + 10);
         }
+         if (direction == Direction::RIGHT) {
+             std::swap(entranceA, exitA);
+             std::swap(entranceB, exitB);
+         }
     }
     
- Portal(Orientation ori, int x, int y, int width, int height)
-      : Portal(ori, ofRectangle(x, y, width, height))
+ Portal(Orientation ori, Direction _direction, int x, int y, int width, int height)
+      : Portal(ori, _direction, ofRectangle(x, y, width, height))
 	  {}
     
     void update(std::vector<Teleportable*> &objects);
@@ -53,6 +57,7 @@ public:
     int id;
     
 private:
+    Direction direction;
     Portal* connectedPortal = nullptr;
     ofVec2f entranceA, entranceB;
     ofVec2f exitA, exitB;
