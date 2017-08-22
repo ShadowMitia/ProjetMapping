@@ -25,6 +25,7 @@ void ofApp::setup(){
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
 #ifdef CUSTOM_BOX2D_TIM
 	ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
+	ofAddListener(worlds->world.PreSolveEvents,  this, &ofApp::PreSolve);
 #endif // CUSTOM_BOX2D_TIM
     
     ////   Import Platform   /////
@@ -175,6 +176,11 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 }
 
 #ifdef CUSTOM_BOX2D_TIM
+void ofApp::PreSolve(ofxBox2dPreContactArgs &e)
+{
+
+}
+
 void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 {
 	if (e.a != nullptr && e.b != nullptr && e.impulse != nullptr)
@@ -200,5 +206,7 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 		}
 	}
 }
+
+
 #endif //CUSTOM_BOX2D_TIM
 

@@ -38,11 +38,9 @@ class ofApp : public ofBaseApp{
     void contactStart(ofxBox2dContactArgs &e);
     void contactEnd(ofxBox2dContactArgs &e);
 #ifdef CUSTOM_BOX2D_TIM
+	void PreSolve(ofxBox2dPreContactArgs &e);
 	void PostSolve(ofxBox2dPostContactArgs &e);
 #endif // CUSTOM_BOX2D_TIM
-
-	
-
 
   ofxPiMapper mapping;
   WorldsBox2d* worlds; // les mondes Box2d
