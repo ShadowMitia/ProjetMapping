@@ -38,7 +38,7 @@ void Waterfalls::update(){
 
 
 void Waterfalls::spawnWater(){
-    spawn.set(50, 10, 200, 30);
+    spawn.set(50, 10, 50, 20);
     
 }
 

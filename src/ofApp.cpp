@@ -41,7 +41,7 @@ void ofApp::setup(){
 void ofApp::update(){
     editorPlatform.update();
     worlds->update();
-    //lightSystem->update();
+    lightSystem->update();
     mapping.update();
 }
 

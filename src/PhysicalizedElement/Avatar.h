@@ -26,6 +26,8 @@ public:
     ofRectangle rect;
     bool jumping = false;
     Viewpoint  viewpoint = Viewpoint::MODE_1;
+    
+    Deplacement modeDeplace;
 
     
 private:
@@ -37,6 +39,7 @@ private:
     
     int countAirControl;
 	float moveInputX;
+    float moveInputY;
 
 public:
 
@@ -53,7 +56,8 @@ public:
   void setPosition(int x, int y);
   void jump();
   void move(Direction _direction);
-  void move(float inputX); 
+  void move(float inputX);
+  void move(float inputX, float inputY);
 
   void keyPressed(int key);
   void keyReleased(int key);

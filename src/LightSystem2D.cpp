@@ -20,7 +20,7 @@ namespace ofx {
         //ofAddListener(ofEvents().setup, this, &LightSystem2D::setup);
         //ofAddListener(ofEvents().update, this, &LightSystem2D::update);
         //ofAddListener(ofEvents().draw, this, &LightSystem2D::draw);
-        ofAddListener(ofEvents().windowResized, this, &LightSystem2D::windowResized);
+        //ofAddListener(ofEvents().windowResized, this, &LightSystem2D::windowResized);
     }
     
     
@@ -29,14 +29,15 @@ namespace ofx {
         //ofRemoveListener(ofEvents().setup, this, &LightSystem2D::setup);
         //ofRemoveListener(ofEvents().update, this, &LightSystem2D::update);
         //ofRemoveListener(ofEvents().draw, this, &LightSystem2D::draw);
-        ofRemoveListener(ofEvents().windowResized, this, &LightSystem2D::windowResized);
+        //ofRemoveListener(ofEvents().windowResized, this, &LightSystem2D::windowResized);
     }
     
     
     void LightSystem2D::setup()
     {
-        ofResizeEventArgs resize(ofGetWidth(), ofGetHeight());
-        windowResized(resize);
+        
+        _lightComp.allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D, GL_RGBA);
+        _sceneComp.allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D, GL_RGBA);
     }
     
     
@@ -301,12 +302,12 @@ namespace ofx {
         }
     }
     
-    
+    /*
     void LightSystem2D::windowResized(ofResizeEventArgs& resize)
     {
         _lightComp.allocate(resize.width, resize.height, GL_RGBA);
         _sceneComp.allocate(resize.width, resize.height, GL_RGBA);
     }
-    
+    */
     
 } // namespace ofx

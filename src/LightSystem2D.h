@@ -14,6 +14,7 @@
 #include "ofTexture.h"
 #include "ofShader.h"
 #include "ofFbo.h"
+#include "Constant.h"
 
 
 namespace ofx {
@@ -44,7 +45,7 @@ namespace ofx {
         void clearLights();
         void clearShapes();
         
-        void windowResized(ofResizeEventArgs& resize);
+        //void windowResized(ofResizeEventArgs& resize);
         
     protected:
         Light2D::List _lights;

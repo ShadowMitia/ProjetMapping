@@ -60,15 +60,26 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     light = std::make_shared<ofx::Light2D>();
     light->setRadius(700);
     lightSystem->add(light);
-     
+    
+    modeDeplace = Deplacement::PLATFORM;
     
 }
 
 void Avatar::update()
 {
-	move(moveInputX);
-
     foot.setPosition(polygon.getPosition()+ofVec2f(0,9));
+    collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
+	
+    if (modeDeplace == Deplacement::PLATFORM ) {
+        polygon.body->SetGravityScale(1.0);
+        move(moveInputX);
+    }
+    if (modeDeplace == Deplacement::TOP ) {
+        polygon.body->SetGravityScale(0.0);
+        move(moveInputX, moveInputY);
+    }
+
+    
     
     if (!jumping)
 	{
@@ -78,8 +89,6 @@ void Avatar::update()
 	{
 		light->setPosition(polygon.getPosition());
 	}
-    collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
-
 
   if (clone)
     {
@@ -87,7 +96,6 @@ void Avatar::update()
       clone->setPosition(polygon.getPosition() + cloneTranslation);
     }
 
-  //std::cout << "Position: " << rect.x << " " << rect.y << '\n';
 
 }
 
@@ -197,8 +205,19 @@ void Avatar::move(float inputX)
 	}
 	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
 
-	impulse *= (1 - polygon.getVelocity().length() / speedMax);
+	impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
+}
+
+void Avatar::move(float inputX,float inputY){
+    
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    b2Vec2 impulse ;
+    impulse.x = speed * inputX * 1.0f;
+    impulse.y = speed * inputY * 1.0f;
+    impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
+    polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
 
 void Avatar::jump()
@@ -207,6 +226,7 @@ void Avatar::jump()
 
 	if (!jumping)
 	{
+        cout << "jump"<< endl;
 		polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 	}
 }
@@ -221,7 +241,12 @@ void Avatar::keyPressed(int key)
 	{
 		moveInputX = 1.0f;
 	}
-
+    if (key ==  OF_KEY_UP || key == 'z') {
+        moveInputY = -1.0f;
+    }
+    if (key == OF_KEY_DOWN || key =='s') {
+        moveInputY = 1.0f;
+    }
 	if (key == ' ')
 	{
 		jump();
@@ -232,11 +257,34 @@ void Avatar::keyReleased(int key)
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
 		moveInputX = 0.0f;
+        
+        if (!jumping) {
+            polygon.setVelocity(0, polygon.getVelocity().y);
+        }
+        
 	}
 	if (key == OF_KEY_RIGHT || key == 'd')
 	{
 		moveInputX = 0.0f;
+        if (!jumping) {
+            polygon.setVelocity(0, polygon.getVelocity().y);
+        }
+        
 	}
+    if (key ==  OF_KEY_UP || key == 'z') {
+        moveInputY = 0.0f;
+        if (!jumping) {
+            polygon.setVelocity(polygon.getVelocity().x,0);
+        }
+        
+    }
+    if (key == OF_KEY_DOWN || key =='s') {
+        moveInputY = 0.0f;
+        if (!jumping) {
+            polygon.setVelocity(polygon.getVelocity().x,0) ;
+        }
+        
+    }
 }
 
 void Avatar::contactStart(dataSprite* OtherSprite)
