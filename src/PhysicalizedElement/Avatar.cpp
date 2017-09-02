@@ -79,6 +79,8 @@ void Avatar::update()
         move(moveInputX, moveInputY);
     }
     
+	//cout << moveInputX << endl;
+
     if (!jumping)
 	{
         this->polygon.setRotation(0);
@@ -225,6 +227,7 @@ void Avatar::jump()
 	if (!jumping)
 	{
         cout << "jump"<< endl;
+		jumping = true;
 		polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 	}
 }
@@ -251,6 +254,7 @@ void Avatar::keyPressed(int key)
 	}
 	if (key == ' ')
 	{
+		cout << "CLIC jump" << endl;
 		jump();
 	}
 }
@@ -300,6 +304,10 @@ void Avatar::contactStart(dataSprite* OtherSprite)
 	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
 	{
 		jumping = false;
+		if (!(abs(moveInputX) > 0))
+		{
+			polygon.setVelocity(0, polygon.getVelocity().y);
+		}
 	}
 }
 
@@ -309,7 +317,7 @@ void Avatar::contactEnd(dataSprite* OtherSprite)
 
 	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
 	{
-		jumping = true;
+		//jumping = true;
 	}
 }
 
@@ -319,6 +327,9 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 
 	if (OtherSprite->getSprite() == Sprite::PLATFORM)
 	{
+		//cout << "normalImpulses [0] : " << impulse->normalImpulses[0] << "normalImpulses [1] : " << impulse->normalImpulses[1] << endl;
+		//cout << "tangentImpulses [0] : " << impulse->tangentImpulses[0] << "tangentImpulses [1] : " << impulse->tangentImpulses[1] << endl;
+
 		jumping = false;
 	}
 }

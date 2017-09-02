@@ -12,14 +12,14 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
   lightSystem2D = _lightSystem2D;
     
     world.init();
-    world.setGravity(0, 10);
+    world.setGravity(0, VarConst::gravity);
     //world.createGround(0,0,1000, 600);
 
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
 
     world.setFPS(60.0);
     
-	int sizeH = 30;
+	/*int sizeH = 30;
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 334, 110, 30, sizeH));
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 1000, 110, 30, sizeH));
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::RIGHT, 700, 120, 30, sizeH));
@@ -29,7 +29,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 
    // portals[2]->linkTo(portals[0]);
     
-	/* portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 2319, 320, 30, 160));
+	 portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 2319, 320, 30, 160));
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 80, 320, 30, 160));
     portals[2]->linkTo(portals[3]);
     portals[3]->linkTo(portals[2]);
@@ -140,7 +140,7 @@ void WorldsBox2d::update(){
       portal->update(teleportables);
     }
 
-    warterfalls->update();
+    //warterfalls->update();
 }
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     
