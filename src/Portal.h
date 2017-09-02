@@ -52,13 +52,17 @@ public:
     void update(std::vector<Teleportable*> &objects);
         
     void draw();
-    void linkTo(Portal* p);
+    void linkTo(Portal* p_angle, Portal* p_perspective);
+	Portal* GetLinkedPortal(Teleportable* obj) const;
+
+
     ofRectangle rect;
     int id;
     
 private:
     Direction direction;
-    Portal* connectedPortal = nullptr;
+    Portal* connectedPortal_Angle;
+	Portal* connectedPortal_Perspective;
     ofVec2f entranceA, entranceB;
     ofVec2f exitA, exitB;
     

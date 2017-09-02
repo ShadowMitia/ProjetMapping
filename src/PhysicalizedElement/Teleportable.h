@@ -8,6 +8,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "../Constant.h"
 #include "PhysicalizedElement.h"
 
 class Teleportable : public PhysicalizedElement {
@@ -22,5 +23,7 @@ public:
     
 public:
     ofRectangle collisionRect;
+
+	Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 };
 

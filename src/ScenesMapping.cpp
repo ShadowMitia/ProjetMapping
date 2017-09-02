@@ -37,7 +37,7 @@ void Scene1::draw(){
     
     image.draw(0, 0);
     worldsBox2d->draw();
-    lightSystem2D->draw();
+   // lightSystem2D->draw();
 }
 
 void Scene1::update(){

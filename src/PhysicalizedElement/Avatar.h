@@ -11,7 +11,6 @@
 #include "ofxBox2d.h"
 #include "../LightSystem2D.h"
 #include "Teleportable.h"
-#include "../Constant.h"
 
 class Avatar : public Teleportable {
 
@@ -25,7 +24,6 @@ public:
     ofx::Light2D::SharedPtr   light;
     ofRectangle rect;
     bool jumping = false;
-    Viewpoint  viewpoint = Viewpoint::MODE_1;
     
     Deplacement modeDeplace;
 

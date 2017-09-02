@@ -13,8 +13,8 @@ namespace VarConst
 	constexpr const int UNIT = 240;
 	//constexpr const int WidthWorld2D = 20 * UNIT;
 	//constexpr const int HeightWorld2D = 4 * UNIT;
-    constexpr const int WidthWorld2D = 3520;
-    constexpr const int HeightWorld2D = 800;
+    constexpr const int WidthWorld2D = 2240;
+    constexpr const int HeightWorld2D = 160;
     
     
 	constexpr const float speedAvatar = 3.0f; // impul
@@ -31,7 +31,7 @@ namespace VarConst
 enum class Sprite { AVATAR, FOOT, WATER, PLATFORM, BLOCK, UNKNOWN };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
-enum class Viewpoint { MODE_1, MODE_2 };
+enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
 
 class dataSprite {
 public:

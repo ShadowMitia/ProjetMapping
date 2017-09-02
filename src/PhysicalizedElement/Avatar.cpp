@@ -78,8 +78,6 @@ void Avatar::update()
         polygon.body->SetGravityScale(0.0);
         move(moveInputX, moveInputY);
     }
-
-    
     
     if (!jumping)
 	{
@@ -247,6 +245,10 @@ void Avatar::keyPressed(int key)
     if (key == OF_KEY_DOWN || key =='s') {
         moveInputY = 1.0f;
     }
+	if (key == OF_KEY_LEFT_CONTROL)
+	{
+		viewpoint = Viewpoint::MODE_PERSPECTIVE;
+	}
 	if (key == ' ')
 	{
 		jump();
@@ -285,6 +287,10 @@ void Avatar::keyReleased(int key)
         }
         
     }
+	if (key == OF_KEY_LEFT_CONTROL)
+	{
+		viewpoint = Viewpoint::MODE_ANGLE;
+	}
 }
 
 void Avatar::contactStart(dataSprite* OtherSprite)

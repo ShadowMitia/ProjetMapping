@@ -10,35 +10,37 @@
 
 void Portal::update(std::vector<Teleportable*>& objects)
 {
-  if (connectedPortal == nullptr /*|| !activated*/) { return; }
+ // if (connectedPortal_Angle == nullptr /*|| !activated*/) { return; }
     
     for (auto &obj : objects)
       {
+		if (GetLinkedPortal(obj))
+		{
+			bool intersects = obj->collisionRect.intersects(rect);
+			bool cloned = obj->hasClone();
+			bool inside = obj->collisionRect.inside(rect);
+			// std::cout << std::boolalpha << "Intersects " << intersects << ' '
+			// 	  << std::boolalpha << "Cloned " << cloned << ' '
+			// 	  << std::boolalpha << "Inside " << inside << '\n';
 
-        bool intersects = obj->collisionRect.intersects(rect);
-        bool cloned = obj->hasClone();
-        bool inside = obj->collisionRect.inside(rect);
-	// std::cout << std::boolalpha << "Intersects " << intersects << ' '
-	// 	  << std::boolalpha << "Cloned " << cloned << ' '
-	// 	  << std::boolalpha << "Inside " << inside << '\n';
+			if (intersects && !cloned)
+			{
+				std::cout << "Clone!\n";
+				obj->createClone(GetLinkedPortal(obj)->rect.getCenter() - rect.getCenter());
+			}
 
-        if (intersects && !cloned)
-	  {
-	    std::cout << "Clone!\n";
-            obj->createClone(connectedPortal->rect.getCenter() - rect.getCenter());
-	  }
-        
-        if (!intersects && !inside && cloned && obj->collisionRect.intersects(entranceA, entranceB))
-	  {
-	    std::cout << "Remove clone\n";
-            obj->removeClone();
-	  }
-        else if (!intersects && !inside && cloned && obj->collisionRect.intersects(exitA, exitB))
-	  {
-	    std::cout << "Teleport to clone\n";
-            obj->teleportToClone();
-            obj->removeClone();
-	  }
+			if (!intersects && !inside && cloned && obj->collisionRect.intersects(entranceA, entranceB))
+			{
+				std::cout << "Remove clone\n";
+				obj->removeClone();
+			}
+			else if (!intersects && !inside && cloned && obj->collisionRect.intersects(exitA, exitB))
+			{
+				std::cout << "Teleport to clone\n";
+				obj->teleportToClone();
+				obj->removeClone();
+			}
+		}
     }
 
 }
@@ -59,13 +61,14 @@ void Portal::draw() {
     ofPopMatrix();
 }
 
-void Portal::linkTo(Portal* p) {
+void Portal::linkTo(Portal* p_angle, Portal* p_perspective) 
+{
+  //if (connectedPortal != nullptr) { return; }
 
-  if (connectedPortal != nullptr) { return; }
+  connectedPortal_Angle = p_angle;
+  connectedPortal_Perspective = p_perspective;
 
-  connectedPortal = p;
-
-  connectedPortal->connectedPortal = this;
+  //connectedPortal_Angle->connectedPortal_Angle = this;
   /*
   int portalDistance = 0;
 
@@ -88,5 +91,14 @@ void Portal::linkTo(Portal* p) {
       std::swap(connectedPortal->entranceA, connectedPortal->exitA);
       std::swap(connectedPortal->entranceB, connectedPortal->exitB);
     }*/
+}
+
+Portal* Portal::GetLinkedPortal(Teleportable* obj) const
+{
+	if (obj->viewpoint == Viewpoint::MODE_ANGLE)
+	{
+		return connectedPortal_Angle;
+	}
+	return connectedPortal_Perspective;
 }
 
