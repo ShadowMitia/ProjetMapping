@@ -25,7 +25,7 @@ namespace VarConst
     constexpr const float impulseJumpAvatar = 11.0f;
 	constexpr const float densityAvatar = 10.0f;
     constexpr const float bounceAvatar = 0.03f;
-    constexpr const float frictionAvatar = 0.0f;
+    constexpr const float frictionAvatar = 4.0f;
 
 }
 

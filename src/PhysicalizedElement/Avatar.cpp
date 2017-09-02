@@ -125,14 +125,12 @@ void Avatar::createClone(ofVec2f cloneTranslation) {
     clone->polygon.create(polygon.getWorld());
 
 }
-
 void Avatar::removeClone() {
   //lightSystemRef->remove(clone->light);
   clone = nullptr;
   cloneTranslation.zero();
 
 }
-
 void Avatar::teleportToClone() {
   //lightSystemRef->remove(clone->light);
 
@@ -141,14 +139,12 @@ void Avatar::teleportToClone() {
   polygon.setVelocity(vel);
   cloneTranslation.zero();
 }
-
-bool Avatar::hasClone() 
+bool Avatar::hasClone()
 { 
 
     return clone ? true : false;
     //return (clone == nullptr);
 }
-
 void Avatar::setPosition(ofVec2f vec)
 {
 	setPosition(vec.x, vec.y);
@@ -193,7 +189,6 @@ void Avatar::move(Direction _direction){
         }
     }
 }
-
 void Avatar::move(float inputX)
 {
 	float speed = VarConst::speedAvatar;
@@ -208,7 +203,6 @@ void Avatar::move(float inputX)
 	impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
-
 void Avatar::move(float inputX,float inputY){
     
     float speed = VarConst::speedAvatar;
@@ -219,7 +213,6 @@ void Avatar::move(float inputX,float inputY){
     impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
     polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
-
 void Avatar::jump()
 {
 	b2Vec2 impulse = VarConst::impulseJumpAvatar * b2Vec2(0.0f, -1.0f);
@@ -231,7 +224,6 @@ void Avatar::jump()
 		polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 	}
 }
-
 void Avatar::keyPressed(int key)
 {
 	if (key == OF_KEY_LEFT || key == 'q')
@@ -265,7 +257,7 @@ void Avatar::keyReleased(int key)
 		moveInputX = 0.0f;
         
         if (!jumping) {
-            polygon.setVelocity(0, polygon.getVelocity().y);
+            //polygon.setVelocity(0, polygon.getVelocity().y);
         }
         
 	}
@@ -273,21 +265,21 @@ void Avatar::keyReleased(int key)
 	{
 		moveInputX = 0.0f;
         if (!jumping) {
-            polygon.setVelocity(0, polygon.getVelocity().y);
+            //polygon.setVelocity(0, polygon.getVelocity().y);
         }
         
 	}
     if (key ==  OF_KEY_UP || key == 'z') {
         moveInputY = 0.0f;
         if (!jumping) {
-            polygon.setVelocity(polygon.getVelocity().x,0);
+            //polygon.setVelocity(polygon.getVelocity().x,0);
         }
         
     }
     if (key == OF_KEY_DOWN || key =='s') {
         moveInputY = 0.0f;
         if (!jumping) {
-            polygon.setVelocity(polygon.getVelocity().x,0) ;
+            //polygon.setVelocity(polygon.getVelocity().x,0) ;
         }
         
     }
@@ -296,7 +288,6 @@ void Avatar::keyReleased(int key)
 		viewpoint = Viewpoint::MODE_ANGLE;
 	}
 }
-
 void Avatar::contactStart(dataSprite* OtherSprite)
 {
 	PhysicalizedElement::contactStart(OtherSprite);
@@ -310,7 +301,6 @@ void Avatar::contactStart(dataSprite* OtherSprite)
 		}
 	}
 }
-
 void Avatar::contactEnd(dataSprite* OtherSprite)
 {
 	PhysicalizedElement::contactEnd(OtherSprite);
@@ -320,7 +310,6 @@ void Avatar::contactEnd(dataSprite* OtherSprite)
 		//jumping = true;
 	}
 }
-
 void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
 	PhysicalizedElement::PostSolve(OtherSprite, impulse);
