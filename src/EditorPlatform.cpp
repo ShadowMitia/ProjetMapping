@@ -186,12 +186,15 @@ vector<Portal*> EditorPlatform::portalImport( ofxBox2d * _world){
 vector<ofPolyline> EditorPlatform::importImage(){
     ofImage image;
     vector<ofPolyline> poly;
+    /*
     cout << " Load file : Map Platforms <---------------" << endl;
     ofFileDialogResult result = ofSystemLoadDialog("Load file : Image");
     if(result.bSuccess) {
         string path = result.getPath();
         image.load(path);
-    }
+    }*/
+    image.load("Test_Saut.png");
+    
     
     ofxCv::ContourFinder contourFinder;
     
