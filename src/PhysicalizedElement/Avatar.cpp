@@ -257,7 +257,7 @@ void Avatar::keyReleased(int key)
 		moveInputX = 0.0f;
         
         if (!jumping) {
-            //polygon.setVelocity(0, polygon.getVelocity().y);
+            polygon.setVelocity(0, polygon.getVelocity().y);
         }
         
 	}
@@ -265,21 +265,21 @@ void Avatar::keyReleased(int key)
 	{
 		moveInputX = 0.0f;
         if (!jumping) {
-            //polygon.setVelocity(0, polygon.getVelocity().y);
+            polygon.setVelocity(0, polygon.getVelocity().y);
         }
         
 	}
     if (key ==  OF_KEY_UP || key == 'z') {
         moveInputY = 0.0f;
         if (!jumping) {
-            //polygon.setVelocity(polygon.getVelocity().x,0);
+            polygon.setVelocity(polygon.getVelocity().x,0);
         }
         
     }
     if (key == OF_KEY_DOWN || key =='s') {
         moveInputY = 0.0f;
         if (!jumping) {
-            //polygon.setVelocity(polygon.getVelocity().x,0) ;
+            polygon.setVelocity(polygon.getVelocity().x,0) ;
         }
         
     }
@@ -307,7 +307,7 @@ void Avatar::contactEnd(dataSprite* OtherSprite)
 
 	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
 	{
-		//jumping = true;
+		jumping = true;
 	}
 }
 void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
@@ -320,5 +320,9 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 		//cout << "tangentImpulses [0] : " << impulse->tangentImpulses[0] << "tangentImpulses [1] : " << impulse->tangentImpulses[1] << endl;
 
 		jumping = false;
+		if (!(abs(moveInputX) > 0))
+		{
+			polygon.setVelocity(0, polygon.getVelocity().y);
+		}
 	}
 }

@@ -32,7 +32,7 @@ public:
             string path = result.getPath();
             image.load(path);
         }*/
-        image.load(Test_SautV.png);
+        image.load("Test_Saut_Visible.png");
         
         name = "Scene One FBO Source";
         allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
