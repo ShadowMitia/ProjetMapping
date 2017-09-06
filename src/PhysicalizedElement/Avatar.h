@@ -23,8 +23,8 @@ public:
 
     ofx::Light2D::SharedPtr   light;
     ofRectangle rect;
-    bool jumping = false;
-    
+    bool jumping;
+	bool ClicJump;
     Deplacement modeDeplace;
 
     

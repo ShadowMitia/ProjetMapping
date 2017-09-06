@@ -46,8 +46,11 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     tempFilter.categoryBits = 0x0002;
     tempFilter.maskBits =  0x0004;
     foot.setFilterData(tempFilter);
+
 	moveInputX = 0.0f;
-	
+	jumping = false;
+	ClicJump = false;
+
 /////////////////////////  Data /////////////////
     dataAvatar* dataAv = new dataAvatar;
     dataAv->setSprite(Sprite::AVATAR);
@@ -244,9 +247,10 @@ void Avatar::keyPressed(int key)
 	{
 		viewpoint = Viewpoint::MODE_PERSPECTIVE;
 	}
-	if (key == ' ')
+	if (key == ' ' && !ClicJump)
 	{
 		cout << "CLIC jump" << endl;
+		ClicJump = true;
 		jump();
 	}
 }
@@ -286,6 +290,10 @@ void Avatar::keyReleased(int key)
 	if (key == OF_KEY_LEFT_CONTROL)
 	{
 		viewpoint = Viewpoint::MODE_ANGLE;
+	}
+	if (key == ' ')
+	{
+		ClicJump = false;
 	}
 }
 void Avatar::contactStart(dataSprite* OtherSprite)
