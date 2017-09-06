@@ -20,20 +20,20 @@
         </vertices>
         <texCoords>
             <texCoord>
-                <x>0.0</x>
-                <y>0.0</y>
+                <x>0.000000000</x>
+                <y>0.000000000</y>
             </texCoord>
             <texCoord>
-                <x>1.0</x>
-                <y>0.0</y>
+                <x>1.000000000</x>
+                <y>0.000000000</y>
             </texCoord>
             <texCoord>
-                <x>1.0</x>
-                <y>1.0</y>
+                <x>1.000000000</x>
+                <y>1.000000000</y>
             </texCoord>
             <texCoord>
-                <x>0.0</x>
-                <y>1.0</y>
+                <x>0.000000000</x>
+                <y>1.000000000</y>
             </texCoord>
         </texCoords>
         <source>

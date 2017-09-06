@@ -18,11 +18,11 @@ namespace VarConst
     
 	constexpr const float gravity = 20.0f;
 
-	constexpr const float speedAvatar = 1.2f; // impul
-	constexpr const float speedAvatarMax = 2.0f;
-	constexpr const float speedAvatarAirControl = 1.2f;
-	constexpr const float speedAvatarAirControlMax = 2.0f;
-    constexpr const float impulseJumpAvatar = 11.0f;
+	constexpr const float speedAvatar = 1.7f; // impul
+	constexpr const float speedAvatarMax = 1.7f;
+	constexpr const float speedAvatarAirControl = 1.7f;
+	constexpr const float speedAvatarAirControlMax = 1.7f;
+    constexpr const float impulseJumpAvatar = 8.25f;
 	constexpr const float densityAvatar = 10.0f;
     constexpr const float bounceAvatar = 0.03f;
     constexpr const float frictionAvatar = 4.0f;

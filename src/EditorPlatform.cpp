@@ -195,7 +195,6 @@ vector<ofPolyline> EditorPlatform::importImage(){
     }*/
     image.load("Test_Saut.png");
     
-    
     ofxCv::ContourFinder contourFinder;
     
     contourFinder.setMinAreaRadius(0);

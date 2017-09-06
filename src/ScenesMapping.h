@@ -34,6 +34,7 @@ public:
         }*/
         image.load("Test_Saut_Visible.png");
         
+
         name = "Scene One FBO Source";
         allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
         worldsBox2d =_worldsBox2d;
