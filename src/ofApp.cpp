@@ -1,5 +1,27 @@
 #include "ofApp.h"
 
+
+vector<ofPolyline> importImage(string path){
+    ofImage image;
+    vector<ofPolyline> poly;
+    image.load("Test_Saut.png");
+    image.load(path);
+    ofxCv::ContourFinder contourFinder;
+    contourFinder.setMinAreaRadius(0);
+    contourFinder.setMaxAreaRadius(1000);
+    contourFinder.setThreshold(100);
+    contourFinder.setFindHoles(true);
+    contourFinder.findContours(image);
+    
+    for (int i =0 ; i<contourFinder.getPolylines().size(); i++){
+        ofPolyline tempPoly;
+        tempPoly = contourFinder.getPolyline(i);
+        tempPoly.addVertex(tempPoly.getVertices().at(0));
+        poly.push_back(tempPoly);
+    }
+    return poly;
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
   ofBackground(0);
@@ -9,7 +31,7 @@ void ofApp::setup(){
     lightSystem->setup();
     worlds->setup(lightSystem);
     
-    scene1 = new Scene1(worlds, lightSystem);
+    scene1 = new Scene1(worlds, lightSystem,"Test_Saut_Visible.png");
     scene2 = new Scene2(worlds, lightSystem);
 
     mapping.registerFboSource(scene1);
@@ -30,16 +52,17 @@ void ofApp::setup(){
     
     ////   Import Platform   /////
     worlds->platforms.clear();
-    vector<ofPolyline>  platforms = editorPlatform.importImage();
+    vector<ofPolyline>  platforms = importImage("Test_Saut.png");
     for (int i =0; i < platforms.size(); i++) {
         worlds->createPlatform(platforms[i]);
     }
+    
+    
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    editorPlatform.update();
     worlds->update();
     lightSystem->update();
     mapping.update();
@@ -206,6 +229,8 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 		}
 	}
 }
+
+
 
 
 #endif //CUSTOM_BOX2D_TIM

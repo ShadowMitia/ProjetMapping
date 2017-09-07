@@ -8,6 +8,7 @@
 #pragma once
 #include "PhysicalizedElement/PhysicalizedElement.h"
 
+
 namespace VarConst
 {
 	constexpr const int UNIT = 240;
@@ -30,6 +31,9 @@ namespace VarConst
 	constexpr const float densityAvatar = 10.0f;
     constexpr const float bounceAvatar = 0.03f;
     constexpr const float frictionAvatar = 4.0f;
+    
+
+
 
 }
 
@@ -57,3 +61,4 @@ private:
   Sprite sprite = Sprite::UNKNOWN;
     
 };
+
