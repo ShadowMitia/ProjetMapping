@@ -24,23 +24,15 @@ public:
     vector<Avatar>*     avatars;
     ofImage image;
     
-    Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D){
-        /*
-        cout << " Load file : IMAGE FOND <---------" << endl;
-        ofFileDialogResult result = ofSystemLoadDialog("Load file : Image");
-        if(result.bSuccess) {
-            string path = result.getPath();
-            image.load(path);
-        }*/
-        image.load("Test_Saut_Visible.png");
-        
-
+    Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D, string path){
+        image.load(path);
         name = "Scene One FBO Source";
-        allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
+        allocate(image.getWidth(), image.getHeight());
         worldsBox2d =_worldsBox2d;
         avatars = &_worldsBox2d->avatars;
         lightSystem2D = _lightSystem2D;
     }
+    
     void update();
     void draw();
 };

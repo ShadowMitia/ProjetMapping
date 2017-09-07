@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofApp.h"
+#include "Constant.h"
 
 #define DEBUGTOTAL
 #define Debug_World
