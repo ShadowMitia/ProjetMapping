@@ -219,30 +219,70 @@ void Avatar::move(float inputX,float inputY){
 void Avatar::jump()
 {
 	b2Vec2 impulse = VarConst::impulseJumpAvatar * b2Vec2(0.0f, -1.0f);
-
 	if (!jumping)
 	{
         cout << "jump"<< endl;
 		jumping = true;
+
+		// test tim
+		/*float sizeImpulseinitial = impulse.Length();
+
+		float speed = VarConst::speedAvatar;
+		float speedMax = VarConst::speedAvatarMax;
+
+		impulse += speed * moveInputX * b2Vec2(1.0f, 0.0f);
+		impulse *= impulse.Length() / sizeImpulseinitial;*/
+		// fin du test de tim
+
 		polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 	}
 }
 void Avatar::keyPressed(int key)
 {
+	// test tim
+	/*if (key == ' ' && !ClicJump)
+	{
+		cout << "CLIC jump" << endl;
+		ClicJump = true;
+		jump();
+	}
+	else
+	{
+		if (key == OF_KEY_LEFT || key == 'q')
+		{
+			moveInputX = -1.0f;
+		}
+		if (key == OF_KEY_RIGHT || key == 'd')
+		{
+			moveInputX = 1.0f;
+		}
+		if (key == OF_KEY_UP || key == 'z') {
+			moveInputY = -1.0f;
+		}
+		if (key == OF_KEY_DOWN || key == 's') {
+			moveInputY = 1.0f;
+		}
+		if (key == OF_KEY_LEFT_CONTROL)
+		{
+			viewpoint = Viewpoint::MODE_PERSPECTIVE;
+		}
+	}*/
+	// fin du test de tim
+
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
-		moveInputX  = -1.0f;
+		moveInputX = -1.0f;
 	}
 	if (key == OF_KEY_RIGHT || key == 'd')
 	{
 		moveInputX = 1.0f;
 	}
-    if (key ==  OF_KEY_UP || key == 'z') {
-        moveInputY = -1.0f;
-    }
-    if (key == OF_KEY_DOWN || key =='s') {
-        moveInputY = 1.0f;
-    }
+	if (key == OF_KEY_UP || key == 'z') {
+		moveInputY = -1.0f;
+	}
+	if (key == OF_KEY_DOWN || key == 's') {
+		moveInputY = 1.0f;
+	}
 	if (key == OF_KEY_LEFT_CONTROL)
 	{
 		viewpoint = Viewpoint::MODE_PERSPECTIVE;
@@ -254,6 +294,7 @@ void Avatar::keyPressed(int key)
 		jump();
 	}
 }
+
 void Avatar::keyReleased(int key)
 {
 	if (key == OF_KEY_LEFT || key == 'q')
