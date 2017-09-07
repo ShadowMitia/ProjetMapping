@@ -16,13 +16,17 @@ namespace VarConst
     constexpr const int WidthWorld2D = 800;
     constexpr const int HeightWorld2D = 150;
     
-	constexpr const float gravity = 20.0f;
+	constexpr const float gravity = 15.0f;
 
-	constexpr const float speedAvatar = 1.7f; // impul
-	constexpr const float speedAvatarMax = 1.7f;
-	constexpr const float speedAvatarAirControl = 1.7f;
-	constexpr const float speedAvatarAirControlMax = 1.7f;
-    constexpr const float impulseJumpAvatar = 8.25f;
+	constexpr const float speedAvatar = 1.5f;
+	constexpr const float speedAvatarMax = 2.0f;
+	constexpr const float speedAvatarAirControl = 1.f;
+	constexpr const float speedAvatarAirControlMax = 1.f;
+
+    constexpr const float impulseJumpAvatar = 7.5f;			// impulsion de base pour les sauts
+	constexpr const float impulseLateralJumpAvatar = 5.f;	// var pour "lisser" la courbe de saut + on la monte, + la cloche s'applatit
+	constexpr const float attenuationImpulseJump = 0.84f;	// var pour "attenuer" les saut latéraux par rapport aux sauts droits
+
 	constexpr const float densityAvatar = 10.0f;
     constexpr const float bounceAvatar = 0.03f;
     constexpr const float frictionAvatar = 4.0f;
