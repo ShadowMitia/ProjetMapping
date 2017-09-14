@@ -9,6 +9,8 @@
 #pragma once
 #include "ofMain.h"
 #include "Constant.h"
+#include "Avatar.h"
+
 
 class Ladder{
 public:
@@ -17,4 +19,5 @@ public:
     Ladder( ofPolyline _poly);
     ofRectangle ladderBox;
     
+    bool inside(Avatar* _avatar);
 };

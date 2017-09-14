@@ -125,18 +125,32 @@ void WorldsBox2d::createAvatar(int x, int y){
     avatars.back().setPosition(x, y);
 }
 void WorldsBox2d::update(){
-  world.update();
+    world.update();
+    
+    for (auto &portal : portals)
+    {
+        portal->update(teleportables);
+    }
+  
+
   for (auto &avatar : avatars)
     {
+        for (int i = 0; i< ladders.size(); i++) {
+            if (ladders[i]->inside(&avatar)) {
+                avatar.modeDeplace = Deplacement::LADDER;
+            }
+            else
+            {
+                avatar.modeDeplace = Deplacement::PLATFORM;
+            }
+            
+        }
       avatar.update();
     }
+    
   for (auto &block : blocks)
     {
       block.update();
-    }
-  for (auto &portal : portals)
-    {
-      portal->update(teleportables);
     }
 
     //warterfalls->update();
@@ -148,6 +162,13 @@ void WorldsBox2d::createPlatform(ofPolyline _polyline){
     platforms.push_back(edge);
 
 }
+void WorldsBox2d::createLadder(ofPolyline _polyline){
+    
+    Ladder *edge = new Ladder(_polyline);
+    ladders.push_back(edge);
+    
+}
+
 void WorldsBox2d::createPortal(){
     //Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
     //portals.push_back(plat);

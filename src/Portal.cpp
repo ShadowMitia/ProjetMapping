@@ -68,29 +68,6 @@ void Portal::linkTo(Portal* p_angle, Portal* p_perspective)
   connectedPortal_Angle = p_angle;
   connectedPortal_Perspective = p_perspective;
 
-  //connectedPortal_Angle->connectedPortal_Angle = this;
-  /*
-  int portalDistance = 0;
-
-  if (orientation == Orientation::HORIZONTAL)
-    {
-      portalDistance = rect.getPosition().x - connectedPortal->rect.getPosition().x;
-    }
-  else
-    {
-      portalDistance = rect.getPosition().y - connectedPortal->rect.getPosition().y;
-    }
-
-  if (portalDistance > 0)
-    {
-      std::swap(entranceA, exitA);
-      std::swap(entranceB, exitB);
-    }
-  else if (portalDistance < 0)
-    {
-      std::swap(connectedPortal->entranceA, connectedPortal->exitA);
-      std::swap(connectedPortal->entranceB, connectedPortal->exitB);
-    }*/
 }
 
 Portal* Portal::GetLinkedPortal(Teleportable* obj) const

@@ -4,11 +4,10 @@
 vector<ofPolyline> importImage(string path){
     ofImage image;
     vector<ofPolyline> poly;
-    image.load("Test_Saut.png");
     image.load(path);
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
-    contourFinder.setMaxAreaRadius(1000);
+    contourFinder.setMaxAreaRadius(180); //1000 max 
     contourFinder.setThreshold(100);
     contourFinder.setFindHoles(true);
     contourFinder.findContours(image);
@@ -52,12 +51,14 @@ void ofApp::setup(){
     
     ////   Import Platform   /////
     worlds->platforms.clear();
-    vector<ofPolyline>  platforms = importImage("Test_Saut.png");
+    vector<ofPolyline>  platforms = importImage("Test_Saut_Plateforme.png");
     for (int i =0; i < platforms.size(); i++) {
         worlds->createPlatform(platforms[i]);
     }
-    
-    
+    vector<ofPolyline>  ladders = importImage("Test_Saut_Echelle.png");
+    for (int i =0; i<ladders.size(); i++) {
+        worlds->createLadder(ladders[i]);
+    }
 
 }
 

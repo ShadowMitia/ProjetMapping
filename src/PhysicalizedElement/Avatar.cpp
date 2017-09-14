@@ -70,23 +70,29 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
 
 void Avatar::update()
 {
+    
     foot.setPosition(polygon.getPosition()+ofVec2f(0,7));
     collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 	
+    
     if (modeDeplace == Deplacement::PLATFORM ) {
         polygon.body->SetGravityScale(1.0);
         move(moveInputX);
     }
-    if (modeDeplace == Deplacement::TOP ) {
+    if (modeDeplace == Deplacement::TOP || modeDeplace == Deplacement::LADDER ) {
         polygon.body->SetGravityScale(0.0);
         move(moveInputX, moveInputY);
     }
-
-
+    
     if (!jumping)
 	{
-        this->polygon.setRotation(0);
+        //this->polygon.setRotation(0);
+        
     }
+    else{
+        this->polygon.setVelocity(this->polygon.getVelocity().x - (VarConst::coefFrotementAir * this->polygon.getVelocity().x/VarConst::speedAvatarMax), this->polygon.getVelocity().y);
+    }
+    
 	if (light)
 	{
 		light->setPosition(polygon.getPosition());
@@ -157,40 +163,6 @@ void Avatar::setPosition(int x, int y)
   collisionRect.setPosition(x, y);
   //light->setPosition(ofVec2f(x, y));
 }
-void Avatar::move(Direction _direction){
-    if (top) {
-        switch (_direction) {
-            case Direction::TOP:
-                polygon.setVelocity(polygon.getVelocity().x, -10);
-                break;
-            case Direction::LEFT:
-                polygon.setVelocity(-10, polygon.getVelocity().y);
-                break;
-            case Direction::RIGHT:
-                polygon.setVelocity(10, polygon.getVelocity().y);
-                break;
-            case Direction::LOW:
-                polygon.setVelocity(polygon.getVelocity().x, 10);
-        }
-    }
-    else
-	{
-        switch (_direction) 
-		{
-            /*
-            case Direction::LEFT:
-                polygon.setVelocity(-10, polygon.getVelocity().y);
-                break;
-            case Direction::RIGHT:
-                polygon.setVelocity(10, polygon.getVelocity().y);
-                break;
-            case Direction::JUMP:
-                polygon.setVelocity(polygon.getVelocity().x, -10);*/
-			default:
-			  break;
-        }
-    }
-}
 void Avatar::move(float inputX)
 {
 	float speed = VarConst::speedAvatar;
@@ -205,8 +177,9 @@ void Avatar::move(float inputX)
 	impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
-void Avatar::move(float inputX,float inputY){
-    
+void Avatar::move(float inputX,float inputY)
+{
+
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     b2Vec2 impulse ;
@@ -214,6 +187,7 @@ void Avatar::move(float inputX,float inputY){
     impulse.y = speed * inputY * 1.0f;
     impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
     polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
+    
 }
 void Avatar::jump()
 {
@@ -221,7 +195,7 @@ void Avatar::jump()
 	{
 		jumping = true;
 		// allez zou, on vire l'inertie du joueur pour ne pas avoir d'elan
-		polygon.setVelocity(0, 0);
+		//polygon.setVelocity(0, 0);
 		// impulsion droite
 		b2Vec2 impulseH = VarConst::impulseJumpAvatar * b2Vec2(0.0f, -1.0f);
         // impulsion latterale
@@ -231,11 +205,14 @@ void Avatar::jump()
 		impulse *= impulseH.Length() / impulse.Length();
 
 		//si on ne saute pas droit, on attenue le saut pour ne pas avoir l'impression que le joueur accelere en sautant
+        /*
 		if (abs(moveInputX) > 0)
 		{
 			impulse *= VarConst::attenuationImpulseJump;
-		}
-		polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
+		}*/
+        impulse = impulseH * (1 - polygon.getVelocity().x/VarConst::speedAvatarMax);
+        
+		polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
 	}
 }
 void Avatar::keyPressed(int key)
@@ -266,14 +243,13 @@ void Avatar::keyPressed(int key)
 		jump();
 	}
 }
-
 void Avatar::keyReleased(int key)
 {
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
 		moveInputX = 0.0f;
         
-        if (!jumping) {
+        if (!jumping || modeDeplace != Deplacement::PLATFORM) {
             polygon.setVelocity(0, polygon.getVelocity().y);
         }
         
@@ -281,21 +257,23 @@ void Avatar::keyReleased(int key)
 	if (key == OF_KEY_RIGHT || key == 'd')
 	{
 		moveInputX = 0.0f;
-        if (!jumping) {
+        if (!jumping || modeDeplace != Deplacement::PLATFORM) {
             polygon.setVelocity(0, polygon.getVelocity().y);
         }
         
 	}
-    if (key ==  OF_KEY_UP || key == 'z') {
+    if (key ==  OF_KEY_UP || key == 'z')
+    {
         moveInputY = 0.0f;
-        if (!jumping) {
+        if (!jumping || modeDeplace != Deplacement::PLATFORM) {
             polygon.setVelocity(polygon.getVelocity().x,0);
         }
         
     }
-    if (key == OF_KEY_DOWN || key =='s') {
+    if (key == OF_KEY_DOWN || key =='s')
+    {
         moveInputY = 0.0f;
-        if (!jumping) {
+        if (!jumping|| modeDeplace != Deplacement::PLATFORM) {
             polygon.setVelocity(polygon.getVelocity().x,0) ;
         }
         

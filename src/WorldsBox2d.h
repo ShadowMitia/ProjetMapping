@@ -16,6 +16,7 @@
 #include "LightSystem2D.h"
 #include "PhysicalizedElement/ObjetBlock.h"
 #include "Constant.h"
+#include "Ladder.h"
 #include "Waterfalls.h"
 
 constexpr int const MAX_WIIMOTES = 4;
@@ -40,6 +41,7 @@ public:
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
     std::vector< ObjetBlock > blocks;
+    std::vector< Ladder * > ladders;
     Waterfalls*               warterfalls;
     
     
@@ -55,6 +57,7 @@ public:
     void createAvatar(int x, int y);
     void createPlatform(ofPolyline _polyline);
     void createPortal();
+    void createLadder(ofPolyline _polyline);
     
     //Wiimotes wiimotes;
 

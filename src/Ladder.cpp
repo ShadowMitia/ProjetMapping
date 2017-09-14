@@ -15,3 +15,7 @@ Ladder::Ladder(int _x, int _y, int _w, int _h ){
 Ladder::Ladder( ofPolyline _poly){
     ladderBox = _poly.getBoundingBox();
 }
+bool Ladder::inside(Avatar* _avatar){
+    //return ladderBox.inside(_avatar->collisionRect);
+    return ladderBox.inside(_avatar->foot.getPosition());
+}

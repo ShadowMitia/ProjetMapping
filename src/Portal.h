@@ -50,7 +50,6 @@ public:
 	  {}
     
     void update(std::vector<Teleportable*> &objects);
-        
     void draw();
     void linkTo(Portal* p_angle, Portal* p_perspective);
 	Portal* GetLinkedPortal(Teleportable* obj) const;

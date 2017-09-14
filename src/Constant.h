@@ -19,12 +19,13 @@ namespace VarConst
     
 	constexpr const float gravity = 15.0f;
 
-	constexpr const float speedAvatar = 1.5f;
+	constexpr const float speedAvatar = 1.0f;
 	constexpr const float speedAvatarMax = 2.0f;
-	constexpr const float speedAvatarAirControl = 1.f;
-	constexpr const float speedAvatarAirControlMax = 1.f;
+	constexpr const float speedAvatarAirControl = 1.0f;
+	constexpr const float speedAvatarAirControlMax = 1.5f;
+    constexpr const float coefFrotementAir = 0.08;
 
-    constexpr const float impulseJumpAvatar = 7.5f;			// impulsion de base pour les sauts
+    constexpr const float impulseJumpAvatar = 7.2f;			// impulsion de base pour les sauts
 	constexpr const float impulseLateralJumpAvatar = 5.f;	// var pour "lisser" la courbe de saut + on la monte, + la cloche s'applatit
 	constexpr const float attenuationImpulseJump = 0.84f;	// var pour "attenuer" les saut latéraux par rapport aux sauts droits
 
