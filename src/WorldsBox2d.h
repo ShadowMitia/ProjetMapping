@@ -37,13 +37,13 @@ public:
     ofxBox2d                 world;
     ofRectangle              bounds;
     vector<shared_ptr<ofxBox2dCircle>>	circles;
+    
     std::vector< Avatar > avatars;
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
-    std::vector< ObjetBlock > blocks;
+    //std::vector< ObjetBlock > blocks;
     std::vector< Ladder * > ladders;
     Waterfalls*               warterfalls;
-    
     
     std::vector<Teleportable*> teleportables;
 

@@ -68,18 +68,19 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     
 }
 
-void Avatar::update()
-{
-    
+void Avatar::presUpdate(){
     foot.setPosition(polygon.getPosition()+ofVec2f(0,7));
     collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
-	
+}
+
+void Avatar::update()
+{
     
     if (modeDeplace == Deplacement::PLATFORM ) {
         polygon.body->SetGravityScale(1.0);
         move(moveInputX);
     }
-    if (modeDeplace == Deplacement::TOP || modeDeplace == Deplacement::LADDER ) {
+    else{
         polygon.body->SetGravityScale(0.0);
         move(moveInputX, moveInputY);
     }

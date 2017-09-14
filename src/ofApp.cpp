@@ -55,6 +55,7 @@ void ofApp::setup(){
     for (int i =0; i < platforms.size(); i++) {
         worlds->createPlatform(platforms[i]);
     }
+    ////   Import Ladder   /////
     vector<ofPolyline>  ladders = importImage("Test_Saut_Echelle.png");
     for (int i =0; i<ladders.size(); i++) {
         worlds->createLadder(ladders[i]);
@@ -79,20 +80,18 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) 
 {
-	for (auto &avatar : worlds->avatars) 
-	{
-		avatar.keyPressed(key);
-	}
+    for (int i = 0; i<worlds->avatars.size(); i++) {
+        worlds->avatars[i].keyPressed(key);
+    }
     mapping.keyPressed(key);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 
-	for (auto &avatar : worlds->avatars)
-	{
-		avatar.keyReleased(key);
-	}
+    for (int i = 0; i<worlds->avatars.size(); i++) {
+        worlds->avatars[i].keyReleased(key);
+    }
     
     mapping.keyReleased(key);
 }
@@ -118,7 +117,6 @@ void ofApp::mousePressed(int x, int y, int button){
 void ofApp::mouseReleased(int x, int y, int button){
 
     mapping.mouseReleased(x, y, button);
-
 }
 
 //--------------------------------------------------------------
@@ -230,9 +228,6 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 		}
 	}
 }
-
-
-
 
 #endif //CUSTOM_BOX2D_TIM
 

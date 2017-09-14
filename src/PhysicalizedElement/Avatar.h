@@ -42,7 +42,7 @@ private:
 
 public:
 
-
+  void presUpdate();
   void update() override;
   void draw() override;
   void createClone(ofVec2f cloneTranslation) override;
@@ -71,7 +71,6 @@ public:
     dataAvatar(){
         setSprite(Sprite::AVATAR);
     }
-    
 };
 class dataFoot: public dataSprite {
 public:

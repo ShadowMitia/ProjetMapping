@@ -13,11 +13,12 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     
     world.init();
     world.setGravity(0, VarConst::gravity);
+    world.setFPS(60.0);
     //world.createGround(0,0,1000, 600);
 
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
 
-    world.setFPS(60.0);
+    
     
 	/*int sizeH = 30;
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 334, 110, 30, sizeH));
@@ -62,12 +63,12 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 	}
 
     //blocks.emplace_back(world, 600, 500, 100, 100);
-
+    /*
 	for (auto &block : blocks)
 	{
 		teleportables.push_back(&block);
 	}
-
+    */
     warterfalls = new Waterfalls(&world);
 
 
@@ -100,13 +101,13 @@ void WorldsBox2d::draw(){
     ofSetHexColor(0xf6c738);
     circles[i].get()->draw();
   }
-
-
+    
+    /*
   for (auto &block : blocks)
     {
       ofSetHexColor(0xFFFFF);
       block.draw();
-    }
+    }*/
 
     for (auto &avatar : avatars) {
     ofSetHexColor(0x00FF00);
@@ -127,31 +128,31 @@ void WorldsBox2d::createAvatar(int x, int y){
 void WorldsBox2d::update(){
     world.update();
     
-    for (auto &portal : portals)
-    {
-        portal->update(teleportables);
+    for (int i = 0; i< portals.size(); i++) {
+        portals[i]->update(teleportables);
     }
-  
-
-  for (auto &avatar : avatars)
+    
+    for (int j = 0; j < avatars.size(); j++)
     {
+        avatars[j].presUpdate();
+        
         for (int i = 0; i< ladders.size(); i++) {
-            if (ladders[i]->inside(&avatar)) {
-                avatar.modeDeplace = Deplacement::LADDER;
+            if (ladders[i]->inside(&avatars[j])) {
+                avatars[j].modeDeplace = Deplacement::LADDER;
             }
             else
             {
-                avatar.modeDeplace = Deplacement::PLATFORM;
+                avatars[j].modeDeplace = Deplacement::PLATFORM;
             }
             
         }
-      avatar.update();
+      avatars[j].update();
     }
-    
+   /*
   for (auto &block : blocks)
     {
       block.update();
-    }
+    }*/
 
     //warterfalls->update();
 }
@@ -168,7 +169,6 @@ void WorldsBox2d::createLadder(ofPolyline _polyline){
     ladders.push_back(edge);
     
 }
-
 void WorldsBox2d::createPortal(){
     //Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
     //portals.push_back(plat);

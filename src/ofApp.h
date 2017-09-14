@@ -45,10 +45,7 @@ class ofApp : public ofBaseApp{
   ofxPiMapper mapping;
   WorldsBox2d* worlds; // les mondes Box2d
 
-  ofx::LightSystem2D* lightSystem;
-
-
-  
+  ofx::LightSystem2D* lightSystem;  
   Scene1* scene1;
   Scene2* scene2;
     
