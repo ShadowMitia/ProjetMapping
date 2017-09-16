@@ -11,14 +11,13 @@
 #include "ofxBox2d.h"
 #include "../LightSystem2D.h"
 #include "Teleportable.h"
-#include "ofxGLFWJoystick.h"
 
 
 class Avatar : public Teleportable {
 
 public:
 
-  Avatar(int id, ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
+	Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
 
     ofxBox2dPolygon polygon;
     ofxBox2dRect    foot;
@@ -41,8 +40,6 @@ private:
 	float moveInputX;
     float moveInputY;
 
-  int id;
-
 public:
 
   void presUpdate();
@@ -61,24 +58,20 @@ public:
   void move(float inputX);
   void move(float inputX, float inputY);
 
-  void checkJoystickInputs();
-
   void keyPressed(int key);
   void keyReleased(int key);
 
-  void contactStart(dataSprite* OtherSprite) override;
-  void contactEnd(dataSprite* OtherSprite) override;
-  void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
+  virtual void contactStart(dataSprite* OtherSprite) override;
+  virtual void contactEnd(dataSprite* OtherSprite) override;
+  virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
 
 };
-
 class dataAvatar: public dataSprite {
 public:
     dataAvatar(){
         setSprite(Sprite::AVATAR);
     }
 };
-
 class dataFoot: public dataSprite {
 public:
     dataFoot(){

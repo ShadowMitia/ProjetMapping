@@ -18,8 +18,8 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
 
-
-
+    
+    
 	/*int sizeH = 30;
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 334, 110, 30, sizeH));
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 1000, 110, 30, sizeH));
@@ -71,6 +71,8 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     */
     warterfalls = new Waterfalls(&world);
 
+    
+    
 
 
 }
@@ -81,6 +83,9 @@ void WorldsBox2d::createCircle(float _x,float _y){
     circles.back().get()->setup(world.getWorld(), _x, _y, r);
 }
 void WorldsBox2d::draw(){
+
+    
+    
     
   for (auto &portal : portals) 
   {
@@ -119,8 +124,7 @@ void WorldsBox2d::draw(){
 
 }
 void WorldsBox2d::createAvatar(int x, int y){
-  static int id = 0;
-  avatars.emplace_back(id, &world, lightSystem2D);
+    avatars.emplace_back(&world, lightSystem2D);
     avatars.back().polygon.setData(new typeBox2d);
     typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
@@ -135,8 +139,8 @@ void WorldsBox2d::update(){
     
     for (int j = 0; j < avatars.size(); j++)
     {
-      avatars[j].checkJoystickInputs();
         avatars[j].presUpdate();
+        
         for (int i = 0; i< ladders.size(); i++) {
             if (ladders[i]->inside(&avatars[j])) {
                 avatars[j].modeDeplace = Deplacement::LADDER;
@@ -155,7 +159,7 @@ void WorldsBox2d::update(){
       block.update();
     }*/
 
-    warterfalls->update();
+    //warterfalls->update();
 }
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     

@@ -1,6 +1,5 @@
 #include "ofApp.h"
 
-#include "ofxGLFWJoystick.h"
 
 vector<ofPolyline> importImage(string path){
     ofImage image;
@@ -19,7 +18,6 @@ vector<ofPolyline> importImage(string path){
         tempPoly.addVertex(tempPoly.getVertices().at(0));
         poly.push_back(tempPoly);
     }
-    
     return poly;
 }
 
@@ -67,11 +65,9 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  ofxGLFWJoystick::one().update();
     worlds->update();
     lightSystem->update();
     mapping.update();
-    
 }
 
 //--------------------------------------------------------------
