@@ -18,8 +18,8 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
 
-    
-    
+
+
 	/*int sizeH = 30;
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 334, 110, 30, sizeH));
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 1000, 110, 30, sizeH));
@@ -137,7 +137,6 @@ void WorldsBox2d::update(){
     {
       avatars[j].checkJoystickInputs();
         avatars[j].presUpdate();
-        
         for (int i = 0; i< ladders.size(); i++) {
             if (ladders[i]->inside(&avatars[j])) {
                 avatars[j].modeDeplace = Deplacement::LADDER;
@@ -156,7 +155,7 @@ void WorldsBox2d::update(){
       block.update();
     }*/
 
-    //warterfalls->update();
+    warterfalls->update();
 }
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     

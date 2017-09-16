@@ -19,6 +19,7 @@ vector<ofPolyline> importImage(string path){
         tempPoly.addVertex(tempPoly.getVertices().at(0));
         poly.push_back(tempPoly);
     }
+    
     return poly;
 }
 
@@ -70,6 +71,7 @@ void ofApp::update(){
     worlds->update();
     lightSystem->update();
     mapping.update();
+    
 }
 
 //--------------------------------------------------------------
