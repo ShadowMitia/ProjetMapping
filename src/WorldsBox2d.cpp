@@ -119,7 +119,8 @@ void WorldsBox2d::draw(){
 
 }
 void WorldsBox2d::createAvatar(int x, int y){
-    avatars.emplace_back(&world, lightSystem2D);
+  static int id = 0;
+  avatars.emplace_back(id, &world, lightSystem2D);
     avatars.back().polygon.setData(new typeBox2d);
     typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
@@ -134,6 +135,7 @@ void WorldsBox2d::update(){
     
     for (int j = 0; j < avatars.size(); j++)
     {
+      avatars[j].checkJoystickInputs();
         avatars[j].presUpdate();
         
         for (int i = 0; i< ladders.size(); i++) {
