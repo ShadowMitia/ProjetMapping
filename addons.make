@@ -4,3 +4,4 @@ ofxLiquidFun
 ofxOpenCv
 ofxPiMapper
 ofxXmlSettings
+ofxGLFWJoystick
