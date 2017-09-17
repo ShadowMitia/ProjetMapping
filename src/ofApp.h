@@ -10,7 +10,7 @@
 #include "LightSystem2D.h"
 #include "Constant.h"
 #include "ofxCv.h"
-
+#include "ofxGLFWJoystick.h"
 
 
 class ofApp : public ofBaseApp{
@@ -33,6 +33,8 @@ class ofApp : public ofBaseApp{
   void windowResized(int w, int h);
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
+  
+
     
     //template<class Temp>
     void contactStart(ofxBox2dContactArgs &e);
@@ -48,5 +50,8 @@ class ofApp : public ofBaseApp{
   ofx::LightSystem2D* lightSystem;  
   Scene1* scene1;
   Scene2* scene2;
+private:
+    void input();
+    bool inputButton[6] = {false};
     
 };

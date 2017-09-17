@@ -60,11 +60,14 @@ void ofApp::setup(){
     for (int i =0; i<ladders.size(); i++) {
         worlds->createLadder(ladders[i]);
     }
+    
+    
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    input();
     worlds->update();
     lightSystem->update();
     mapping.update();
@@ -231,3 +234,38 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 
 #endif //CUSTOM_BOX2D_TIM
 
+void ofApp::input(){
+    ofxGLFWJoystick::one().update();
+    int joystickID = 0;
+    
+    
+    if (inputButton[0]!=ofxGLFWJoystick::one().getButtonValue(0, joystickID)) {
+        inputButton[0] = ofxGLFWJoystick::one().getButtonValue(0, joystickID);
+
+        if (inputButton[0])worlds->avatars[0].keyPressed(OF_KEY_UP);
+        else worlds->avatars[0].keyReleased(OF_KEY_UP);
+    }
+    if (inputButton[1]!=ofxGLFWJoystick::one().getButtonValue(1, joystickID)) {
+        inputButton[1] = ofxGLFWJoystick::one().getButtonValue(1, joystickID);
+        
+        if (inputButton[1])worlds->avatars[0].keyPressed(OF_KEY_DOWN);
+        else worlds->avatars[0].keyReleased(OF_KEY_DOWN);
+    }
+    if (inputButton[2]!=ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
+        inputButton[2] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
+        cout << inputButton[2] << endl;
+        if (inputButton[2])worlds->avatars[0].keyPressed(OF_KEY_LEFT);
+        else worlds->avatars[0].keyReleased(OF_KEY_LEFT);
+    }
+    if (inputButton[3]!=ofxGLFWJoystick::one().getButtonValue(3, joystickID)) {
+        inputButton[3] = ofxGLFWJoystick::one().getButtonValue(3, joystickID);
+        if (inputButton[3])worlds->avatars[0].keyPressed(OF_KEY_RIGHT);
+        else worlds->avatars[0].keyReleased(OF_KEY_RIGHT);
+    }
+    if (inputButton[4]!=ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
+        inputButton[4] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
+        if (inputButton[4])worlds->avatars[0].keyPressed(' ');
+        else worlds->avatars[0].keyReleased(' ');
+    }
+    
+}
