@@ -252,20 +252,28 @@ void ofApp::input(){
         else worlds->avatars[0].keyReleased(OF_KEY_DOWN);
     }
     if (inputButton[2]!=ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
-        inputButton[2] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
-        cout << inputButton[2] << endl;
-        if (inputButton[2])worlds->avatars[0].keyPressed(OF_KEY_LEFT);
-        else worlds->avatars[0].keyReleased(OF_KEY_LEFT);
+        if(!inputButton[3])inputButton[2] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
+        
+        if (!inputButton[3] && !inputButton[2])worlds->avatars[0].keyReleased(OF_KEY_LEFT);
+        else worlds->avatars[0].keyPressed(OF_KEY_LEFT);
     }
     if (inputButton[3]!=ofxGLFWJoystick::one().getButtonValue(3, joystickID)) {
-        inputButton[3] = ofxGLFWJoystick::one().getButtonValue(3, joystickID);
-        if (inputButton[3])worlds->avatars[0].keyPressed(OF_KEY_RIGHT);
-        else worlds->avatars[0].keyReleased(OF_KEY_RIGHT);
+        if (!inputButton[2])inputButton[3] = ofxGLFWJoystick::one().getButtonValue(3, joystickID);
+        
+        if (!inputButton[3])worlds->avatars[0].keyReleased(OF_KEY_RIGHT);
+        else worlds->avatars[0].keyPressed(OF_KEY_RIGHT);
     }
     if (inputButton[4]!=ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
         inputButton[4] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
         if (inputButton[4])worlds->avatars[0].keyPressed(' ');
         else worlds->avatars[0].keyReleased(' ');
     }
+    if (inputButton[5]!=ofxGLFWJoystick::one().getButtonValue(12, joystickID)) {
+        inputButton[5] = ofxGLFWJoystick::one().getButtonValue(12, joystickID);
+        
+        if (inputButton[5])worlds->avatars[0].keyPressed(OF_KEY_LEFT_CONTROL);
+        else worlds->avatars[0].keyReleased(OF_KEY_LEFT_CONTROL);
+    }
     
+
 }
