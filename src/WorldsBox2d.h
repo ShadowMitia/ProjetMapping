@@ -63,4 +63,5 @@ public:
 
 private:
 
+    void importPortal();
 };

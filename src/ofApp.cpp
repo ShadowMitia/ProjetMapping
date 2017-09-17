@@ -7,7 +7,7 @@ vector<ofPolyline> importImage(string path){
     image.load(path);
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
-    contourFinder.setMaxAreaRadius(180); //1000 max 
+    contourFinder.setMaxAreaRadius(1000); //1000 max
     contourFinder.setThreshold(100);
     contourFinder.setFindHoles(true);
     contourFinder.findContours(image);
@@ -30,7 +30,7 @@ void ofApp::setup(){
     lightSystem->setup();
     worlds->setup(lightSystem);
     
-    scene1 = new Scene1(worlds, lightSystem,"Test_Saut_Visible.png");
+    scene1 = new Scene1(worlds, lightSystem,"Map_prog_Plateforme_Solide.png");
     scene2 = new Scene2(worlds, lightSystem);
 
     mapping.registerFboSource(scene1);
@@ -51,13 +51,13 @@ void ofApp::setup(){
     
     ////   Import Platform   /////
     worlds->platforms.clear();
-    vector<ofPolyline>  platforms = importImage("Test_Saut_Plateforme.png");
-    for (int i =0; i < platforms.size(); i++) {
+    vector<ofPolyline>  platforms = importImage("Map_prog_Plateforme_Solide.png");
+    for (int i =0; i < platforms.size()-1; i++) {
         worlds->createPlatform(platforms[i]);
     }
     ////   Import Ladder   /////
-    vector<ofPolyline>  ladders = importImage("Test_Saut_Echelle.png");
-    for (int i =0; i<ladders.size(); i++) {
+    vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
+    for (int i =0; i<ladders.size()-1; i++) {
         worlds->createLadder(ladders[i]);
     }
     

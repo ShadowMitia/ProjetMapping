@@ -24,29 +24,36 @@ public:
   enum class Direction {LEFT, RIGHT};
   enum class Orientation { VERTICAL, HORIZONTAL };
 
- Portal(Orientation ori, Direction _direction, ofRectangle rect)
-     : rect(rect), orientation(ori), direction(_direction)  {
-        if (ori == Orientation::HORIZONTAL){
-            entranceA = ofVec2f(rect.x - 10 , rect.y );
-            entranceB = ofVec2f(rect.x - 10 , rect.y + rect.height );
-            exitA = ofVec2f(rect.x + rect.width  + 10, rect.y);
-            exitB = ofVec2f(rect.x + rect.width + 10, rect.y + rect.height);
+ Portal(Orientation _ori, Direction _direction, ofRectangle _rect){
+         direction = _direction;
+         orientation = _ori;
+         rect = _rect;
+        if (_ori == Orientation::VERTICAL){
+            float temp = rect.getWidth();
+            rect.setWidth(rect.getHeight());
+            rect.setHeight(temp);
+            entranceA = ofVec2f(rect.x - 2 , rect.y );
+            entranceB = ofVec2f(rect.x - 2 , rect.y + rect.height );
+            exitA = ofVec2f(rect.x + rect.width  + 2, rect.y);
+            exitB = ofVec2f(rect.x + rect.width + 2, rect.y + rect.height);
 	  }
         else{
-            entranceA = ofVec2f(rect.x , rect.y - 10);
-            entranceB = ofVec2f(rect.x + rect.width , rect.y - 10);
+            entranceA = ofVec2f(rect.x , rect.y - 2);
+            entranceB = ofVec2f(rect.x + rect.width , rect.y - 2);
 
-            exitA = ofVec2f(rect.x , rect.y + rect.height + 10);
-            exitB = ofVec2f(rect.x + rect.width , rect.y + rect.height + 10);
+            exitA = ofVec2f(rect.x , rect.y + rect.height + 2);
+            exitB = ofVec2f(rect.x + rect.width , rect.y + rect.height + 2);
         }
-         if (direction == Direction::RIGHT) {
+         if (direction == Direction::LEFT) {
              std::swap(entranceA, exitA);
              std::swap(entranceB, exitB);
          }
+         connectedPortal_Angle = NULL;
+         connectedPortal_Perspective = NULL;
     }
     
  Portal(Orientation ori, Direction _direction, int x, int y, int width, int height)
-      : Portal(ori, _direction, ofRectangle(x, y, width, height))
+      : Portal(ori, _direction, ofRectangle(x, y,height,width))
 	  {}
     
     void update(std::vector<Teleportable*> &objects);
