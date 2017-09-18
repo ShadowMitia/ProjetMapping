@@ -52,6 +52,6 @@ class ofApp : public ofBaseApp{
   Scene2* scene2;
 private:
     void input();
-    bool inputButton[6] = {false};
+    bool inputButton[1][6] = {false};
     
 };

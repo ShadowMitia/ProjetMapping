@@ -157,14 +157,11 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     temp.addVertex(ofPoint(x,y));
     createPlatform(temp);
 }
-
 void WorldsBox2d::importPortal(){
-    
     int sizeH = 160;
     int sizeW = 2;
-    
+
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 80, 80, sizeW, sizeH));// portal:0
-    
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 240, 80, sizeW, sizeH));// portal:1
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 400, 80, sizeW, sizeH));// portal:2
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 560, 80, sizeW, sizeH));// portal:3
@@ -182,21 +179,14 @@ void WorldsBox2d::importPortal(){
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 2560, 80, sizeW, sizeH));// portal:15
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 2800, 80, sizeW, sizeH));// portal:16
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 3040, 80, sizeW, sizeH));// portal:17
-
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::LEFT, 3280, 80, sizeW, sizeH/2));// portal:18
-     
     portals.push_back(new Portal(Portal::Orientation::VERTICAL,Portal::Direction::LEFT, 80, 80, sizeW, sizeH));// portal:19
-    
     portals.push_back(new Portal(Portal::Orientation::VERTICAL,Portal::Direction::RIGHT, 399, 80, sizeW, sizeH/2));// portal:20
-    
     portals.push_back(new Portal(Portal::Orientation::VERTICAL,Portal::Direction::LEFT, 560, 80, sizeW, sizeH/2));// portal:21
-    
     portals.push_back(new Portal(Portal::Orientation::VERTICAL,Portal::Direction::RIGHT, 719, 80, sizeW, sizeH));// portal:22
-    
     portals.push_back(new Portal(Portal::Orientation::VERTICAL,Portal::Direction::LEFT, 800, 80, sizeW, sizeH/2));// portal:23
     portals.push_back(new Portal(Portal::Orientation::VERTICAL,Portal::Direction::LEFT, 880, 80, sizeW, sizeH/2));// portal:24
     portals.push_back(new Portal(Portal::Orientation::VERTICAL,Portal::Direction::RIGHT, 1119, 80, sizeW, sizeH/2));// portal:25
-    
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 799, 159, sizeW, sizeH/2));// portal:26
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 879, 159, sizeW, sizeH/2));// portal:27
     portals.push_back(new Portal(Portal::Orientation::HORIZONTAL,Portal::Direction::RIGHT, 959, 159, sizeW, sizeH/2));// portal:28
@@ -449,4 +439,3 @@ void WorldsBox2d::importPortal(){
     portals[70]->linkTo(portals[192],NULL);
     portals[71]->linkTo(portals[200],NULL);*/
 }
-
