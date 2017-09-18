@@ -29,7 +29,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
 
 	for (auto &avatar : avatars)
 	{
-		teleportables.push_back(&avatar);
+		teleportables.push_back(avatar);
 	}
 
     //blocks.emplace_back(world, 600, 500, 100, 100);
@@ -86,7 +86,7 @@ void WorldsBox2d::draw(){
 
     for (auto &avatar : avatars) {
     ofSetHexColor(0x00FF00);
-    avatar.draw();
+    avatar->draw();
   }
 
     warterfalls->draw();
@@ -94,11 +94,12 @@ void WorldsBox2d::draw(){
 
 }
 void WorldsBox2d::createAvatar(int x, int y){
-    avatars.emplace_back(&world, lightSystem2D);
-    avatars.back().polygon.setData(new typeBox2d);
-    typeBox2d *sd  = (typeBox2d*) avatars.back().polygon.getData();
+    Avatar * avatar = new Avatar(&world, lightSystem2D);
+    avatar->polygon.setData(new typeBox2d);
+    typeBox2d *sd  = (typeBox2d*) avatar->polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
-    avatars.back().setPosition(x, y);
+    avatar->setPosition(x, y);
+    avatars.push_back(avatar);
 }
 void WorldsBox2d::update(){
     world.update();
@@ -109,19 +110,19 @@ void WorldsBox2d::update(){
     
     for (int j = 0; j < avatars.size(); j++)
     {
-        avatars[j].presUpdate();
+        avatars[j]->presUpdate();
         
         for (int i = 0; i< ladders.size(); i++) {
-            if (ladders[i]->inside(&avatars[j])) {
-                avatars[j].modeDeplace = Deplacement::LADDER;
+            if (ladders[i]->inside(avatars[j])) {
+                avatars[j]->modeDeplace = Deplacement::LADDER;
             }
             else
             {
-                avatars[j].modeDeplace = Deplacement::PLATFORM;
+                avatars[j]->modeDeplace = Deplacement::PLATFORM;
             }
             
         }
-      avatars[j].update();
+      avatars[j]->update();
     }
    /*
   for (auto &block : blocks)
