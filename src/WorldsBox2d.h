@@ -19,7 +19,7 @@
 #include "Ladder.h"
 #include "Waterfalls.h"
 
-constexpr int const MAX_WIIMOTES = 4;
+
 
 template<class T>
 class data : public T , public dataSprite{};
@@ -41,7 +41,7 @@ public:
     std::vector< Avatar > avatars;
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
-    //std::vector< ObjetBlock > blocks;
+    std::vector< ObjectBlock * > blocks;
     std::vector< Ladder * > ladders;
     Waterfalls*               warterfalls;
     
@@ -58,6 +58,7 @@ public:
     void createPlatform(ofPolyline _polyline);
     void createPortal();
     void createLadder(ofPolyline _polyline);
+  void createBox(ofPolyline _polyline);
     
     //Wiimotes wiimotes;
 

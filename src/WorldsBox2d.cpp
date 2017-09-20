@@ -102,12 +102,12 @@ void WorldsBox2d::draw(){
     circles[i].get()->draw();
   }
     
-    /*
+    
   for (auto &block : blocks)
     {
       ofSetHexColor(0xFFFFF);
-      block.draw();
-    }*/
+      block->draw();
+    }
 
     for (auto &avatar : avatars) {
     ofSetHexColor(0x00FF00);
@@ -126,6 +126,7 @@ void WorldsBox2d::createAvatar(int x, int y){
     sd->type = typeBox2d::Type::AVATAR;
     avatars.back().setPosition(x, y);
 }
+
 void WorldsBox2d::update(){
     world.update();
     
@@ -135,7 +136,7 @@ void WorldsBox2d::update(){
     
     for (int j = 0; j < avatars.size(); j++)
     {
-      avatars[j].checkJoystickInputs();
+      //avatars[j].checkJoystickInputs();
         avatars[j].presUpdate();
         
         for (int i = 0; i< ladders.size(); i++) {
@@ -150,11 +151,11 @@ void WorldsBox2d::update(){
         }
       avatars[j].update();
     }
-   /*
+   
   for (auto &block : blocks)
     {
-      block.update();
-    }*/
+      block->update();
+    }
 
     //warterfalls->update();
 }
@@ -175,6 +176,13 @@ void WorldsBox2d::createPortal(){
     //Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
     //portals.push_back(plat);
 }
+
+void WorldsBox2d::createBox(ofPolyline _polyline)
+{
+  ObjectBlock* block = new ObjectBlock(world.getWorld(), _polyline);
+  blocks.push_back(block);
+}
+
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     ofPolyline temp;
     temp.addVertex(ofPoint(x,y));

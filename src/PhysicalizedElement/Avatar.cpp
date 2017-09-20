@@ -31,8 +31,8 @@ Avatar::Avatar(int id, ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : light
 	polygon.body->SetType(b2BodyType::b2_dynamicBody);
 	polygon.body->SetFixedRotation(true);
 
-
-    b2Filter tempFilter;
+	
+	b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;
     tempFilter.maskBits = 0xFFFF;
     polygon.setFilterData(tempFilter);
@@ -274,7 +274,7 @@ void Avatar::jump()
 }
 void Avatar::keyPressed(int key)
 {
-  /*
+  
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
 		moveInputX = -1.0f;
@@ -300,11 +300,11 @@ void Avatar::keyPressed(int key)
 		ClicJump = true;
 		jump();
 	}
-  */
+ 
 }
 void Avatar::keyReleased(int key)
 {
-  /*
+  
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
 		moveInputX = 0.0f;
@@ -346,7 +346,7 @@ void Avatar::keyReleased(int key)
 	{
 		ClicJump = false;
 	}
-  */
+  
 }
 void Avatar::contactStart(dataSprite* OtherSprite)
 {
@@ -360,9 +360,11 @@ void Avatar::contactStart(dataSprite* OtherSprite)
 			polygon.setVelocity(0, polygon.getVelocity().y);
 		}
 	}
+
 }
 void Avatar::contactEnd(dataSprite* OtherSprite)
 {
+  
 	PhysicalizedElement::contactEnd(OtherSprite);
 
 	if (OtherSprite->getSprite() == Sprite::PLATFORM) 

@@ -22,8 +22,8 @@ public:
     virtual bool hasClone() = 0;
     
 public:
-    ofRectangle collisionRect;
+  ofRectangle collisionRect;
 
-	Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
+  Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 };
 

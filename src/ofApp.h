@@ -1,5 +1,7 @@
 #pragma once
 
+//#define USE_WIIMOTE
+
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxPiMapper.h"
@@ -11,10 +13,12 @@
 #include "Constant.h"
 #include "ofxCv.h"
 
+#ifdef USE_WIIMOTE
+#include "Wiimote.h"
+#endif
 
 
-class ofApp : public ofBaseApp{
-
+class ofApp : public ofBaseApp {
 
  public:
   
@@ -48,5 +52,7 @@ class ofApp : public ofBaseApp{
   ofx::LightSystem2D* lightSystem;  
   Scene1* scene1;
   Scene2* scene2;
+
+
     
 };

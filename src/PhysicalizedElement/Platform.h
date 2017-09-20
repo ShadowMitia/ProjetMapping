@@ -30,7 +30,6 @@ private:
     float rad;
     ofVec2f translat;
     
-    
 public:
     
     void create(b2World* _b2World, ofPolyline _groundLine,ofx::LightSystem2D* _LightSystem);

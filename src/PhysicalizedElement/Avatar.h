@@ -12,6 +12,7 @@
 #include "../LightSystem2D.h"
 #include "Teleportable.h"
 #include "ofxGLFWJoystick.h"
+#include "ObjetBlock.h"
 
 
 class Avatar : public Teleportable {

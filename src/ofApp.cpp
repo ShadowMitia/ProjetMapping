@@ -2,13 +2,17 @@
 
 #include "ofxGLFWJoystick.h"
 
-vector<ofPolyline> importImage(string path){
+
+vector<ofPolyline> importImage(string path){    
     ofImage image;
     vector<ofPolyline> poly;
-    image.load(path);
+    if (!image.load(path))
+      {
+	std::cout << "Impossible d'ouvrir: " <<  path << '\n';
+      }
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
-    contourFinder.setMaxAreaRadius(180); //1000 max 
+    contourFinder.setMaxAreaRadius(200); //1000 max 
     contourFinder.setThreshold(100);
     contourFinder.setFindHoles(true);
     contourFinder.findContours(image);
@@ -22,6 +26,7 @@ vector<ofPolyline> importImage(string path){
     return poly;
 }
 
+
 //--------------------------------------------------------------
 void ofApp::setup(){
   ofBackground(0);
@@ -31,7 +36,7 @@ void ofApp::setup(){
     lightSystem->setup();
     worlds->setup(lightSystem);
     
-    scene1 = new Scene1(worlds, lightSystem,"Test_Saut_Visible.png");
+    scene1 = new Scene1(worlds, lightSystem,"Test_Saut_Visible_Boites.png");
     scene2 = new Scene2(worlds, lightSystem);
 
     mapping.registerFboSource(scene1);
@@ -52,21 +57,28 @@ void ofApp::setup(){
     
     ////   Import Platform   /////
     worlds->platforms.clear();
-    vector<ofPolyline>  platforms = importImage("Test_Saut_Plateforme.png");
+    vector<ofPolyline>  platforms = importImage("Test_Saut_Visible_Boites.png");
     for (int i =0; i < platforms.size(); i++) {
         worlds->createPlatform(platforms[i]);
     }
     ////   Import Ladder   /////
+    /*
     vector<ofPolyline>  ladders = importImage("Test_Saut_Echelle.png");
     for (int i =0; i<ladders.size(); i++) {
         worlds->createLadder(ladders[i]);
     }
+    */
+    vector<ofPolyline> boxes = importImage("Test_Boite.png");
+    for (int i = 0; i < boxes.size() - 1; i++)
+      {
+	worlds->createBox(boxes[i]);
+      }
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  ofxGLFWJoystick::one().update();
+  //ofxGLFWJoystick::one().update();
     worlds->update();
     lightSystem->update();
     mapping.update();

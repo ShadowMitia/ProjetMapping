@@ -34,7 +34,7 @@ namespace VarConst
     constexpr const float frictionAvatar = 4.0f;
     
 
-
+    constexpr const int MAX_WIIMOTES = 4;
 
 }
 
