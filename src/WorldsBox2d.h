@@ -38,7 +38,8 @@ public:
     ofRectangle              bounds;
     vector<shared_ptr<ofxBox2dCircle>>	circles;
     
-    std::vector< Avatar > avatars;
+    std::vector< Avatar *> avatars;
+    std::vector< Avatar *> clodes;
     std::vector< Portal * > portals;
     std::vector< Platform * > platforms;
     std::vector< ObjectBlock * > blocks;
@@ -59,9 +60,8 @@ public:
     void createPortal();
     void createLadder(ofPolyline _polyline);
   void createBox(ofPolyline _polyline);
-    
-    //Wiimotes wiimotes;
 
 private:
 
+    void importPortal();
 };

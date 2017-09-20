@@ -1,6 +1,5 @@
 #include "ofApp.h"
 
-#include "ofxGLFWJoystick.h"
 
 
 vector<ofPolyline> importImage(string path){    
@@ -12,7 +11,7 @@ vector<ofPolyline> importImage(string path){
       }
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
-    contourFinder.setMaxAreaRadius(200); //1000 max 
+    contourFinder.setMaxAreaRadius(1000); //1000 max
     contourFinder.setThreshold(100);
     contourFinder.setFindHoles(true);
     contourFinder.findContours(image);
@@ -35,8 +34,8 @@ void ofApp::setup(){
     lightSystem = new ofx::LightSystem2D;
     lightSystem->setup();
     worlds->setup(lightSystem);
-    
-    scene1 = new Scene1(worlds, lightSystem,"Test_Saut_Visible_Boites.png");
+
+    scene1 = new Scene1(worlds, lightSystem,"Map_prog_Plateforme_Solide.png");
     scene2 = new Scene2(worlds, lightSystem);
 
     mapping.registerFboSource(scene1);
@@ -57,28 +56,31 @@ void ofApp::setup(){
     
     ////   Import Platform   /////
     worlds->platforms.clear();
-    vector<ofPolyline>  platforms = importImage("Test_Saut_Visible_Boites.png");
-    for (int i =0; i < platforms.size(); i++) {
+
+    vector<ofPolyline>  platforms = importImage("Map_prog_Plateforme_Solide.png");
+    for (int i =0; i < platforms.size()-1; i++) {
         worlds->createPlatform(platforms[i]);
     }
     ////   Import Ladder   /////
-    /*
-    vector<ofPolyline>  ladders = importImage("Test_Saut_Echelle.png");
-    for (int i =0; i<ladders.size(); i++) {
+    vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
+    for (int i =0; i<ladders.size()-1; i++) {
         worlds->createLadder(ladders[i]);
     }
-    */
+    
+
+    /*
     vector<ofPolyline> boxes = importImage("Test_Boite.png");
     for (int i = 0; i < boxes.size() - 1; i++)
       {
 	worlds->createBox(boxes[i]);
       }
+    */
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  //ofxGLFWJoystick::one().update();
+    input();
     worlds->update();
     lightSystem->update();
     mapping.update();
@@ -95,7 +97,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key) 
 {
     for (int i = 0; i<worlds->avatars.size(); i++) {
-        worlds->avatars[i].keyPressed(key);
+        worlds->avatars[i]->keyPressed(key);
     }
     mapping.keyPressed(key);
 }
@@ -104,7 +106,7 @@ void ofApp::keyPressed(int key)
 void ofApp::keyReleased(int key){
 
     for (int i = 0; i<worlds->avatars.size(); i++) {
-        worlds->avatars[i].keyReleased(key);
+        worlds->avatars[i]->keyReleased(key);
     }
     
     mapping.keyReleased(key);
@@ -214,7 +216,6 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 #ifdef CUSTOM_BOX2D_TIM
 void ofApp::PreSolve(ofxBox2dPreContactArgs &e)
 {
-
 }
 
 void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
@@ -245,3 +246,44 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 
 #endif //CUSTOM_BOX2D_TIM
 
+void ofApp::input(){
+    ofxGLFWJoystick::one().update();
+    for (int joystickID = 0; joystickID < 1; joystickID++) {
+        if (inputButton[joystickID][0]!=ofxGLFWJoystick::one().getButtonValue(0, joystickID)) {
+            inputButton[joystickID][0] = ofxGLFWJoystick::one().getButtonValue(0, joystickID);
+            
+            if (inputButton[joystickID][0])worlds->avatars[joystickID]->keyPressed(OF_KEY_UP);
+            else worlds->avatars[joystickID]->keyReleased(OF_KEY_UP);
+        }
+        if (inputButton[joystickID][1]!=ofxGLFWJoystick::one().getButtonValue(1, joystickID)) {
+            inputButton[joystickID][1] = ofxGLFWJoystick::one().getButtonValue(1, joystickID);
+            
+            if (inputButton[joystickID][1])worlds->avatars[joystickID]->keyPressed(OF_KEY_DOWN);
+            else worlds->avatars[joystickID]->keyReleased(OF_KEY_DOWN);
+        }
+        if (inputButton[joystickID][2]!=ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
+            if(!inputButton[joystickID][3])inputButton[joystickID][2] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
+            
+            if (!inputButton[joystickID][3] && !inputButton[joystickID][2])worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT);
+            else worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT);
+        }
+        if (inputButton[joystickID][3]!=ofxGLFWJoystick::one().getButtonValue(3, joystickID)) {
+            if (!inputButton[joystickID][2])inputButton[joystickID][3] = ofxGLFWJoystick::one().getButtonValue(3, joystickID);
+            
+            if (!inputButton[joystickID][3])worlds->avatars[joystickID]->keyReleased(OF_KEY_RIGHT);
+            else worlds->avatars[joystickID]->keyPressed(OF_KEY_RIGHT);
+        }
+        if (inputButton[joystickID][4]!=ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
+            inputButton[joystickID][4] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
+            if (inputButton[joystickID][4])worlds->avatars[joystickID]->keyPressed(' ');
+            else worlds->avatars[joystickID]->keyReleased(' ');
+        }
+        if (inputButton[joystickID][5]!=ofxGLFWJoystick::one().getButtonValue(12, joystickID)) {
+            inputButton[joystickID][5] = ofxGLFWJoystick::one().getButtonValue(12, joystickID);
+            
+            if (inputButton[joystickID][5])worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT_CONTROL);
+            else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
+        }
+    }
+    
+}

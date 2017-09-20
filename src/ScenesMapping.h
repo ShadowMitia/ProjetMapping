@@ -21,7 +21,6 @@ class Scene1 : public ofx::piMapper::FboSource
 public:
     WorldsBox2d *       worldsBox2d;
     ofx::LightSystem2D* lightSystem2D;
-    vector<Avatar>*     avatars;
     ofImage image;
     
     Scene1(WorldsBox2d* _worldsBox2d,ofx::LightSystem2D* _lightSystem2D, string path){
@@ -29,7 +28,6 @@ public:
         name = "Scene One FBO Source";
         allocate(image.getWidth(), image.getHeight());
         worldsBox2d =_worldsBox2d;
-        avatars = &_worldsBox2d->avatars;
         lightSystem2D = _lightSystem2D;
     }
     

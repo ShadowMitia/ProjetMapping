@@ -1,21 +1,20 @@
-
-#ifdef tot
-
-#pragma once
+#ifndef WIIMOTE_H
+#define WIIMOTE_H
 
 #include "ofMain.h"
-#include "Avatar.h"
+#include <vector>
 #include "wiiuse.h"
+#include "PhysicalizedElement/Avatar.h"
 
 class Wiimotes : public ofThread {
 
   using Wiimote = struct wiimote_t;
 
-  std::vector<Avatar>& players;
+  std::vector<std::shared_ptr<Avatar>>& players;
 
 public:
 
-  Wiimotes(unsigned int MAX_WIIMOTES, std::vector<Avatar>& players) : players(players){
+  Wiimotes(unsigned int MAX_WIIMOTES, std::vector<std::shared_ptr<Avatar>>& players) : players(players){
     max_wiimotes = MAX_WIIMOTES;
     wiimotes = wiiuse_init(MAX_WIIMOTES);
     found = wiiuse_find(wiimotes, MAX_WIIMOTES, 5);
@@ -220,23 +219,23 @@ public:
      *	if B is pressed but is not held, toggle the rumble
      */
     if (IS_JUST_PRESSED(wm, WIIMOTE_BUTTON_ONE)) {
-      players[player].jump();
+      players[player]->jump();
     }
 
     if (IS_JUST_PRESSED(wm, WIIMOTE_BUTTON_UP)) {
-      players[player].goingLeft(true);
+      players[player]->goingLeft(true);
     }
 
     if (IS_RELEASED(wm, WIIMOTE_BUTTON_UP)) {
-      players[player].goingLeft(false);
+      players[player]->goingLeft(false);
     }
 
     if (IS_JUST_PRESSED(wm, WIIMOTE_BUTTON_DOWN)) {
-      players[player].goingRight(true);
+      players[player]->goingRight(true);
     }
 
     if (IS_RELEASED(wm, WIIMOTE_BUTTON_DOWN)) {
-      players[player].goingRight(false);
+      players[player]->goingRight(false);
     }
 
   }
@@ -247,4 +246,4 @@ private:
 
 };
 
-#endif
+#endif /* WIIMOTE_H */

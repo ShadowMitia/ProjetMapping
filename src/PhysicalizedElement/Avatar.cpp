@@ -19,7 +19,7 @@ std::vector <ofPoint> loadPoints(std::string file) {
     return pts;
 }
 
-Avatar::Avatar(int id, ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRef(lightSystem), box2dRef(box2d), id(id)
+Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRef(lightSystem), box2dRef(box2d)
 {
 ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
@@ -128,7 +128,7 @@ void Avatar::createClone(ofVec2f cloneTranslation) {
 
     this->cloneTranslation = cloneTranslation;
 
-    clone = std::make_unique<Avatar>(-1, box2dRef, lightSystemRef);
+    clone = std::make_unique<Avatar>(box2dRef, lightSystemRef);
     clone->setPosition(cloneTranslation);
     clone->polygon.setVelocity(polygon.getVelocity());
     clone->polygon.create(polygon.getWorld());
@@ -178,7 +178,6 @@ void Avatar::move(float inputX)
 	impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
-
 void Avatar::move(float inputX,float inputY)
 {
 
@@ -191,61 +190,6 @@ void Avatar::move(float inputX,float inputY)
     polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
     
 }
-
-void Avatar::checkJoystickInputs()
-{
-
-  // pressed
-
-  moveInputX = ofxGLFWJoystick::one().getAxisValue(6, id);
-  moveInputY = ofxGLFWJoystick::one().getAxisValue(7, id);
-  //moveInputY = 1;
-  //std::cout << ofxGLFWJoystick::one().getButtonValue(0, id) << '\n';
-
-	if (ofxGLFWJoystick::one().getButtonValue(5, id))
-	{
-		viewpoint = Viewpoint::MODE_PERSPECTIVE;
-	}
-
-
-	//std::cout << std::boolalpha << ClicJump << '\n';
-
-	if ((ofxGLFWJoystick::one().getButtonValue(0, id)) && !ClicJump )
-	{
-
-		jump();
-		ClicJump = true;
-	}
-
-  	// released checks
-
-	if (moveInputX >= -0.1 && moveInputX <= 0.1)
-	  {
-	    if (!jumping || modeDeplace != Deplacement::PLATFORM) {
-	      polygon.setVelocity(0, polygon.getVelocity().y);
-	    }
-	  }
-
-	if (moveInputY >= -0.1 && moveInputY <= 0.1)
-	  {
-	    if (!jumping || modeDeplace != Deplacement::PLATFORM) {
-	      polygon.setVelocity(polygon.getVelocity().x, 0);
-	    }
-	  }
-
-	if (!(ofxGLFWJoystick::one().getButtonValue(5, id)))
-	  {
-	    viewpoint = Viewpoint::MODE_ANGLE;
-	  }
-
-	if (!(ofxGLFWJoystick::one().getButtonValue(0, id)))
-	  {
-	    ClicJump = false;
-	  }
-
-
-}
-
 void Avatar::jump()
 {
 	if (!jumping)
@@ -267,14 +211,13 @@ void Avatar::jump()
 		{
 			impulse *= VarConst::attenuationImpulseJump;
 		}*/
-		impulse = impulseH * (1 - polygon.getVelocity().x/VarConst::speedAvatarMax);
+        impulse = impulseH * (1 - polygon.getVelocity().x/VarConst::speedAvatarMax);
         
 		polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
 	}
 }
 void Avatar::keyPressed(int key)
 {
-  
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
 		moveInputX = -1.0f;
@@ -300,11 +243,11 @@ void Avatar::keyPressed(int key)
 		ClicJump = true;
 		jump();
 	}
- 
+
 }
 void Avatar::keyReleased(int key)
 {
-  
+
 	if (key == OF_KEY_LEFT || key == 'q')
 	{
 		moveInputX = 0.0f;
@@ -346,7 +289,6 @@ void Avatar::keyReleased(int key)
 	{
 		ClicJump = false;
 	}
-  
 }
 void Avatar::contactStart(dataSprite* OtherSprite)
 {

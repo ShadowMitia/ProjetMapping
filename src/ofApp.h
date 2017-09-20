@@ -13,9 +13,14 @@
 #include "Constant.h"
 #include "ofxCv.h"
 
+#include "ofxGLFWJoystick.h"
+
 #ifdef USE_WIIMOTE
 #include "Wiimote.h"
 #endif
+
+
+
 
 
 class ofApp : public ofBaseApp {
@@ -37,6 +42,8 @@ class ofApp : public ofBaseApp {
   void windowResized(int w, int h);
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
+  
+
     
     //template<class Temp>
     void contactStart(ofxBox2dContactArgs &e);
@@ -53,6 +60,8 @@ class ofApp : public ofBaseApp {
   Scene1* scene1;
   Scene2* scene2;
 
-
+private:
+  void input();
+  bool inputButton[1][6] = { false };
     
 };
