@@ -4,4 +4,5 @@ ofxGui
 ofxLiquidFun
 ofxOpenCv
 ofxPiMapper
+ofxWiiuse
 ofxXmlSettings

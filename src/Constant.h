@@ -33,7 +33,6 @@ namespace VarConst
     constexpr const float bounceAvatar = 0.03f;
     constexpr const float frictionAvatar = 4.0f;
     
-
     constexpr const int MAX_WIIMOTES = 4;
 
 }
@@ -58,7 +57,6 @@ public:
     
     PhysicalizedElement* Element;
     
-private:
     Sprite sprite = Sprite::UNKNOWN;
     
 };

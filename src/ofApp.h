@@ -15,15 +15,18 @@
 
 #include "ofxGLFWJoystick.h"
 
+#define USE_WIIMOTE
+
 #ifdef USE_WIIMOTE
-#include "Wiimote.h"
+#include "ofxWiiuse.h"
 #endif
 
-
-
-
-
+#ifdef USE_WIIMOTE
+class ofApp : public ofBaseApp, public ofxWiiuseListener {
+#else
 class ofApp : public ofBaseApp {
+#endif
+
 
  public:
   
@@ -42,6 +45,7 @@ class ofApp : public ofBaseApp {
   void windowResized(int w, int h);
   void dragEvent(ofDragInfo dragInfo);
   void gotMessage(ofMessage msg);
+  void exit();
   
 
     
@@ -63,5 +67,17 @@ class ofApp : public ofBaseApp {
 private:
   void input();
   bool inputButton[1][6] = { false };
+
+
+  bool fullscreen = false;
+
+#ifdef USE_WIIMOTE
+  ofxWiiuse wiiuse;
+
+  void onWiiuseControlEvent(ofxWiiuseControlEventArgs& args) override;
+  void onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args) override;
+  void onWiiuseMotionEvent(ofxWiiuseMotionEventArgs& args) override;
+  void onWiiuseIRTrackingEvent(ofxWiiuseIRTrackingEventArgs& args) override;
+#endif
     
 };

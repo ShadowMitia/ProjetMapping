@@ -76,6 +76,6 @@ Portal* Portal::GetLinkedPortal(Teleportable* obj) const
 	{
 		return connectedPortal_Angle;
 	}
-	return connectedPortal_Perspective;
+	return connectedPortal_Perspective != nullptr ? connectedPortal_Perspective : connectedPortal_Angle;
 }
 

@@ -56,7 +56,7 @@ public:
   void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
   void jump();
-  void move(Direction _direction);
+  //void move(Direction _direction);
   void move(float inputX);
   void move(float inputX, float inputY);
 

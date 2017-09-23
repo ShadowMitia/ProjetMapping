@@ -76,10 +76,17 @@ void ofApp::setup(){
       }
     */
 
+#ifdef USE_WIIMOTE
+	wiiuse.addListener(this);
+#endif
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+#ifdef USE_WIIMOTE
+	wiiuse.update();
+#endif
     input();
     worlds->update();
     lightSystem->update();
@@ -110,6 +117,12 @@ void ofApp::keyReleased(int key){
     }
     
     mapping.keyReleased(key);
+
+	if (key == 'f')
+	{
+		fullscreen = !fullscreen;
+		ofSetFullscreen(fullscreen);
+	}
 }
 
 //--------------------------------------------------------------
@@ -158,6 +171,12 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+void ofApp::exit() {
+#ifdef USE_WIIMOTE
+	wiiuse.removeListener(this);
+#endif
 }
 
 
@@ -222,8 +241,8 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 {
 	if (e.a != nullptr && e.b != nullptr && e.impulse != nullptr)
 	{
-		dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
-		dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
+		dataSprite* aSprite = reinterpret_cast<dataSprite*>(e.a->GetBody()->GetUserData());
+		dataSprite* bSprite = reinterpret_cast<dataSprite*>(e.b->GetBody()->GetUserData());
 
 		if (aSprite == nullptr || bSprite == nullptr)
 		{
@@ -287,3 +306,52 @@ void ofApp::input(){
     }
     
 }
+
+#ifdef USE_WIIMOTE
+
+void ofApp::onWiiuseControlEvent(ofxWiiuseControlEventArgs& args)
+{
+
+}
+
+void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
+{
+
+	std::cout << "truc\n";
+
+	switch (args.second)
+	{
+	case OFXWIIUSE_BUTTON_UP_PRESSED:
+	{
+		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
+		std::cout << "test\n";
+		break;
+	}
+	case OFXWIIUSE_BUTTON_DOWN_PRESSED:
+	{
+		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_RIGHT);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_UP_RELEASED:
+	{
+		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_DOWN_RELEASED:
+	{
+		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_RIGHT);
+		break;
+	}
+	}
+}
+
+void ofApp::onWiiuseMotionEvent(ofxWiiuseMotionEventArgs& args)
+{
+
+}
+
+void ofApp::onWiiuseIRTrackingEvent(ofxWiiuseIRTrackingEventArgs& args)
+{
+}
+
+#endif

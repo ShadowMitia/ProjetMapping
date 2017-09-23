@@ -14,7 +14,11 @@
 
 class dataPlatform: public dataSprite {
 public:
-    int alex; 
+    //int alex; 
+
+	dataPlatform() {
+		setSprite(Sprite::PLATFORM);
+	}
 };
 
 class Platform : public PhysicalizedElement {
