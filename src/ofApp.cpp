@@ -351,6 +351,26 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
 		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_RIGHT);
 		break;
 	}
+	case OFXWIIUSE_BUTTON_LEFT_PRESSED:
+	{
+		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_DOWN);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_LEFT_RELEASED:
+	{
+		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_DOWN);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_RIGHT_PRESSED:
+	{
+		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_RIGHT_RELEASED:
+	{
+		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_UP);
+		break;
+	}
 	case OFXWIIUSE_BUTTON_ONE_PRESSED:
 	{
 		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
