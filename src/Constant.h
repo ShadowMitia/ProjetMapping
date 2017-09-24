@@ -17,7 +17,8 @@ namespace VarConst
     constexpr const int WidthWorld2D = 800;
     constexpr const int HeightWorld2D = 150;
     
-	constexpr const float gravity = 15.0f;
+	//constexpr const float gravity = 15.0f;
+	constexpr const float gravity = 0.0f;
 
 	constexpr const float speedAvatar = 1.0f;
 	constexpr const float speedAvatarMax = 2.0f;
@@ -25,7 +26,9 @@ namespace VarConst
 	constexpr const float speedAvatarAirControlMax = 1.7f;
     constexpr const float coefFrotementAir = 0.04;
 
-    constexpr const float impulseJumpAvatar = 7.3f;			// impulsion de base pour les sauts
+    //constexpr const float impulseJumpAvatar = 7.3f;			// impulsion de base pour les sauts
+	constexpr const float impulseJumpAvatar = 10.3f;			// impulsion de base pour les sauts
+
 	constexpr const float impulseLateralJumpAvatar = 5.f;	// var pour "lisser" la courbe de saut + on la monte, + la cloche s'applatit
 	constexpr const float attenuationImpulseJump = 0.84f;	// var pour "attenuer" les saut latéraux par rapport aux sauts droits
 
@@ -37,7 +40,7 @@ namespace VarConst
 
 }
 
-enum class Sprite { AVATAR, FOOT, WATER, PLATFORM, BLOCK, UNKNOWN };
+enum class Sprite { AVATAR, AVATAR_CLONE, FOOT, WATER, PLATFORM, BLOCK, UNKNOWN };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
 enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };

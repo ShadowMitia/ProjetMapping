@@ -7,7 +7,7 @@ vector<ofPolyline> importImage(string path){
     vector<ofPolyline> poly;
     if (!image.load(path))
       {
-	std::cout << "Impossible d'ouvrir: " <<  path << '\n';
+		throw std::invalid_argument(path);
       }
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
@@ -27,46 +27,55 @@ vector<ofPolyline> importImage(string path){
 
 
 //--------------------------------------------------------------
-void ofApp::setup(){
-  ofBackground(0);
+void ofApp::setup() {
+	ofBackground(0);
 
-    worlds =new WorldsBox2d;
-    lightSystem = new ofx::LightSystem2D;
-    lightSystem->setup();
-    worlds->setup(lightSystem);
+	worlds = new WorldsBox2d;
+	lightSystem = new ofx::LightSystem2D;
+	lightSystem->setup();
+	worlds->setup(lightSystem);
 
-    scene1 = new Scene1(worlds, lightSystem,"Map_prog_Plateforme_Solide.png");
-    scene2 = new Scene2(worlds, lightSystem);
+	scene1 = new Scene1(worlds, lightSystem, "Map_prog_Plateforme_Solide.png");
+	scene2 = new Scene2(worlds, lightSystem);
 
-    mapping.registerFboSource(scene1);
-    mapping.registerFboSource(scene2);
+	mapping.registerFboSource(scene1);
+	mapping.registerFboSource(scene2);
 
 
-    mapping.setup();
+	mapping.setup();
 
-    //importPortial();
-    worlds->world.enableEvents();    
+	//importPortial();
+	worlds->world.enableEvents();
 
-    ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
-    ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
+	ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
+	ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
 #ifdef CUSTOM_BOX2D_TIM
 	ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
-	ofAddListener(worlds->world.PreSolveEvents,  this, &ofApp::PreSolve);
+	ofAddListener(worlds->world.PreSolveEvents, this, &ofApp::PreSolve);
 #endif // CUSTOM_BOX2D_TIM
-    
-    ////   Import Platform   /////
-    worlds->platforms.clear();
 
-    vector<ofPolyline>  platforms = importImage("Map_prog_Plateforme_Solide.png");
-    for (int i =0; i < platforms.size()-1; i++) {
-        worlds->createPlatform(platforms[i]);
-    }
-    ////   Import Ladder   /////
-    vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
-    for (int i =0; i<ladders.size()-1; i++) {
-        worlds->createLadder(ladders[i]);
-    }
-    
+	////   Import Platform   /////
+	worlds->platforms.clear();
+
+	vector<ofPolyline>  platforms = importImage("Map_prog_Plateforme_Solide.png");
+	for (int i = 0; i < platforms.size() - 1; i++) {
+		worlds->createPlatform(platforms[i]);
+	}
+	////   Import Ladder   /////
+	/*
+	vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
+	for (int i =0; i<ladders.size()-1; i++) {
+		worlds->createLadder(ladders[i]);
+	}
+	*/
+
+	ofPolyline ladders;
+	ladders.addVertex(0, 0);
+	ladders.addVertex(0, 3520);
+	ladders.addVertex(0, 800);
+	ladders.addVertex(3520, 800);
+
+	worlds->createLadder(ladders);
 
     /*
     vector<ofPolyline> boxes = importImage("Test_Boite.png");
@@ -342,6 +351,27 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
 		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_RIGHT);
 		break;
 	}
+	case OFXWIIUSE_BUTTON_ONE_PRESSED:
+	{
+		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_ONE_RELEASED:
+	{
+		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_UP);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_TWO_PRESSED:
+	{
+		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_CONTROL);
+		break;
+	}
+	case OFXWIIUSE_BUTTON_TWO_RELEASED:
+	{
+		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_CONTROL);
+		break;
+	}
+
 	}
 }
 

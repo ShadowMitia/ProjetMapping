@@ -74,6 +74,16 @@ public:
         setSprite(Sprite::AVATAR);
     }
 };
+
+class dataAvatarClone : public dataSprite
+{
+public:
+	dataAvatarClone()
+	{
+		setSprite(Sprite::AVATAR_CLONE);
+	}
+};
+
 class dataFoot: public dataSprite {
 public:
     dataFoot(){

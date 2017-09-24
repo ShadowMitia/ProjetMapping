@@ -22,7 +22,7 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     
     for (unsigned int i = 0; i < 1; i++)
       {
-		createAvatar(85, 400);
+		createAvatar(85, 85);
       }
     //wiimotes.startThread();
     //createAvatar(100, 100);
