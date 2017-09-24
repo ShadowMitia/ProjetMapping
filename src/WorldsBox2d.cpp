@@ -22,11 +22,10 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     
     for (unsigned int i = 0; i < 1; i++)
       {
-		createAvatar(85, 85);
+		//createAvatar(85, 85);
 		createAvatar(100, 100);
       }
-    //wiimotes.startThread();
-    //createAvatar(100, 100);
+
 
 	for (auto &avatar : avatars)
 	{
@@ -164,6 +163,7 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     temp.addVertex(ofPoint(x,y));
     createPlatform(temp);
 }
+// attention code deguelas 
 void WorldsBox2d::importPortal(){
     int sizeH = 160;
     int sizeW = 2;
@@ -373,7 +373,7 @@ void WorldsBox2d::importPortal(){
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::RIGHT, 960, 479, sizeW, sizeH / 2));// portal:201
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::RIGHT, 3360, 719, sizeW, sizeH / 2));// portal:202
 
-																														  //angle; perspective  portals[],NULL
+    //angle; perspective  portals[],NULL
 
 	portals[0]->linkTo(portals[15], NULL);
 	portals[1]->linkTo(portals[34], NULL);
