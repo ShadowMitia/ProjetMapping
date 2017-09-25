@@ -69,7 +69,7 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
 }
 
 void Avatar::presUpdate(){
-    foot.setPosition(polygon.getPosition()+ofVec2f(0,7));
+    foot.setPosition(polygon.getPosition()+ofVec2f(0,3));
     collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
 

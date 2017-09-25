@@ -67,7 +67,7 @@ void ofApp::setup() {
 	for (int i =0; i<ladders.size()-1; i++) {
 		worlds->createLadder(ladders[i]);
 	}
-	*/
+	
 
 	ofPolyline ladders;
 	ladders.addVertex(0, 0);
@@ -76,7 +76,7 @@ void ofApp::setup() {
 	ladders.addVertex(3520, 800);
 
 	worlds->createLadder(ladders);
-
+     */
     /*
     vector<ofPolyline> boxes = importImage("Test_Boite.png");
     for (int i = 0; i < boxes.size() - 1; i++)
