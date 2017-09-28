@@ -7,9 +7,8 @@
 //
 
 #include "WorldsBox2d.h"
-void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
-        
-  lightSystem2D = _lightSystem2D;
+void WorldsBox2d::setup(){
+    
     
     world.init();
     world.setGravity(0, VarConst::gravity);
@@ -62,10 +61,7 @@ void WorldsBox2d::draw(){
   for (auto &platform : platforms) 
   {
     ofSetHexColor(0xFF0000);
-    if (platform->shape->bVisible) 
-	{
       platform->ground.draw();
-    }
   }
 
   for (int i = 0; i < circles.size(); i++) {
@@ -91,7 +87,7 @@ void WorldsBox2d::draw(){
 
 }
 void WorldsBox2d::createAvatar(int x, int y){
-    Avatar * avatar = new Avatar(&world, lightSystem2D);
+    Avatar * avatar = new Avatar(&world);
     avatar->polygon.setData(new typeBox2d);
     typeBox2d *sd  = (typeBox2d*) avatar->polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
@@ -133,7 +129,7 @@ void WorldsBox2d::update(){
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     
     Platform *edge = new Platform;
-    edge->create(world.getWorld(), _polyline, lightSystem2D);
+    edge->create(world.getWorld(), _polyline);
     platforms.push_back(edge);
 
 }

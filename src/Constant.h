@@ -40,7 +40,7 @@ namespace VarConst
 
 }
 
-enum class Sprite { AVATAR, AVATAR_CLONE, FOOT, WATER, PLATFORM, BLOCK, UNKNOWN };
+enum class Sprite { AVATAR, AVATAR_CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, UNKNOWN };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
 enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };

@@ -31,12 +31,10 @@ void ofApp::setup() {
 	ofBackground(0);
 
 	worlds = new WorldsBox2d;
-	lightSystem = new ofx::LightSystem2D;
-	lightSystem->setup();
-	worlds->setup(lightSystem);
+	worlds->setup();
 
-	scene1 = new Scene1(worlds, lightSystem, "Map_prog_Plateforme_Solide.png");
-	scene2 = new Scene2(worlds, lightSystem);
+	scene1 = new Scene1(worlds, "Map_prog_Plateforme_Solide.png");
+	scene2 = new Scene2(worlds);
 
 	mapping.registerFboSource(scene1);
 	mapping.registerFboSource(scene2);
@@ -98,7 +96,6 @@ void ofApp::update(){
 #endif
     input();
     worlds->update();
-    lightSystem->update();
     mapping.update();
 }
 

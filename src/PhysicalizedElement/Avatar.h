@@ -9,7 +9,6 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
-#include "../LightSystem2D.h"
 #include "Teleportable.h"
 #include "ofxGLFWJoystick.h"
 #include "ObjetBlock.h"
@@ -19,12 +18,11 @@ class Avatar : public Teleportable {
 
 public:
 
-	Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem);
+	Avatar(ofxBox2d* box2d);
 
     ofxBox2dPolygon polygon;
     ofxBox2dRect    foot;
 
-    ofx::Light2D::SharedPtr   light;
     ofRectangle rect;
     bool jumping;
 	bool ClicJump;
@@ -34,13 +32,13 @@ public:
 private:
     std::unique_ptr<Avatar> clone = nullptr;
     ofVec2f cloneTranslation;
-    ofx::LightSystem2D* lightSystemRef;
     ofxBox2d* box2dRef;
     bool top =false;
     
     int countAirControl;
 	float moveInputX;
     float moveInputY;
+    vector<bool>  pickupAvatar;
 
 public:
 
