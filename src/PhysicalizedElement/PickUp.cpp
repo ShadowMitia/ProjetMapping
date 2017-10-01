@@ -17,20 +17,23 @@ PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
     int width = 1000000;
     int height = 1000000;
     
-    auto p = _polyline.getVertices();
+    const auto& p = _polyline.getVertices();
     for (int i = 0; i < p.size(); i++)
     {
         if (p[i].x < width) { width = p[i].x; }
         
         if (p[i].y < height) { height = p[i].y; }
     }
-    
+
     this->width = width;
     this->height = height;
     
+
     pickUp.create(_box2d);
+
+
     pickUp.body->SetFixedRotation(true);
-    
+
     collisionRect.set(pickUp.getPosition().x, pickUp.getPosition().y, width, height);
     
     b2Filter tempFilter;
@@ -49,8 +52,6 @@ PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
 void PickUp::update()
 {
     
-
-    
     collisionRect.set(pickUp.getPosition().x - width / 2, pickUp.getPosition().y - height / 2, width, height);
     
     if (clone)
@@ -62,6 +63,7 @@ void PickUp::update()
 
 void PickUp::draw()
 {
+  ofSetColor(ofColor::green);
     pickUp.draw();
     
     //ofSetColor(ofColor::orange);
@@ -106,7 +108,10 @@ bool PickUp::hasClone()
 }
 
 void PickUp::contactStart(dataSprite* OtherSprite) {
-
+  if (OtherSprite->getSprite() == Sprite::AVATAR)
+    {
+      std::cout << "AVATAAAAAAAAAAAAAAR\n";
+    }
 }
 
 void PickUp::contactEnd(dataSprite* OtherSprite)

@@ -238,6 +238,7 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 void ofApp::PreSolve(ofxBox2dPreContactArgs &e)
 {
 }
+
 void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 {
 	if (e.a != nullptr && e.b != nullptr && e.impulse != nullptr)
@@ -250,16 +251,17 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 			return;
 		}
 
-		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
-		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
+		PhysicalizedElement* aPhysicalizedElement = dynamic_cast<PhysicalizedElement*>(aSprite->Element);
+		PhysicalizedElement* bPhysicalizedElement = dynamic_cast<PhysicalizedElement*>(bSprite->Element);
 
-		if (aPhysicalizedElement)
+		if (aPhysicalizedElement != nullptr)
 		{
-			aPhysicalizedElement->PostSolve(bSprite, e.impulse);
+		  aPhysicalizedElement->PostSolve(bSprite, e.impulse);
 		}
-		if (bPhysicalizedElement)
+
+		if (bPhysicalizedElement != nullptr)
 		{
-			bPhysicalizedElement->PostSolve(aSprite, e.impulse);
+		  bPhysicalizedElement->PostSolve(aSprite, e.impulse);
 		}
 	}
 }
@@ -268,7 +270,7 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 void ofApp::input() {
 
 	bool temp[4];
-	if (ofxGLFWJoystick::one().getAxisValue(0, 0)> 0.5 || ofxGLFWJoystick::one().getAxisValue(0, 0)< -0.5) {
+	if (ofxGLFWJoystick::one().getAxisValue(0, 0) > 0.5 || ofxGLFWJoystick::one().getAxisValue(0, 0) < -0.5) {
 		if (ofxGLFWJoystick::one().getAxisValue(0, 0)>0) {
 			temp[1] = true;
 			temp[0] = false;

@@ -128,13 +128,11 @@ void Avatar::createClone(ofVec2f cloneTranslation) {
 }
 
 void Avatar::removeClone() {
-  //lightSystemRef->remove(clone->light);
   clone = nullptr;
   cloneTranslation.zero();
 
 }
 void Avatar::teleportToClone() {
-  //lightSystemRef->remove(clone->light);
 
   auto vel = polygon.getVelocity();
   polygon.setPosition(clone->polygon.getPosition());
@@ -151,12 +149,13 @@ void Avatar::setPosition(ofVec2f vec)
 {
 	setPosition(vec.x, vec.y);
 }
+
 void Avatar::setPosition(int x, int y)
 {
   polygon.setPosition(x, y);
   collisionRect.setPosition(x, y);
-  //light->setPosition(ofVec2f(x, y));
 }
+
 void Avatar::move(float inputX)
 {
 	float speed = VarConst::speedAvatar;
@@ -172,6 +171,7 @@ void Avatar::move(float inputX)
 	impulse *= (1 - std::min(std::abs(polygon.getVelocity().x), speedMax) / speedMax);
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
+
 void Avatar::move(float inputX,float inputY)
 {
 
@@ -182,8 +182,8 @@ void Avatar::move(float inputX,float inputY)
     impulse.y = speed * inputY * 1.0f;
     impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
     polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
-    
 }
+
 void Avatar::jump()
 {
 	if (!jumping)
@@ -210,6 +210,7 @@ void Avatar::jump()
 		polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
 	}
 }
+
 void Avatar::keyPressed(int key)
 {
 	if (key == OF_KEY_LEFT || key == 'q')
@@ -239,6 +240,7 @@ void Avatar::keyPressed(int key)
 	}
 
 }
+
 void Avatar::keyReleased(int key)
 {
 
@@ -284,6 +286,7 @@ void Avatar::keyReleased(int key)
 		ClicJump = false;
 	}
 }
+
 void Avatar::contactStart(dataSprite* OtherSprite)
 {
 	PhysicalizedElement::contactStart(OtherSprite);
@@ -298,6 +301,7 @@ void Avatar::contactStart(dataSprite* OtherSprite)
 	}
 
 }
+
 void Avatar::contactEnd(dataSprite* OtherSprite)
 {
 	
@@ -308,6 +312,7 @@ void Avatar::contactEnd(dataSprite* OtherSprite)
 		jumping = true;
 	}
 }
+
 void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
 	PhysicalizedElement::PostSolve(OtherSprite, impulse);

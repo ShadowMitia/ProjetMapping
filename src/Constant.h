@@ -6,7 +6,7 @@
 //
 //
 #pragma once
-#include "PhysicalizedElement/PhysicalizedElement.h"
+
 
 
 namespace VarConst
@@ -45,6 +45,8 @@ enum class Sprite { AVATAR, AVATAR_CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, 
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
 enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
+
+class PhysicalizedElement;
 
 class dataSprite {
 public:

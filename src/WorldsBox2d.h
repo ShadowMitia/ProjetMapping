@@ -13,6 +13,7 @@
 #include "Wiimotes.h"
 #include "PhysicalizedElement/Platform.h"
 #include "PhysicalizedElement/ObjetBlock.h"
+#include "PhysicalizedElement/PickUp.h"
 #include "Constant.h"
 #include "Ladder.h"
 #include "Waterfalls.h"
@@ -42,6 +43,9 @@ public:
     std::vector< Platform * > platforms;
     std::vector< ObjectBlock * > blocks;
     std::vector< Ladder * > ladders;
+  std::vector<PickUp*>  pickups;
+
+
     Waterfalls*               warterfalls;
     
     std::vector<Teleportable*> teleportables;

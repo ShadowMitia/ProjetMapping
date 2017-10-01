@@ -18,7 +18,7 @@ ObjectBlock::ObjectBlock(b2World* _box2d, ofPolyline _polyline)
     int width = 1000000;
     int height = 1000000;
 
-    auto p = _polyline.getVertices();
+    const auto& p = _polyline.getVertices();
     for (int i = 0; i < p.size(); i++)
       {
 	if (p[i].x < width) { width = p[i].x; }

@@ -30,7 +30,12 @@ public:
     void contactStart(dataSprite* OtherSprite) override;
     void contactEnd(dataSprite* OtherSprite) override;
     void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
-    
+
+  void setPosition(float x, float y)
+  {
+    pickUp.setPosition(x, y);
+  }
+
     ofVec2f getPosition()
     {
         return pickUp.getPosition();
@@ -47,7 +52,6 @@ private:
     b2World* box2d;
     
     ofVec2f cloneTranslation;
-    
 
     
 };

@@ -30,6 +30,7 @@ void Portal::update(std::vector<Teleportable*>& objects)
 				obj->createClone(GetLinkedPortal(obj)->rect.getCenter() - rect.getCenter());
 			}
 
+			// PAS FINI!
 			if (intersects && !inside && obj->viewpoint != Viewpoint::MODE_PERSPECTIVE && cloned)
 			{
 				std::cout << "close portal\n";
@@ -47,11 +48,8 @@ void Portal::update(std::vector<Teleportable*>& objects)
 				obj->teleportToClone();
 				obj->removeClone();
 			}
-			
-
 		}
     }
-
 }
 
 void Portal::draw() {
@@ -81,11 +79,12 @@ void Portal::linkTo(Portal* p_angle, Portal* p_perspective)
 
 Portal* Portal::GetLinkedPortal(Teleportable* obj) const
 {
-	if (obj->viewpoint == Viewpoint::MODE_ANGLE)
-	{
-		return connectedPortal_Angle;
-	}
-	
-	return connectedPortal_Perspective != nullptr ? connectedPortal_Perspective : connectedPortal_Angle;
+  if (obj->viewpoint == Viewpoint::MODE_ANGLE)
+    {
+      return connectedPortal_Angle;
+    }
+
+  //return connectedPortal_Perspective != nullptr ? connectedPortal_Perspective : connectedPortal_Angle;
+  return connectedPortal_Perspective;
 }
 

@@ -21,10 +21,22 @@ void WorldsBox2d::setup(){
     
     for (unsigned int i = 0; i < 1; i++)
       {
-		//createAvatar(85, 85);
-		createAvatar(1200, 700);
-
+	//createAvatar(85, 85);
+	createAvatar(1200, 700);
       }
+
+    ofPolyline pickupForm;
+    pickupForm.addVertex(0, 0);
+    pickupForm.addVertex(10, 0);
+    pickupForm.addVertex(10, 10);
+    pickupForm.addVertex(0, 10);
+    pickupForm.close();
+
+
+    PickUp* p = new PickUp(world.getWorld(), pickupForm);
+
+    pickups.push_back(p);
+    pickups.back()->setPosition(2800, 600);
 
 
 	for (auto &avatar : avatars)
@@ -32,13 +44,22 @@ void WorldsBox2d::setup(){
 		teleportables.push_back(avatar);
 	}
 
-    //blocks.emplace_back(world, 600, 500, 100, 100);
-    /*
+    ofPolyline blockForm;
+    blockForm.addVertex(0, 0);
+    blockForm.addVertex(10, 0);
+    blockForm.addVertex(10, 10);
+    blockForm.addVertex(0, 10);
+    blockForm.close();
+
+
+    ObjectBlock* block = new ObjectBlock(world.getWorld(), blockForm);
+    blocks.push_back(block);
+
 	for (auto &block : blocks)
 	{
-		teleportables.push_back(&block);
+	  teleportables.push_back(block);
 	}
-    */
+
     warterfalls = new Waterfalls(&world);
 
 
@@ -49,6 +70,9 @@ void WorldsBox2d::createCircle(float _x,float _y){
     circles.back().get()->setPhysics(0.0, 0.53, 0.1);
     circles.back().get()->setup(world.getWorld(), _x, _y, r);
 }
+
+
+
 void WorldsBox2d::draw(){
 
     
@@ -76,6 +100,12 @@ void WorldsBox2d::draw(){
     {
       ofSetHexColor(0xFFFFF);
       block->draw();
+    }
+
+  for (auto& pickup : pickups)
+    {
+      ofSetHexColor(0x00FF00);
+      pickup->draw();
     }
 
     for (auto &avatar : avatars) {
@@ -370,211 +400,211 @@ void WorldsBox2d::importPortal(){
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::RIGHT, 960, 479, sizeW, sizeH / 2));// portal:201
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::RIGHT, 3360, 719, sizeW, sizeH / 2));// portal:202
 
-    //angle; perspective  portals[],NULL
+    //angle; perspective  portals[],nullptr
 
-	portals[0]->linkTo(portals[15], NULL);
-	portals[1]->linkTo(portals[34], NULL);
-	portals[2]->linkTo(portals[47], NULL);
-	portals[3]->linkTo(portals[35], NULL);
-	portals[4]->linkTo(portals[18], NULL);
-	portals[5]->linkTo(portals[40], NULL);
-	portals[6]->linkTo(portals[42], NULL);
-	portals[7]->linkTo(portals[41], NULL);
-	portals[8]->linkTo(portals[166], NULL);
+	portals[0]->linkTo(portals[15], nullptr);
+	portals[1]->linkTo(portals[34], nullptr);
+	portals[2]->linkTo(portals[47], nullptr);
+	portals[3]->linkTo(portals[35], nullptr);
+	portals[4]->linkTo(portals[18], nullptr);
+	portals[5]->linkTo(portals[40], nullptr);
+	portals[6]->linkTo(portals[42], nullptr);
+	portals[7]->linkTo(portals[41], nullptr);
+	portals[8]->linkTo(portals[166], nullptr);
 	portals[9]->linkTo(portals[131], portals[104]);
-	portals[10]->linkTo(portals[162], NULL);
-	portals[11]->linkTo(portals[105], NULL);
-	portals[12]->linkTo(portals[181], NULL);
-	portals[13]->linkTo(portals[182], NULL);
-	portals[14]->linkTo(portals[183], NULL);
-	portals[15]->linkTo(portals[0], NULL);
+	portals[10]->linkTo(portals[162], nullptr);
+	portals[11]->linkTo(portals[105], nullptr);
+	portals[12]->linkTo(portals[181], nullptr);
+	portals[13]->linkTo(portals[182], nullptr);
+	portals[14]->linkTo(portals[183], nullptr);
+	portals[15]->linkTo(portals[0], nullptr);
 	portals[16]->linkTo(portals[58], portals[177]);
 	portals[17]->linkTo(portals[55], portals[167]);
 	portals[18]->linkTo(portals[4], portals[190]);
-	portals[19]->linkTo(portals[22], NULL);
-	portals[20]->linkTo(NULL, NULL);
-	portals[21]->linkTo(NULL, portals[25]);
-	portals[22]->linkTo(portals[19], NULL);
-	portals[23]->linkTo(portals[25], NULL);
-	portals[24]->linkTo(portals[20], NULL);
-	portals[25]->linkTo(portals[23], NULL);
-	portals[26]->linkTo(NULL, portals[190]);
-	portals[27]->linkTo(NULL, portals[160]);
-	portals[28]->linkTo(NULL, portals[163]);
-	portals[29]->linkTo(NULL, portals[52]);
-	portals[30]->linkTo(portals[33], NULL);
-	portals[31]->linkTo(NULL, portals[135]);
-	portals[32]->linkTo(NULL, portals[157]);
-	portals[33]->linkTo(NULL, portals[30]);
+	portals[19]->linkTo(portals[22], nullptr);
+	portals[20]->linkTo(nullptr, nullptr);
+	portals[21]->linkTo(nullptr, portals[25]);
+	portals[22]->linkTo(portals[19], nullptr);
+	portals[23]->linkTo(portals[25], nullptr);
+	portals[24]->linkTo(portals[20], nullptr);
+	portals[25]->linkTo(portals[23], nullptr);
+	portals[26]->linkTo(nullptr, portals[190]);
+	portals[27]->linkTo(nullptr, portals[160]);
+	portals[28]->linkTo(nullptr, portals[163]);
+	portals[29]->linkTo(nullptr, portals[52]);
+	portals[30]->linkTo(portals[33], nullptr);
+	portals[31]->linkTo(nullptr, portals[135]);
+	portals[32]->linkTo(nullptr, portals[157]);
+	portals[33]->linkTo(nullptr, portals[30]);
 	portals[34]->linkTo(portals[1], portals[37]);
 	portals[35]->linkTo(portals[3], portals[49]);
 	portals[36]->linkTo(portals[59], portals[99]);
-	portals[37]->linkTo(portals[44], NULL);
-	portals[38]->linkTo(portals[56], NULL);
-	portals[39]->linkTo(portals[68], NULL);
+	portals[37]->linkTo(portals[44], nullptr);
+	portals[38]->linkTo(portals[56], nullptr);
+	portals[39]->linkTo(portals[68], nullptr);
 	portals[40]->linkTo(portals[5], portals[160]);
 	portals[41]->linkTo(portals[7], portals[52]);
 	portals[42]->linkTo(portals[6], portals[163]);
-	portals[43]->linkTo(portals[177], NULL);
-	portals[44]->linkTo(portals[37], NULL);
-	portals[45]->linkTo(portals[65], NULL);
-	portals[46]->linkTo(portals[49], NULL);
-	portals[47]->linkTo(portals[2], NULL);
+	portals[43]->linkTo(portals[177], nullptr);
+	portals[44]->linkTo(portals[37], nullptr);
+	portals[45]->linkTo(portals[65], nullptr);
+	portals[46]->linkTo(portals[49], nullptr);
+	portals[47]->linkTo(portals[2], nullptr);
 	portals[48]->linkTo(portals[64], portals[51]);
-	portals[49]->linkTo(portals[46], NULL);
-	portals[50]->linkTo(portals[67], NULL);
-	portals[51]->linkTo(portals[90], NULL);
-	portals[52]->linkTo(portals[85], NULL);
+	portals[49]->linkTo(portals[46], nullptr);
+	portals[50]->linkTo(portals[67], nullptr);
+	portals[51]->linkTo(portals[90], nullptr);
+	portals[52]->linkTo(portals[85], nullptr);
 	portals[53]->linkTo(portals[87], portals[169]);
 	portals[54]->linkTo(portals[92], portals[168]);
-	portals[55]->linkTo(portals[17], NULL);
-	portals[56]->linkTo(portals[38], NULL);
-	portals[57]->linkTo(portals[43], NULL);
-	portals[58]->linkTo(portals[16], NULL);
+	portals[55]->linkTo(portals[17], nullptr);
+	portals[56]->linkTo(portals[38], nullptr);
+	portals[57]->linkTo(portals[43], nullptr);
+	portals[58]->linkTo(portals[16], nullptr);
 	portals[59]->linkTo(portals[36], portals[44]);
-	portals[60]->linkTo(portals[130], NULL);
-	portals[61]->linkTo(portals[159], NULL);
-	portals[62]->linkTo(portals[161], NULL);
-	portals[63]->linkTo(portals[165], NULL);
-	portals[64]->linkTo(portals[48], NULL);
-	portals[65]->linkTo(portals[45], NULL);
-	portals[66]->linkTo(portals[100], NULL);
+	portals[60]->linkTo(portals[130], nullptr);
+	portals[61]->linkTo(portals[159], nullptr);
+	portals[62]->linkTo(portals[161], nullptr);
+	portals[63]->linkTo(portals[165], nullptr);
+	portals[64]->linkTo(portals[48], nullptr);
+	portals[65]->linkTo(portals[45], nullptr);
+	portals[66]->linkTo(portals[100], nullptr);
 	portals[67]->linkTo(portals[50], portals[46]);
-	portals[68]->linkTo(portals[39], NULL);
-	portals[69]->linkTo(portals[121], NULL);
-	portals[70]->linkTo(portals[192], NULL);
-	portals[71]->linkTo(portals[200], NULL);
-	portals[72]->linkTo(NULL, portals[75]);
-	portals[73]->linkTo(portals[128], NULL);
-	portals[74]->linkTo(NULL, NULL);
-	portals[75]->linkTo(NULL, NULL);
-	portals[76]->linkTo(NULL, portals[79]);
-	portals[77]->linkTo(NULL, portals[74]);
-	portals[78]->linkTo(NULL, NULL);
-	portals[79]->linkTo(NULL, NULL);
-	portals[80]->linkTo(NULL, portals[78]);
-	portals[81]->linkTo(NULL, portals[84]);
-	portals[82]->linkTo(NULL, portals[86]);
-	portals[83]->linkTo(NULL, NULL);
-	portals[84]->linkTo(NULL, NULL);
-	portals[85]->linkTo(portals[52], NULL);
-	portals[86]->linkTo(NULL, NULL);
+	portals[68]->linkTo(portals[39], nullptr);
+	portals[69]->linkTo(portals[121], nullptr);
+	portals[70]->linkTo(portals[192], nullptr);
+	portals[71]->linkTo(portals[200], nullptr);
+	portals[72]->linkTo(nullptr, portals[75]);
+	portals[73]->linkTo(portals[128], nullptr);
+	portals[74]->linkTo(nullptr, nullptr);
+	portals[75]->linkTo(nullptr, nullptr);
+	portals[76]->linkTo(nullptr, portals[79]);
+	portals[77]->linkTo(nullptr, portals[74]);
+	portals[78]->linkTo(nullptr, nullptr);
+	portals[79]->linkTo(nullptr, nullptr);
+	portals[80]->linkTo(nullptr, portals[78]);
+	portals[81]->linkTo(nullptr, portals[84]);
+	portals[82]->linkTo(nullptr, portals[86]);
+	portals[83]->linkTo(nullptr, nullptr);
+	portals[84]->linkTo(nullptr, nullptr);
+	portals[85]->linkTo(portals[52], nullptr);
+	portals[86]->linkTo(nullptr, nullptr);
 	portals[87]->linkTo(portals[53], portals[90]);
-	portals[88]->linkTo(NULL, portals[172]);
-	portals[89]->linkTo(NULL, NULL);
-	portals[90]->linkTo(portals[51], NULL);
-	portals[91]->linkTo(NULL, portals[83]);
+	portals[88]->linkTo(nullptr, portals[172]);
+	portals[89]->linkTo(nullptr, nullptr);
+	portals[90]->linkTo(portals[51], nullptr);
+	portals[91]->linkTo(nullptr, portals[83]);
 	portals[92]->linkTo(portals[54], portals[85]);
-	portals[93]->linkTo(NULL, NULL);
-	portals[94]->linkTo(NULL, portals[84]);
-	portals[95]->linkTo(NULL, portals[93]);
-	portals[96]->linkTo(portals[122], NULL);
-	portals[97]->linkTo(portals[124], NULL);
-	portals[98]->linkTo(portals[119], NULL);
-	portals[99]->linkTo(portals[106], NULL);
-	portals[100]->linkTo(portals[66], NULL);
-	portals[101]->linkTo(portals[92], NULL);
-	portals[102]->linkTo(portals[87], NULL);
-	portals[103]->linkTo(portals[85], NULL);
-	portals[104]->linkTo(portals[167], NULL);
-	portals[105]->linkTo(portals[11], NULL);
-	portals[106]->linkTo(portals[99], NULL);
-	portals[107]->linkTo(portals[114], NULL);
-	portals[108]->linkTo(portals[120], NULL);
-	portals[109]->linkTo(portals[170], NULL);
-	portals[110]->linkTo(portals[169], NULL);
-	portals[111]->linkTo(portals[168], NULL);
-	portals[112]->linkTo(portals[173], NULL);
-	portals[113]->linkTo(portals[123], NULL);
-	portals[114]->linkTo(portals[201], NULL);
-	portals[115]->linkTo(portals[143], NULL);
+	portals[93]->linkTo(nullptr, nullptr);
+	portals[94]->linkTo(nullptr, portals[84]);
+	portals[95]->linkTo(nullptr, portals[93]);
+	portals[96]->linkTo(portals[122], nullptr);
+	portals[97]->linkTo(portals[124], nullptr);
+	portals[98]->linkTo(portals[119], nullptr);
+	portals[99]->linkTo(portals[106], nullptr);
+	portals[100]->linkTo(portals[66], nullptr);
+	portals[101]->linkTo(portals[92], nullptr);
+	portals[102]->linkTo(portals[87], nullptr);
+	portals[103]->linkTo(portals[85], nullptr);
+	portals[104]->linkTo(portals[167], nullptr);
+	portals[105]->linkTo(portals[11], nullptr);
+	portals[106]->linkTo(portals[99], nullptr);
+	portals[107]->linkTo(portals[114], nullptr);
+	portals[108]->linkTo(portals[120], nullptr);
+	portals[109]->linkTo(portals[170], nullptr);
+	portals[110]->linkTo(portals[169], nullptr);
+	portals[111]->linkTo(portals[168], nullptr);
+	portals[112]->linkTo(portals[173], nullptr);
+	portals[113]->linkTo(portals[123], nullptr);
+	portals[114]->linkTo(portals[201], nullptr);
+	portals[115]->linkTo(portals[143], nullptr);
 	portals[116]->linkTo(portals[175], portals[179]);
 	portals[117]->linkTo(portals[195], portals[105]);
 	portals[118]->linkTo(portals[188], portals[199]);
 	portals[119]->linkTo(portals[98], portals[106]);
-	portals[120]->linkTo(portals[61], NULL);
-	portals[121]->linkTo(portals[69], NULL);
-	portals[122]->linkTo(portals[96], NULL);
-	portals[123]->linkTo(portals[113], NULL);
-	portals[124]->linkTo(portals[97], NULL);
-	portals[125]->linkTo(portals[180], NULL);
+	portals[120]->linkTo(portals[61], nullptr);
+	portals[121]->linkTo(portals[69], nullptr);
+	portals[122]->linkTo(portals[96], nullptr);
+	portals[123]->linkTo(portals[113], nullptr);
+	portals[124]->linkTo(portals[97], nullptr);
+	portals[125]->linkTo(portals[180], nullptr);
 	portals[126]->linkTo(portals[174], portals[110]);
 	portals[127]->linkTo(portals[202], portals[112]);
 	portals[128]->linkTo(portals[73], portals[109]);
-	portals[129]->linkTo(portals[178], NULL);
+	portals[129]->linkTo(portals[178], nullptr);
 	portals[130]->linkTo(portals[199], portals[70]);
-	portals[131]->linkTo(portals[9], NULL);
-	portals[132]->linkTo(portals[158], NULL);
-	portals[133]->linkTo(NULL, portals[142]);
-	portals[134]->linkTo(NULL, portals[139]);
-	portals[135]->linkTo(NULL, portals[31]);
-	portals[136]->linkTo(NULL, NULL);
-	portals[137]->linkTo(portals[103], NULL);
-	portals[138]->linkTo(NULL, NULL);
-	portals[139]->linkTo(NULL, NULL);
+	portals[131]->linkTo(portals[9], nullptr);
+	portals[132]->linkTo(portals[158], nullptr);
+	portals[133]->linkTo(nullptr, portals[142]);
+	portals[134]->linkTo(nullptr, portals[139]);
+	portals[135]->linkTo(nullptr, portals[31]);
+	portals[136]->linkTo(nullptr, nullptr);
+	portals[137]->linkTo(portals[103], nullptr);
+	portals[138]->linkTo(nullptr, nullptr);
+	portals[139]->linkTo(nullptr, nullptr);
 	portals[140]->linkTo(portals[102], portals[143]);
-	portals[141]->linkTo(NULL, portals[147]);
-	portals[142]->linkTo(NULL, NULL);
-	portals[143]->linkTo(portals[115], NULL);
-	portals[144]->linkTo(NULL, portals[138]);
+	portals[141]->linkTo(nullptr, portals[147]);
+	portals[142]->linkTo(nullptr, nullptr);
+	portals[143]->linkTo(portals[115], nullptr);
+	portals[144]->linkTo(nullptr, portals[138]);
 	portals[145]->linkTo(portals[101], portals[137]);
-	portals[146]->linkTo(NULL, NULL);
-	portals[147]->linkTo(NULL, NULL);
-	portals[148]->linkTo(NULL, portals[151]);
-	portals[149]->linkTo(NULL, portals[136]);
-	portals[150]->linkTo(NULL, NULL);
-	portals[151]->linkTo(NULL, NULL);
-	portals[152]->linkTo(NULL, portals[150]);
-	portals[153]->linkTo(NULL, portals[155]);
-	portals[154]->linkTo(NULL, NULL);
-	portals[155]->linkTo(NULL, NULL);
-	portals[156]->linkTo(NULL, portals[154]);
-	portals[157]->linkTo(NULL, NULL);
-	portals[158]->linkTo(portals[132], NULL);
-	portals[159]->linkTo(portals[120], NULL);
-	portals[160]->linkTo(NULL, NULL);
-	portals[161]->linkTo(portals[62], NULL);
-	portals[162]->linkTo(portals[10], NULL);
-	portals[163]->linkTo(NULL, NULL);
+	portals[146]->linkTo(nullptr, nullptr);
+	portals[147]->linkTo(nullptr, nullptr);
+	portals[148]->linkTo(nullptr, portals[151]);
+	portals[149]->linkTo(nullptr, portals[136]);
+	portals[150]->linkTo(nullptr, nullptr);
+	portals[151]->linkTo(nullptr, nullptr);
+	portals[152]->linkTo(nullptr, portals[150]);
+	portals[153]->linkTo(nullptr, portals[155]);
+	portals[154]->linkTo(nullptr, nullptr);
+	portals[155]->linkTo(nullptr, nullptr);
+	portals[156]->linkTo(nullptr, portals[154]);
+	portals[157]->linkTo(nullptr, nullptr);
+	portals[158]->linkTo(portals[132], nullptr);
+	portals[159]->linkTo(portals[120], nullptr);
+	portals[160]->linkTo(nullptr, nullptr);
+	portals[161]->linkTo(portals[62], nullptr);
+	portals[162]->linkTo(portals[10], nullptr);
+	portals[163]->linkTo(nullptr, nullptr);
 	portals[164]->linkTo(portals[186], portals[52]);
 	portals[165]->linkTo(portals[63], portals[170]);
-	portals[166]->linkTo(portals[8], NULL);
-	portals[167]->linkTo(portals[104], NULL);
-	portals[168]->linkTo(portals[111], NULL);
-	portals[169]->linkTo(portals[110], NULL);
-	portals[170]->linkTo(portals[109], NULL);
-	portals[171]->linkTo(portals[193], NULL);
-	portals[172]->linkTo(NULL, NULL);
-	portals[173]->linkTo(portals[112], NULL);
-	portals[174]->linkTo(portals[126], NULL);
-	portals[175]->linkTo(portals[116], NULL);
-	portals[176]->linkTo(portals[117], NULL);
-	portals[177]->linkTo(portals[179], NULL);
-	portals[178]->linkTo(portals[129], NULL);
-	portals[179]->linkTo(portals[177], NULL);
-	portals[180]->linkTo(portals[125], NULL);
-	portals[181]->linkTo(portals[12], NULL);
-	portals[182]->linkTo(portals[13], NULL);
-	portals[183]->linkTo(portals[14], NULL);
-	portals[184]->linkTo(portals[189], NULL);
+	portals[166]->linkTo(portals[8], nullptr);
+	portals[167]->linkTo(portals[104], nullptr);
+	portals[168]->linkTo(portals[111], nullptr);
+	portals[169]->linkTo(portals[110], nullptr);
+	portals[170]->linkTo(portals[109], nullptr);
+	portals[171]->linkTo(portals[193], nullptr);
+	portals[172]->linkTo(nullptr, nullptr);
+	portals[173]->linkTo(portals[112], nullptr);
+	portals[174]->linkTo(portals[126], nullptr);
+	portals[175]->linkTo(portals[116], nullptr);
+	portals[176]->linkTo(portals[117], nullptr);
+	portals[177]->linkTo(portals[179], nullptr);
+	portals[178]->linkTo(portals[129], nullptr);
+	portals[179]->linkTo(portals[177], nullptr);
+	portals[180]->linkTo(portals[125], nullptr);
+	portals[181]->linkTo(portals[12], nullptr);
+	portals[182]->linkTo(portals[13], nullptr);
+	portals[183]->linkTo(portals[14], nullptr);
+	portals[184]->linkTo(portals[189], nullptr);
 	portals[185]->linkTo(portals[187], portals[173]);
-	portals[186]->linkTo(portals[164], NULL);
-	portals[187]->linkTo(portals[185], NULL);
+	portals[186]->linkTo(portals[164], nullptr);
+	portals[187]->linkTo(portals[185], nullptr);
 	portals[188]->linkTo(portals[118], portals[115]);
-	portals[189]->linkTo(portals[184], NULL);
-	portals[190]->linkTo(portals[107], NULL);
+	portals[189]->linkTo(portals[184], nullptr);
+	portals[190]->linkTo(portals[107], nullptr);
 	portals[191]->linkTo(portals[195], portals[189]);
 	portals[192]->linkTo(portals[188], portals[201]);
 	portals[193]->linkTo(portals[171], portals[111]);
 	portals[194]->linkTo(portals[199], portals[188]);
 	portals[195]->linkTo(portals[191], portals[103]);
-	portals[196]->linkTo(NULL, portals[146]);
-	portals[197]->linkTo(NULL, NULL);
-	portals[198]->linkTo(NULL, NULL);
-	portals[199]->linkTo(portals[194], NULL);
-	portals[200]->linkTo(portals[71], NULL);
-	portals[201]->linkTo(portals[114], NULL);
-	portals[202]->linkTo(portals[127], NULL);
+	portals[196]->linkTo(nullptr, portals[146]);
+	portals[197]->linkTo(nullptr, nullptr);
+	portals[198]->linkTo(nullptr, nullptr);
+	portals[199]->linkTo(portals[194], nullptr);
+	portals[200]->linkTo(portals[71], nullptr);
+	portals[201]->linkTo(portals[114], nullptr);
+	portals[202]->linkTo(portals[127], nullptr);
 
 
 
