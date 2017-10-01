@@ -22,8 +22,8 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
     
     for (unsigned int i = 0; i < 1; i++)
       {
-		createAvatar(85, 85);
-		createAvatar(100, 100);
+		//createAvatar(85, 85);
+		createAvatar(1200, 700);
       }
     //wiimotes.startThread();
     //createAvatar(100, 100);
@@ -57,17 +57,9 @@ void WorldsBox2d::draw(){
     
   for (auto &portal : portals) 
   {
-		portal->draw();
+		//portal->draw();
   }
 
-  for (auto &platform : platforms) 
-  {
-    ofSetHexColor(0xFF0000);
-    if (platform->shape->bVisible) 
-	{
-      platform->ground.draw();
-    }
-  }
 
   for (int i = 0; i < circles.size(); i++) {
     ofFill();
@@ -322,7 +314,7 @@ void WorldsBox2d::importPortal(){
 	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::RIGHT, 879, 560, sizeW, sizeH));// portal:150
 	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::LEFT, 880, 560, sizeW, sizeH));// portal:151
 	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::LEFT, 1040, 560, sizeW, sizeH));// portal:152
-	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::LEFT, 1359, 560, sizeW, sizeH));// portal:153
+	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::RIGHT, 1359, 560, sizeW, sizeH));// portal:153
 	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::RIGHT, 1519, 560, sizeW, sizeH));// portal:154
 	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::LEFT, 1520, 560, sizeW, sizeH));// portal:155
 	portals.push_back(new Portal(Portal::Orientation::VERTICAL, Portal::Direction::LEFT, 1840, 560, sizeW, sizeH));// portal:156
@@ -466,7 +458,7 @@ void WorldsBox2d::importPortal(){
 	portals[88]->linkTo(NULL, portals[172]);
 	portals[89]->linkTo(NULL, NULL);
 	portals[90]->linkTo(portals[51], NULL);
-	portals[91]->linkTo(NULL, NULL);
+	portals[91]->linkTo(NULL, portals[83]);
 	portals[92]->linkTo(portals[54], portals[85]);
 	portals[93]->linkTo(NULL, NULL);
 	portals[94]->linkTo(NULL, portals[84]);
@@ -479,7 +471,7 @@ void WorldsBox2d::importPortal(){
 	portals[101]->linkTo(portals[92], NULL);
 	portals[102]->linkTo(portals[87], NULL);
 	portals[103]->linkTo(portals[85], NULL);
-	portals[104]->linkTo(portals[131], NULL);
+	portals[104]->linkTo(portals[167], NULL);
 	portals[105]->linkTo(portals[11], NULL);
 	portals[106]->linkTo(portals[99], NULL);
 	portals[107]->linkTo(portals[114], NULL);

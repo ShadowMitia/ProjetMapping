@@ -15,12 +15,6 @@ class Teleportable;
 class Portal {
 public:
 
-  /*
-   * Possible TODO: custom orientations for exits (now are relative to create "tunnels")
-   *
-   */
-
-
   enum class Direction {LEFT, RIGHT};
   enum class Orientation { VERTICAL, HORIZONTAL };
 
@@ -48,8 +42,8 @@ public:
              std::swap(entranceA, exitA);
              std::swap(entranceB, exitB);
          }
-         connectedPortal_Angle = NULL;
-         connectedPortal_Perspective = NULL;
+         connectedPortal_Angle = nullptr;
+         connectedPortal_Perspective = nullptr;
     }
     
  Portal(Orientation ori, Direction _direction, int x, int y, int width, int height)

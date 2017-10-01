@@ -2,7 +2,7 @@
 
 
 
-vector<ofPolyline> importImage(string path){    
+vector<ofPolyline> importImage(const string& path){    
     ofImage image;
     vector<ofPolyline> poly;
     if (!image.load(path))
@@ -35,7 +35,7 @@ void ofApp::setup() {
 	lightSystem->setup();
 	worlds->setup(lightSystem);
 
-	scene1 = new Scene1(worlds, lightSystem, "Map_prog_Plateforme_Solide.png");
+	scene1 = new Scene1(worlds, lightSystem, "Map_prog_Plateformes_Test.png");
 	scene2 = new Scene2(worlds, lightSystem);
 
 	mapping.registerFboSource(scene1);
@@ -57,7 +57,7 @@ void ofApp::setup() {
 	////   Import Platform   /////
 	worlds->platforms.clear();
 
-	vector<ofPolyline>  platforms = importImage("Map_prog_Plateforme_Solide.png");
+	vector<ofPolyline>  platforms = importImage("Map_prog_Plateformes_Test.png");
 	for (int i = 0; i < platforms.size() - 1; i++) {
 		worlds->createPlatform(platforms[i]);
 	}
@@ -75,7 +75,7 @@ void ofApp::setup() {
 	ladders.addVertex(0, 800);
 	ladders.addVertex(3520, 800);
 
-	worlds->createLadder(ladders);
+	//worlds->createLadder(ladders);
 
     /*
     vector<ofPolyline> boxes = importImage("Test_Boite.png");
@@ -274,46 +274,52 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 
 #endif //CUSTOM_BOX2D_TIM
 
-void ofApp::input(){
-    ofxGLFWJoystick::one().update();
-    for (int joystickID = 0; joystickID < 1; joystickID++) {
-        if (inputButton[joystickID][0]!=ofxGLFWJoystick::one().getButtonValue(0, joystickID)) {
-            inputButton[joystickID][0] = ofxGLFWJoystick::one().getButtonValue(0, joystickID);
-            
-            if (inputButton[joystickID][0])worlds->avatars[joystickID]->keyPressed(OF_KEY_UP);
-            else worlds->avatars[joystickID]->keyReleased(OF_KEY_UP);
-        }
-        if (inputButton[joystickID][1]!=ofxGLFWJoystick::one().getButtonValue(1, joystickID)) {
-            inputButton[joystickID][1] = ofxGLFWJoystick::one().getButtonValue(1, joystickID);
-            
-            if (inputButton[joystickID][1])worlds->avatars[joystickID]->keyPressed(OF_KEY_DOWN);
-            else worlds->avatars[joystickID]->keyReleased(OF_KEY_DOWN);
-        }
-        if (inputButton[joystickID][2]!=ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
-            if(!inputButton[joystickID][3])inputButton[joystickID][2] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
-            
-            if (!inputButton[joystickID][3] && !inputButton[joystickID][2])worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT);
-            else worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT);
-        }
-        if (inputButton[joystickID][3]!=ofxGLFWJoystick::one().getButtonValue(3, joystickID)) {
-            if (!inputButton[joystickID][2])inputButton[joystickID][3] = ofxGLFWJoystick::one().getButtonValue(3, joystickID);
-            
-            if (!inputButton[joystickID][3])worlds->avatars[joystickID]->keyReleased(OF_KEY_RIGHT);
-            else worlds->avatars[joystickID]->keyPressed(OF_KEY_RIGHT);
-        }
-        if (inputButton[joystickID][4]!=ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
-            inputButton[joystickID][4] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
-            if (inputButton[joystickID][4])worlds->avatars[joystickID]->keyPressed(' ');
-            else worlds->avatars[joystickID]->keyReleased(' ');
-        }
-        if (inputButton[joystickID][5]!=ofxGLFWJoystick::one().getButtonValue(12, joystickID)) {
-            inputButton[joystickID][5] = ofxGLFWJoystick::one().getButtonValue(12, joystickID);
-            
-            if (inputButton[joystickID][5])worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT_CONTROL);
-            else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
-        }
-    }
-    
+void ofApp::input() {
+
+	bool temp[4];
+	if (ofxGLFWJoystick::one().getAxisValue(0, 0)> 0.5 || ofxGLFWJoystick::one().getAxisValue(0, 0)< -0.5) {
+		if (ofxGLFWJoystick::one().getAxisValue(0, 0)>0) {
+			temp[1] = true;
+			temp[0] = false;
+		}
+		else {
+			temp[0] = true;
+			temp[1] = false;
+		}
+	}
+	else {
+		temp[1] = false;
+		temp[0] = false;
+	}
+
+
+	ofxGLFWJoystick::one().update();
+	for (int joystickID = 0; joystickID < 1; joystickID++) {
+
+		if (inputButton[joystickID][2] != ofxGLFWJoystick::one().getButtonValue(13, joystickID)) {
+			if (!inputButton[joystickID][3])inputButton[joystickID][2] = ofxGLFWJoystick::one().getButtonValue(13, joystickID);
+			if (!inputButton[joystickID][3] && !inputButton[joystickID][2])worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT);
+			else worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT);
+		}
+		if (inputButton[joystickID][3] != ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
+			if (!inputButton[joystickID][2])inputButton[joystickID][3] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
+
+			if (!inputButton[joystickID][3])worlds->avatars[joystickID]->keyReleased(OF_KEY_RIGHT);
+			else worlds->avatars[joystickID]->keyPressed(OF_KEY_RIGHT);
+		}
+		if (inputButton[joystickID][4] != ofxGLFWJoystick::one().getButtonValue(1, joystickID)) {
+			inputButton[joystickID][4] = ofxGLFWJoystick::one().getButtonValue(1, joystickID);
+			if (inputButton[joystickID][4]) worlds->avatars[joystickID]->keyPressed(' ');
+			else worlds->avatars[joystickID]->keyReleased(' ');
+		}
+		if (inputButton[joystickID][5] != ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
+			inputButton[joystickID][5] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
+
+			if (inputButton[joystickID][5])worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT_CONTROL);
+			else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
+		}
+	}
+
 }
 
 #ifdef USE_WIIMOTE
@@ -326,14 +332,11 @@ void ofApp::onWiiuseControlEvent(ofxWiiuseControlEventArgs& args)
 void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
 {
 
-	std::cout << "truc\n";
-
 	switch (args.second)
 	{
 	case OFXWIIUSE_BUTTON_UP_PRESSED:
 	{
 		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
-		std::cout << "test\n";
 		break;
 	}
 	case OFXWIIUSE_BUTTON_DOWN_PRESSED:
@@ -373,22 +376,22 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
 	}
 	case OFXWIIUSE_BUTTON_ONE_PRESSED:
 	{
-		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
+		worlds->avatars[args.first - 1]->keyPressed(' ');
 		break;
 	}
 	case OFXWIIUSE_BUTTON_ONE_RELEASED:
 	{
-		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_UP);
+		worlds->avatars[args.first - 1]->keyReleased(' ');
 		break;
 	}
 	case OFXWIIUSE_BUTTON_TWO_PRESSED:
 	{
-		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_CONTROL);
+		worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT_CONTROL);
 		break;
 	}
 	case OFXWIIUSE_BUTTON_TWO_RELEASED:
 	{
-		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_CONTROL);
+		worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
 		break;
 	}
 

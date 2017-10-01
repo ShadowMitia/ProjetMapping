@@ -69,7 +69,7 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
 }
 
 void Avatar::presUpdate(){
-    foot.setPosition(polygon.getPosition()+ofVec2f(0,7));
+    foot.setPosition(polygon.getPosition()+ofVec2f(0,4));
     collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
 
@@ -132,8 +132,8 @@ void Avatar::createClone(ofVec2f cloneTranslation) {
     clone->setPosition(cloneTranslation);
     clone->polygon.setVelocity(polygon.getVelocity());
     clone->polygon.create(polygon.getWorld());
-
 }
+
 void Avatar::removeClone() {
   //lightSystemRef->remove(clone->light);
   clone = nullptr;
@@ -170,12 +170,13 @@ void Avatar::move(float inputX)
 	float speedMax = VarConst::speedAvatarMax;
 	if (jumping)
 	{
+
 		speed = VarConst::speedAvatarAirControl;
 		speedMax = VarConst::speedAvatarAirControlMax;
 	}
 	b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
 
-	impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
+	impulse *= (1 - std::min(std::abs(polygon.getVelocity().x), speedMax) / speedMax);
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
 void Avatar::move(float inputX,float inputY)
@@ -306,7 +307,7 @@ void Avatar::contactStart(dataSprite* OtherSprite)
 }
 void Avatar::contactEnd(dataSprite* OtherSprite)
 {
-  
+	
 	PhysicalizedElement::contactEnd(OtherSprite);
 
 	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
@@ -326,6 +327,7 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 		jumping = false;
 		if (!(abs(moveInputX) > 0))
 		{
+
 			polygon.setVelocity(0, polygon.getVelocity().y);
 		}
 	}
