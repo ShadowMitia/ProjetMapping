@@ -11,9 +11,7 @@
 #include "PhysicalizedElement/Avatar.h"
 #include "Portal.h"
 #include "Wiimotes.h"
-#include "Light2D.h"
 #include "PhysicalizedElement/Platform.h"
-#include "LightSystem2D.h"
 #include "PhysicalizedElement/ObjetBlock.h"
 #include "Constant.h"
 #include "Ladder.h"
@@ -48,9 +46,8 @@ public:
     
     std::vector<Teleportable*> teleportables;
 
-    ofx::LightSystem2D * lightSystem2D;
     
-    void setup(ofx::LightSystem2D * _lightSystem2D);
+    void setup();
     void createCircle(float _x,float _y);
     void draw();
     void update();

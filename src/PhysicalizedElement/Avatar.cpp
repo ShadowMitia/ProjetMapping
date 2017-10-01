@@ -19,7 +19,7 @@ std::vector <ofPoint> loadPoints(std::string file) {
     return pts;
 }
 
-Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRef(lightSystem), box2dRef(box2d)
+Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
 {
 ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
@@ -60,9 +60,6 @@ Avatar::Avatar(ofxBox2d* box2d, ofx::LightSystem2D* lightSystem) : lightSystemRe
     dataFo->Element = this;
     foot.setData(dataFo);
     
-    light = std::make_shared<ofx::Light2D>();
-    light->setRadius(700);
-    lightSystem->add(light);
     
     modeDeplace = Deplacement::PLATFORM;
     
@@ -94,10 +91,6 @@ void Avatar::update()
         this->polygon.setVelocity(this->polygon.getVelocity().x - (VarConst::coefFrotementAir * this->polygon.getVelocity().x/VarConst::speedAvatarMax), this->polygon.getVelocity().y);
     }
     
-	if (light)
-	{
-		light->setPosition(polygon.getPosition());
-	}
 
   if (clone)
     {
@@ -128,7 +121,7 @@ void Avatar::createClone(ofVec2f cloneTranslation) {
 
     this->cloneTranslation = cloneTranslation;
 
-    clone = std::make_unique<Avatar>(box2dRef, lightSystemRef);
+    clone = std::make_unique<Avatar>(box2dRef);
     clone->setPosition(cloneTranslation);
     clone->polygon.setVelocity(polygon.getVelocity());
     clone->polygon.create(polygon.getWorld());

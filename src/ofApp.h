@@ -9,7 +9,6 @@
 #include "WorldsBox2d.h"
 #include "ScenesMapping.h"
 #include "PhysicalizedElement/Avatar.h"
-#include "LightSystem2D.h"
 #include "Constant.h"
 #include "ofxCv.h"
 
@@ -60,7 +59,6 @@ class ofApp : public ofBaseApp {
   ofxPiMapper mapping;
   WorldsBox2d* worlds; // les mondes Box2d
 
-  ofx::LightSystem2D* lightSystem;  
   Scene1* scene1;
   Scene2* scene2;
 

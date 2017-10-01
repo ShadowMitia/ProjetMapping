@@ -7,8 +7,6 @@
 
 #pragma once
 #include "ofxBox2d.h"
-#include "../Shape2D.h"
-#include "../LightSystem2D.h"
 #include "../Constant.h"
 #include "PhysicalizedElement.h"
 
@@ -24,10 +22,7 @@ public:
 class Platform : public PhysicalizedElement {
 public:
     
-    ofxBox2dEdge ground;
-    ofx::Shape2D::SharedPtr shape;
-    ofx::LightSystem2D* LightSystem;
-    
+    ofxBox2dEdge ground;    
     
 private:
     float scale;
@@ -36,7 +31,7 @@ private:
     
 public:
     
-    void create(b2World* _b2World, ofPolyline _groundLine,ofx::LightSystem2D* _LightSystem);
+    void create(b2World* _b2World, ofPolyline _groundLine);
     void draw();
     
 };

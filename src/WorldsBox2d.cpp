@@ -7,9 +7,8 @@
 //
 
 #include "WorldsBox2d.h"
-void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
-        
-  lightSystem2D = _lightSystem2D;
+void WorldsBox2d::setup(){
+    
     
     world.init();
     world.setGravity(0, VarConst::gravity);
@@ -24,9 +23,9 @@ void WorldsBox2d::setup(ofx::LightSystem2D * _lightSystem2D){
       {
 		//createAvatar(85, 85);
 		createAvatar(1200, 700);
+
       }
-    //wiimotes.startThread();
-    //createAvatar(100, 100);
+
 
 	for (auto &avatar : avatars)
 	{
@@ -60,6 +59,11 @@ void WorldsBox2d::draw(){
 		//portal->draw();
   }
 
+  for (auto &platform : platforms) 
+  {
+    ofSetHexColor(0xFF0000);
+      platform->ground.draw();
+  }
 
   for (int i = 0; i < circles.size(); i++) {
     ofFill();
@@ -84,7 +88,7 @@ void WorldsBox2d::draw(){
 
 }
 void WorldsBox2d::createAvatar(int x, int y){
-    Avatar * avatar = new Avatar(&world, lightSystem2D);
+    Avatar * avatar = new Avatar(&world);
     avatar->polygon.setData(new typeBox2d);
     typeBox2d *sd  = (typeBox2d*) avatar->polygon.getData();
     sd->type = typeBox2d::Type::AVATAR;
@@ -126,7 +130,7 @@ void WorldsBox2d::update(){
 void WorldsBox2d::createPlatform(ofPolyline _polyline){
     
     Platform *edge = new Platform;
-    edge->create(world.getWorld(), _polyline, lightSystem2D);
+    edge->create(world.getWorld(), _polyline);
     platforms.push_back(edge);
 
 }
@@ -156,6 +160,7 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     temp.addVertex(ofPoint(x,y));
     createPlatform(temp);
 }
+// attention code deguelas 
 void WorldsBox2d::importPortal(){
     int sizeH = 160;
     int sizeW = 2;
@@ -365,7 +370,7 @@ void WorldsBox2d::importPortal(){
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::RIGHT, 960, 479, sizeW, sizeH / 2));// portal:201
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::RIGHT, 3360, 719, sizeW, sizeH / 2));// portal:202
 
-																														  //angle; perspective  portals[],NULL
+    //angle; perspective  portals[],NULL
 
 	portals[0]->linkTo(portals[15], NULL);
 	portals[1]->linkTo(portals[34], NULL);

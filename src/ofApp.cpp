@@ -31,12 +31,11 @@ void ofApp::setup() {
 	ofBackground(0);
 
 	worlds = new WorldsBox2d;
-	lightSystem = new ofx::LightSystem2D;
-	lightSystem->setup();
-	worlds->setup(lightSystem);
+	worlds->setup();
 
-	scene1 = new Scene1(worlds, lightSystem, "Map_prog_Plateformes_Test.png");
-	scene2 = new Scene2(worlds, lightSystem);
+
+	scene1 = new Scene1(worlds, "Map_prog_Plateformes_Test.png");
+	scene2 = new Scene2(worlds);
 
 	mapping.registerFboSource(scene1);
 	mapping.registerFboSource(scene2);
@@ -67,7 +66,7 @@ void ofApp::setup() {
 	for (int i =0; i<ladders.size()-1; i++) {
 		worlds->createLadder(ladders[i]);
 	}
-	*/
+	
 
 	ofPolyline ladders;
 	ladders.addVertex(0, 0);
@@ -75,7 +74,8 @@ void ofApp::setup() {
 	ladders.addVertex(0, 800);
 	ladders.addVertex(3520, 800);
 
-	//worlds->createLadder(ladders);
+	worlds->createLadder(ladders);
+     */
 
     /*
     vector<ofPolyline> boxes = importImage("Test_Boite.png");
@@ -98,7 +98,6 @@ void ofApp::update(){
 #endif
     input();
     worlds->update();
-    lightSystem->update();
     mapping.update();
 }
 
@@ -141,7 +140,6 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
     mapping.mouseDragged(x, y, button);
-
 }
 
 //--------------------------------------------------------------
@@ -150,13 +148,10 @@ void ofApp::mousePressed(int x, int y, int button){
     mapping.mousePressed(x, y, button);
 
 }
-
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-
     mapping.mouseReleased(x, y, button);
 }
-
 //--------------------------------------------------------------
 void ofApp::mouseEntered(int x, int y){
 
@@ -178,7 +173,8 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo)
+{
 
 }
 
@@ -187,7 +183,6 @@ void ofApp::exit() {
 	wiiuse.removeListener(this);
 #endif
 }
-
 
 void ofApp::contactStart(ofxBox2dContactArgs &e) 
 {
@@ -214,7 +209,6 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
 		}
 	}
 }
-
 void ofApp::contactEnd(ofxBox2dContactArgs &e)
 {
 	if (e.a != nullptr && e.b != nullptr)
@@ -240,12 +234,10 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 		}
 	}
 }
-
 #ifdef CUSTOM_BOX2D_TIM
 void ofApp::PreSolve(ofxBox2dPreContactArgs &e)
 {
 }
-
 void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 {
 	if (e.a != nullptr && e.b != nullptr && e.impulse != nullptr)
@@ -271,7 +263,6 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 		}
 	}
 }
-
 #endif //CUSTOM_BOX2D_TIM
 
 void ofApp::input() {

@@ -174,15 +174,12 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\Ladder.cpp" />
-    <ClCompile Include="src\Light2D.cpp" />
-    <ClCompile Include="src\LightSystem2D.cpp" />
     <ClCompile Include="src\PhysicalizedElement\Avatar.cpp" />
     <ClCompile Include="src\PhysicalizedElement\ObjetBlock.cpp" />
     <ClCompile Include="src\PhysicalizedElement\PhysicalizedElement.cpp" />
     <ClCompile Include="src\PhysicalizedElement\Platform.cpp" />
     <ClCompile Include="src\Portal.cpp" />
     <ClCompile Include="src\ScenesMapping.cpp" />
-    <ClCompile Include="src\Shape2D.cpp" />
     <ClCompile Include="src\Waterfalls.cpp" />
     <ClCompile Include="src\WorldsBox2d.cpp" />
     <ClCompile Include="..\..\..\addons\ofxCv\libs\CLD\src\ETF.cpp" />
@@ -360,8 +357,6 @@
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Constant.h" />
     <ClInclude Include="src\Ladder.h" />
-    <ClInclude Include="src\Light2D.h" />
-    <ClInclude Include="src\LightSystem2D.h" />
     <ClInclude Include="src\PhysicalizedElement\Avatar.h" />
     <ClInclude Include="src\PhysicalizedElement\ObjetBlock.h" />
     <ClInclude Include="src\PhysicalizedElement\PhysicalizedElement.h" />
@@ -369,7 +364,6 @@
     <ClInclude Include="src\PhysicalizedElement\Teleportable.h" />
     <ClInclude Include="src\Portal.h" />
     <ClInclude Include="src\ScenesMapping.h" />
-    <ClInclude Include="src\Shape2D.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Waterfalls.h" />
     <ClInclude Include="src\Wiimote.h" />
