@@ -321,7 +321,6 @@ void ofApp::input() {
 		}
 	}
 
-
 	std::cout << "Input end\n";
 
 }
