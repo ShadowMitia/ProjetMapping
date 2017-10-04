@@ -1,13 +1,12 @@
 #include "ofApp.h"
 
 
-
 vector<ofPolyline> importImage(const string& path){    
     ofImage image;
     vector<ofPolyline> poly;
     if (!image.load(path))
       {
-		throw std::invalid_argument(path);
+	throw std::invalid_argument(path);
       }
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
@@ -56,10 +55,13 @@ void ofApp::setup() {
 	////   Import Platform   /////
 	worlds->platforms.clear();
 
-	vector<ofPolyline>  platforms = importImage("Map_prog_Plateformes_Test.png");
+	std::vector<ofPolyline>  platforms = importImage("Map_prog_Plateformes_Test.png");
 	for (int i = 0; i < platforms.size() - 1; i++) {
 		worlds->createPlatform(platforms[i]);
 	}
+
+	std::cout << "Platforms loaded\n";
+
 	////   Import Ladder   /////
 	/*
 	vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
@@ -93,9 +95,6 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-#ifdef USE_WIIMOTE
-	wiiuse.update();
-#endif
     input();
     worlds->update();
     mapping.update();
@@ -269,24 +268,33 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 
 void ofApp::input() {
 
-	bool temp[4];
+#ifdef USE_WIIMOTE
+  wiiuse.update();
+#endif
+
+
+  bool temp[2] = {false, false};
+
 	if (ofxGLFWJoystick::one().getAxisValue(0, 0) > 0.5 || ofxGLFWJoystick::one().getAxisValue(0, 0) < -0.5) {
 		if (ofxGLFWJoystick::one().getAxisValue(0, 0)>0) {
 			temp[1] = true;
-			temp[0] = false;
+			//temp[0] = false;
 		}
 		else {
 			temp[0] = true;
-			temp[1] = false;
+			//temp[1] = false;
 		}
 	}
+	/*
 	else {
 		temp[1] = false;
 		temp[0] = false;
 	}
+	*/
 
 
 	ofxGLFWJoystick::one().update();
+
 	for (int joystickID = 0; joystickID < 1; joystickID++) {
 
 		if (inputButton[joystickID][2] != ofxGLFWJoystick::one().getButtonValue(13, joystickID)) {
@@ -312,6 +320,9 @@ void ofApp::input() {
 			else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
 		}
 	}
+
+
+	std::cout << "Input end\n";
 
 }
 

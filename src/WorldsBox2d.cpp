@@ -17,13 +17,25 @@ void WorldsBox2d::setup(){
 
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
 
+    std::cout << "Init world\n";
+
     importPortal();
-    
+
+    std::cout << "Loaded portals\n";
+
     for (unsigned int i = 0; i < 1; i++)
       {
 	//createAvatar(85, 85);
 	createAvatar(1200, 700);
       }
+
+	for (auto &avatar : avatars)
+	{
+		teleportables.push_back(avatar);
+	}
+
+    std::cout << "Loaded player\n";
+
 
     ofPolyline pickupForm;
     pickupForm.addVertex(0, 0);
@@ -38,11 +50,13 @@ void WorldsBox2d::setup(){
     pickups.push_back(p);
     pickups.back()->setPosition(2800, 600);
 
-
-	for (auto &avatar : avatars)
+	for (auto &pickup : pickups)
 	{
-		teleportables.push_back(avatar);
+	  teleportables.push_back(pickup);
 	}
+
+	std::cout << "Loaded pickups\n";
+
 
     ofPolyline blockForm;
     blockForm.addVertex(0, 0);
@@ -59,6 +73,9 @@ void WorldsBox2d::setup(){
 	{
 	  teleportables.push_back(block);
 	}
+
+	std::cout << "Loaded blocks\n";
+
 
     warterfalls = new Waterfalls(&world);
 
@@ -127,11 +144,33 @@ void WorldsBox2d::createAvatar(int x, int y){
 }
 
 void WorldsBox2d::update(){
+
+  std::cout << "Update\n";
+
     world.update();
+    std::cout << "Updated world\n";
+
     
     for (int i = 0; i< portals.size(); i++) {
         portals[i]->update(teleportables);
     }
+
+    std::cout << "Updated portals\n";
+
+    for (auto &block : blocks)
+    {
+      block->update();
+    }
+
+  std::cout << "Updated blocks\n";
+
+    for (auto &pickup : pickups)
+    {
+      pickup->update();
+    }
+
+  std::cout << "Updated pickups\n";
+
     
     for (int j = 0; j < avatars.size(); j++)
     {
@@ -149,11 +188,9 @@ void WorldsBox2d::update(){
         }
       avatars[j]->update();
     }
-   
-  for (auto &block : blocks)
-    {
-      block->update();
-    }
+
+    std::cout << "Updated avatars\n";
+
 
     //warterfalls->update();
 }
