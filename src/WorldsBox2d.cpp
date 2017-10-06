@@ -143,6 +143,13 @@ void WorldsBox2d::update(){
       block->update();
     }
 
+    for (auto& pickup : pickups)
+      {
+	pickup->update();
+      }
+
+    pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [](const auto& p){ return p->isCollected(); }), pickups.end());
+
     for (unsigned int i = 0; i < pickups.size(); ++i)
     {
       pickups[i]->update();
