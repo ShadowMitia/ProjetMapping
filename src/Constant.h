@@ -48,22 +48,7 @@ enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
 
 class PhysicalizedElement;
 
-class dataSprite {
-public:
-    
-    Sprite getSprite()
-    {
-        return sprite;
-    }
-    
-    void setSprite(Sprite _sprite)
-    {
-        sprite = _sprite;
-    }
-    
+struct dataSprite {
     PhysicalizedElement* Element;
-    
     Sprite sprite = Sprite::UNKNOWN;
-    
 };
-

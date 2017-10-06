@@ -106,12 +106,12 @@ PROJECT_LDFLAGS= -lwiiuse
 #
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
-#PROJECT_CFLAGS =
+#PROJECT_CFLAGS = -Wall -Wextra -Wduplicated-cond -Wduplicated-branches -Wnull-dereference -Wuseless-cast -Wdouble-promotion -Wshadow
 
 ################################################################################
 # PROJECT OPTIMIZATION CFLAGS
 #   These are lists of CFLAGS that are target-specific.  While any flags could 
-#   be conditionally added, they are usually limited to optimization flags. 
+#   be conditionally added, they are usually limited to optimization flags.
 #   These flags are added BEFORE the PROJECT_CFLAGS.
 #
 #   PROJECT_OPTIMIZATION_CFLAGS_RELEASE flags are only applied to RELEASE targets.

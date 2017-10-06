@@ -3,11 +3,13 @@
 
 vector<ofPolyline> importImage(const string& path){    
     ofImage image;
-    vector<ofPolyline> poly;
+    std::vector<ofPolyline> poly;
+
     if (!image.load(path))
       {
 	throw std::invalid_argument(path);
       }
+
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
     contourFinder.setMaxAreaRadius(1000); //1000 max
@@ -15,7 +17,7 @@ vector<ofPolyline> importImage(const string& path){
     contourFinder.setFindHoles(true);
     contourFinder.findContours(image);
     
-    for (int i =0 ; i<contourFinder.getPolylines().size(); i++){
+    for (int i = 0 ; i < contourFinder.getPolylines().size(); i++){
         ofPolyline tempPoly;
         tempPoly = contourFinder.getPolyline(i);
         tempPoly.addVertex(tempPoly.getVertices().at(0));
@@ -60,8 +62,6 @@ void ofApp::setup() {
 		worlds->createPlatform(platforms[i]);
 	}
 
-	std::cout << "Platforms loaded\n";
-
 	////   Import Ladder   /////
 	/*
 	vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
@@ -89,6 +89,10 @@ void ofApp::setup() {
 
 #ifdef USE_WIIMOTE
 	wiiuse.addListener(this);
+	for (int i = 0; i < wiiuse.getNumberOfConnectedWiimotes(); i++)
+	  {
+	    wiiuse.setLed(i, i + 1);
+	  }
 #endif
 
 }
@@ -195,14 +199,11 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
 			return;
 		}
 
-		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
-		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
-
-		if (aPhysicalizedElement)
+		if ( aSprite->Element != nullptr)
 		{
 			//aPhysicalizedElement->contactStart(bSprite);
 		}
-		if (bPhysicalizedElement)
+		if ( aSprite->Element != nullptr)
 		{
 			//bPhysicalizedElement->contactStart(aSprite);
 		}
@@ -220,16 +221,13 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 			return;
 		}
 
-		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
-		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
-
-		if (aPhysicalizedElement)
+		if (aSprite->Element != nullptr)
 		{
-			aPhysicalizedElement->contactEnd(bSprite);
+		  aSprite->Element->contactEnd(bSprite);
 		}
-		if (bPhysicalizedElement)
+		if (bSprite->Element)
 		{
-			bPhysicalizedElement->contactEnd(aSprite);
+		  bSprite->Element->contactEnd(aSprite);
 		}
 	}
 }
@@ -242,25 +240,22 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 {
 	if (e.a != nullptr && e.b != nullptr && e.impulse != nullptr)
 	{
-		dataSprite* aSprite = reinterpret_cast<dataSprite*>(e.a->GetBody()->GetUserData());
-		dataSprite* bSprite = reinterpret_cast<dataSprite*>(e.b->GetBody()->GetUserData());
+	  dataSprite* aSprite = (dataSprite*)(e.a->GetBody()->GetUserData());
+	  dataSprite* bSprite = (dataSprite*)(e.b->GetBody()->GetUserData());
 
 		if (aSprite == nullptr || bSprite == nullptr)
 		{
 			return;
 		}
 
-		PhysicalizedElement* aPhysicalizedElement = dynamic_cast<PhysicalizedElement*>(aSprite->Element);
-		PhysicalizedElement* bPhysicalizedElement = dynamic_cast<PhysicalizedElement*>(bSprite->Element);
-
-		if (aPhysicalizedElement != nullptr)
+		if (aSprite->Element != nullptr)
 		{
-		  aPhysicalizedElement->PostSolve(bSprite, e.impulse);
+		  aSprite->Element->PostSolve(bSprite, e.impulse);
 		}
 
-		if (bPhysicalizedElement != nullptr)
+		if (bSprite->Element != nullptr)
 		{
-		  bPhysicalizedElement->PostSolve(aSprite, e.impulse);
+		  bSprite->Element->PostSolve(aSprite, e.impulse);
 		}
 	}
 }
@@ -320,8 +315,6 @@ void ofApp::input() {
 			else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
 		}
 	}
-
-	std::cout << "Input end\n";
 
 }
 

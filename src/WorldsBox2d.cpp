@@ -17,11 +17,7 @@ void WorldsBox2d::setup(){
 
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
 
-    std::cout << "Init world\n";
-
     importPortal();
-
-    std::cout << "Loaded portals\n";
 
     for (unsigned int i = 0; i < 1; i++)
       {
@@ -29,13 +25,10 @@ void WorldsBox2d::setup(){
 	createAvatar(1200, 700);
       }
 
-	for (auto &avatar : avatars)
-	{
-		teleportables.push_back(avatar);
-	}
-
-    std::cout << "Loaded player\n";
-
+    for (auto &avatar : avatars)
+      {
+	teleportables.push_back(avatar);
+      }
 
     ofPolyline pickupForm;
     pickupForm.addVertex(0, 0);
@@ -46,16 +39,15 @@ void WorldsBox2d::setup(){
 
 
     PickUp* p = new PickUp(world.getWorld(), pickupForm);
+    p->setPosition(1400, 700);
 
     pickups.push_back(p);
-    pickups.back()->setPosition(2800, 600);
 
-	for (auto &pickup : pickups)
-	{
-	  teleportables.push_back(pickup);
-	}
 
-	std::cout << "Loaded pickups\n";
+    for (auto &pickup : pickups)
+      {
+	teleportables.push_back(pickup);
+      }
 
 
     ofPolyline blockForm;
@@ -69,18 +61,15 @@ void WorldsBox2d::setup(){
     ObjectBlock* block = new ObjectBlock(world.getWorld(), blockForm);
     blocks.push_back(block);
 
-	for (auto &block : blocks)
-	{
-	  teleportables.push_back(block);
-	}
-
-	std::cout << "Loaded blocks\n";
-
+    for (auto &block : blocks)
+    {
+      teleportables.push_back(block);
+    }
 
     warterfalls = new Waterfalls(&world);
 
-
 }
+
 void WorldsBox2d::createCircle(float _x,float _y){
     float r = ofRandom(4, 20);
     circles.push_back(std::make_shared<ofxBox2dCircle>());
@@ -92,21 +81,20 @@ void WorldsBox2d::createCircle(float _x,float _y){
 
 void WorldsBox2d::draw(){
 
-    
-    
-    
+  /*
   for (auto &portal : portals) 
   {
-		//portal->draw();
+     portal->draw();
   }
+  */
 
   for (auto &platform : platforms) 
   {
-    ofSetHexColor(0xFF0000);
-      platform->ground.draw();
+     ofSetHexColor(0xFF0000);
+     platform->ground.draw();
   }
 
-  for (int i = 0; i < circles.size(); i++) {
+  for (unsigned int i = 0; i < circles.size(); i++) {
     ofFill();
     ofSetHexColor(0xf6c738);
     circles[i].get()->draw();
@@ -136,41 +124,33 @@ void WorldsBox2d::draw(){
 }
 void WorldsBox2d::createAvatar(int x, int y){
     Avatar * avatar = new Avatar(&world);
-    avatar->polygon.setData(new typeBox2d);
-    typeBox2d *sd  = (typeBox2d*) avatar->polygon.getData();
-    sd->type = typeBox2d::Type::AVATAR;
+    //avatar->polygon.setData(new typeBox2d);
+    //typeBox2d *sd  = (typeBox2d*) avatar->polygon.getData();
+    //sd->type = typeBox2d::Type::AVATAR;
     avatar->setPosition(x, y);
     avatars.push_back(avatar);
 }
 
 void WorldsBox2d::update(){
-
-  std::cout << "Update\n";
-
     world.update();
-    std::cout << "Updated world\n";
-
     
     for (int i = 0; i< portals.size(); i++) {
         portals[i]->update(teleportables);
     }
-
-    std::cout << "Updated portals\n";
 
     for (auto &block : blocks)
     {
       block->update();
     }
 
-  std::cout << "Updated blocks\n";
-
-    for (auto &pickup : pickups)
+    for (unsigned int i = 0; i < pickups.size(); ++i)
     {
-      pickup->update();
+      pickups[i]->update();
+      if (pickups[i]->isCollected())
+	{
+	  pickups.erase(pickups.begin() + i);
+	}
     }
-
-  std::cout << "Updated pickups\n";
-
     
     for (int j = 0; j < avatars.size(); j++)
     {
@@ -188,8 +168,6 @@ void WorldsBox2d::update(){
         }
       avatars[j]->update();
     }
-
-    std::cout << "Updated avatars\n";
 
 
     //warterfalls->update();

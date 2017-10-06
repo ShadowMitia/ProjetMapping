@@ -6,7 +6,7 @@
 class Timer {
 
   uint64_t startTime = 0;
-  bool isPlaying = false;
+  bool isRunning = false;
 
 public:
   Timer() = default;
@@ -16,16 +16,16 @@ public:
   }
 
   void start() {
-    isPlaying = true;
+    isRunning = true;
     startTime = ofGetElapsedTimeMillis();
   }
 
-  bool isStarted() {
-    return isPlaying;
+  bool isStarted() const {
+    return isRunning;
   }
 
-  uint64_t getElapsedMillis() {
-    if (isPlaying){
+  uint64_t getElapsedMillis() const {
+    if (isRunning){
       return ofGetElapsedTimeMillis() - startTime;
     } else {
       return 0;
@@ -34,7 +34,7 @@ public:
 
   void stop() {
     startTime = 0;
-    isPlaying = false;
+    isRunning = false;
   }
 
   void reset() {

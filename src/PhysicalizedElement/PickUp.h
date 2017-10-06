@@ -40,18 +40,25 @@ public:
     {
         return pickUp.getPosition();
     }
+
+  void setCollected()
+  {
+    collected = true;
+  }
+
+  bool isCollected() const
+  {
+    return collected;
+  }
     
 private:
     ofxBox2dPolygon pickUp;
-    
-    int width;
-    int height;
-    
+
     std::unique_ptr<PickUp> clone;
     
     b2World* box2d;
     
     ofVec2f cloneTranslation;
 
-    
+  bool collected = false;
 };

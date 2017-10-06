@@ -64,8 +64,7 @@ class ofApp : public ofBaseApp {
 
 private:
   void input();
-  bool inputButton[1][6] = { false };
-
+  bool inputButton[1][6] = { { false } };
 
   bool fullscreen = false;
 

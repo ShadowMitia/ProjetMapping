@@ -10,7 +10,6 @@
 #include "ofxBox2d.h"
 #include "PhysicalizedElement/Avatar.h"
 #include "Portal.h"
-#include "Wiimotes.h"
 #include "PhysicalizedElement/Platform.h"
 #include "PhysicalizedElement/ObjetBlock.h"
 #include "PhysicalizedElement/PickUp.h"
@@ -19,7 +18,7 @@
 #include "Waterfalls.h"
 
 
-
+/*
 template<class T>
 class data : public T , public dataSprite{};
 
@@ -28,7 +27,7 @@ public:
     enum class Type { AVATAR, PLATFORM, FOOT };
     Type type;
 };
-
+*/
 
 class WorldsBox2d {
 public:

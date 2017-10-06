@@ -36,7 +36,7 @@ private:
     bool top =false;
     
     int countAirControl;
-	float moveInputX;
+  float moveInputX;
     float moveInputY;
     vector<bool>  pickupAvatar;
 
@@ -66,6 +66,8 @@ public:
   virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
 
 };
+
+/*
 class dataAvatar: public dataSprite {
 public:
     dataAvatar(){
@@ -88,3 +90,5 @@ public:
         setSprite(Sprite::FOOT);
     }
 };
+
+*/
