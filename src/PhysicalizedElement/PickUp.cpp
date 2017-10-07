@@ -111,9 +111,9 @@ bool PickUp::hasClone()
     return clone ? true : false;
 }
 
-void PickUp::contactStart(dataSprite* OtherSprite) {
+void PickUp::contactStart(dataSprite* OtherSprite)
+{
   PhysicalizedElement::contactStart(OtherSprite);
-
 }
 
 void PickUp::contactEnd(dataSprite* OtherSprite)
@@ -122,8 +122,7 @@ void PickUp::contactEnd(dataSprite* OtherSprite)
     
 }
 
-void PickUp::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {
+void PickUp::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
+{
   PhysicalizedElement::PostSolve(OtherSprite, impulse);
-
-
 }
