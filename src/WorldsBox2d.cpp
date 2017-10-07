@@ -21,7 +21,7 @@ void WorldsBox2d::setup(){
     
     for (unsigned int i = 0; i < 1; i++)
       {
-		//createAvatar(85, 85);
+		createAvatar(1250, 700);
 		createAvatar(1200, 700);
 
       }
