@@ -51,9 +51,9 @@ public:
     return collected;
   }
     
-private:
     ofxBox2dPolygon pickUp;
 
+private:
     std::unique_ptr<PickUp> clone;
     
     b2World* box2d;

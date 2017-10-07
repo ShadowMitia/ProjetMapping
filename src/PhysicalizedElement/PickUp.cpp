@@ -10,7 +10,7 @@
 
 PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
 {
-    pickUp.setPhysics(3.0, 0.0, 0.0);
+    pickUp.setPhysics(3.0, 0.0, 10.0);
     
     pickUp.addVertices(_polyline.getVertices());
     
@@ -124,4 +124,6 @@ void PickUp::contactEnd(dataSprite* OtherSprite)
 
 void PickUp::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {
   PhysicalizedElement::PostSolve(OtherSprite, impulse);
+
+
 }

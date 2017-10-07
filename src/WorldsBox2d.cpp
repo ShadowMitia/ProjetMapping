@@ -123,6 +123,7 @@ void WorldsBox2d::draw(){
     //world.draw();
 
 }
+
 void WorldsBox2d::createAvatar(int x, int y){
     Avatar * avatar = new Avatar(&world);
     avatar->setPosition(x, y);
@@ -131,7 +132,7 @@ void WorldsBox2d::createAvatar(int x, int y){
 
 void WorldsBox2d::update(){
 
-  pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [](auto& p){ return p->isCollected(); }), pickups.end());
+  pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) world.getWorld()->DestroyBody(p->pickUp.body); return res; }), pickups.end());
   
     world.update();
     
