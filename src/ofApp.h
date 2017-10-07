@@ -14,7 +14,7 @@
 
 #include "ofxGLFWJoystick.h"
 
-#define USE_WIIMOTE
+//#define USE_WIIMOTE
 
 #ifdef USE_WIIMOTE
 #include "ofxWiiuse.h"
@@ -64,8 +64,7 @@ class ofApp : public ofBaseApp {
 
 private:
   void input();
-  bool inputButton[1][6] = { false };
-
+  bool inputButton[1][6] = { { false } };
 
   bool fullscreen = false;
 

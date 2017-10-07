@@ -7,8 +7,9 @@
 //
 #include "Avatar.h"
 #include "Platform.h"
+#include "PickUp.h"
 
-std::vector <ofPoint> loadPoints(std::string file) {
+std::vector <ofPoint> loadPoints(const std::string& file) {
     std::vector <ofPoint> pts;
     std::vector <std::string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
     for (unsigned int i = 0; i < ptsStr.size(); i += 2) {
@@ -36,6 +37,8 @@ Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
     tempFilter.categoryBits = 0x0001;
     tempFilter.maskBits = 0xFFFF;
     polygon.setFilterData(tempFilter);
+
+
     /////////////// FOOT ///////////////
     ofRectangle temp = polygon.getBoundingBox();
     temp.height = 5;
@@ -43,6 +46,8 @@ Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
     foot.setPhysics(3.0, 0.53, 0.1);
     foot.setup(box2d->getWorld(), temp);
     foot.body->SetGravityScale(0);
+
+
     tempFilter.categoryBits = 0x0002;
     tempFilter.maskBits =  0x0004;
     foot.setFilterData(tempFilter);
@@ -52,6 +57,7 @@ Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
 	ClicJump = false;
 
 /////////////////////////  Data /////////////////
+	/*
     dataAvatar* dataAv = new dataAvatar;
     dataAv->setSprite(Sprite::AVATAR);
     polygon.setData(dataAv);
@@ -59,7 +65,19 @@ Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
     dataFo->setSprite(Sprite::FOOT);
     dataFo->Element = this;
     foot.setData(dataFo);
-    
+	*/
+
+	polygon.setData(new dataSprite());
+
+	dataSprite* data = (dataSprite*)polygon.getData();
+	data->sprite = Sprite::AVATAR;
+	data->Element = this;
+
+	foot.setData(new dataSprite());
+	data = (dataSprite*)polygon.getData();
+	data->sprite = Sprite::FOOT;
+	data->Element = this;
+
     
     modeDeplace = Deplacement::PLATFORM;
     
@@ -128,13 +146,11 @@ void Avatar::createClone(ofVec2f cloneTranslation) {
 }
 
 void Avatar::removeClone() {
-  //lightSystemRef->remove(clone->light);
   clone = nullptr;
   cloneTranslation.zero();
 
 }
 void Avatar::teleportToClone() {
-  //lightSystemRef->remove(clone->light);
 
   auto vel = polygon.getVelocity();
   polygon.setPosition(clone->polygon.getPosition());
@@ -151,12 +167,13 @@ void Avatar::setPosition(ofVec2f vec)
 {
 	setPosition(vec.x, vec.y);
 }
+
 void Avatar::setPosition(int x, int y)
 {
   polygon.setPosition(x, y);
   collisionRect.setPosition(x, y);
-  //light->setPosition(ofVec2f(x, y));
 }
+
 void Avatar::move(float inputX)
 {
 	float speed = VarConst::speedAvatar;
@@ -172,6 +189,7 @@ void Avatar::move(float inputX)
 	impulse *= (1 - std::min(std::abs(polygon.getVelocity().x), speedMax) / speedMax);
 	polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
+
 void Avatar::move(float inputX,float inputY)
 {
 
@@ -182,8 +200,8 @@ void Avatar::move(float inputX,float inputY)
     impulse.y = speed * inputY * 1.0f;
     impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
     polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
-    
 }
+
 void Avatar::jump()
 {
 	if (!jumping)
@@ -210,6 +228,7 @@ void Avatar::jump()
 		polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
 	}
 }
+
 void Avatar::keyPressed(int key)
 {
 	if (key == OF_KEY_LEFT || key == 'q')
@@ -239,6 +258,7 @@ void Avatar::keyPressed(int key)
 	}
 
 }
+
 void Avatar::keyReleased(int key)
 {
 
@@ -284,11 +304,12 @@ void Avatar::keyReleased(int key)
 		ClicJump = false;
 	}
 }
+
 void Avatar::contactStart(dataSprite* OtherSprite)
 {
 	PhysicalizedElement::contactStart(OtherSprite);
 
-	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
+	if (OtherSprite->sprite == Sprite::PLATFORM)
 	{
 		jumping = false;
 		if (!(abs(moveInputX) > 0))
@@ -298,21 +319,23 @@ void Avatar::contactStart(dataSprite* OtherSprite)
 	}
 
 }
+
 void Avatar::contactEnd(dataSprite* OtherSprite)
 {
 	
 	PhysicalizedElement::contactEnd(OtherSprite);
 
-	if (OtherSprite->getSprite() == Sprite::PLATFORM) 
+	if (OtherSprite->sprite == Sprite::PLATFORM)
 	{
 		jumping = true;
 	}
 }
+
 void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
 	PhysicalizedElement::PostSolve(OtherSprite, impulse);
 
-	if (OtherSprite->getSprite() == Sprite::PLATFORM)
+	if (OtherSprite->sprite == Sprite::PLATFORM)
 	{
 		//cout << "normalImpulses [0] : " << impulse->normalImpulses[0] << "normalImpulses [1] : " << impulse->normalImpulses[1] << endl;
 		//cout << "tangentImpulses [0] : " << impulse->tangentImpulses[0] << "tangentImpulses [1] : " << impulse->tangentImpulses[1] << endl;
@@ -323,5 +346,8 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 
 			polygon.setVelocity(0, polygon.getVelocity().y);
 		}
-	}
+	} else if (OtherSprite->sprite == Sprite::PICKUP)
+	  {
+	    static_cast<PickUp*>(OtherSprite->Element)->setCollected();
+	  }
 }

@@ -1,14 +1,15 @@
 #include "ofApp.h"
 
 
-
 vector<ofPolyline> importImage(const string& path){    
     ofImage image;
-    vector<ofPolyline> poly;
+    std::vector<ofPolyline> poly;
+
     if (!image.load(path))
       {
-		throw std::invalid_argument(path);
+	throw std::invalid_argument(path);
       }
+
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
     contourFinder.setMaxAreaRadius(1000); //1000 max
@@ -16,7 +17,7 @@ vector<ofPolyline> importImage(const string& path){
     contourFinder.setFindHoles(true);
     contourFinder.findContours(image);
     
-    for (int i =0 ; i<contourFinder.getPolylines().size(); i++){
+    for (int i = 0 ; i < contourFinder.getPolylines().size(); i++){
         ofPolyline tempPoly;
         tempPoly = contourFinder.getPolyline(i);
         tempPoly.addVertex(tempPoly.getVertices().at(0));
@@ -56,10 +57,11 @@ void ofApp::setup() {
 	////   Import Platform   /////
 	worlds->platforms.clear();
 
-	vector<ofPolyline>  platforms = importImage("Map_prog_Plateformes_Test.png");
+	std::vector<ofPolyline>  platforms = importImage("Map_prog_Plateformes_Test.png");
 	for (int i = 0; i < platforms.size() - 1; i++) {
 		worlds->createPlatform(platforms[i]);
 	}
+
 	////   Import Ladder   /////
 	/*
 	vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
@@ -87,15 +89,16 @@ void ofApp::setup() {
 
 #ifdef USE_WIIMOTE
 	wiiuse.addListener(this);
+	for (int i = 0; i < wiiuse.getNumberOfConnectedWiimotes(); i++)
+	  {
+	    wiiuse.setLed(i, i + 1);
+	  }
 #endif
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-#ifdef USE_WIIMOTE
-	wiiuse.update();
-#endif
     input();
     worlds->update();
     mapping.update();
@@ -196,14 +199,11 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
 			return;
 		}
 
-		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
-		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
-
-		if (aPhysicalizedElement)
+		if ( aSprite->Element != nullptr)
 		{
 			//aPhysicalizedElement->contactStart(bSprite);
 		}
-		if (bPhysicalizedElement)
+		if ( aSprite->Element != nullptr)
 		{
 			//bPhysicalizedElement->contactStart(aSprite);
 		}
@@ -221,16 +221,13 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 			return;
 		}
 
-		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
-		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
-
-		if (aPhysicalizedElement)
+		if (aSprite->Element != nullptr)
 		{
-			aPhysicalizedElement->contactEnd(bSprite);
+		  aSprite->Element->contactEnd(bSprite);
 		}
-		if (bPhysicalizedElement)
+		if (bSprite->Element)
 		{
-			bPhysicalizedElement->contactEnd(aSprite);
+		  bSprite->Element->contactEnd(aSprite);
 		}
 	}
 }
@@ -238,28 +235,27 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 void ofApp::PreSolve(ofxBox2dPreContactArgs &e)
 {
 }
+
 void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 {
 	if (e.a != nullptr && e.b != nullptr && e.impulse != nullptr)
 	{
-		dataSprite* aSprite = reinterpret_cast<dataSprite*>(e.a->GetBody()->GetUserData());
-		dataSprite* bSprite = reinterpret_cast<dataSprite*>(e.b->GetBody()->GetUserData());
+	  dataSprite* aSprite = (dataSprite*)(e.a->GetBody()->GetUserData());
+	  dataSprite* bSprite = (dataSprite*)(e.b->GetBody()->GetUserData());
 
 		if (aSprite == nullptr || bSprite == nullptr)
 		{
 			return;
 		}
 
-		PhysicalizedElement* aPhysicalizedElement = aSprite->Element;
-		PhysicalizedElement* bPhysicalizedElement = bSprite->Element;
-
-		if (aPhysicalizedElement)
+		if (aSprite->Element != nullptr)
 		{
-			aPhysicalizedElement->PostSolve(bSprite, e.impulse);
+		  aSprite->Element->PostSolve(bSprite, e.impulse);
 		}
-		if (bPhysicalizedElement)
+
+		if (bSprite->Element != nullptr)
 		{
-			bPhysicalizedElement->PostSolve(aSprite, e.impulse);
+		  bSprite->Element->PostSolve(aSprite, e.impulse);
 		}
 	}
 }
@@ -267,24 +263,33 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 
 void ofApp::input() {
 
-	bool temp[4];
-	if (ofxGLFWJoystick::one().getAxisValue(0, 0)> 0.5 || ofxGLFWJoystick::one().getAxisValue(0, 0)< -0.5) {
+#ifdef USE_WIIMOTE
+  wiiuse.update();
+#endif
+
+
+  bool temp[2] = {false, false};
+
+	if (ofxGLFWJoystick::one().getAxisValue(0, 0) > 0.5 || ofxGLFWJoystick::one().getAxisValue(0, 0) < -0.5) {
 		if (ofxGLFWJoystick::one().getAxisValue(0, 0)>0) {
 			temp[1] = true;
-			temp[0] = false;
+			//temp[0] = false;
 		}
 		else {
 			temp[0] = true;
-			temp[1] = false;
+			//temp[1] = false;
 		}
 	}
+	/*
 	else {
 		temp[1] = false;
 		temp[0] = false;
 	}
+	*/
 
 
 	ofxGLFWJoystick::one().update();
+
 	for (int joystickID = 0; joystickID < 1; joystickID++) {
 
 		if (inputButton[joystickID][2] != ofxGLFWJoystick::one().getButtonValue(13, joystickID)) {

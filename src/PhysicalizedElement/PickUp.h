@@ -30,24 +30,35 @@ public:
     void contactStart(dataSprite* OtherSprite) override;
     void contactEnd(dataSprite* OtherSprite) override;
     void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
-    
+
+  void setPosition(float x, float y)
+  {
+    pickUp.setPosition(x, y);
+  }
+
     ofVec2f getPosition()
     {
         return pickUp.getPosition();
     }
+
+  void setCollected()
+  {
+    collected = true;
+  }
+
+  bool isCollected() const
+  {
+    return collected;
+  }
     
 private:
     ofxBox2dPolygon pickUp;
-    
-    int width;
-    int height;
-    
+
     std::unique_ptr<PickUp> clone;
     
     b2World* box2d;
     
     ofVec2f cloneTranslation;
-    
 
-    
+  bool collected = false;
 };

@@ -17,9 +17,10 @@
 
 class Waterfalls{
 public:
+    Waterfalls() = delete;
     Waterfalls(ofxBox2d* _box2d);
     ofxBox2dParticleSystem waters;
-    ofRectangle       spawn,despawn;
+    ofRectangle       spawn, despawn;
     void update();
     void draw();
     ofPolyline polyWater;
@@ -30,6 +31,7 @@ private:
     void despawnWater();
 };
 
+/*
 class dataWater: public dataSprite {
 public:
     dataWater(){
@@ -37,4 +39,4 @@ public:
     }
     //Water* WaterPtr;
 };
-
+*/

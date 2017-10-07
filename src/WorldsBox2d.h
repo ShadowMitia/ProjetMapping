@@ -10,15 +10,15 @@
 #include "ofxBox2d.h"
 #include "PhysicalizedElement/Avatar.h"
 #include "Portal.h"
-#include "Wiimotes.h"
 #include "PhysicalizedElement/Platform.h"
 #include "PhysicalizedElement/ObjetBlock.h"
+#include "PhysicalizedElement/PickUp.h"
 #include "Constant.h"
 #include "Ladder.h"
 #include "Waterfalls.h"
 
 
-
+/*
 template<class T>
 class data : public T , public dataSprite{};
 
@@ -27,7 +27,7 @@ public:
     enum class Type { AVATAR, PLATFORM, FOOT };
     Type type;
 };
-
+*/
 
 class WorldsBox2d {
 public:
@@ -42,6 +42,9 @@ public:
     std::vector< Platform * > platforms;
     std::vector< ObjectBlock * > blocks;
     std::vector< Ladder * > ladders;
+  std::vector<PickUp*>  pickups;
+
+
     Waterfalls*               warterfalls;
     
     std::vector<Teleportable*> teleportables;

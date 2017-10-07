@@ -17,31 +17,38 @@ PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
     int width = 1000000;
     int height = 1000000;
     
-    auto p = _polyline.getVertices();
+    const auto& p = _polyline.getVertices();
     for (int i = 0; i < p.size(); i++)
     {
         if (p[i].x < width) { width = p[i].x; }
         
         if (p[i].y < height) { height = p[i].y; }
     }
-    
-    this->width = width;
-    this->height = height;
-    
+
+    collisionRect.width = width;
+    collisionRect.height = height;
+
+    auto pos = pickUp.getPosition();
+    collisionRect.x = pos.x;
+    collisionRect.y = pos.y;
+
     pickUp.create(_box2d);
+
+
     pickUp.body->SetFixedRotation(true);
-    
-    collisionRect.set(pickUp.getPosition().x, pickUp.getPosition().y, width, height);
+
+    collisionRect.set(pickUp.getPosition().x, pickUp.getPosition().y, collisionRect.width, collisionRect.height);
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;
     tempFilter.maskBits = 0xFFFF;
     pickUp.setFilterData(tempFilter);
-    
-    dataSprite* data = new dataSprite;
-    data->setSprite(Sprite::PICKUP);
+
+    pickUp.setData(new dataSprite);
+    dataSprite* data = (dataSprite*)pickUp.getData();
+    data->sprite = Sprite::PICKUP;
     data->Element = this;
-    pickUp.setData(data);
+
     
     this->box2d = _box2d;
 }
@@ -49,9 +56,7 @@ PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
 void PickUp::update()
 {
     
-
-    
-    collisionRect.set(pickUp.getPosition().x - width / 2, pickUp.getPosition().y - height / 2, width, height);
+  //collisionRect.set(pickUp.getPosition().x - collisionRect.width / 2, pickUp.getPosition().y - height / 2, width, height);
     
     if (clone)
     {
@@ -62,10 +67,11 @@ void PickUp::update()
 
 void PickUp::draw()
 {
-    pickUp.draw();
+  ofSetColor(ofColor::green);
+  pickUp.draw();
     
     //ofSetColor(ofColor::orange);
-    //ofDrawRectangle(collisionRect);
+    //ofDrawCollisionRect(collisionRect);
     
     if (clone)
     {
@@ -106,15 +112,16 @@ bool PickUp::hasClone()
 }
 
 void PickUp::contactStart(dataSprite* OtherSprite) {
+  PhysicalizedElement::contactStart(OtherSprite);
 
 }
 
 void PickUp::contactEnd(dataSprite* OtherSprite)
 {
-    
+  PhysicalizedElement::contactEnd(OtherSprite);
     
 }
 
 void PickUp::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {
-
+  PhysicalizedElement::PostSolve(OtherSprite, impulse);
 }

@@ -6,7 +6,7 @@
 //
 //
 #pragma once
-#include "PhysicalizedElement/PhysicalizedElement.h"
+
 
 
 namespace VarConst
@@ -46,22 +46,9 @@ enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
 enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
 
-class dataSprite {
-public:
-    
-    Sprite getSprite()
-    {
-        return sprite;
-    }
-    
-    void setSprite(Sprite _sprite)
-    {
-        sprite = _sprite;
-    }
-    
-    PhysicalizedElement* Element;
-    
-    Sprite sprite = Sprite::UNKNOWN;
-    
-};
+class PhysicalizedElement;
 
+struct dataSprite {
+    PhysicalizedElement* Element;
+    Sprite sprite = Sprite::UNKNOWN;
+};

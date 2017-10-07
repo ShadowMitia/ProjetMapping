@@ -14,10 +14,12 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine){
     ground.addVertexes(_groundLine);
     ground.setPhysics(0, 0, 0.5f); // (0.0, 0.1, 0.7)
     ground.create(_b2World);
-    dataPlatform * data = new dataPlatform;
-    data->setSprite(Sprite::PLATFORM);
-	data->Element = this;
-    ground.setData(data);
+
+    ground.setData(new dataSprite());
+    dataSprite* data = (dataSprite*)ground.getData();
+    data->sprite = Sprite::PLATFORM;
+    data->Element = this;
+
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0004;
     tempFilter.maskBits = 0x0002 | 0x0001;
