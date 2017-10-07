@@ -37,6 +37,11 @@ public:
   {
     return box.getPosition();
   }
+
+  void setPosition(int x, int y)
+  {
+    box.setPosition(x, y);
+  }
   
 private:
   ofxBox2dPolygon box;

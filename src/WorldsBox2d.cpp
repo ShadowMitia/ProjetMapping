@@ -21,8 +21,8 @@ void WorldsBox2d::setup(){
 
     for (unsigned int i = 0; i < 1; i++)
       {
-		createAvatar(1250, 700);
-		//createAvatar(1200, 700);
+	createAvatar(1250, 700);
+	//createAvatar(1200, 700);
       }
 
     for (auto &avatar : avatars)
@@ -59,6 +59,7 @@ void WorldsBox2d::setup(){
 
 
     ObjectBlock* block = new ObjectBlock(world.getWorld(), blockForm);
+    block->setPosition(1300, 700);
     blocks.push_back(block);
 
     for (auto &block : blocks)
@@ -82,13 +83,13 @@ void WorldsBox2d::createCircle(float _x,float _y){
 void WorldsBox2d::draw(){
 
   /*
-  for (auto &portal : portals) 
+  for (auto &portal : portals)
   {
      portal->draw();
   }
   */
 
-  for (auto &platform : platforms) 
+  for (auto &platform : platforms)
   {
      ofSetHexColor(0xFF0000);
      platform->ground.draw();
@@ -99,8 +100,8 @@ void WorldsBox2d::draw(){
     ofSetHexColor(0xf6c738);
     circles[i].get()->draw();
   }
-    
-    
+
+
   for (auto &block : blocks)
     {
       ofSetHexColor(0xFFFFF);
@@ -124,14 +125,14 @@ void WorldsBox2d::draw(){
 }
 void WorldsBox2d::createAvatar(int x, int y){
     Avatar * avatar = new Avatar(&world);
-    //avatar->polygon.setData(new typeBox2d);
-    //typeBox2d *sd  = (typeBox2d*) avatar->polygon.getData();
-    //sd->type = typeBox2d::Type::AVATAR;
     avatar->setPosition(x, y);
     avatars.push_back(avatar);
 }
 
 void WorldsBox2d::update(){
+
+  pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [](auto& p){ return p->isCollected(); }), pickups.end());
+  
     world.update();
     
     for (int i = 0; i< portals.size(); i++) {
@@ -148,17 +149,7 @@ void WorldsBox2d::update(){
 	pickup->update();
       }
 
-    pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [](const auto& p){ return p->isCollected(); }), pickups.end());
 
-    for (unsigned int i = 0; i < pickups.size(); ++i)
-    {
-      pickups[i]->update();
-      if (pickups[i]->isCollected())
-	{
-	  pickups.erase(pickups.begin() + i);
-	}
-    }
-    
     for (int j = 0; j < avatars.size(); j++)
     {
         avatars[j]->presUpdate();
@@ -217,7 +208,7 @@ void WorldsBox2d::importPortal(){
     int sizeH = 160;
     int sizeW = 2;
 
-
+    /*
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::LEFT, 80, 80, sizeW, sizeH));// portal:0
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::LEFT, 240, 80, sizeW, sizeH));// portal:1
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::LEFT, 400, 80, sizeW, sizeH));// portal:2
@@ -628,7 +619,7 @@ void WorldsBox2d::importPortal(){
 	portals[201]->linkTo(portals[114], nullptr);
 	portals[202]->linkTo(portals[127], nullptr);
 
-
+    */
 
 
 }
