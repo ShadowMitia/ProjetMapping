@@ -177,6 +177,7 @@
     <ClCompile Include="src\PhysicalizedElement\Avatar.cpp" />
     <ClCompile Include="src\PhysicalizedElement\ObjetBlock.cpp" />
     <ClCompile Include="src\PhysicalizedElement\PhysicalizedElement.cpp" />
+    <ClCompile Include="src\PhysicalizedElement\PickUp.cpp" />
     <ClCompile Include="src\PhysicalizedElement\Platform.cpp" />
     <ClCompile Include="src\Portal.cpp" />
     <ClCompile Include="src\ScenesMapping.cpp" />
@@ -360,6 +361,7 @@
     <ClInclude Include="src\PhysicalizedElement\Avatar.h" />
     <ClInclude Include="src\PhysicalizedElement\ObjetBlock.h" />
     <ClInclude Include="src\PhysicalizedElement\PhysicalizedElement.h" />
+    <ClInclude Include="src\PhysicalizedElement\PickUp.h" />
     <ClInclude Include="src\PhysicalizedElement\Platform.h" />
     <ClInclude Include="src\PhysicalizedElement\Teleportable.h" />
     <ClInclude Include="src\Portal.h" />

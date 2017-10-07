@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 
-class dataSprite;
+struct dataSprite;
 
 class PhysicalizedElement {
 

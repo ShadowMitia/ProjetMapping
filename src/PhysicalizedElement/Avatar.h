@@ -12,6 +12,7 @@
 #include "Teleportable.h"
 #include "ofxGLFWJoystick.h"
 #include "ObjetBlock.h"
+#include "PhysicalizedElement.h"
 
 
 class Avatar : public Teleportable {

@@ -9,6 +9,7 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Avatar.h"
+#include "PhysicalizedElement.h"
 
 class Teleportable;
 

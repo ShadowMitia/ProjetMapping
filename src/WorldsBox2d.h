@@ -10,6 +10,7 @@
 #include "ofxBox2d.h"
 #include "PhysicalizedElement/Avatar.h"
 #include "Portal.h"
+#include "PhysicalizedElement/PhysicalizedElement.h"
 #include "PhysicalizedElement/Platform.h"
 #include "PhysicalizedElement/ObjetBlock.h"
 #include "PhysicalizedElement/PickUp.h"

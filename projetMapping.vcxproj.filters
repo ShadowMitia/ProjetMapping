@@ -550,6 +550,9 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp">
       <Filter>addons\ofxXmlSettings\libs</Filter>
     </ClCompile>
+    <ClCompile Include="src\PhysicalizedElement\PickUp.cpp">
+      <Filter>src\PhysicalizedElement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1918,6 +1921,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxXmlSettings\libs\tinyxml.h">
       <Filter>addons\ofxXmlSettings\libs</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicalizedElement\PickUp.h">
+      <Filter>src\PhysicalizedElement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
