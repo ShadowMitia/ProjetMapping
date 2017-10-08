@@ -11,6 +11,8 @@
 #include "../Constant.h"
 #include "PhysicalizedElement.h"
 
+class WorldPortal;
+
 class Teleportable : public PhysicalizedElement {
 public:
     virtual void update() = 0;
@@ -25,5 +27,9 @@ public:
   ofRectangle collisionRect;
 
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
+
+  WorldPortal* cloningPortal = nullptr;
+  ofVec2f entryPoint = ofVec2f(0, 0);
+
 };
 

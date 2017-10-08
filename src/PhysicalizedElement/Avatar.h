@@ -19,27 +19,24 @@ class Avatar : public Teleportable {
 
 public:
 
-	Avatar(ofxBox2d* box2d);
+  Avatar(ofxBox2d* box2d);
 
-    ofxBox2dPolygon polygon;
-    ofxBox2dRect    foot;
+  ofxBox2dPolygon polygon;
+  ofxBox2dRect    foot;
 
-    ofRectangle rect;
-    bool jumping;
-	bool ClicJump;
-    Deplacement modeDeplace;
+  ofRectangle rect;
+  bool jumping;
+  bool ClicJump;
+  Deplacement modeDeplace;
 
     
 private:
-    std::unique_ptr<Avatar> clone = nullptr;
-    ofVec2f cloneTranslation;
-    ofxBox2d* box2dRef;
-    bool top =false;
-    
-    int countAirControl;
+  std::unique_ptr<Avatar> clone = nullptr;
+  ofVec2f cloneTranslation;
+  ofxBox2d* box2dRef;
   float moveInputX;
-    float moveInputY;
-    vector<bool>  pickupAvatar;
+  float moveInputY;
+  vector<bool>  pickupAvatar;
 
 public:
 
@@ -51,7 +48,16 @@ public:
   void teleportToClone() override;
   bool hasClone() override;
 
-    
+  ofVec2f getPosition()
+  {
+    return ofVec2f(rect.x, rect.y);
+  }
+
+  ofVec2f getFootPosition()
+  {
+    return foot.getPosition();
+  }
+
   void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
   void jump();
@@ -69,27 +75,27 @@ public:
 };
 
 /*
-class dataAvatar: public dataSprite {
-public:
-    dataAvatar(){
-        setSprite(Sprite::AVATAR);
-    }
-};
+  class dataAvatar: public dataSprite {
+  public:
+  dataAvatar(){
+  setSprite(Sprite::AVATAR);
+  }
+  };
 
-class dataAvatarClone : public dataSprite
-{
-public:
-	dataAvatarClone()
-	{
-		setSprite(Sprite::AVATAR_CLONE);
-	}
-};
+  class dataAvatarClone : public dataSprite
+  {
+  public:
+  dataAvatarClone()
+  {
+  setSprite(Sprite::AVATAR_CLONE);
+  }
+  };
 
-class dataFoot: public dataSprite {
-public:
-    dataFoot(){
-        setSprite(Sprite::FOOT);
-    }
-};
+  class dataFoot: public dataSprite {
+  public:
+  dataFoot(){
+  setSprite(Sprite::FOOT);
+  }
+  };
 
 */

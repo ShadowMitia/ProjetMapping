@@ -49,7 +49,6 @@ PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
     data->sprite = Sprite::PICKUP;
     data->Element = this;
 
-    
     this->box2d = _box2d;
 }
 

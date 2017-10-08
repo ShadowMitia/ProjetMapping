@@ -82,12 +82,12 @@ void WorldsBox2d::createCircle(float _x,float _y){
 
 void WorldsBox2d::draw(){
 
-  /*
+
   for (auto &portal : portals)
   {
      portal->draw();
   }
-  */
+
 
   for (auto &platform : platforms)
   {
@@ -207,8 +207,16 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
 }
 // attention code deguelas 
 void WorldsBox2d::importPortal(){
-    int sizeH = 160;
-    int sizeW = 2;
+  constexpr const int sizeH = 160;
+  constexpr const int sizeW = 3;
+
+    portals.push_back(new WorldPortal(ofRectangle(1360, 500, sizeW, sizeH), Orientation::VERTICAL));
+    portals.push_back(new WorldPortal(ofRectangle(1560, 500, sizeW, sizeH), Orientation::VERTICAL));
+    linkPortals(portals[0], portals[1]);
+
+    portals.push_back(new WorldPortal(ofRectangle(1360, 500, sizeW, sizeH), Orientation::VERTICAL));
+    portals.push_back(new WorldPortal(ofRectangle(1560, 500, sizeW, sizeH), Orientation::VERTICAL));
+    linkPortals(portals[2], portals[3]);
 
     /*
 	portals.push_back(new Portal(Portal::Orientation::HORIZONTAL, Portal::Direction::LEFT, 80, 80, sizeW, sizeH));// portal:0

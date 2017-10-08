@@ -8,9 +8,22 @@
 
 #include "Portal.h"
 
+
+void linkPortals(WorldPortal* portal1, WorldPortal* portal2)
+  {
+    if (portal1 == nullptr || portal2 == nullptr)
+      {
+	std::cout << "Both portals require a valid portal\n";
+	return;
+      }
+    portal1->linkPortal(portal2);
+    portal2->linkPortal(portal1);
+  }
+
+/*
 void Portal::update(std::vector<Teleportable*>& objects)
 {
- // if (connectedPortal_Angle == nullptr /*|| !activated*/) { return; }
+ // if (connectedPortal_Angle == nullptr || !activated) { return; }
     
     for (auto &obj : objects)
       {
@@ -88,3 +101,4 @@ Portal* Portal::GetLinkedPortal(Teleportable* obj) const
   return connectedPortal_Perspective;
 }
 
+*/

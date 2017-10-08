@@ -38,12 +38,12 @@ public:
     vector<shared_ptr<ofxBox2dCircle>>	circles;
     
     std::vector< Avatar *> avatars;
-    std::vector< Avatar *> clodes;
-    std::vector< Portal * > portals;
+    //std::vector< Avatar *> clodes;
+    std::vector< WorldPortal * > portals;
     std::vector< Platform * > platforms;
     std::vector< ObjectBlock * > blocks;
     std::vector< Ladder * > ladders;
-  std::vector<PickUp*>  pickups;
+    std::vector<PickUp*>  pickups;
 
 
     Waterfalls*               warterfalls;

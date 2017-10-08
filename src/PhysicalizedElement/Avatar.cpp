@@ -22,22 +22,21 @@ std::vector <ofPoint> loadPoints(const std::string& file) {
 
 Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
 {
-////////// POLYGONE ///////////////////
+  ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, VarConst::frictionAvatar);
     polygon.create(box2d->getWorld());
 
-	polygon.body->SetType(b2BodyType::b2_dynamicBody);
-	polygon.body->SetFixedRotation(true);
+    polygon.body->SetType(b2BodyType::b2_dynamicBody);
+    polygon.body->SetFixedRotation(true);
 
 	
-	b2Filter tempFilter;
+    b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;
     tempFilter.maskBits = 0xFFFF;
     polygon.setFilterData(tempFilter);
-
 
     /////////////// FOOT ///////////////
     ofRectangle temp = polygon.getBoundingBox();
@@ -52,12 +51,12 @@ Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
     tempFilter.maskBits =  0x0004;
     foot.setFilterData(tempFilter);
 
-	moveInputX = 0.0f;
-	jumping = false;
-	ClicJump = false;
+    moveInputX = 0.0f;
+    jumping = false;
+    ClicJump = false;
 
-/////////////////////////  Data /////////////////
-	/*
+    /////////////////////////  Data /////////////////
+    /*
     dataAvatar* dataAv = new dataAvatar;
     dataAv->setSprite(Sprite::AVATAR);
     polygon.setData(dataAv);
@@ -65,26 +64,25 @@ Avatar::Avatar(ofxBox2d* box2d) : box2dRef(box2d)
     dataFo->setSprite(Sprite::FOOT);
     dataFo->Element = this;
     foot.setData(dataFo);
-	*/
+    */
 
-	polygon.setData(new dataSprite());
+    polygon.setData(new dataSprite());
 
-	dataSprite* data = (dataSprite*)polygon.getData();
-	data->sprite = Sprite::AVATAR;
-	data->Element = this;
+    dataSprite* data = (dataSprite*)polygon.getData();
+    data->sprite = Sprite::AVATAR;
+    data->Element = this;
 
-	foot.setData(new dataSprite());
-	data = (dataSprite*)polygon.getData();
-	data->sprite = Sprite::FOOT;
-	data->Element = this;
-
+    foot.setData(new dataSprite());
+    data = (dataSprite*)polygon.getData();
+    data->sprite = Sprite::FOOT;
+    data->Element = this;
     
     modeDeplace = Deplacement::PLATFORM;
     
 }
 
 void Avatar::presUpdate(){
-    foot.setPosition(polygon.getPosition()+ofVec2f(0,4));
+    foot.setPosition(polygon.getPosition() + ofVec2f(0,4));
     collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
 
@@ -143,11 +141,14 @@ void Avatar::createClone(ofVec2f cloneTranslation) {
     clone->setPosition(cloneTranslation);
     clone->polygon.setVelocity(polygon.getVelocity());
     clone->polygon.create(polygon.getWorld());
+
+    entryPoint = polygon.getPosition();
 }
 
 void Avatar::removeClone() {
   clone = nullptr;
   cloneTranslation.zero();
+  entryPoint.zero();
 
 }
 void Avatar::teleportToClone() {
