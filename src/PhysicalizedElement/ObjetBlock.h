@@ -38,6 +38,11 @@ public:
     return box.getPosition();
   }
 
+  void setPosition(ofVec2f pos)
+  {
+    box.setPosition(pos);
+  }
+
   void setPosition(int x, int y)
   {
     box.setPosition(x, y);

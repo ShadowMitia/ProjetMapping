@@ -29,7 +29,7 @@ public:
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
   WorldPortal* cloningPortal = nullptr;
-  ofVec2f entryPoint = ofVec2f(0, 0);
+  ofVec2f entryPoint;
 
 };
 

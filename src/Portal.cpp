@@ -16,9 +16,95 @@ void linkPortals(WorldPortal* portal1, WorldPortal* portal2)
 	std::cout << "Both portals require a valid portal\n";
 	return;
       }
+
+    //static_assert(portal1->orientation == portal2->orientation "Portals must have same orientation)");
+
     portal1->linkPortal(portal2);
     portal2->linkPortal(portal1);
   }
+
+WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, int x, int y, int width, int height) : WorldPortal(orientation, direction, ofRectangle(x, y, width, height))
+  {
+
+  }
+
+WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : collisionRect(portal), orientation(orientation), direction(direction)
+  {
+    if (orientation == Orientation::Horizontal)
+      {
+	std::swap(collisionRect.width, collisionRect.height);
+      }
+
+    static int cur_id = 0;
+    id = cur_id;
+    ++cur_id;
+  }
+
+void WorldPortal::update(const std::vector<Teleportable*>& objects)
+  {
+    if (linkedPortal == nullptr) return; // for debug, to be removed
+
+    for (const auto &obj : objects)
+      {
+	bool intersects = obj->collisionRect.intersects(collisionRect);
+	bool cloned = obj->hasClone();
+	bool verticalPortal = (orientation == Orientation::Vertical);
+	bool left = (direction == PortalDirection::Left);
+	ofVec2f const &objCenter = obj->collisionRect.getCenter();
+	ofVec2f const &portalCenter = collisionRect.getCenter();
+
+	if (intersects && !cloned)
+	  {
+	    std::cout << "Intersects\n";
+	    std::cout << objCenter.x << ' ' << portalCenter.x << '\n';
+	    if ((left && verticalPortal && objCenter.x < portalCenter.x)
+		|| (!left && verticalPortal && objCenter.x > portalCenter.x)
+		|| (left && !verticalPortal && objCenter.y > portalCenter.y)
+		|| (!left && !verticalPortal && objCenter.y < portalCenter.y)
+		)
+	      {
+		obj->createClone(linkedPortal->collisionRect.getCenter() - portalCenter);
+		obj->cloningPortal = this;
+	      }
+	  }
+	else if (!intersects && cloned && obj->cloningPortal == this)
+	  {
+	    if ((left && verticalPortal && objCenter.x < obj->entryPoint.x)
+		|| (!left && verticalPortal && objCenter.x > obj->entryPoint.x)
+		|| (!left && !verticalPortal && objCenter.y < obj->entryPoint.y)
+		|| (left && !verticalPortal && objCenter.y > obj->entryPoint.y))
+	      {
+		obj->removeClone();
+		obj->cloningPortal = nullptr;
+	      }
+	    else
+	      {
+		obj->teleportToClone();
+		obj->removeClone();
+		obj->cloningPortal = nullptr;
+	      }
+	  }
+      }
+  }
+
+void WorldPortal::draw() const
+  {
+    ofSetColor(ofColor::darkGreen);
+    if (linkedPortal == nullptr)
+      {
+	ofSetColor(ofColor::orange);
+      }
+    ofDrawRectangle(collisionRect);
+    ofSetColor(ofColor::red); // pour debug seulement
+    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
+    ofSetColor(ofColor::white);
+  }
+
+void WorldPortal::linkPortal(WorldPortal* portal)
+  {
+    linkedPortal = portal;
+  }
+
 
 /*
 void Portal::update(std::vector<Teleportable*>& objects)

@@ -9,27 +9,26 @@
 #include "ObjetBlock.h"
 
 
-ObjectBlock::ObjectBlock(b2World* _box2d, ofPolyline _polyline)
+ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline) : box2d(box2d)
   {
     box.setPhysics(3.0, 0.0, 0.0);
     
-    box.addVertices(_polyline.getVertices());
+    box.addVertices(polyline.getVertices());
+    box.create(box2d);
 
     int width = 1000000;
     int height = 1000000;
-
-    const auto& p = _polyline.getVertices();
+    const auto& p = polyline.getVertices();
     for (int i = 0; i < p.size(); i++)
       {
 	if (p[i].x < width) { width = p[i].x; }
 
 	if (p[i].y < height) { height = p[i].y; }
       }
-
     this->width = width;
     this->height = height;
 
-    box.create(_box2d);
+    box.body->SetType(b2BodyType::b2_dynamicBody);
     box.body->SetFixedRotation(true);
 
     collisionRect.set(box.getPosition().x, box.getPosition().y, width, height);
@@ -38,19 +37,11 @@ ObjectBlock::ObjectBlock(b2World* _box2d, ofPolyline _polyline)
     tempFilter.categoryBits = 0x0001;
     tempFilter.maskBits = 0xFFFF;
     box.setFilterData(tempFilter);
-    /*
-    dataSprite* data = new dataSprite;
-    data->setSprite(Sprite::BLOCK);
-    data->Element = this;
-    box.setData(data);
-    */
 
     box.setData(new dataSprite());
     dataSprite* data = (dataSprite*)box.getData();
     data->Element = this;
     data->sprite = Sprite::BLOCK;
-    
-    this->box2d = _box2d;
   }
 
 void ObjectBlock::update()
@@ -91,28 +82,39 @@ void ObjectBlock::draw()
 void ObjectBlock::createClone(ofVec2f translateClone)
   {
     if (clone) { return; }
-
+    std::cout << "Create object block clone\n";
     cloneTranslation = translateClone;
 
     ofPolyline p;
     
     for (int i = 0; i < box.getVertices().size(); i++)
       {
-	p.addVertex(box.getVertices()[i].x + translateClone.x, box.getVertices()[i].y + translateClone.y, 0);
+	p.addVertex(box.getVertices()[i].x, box.getVertices()[i].y, 0);
       }
     
     clone = std::make_unique<ObjectBlock>(box2d, p);
+    clone->box.setPosition(cloneTranslation);
+    clone->box.setVelocity(box.getVelocity());
+    clone->box.create(box.getWorld());
+
+    entryPoint = box.getPosition();
   }
 
 void ObjectBlock::removeClone()
   {
+    std::cout << "Remove object block clone\n";
     clone = nullptr;
     cloneTranslation.zero();
+    entryPoint.zero();
   }
 
 void ObjectBlock::teleportToClone()
   {
+    std::cout << "Teleport object block clone\n";
+    auto vel = box.getPosition();
     box.setPosition(clone->box.getPosition());
+    box.setVelocity(vel);
+    cloneTranslation.zero();
   }
 
 bool ObjectBlock::hasClone()

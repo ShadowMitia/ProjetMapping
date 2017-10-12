@@ -70,7 +70,6 @@ private:
 
 #ifdef USE_WIIMOTE
   ofxWiiuse wiiuse;
-
   void onWiiuseControlEvent(ofxWiiuseControlEventArgs& args) override;
   void onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args) override;
   void onWiiuseMotionEvent(ofxWiiuseMotionEventArgs& args) override;
