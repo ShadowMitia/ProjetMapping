@@ -31,7 +31,7 @@ public:
 
   virtual void draw() const;
 
-  void linkPortal(WorldPortal* portal);
+  void linkTo(WorldPortal* portal);
 
 protected:
   ofRectangle collisionRect;
@@ -52,6 +52,8 @@ class EmptyPortal : public WorldPortal
   {
     ofSetColor(ofColor::dimGrey);
     ofDrawRectangle(collisionRect);
+    ofSetColor(ofColor::red); // pour debug seulement
+    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
     ofSetColor(ofColor::white);
   }
 };
@@ -93,17 +95,20 @@ public:
 	ofSetColor(ofColor::violet);
       }
     ofDrawRectangle(collisionRect);
+    ofSetColor(ofColor::red); // pour debug seulement
+    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
     ofSetColor(ofColor::white);
   }
-  
-private:
+
 
   bool activated = false;
 
+private:
+
+
+
 };
 
-
-void linkPortals(WorldPortal* portal1, WorldPortal* portal2);
 
 /*
   class WorldPortal : public Portal

@@ -33,12 +33,14 @@ public:
 
   void setPosition(float x, float y)
   {
-    pickUp.setPosition(x, y);
+    pickUp.setPosition(x + width / 2, y + height / 2);
   }
 
     ofVec2f getPosition()
     {
-      return pickUp.getPosition() - ofVec2f(width / 2, height / 2);
+      ofVec2f pos = pickUp.getPosition();
+      pos += ofVec2f(width / 2, height / 2);
+      return pos;
     }
 
   void setCollected()

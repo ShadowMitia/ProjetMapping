@@ -8,21 +8,6 @@
 
 #include "Portal.h"
 
-
-void linkPortals(WorldPortal* portal1, WorldPortal* portal2)
-  {
-    if (portal1 == nullptr || portal2 == nullptr)
-      {
-	std::cout << "Both portals require a valid portal\n";
-	return;
-      }
-
-    //static_assert(portal1->orientation == portal2->orientation "Portals must have same orientation)");
-
-    portal1->linkPortal(portal2);
-    portal2->linkPortal(portal1);
-  }
-
 WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, int x, int y, int width, int height) : WorldPortal(orientation, direction, ofRectangle(x, y, width, height))
   {
 
@@ -100,7 +85,7 @@ void WorldPortal::draw() const
     ofSetColor(ofColor::white);
   }
 
-void WorldPortal::linkPortal(WorldPortal* portal)
+void WorldPortal::linkTo(WorldPortal* portal)
   {
     linkedPortal = portal;
   }

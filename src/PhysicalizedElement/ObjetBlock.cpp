@@ -31,7 +31,7 @@ ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline) : box2d(box2d)
     box.body->SetType(b2BodyType::b2_dynamicBody);
     box.body->SetFixedRotation(true);
 
-    collisionRect.set(box.getPosition().x, box.getPosition().y, width, height);
+    collisionRect.set(box.getPosition().x - width / 2, box.getPosition().y - height / 2, width, height);
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;

@@ -40,12 +40,12 @@ public:
 
   void setPosition(ofVec2f pos)
   {
-    box.setPosition(pos);
+    box.setPosition(pos.x + width / 2, pos.y + height / 2);
   }
 
   void setPosition(int x, int y)
   {
-    box.setPosition(x, y);
+    box.setPosition(x + width / 2, y + height / 2);
   }
   
 private:

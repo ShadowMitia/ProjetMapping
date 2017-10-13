@@ -62,9 +62,6 @@ void PickUp::draw()
   ofSetColor(ofColor::green);
   pickUp.draw();
     
-    //ofSetColor(ofColor::orange);
-    //ofDrawCollisionRect(collisionRect);
-    
     if (clone)
     {
         clone->draw();
