@@ -133,7 +133,7 @@ void WorldsBox2d::createAvatar(int x, int y){
 void WorldsBox2d::update(){
 
   // supprimes les pickups collectés et les enleves de box2d et de la liste des pickups
-  pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) world.getWorld()->DestroyBody(p->pickUp.body); return res; }), pickups.end());
+  //pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) world.getWorld()->DestroyBody(p->pickUp.body); return res; }), pickups.end());
   
     world.update();
     

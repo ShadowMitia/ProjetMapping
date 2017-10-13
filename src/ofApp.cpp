@@ -29,7 +29,6 @@ vector<ofPolyline> importImage(const string& path){
 
 //--------------------------------------------------------------
 void ofApp::setup() {
-	ofBackground(0);
 
 	worlds = new WorldsBox2d;
 	worlds->setup();
@@ -100,6 +99,7 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update(){
     input();
+    scene1->update();
     worlds->update();
     mapping.update();
 }
