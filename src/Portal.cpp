@@ -7,6 +7,8 @@
 //
 
 #include "Portal.h"
+#include "Constant.h"
+#include "Avatar.h"
 
 WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, int x, int y, int width, int height) : WorldPortal(orientation, direction, ofRectangle(x, y, width, height))
   {
@@ -24,6 +26,17 @@ WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, ofR
     id = cur_id;
     ++cur_id;
   }
+
+ofRectangle WorldPortal::getCollisionRect() const
+{
+  return collisionRect;
+}
+
+
+ofVec2f WorldPortal::getPosition() const
+{
+  return ofVec2f(collisionRect.x, collisionRect.y);
+}
 
 void WorldPortal::update(const std::vector<Teleportable*>& objects)
   {
@@ -71,7 +84,7 @@ void WorldPortal::update(const std::vector<Teleportable*>& objects)
   }
 
 void WorldPortal::draw() const
-  {
+{
     ofSetColor(ofColor::darkGreen);
     if (linkedPortal == nullptr)
       {
@@ -83,12 +96,103 @@ void WorldPortal::draw() const
     ofSetColor(ofColor::white);
   }
 
-ofVec2f WorldPortal::getPosition() const
+EmptyPortal::EmptyPortal(Orientation orientation, PortalDirection direction, int x, int y, int w, int h) : EmptyPortal(orientation, direction, ofRectangle(x, y, w, h))
   {
-    return ofVec2f(collisionRect.x, collisionRect.y);
+
   }
+
+EmptyPortal::EmptyPortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : WorldPortal(orientation, direction, portal)
+  {
+
+  }
+
+  void EmptyPortal::update(const std::vector<Teleportable*>& objects)
+  {
+    return;
+  }
+
+  void EmptyPortal::draw() const
+  {
+    ofSetColor(ofColor::dimGrey);
+    ofDrawRectangle(collisionRect);
+    ofSetColor(ofColor::red); // pour debug seulement
+    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
+    ofSetColor(ofColor::white);
+  }
+
 
 void WorldPortal::linkTo(WorldPortal* portal)
   {
     linkedPortal = portal;
+  }
+
+PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, int x, int y, int h, int w) : PerspectivePortal(orientation, direction, ofRectangle(x, y, w, h))
+  {
+
+  }
+
+
+PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : WorldPortal(orientation, direction, portal)
+{
+
+}
+
+
+void PerspectivePortal::setActive(bool active)
+  {
+    activated = active;
+  }
+
+void PerspectivePortal::update(const std::vector<Teleportable*>& objects)
+  {
+    if (!activated) return;
+
+    std::cout << "Actif\n";
+
+    for (auto& obj : objects)
+      {
+	if (dynamic_cast<Avatar*>(obj) != nullptr)
+	  {
+	    if (obj->perspectivePortal == this && collisionRect.intersects(obj->getCollisionRect()))
+	      {
+		obj->viewpoint = Viewpoint::MODE_ANGLE;
+		obj->createClone(linkedPortal->getPosition());
+		obj->teleportToClone();
+	      }
+	    else
+	      {
+		activated = false;
+	      }
+	  }
+	else
+	  {
+	    if (obj->perspectivePortal == this &&  collisionRect.intersects(obj->getCollisionRect()))
+	      {
+		obj->createClone(linkedPortal->getPosition());
+		obj->teleportToClone();
+	      }
+	  }
+      }
+  }
+
+bool PerspectivePortal::isActivated() const
+  {
+    return activated;
+  }
+
+void PerspectivePortal::draw() const
+  {
+    ofSetColor(ofColor::green);
+    if (linkedPortal == nullptr)
+      {
+	ofSetColor(ofColor::brown);
+      }
+    if (activated)
+      {
+	ofSetColor(ofColor::violet);
+      }
+    ofDrawRectangle(collisionRect);
+    ofSetColor(ofColor::red); // pour debug seulement
+    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
+    ofSetColor(ofColor::white);
   }

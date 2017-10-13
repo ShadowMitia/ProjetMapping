@@ -77,14 +77,16 @@ void Avatar::presUpdate(){
 void Avatar::update()
 {
     
-  if (modeDeplace == Deplacement::PLATFORM ) {
-    polygon.body->SetGravityScale(1.0);
-    move(moveInputX);
-  }
-  else{
-    polygon.body->SetGravityScale(0.0);
-    move(moveInputX, moveInputY);
-  }
+  if (modeDeplace == Deplacement::PLATFORM)
+    {
+      polygon.body->SetGravityScale(1.0);
+      move(moveInputX);
+    }
+  else
+    {
+      polygon.body->SetGravityScale(0.0);
+      move(moveInputX, moveInputY);
+    }
     
   if (!jumping)
     {
@@ -109,9 +111,7 @@ void Avatar::draw() {
   ofSetColor(ofColor::violet);
   foot.draw();
   ofSetColor(ofColor::white);
-  //ofSetColor(ofColor::orange);
-  //ofDrawRectangle(collisionRect);
-    
+
   if (clone) {
     clone->draw();
   }
@@ -336,47 +336,32 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
     }
 }
 
+ofVec2f Avatar::getFootPosition()
+  {
+    return foot.getPosition();
+  }
+
 void Avatar::processPerspectivePortals(std::vector<PerspectivePortal*>& portals)
-{
+  {
 
-    if (viewpoint == Viewpoint::MODE_PERSPECTIVE)
+    int distance = 100000000;
+    PerspectivePortal* portal = nullptr;
+    for (auto& p : portals)
       {
-	int distance = 100000000;
-	PerspectivePortal* portal = nullptr;
-	for (auto& p : portals)
+	if (p->getCollisionRect().getCenter().distance(getCenter()) < distance)
 	  {
-	    if (p->getCollisionRect().getCenter().distance(getCenter()) < distance)
-	      {
-
-		distance = p->getCollisionRect().getCenter().distance(getCenter());
-		std::cout << distance << '\n';
-		portal = p;
-	      }
-	  }
-
-	std::cout << "Smallest: " << distance << '\n';
-
-	if (portal != nullptr)
-	  {
-	    if (portal != perspectivePortal)
-	      {
-		perspectivePortal->linked.erase(std::find(perspectivePortal->linked.begin(), perspectivePortal->linked.end(), this));
-		portal->setActive(true);
-		portal->linked.push_back(this);
-	      }
+	    distance = p->getCollisionRect().getCenter().distance(getCenter());
+	    portal = p;
 	  }
       }
-    /*
-    else
+
+    if (portal != nullptr)
       {
-	for (auto& p : portals)
-	  {
-	    auto pos = std::find(p->linked.begin(), p->linked.end(), this);
-	    if (pos != p->linked.end())
-	      {
-		p->linked.erase(pos);
-	      }
-	  }
+	perspectivePortal = portal;
       }
-    */
+
+    if (perspectivePortal->getCollisionRect().inside(getCenter()))
+      {
+	perspectivePortal->setActive(true);
+      }
   }

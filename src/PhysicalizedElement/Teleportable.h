@@ -11,6 +11,7 @@
 #include "../Constant.h"
 #include "PhysicalizedElement.h"
 
+class PerspectivePortal;
 class WorldPortal;
 
 class Teleportable : public PhysicalizedElement {
@@ -22,14 +23,25 @@ public:
     virtual void removeClone() = 0;
     virtual void teleportToClone() = 0;
     virtual bool hasClone() = 0;
+
+  ofVec2f getCenter() const;
+
+  ofRectangle getCollisionRect() const;
+
+  bool inside(ofVec2f pos) const;
+
+  ofVec2f getPosition() const;
     
 public:
   ofRectangle collisionRect;
+
+  PerspectivePortal* perspectivePortal;
 
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
   std::vector<WorldPortal*> cloningPortal;
   ofVec2f entryPoint;
+
 
 };
 

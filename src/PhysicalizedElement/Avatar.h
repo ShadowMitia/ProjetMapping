@@ -25,10 +25,11 @@ public:
   ofxBox2dPolygon polygon;
   ofxBox2dRect    foot;
 
-  ofRectangle rect;
   bool jumping;
   bool ClicJump;
   Deplacement modeDeplace;
+
+  void processPerspectivePortals(std::vector<PerspectivePortal*>& portals);
 
     
 private:
@@ -36,10 +37,7 @@ private:
   ofVec2f cloneTranslation;
   float moveInputX;
   float moveInputY;
-  //std::vector<bool>  pickupAvatar;
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
-
-  PerspectivePortal* perspectivePortal;
 
 public:
 
@@ -51,30 +49,8 @@ public:
   void teleportToClone() override;
   bool hasClone() override;
 
-  void processPerspectivePortals(std::vector<PerspectivePortal*>& portals);
 
-
-  ofVec2f getPosition() const
-  {
-    return ofVec2f(rect.x, rect.y);
-  }
-
-  ofVec2f getFootPosition()
-  {
-    return foot.getPosition();
-  }
-
-
-  ofVec2f getCenter() const
-  {
-    return collisionRect.getCenter();
-  }
-
-
-  ofRectangle getCollisionRect() const
-  {
-    return collisionRect;
-  }
+  ofVec2f getFootPosition();
 
   void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
