@@ -32,6 +32,16 @@ public:
 
   void linkTo(WorldPortal* portal);
 
+  bool inside(ofVec2f pos)
+  {
+    return collisionRect.inside(pos);
+  }
+
+  ofRectangle getCollisionRect() const
+  {
+    return collisionRect;
+  }
+
 
   ofVec2f getPosition() const;
 
@@ -95,15 +105,33 @@ public:
   void update(const std::vector<Teleportable*>& objects) override
   {
     if (!activated) return;
-    WorldPortal::update(objects);
-    for (auto& a : linked)
+
+    for (auto& obj : objects)
       {
-	if (!collisionRect.inside(a->getCenter()))
+	if ( dynamic_cast<Avatar*>(obj) != nullptr)
 	  {
-	    linked.erase(std::find(linked.begin(), linked.end(), a));
+	    std::cout << "Avatar stuff\n";
+	    auto pos = std::find(linked.begin(), linked.end(), obj);
+	    if (pos != linked.end() && collisionRect.intersects(static_cast<Avatar*>(obj)->getCollisionRect()))
+	      {
+		obj->viewpoint = Viewpoint::MODE_ANGLE;
+		obj->createClone(linkedPortal->getPosition());
+		obj->teleportToClone();
+		linked.erase(pos);
+	      }
+	    else
+	      {
+		activated = false;
+	      }
+	  }
+	else
+	  {
+	    std::cout << "Other stuff\n";
+	    //obj->createClone(linkedPortal->getPosition());
+	    //obj->teleportToClone();
 	  }
       }
-    if (linked.size() == 0) activated = false;
+
   }
 
   bool isActivated() const

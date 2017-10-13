@@ -329,7 +329,8 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 	{
 	  polygon.setVelocity(0, polygon.getVelocity().y);
 	}
-    } else if (OtherSprite->sprite == Sprite::PICKUP)
+    }
+  else if (OtherSprite->sprite == Sprite::PICKUP)
     {
       static_cast<PickUp*>(OtherSprite->Element)->setCollected();
     }
@@ -344,14 +345,34 @@ void Avatar::processPerspectivePortals(std::vector<PerspectivePortal*>& portals)
 	PerspectivePortal* portal = nullptr;
 	for (auto& p : portals)
 	  {
-	    if (p->getPosition().squareDistance(getPosition()) < distance)
+	    if (p->getCollisionRect().getCenter().distance(getCenter()) < distance)
 	      {
-		distance = p->getPosition().squareDistance(getPosition());
+
+		distance = p->getCollisionRect().getCenter().distance(getCenter());
+		std::cout << distance << '\n';
 		portal = p;
 	      }
 	  }
 
-	portal->setActive(true);
-	portal->linked.push_back(this);
+	std::cout << "Smallest: " << distance << '\n';
+
+	if (portal != nullptr)
+	  {
+	    portal->setActive(true);
+	    portal->linked.push_back(this);
+	  }
       }
+    /*
+    else
+      {
+	for (auto& p : portals)
+	  {
+	    auto pos = std::find(p->linked.begin(), p->linked.end(), this);
+	    if (pos != p->linked.end())
+	      {
+		p->linked.erase(pos);
+	      }
+	  }
+      }
+    */
   }

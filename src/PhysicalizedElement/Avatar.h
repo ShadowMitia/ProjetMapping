@@ -36,7 +36,7 @@ private:
   ofVec2f cloneTranslation;
   float moveInputX;
   float moveInputY;
-  std::vector<bool>  pickupAvatar;
+  //std::vector<bool>  pickupAvatar;
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
 public:
@@ -66,6 +66,12 @@ public:
   ofVec2f getCenter() const
   {
     return collisionRect.getCenter();
+  }
+
+
+  ofRectangle getCollisionRect() const
+  {
+    return collisionRect;
   }
 
   void setPosition(ofVec2f vec);
