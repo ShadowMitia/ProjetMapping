@@ -19,7 +19,7 @@ class Avatar : public Teleportable {
 
 public:
 
-  Avatar(ofxBox2d* box2d);
+  Avatar(b2World* box2d);
 
   ofxBox2dPolygon polygon;
   ofxBox2dRect    foot;
@@ -33,10 +33,9 @@ public:
 private:
   std::unique_ptr<Avatar> clone = nullptr;
   ofVec2f cloneTranslation;
-  ofxBox2d* box2dRef;
   float moveInputX;
   float moveInputY;
-  vector<bool>  pickupAvatar;
+  std::vector<bool>  pickupAvatar;
 
 public:
 
@@ -48,7 +47,7 @@ public:
   void teleportToClone() override;
   bool hasClone() override;
 
-  ofVec2f getPosition()
+  ofVec2f getPosition() const
   {
     return ofVec2f(rect.x, rect.y);
   }
@@ -73,29 +72,3 @@ public:
   virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
 
 };
-
-/*
-  class dataAvatar: public dataSprite {
-  public:
-  dataAvatar(){
-  setSprite(Sprite::AVATAR);
-  }
-  };
-
-  class dataAvatarClone : public dataSprite
-  {
-  public:
-  dataAvatarClone()
-  {
-  setSprite(Sprite::AVATAR_CLONE);
-  }
-  };
-
-  class dataFoot: public dataSprite {
-  public:
-  dataFoot(){
-  setSprite(Sprite::FOOT);
-  }
-  };
-
-*/

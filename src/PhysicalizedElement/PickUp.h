@@ -17,7 +17,7 @@ class PickUp : public Teleportable {
 public:
     
     
-    PickUp(b2World* _box2d, ofPolyline _polyline);
+    PickUp(b2World* box2d, ofPolyline polyline);
     
     void update() override;
     void draw() override;
@@ -51,14 +51,12 @@ public:
     return collected;
   }
     
-    ofxBox2dPolygon pickUp;
+  ofxBox2dPolygon pickUp;
 
 private:
-    std::unique_ptr<PickUp> clone;
+  std::unique_ptr<PickUp> clone;
     
-    b2World* box2d;
-    
-    ofVec2f cloneTranslation;
+  ofVec2f cloneTranslation;
 
   bool collected = false;
 };

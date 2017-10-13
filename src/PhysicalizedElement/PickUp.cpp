@@ -8,16 +8,23 @@
 
 #include "PickUp.h"
 
-PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
+PickUp::PickUp(b2World* box2d, ofPolyline polyline)
 {
+
+  pickUp.addVertices(polyline.getVertices());
+
     pickUp.setPhysics(3.0, 0.0, 10.0);
-    
-    pickUp.addVertices(_polyline.getVertices());
+    pickUp.create(box2d);
+
+    pickUp.body->SetType(b2BodyType::b2_dynamicBody);
+    pickUp.body->SetFixedRotation(true);
+
+
     
     int width = 1000000;
     int height = 1000000;
     
-    const auto& p = _polyline.getVertices();
+    const auto& p = polyline.getVertices();
     for (int i = 0; i < p.size(); i++)
     {
         if (p[i].x < width) { width = p[i].x; }
@@ -25,19 +32,7 @@ PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
         if (p[i].y < height) { height = p[i].y; }
     }
 
-    collisionRect.width = width;
-    collisionRect.height = height;
-
-    auto pos = pickUp.getPosition();
-    collisionRect.x = pos.x;
-    collisionRect.y = pos.y;
-
-    pickUp.create(_box2d);
-
-
-    pickUp.body->SetFixedRotation(true);
-
-    collisionRect.set(pickUp.getPosition().x, pickUp.getPosition().y, collisionRect.width, collisionRect.height);
+    collisionRect.set(pickUp.getPosition().x, pickUp.getPosition().y, width, height);
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;
@@ -48,8 +43,6 @@ PickUp::PickUp(b2World* _box2d, ofPolyline _polyline)
     dataSprite* data = (dataSprite*)pickUp.getData();
     data->sprite = Sprite::PICKUP;
     data->Element = this;
-
-    this->box2d = _box2d;
 }
 
 void PickUp::update()
@@ -81,28 +74,44 @@ void PickUp::draw()
 void PickUp::createClone(ofVec2f translateClone)
 {
     if (clone) { return; }
-    
+
+    std::cout << "Create pickup clone\n";
+
     cloneTranslation = translateClone;
     
     ofPolyline p;
     
     for (int i = 0; i < pickUp.getVertices().size(); i++)
     {
-        p.addVertex(pickUp.getVertices()[i].x + translateClone.x, pickUp.getVertices()[i].y + translateClone.y, 0);
+      p.addVertex(pickUp.getVertices()[i].x, pickUp.getVertices()[i].y, 0);
     }
     
-    clone = std::make_unique<PickUp>(box2d, p);
+    clone = std::make_unique<PickUp>(pickUp.getWorld(), p);
+    clone->setPosition(translateClone.x, translateClone.y);
+
+    clone->pickUp.setVelocity(pickUp.getVelocity());
+    clone->pickUp.create(pickUp.getWorld());
+
+    entryPoint = pickUp.getPosition();
 }
 
 void PickUp::removeClone()
 {
+
+  std::cout << "Remove pickup clone\n";
+
     clone = nullptr;
     cloneTranslation.zero();
+    entryPoint.zero();
 }
 
 void PickUp::teleportToClone()
 {
-    pickUp.setPosition(clone->pickUp.getPosition());
+  std::cout << "Teleport pickup\n";
+  auto vel = pickUp.getVelocity();
+  pickUp.setPosition(clone->pickUp.getPosition());
+  pickUp.setVelocity(vel);
+  cloneTranslation.zero();
 }
 
 bool PickUp::hasClone()

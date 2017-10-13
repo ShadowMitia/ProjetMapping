@@ -14,220 +14,209 @@
 
 class Teleportable;
 
-enum class Orientation { HORIZONTAL, VERTICAL };
+enum class Orientation { Horizontal, Vertical };
+enum class PortalDirection { Left, Right };
 
 class WorldPortal
 {
 public:
 
-  WorldPortal(ofRectangle portal, Orientation orientation) : collisionRect(portal), orientation(orientation)
+  int id; // pour debug seulement
+
+  WorldPortal() = delete;
+  WorldPortal(Orientation orientation, PortalDirection direction, int x, int y, int width, int height);
+  WorldPortal(Orientation orientation, PortalDirection direction, ofRectangle portal);
+
+  virtual void update(const std::vector<Teleportable*>& objects);
+
+  virtual void draw() const;
+
+  void linkPortal(WorldPortal* portal);
+
+protected:
+  ofRectangle collisionRect;
+  Orientation orientation;
+  PortalDirection direction;
+
+  WorldPortal* linkedPortal;
+};
+
+class EmptyPortal : public WorldPortal
+{
+  void update(const std::vector<Teleportable*>& objects) override
   {
-    if (orientation == Orientation::HORIZONTAL)
-      {
-	std::swap(portal.width, portal.height);
-      }
+    return;
   }
 
-  void update(const std::vector<Teleportable*>& objects)
+  void draw() const override
+  {
+    ofSetColor(ofColor::dimGrey);
+    ofDrawRectangle(collisionRect);
+    ofSetColor(ofColor::white);
+  }
+};
+
+
+class PerspectivePortal : public WorldPortal
+{
+public:
+  PerspectivePortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : WorldPortal(orientation, direction, portal)
   {
 
-    for (const auto &obj : objects)
-      {
-	bool intersects = obj->collisionRect.intersects(collisionRect);
-	bool cloned = obj->hasClone();
-	bool verticalPortal = (orientation == Orientation::VERTICAL);
-
-	if (intersects && !cloned)
-	  {
-	    std::cout << "V Clone!\n";
-	    obj->createClone(linkedPortal->collisionRect.getCenter() - collisionRect.getCenter());
-	    obj->cloningPortal = this;
-	  }
-	else if (!intersects && cloned && obj->cloningPortal == this)
-	  {
-
-	    if (verticalPortal)
-	      {
-		if ((obj->collisionRect.getCenter().x < obj->entryPoint.x + 5) && (obj->collisionRect.getCenter().x > obj->entryPoint.x - 5))
-		  {
-		    std::cout << "V Remove clone\n";
-		    obj->removeClone();
-		    obj->cloningPortal = nullptr;
-		  }
-		else
-		  {
-
-		    std::cout << "V Teleport to clone\n";
-		    obj->teleportToClone();
-		    obj->removeClone();
-		  }
-	      }
-	    else
-	      {
-		  if ((obj->collisionRect.getCenter().y < obj->entryPoint.y + 5) && (obj->collisionRect.getCenter().y > obj->entryPoint.y - 5))
-		  {
-		    std::cout << "H Remove clone\n";
-		    obj->removeClone();
-		    obj->cloningPortal = nullptr;
-		  }
-		else
-		  {
-		    std::cout << "H Teleport to clone\n";
-		    obj->teleportToClone();
-		    obj->removeClone();
-		  }
-	      }
-
-
-
-	  }
-      }
   }
 
-    void draw()
-    {
-      ofSetColor(ofColor::orange);
+  void setActive(bool active = true)
+  {
+    activated = active;
+  }
 
-      ofDrawRectangle(collisionRect);
+  void update(const std::vector<Teleportable*>& objects) override
+  {
+    if (!activated) return;
+    WorldPortal::update(objects);
+  }
 
-      ofSetColor(ofColor::white);
+  bool isActivated()
+  {
+    return activated;
+  }
 
-    }
-
-    void linkPortal(WorldPortal* portal)
-    {
-      linkedPortal = portal;
-    }
-
-  private:
-    ofRectangle collisionRect;
-    Orientation orientation;
-
-    WorldPortal* linkedPortal;
-
-
-    ofVec2f entranceA, entranceB;
-    ofVec2f exitA, exitB;
-
+  void draw() const override
+  {
+    ofSetColor(ofColor::green);
+    if (linkedPortal == nullptr)
+      {
+	ofSetColor(ofColor::brown);
+      }
+    if (activated)
+      {
+	ofSetColor(ofColor::violet);
+      }
+    ofDrawRectangle(collisionRect);
+    ofSetColor(ofColor::white);
+  }
   
+private:
+
+  bool activated = false;
+
+};
+
+
+void linkPortals(WorldPortal* portal1, WorldPortal* portal2);
+
+/*
+  class WorldPortal : public Portal
+  {
+  public:
+  WorldPortal(ofRectangle portal, Orientation orientation) : Portal(portal, orientation)
+  {
+
+  }
+
+  void update(const std::vector<Teleportable*>& objects) override
+  {
+  for (const auto &obj : objects)
+  {
+  bool intersects = obj->collisionRect.intersects(collisionRect);
+  bool cloned = obj->hasClone();
+  bool inside = obj->collisionRect.inside(collisionRect);
+  // std::cout << std::boolalpha << "Intersects " << intersects << ' '
+  // 	  << std::boolalpha << "Cloned " << cloned << ' '
+  // 	  << std::boolalpha << "Inside " << inside << '\n';
+
+  if (intersects && !cloned)
+  {
+  std::cout << "World Portal Clone!\n";
+  obj->createClone(linkedPortal->collisionRect.getCenter() - collisionRect.getCenter());
+  }
+
+  if (!intersects && !inside && cloned && obj->collisionRect.intersects(entranceA, entranceB))
+  {
+  std::cout << "World Portal Remove clone\n";
+  obj->removeClone();
+  }
+  else if (!intersects && !inside && cloned && obj->collisionRect.intersects(exitA, exitB))
+  {
+  std::cout << "World Portal Teleport to clone\n";
+  obj->teleportToClone();
+  obj->removeClone();
+  }
+  }
+  }
+
+  void draw() override
+  {
+  ofSetColor(ofColor::orange);
+  ofDrawRectangle(collisionRect);
+
+  ofSetColor(ofColor::blue);
+  ofDrawLine(entranceA, entranceB);
+
+  ofSetColor(ofColor::red);
+  ofDrawLine(exitA, exitB);
+
+  }
+
 
   };
 
+  class PerspectivePortal : public Portal {
+  public:
 
-  void linkPortals(WorldPortal* portal1, WorldPortal* portal2);
+  enum class Direction { LEFT, RIGHT };
 
-  /*
-    class WorldPortal : public Portal
-    {
-    public:
-    WorldPortal(ofRectangle portal, Orientation orientation) : Portal(portal, orientation)
-    {
+  Portal(Orientation _ori, Direction _direction, ofRectangle _rect){
+  direction = _direction;
+  orientation = _ori;
+  rect = _rect;
+  if (_ori == Orientation::VERTICAL){
+  float temp = rect.getWidth();
+  rect.setWidth(rect.getHeight());
+  rect.setHeight(temp);
+  entranceA = ofVec2f(rect.x - 2 , rect.y );
+  entranceB = ofVec2f(rect.x - 2 , rect.y + rect.height );
+  exitA = ofVec2f(rect.x + rect.width  + 2, rect.y);
+  exitB = ofVec2f(rect.x + rect.width + 2, rect.y + rect.height);
+  }
+  else{
+  entranceA = ofVec2f(rect.x , rect.y - 2);
+  entranceB = ofVec2f(rect.x + rect.width , rect.y - 2);
 
-    }
-
-    void update(const std::vector<Teleportable*>& objects) override
-    {
-    for (const auto &obj : objects)
-    {
-    bool intersects = obj->collisionRect.intersects(collisionRect);
-    bool cloned = obj->hasClone();
-    bool inside = obj->collisionRect.inside(collisionRect);
-    // std::cout << std::boolalpha << "Intersects " << intersects << ' '
-    // 	  << std::boolalpha << "Cloned " << cloned << ' '
-    // 	  << std::boolalpha << "Inside " << inside << '\n';
-
-    if (intersects && !cloned)
-    {
-    std::cout << "World Portal Clone!\n";
-    obj->createClone(linkedPortal->collisionRect.getCenter() - collisionRect.getCenter());
-    }
-
-    if (!intersects && !inside && cloned && obj->collisionRect.intersects(entranceA, entranceB))
-    {
-    std::cout << "World Portal Remove clone\n";
-    obj->removeClone();
-    }
-    else if (!intersects && !inside && cloned && obj->collisionRect.intersects(exitA, exitB))
-    {
-    std::cout << "World Portal Teleport to clone\n";
-    obj->teleportToClone();
-    obj->removeClone();
-    }
-    }
-    }
-
-    void draw() override
-    {
-    ofSetColor(ofColor::orange);
-    ofDrawRectangle(collisionRect);
-
-    ofSetColor(ofColor::blue);
-    ofDrawLine(entranceA, entranceB);
-
-    ofSetColor(ofColor::red);
-    ofDrawLine(exitA, exitB);
-
-    }
-
-
-    };
-
-    class PerspectivePortal : public Portal {
-    public:
-
-    enum class Direction { LEFT, RIGHT };
-
-    Portal(Orientation _ori, Direction _direction, ofRectangle _rect){
-    direction = _direction;
-    orientation = _ori;
-    rect = _rect;
-    if (_ori == Orientation::VERTICAL){
-    float temp = rect.getWidth();
-    rect.setWidth(rect.getHeight());
-    rect.setHeight(temp);
-    entranceA = ofVec2f(rect.x - 2 , rect.y );
-    entranceB = ofVec2f(rect.x - 2 , rect.y + rect.height );
-    exitA = ofVec2f(rect.x + rect.width  + 2, rect.y);
-    exitB = ofVec2f(rect.x + rect.width + 2, rect.y + rect.height);
-    }
-    else{
-    entranceA = ofVec2f(rect.x , rect.y - 2);
-    entranceB = ofVec2f(rect.x + rect.width , rect.y - 2);
-
-    exitA = ofVec2f(rect.x , rect.y + rect.height + 2);
-    exitB = ofVec2f(rect.x + rect.width , rect.y + rect.height + 2);
-    }
-    if (direction == Direction::LEFT) {
-    std::swap(entranceA, exitA);
-    std::swap(entranceB, exitB);
-    }
-    connectedPortal_Angle = nullptr;
-    connectedPortal_Perspective = nullptr;
-    }
+  exitA = ofVec2f(rect.x , rect.y + rect.height + 2);
+  exitB = ofVec2f(rect.x + rect.width , rect.y + rect.height + 2);
+  }
+  if (direction == Direction::LEFT) {
+  std::swap(entranceA, exitA);
+  std::swap(entranceB, exitB);
+  }
+  connectedPortal_Angle = nullptr;
+  connectedPortal_Perspective = nullptr;
+  }
     
-    Portal(Orientation ori, Direction _direction, int x, int y, int width, int height)
-    : Portal(ori, _direction, ofRectangle(x, y,height,width))
-    {}
+  Portal(Orientation ori, Direction _direction, int x, int y, int width, int height)
+  : Portal(ori, _direction, ofRectangle(x, y,height,width))
+  {}
     
-    void update(std::vector<Teleportable*> &objects) override;
-    void draw() override;
-    void linkTo(Portal* p_angle, Portal* p_perspective);
-    Portal* GetLinkedPortal(Teleportable* obj) const;
+  void update(std::vector<Teleportable*> &objects) override;
+  void draw() override;
+  void linkTo(Portal* p_angle, Portal* p_perspective);
+  Portal* GetLinkedPortal(Teleportable* obj) const;
 
 
-    ofRectangle rect;
-    int id;
+  ofRectangle rect;
+  int id;
     
-    protected:
-    Direction direction;
-    Portal* connectedPortal_Angle;
-    Portal* connectedPortal_Perspective;
-    ofVec2f entranceA, entranceB;
-    ofVec2f exitA, exitB;
+  protected:
+  Direction direction;
+  Portal* connectedPortal_Angle;
+  Portal* connectedPortal_Perspective;
+  ofVec2f entranceA, entranceB;
+  ofVec2f exitA, exitB;
     
-    Orientation orientation;
+  Orientation orientation;
 
-    bool activated = false;
+  bool activated = false;
     
-    };
-  */
+  };
+*/

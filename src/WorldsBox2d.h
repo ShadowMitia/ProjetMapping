@@ -40,6 +40,7 @@ public:
     std::vector< Avatar *> avatars;
     //std::vector< Avatar *> clodes;
     std::vector< WorldPortal * > portals;
+    std::vector< PerspectivePortal* > perspectivePortals;
     std::vector< Platform * > platforms;
     std::vector< ObjectBlock * > blocks;
     std::vector< Ladder * > ladders;
