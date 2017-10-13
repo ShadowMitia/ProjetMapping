@@ -16,46 +16,18 @@ void WorldsBox2d::setup(){
 
   importPortal();
 
-  for (unsigned int i = 0; i < 1; i++)
-    {
-      createAvatar(1300, 700);
-      //createAvatar(1200, 700);
-    }
+  createAvatar(1300, 200);
+  //createAvatar(1200, 700);
 
   for (auto &avatar : avatars)
     {
       teleportables.push_back(avatar);
     }
 
-  ofPolyline pickupForm;
-  pickupForm.addVertex(0, 0);
-  pickupForm.addVertex(10, 0);
-  pickupForm.addVertex(10, 10);
-  pickupForm.addVertex(0, 10);
-  pickupForm.close();
-
-  PickUp* p = new PickUp(world.getWorld(), pickupForm);
-  p->setPosition(1400, 700);
-
-  pickups.push_back(p);
-
   for (auto &pickup : pickups)
     {
       teleportables.push_back(pickup);
     }
-
-
-  ofPolyline blockForm;
-  blockForm.addVertex(0, 0);
-  blockForm.addVertex(10, 0);
-  blockForm.addVertex(10, 10);
-  blockForm.addVertex(0, 10);
-  blockForm.close();
-
-
-  ObjectBlock* block = new ObjectBlock(world.getWorld(), blockForm);
-  block->setPosition(1300, 700);
-  blocks.push_back(block);
 
   for (auto &block : blocks)
     {
@@ -201,6 +173,12 @@ void WorldsBox2d::createBox(ofPolyline polyline)
 {
   ObjectBlock* block = new ObjectBlock(world.getWorld(), polyline);
   blocks.push_back(block);
+}
+
+void WorldsBox2d::createPickup(ofPolyline polyline)
+{
+  PickUp* pickup = new PickUp(world.getWorld(), polyline);
+  pickups.push_back(pickup);
 }
 
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {

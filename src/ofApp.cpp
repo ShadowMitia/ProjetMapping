@@ -33,7 +33,7 @@ void ofApp::setup() {
   worlds = new WorldsBox2d;
   worlds->setup();
 
-  scene1 = new Scene1(worlds, "Map_prog_Plateformes_Test.png");
+  scene1 = new Scene1(worlds, "Map_prog.png");
   scene2 = new Scene2(worlds);
 
   mapping.registerFboSource(scene1);
@@ -53,35 +53,34 @@ void ofApp::setup() {
   ////   Import Platform   /////
   worlds->platforms.clear();
 
-  std::vector<ofPolyline>  platforms = importImage("Map_prog_Plateformes_Test.png");
-  for (int i = 0; i < platforms.size() - 1; i++) {
+  std::vector<ofPolyline>  platforms = importImage("Map_prog_plateforme_blanc.png");
+  for (std::size_t i = 0; i < platforms.size() - 1; i++) {
     worlds->createPlatform(platforms[i]);
   }
 
   ////   Import Ladder   /////
-  /*
-    vector<ofPolyline>  ladders = importImage("Map_prog_Echelles.png");
-    for (int i =0; i<ladders.size()-1; i++) {
-    worlds->createLadder(ladders[i]);
+
+  std::vector<ofPolyline>  ladders = importImage("Map_prog_echelle_blanc.png");
+  for (std::size_t i =0; i< ladders.size()-1; i++) {
+      worlds->createLadder(ladders[i]);
     }
-	
 
-    ofPolyline ladders;
-    ladders.addVertex(0, 0);
-    ladders.addVertex(0, 3520);
-    ladders.addVertex(0, 800);
-    ladders.addVertex(3520, 800);
+    // Import blocs
 
-    worlds->createLadder(ladders);
-  */
-
-  /*
-    vector<ofPolyline> boxes = importImage("Test_Boite.png");
-    for (int i = 0; i < boxes.size() - 1; i++)
+    std::vector<ofPolyline> boxes = importImage("Map_prog_bloc_blanc.png");
+    for (std::size_t i = 0; i < boxes.size() - 1; i++)
     {
-    worlds->createBox(boxes[i]);
+      worlds->createBox(boxes[i]);
     }
-  */
+
+    // Import pickups
+    std::vector<ofPolyline> pickups = importImage("Map_prog_pickup_blanc.png");
+    for (std::size_t i = 0; i < pickups.size() - 1; i++)
+    {
+      worlds->createPickup(pickups[i]);
+    }
+
+
 
 #ifdef USE_WIIMOTE
   wiiuse.addListener(this);
