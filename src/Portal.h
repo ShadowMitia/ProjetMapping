@@ -46,6 +46,17 @@ protected:
 
 class EmptyPortal : public WorldPortal
 {
+public:
+  EmptyPortal() = delete;
+  EmptyPortal(Orientation orientation, PortalDirection direction, int x, int y, int w, int h) : EmptyPortal(orientation, direction, ofRectangle(x, y, w, h))
+  {
+
+  }
+  EmptyPortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : WorldPortal(orientation, direction, portal)
+  {
+
+  }
+
   void update(const std::vector<Teleportable*>& objects) override
   {
     return;
@@ -65,6 +76,12 @@ class EmptyPortal : public WorldPortal
 class PerspectivePortal : public WorldPortal
 {
 public:
+  PerspectivePortal() = delete;
+  PerspectivePortal(Orientation orientation, PortalDirection direction, int x, int y, int h, int w) : PerspectivePortal(orientation, direction, ofRectangle(x, y, w, h))
+  {
+
+  }
+
   PerspectivePortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : WorldPortal(orientation, direction, portal)
   {
 
