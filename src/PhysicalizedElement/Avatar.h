@@ -39,6 +39,8 @@ private:
   //std::vector<bool>  pickupAvatar;
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
+  PerspectivePortal* perspectivePortal;
+
 public:
 
   void presUpdate();

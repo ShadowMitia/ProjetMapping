@@ -132,6 +132,11 @@ public:
 	  }
       }
 
+    if (linked.size() == 0)
+      {
+	activated = false;
+      }
+
   }
 
   bool isActivated() const

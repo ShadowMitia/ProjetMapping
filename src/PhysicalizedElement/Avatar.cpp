@@ -358,8 +358,12 @@ void Avatar::processPerspectivePortals(std::vector<PerspectivePortal*>& portals)
 
 	if (portal != nullptr)
 	  {
-	    portal->setActive(true);
-	    portal->linked.push_back(this);
+	    if (portal != perspectivePortal)
+	      {
+		perspectivePortal->linked.erase(std::find(perspectivePortal->linked.begin(), perspectivePortal->linked.end(), this));
+		portal->setActive(true);
+		portal->linked.push_back(this);
+	      }
 	  }
       }
     /*
