@@ -35,7 +35,7 @@ public:
 
   ofVec2f getPosition()
   {
-    return box.getPosition();
+    return box.getPosition() - ofVec2f(width / 2, height / 2);
   }
 
   void setPosition(ofVec2f pos)

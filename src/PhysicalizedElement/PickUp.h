@@ -38,7 +38,7 @@ public:
 
     ofVec2f getPosition()
     {
-        return pickUp.getPosition();
+      return pickUp.getPosition() - ofVec2f(width / 2, height / 2);
     }
 
   void setCollected()
@@ -59,4 +59,7 @@ private:
   ofVec2f cloneTranslation;
 
   bool collected = false;
+
+  int width = 0;
+  int height = 0;
 };
