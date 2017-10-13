@@ -28,7 +28,7 @@ public:
 
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
-  WorldPortal* cloningPortal = nullptr;
+  std::vector<WorldPortal*> cloningPortal;
   ofVec2f entryPoint;
 
 };

@@ -96,7 +96,7 @@ void WorldsBox2d::draw(){
       platform->ground.draw();
     }
 
-  for (unsigned int i = 0; i < circles.size(); i++) {
+  for (std::size_t i = 0; i < circles.size(); i++) {
     ofFill();
     ofSetHexColor(0xf6c738);
     circles[i].get()->draw();
@@ -133,6 +133,7 @@ void WorldsBox2d::createAvatar(int x, int y){
 void WorldsBox2d::update(){
 
   // supprimes les pickups collectés et les enleves de box2d et de la liste des pickups
+
   pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) { std::remove(teleportables.begin(), teleportables.end(), p); world.getWorld()->DestroyBody(p->pickUp.body);} return res; }), pickups.end());
 
   world.update();
@@ -147,11 +148,12 @@ void WorldsBox2d::update(){
       pickup->update();
     }
 
-  for (int j = 0; j < avatars.size(); j++)
+  for (std::size_t j = 0; j < avatars.size(); j++)
     {
+      avatars[j]->processPerspectivePortals(perspectivePortals);
       avatars[j]->presUpdate();
         
-      for (int i = 0; i < ladders.size(); i++) {
+      for (std::size_t i = 0; i < ladders.size(); i++) {
 	if (ladders[i]->inside(avatars[j])) {
 	  avatars[j]->modeDeplace = Deplacement::LADDER;
 	}
@@ -164,11 +166,11 @@ void WorldsBox2d::update(){
       avatars[j]->update();
     }
 
-  for (int i = 0; i< perspectivePortals.size(); i++) {
+  for (std::size_t i = 0; i< perspectivePortals.size(); i++) {
     perspectivePortals[i]->update(teleportables);
   }
 
-  for (int i = 0; i< portals.size(); i++) {
+  for (std::size_t i = 0; i< portals.size(); i++) {
     portals[i]->update(teleportables);
   }
 
@@ -176,16 +178,16 @@ void WorldsBox2d::update(){
   //warterfalls->update();
 }
 
-void WorldsBox2d::createPlatform(ofPolyline _polyline){
+void WorldsBox2d::createPlatform(ofPolyline polyline){
     
   Platform *edge = new Platform;
-  edge->create(world.getWorld(), _polyline);
+  edge->create(world.getWorld(), polyline);
   platforms.push_back(edge);
 }
 
-void WorldsBox2d::createLadder(ofPolyline _polyline){
+void WorldsBox2d::createLadder(ofPolyline polyline){
     
-  Ladder *edge = new Ladder(_polyline);
+  Ladder *edge = new Ladder(polyline);
   ladders.push_back(edge);
     
 }
@@ -648,7 +650,7 @@ void WorldsBox2d::importPortal(){
   linkPortals(portals[200], portals[71]);
   linkPortals(portals[201], portals[114]);
   linkPortals(portals[202], portals[127]);
-
+  */
 
 
   /*

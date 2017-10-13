@@ -5,4 +5,3 @@ ofxLiquidFun
 ofxOpenCv
 ofxPiMapper
 ofxXmlSettings
-ofxWiiuse

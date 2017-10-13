@@ -40,8 +40,6 @@ void WorldPortal::update(const std::vector<Teleportable*>& objects)
 
 	if (intersects && !cloned)
 	  {
-	    std::cout << "Intersects\n";
-	    std::cout << objCenter.x << ' ' << portalCenter.x << '\n';
 	    if ((left && verticalPortal && objCenter.x < portalCenter.x)
 		|| (!left && verticalPortal && objCenter.x > portalCenter.x)
 		|| (left && !verticalPortal && objCenter.y > portalCenter.y)
@@ -49,24 +47,24 @@ void WorldPortal::update(const std::vector<Teleportable*>& objects)
 		)
 	      {
 		obj->createClone(linkedPortal->collisionRect.getCenter() - portalCenter);
-		obj->cloningPortal = this;
+		obj->cloningPortal.push_back(this);
 	      }
 	  }
-	else if (!intersects && cloned && obj->cloningPortal == this)
+	else if (!intersects && cloned && std::find(obj->cloningPortal.begin(), obj->cloningPortal.end(), this) != obj->cloningPortal.end())
 	  {
 	    if ((left && verticalPortal && objCenter.x < obj->entryPoint.x)
 		|| (!left && verticalPortal && objCenter.x > obj->entryPoint.x)
-		|| (!left && !verticalPortal && objCenter.y < obj->entryPoint.y)
-		|| (left && !verticalPortal && objCenter.y > obj->entryPoint.y))
+		|| (left && !verticalPortal && objCenter.y > obj->entryPoint.y)
+		|| (!left && !verticalPortal && objCenter.y < obj->entryPoint.y))
 	      {
 		obj->removeClone();
-		obj->cloningPortal = nullptr;
+		obj->cloningPortal.erase(std::find(obj->cloningPortal.begin(), obj->cloningPortal.end(), this));
 	      }
 	    else
 	      {
 		obj->teleportToClone();
 		obj->removeClone();
-		obj->cloningPortal = nullptr;
+		obj->cloningPortal.erase(std::find(obj->cloningPortal.begin(), obj->cloningPortal.end(), this));
 	      }
 	  }
       }
@@ -85,91 +83,12 @@ void WorldPortal::draw() const
     ofSetColor(ofColor::white);
   }
 
+ofVec2f WorldPortal::getPosition() const
+  {
+    return ofVec2f(collisionRect.x, collisionRect.y);
+  }
+
 void WorldPortal::linkTo(WorldPortal* portal)
   {
     linkedPortal = portal;
   }
-
-
-/*
-void Portal::update(std::vector<Teleportable*>& objects)
-{
- // if (connectedPortal_Angle == nullptr || !activated) { return; }
-    
-    for (auto &obj : objects)
-      {
-		if (GetLinkedPortal(obj))
-		{
-
-			bool intersects = obj->collisionRect.intersects(rect);
-			bool cloned = obj->hasClone();
-			bool inside = obj->collisionRect.inside(rect);
-			// std::cout << std::boolalpha << "Intersects " << intersects << ' '
-			// 	  << std::boolalpha << "Cloned " << cloned << ' '
-			// 	  << std::boolalpha << "Inside " << inside << '\n';
-
-			if (intersects && !cloned)
-			{
-				std::cout << "Clone!\n";
-				obj->createClone(GetLinkedPortal(obj)->rect.getCenter() - rect.getCenter());
-			}
-
-			// PAS FINI!
-			if (intersects && !inside && obj->viewpoint != Viewpoint::MODE_PERSPECTIVE && cloned)
-			{
-				std::cout << "close portal\n";
-				obj->removeClone();
-			}
-
-			if (!intersects && !inside && cloned && obj->collisionRect.intersects(entranceA, entranceB))
-			{
-				std::cout << "Remove clone\n";
-				obj->removeClone();
-			}
-			else if (!intersects && !inside && cloned && obj->collisionRect.intersects(exitA, exitB))
-			{
-				std::cout << "Teleport to clone\n";
-				obj->teleportToClone();
-				obj->removeClone();
-			}
-		}
-    }
-}
-
-void Portal::draw() {
-    
-    ofSetLineWidth(3);
-    ofSetColor(ofColor::blue);
-    ofDrawLine(entranceA, entranceB);
-    ofSetLineWidth(3);
-    ofSetColor(ofColor::red);
-    ofDrawLine(exitA, exitB);
-    
-    ofPushMatrix();
-    ofSetColor(ofColor::orange);
-    ofDrawRectangle(rect);
-    ofSetColor(ofColor::white);
-    ofPopMatrix();
-}
-
-void Portal::linkTo(Portal* p_angle, Portal* p_perspective) 
-{
-  //if (connectedPortal != nullptr) { return; }
-
-  connectedPortal_Angle = p_angle;
-  connectedPortal_Perspective = p_perspective;
-
-}
-
-Portal* Portal::GetLinkedPortal(Teleportable* obj) const
-{
-  if (obj->viewpoint == Viewpoint::MODE_ANGLE)
-    {
-      return connectedPortal_Angle;
-    }
-
-  //return connectedPortal_Perspective != nullptr ? connectedPortal_Perspective : connectedPortal_Angle;
-  return connectedPortal_Perspective;
-}
-
-*/

@@ -8,6 +8,7 @@
 #include "Avatar.h"
 #include "Platform.h"
 #include "PickUp.h"
+#include "../Portal.h"
 
 std::vector <ofPoint> loadPoints(const std::string& file) {
   std::vector <ofPoint> pts;
@@ -99,8 +100,6 @@ void Avatar::update()
       clone->polygon.setVelocity(polygon.getVelocity());
       clone->setPosition(polygon.getPosition() + cloneTranslation);
     }
-
-
 }
 
 void Avatar::draw() {
@@ -328,7 +327,6 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
       jumping = false;
       if (!(abs(moveInputX) > 0))
 	{
-
 	  polygon.setVelocity(0, polygon.getVelocity().y);
 	}
     } else if (OtherSprite->sprite == Sprite::PICKUP)
@@ -336,3 +334,24 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
       static_cast<PickUp*>(OtherSprite->Element)->setCollected();
     }
 }
+
+void Avatar::processPerspectivePortals(std::vector<PerspectivePortal*>& portals)
+{
+
+    if (viewpoint == Viewpoint::MODE_PERSPECTIVE)
+      {
+	int distance = 100000000;
+	PerspectivePortal* portal = nullptr;
+	for (auto& p : portals)
+	  {
+	    if (p->getPosition().squareDistance(getPosition()) < distance)
+	      {
+		distance = p->getPosition().squareDistance(getPosition());
+		portal = p;
+	      }
+	  }
+
+	portal->setActive(true);
+	portal->linked.push_back(this);
+      }
+  }

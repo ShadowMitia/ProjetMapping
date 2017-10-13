@@ -13,24 +13,41 @@
 #include "FboSource.h"
 #include "WorldsBox2d.h"
 #include "PhysicalizedElement/Avatar.h"
+#include "Light.h"
 
 
 class Scene1 : public ofx::piMapper::FboSource
 {
 public:
+    int lightSize;
+    LightRender lightRender;
     WorldsBox2d *       worldsBox2d;
     ofImage image;
+    ofImage imagePlatform;
     
     Scene1(WorldsBox2d* _worldsBox2d, string path){
         image.load(path);
         name = "Scene One FBO Source";
         allocate(image.getWidth(), image.getHeight());
         worldsBox2d =_worldsBox2d;
+        
+        lightSize = 256;
+        ofDisableArbTex();  // <-- Very Important
+        lightRender.setup(lightSize,lightSize);
+        lightRender.setRenderFuctionObjet(this, &Scene1::renderObjects);
+        lightRender.setRenderFuctionPlatform(this, &Scene1::renderPlatform);
+        lightRender.addLight(lightSize/2, lightSize/2);
+        
     }
     
     void update();
     void draw();
+    void renderObjects();
+    void renderPlatform();
 };
+
+
+
 
 
 class Scene2 : public ofx::piMapper::FboSource

@@ -81,6 +81,7 @@
 		67FF225B68ECC1942C833BFE /* SelNextSurfaceCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FC98A68C64BFC941D0B31EE9 /* SelNextSurfaceCmd.cpp */; };
 		6AA3415BCECADF4BFF04564A /* b2PrismaticJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EA7E326BE942859474CAC949 /* b2PrismaticJoint.cpp */; };
 		6AABAB39E82AF5CFEA23A205 /* ContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5FBB4A8427353AED09174BE5 /* ContourFinder.cpp */; };
+		6C2A5834F2BDE8280BAEC2D1 /* PickUp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 83168B19E474ACA4DE7B1DF4 /* PickUp.cpp */; };
 		6C849FD52946FEAFF7BD6AC0 /* b2Fixture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9813832A39DF627AC1AF6 /* b2Fixture.cpp */; };
 		7002E598586957E5F20E69A7 /* SelVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A2282B1E05458C3B2BBCE568 /* SelVertexCmd.cpp */; };
 		7101B8EBCB8F8C03A1F56597 /* b2WeldJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B431E9E7F8008EED17023DF3 /* b2WeldJoint.cpp */; };
@@ -141,7 +142,6 @@
 		B6840996567E78436F7ECFAB /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B047FF96258DC01792B272DB /* ETF.cpp */; };
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
 		BB51758A0089E41CEDEE257F /* Waterfalls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3B560358B97D761FB04DC23 /* Waterfalls.cpp */; };
-		BCF640481F7DC1D600DFC0C2 /* PickUp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF640461F7DC1D600DFC0C2 /* PickUp.cpp */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
 		BF2CFA915EDBB99B0F92489A /* b2ChainShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52E6BAAF72BF7CDFDF5F9C /* b2ChainShape.cpp */; };
 		BF30D7A362CEBF9286D087FD /* b2WorldCallbacks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1325975A2867C7088859835 /* b2WorldCallbacks.cpp */; };
@@ -336,7 +336,6 @@
 		3C10C48B1E9A15223A02411C /* b2ParticleAssembly.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2ParticleAssembly.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Particle/b2ParticleAssembly.cpp; sourceTree = SOURCE_ROOT; };
 		3DF2D82EA37D8C7A5F686EA5 /* TriangleSurface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = TriangleSurface.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/TriangleSurface.cpp; sourceTree = SOURCE_ROOT; };
 		3E4A0386460638A781A7AC84 /* AddGridRowCmd.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = AddGridRowCmd.cpp; path = ../../../addons/ofxPiMapper/src/Commands/AddGridRowCmd.cpp; sourceTree = SOURCE_ROOT; };
-		3EF95F62E40564F1D8157D16 /* Wiimotes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Wiimotes.h; path = src/Wiimotes.h; sourceTree = SOURCE_ROOT; };
 		3F1DBE7BC677B57E16C6DCFD /* PhysicalizedElement.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PhysicalizedElement.cpp; path = src/PhysicalizedElement/PhysicalizedElement.cpp; sourceTree = SOURCE_ROOT; };
 		3FBD320860285A0147703AF6 /* b2MouseJoint.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2MouseJoint.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Joints/b2MouseJoint.cpp; sourceTree = SOURCE_ROOT; };
 		402C8F4015542356D362AC88 /* Calibration.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Calibration.cpp; path = ../../../addons/ofxCv/libs/ofxCv/src/Calibration.cpp; sourceTree = SOURCE_ROOT; };
@@ -486,6 +485,7 @@
 		820102E51B125101D727B3CC /* ETF.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ETF.h; path = ../../../addons/ofxCv/libs/CLD/include/CLD/ETF.h; sourceTree = SOURCE_ROOT; };
 		826C16D3DF61FADC7357427C /* b2PolygonContact.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2PolygonContact.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Contacts/b2PolygonContact.h; sourceTree = SOURCE_ROOT; };
 		82C4AF58EA085FDFBD91FEA4 /* Box2D.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Box2D.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Box2D.h; sourceTree = SOURCE_ROOT; };
+		83168B19E474ACA4DE7B1DF4 /* PickUp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = PickUp.cpp; path = src/PhysicalizedElement/PickUp.cpp; sourceTree = SOURCE_ROOT; };
 		8326CDEDA153D242D924D2B6 /* Flow.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Flow.h; path = ../../../addons/ofxCv/libs/ofxCv/include/ofxCv/Flow.h; sourceTree = SOURCE_ROOT; };
 		832BDC407620CDBA568B713D /* tinyxmlerror.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlerror.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlerror.cpp; sourceTree = SOURCE_ROOT; };
 		836B103542A52C63B004410C /* SurfaceManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SurfaceManager.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/SurfaceManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -506,7 +506,6 @@
 		8A9C4049B5CE4A1F6C8AF18C /* ofxBox2dPolygon.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dPolygon.h; path = ../../../addons/ofxLiquidFun/src/ofxBox2dPolygon.h; sourceTree = SOURCE_ROOT; };
 		8ACD88B7932EF60A81B535F3 /* b2TrackedBlock.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2TrackedBlock.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Common/b2TrackedBlock.h; sourceTree = SOURCE_ROOT; };
 		8AFC9EE49ED40BAC4A939E29 /* b2Joint.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2Joint.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Joints/b2Joint.cpp; sourceTree = SOURCE_ROOT; };
-		8C45710C044CCE4B635DA296 /* Wiimote.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Wiimote.h; path = src/Wiimote.h; sourceTree = SOURCE_ROOT; };
 		8D3CB0B9A827AFA479349BBE /* SetApplicationModeCmd.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SetApplicationModeCmd.cpp; path = ../../../addons/ofxPiMapper/src/Commands/SetApplicationModeCmd.cpp; sourceTree = SOURCE_ROOT; };
 		8DB45DE3BD6BB97E34BDB411 /* nn_index.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = nn_index.h; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/flann/nn_index.h; sourceTree = SOURCE_ROOT; };
 		8E79CF8911DFABAFE23EA45B /* ofxCvConstants.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxCvConstants.h; path = ../../../addons/ofxOpenCv/src/ofxCvConstants.h; sourceTree = SOURCE_ROOT; };
@@ -614,11 +613,11 @@
 		BA65337B3E631788AE2D018B /* RmGridColCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = RmGridColCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/RmGridColCmd.h; sourceTree = SOURCE_ROOT; };
 		BB644064DB39B263E7BCE7E6 /* b2BroadPhase.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2BroadPhase.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Collision/b2BroadPhase.h; sourceTree = SOURCE_ROOT; };
 		BBAF9D981351C596CA67CAF9 /* hybridtracker.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = hybridtracker.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/contrib/hybridtracker.hpp; sourceTree = SOURCE_ROOT; };
+		BC98183D1F90558D00028AC3 /* Light.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light.h; sourceTree = "<group>"; };
 		BCB571865BB25BC586CF80EC /* SetPresetCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SetPresetCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/SetPresetCmd.h; sourceTree = SOURCE_ROOT; };
 		BCBB74B9531974E1D5DA019B /* HexagonSurface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = HexagonSurface.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/HexagonSurface.cpp; sourceTree = SOURCE_ROOT; };
-		BCF640461F7DC1D600DFC0C2 /* PickUp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PickUp.cpp; path = PhysicalizedElement/PickUp.cpp; sourceTree = "<group>"; };
-		BCF640471F7DC1D600DFC0C2 /* PickUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PickUp.h; path = PhysicalizedElement/PickUp.h; sourceTree = "<group>"; };
 		BDBE053980FA01FAD543D782 /* CmdManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CmdManager.cpp; path = ../../../addons/ofxPiMapper/src/Commands/CmdManager.cpp; sourceTree = SOURCE_ROOT; };
+		BDD599B3F3728036884532A6 /* PickUp.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PickUp.h; path = src/PhysicalizedElement/PickUp.h; sourceTree = SOURCE_ROOT; };
 		BEB021F1F92E6E734BB409A2 /* b2StackAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2StackAllocator.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Common/b2StackAllocator.cpp; sourceTree = SOURCE_ROOT; };
 		BF85CBDEA83E69E3C0C7B0F8 /* ofxBox2dEdge.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dEdge.h; path = ../../../addons/ofxLiquidFun/src/ofxBox2dEdge.h; sourceTree = SOURCE_ROOT; };
 		C090D9C89167F60F841E6830 /* b2MotorJoint.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2MotorJoint.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Joints/b2MotorJoint.h; sourceTree = SOURCE_ROOT; };
@@ -1378,11 +1377,11 @@
 				21968481CA3C93EB94138CD5 /* ObjetBlock.h */,
 				3F1DBE7BC677B57E16C6DCFD /* PhysicalizedElement.cpp */,
 				2744AC5205E3A8FDDF7FFD79 /* PhysicalizedElement.h */,
+				83168B19E474ACA4DE7B1DF4 /* PickUp.cpp */,
+				BDD599B3F3728036884532A6 /* PickUp.h */,
 				67DD44265A628EE9D26C6E63 /* Platform.cpp */,
 				C2E1098584184A0E8ED7C9D7 /* Platform.h */,
 				B161D6CD0DE29FB0DC074A43 /* Teleportable.h */,
-				BCF640461F7DC1D600DFC0C2 /* PickUp.cpp */,
-				BCF640471F7DC1D600DFC0C2 /* PickUp.h */,
 			);
 			name = PhysicalizedElement;
 			sourceTree = "<group>";
@@ -1832,10 +1831,9 @@
 				DA95C249C1ACE6032D763379 /* Timer.h */,
 				B3B560358B97D761FB04DC23 /* Waterfalls.cpp */,
 				31C6F1A26EE761EC3EA82647 /* Waterfalls.h */,
-				8C45710C044CCE4B635DA296 /* Wiimote.h */,
-				3EF95F62E40564F1D8157D16 /* Wiimotes.h */,
 				AA4AD6D7B7B6C92B355A90A1 /* WorldsBox2d.cpp */,
 				74F58875EEA9B57763DF617E /* WorldsBox2d.h */,
+				BC98183D1F90558D00028AC3 /* Light.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -2078,6 +2076,7 @@
 				E781B276405F7FD95E09372F /* Avatar.cpp in Sources */,
 				446D9C7F32759D5C9DFB0E0F /* ObjetBlock.cpp in Sources */,
 				37974BD98BBEBCE9F84C91A1 /* PhysicalizedElement.cpp in Sources */,
+				6C2A5834F2BDE8280BAEC2D1 /* PickUp.cpp in Sources */,
 				288FE439032B895D49F0C49B /* Platform.cpp in Sources */,
 				3D5E766EB943847296812895 /* Portal.cpp in Sources */,
 				10442BEDEC5FAD205F66DC67 /* ScenesMapping.cpp in Sources */,
@@ -2161,7 +2160,6 @@
 				440B97C9DB0452B922B893CB /* b2RopeJoint.cpp in Sources */,
 				7101B8EBCB8F8C03A1F56597 /* b2WeldJoint.cpp in Sources */,
 				426B49D327BFC692A16EB859 /* b2WheelJoint.cpp in Sources */,
-				BCF640481F7DC1D600DFC0C2 /* PickUp.cpp in Sources */,
 				9F23FA2C2157EC95DFC4AD75 /* b2Particle.cpp in Sources */,
 				1529EA60921FDF7B07077187 /* b2ParticleAssembly.cpp in Sources */,
 				4C06E4C9B9CBCC35BC0E1E46 /* b2ParticleGroup.cpp in Sources */,

@@ -14,6 +14,7 @@
 #include "ObjetBlock.h"
 #include "PhysicalizedElement.h"
 
+class PerspectivePortal;
 
 class Avatar : public Teleportable {
 
@@ -31,11 +32,12 @@ public:
 
     
 private:
-  std::unique_ptr<Avatar> clone = nullptr;
+  std::unique_ptr<Avatar> clone;
   ofVec2f cloneTranslation;
   float moveInputX;
   float moveInputY;
   std::vector<bool>  pickupAvatar;
+  Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
 public:
 
@@ -47,6 +49,9 @@ public:
   void teleportToClone() override;
   bool hasClone() override;
 
+  void processPerspectivePortals(std::vector<PerspectivePortal*>& portals);
+
+
   ofVec2f getPosition() const
   {
     return ofVec2f(rect.x, rect.y);
@@ -57,8 +62,16 @@ public:
     return foot.getPosition();
   }
 
+
+  ofVec2f getCenter() const
+  {
+    return collisionRect.getCenter();
+  }
+
   void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
+
+
   void jump();
   //void move(Direction _direction);
   void move(float inputX);

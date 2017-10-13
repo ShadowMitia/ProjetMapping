@@ -12,37 +12,40 @@
 void Scene1::draw(){
 
     ofClear(0);
-    ofBackgroundGradient(ofColor(10), ofColor(0));
-    
-    ofBackground(255,255,255, 255);
-    //ofDrawBitmapString("1", 50, 50);
-    ofSetColor(ofColor::white);
-    ofSetLineWidth(1);
-    /*
-    for (int i=0; i<= VarConst::WidthWorld2D; i+= VarConst::UNIT) {
-        ofDrawLine(i, 0, i, VarConst::HeightWorld2D);
-    }
-    for (int i=0; i<= VarConst::HeightWorld2D; i+= VarConst::UNIT) {
-        ofDrawLine(0, i, VarConst::WidthWorld2D, i);
-    }
-    //worldsBox2d->draw();
-    ofSetColor(ofColor::white);
-    
-    for (auto &platforms: worldsBox2d->platforms) {
-        if (platforms->shape->bVisible) {
-            //platforms->ground.draw();
-        }
-    }
-    */
-    
-    image.draw(0, 0);
+    ofBackground(200, 200, 0);
+    renderPlatform();
     worldsBox2d->draw();
-   // lightSystem2D->draw();
+    
+    ofPushMatrix();
+    ofTranslate(worldsBox2d->avatars[0]->polygon.getPosition().x - (lightSize / 2), worldsBox2d->avatars[0]->polygon.getPosition().y - (lightSize / 2));
+    lightRender.draw();
+    ofPopMatrix();
+}
+
+void Scene1::renderObjects(){
+    //image.draw(0, 0);
+}
+void Scene1::renderPlatform(){
+    
+    ofBackground(0, 0, 0, 0);
+    for (auto &platform : worldsBox2d->platforms)
+    {
+        ofSetHexColor(0xFF0000);
+        platform->ground.draw();
+    }
 }
 
 void Scene1::update(){
+    
+    lightRender.lights[0].vel.x = worldsBox2d->avatars[0]->polygon.getPosition().x;
+    lightRender.lights[0].vel.y = worldsBox2d->avatars[0]->polygon.getPosition().y;
+    lightRender.renderLights();
 
 }
+
+
+
+
 
 void Scene2::draw(){
 
