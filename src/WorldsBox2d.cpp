@@ -16,7 +16,7 @@ void WorldsBox2d::setup(){
 
   importPortal();
 
-  createAvatar(1300, 200);
+  createAvatar(800, 600);
   //createAvatar(1200, 700);
 
   for (auto &avatar : avatars)
@@ -59,8 +59,6 @@ void WorldsBox2d::draw(){
     {
       portal->draw();
     }
-
-
 
   for (auto &platform : platforms)
     {
