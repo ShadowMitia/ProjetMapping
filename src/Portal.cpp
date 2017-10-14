@@ -9,6 +9,9 @@
 #include "Portal.h"
 #include "Constant.h"
 #include "Avatar.h"
+#include "PhysicalizedElement/ObjetBlock.h"
+#include "PhysicalizedElement/PickUp.h"
+#include "PhysicalizedElement/Avatar.h"
 
 WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, int x, int y, int width, int height) : WorldPortal(orientation, direction, ofRectangle(x, y, width, height))
   {
@@ -40,10 +43,25 @@ ofVec2f WorldPortal::getPosition() const
 
 void WorldPortal::update(const std::vector<Teleportable*>& objects)
   {
-    if (linkedPortal == nullptr) return; // for debug, to be removed
+    //if (linkedPortal == nullptr) return; // for debug, to be removed
+
 
     for (const auto &obj : objects)
       {
+	if (dynamic_cast<ObjectBlock*>(obj))
+	      {
+		std::cout << "MMMh\n";
+	      }
+	else if (dynamic_cast<PickUp*>(obj))
+	  {
+	    std::cout << "pickup\n";
+	  }
+	else if (dynamic_cast<Avatar*>(obj))
+	  {
+	    // std::cout << "avatar\n";
+	  }
+
+
 	bool intersects = obj->collisionRect.intersects(collisionRect);
 	bool cloned = obj->hasClone();
 	bool verticalPortal = (orientation == Orientation::Vertical);
@@ -53,6 +71,8 @@ void WorldPortal::update(const std::vector<Teleportable*>& objects)
 
 	if (intersects && !cloned)
 	  {
+
+
 	    if ((left && verticalPortal && objCenter.x < portalCenter.x)
 		|| (!left && verticalPortal && objCenter.x > portalCenter.x)
 		|| (left && !verticalPortal && objCenter.y > portalCenter.y)
