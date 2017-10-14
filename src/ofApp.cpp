@@ -33,7 +33,7 @@ void ofApp::setup() {
   worlds = new WorldsBox2d;
   worlds->setup();
 
-  scene1 = new Scene1(worlds, "Map_prog.png");
+  scene1 = new Scene1(worlds, "Map_prog_LD.png");
   scene2 = new Scene2(worlds);
 
   mapping.registerFboSource(scene1);
@@ -130,16 +130,6 @@ void ofApp::keyReleased(int key){
       fullscreen = !fullscreen;
       ofSetFullscreen(fullscreen);
     }
-  /*
-  if (key == OF_KEY_LEFT)
-    {
-      camera.setPosition(0, 0, 0);
-    }
-  else if (key == OF_KEY_RIGHT)
-    {
-      camera.setPosition(1920, 0, 0);
-    }
-  */
 }
 
 //--------------------------------------------------------------

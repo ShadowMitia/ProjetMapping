@@ -22,7 +22,7 @@ void Scene1::draw(){
     ofPopMatrix();
 }
 
-void Scene1::renderObjects(){
+void Scene1::renderObjects() {
     //image.draw(0, 0);
 }
 
@@ -37,20 +37,12 @@ void Scene1::renderPlatform(){
 }
 
 void Scene1::update(){
-
     lightRender.lights[0].vel.x = worldsBox2d->avatars[0]->polygon.getPosition().x;
     lightRender.lights[0].vel.y = worldsBox2d->avatars[0]->polygon.getPosition().y;
     lightRender.renderLights();
-
 }
 
-
-
-
-
 void Scene2::draw(){
-
     ofSetColor(ofColor::white);
     worldsBox2d->draw();
-    //lightSystem2D->draw();
 }
