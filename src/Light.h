@@ -126,7 +126,7 @@ public:
         
         for(int i=0; i<lights.size(); i++) {
             ofSetColor(255, 255, 0);
-            ofCircle(lights[i].pos.x, lights[i].pos.y, 5,5);
+            ofDrawCircle(lights[i].pos.x, lights[i].pos.y, 5,5);
         }
         
         ofPopMatrix();
@@ -184,7 +184,7 @@ public:
             ofClear(0, 0, 0, 0);
             shadowMapShader.setUniform2f("lightLocation", lights[i].pos.x, lights[i].pos.y);
             shadowMapShader.setUniform2f("resolution", width, height);
-            shadowMapShader.setUniformTexture("u_texture", occludersFBOPlaform.getTextureReference(), 0);
+            shadowMapShader.setUniformTexture("u_texture", occludersFBOPlaform.getTexture(), 0);
             occludersFBOPlaform.draw(0, 0);
             shadowMapShader.end();
             shadowMapFBOPlatform.end();
@@ -195,7 +195,7 @@ public:
             ofClear(0, 0, 0, 0);
             shadowMapShader.setUniform2f("lightLocation", lights[i].pos.x, lights[i].pos.y);
             shadowMapShader.setUniform2f("resolution", width, height);
-            shadowMapShader.setUniformTexture("u_texture", occludersFBOObjet.getTextureReference(), 0);
+            shadowMapShader.setUniformTexture("u_texture", occludersFBOObjet.getTexture(), 0);
             occludersFBOObjet.draw(0, 0);
             shadowMapShader.end();
             shadowMapFBOObjet.end();
@@ -205,8 +205,8 @@ public:
             // -------------------------------
             lightShader.begin();
             lightShader.setUniform2f("resolution", width, height);
-            lightShader.setUniformTexture("u_texturePlaform", shadowMapFBOPlatform.getTextureReference(), 0);
-            lightShader.setUniformTexture("u_textureObjet", shadowMapFBOObjet.getTextureReference(), 1);
+            lightShader.setUniformTexture("u_texturePlaform", shadowMapFBOPlatform.getTexture(), 0);
+            lightShader.setUniformTexture("u_textureObjet", shadowMapFBOObjet.getTexture(), 1);
             
             //lightShader.setUniformTexture("u_objects_tex", objectsFBO.getTextureReference(), 1);
             

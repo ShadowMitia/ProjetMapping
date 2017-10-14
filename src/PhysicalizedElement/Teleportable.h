@@ -35,7 +35,7 @@ public:
 public:
   ofRectangle collisionRect;
 
-  PerspectivePortal* perspectivePortal;
+  PerspectivePortal* perspectivePortal = nullptr;
 
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 

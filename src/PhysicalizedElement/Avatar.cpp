@@ -76,7 +76,7 @@ void Avatar::presUpdate(){
 
 void Avatar::update()
 {
-    
+
   if (modeDeplace == Deplacement::PLATFORM)
     {
       polygon.body->SetGravityScale(1.0);
@@ -360,7 +360,7 @@ void Avatar::processPerspectivePortals(std::vector<PerspectivePortal*>& portals)
 	perspectivePortal = portal;
       }
 
-    if (perspectivePortal->getCollisionRect().inside(getCenter()))
+    if (viewpoint == Viewpoint::MODE_PERSPECTIVE && perspectivePortal->getCollisionRect().inside(getCenter()))
       {
 	perspectivePortal->setActive(true);
       }
