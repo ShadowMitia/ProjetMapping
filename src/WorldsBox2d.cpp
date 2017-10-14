@@ -20,6 +20,9 @@ void WorldsBox2d::setup(){
   importPortal();
 
   createAvatar(2680, 600);
+  createAvatar(2620, 620);
+  createAvatar(2620, 600);
+  createAvatar(2680, 620);
   //createAvatar(1200, 700);
 
   for (auto &avatar : avatars)

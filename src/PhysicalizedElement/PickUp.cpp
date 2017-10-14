@@ -41,6 +41,8 @@ PickUp::PickUp(b2World* box2d, ofPolyline polyline)
     dataSprite* data = (dataSprite*)pickUp.getData();
     data->sprite = Sprite::PICKUP;
     data->Element = this;
+
+    pickUp.body->SetGravityScale(0.0);
 }
 
 void PickUp::update(ofRectangle gravityWell)
