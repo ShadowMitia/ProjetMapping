@@ -30,6 +30,8 @@ vector<ofPolyline> importImage(const string& path){
 //--------------------------------------------------------------
 void ofApp::setup() {
 
+  ofSetLogLevel(OF_LOG_SILENT);
+
   worlds = new WorldsBox2d;
   worlds->setup();
 
