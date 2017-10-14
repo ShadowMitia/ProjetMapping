@@ -47,7 +47,6 @@ Avatar::Avatar(b2World* box2d)
   foot.setup(box2d, temp);
   foot.body->SetGravityScale(0);
 
-
   tempFilter.categoryBits = 0x0002;
   tempFilter.maskBits =  0x0004;
   foot.setFilterData(tempFilter);
@@ -69,13 +68,28 @@ Avatar::Avatar(b2World* box2d)
   modeDeplace = Deplacement::PLATFORM;
 }
 
-void Avatar::presUpdate(){
+void Avatar::presUpdate()
+{
   foot.setPosition(polygon.getPosition() + ofVec2f(0,4));
   collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
-
-void Avatar::update()
+void Avatar::gravityCheck(ofRectangle gravityWell)
 {
+  if (gravityWell.inside(polygon.getPosition()))
+    {
+      modeDeplace = Deplacement::TOP;
+    }
+  else
+    {
+      modeDeplace = Deplacement::PLATFORM;
+    }
+}
+
+void Avatar::update(ofRectangle gravityWell)
+{
+
+
+  gravityCheck(gravityWell);
 
   if (modeDeplace == Deplacement::PLATFORM)
     {
@@ -105,7 +119,6 @@ void Avatar::update()
 }
 
 void Avatar::draw() {
-
   ofSetColor(ofColor::blue);
   polygon.draw();
   ofSetColor(ofColor::violet);
@@ -134,21 +147,21 @@ void Avatar::removeClone() {
   clone = nullptr;
   cloneTranslation.zero();
   entryPoint.zero();
-
-
 }
-void Avatar::teleportToClone() {
 
+void Avatar::teleportToClone() {
   auto vel = polygon.getVelocity();
   polygon.setPosition(clone->polygon.getPosition());
   polygon.setVelocity(vel);
   cloneTranslation.zero();
 }
+
 bool Avatar::hasClone()
 {
   return clone ? true : false;
   //return (clone == nullptr);
 }
+
 void Avatar::setPosition(ofVec2f vec)
 {
   setPosition(vec.x, vec.y);

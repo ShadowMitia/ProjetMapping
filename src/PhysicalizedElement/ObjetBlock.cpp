@@ -9,7 +9,7 @@
 #include "ObjetBlock.h"
 
 
-ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline) : box2d(box2d)
+ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline)
   {
     box.setPhysics(3.0, 0.0, 0.0);
     
@@ -44,8 +44,10 @@ ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline) : box2d(box2d)
     data->sprite = Sprite::BLOCK;
   }
 
-void ObjectBlock::update()
+void ObjectBlock::update(ofRectangle gravityWell)
   {
+
+    gravityCheck(gravityWell);
 
     if (blocked)
       {
@@ -92,7 +94,7 @@ void ObjectBlock::createClone(ofVec2f translateClone)
 	p.addVertex(box.getVertices()[i].x, box.getVertices()[i].y, 0);
       }
     
-    clone = std::make_unique<ObjectBlock>(box2d, p);
+    clone = std::make_unique<ObjectBlock>(box.getWorld(), p);
     clone->box.setPosition(cloneTranslation);
     clone->box.setVelocity(box.getVelocity());
     clone->box.create(box.getWorld());
@@ -111,7 +113,7 @@ void ObjectBlock::removeClone()
 void ObjectBlock::teleportToClone()
   {
     std::cout << "Teleport object block clone\n";
-    auto vel = box.getPosition();
+    auto vel = box.getVelocity();
     box.setPosition(clone->box.getPosition());
     box.setVelocity(vel);
     cloneTranslation.zero();

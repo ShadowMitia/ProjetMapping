@@ -8,6 +8,9 @@
 
 #include "WorldsBox2d.h"
 void WorldsBox2d::setup(){
+
+  noGravityWell = ofRectangle(2500, 0, 1000, 800);
+
   world.init();
   world.setGravity(0, VarConst::gravity);
   world.setFPS(60.0);
@@ -16,7 +19,7 @@ void WorldsBox2d::setup(){
 
   importPortal();
 
-  createAvatar(1300, 500);
+  createAvatar(2680, 600);
   //createAvatar(1200, 700);
 
   for (auto &avatar : avatars)
@@ -109,12 +112,12 @@ void WorldsBox2d::update()
 
   for (auto &block : blocks)
     {
-      block->update();
+      block->update(noGravityWell);
     }
 
   for (auto& pickup : pickups)
     {
-      pickup->update();
+      pickup->update(noGravityWell);
     }
 
 
@@ -134,7 +137,7 @@ void WorldsBox2d::update()
 	//
 	//   }
       }
-      avatars[j]->update();
+      avatars[j]->update(noGravityWell);
     }
 
   for (auto& pportal : perspectivePortals)

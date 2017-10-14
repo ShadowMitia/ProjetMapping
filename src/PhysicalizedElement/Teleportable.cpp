@@ -15,8 +15,9 @@ ofVec2f Teleportable::getCenter() const
   {
     return collisionRect.inside(pos);
   }
-
+/*
   ofVec2f Teleportable::getPosition() const
   {
     return ofVec2f(collisionRect.x, collisionRect.y);
   }
+*/

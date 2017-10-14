@@ -39,10 +39,12 @@ private:
   float moveInputY;
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
+  void gravityCheck(ofRectangle gravityWell) override;
+
 public:
 
   void presUpdate();
-  void update() override;
+  void update(ofRectangle gravityWell) override;
   void draw() override;
   void createClone(ofVec2f cloneTranslation) override;
   void removeClone() override;
