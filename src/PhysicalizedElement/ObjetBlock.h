@@ -21,7 +21,7 @@ public:
 
   ObjectBlock(b2World* _box2d, ofPolyline _polyline);
 
-  void update() override;
+  void update(ofRectangle gravityWell) override;
   void draw() override;
 
   void createClone(ofVec2f translateClone) override;
@@ -51,12 +51,23 @@ public:
 private:
   ofxBox2dPolygon box;
 
+  void gravityCheck(ofRectangle gravityWell) override
+  {
+    if (gravityWell.inside(box.getPosition()))
+      {
+	box.body->SetGravityScale(0.0);
+      }
+    else
+      {
+	box.body->SetGravityScale(1.0);
+      }
+  }
+
+
   int width;
   int height;
   
   std::unique_ptr<ObjectBlock> clone;
-
-  b2World* box2d;
 
   ofVec2f cloneTranslation;
 

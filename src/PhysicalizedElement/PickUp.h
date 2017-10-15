@@ -19,7 +19,7 @@ public:
     
     PickUp(b2World* box2d, ofPolyline polyline);
     
-    void update() override;
+    void update(ofRectangle gravityWell) override;
     void draw() override;
     
     void createClone(ofVec2f translateClone) override;
@@ -51,6 +51,18 @@ public:
   bool isCollected() const
   {
     return collected;
+  }
+
+  void gravityCheck(ofRectangle gravityWell) override
+  {
+    if (gravityWell.inside(pickUp.getPosition()))
+      {
+	pickUp.body->SetGravityScale(0.0);
+      }
+    else
+      {
+	pickUp.body->SetGravityScale(1.0);
+      }
   }
     
   ofxBox2dPolygon pickUp;

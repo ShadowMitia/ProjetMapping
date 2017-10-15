@@ -9,7 +9,7 @@
 #include "ObjetBlock.h"
 
 
-ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline) : box2d(box2d)
+ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline)
   {
     box.setPhysics(3.0, 0.0, 0.0);
     
@@ -42,10 +42,14 @@ ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline) : box2d(box2d)
     dataSprite* data = (dataSprite*)box.getData();
     data->Element = this;
     data->sprite = Sprite::BLOCK;
+
+    box.body->SetGravityScale(0.0);
   }
 
-void ObjectBlock::update()
+void ObjectBlock::update(ofRectangle gravityWell)
   {
+
+    gravityCheck(gravityWell);
 
     if (blocked)
       {
@@ -92,7 +96,7 @@ void ObjectBlock::createClone(ofVec2f translateClone)
 	p.addVertex(box.getVertices()[i].x, box.getVertices()[i].y, 0);
       }
     
-    clone = std::make_unique<ObjectBlock>(box2d, p);
+    clone = std::make_unique<ObjectBlock>(box.getWorld(), p);
     clone->box.setPosition(cloneTranslation);
     clone->box.setVelocity(box.getVelocity());
     clone->box.create(box.getWorld());
@@ -111,7 +115,7 @@ void ObjectBlock::removeClone()
 void ObjectBlock::teleportToClone()
   {
     std::cout << "Teleport object block clone\n";
-    auto vel = box.getPosition();
+    auto vel = box.getVelocity();
     box.setPosition(clone->box.getPosition());
     box.setVelocity(vel);
     cloneTranslation.zero();
@@ -153,12 +157,16 @@ void ObjectBlock::contactStart(dataSprite* OtherSprite) {
       box.setVelocity(0, 0);
       box.setDamping(0);
     }
+
 }
 
 void ObjectBlock::contactEnd(dataSprite* OtherSprite)
 {
-
-
+ if (OtherSprite->sprite == Sprite::PLATFORM || OtherSprite->sprite == Sprite::BLOCK || OtherSprite->sprite == Sprite::AVATAR)
+    {
+      box.setVelocity(0, 0);
+      box.setDamping(0);
+    }
 }
 
 void ObjectBlock::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {

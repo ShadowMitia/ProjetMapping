@@ -16,8 +16,9 @@ class WorldPortal;
 
 class Teleportable : public PhysicalizedElement {
 public:
-    virtual void update() = 0;
+  virtual void update(ofRectangle gravityWell) = 0;
     virtual void draw() = 0;
+  virtual void gravityCheck(ofRectangle gravityWell) = 0;
     
     virtual void createClone(ofVec2f translationClone) = 0;
     virtual void removeClone() = 0;
@@ -30,18 +31,17 @@ public:
 
   bool inside(ofVec2f pos) const;
 
-  ofVec2f getPosition() const;
+  //ofVec2f getPosition() const;
+
     
 public:
   ofRectangle collisionRect;
 
-  PerspectivePortal* perspectivePortal;
+  PerspectivePortal* perspectivePortal = nullptr;
 
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
   std::vector<WorldPortal*> cloningPortal;
   ofVec2f entryPoint;
-
-
 };
 

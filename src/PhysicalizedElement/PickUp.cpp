@@ -19,8 +19,6 @@ PickUp::PickUp(b2World* box2d, ofPolyline polyline)
     pickUp.body->SetType(b2BodyType::b2_dynamicBody);
     pickUp.body->SetFixedRotation(true);
 
-
-    
     width = 1000000;
     height = 1000000;
     
@@ -43,11 +41,15 @@ PickUp::PickUp(b2World* box2d, ofPolyline polyline)
     dataSprite* data = (dataSprite*)pickUp.getData();
     data->sprite = Sprite::PICKUP;
     data->Element = this;
+
+    pickUp.body->SetGravityScale(0.0);
 }
 
-void PickUp::update()
+void PickUp::update(ofRectangle gravityWell)
 {
-    
+
+
+  gravityCheck(gravityWell);
   collisionRect.set(pickUp.getPosition().x - collisionRect.width / 2, pickUp.getPosition().y - height / 2, width, height);
     
     if (clone)
