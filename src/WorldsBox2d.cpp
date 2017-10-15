@@ -19,10 +19,12 @@ void WorldsBox2d::setup(){
 
   importPortal();
 
+
   createAvatar(90, 90);
   createAvatar(90, 140);
   createAvatar(2600, 90);
   createAvatar(680, 140);
+
 
   for (auto &avatar : avatars)
     {
@@ -117,7 +119,9 @@ void WorldsBox2d::createAvatar(int x, int y){
 void WorldsBox2d::update()
 {
   // supprimes les pickups collectés et les enleves de box2d et de la liste des pickups
-  pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) { std::remove(teleportables.begin(), teleportables.end(), p); world.getWorld()->DestroyBody(p->pickUp.body);} return res; }), pickups.end());
+
+  //pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) { std::remove(teleportables.begin(), teleportables.end(), p); world.getWorld()->DestroyBody(p->pickUp.body);} return res; }), pickups.end());
+
 
   world.update();
 
@@ -204,7 +208,7 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
   createPlatform(temp);
 }
 
-// attention code deguelas 
+// attention code deguelas
 void WorldsBox2d::importPortal(){
   constexpr const int sizeH = 160;
   constexpr const int sizeW = 3;

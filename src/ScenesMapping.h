@@ -24,26 +24,39 @@ public:
     WorldsBox2d *       worldsBox2d;
     ofImage image;
     ofImage imagePlatform;
-    
+
     Scene1(WorldsBox2d* _worldsBox2d, string path){
         image.load(path);
         name = "Scene One FBO Source";
         allocate(image.getWidth(), image.getHeight());
         worldsBox2d =_worldsBox2d;
-        
+
         lightSize = 256;
         ofDisableArbTex();  // <-- Very Important
         lightRender.setup(lightSize,lightSize);
-        lightRender.setRenderFuctionObjet(this, &Scene1::renderObjects);
-        lightRender.setRenderFuctionPlatform(this, &Scene1::renderPlatform);
+        lightRender.setRenderFunction(this, &Scene1::renderObjects);
+        lightRender.setRenderFunction(this, &Scene1::renderPlatform);
         lightRender.addLight(lightSize/2, lightSize/2);
-        
+
+	mask.allocate(image.getWidth(), image.getHeight());
+
+	mask.begin();
+	ofClear(0);
+	mask.end();
     }
-    
+
+  ofFbo mask;
+
+
     void update();
     void draw();
     void renderObjects();
     void renderPlatform();
+
+  void faceBorders()
+  {
+
+  }
 };
 
 

@@ -21,11 +21,9 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine){
     data->Element = this;
 
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0004;
-    tempFilter.maskBits = 0x0002 | 0x0001;
+    tempFilter.categoryBits = 0x0100;
+    tempFilter.maskBits = 0xFFFF;
     ground.setFilterData(tempFilter);
-    
-
 }
 
 void Platform::draw(){

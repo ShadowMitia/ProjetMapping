@@ -41,6 +41,19 @@ namespace VarConst
 
 }
 
+/*
+Category bits:
+AVATAR : 0x0001
+AVATAR_FOOT : 0x0002
+PICKUP : 0x0010
+BLOCK : 0x0040
+PLATFORM : 0x100
+
+
+ */
+
+
+
 enum class Sprite { AVATAR, AVATAR_CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, UNKNOWN };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };

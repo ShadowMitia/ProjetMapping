@@ -20,6 +20,8 @@ WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, int
 
 WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : collisionRect(portal), orientation(orientation), direction(direction)
   {
+
+    
     if (orientation == Orientation::Horizontal)
       {
 	std::swap(collisionRect.width, collisionRect.height);
@@ -176,7 +178,7 @@ void PerspectivePortal::update(const std::vector<Teleportable*>& objects)
 	    if (obj->perspectivePortal == this && collisionRect.intersects(obj->getCollisionRect()))
 	      {
 		obj->viewpoint = Viewpoint::MODE_ANGLE;
-		obj->createClone(linkedPortal->getPosition());
+		obj->createClone(linkedPortal->getCollisionRect().getCenter() - collisionRect.getCenter());
 		obj->teleportToClone();
 	      }
 	    else

@@ -57,7 +57,7 @@ void main() {
 
     }
     
-    float radius = 70.0;
+    float radius = u_radius;
     float bleed = 0.0;
     float linearizeFactor = 0.9;
     float distance = length(lightLocation - gl_FragCoord.xy);

@@ -356,6 +356,7 @@
     <ClCompile Include="..\..\..\addons\ofxXmlSettings\libs\tinyxmlparser.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Light.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\Constant.h" />
     <ClInclude Include="src\Ladder.h" />

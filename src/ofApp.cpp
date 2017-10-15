@@ -82,18 +82,9 @@ void ofApp::setup() {
       worlds->createPickup(pickups[i]);
     }
 
-
-
 #ifdef USE_WIIMOTE
   wiiuse.addListener(this);
-  /*
-  for (int i = 0; i < wiiuse.getNumberOfConnectedWiimotes(); i++)
-    {
-      wiiuse.setLed(i, true);
-    }
-	*/
 #endif
-
 }
 
 //--------------------------------------------------------------
@@ -312,10 +303,12 @@ void ofApp::input() {
 }
 
 #ifdef USE_WIIMOTE
-
 void ofApp::onWiiuseControlEvent(ofxWiiuseControlEventArgs& args)
 {
+  switch (args.second)
+    {
 
+    }
 }
 
 void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
@@ -383,6 +376,9 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
 	worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
 	break;
       }
+
+    default:
+      break;
 
     }
 }

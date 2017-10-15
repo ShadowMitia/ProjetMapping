@@ -1928,6 +1928,9 @@
     <ClInclude Include="src\PhysicalizedElement\PickUp.h">
       <Filter>src\PhysicalizedElement</Filter>
     </ClInclude>
+    <ClInclude Include="src\Light.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

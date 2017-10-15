@@ -10,8 +10,8 @@
 #include "PickUp.h"
 #include "../Portal.h"
 
-std::vector <ofPoint> loadPoints(const std::string& file) {
-  std::vector <ofPoint> pts;
+std::vector<ofPoint> loadPoints(const std::string& file) {
+  std::vector<ofPoint> pts;
   std::vector <std::string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
   for (unsigned int i = 0; i < ptsStr.size(); i += 2) {
     float x = ofToFloat(ptsStr[i]);
@@ -33,7 +33,6 @@ Avatar::Avatar(b2World* box2d)
   polygon.body->SetType(b2BodyType::b2_dynamicBody);
   polygon.body->SetFixedRotation(true);
 
-	
   b2Filter tempFilter;
   tempFilter.categoryBits = 0x0001;
   tempFilter.maskBits = 0xFFFF;
@@ -48,7 +47,7 @@ Avatar::Avatar(b2World* box2d)
   foot.body->SetGravityScale(0);
 
   tempFilter.categoryBits = 0x0002;
-  tempFilter.maskBits =  0x0004;
+  tempFilter.maskBits =  0x0100;
   foot.setFilterData(tempFilter);
 
   moveInputX = 0.0f;
@@ -73,6 +72,7 @@ void Avatar::presUpdate()
   foot.setPosition(polygon.getPosition() + ofVec2f(0,4));
   collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
+
 void Avatar::gravityCheck(ofRectangle gravityWell)
 {
   if (gravityWell.inside(polygon.getPosition()))
@@ -87,8 +87,6 @@ void Avatar::gravityCheck(ofRectangle gravityWell)
 
 void Avatar::update(ofRectangle gravityWell)
 {
-
-
   gravityCheck(gravityWell);
 
   if (modeDeplace == Deplacement::PLATFORM)
@@ -101,12 +99,8 @@ void Avatar::update(ofRectangle gravityWell)
       polygon.body->SetGravityScale(0.0);
       move(moveInputX, moveInputY);
     }
-    
-  if (!jumping)
-    {
-      //this->polygon.setRotation(0);
-    }
-  else
+
+  if (jumping)
     {
       polygon.setVelocity(polygon.getVelocity().x - (VarConst::coefFrotementAir * polygon.getVelocity().x/VarConst::speedAvatarMax), polygon.getVelocity().y);
     }
@@ -334,9 +328,6 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 
   if (OtherSprite->sprite == Sprite::PLATFORM)
     {
-      //cout << "normalImpulses [0] : " << impulse->normalImpulses[0] << "normalImpulses [1] : " << impulse->normalImpulses[1] << endl;
-      //cout << "tangentImpulses [0] : " << impulse->tangentImpulses[0] << "tangentImpulses [1] : " << impulse->tangentImpulses[1] << endl;
-
       jumping = false;
       if (!(abs(moveInputX) > 0))
 	{
