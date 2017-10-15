@@ -9,21 +9,11 @@
 #include "ofxBox2d.h"
 #include "../Constant.h"
 #include "PhysicalizedElement.h"
-/*
-class dataPlatform: public dataSprite {
-public:
-    //int alex; 
-
-	dataPlatform() {
-		setSprite(Sprite::PLATFORM);
-	}
-};
-*/
 
 
 class Platform : public PhysicalizedElement {
 public:
-    
+
     ofxBox2dEdge ground;    
     
 private:

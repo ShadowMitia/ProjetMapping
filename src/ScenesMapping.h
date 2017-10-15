@@ -38,7 +38,6 @@ public:
         lightRender.setRenderFunction(this, &Scene1::renderPlatform);
         lightRender.addLight(lightSize/2, lightSize/2);
 
-
 	mask.allocate(image.getWidth(), image.getHeight());
 
 	mask.begin();
@@ -46,13 +45,18 @@ public:
 	mask.end();
     }
 
-        ofFbo mask;
+  ofFbo mask;
 
 
     void update();
     void draw();
     void renderObjects();
     void renderPlatform();
+
+  void faceBorders()
+  {
+
+  }
 };
 
 

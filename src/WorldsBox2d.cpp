@@ -19,11 +19,11 @@ void WorldsBox2d::setup(){
 
   importPortal();
 
-  createAvatar(2680, 600);
-  createAvatar(2620, 620);
-  createAvatar(2620, 600);
-  createAvatar(2680, 620);
-  //createAvatar(1200, 700);
+  //createAvatar(2680, 600);
+  //createAvatar(2620, 620);
+  //createAvatar(2620, 600);
+  //createAvatar(2680, 620);
+  createAvatar(1200, 700);
 
 
   for (auto &avatar : avatars)
@@ -199,7 +199,7 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
   createPlatform(temp);
 }
 
-// attention code deguelas 
+// attention code deguelas
 void WorldsBox2d::importPortal(){
   constexpr const int sizeH = 160;
   constexpr const int sizeW = 3;

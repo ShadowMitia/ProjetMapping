@@ -9,20 +9,18 @@
 #include "ScenesMapping.h"
 
 
-void Scene1::draw(){
-
+void Scene1::draw()
+{
     ofClear(0);
     //ofBackground(200, 200, 0);
     renderPlatform();
     image.draw(0, 0);
     worldsBox2d->draw();
 
-
-
     // creation du mask pour les ombres
     mask.begin();
     ofBackground(0, 0, 0);
-    for (int i = 0; i < worldsBox2d->avatars.size(); i++) {
+    for (std::size_t i = 0; i < worldsBox2d->avatars.size(); i++) {
         lightRender.lights[i].vel.x = worldsBox2d->avatars[i]->polygon.getPosition().x;
         lightRender.lights[i].vel.y = worldsBox2d->avatars[i]->polygon.getPosition().y;
         lightRender.radius = 50.0;
@@ -34,14 +32,16 @@ void Scene1::draw(){
     }
     mask.end();
 
-    mask.draw(0,0);
+    //mask.draw(0,0);
 }
 
-void Scene1::renderObjects() {
+void Scene1::renderObjects()
+{
     //image.draw(0, 0);
 }
 
-void Scene1::renderPlatform(){
+void Scene1::renderPlatform()
+{
   //ofBackground(0, 0, 0, 0);
     for (auto &platform : worldsBox2d->platforms)
     {
@@ -51,11 +51,13 @@ void Scene1::renderPlatform(){
     ofSetColor(ofColor::white);
 }
 
-void Scene1::update(){
+void Scene1::update()
+{
 
 }
 
-void Scene2::draw(){
+void Scene2::draw()
+{
     ofSetColor(ofColor::white);
     worldsBox2d->draw();
 }

@@ -178,7 +178,7 @@ void PerspectivePortal::update(const std::vector<Teleportable*>& objects)
 	    if (obj->perspectivePortal == this && collisionRect.intersects(obj->getCollisionRect()))
 	      {
 		obj->viewpoint = Viewpoint::MODE_ANGLE;
-		obj->createClone(linkedPortal->getPosition());
+		obj->createClone(linkedPortal->getCollisionRect().getCenter() - collisionRect.getCenter());
 		obj->teleportToClone();
 	      }
 	    else

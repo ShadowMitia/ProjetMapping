@@ -34,7 +34,7 @@ ObjectBlock::ObjectBlock(b2World* box2d, ofPolyline polyline)
     collisionRect.set(box.getPosition().x - width / 2, box.getPosition().y - height / 2, width, height);
     
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0001;
+    tempFilter.categoryBits = 0x0040;
     tempFilter.maskBits = 0xFFFF;
     box.setFilterData(tempFilter);
 
@@ -127,37 +127,12 @@ bool ObjectBlock::hasClone()
   }
 
 void ObjectBlock::contactStart(dataSprite* OtherSprite) {
-  if (OtherSprite->sprite == Sprite::AVATAR)
-    {
-      pushed = true;
-      if (static_cast<Avatar*>(OtherSprite->Element)->polygon.getPosition().x < box.getPosition().x)
-	{
-	  from = PUSHED_FROM::Left;
-	}
-      else if (static_cast<Avatar*>(OtherSprite->Element)->polygon.getPosition().x > box.getPosition().x)
-	{
-	  from = PUSHED_FROM::Right;
-	}
-      else if (static_cast<Avatar*>(OtherSprite->Element)->polygon.getPosition().y < box.getPosition().y)
-	{
-	  from = PUSHED_FROM::Top;
-	}
-      else if (static_cast<Avatar*>(OtherSprite->Element)->polygon.getPosition().y <= box.getPosition().y)
-	{
-	  from = PUSHED_FROM::Bottom;
-	}
-    }
-  else if (OtherSprite->sprite == Sprite::BLOCK)
-    {
-      blocked = true;
-    }
-  else if (OtherSprite->sprite == Sprite::PLATFORM || OtherSprite->sprite == Sprite::BLOCK || OtherSprite->sprite == Sprite::AVATAR)
+  if (OtherSprite->sprite == Sprite::PLATFORM || OtherSprite->sprite == Sprite::BLOCK || OtherSprite->sprite == Sprite::AVATAR)
     {
       falling = false;
       box.setVelocity(0, 0);
       box.setDamping(0);
     }
-
 }
 
 void ObjectBlock::contactEnd(dataSprite* OtherSprite)

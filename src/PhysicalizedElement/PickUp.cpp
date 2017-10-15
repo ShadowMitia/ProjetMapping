@@ -33,7 +33,7 @@ PickUp::PickUp(b2World* box2d, ofPolyline polyline)
     collisionRect.set(pickUp.getPosition().x, pickUp.getPosition().y, width, height);
     
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0001;
+    tempFilter.categoryBits = 0x0010;
     tempFilter.maskBits = 0xFFFF;
     pickUp.setFilterData(tempFilter);
 
