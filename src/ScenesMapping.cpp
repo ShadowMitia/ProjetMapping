@@ -14,12 +14,28 @@ void Scene1::draw(){
     ofClear(0);
     ofBackground(200, 200, 0);
     renderPlatform();
-    image.draw(0, 0);
+    //image.draw(0, 0);
     worldsBox2d->draw();
-    ofPushMatrix();
-    ofTranslate(worldsBox2d->avatars[0]->polygon.getPosition().x - (lightSize / 2), worldsBox2d->avatars[0]->polygon.getPosition().y - (lightSize / 2));
-    lightRender.draw();
-    ofPopMatrix();
+    
+    ofFbo mask;
+    mask.allocate(image.getWidth(), image.getHeight());
+    
+    // creation du mask pour les ombres 
+    mask.begin();
+    ofBackground(0, 0, 0);
+    for (int i = 0; i < worldsBox2d->avatars.size(); i++) {
+        lightRender.lights[i].vel.x = worldsBox2d->avatars[i]->polygon.getPosition().x;
+        lightRender.lights[i].vel.y = worldsBox2d->avatars[i]->polygon.getPosition().y;
+        lightRender.radius = 50.0;
+        lightRender.renderLights();
+        ofPushMatrix();
+        ofTranslate(worldsBox2d->avatars[i]->polygon.getPosition().x - (lightSize / 2), worldsBox2d->avatars[i]->polygon.getPosition().y - (lightSize / 2));
+        lightRender.draw();
+        ofPopMatrix();
+    }
+    mask.end();
+    
+    mask.draw(0,0);
 }
 
 void Scene1::renderObjects() {
@@ -37,9 +53,7 @@ void Scene1::renderPlatform(){
 }
 
 void Scene1::update(){
-    lightRender.lights[0].vel.x = worldsBox2d->avatars[0]->polygon.getPosition().x;
-    lightRender.lights[0].vel.y = worldsBox2d->avatars[0]->polygon.getPosition().y;
-    lightRender.renderLights();
+    
 }
 
 void Scene2::draw(){

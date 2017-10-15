@@ -29,6 +29,7 @@ private:
     ofShader occludersShader, shadowMapShader, lightShader;
 public:
     
+    float radius;
     vector <Light> lights;
     ofFbo occludersFBOPlaform,occludersFBOObjet, shadowMapFBOPlatform, shadowMapFBOObjet , objectsFBO, lightFBO;
     int width, height;
@@ -213,7 +214,7 @@ public:
             
             lightShader.setUniform2f("lightLocation", lights[i].pos.x, lights[i].pos.y);
             lightShader.setUniform3f("lightColor", lights[i].color.r, lights[i].color.g, lights[i].color.b);
-            lightShader.setUniform1f("u_radius", 10.0);
+            lightShader.setUniform1f("u_radius", radius);
             ofSetColor(255, 0, 255, 100);
             
             glBegin(GL_QUADS); {
