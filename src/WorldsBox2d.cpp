@@ -19,16 +19,12 @@ void WorldsBox2d::setup(){
 
   importPortal();
 
-<<<<<<< HEAD
-  createAvatar(800, 600);
-  createAvatar(1200, 700);
-=======
   createAvatar(2680, 600);
   createAvatar(2620, 620);
   createAvatar(2620, 600);
   createAvatar(2680, 620);
   //createAvatar(1200, 700);
->>>>>>> origin/master
+
 
   for (auto &avatar : avatars)
     {
@@ -114,12 +110,9 @@ void WorldsBox2d::createAvatar(int x, int y){
 void WorldsBox2d::update()
 {
   // supprimes les pickups collectés et les enleves de box2d et de la liste des pickups
-<<<<<<< HEAD
 
   //pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) { std::remove(teleportables.begin(), teleportables.end(), p); world.getWorld()->DestroyBody(p->pickUp.body);} return res; }), pickups.end());
-=======
-  pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) { std::remove(teleportables.begin(), teleportables.end(), p); world.getWorld()->DestroyBody(p->pickUp.body);} return res; }), pickups.end());
->>>>>>> origin/master
+
 
   world.update();
 
