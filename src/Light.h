@@ -33,29 +33,31 @@ public:
     vector <Light> lights;
     ofFbo occludersFBOPlaform,occludersFBOObjet, shadowMapFBOPlatform, shadowMapFBOObjet , objectsFBO, lightFBO;
     int width, height;
-    
+
     LightRender() {
     }
-    
+
     template <class TObj>
-    void setRenderFuctionPlatform(TObj  * listener, void (TObj::*listenerMethod)()){
+    void setRenderFunction(TObj  * listener, void (TObj::*listenerMethod)()){
         renderEventPlatform += Poco::Delegate<TObj, void, false>(listener, listenerMethod);
     }
+  /*
     template <class TObj>
-    void setRenderFuctionObjet(TObj  * listener, void (TObj::*listenerMethod)()){
+    void setRenderFunction(TObj  * listener, void (TObj::*listenerMethod)()){
         renderEventObjet += Poco::Delegate<TObj, void, false>(listener, listenerMethod);
     }
+  */
     //--------------------------------------------------------------
     void setup(int w, int h) {
-        
+
         ofDisableArbTex();  // <-- Very Important
-        
+
         width = w;height=h;
         occludersFBOPlaform.allocate(width, height, GL_RGBA);
         occludersFBOObjet.allocate(width, height, GL_RGBA);
         lightFBO.allocate(width, height, GL_RGBA);
         objectsFBO.allocate(width, height, GL_RGBA);
-        
+
         ofFbo::Settings s;
         s.width  = width;
         s.height = 1;
@@ -67,14 +69,14 @@ public:
         s.useDepth = false;
         shadowMapFBOPlatform.allocate(s);
         shadowMapFBOObjet.allocate(s);
-        
+
         ofFbo::Settings lightS;
         lightS.width  = width;
         lightS.height = height;
         lightS.useDepth = false;
         lightS.internalformat = GL_RGBA;
         lightFBO.allocate(lightS);
-        
+
         if(!occludersShader.load("pass.vert", "pass.frag")) {
             printf("Error loading occludersShader\n");
         }
@@ -84,7 +86,7 @@ public:
         if(!lightShader.load("pass.vert", "light.frag")) {
             printf("Error loading lightShader\n");
         }
-        
+
     }
     //--------------------------------------------------------------
     void addLight(float x, float y) {
@@ -98,7 +100,7 @@ public:
             renderEventPlatform.notify(this);
         }
         catch(Poco::Exception &e) {
-            
+
         }
     }
     void callRenderRunction2() {
@@ -106,7 +108,7 @@ public:
             renderEventObjet.notify(this);
         }
         catch(Poco::Exception &e) {
-            
+
         }
     }
     //--------------------------------------------------------------
@@ -114,7 +116,7 @@ public:
         int nFbos = 2;
         float sw = drawWidth / (float)(width*nFbos);
         float sh = sw;
-        
+
         ofPushMatrix();
         ofTranslate(x,y);
         ofScale((float)sw, (float)sh);
@@ -124,34 +126,34 @@ public:
         occludersFBOObjet.draw(0, 0);
         ofSetColor(255);
         shadowMapFBOPlatform.draw(width, 0, width, height);
-        
+
         for(int i=0; i<lights.size(); i++) {
             ofSetColor(255, 255, 0);
             ofDrawCircle(lights[i].pos.x, lights[i].pos.y, 5,5);
         }
-        
+
         ofPopMatrix();
     }
     //--------------------------------------------------------------
     void renderLights() {
-        
+
         /*
          objectsFBO.begin();
          ofClear(0, 0, 0, 0);
          callRenderRunction();
          objectsFBO.end();
          */
-        
+
         lightFBO.begin();
         ofClear(0, 0, 0);
-        
+
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
-        
+
         for(int i=0; i<lights.size(); i++) {
             Light light = lights[i];
-            
-            
+
+
             // -------------------------------
             // Occlusion Map
             // -------------------------------
@@ -165,8 +167,8 @@ public:
             ofPopMatrix();
             //occludersShader.end();
             occludersFBOPlaform.end();
-            
-            
+
+
             occludersFBOObjet.begin();
             ofClear(0, 0, 0, 0);
             //occludersShader.begin();
@@ -175,8 +177,8 @@ public:
             callRenderRunction2(); // image occuders
             ofPopMatrix();
             occludersFBOObjet.end();
-            
-            
+
+
             // -------------------------------
             // 1d Shadow Map
             // -------------------------------
@@ -189,8 +191,8 @@ public:
             occludersFBOPlaform.draw(0, 0);
             shadowMapShader.end();
             shadowMapFBOPlatform.end();
-            
-            
+
+
             shadowMapFBOObjet.begin();
             shadowMapShader.begin();
             ofClear(0, 0, 0, 0);
@@ -200,7 +202,7 @@ public:
             occludersFBOObjet.draw(0, 0);
             shadowMapShader.end();
             shadowMapFBOObjet.end();
-            
+
             // -------------------------------
             // Shadows
             // -------------------------------
@@ -208,10 +210,10 @@ public:
             lightShader.setUniform2f("resolution", width, height);
             lightShader.setUniformTexture("u_texturePlaform", shadowMapFBOPlatform.getTexture(), 0);
             lightShader.setUniformTexture("u_textureObjet", shadowMapFBOObjet.getTexture(), 1);
-            
+
             //lightShader.setUniformTexture("u_objects_tex", objectsFBO.getTextureReference(), 1);
-            
-            
+
+
             lightShader.setUniform2f("lightLocation", lights[i].pos.x, lights[i].pos.y);
             lightShader.setUniform3f("lightColor", lights[i].color.r, lights[i].color.g, lights[i].color.b);
             lightShader.setUniform1f("u_radius", radius);

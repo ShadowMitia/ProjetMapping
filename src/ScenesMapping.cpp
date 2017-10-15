@@ -12,15 +12,14 @@
 void Scene1::draw(){
 
     ofClear(0);
-    ofBackground(200, 200, 0);
+    //ofBackground(200, 200, 0);
     renderPlatform();
-    //image.draw(0, 0);
+    image.draw(0, 0);
     worldsBox2d->draw();
-    
-    ofFbo mask;
-    mask.allocate(image.getWidth(), image.getHeight());
-    
-    // creation du mask pour les ombres 
+
+
+
+    // creation du mask pour les ombres
     mask.begin();
     ofBackground(0, 0, 0);
     for (int i = 0; i < worldsBox2d->avatars.size(); i++) {
@@ -34,7 +33,7 @@ void Scene1::draw(){
         ofPopMatrix();
     }
     mask.end();
-    
+
     mask.draw(0,0);
 }
 
@@ -53,7 +52,7 @@ void Scene1::renderPlatform(){
 }
 
 void Scene1::update(){
-    
+
 }
 
 void Scene2::draw(){

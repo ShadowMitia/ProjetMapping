@@ -20,6 +20,8 @@ WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, int
 
 WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : collisionRect(portal), orientation(orientation), direction(direction)
   {
+
+    
     if (orientation == Orientation::Horizontal)
       {
 	std::swap(collisionRect.width, collisionRect.height);
@@ -146,7 +148,7 @@ void WorldPortal::linkTo(WorldPortal* portal)
     linkedPortal = portal;
   }
 
-PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, int x, int y, int h, int w) : PerspectivePortal(orientation, direction, ofRectangle(x, y, w, h))
+PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, int x, int y, int w, int h) : PerspectivePortal(orientation, direction, ofRectangle(x, y, w, h))
   {
 
   }
