@@ -2,20 +2,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>430.000000000</x>
-                <y>601.000000000</y>
+                <x>426.000000000</x>
+                <y>530.000000000</y>
             </vertex>
             <vertex>
-                <x>630.000000000</x>
-                <y>704.000000000</y>
+                <x>603.000000000</x>
+                <y>629.000000000</y>
             </vertex>
             <vertex>
-                <x>673.000000000</x>
-                <y>904.000000000</y>
+                <x>622.000000000</x>
+                <y>828.000000000</y>
             </vertex>
             <vertex>
-                <x>489.000000000</x>
-                <y>802.000000000</y>
+                <x>454.000000000</x>
+                <y>725.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -92,263 +92,38 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>66.000000000</x>
-                <y>679.000000000</y>
-            </vertex>
-            <vertex>
-                <x>249.000000000</x>
-                <y>761.000000000</y>
-            </vertex>
-            <vertex>
-                <x>324.000000000</x>
-                <y>960.000000000</y>
-            </vertex>
-            <vertex>
-                <x>143.000000000</x>
-                <y>875.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.341041714</x>
-                <y>0.699791551</y>
-            </texCoord>
-            <texCoord>
-                <x>0.386439383</x>
-                <y>0.699791551</y>
-            </texCoord>
-            <texCoord>
-                <x>0.386439383</x>
-                <y>0.900208414</y>
-            </texCoord>
-            <texCoord>
-                <x>0.341041714</x>
-                <y>0.900208414</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>249.000000000</x>
-                <y>761.000000000</y>
-            </vertex>
-            <vertex>
-                <x>430.000000000</x>
-                <y>601.000000000</y>
-            </vertex>
-            <vertex>
-                <x>489.000000000</x>
-                <y>802.000000000</y>
-            </vertex>
-            <vertex>
-                <x>324.000000000</x>
-                <y>960.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.386439383</x>
-                <y>0.699791670</y>
-            </texCoord>
-            <texCoord>
-                <x>0.431609839</x>
-                <y>0.699791670</y>
-            </texCoord>
-            <texCoord>
-                <x>0.431609839</x>
-                <y>0.900416613</y>
-            </texCoord>
-            <texCoord>
-                <x>0.386439383</x>
-                <y>0.900416613</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>630.000000000</x>
-                <y>704.000000000</y>
-            </vertex>
-            <vertex>
-                <x>846.000000000</x>
-                <y>805.000000000</y>
-            </vertex>
-            <vertex>
-                <x>875.000000000</x>
-                <y>1004.000000000</y>
-            </vertex>
-            <vertex>
-                <x>673.000000000</x>
-                <y>904.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.476837158</x>
-                <y>0.699999988</y>
-            </texCoord>
-            <texCoord>
-                <x>0.521875024</x>
-                <y>0.699999988</y>
-            </texCoord>
-            <texCoord>
-                <x>0.521875024</x>
-                <y>0.900208354</y>
-            </texCoord>
-            <texCoord>
-                <x>0.476837158</x>
-                <y>0.900208354</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>846.000000000</x>
-                <y>805.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1015.000000000</x>
-                <y>638.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1032.000000000</x>
-                <y>842.000000000</y>
-            </vertex>
-            <vertex>
-                <x>875.000000000</x>
-                <y>1004.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.521875024</x>
-                <y>0.699999988</y>
-            </texCoord>
-            <texCoord>
-                <x>0.567121148</x>
-                <y>0.699999988</y>
-            </texCoord>
-            <texCoord>
-                <x>0.567121148</x>
-                <y>0.900208354</y>
-            </texCoord>
-            <texCoord>
-                <x>0.521875024</x>
-                <y>0.900208354</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>371.000000000</x>
-                <y>379.000000000</y>
-            </vertex>
-            <vertex>
-                <x>574.000000000</x>
-                <y>467.000000000</y>
-            </vertex>
-            <vertex>
-                <x>630.000000000</x>
-                <y>704.000000000</y>
-            </vertex>
-            <vertex>
-                <x>430.000000000</x>
-                <y>601.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.340984821</x>
-                <y>0.400208354</y>
-            </texCoord>
-            <texCoord>
-                <x>0.386231035</x>
-                <y>0.400208354</y>
-            </texCoord>
-            <texCoord>
-                <x>0.386231035</x>
-                <y>0.600000024</y>
-            </texCoord>
-            <texCoord>
-                <x>0.340984821</x>
-                <y>0.600000024</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>574.000000000</x>
-                <y>467.000000000</y>
-            </vertex>
-            <vertex>
-                <x>774.000000000</x>
-                <y>292.000000000</y>
-            </vertex>
-            <vertex>
-                <x>798.000000000</x>
+                <x>70.000000000</x>
                 <y>538.000000000</y>
             </vertex>
             <vertex>
-                <x>630.000000000</x>
-                <y>704.000000000</y>
+                <x>223.000000000</x>
+                <y>647.000000000</y>
+            </vertex>
+            <vertex>
+                <x>263.000000000</x>
+                <y>843.000000000</y>
+            </vertex>
+            <vertex>
+                <x>120.000000000</x>
+                <y>730.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
             <texCoord>
-                <x>0.386363626</x>
-                <y>0.398958355</y>
+                <x>0.341041714</x>
+                <y>0.699791551</y>
             </texCoord>
             <texCoord>
-                <x>0.431893915</x>
-                <y>0.398958355</y>
+                <x>0.386439383</x>
+                <y>0.699791551</y>
             </texCoord>
             <texCoord>
-                <x>0.431893915</x>
-                <y>0.600416660</y>
+                <x>0.386439383</x>
+                <y>0.900208414</y>
             </texCoord>
             <texCoord>
-                <x>0.386363626</x>
-                <y>0.600416660</y>
+                <x>0.341041714</x>
+                <y>0.900208414</y>
             </texCoord>
         </texCoords>
         <source>
@@ -362,38 +137,38 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>781.000000000</x>
-                <y>313.000000000</y>
+                <x>223.000000000</x>
+                <y>647.000000000</y>
             </vertex>
             <vertex>
-                <x>982.000000000</x>
-                <y>384.000000000</y>
+                <x>426.000000000</x>
+                <y>530.000000000</y>
             </vertex>
             <vertex>
-                <x>998.000000000</x>
-                <y>619.000000000</y>
+                <x>454.000000000</x>
+                <y>725.000000000</y>
             </vertex>
             <vertex>
-                <x>805.000000000</x>
-                <y>559.000000000</y>
+                <x>263.000000000</x>
+                <y>843.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
             <texCoord>
-                <x>0.431818187</x>
-                <y>0.399791628</y>
+                <x>0.386439383</x>
+                <y>0.699791670</y>
             </texCoord>
             <texCoord>
-                <x>0.476988643</x>
-                <y>0.399791628</y>
+                <x>0.431609839</x>
+                <y>0.699791670</y>
             </texCoord>
             <texCoord>
-                <x>0.476988643</x>
-                <y>0.598958373</y>
+                <x>0.431609839</x>
+                <y>0.900416613</y>
             </texCoord>
             <texCoord>
-                <x>0.431818187</x>
-                <y>0.598958373</y>
+                <x>0.386439383</x>
+                <y>0.900416613</y>
             </texCoord>
         </texCoords>
         <source>
@@ -407,38 +182,38 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>842.000000000</x>
-                <y>564.000000000</y>
+                <x>603.000000000</x>
+                <y>629.000000000</y>
             </vertex>
             <vertex>
-                <x>1016.000000000</x>
-                <y>638.000000000</y>
+                <x>801.000000000</x>
+                <y>742.000000000</y>
             </vertex>
             <vertex>
-                <x>847.000000000</x>
-                <y>805.000000000</y>
+                <x>808.000000000</x>
+                <y>942.000000000</y>
             </vertex>
             <vertex>
-                <x>631.000000000</x>
-                <y>704.000000000</y>
+                <x>622.000000000</x>
+                <y>828.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
             <texCoord>
-                <x>0.932178020</x>
+                <x>0.476837158</x>
                 <y>0.699999988</y>
             </texCoord>
             <texCoord>
-                <x>0.976988614</x>
+                <x>0.521875024</x>
                 <y>0.699999988</y>
             </texCoord>
             <texCoord>
-                <x>0.976988614</x>
-                <y>0.898750007</y>
+                <x>0.521875024</x>
+                <y>0.900208354</y>
             </texCoord>
             <texCoord>
-                <x>0.932178020</x>
-                <y>0.898750007</y>
+                <x>0.476837158</x>
+                <y>0.900208354</y>
             </texCoord>
         </texCoords>
         <source>
@@ -452,263 +227,38 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>244.000000000</x>
-                <y>525.000000000</y>
+                <x>801.000000000</x>
+                <y>742.000000000</y>
             </vertex>
             <vertex>
-                <x>430.000000000</x>
-                <y>601.000000000</y>
+                <x>966.000000000</x>
+                <y>613.000000000</y>
             </vertex>
             <vertex>
-                <x>249.000000000</x>
-                <y>761.000000000</y>
+                <x>966.000000000</x>
+                <y>814.000000000</y>
             </vertex>
             <vertex>
-                <x>66.000000000</x>
-                <y>679.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.727272749</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.772727251</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.772727251</x>
-                <y>0.600000024</y>
-            </texCoord>
-            <texCoord>
-                <x>0.727272749</x>
-                <y>0.600000024</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>567.000000000</x>
-                <y>231.000000000</y>
-            </vertex>
-            <vertex>
-                <x>760.000000000</x>
-                <y>309.000000000</y>
-            </vertex>
-            <vertex>
-                <x>574.000000000</x>
-                <y>467.000000000</y>
-            </vertex>
-            <vertex>
-                <x>378.000000000</x>
-                <y>375.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.727348447</x>
-                <y>0.700208366</y>
-            </texCoord>
-            <texCoord>
-                <x>0.772727251</x>
-                <y>0.700208366</y>
-            </texCoord>
-            <texCoord>
-                <x>0.772727251</x>
-                <y>0.899166644</y>
-            </texCoord>
-            <texCoord>
-                <x>0.727348447</x>
-                <y>0.899166644</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>999.000000000</x>
-                <y>403.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1258.000000000</x>
-                <y>503.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1257.000000000</x>
-                <y>741.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1015.000000000</x>
-                <y>638.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.476988643</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.522443175</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.522443175</x>
-                <y>0.600000024</y>
-            </texCoord>
-            <texCoord>
-                <x>0.476988643</x>
-                <y>0.600000024</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1258.000000000</x>
-                <y>509.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1535.000000000</x>
-                <y>621.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1507.000000000</x>
-                <y>857.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1257.000000000</x>
-                <y>747.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.522443175</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.567897677</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.567897677</x>
-                <y>0.600000024</y>
-            </texCoord>
-            <texCoord>
-                <x>0.522443175</x>
-                <y>0.600000024</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1257.000000000</x>
-                <y>740.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1507.000000000</x>
-                <y>850.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1487.000000000</x>
-                <y>1050.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1256.000000000</x>
+                <x>808.000000000</x>
                 <y>942.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
             <texCoord>
-                <x>0.568465948</x>
-                <y>0.100000001</y>
+                <x>0.521875024</x>
+                <y>0.699999988</y>
             </texCoord>
             <texCoord>
-                <x>0.613636374</x>
-                <y>0.100000001</y>
+                <x>0.567121148</x>
+                <y>0.699999988</y>
             </texCoord>
             <texCoord>
-                <x>0.613636374</x>
-                <y>0.299999982</y>
+                <x>0.567121148</x>
+                <y>0.900208354</y>
             </texCoord>
             <texCoord>
-                <x>0.568465948</x>
-                <y>0.299999982</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1504.994262695</x>
-                <y>851.787963867</y>
-            </vertex>
-            <vertex>
-                <x>1645.429687500</x>
-                <y>674.178710938</y>
-            </vertex>
-            <vertex>
-                <x>1619.614379883</x>
-                <y>877.603393555</y>
-            </vertex>
-            <vertex>
-                <x>1491.570312500</x>
-                <y>1042.821289062</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.613636374</x>
-                <y>0.101250000</y>
-            </texCoord>
-            <texCoord>
-                <x>0.659090936</x>
-                <y>0.101250000</y>
-            </texCoord>
-            <texCoord>
-                <x>0.659090936</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.613636374</x>
-                <y>0.300000012</y>
+                <x>0.521875024</x>
+                <y>0.900208354</y>
             </texCoord>
         </texCoords>
         <source>
@@ -722,37 +272,37 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>1535.000000000</x>
-                <y>621.000000000</y>
+                <x>390.000000000</x>
+                <y>307.000000000</y>
             </vertex>
             <vertex>
-                <x>1677.000000000</x>
-                <y>438.000000000</y>
+                <x>584.000000000</x>
+                <y>407.000000000</y>
             </vertex>
             <vertex>
-                <x>1645.429687500</x>
-                <y>674.178710938</y>
+                <x>603.000000000</x>
+                <y>629.000000000</y>
             </vertex>
             <vertex>
-                <x>1507.000000000</x>
-                <y>857.000000000</y>
+                <x>426.000000000</x>
+                <y>530.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
             <texCoord>
-                <x>0.567897677</x>
-                <y>0.400000006</y>
+                <x>0.340984821</x>
+                <y>0.400208354</y>
             </texCoord>
             <texCoord>
-                <x>0.613352299</x>
-                <y>0.400000006</y>
+                <x>0.386231035</x>
+                <y>0.400208354</y>
             </texCoord>
             <texCoord>
-                <x>0.613352299</x>
+                <x>0.386231035</x>
                 <y>0.600000024</y>
             </texCoord>
             <texCoord>
-                <x>0.567897677</x>
+                <x>0.340984821</x>
                 <y>0.600000024</y>
             </texCoord>
         </texCoords>
@@ -767,380 +317,830 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>1649.000000000</x>
-                <y>665.000000000</y>
+                <x>584.000000000</x>
+                <y>407.000000000</y>
             </vertex>
             <vertex>
-                <x>1768.000000000</x>
-                <y>511.000000000</y>
+                <x>765.000000000</x>
+                <y>293.000000000</y>
             </vertex>
             <vertex>
-                <x>1729.893554688</x>
-                <y>715.823364258</y>
-            </vertex>
-            <vertex>
-                <x>1618.000000000</x>
-                <y>877.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.659090936</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.704545438</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.704545438</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.659090936</x>
-                <y>0.300000012</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1771.000000000</x>
-                <y>522.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1870.636352539</x>
-                <y>403.269409180</y>
-            </vertex>
-            <vertex>
-                <x>1842.000000000</x>
-                <y>581.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1740.000000000</x>
-                <y>712.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.340909094</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.386363626</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.386363626</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.340909094</x>
-                <y>0.300000012</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1678.460327148</x>
-                <y>437.785339355</y>
-            </vertex>
-            <vertex>
-                <x>1818.381103516</x>
-                <y>282.525817871</y>
-            </vertex>
-            <vertex>
-                <x>1768.000000000</x>
-                <y>511.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1655.000000000</x>
-                <y>656.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.613636374</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.659090936</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.659090936</x>
-                <y>0.600000024</y>
-            </texCoord>
-            <texCoord>
-                <x>0.613636374</x>
-                <y>0.600000024</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1416.000000000</x>
-                <y>333.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1677.000000000</x>
-                <y>438.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1533.000000000</x>
-                <y>605.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1249.000000000</x>
-                <y>493.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.863636374</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.909090936</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.909090936</x>
-                <y>0.500000000</y>
-            </texCoord>
-            <texCoord>
-                <x>0.863636374</x>
-                <y>0.500000000</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1252.000000000</x>
-                <y>209.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1407.000000000</x>
-                <y>42.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1401.000000000</x>
-                <y>327.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1249.000000000</x>
-                <y>493.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.159090906</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.204545453</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.204545453</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.159090906</x>
-                <y>0.300000012</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>978.000000000</x>
-                <y>125.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1252.000000000</x>
-                <y>209.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1249.000000000</x>
-                <y>493.000000000</y>
-            </vertex>
-            <vertex>
-                <x>999.000000000</x>
-                <y>403.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.113636367</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.159090906</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.159090906</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.113636367</x>
-                <y>0.300000012</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1168.000000000</x>
-                <y>0.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1387.000000000</x>
-                <y>62.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1259.000000000</x>
-                <y>192.000000000</y>
-            </vertex>
-            <vertex>
-                <x>971.000000000</x>
-                <y>124.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.727272749</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.772727251</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.772727251</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.727272749</x>
-                <y>0.300000012</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>1564.000000000</x>
-                <y>188.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1817.000000000</x>
-                <y>274.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1676.000000000</x>
-                <y>438.000000000</y>
-            </vertex>
-            <vertex>
-                <x>1416.000000000</x>
-                <y>333.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.863636374</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.909090936</x>
-                <y>0.100000001</y>
-            </texCoord>
-            <texCoord>
-                <x>0.909090936</x>
-                <y>0.300000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.863636374</x>
-                <y>0.300000012</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>709.000000000</x>
+                <x>774.000000000</x>
                 <y>512.000000000</y>
             </vertex>
             <vertex>
-                <x>821.000000000</x>
-                <y>550.000000000</y>
+                <x>603.000000000</x>
+                <y>629.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.386363626</x>
+                <y>0.398958355</y>
+            </texCoord>
+            <texCoord>
+                <x>0.431893915</x>
+                <y>0.398958355</y>
+            </texCoord>
+            <texCoord>
+                <x>0.431893915</x>
+                <y>0.600416660</y>
+            </texCoord>
+            <texCoord>
+                <x>0.386363626</x>
+                <y>0.600416660</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>765.000000000</x>
+                <y>293.000000000</y>
             </vertex>
             <vertex>
-                <x>823.509887695</x>
-                <y>675.435852051</y>
+                <x>972.000000000</x>
+                <y>390.000000000</y>
             </vertex>
             <vertex>
-                <x>720.000000000</x>
-                <y>624.000000000</y>
+                <x>966.000000000</x>
+                <y>613.000000000</y>
+            </vertex>
+            <vertex>
+                <x>774.000000000</x>
+                <y>512.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.431818187</x>
+                <y>0.399791628</y>
+            </texCoord>
+            <texCoord>
+                <x>0.476988643</x>
+                <y>0.399791628</y>
+            </texCoord>
+            <texCoord>
+                <x>0.476988643</x>
+                <y>0.598958373</y>
+            </texCoord>
+            <texCoord>
+                <x>0.431818187</x>
+                <y>0.598958373</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>774.000000000</x>
+                <y>512.000000000</y>
+            </vertex>
+            <vertex>
+                <x>966.000000000</x>
+                <y>613.000000000</y>
+            </vertex>
+            <vertex>
+                <x>801.000000000</x>
+                <y>742.000000000</y>
+            </vertex>
+            <vertex>
+                <x>603.000000000</x>
+                <y>629.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.932178020</x>
+                <y>0.699999988</y>
+            </texCoord>
+            <texCoord>
+                <x>0.976988614</x>
+                <y>0.699999988</y>
+            </texCoord>
+            <texCoord>
+                <x>0.976988614</x>
+                <y>0.898750007</y>
+            </texCoord>
+            <texCoord>
+                <x>0.932178020</x>
+                <y>0.898750007</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>269.000000000</x>
+                <y>429.000000000</y>
+            </vertex>
+            <vertex>
+                <x>426.000000000</x>
+                <y>530.000000000</y>
+            </vertex>
+            <vertex>
+                <x>221.000000000</x>
+                <y>647.000000000</y>
+            </vertex>
+            <vertex>
+                <x>68.000000000</x>
+                <y>538.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.727272749</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.772727251</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.772727251</x>
+                <y>0.600000024</y>
+            </texCoord>
+            <texCoord>
+                <x>0.727272749</x>
+                <y>0.600000024</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>576.000000000</x>
+                <y>195.000000000</y>
+            </vertex>
+            <vertex>
+                <x>765.000000000</x>
+                <y>293.000000000</y>
+            </vertex>
+            <vertex>
+                <x>584.000000000</x>
+                <y>407.000000000</y>
+            </vertex>
+            <vertex>
+                <x>390.000000000</x>
+                <y>307.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.727348447</x>
+                <y>0.700208366</y>
+            </texCoord>
+            <texCoord>
+                <x>0.772727251</x>
+                <y>0.700208366</y>
+            </texCoord>
+            <texCoord>
+                <x>0.772727251</x>
+                <y>0.899166644</y>
+            </texCoord>
+            <texCoord>
+                <x>0.727348447</x>
+                <y>0.899166644</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>972.000000000</x>
+                <y>390.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1195.000000000</x>
+                <y>505.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1175.000000000</x>
+                <y>734.000000000</y>
+            </vertex>
+            <vertex>
+                <x>966.000000000</x>
+                <y>613.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.476988643</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.522443175</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.522443175</x>
+                <y>0.600000024</y>
+            </texCoord>
+            <texCoord>
+                <x>0.476988643</x>
+                <y>0.600000024</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1195.000000000</x>
+                <y>505.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1441.000000000</x>
+                <y>625.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1404.000000000</x>
+                <y>848.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1175.000000000</x>
+                <y>734.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.522443175</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.567897677</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.567897677</x>
+                <y>0.600000024</y>
+            </texCoord>
+            <texCoord>
+                <x>0.522443175</x>
+                <y>0.600000024</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1175.000000000</x>
+                <y>734.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1404.000000000</x>
+                <y>848.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1367.000000000</x>
+                <y>1053.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1158.000000000</x>
+                <y>932.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.568465948</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.613636374</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.613636374</x>
+                <y>0.299999982</y>
+            </texCoord>
+            <texCoord>
+                <x>0.568465948</x>
+                <y>0.299999982</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1404.000000000</x>
+                <y>848.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1545.000000000</x>
+                <y>714.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1500.192626953</x>
+                <y>912.796081543</y>
+            </vertex>
+            <vertex>
+                <x>1367.000000000</x>
+                <y>1053.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.613636374</x>
+                <y>0.101250000</y>
+            </texCoord>
+            <texCoord>
+                <x>0.659090936</x>
+                <y>0.101250000</y>
+            </texCoord>
+            <texCoord>
+                <x>0.659090936</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.613636374</x>
+                <y>0.300000012</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1441.000000000</x>
+                <y>625.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1591.000000000</x>
+                <y>488.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1553.000000000</x>
+                <y>708.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1404.000000000</x>
+                <y>848.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.567897677</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.613352299</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.613352299</x>
+                <y>0.600000024</y>
+            </texCoord>
+            <texCoord>
+                <x>0.567897677</x>
+                <y>0.600000024</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1545.000000000</x>
+                <y>714.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1675.000000000</x>
+                <y>593.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1629.000000000</x>
+                <y>788.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1500.192626953</x>
+                <y>912.796081543</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.659090936</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.704545438</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.704545438</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.659090936</x>
+                <y>0.300000012</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1675.000000000</x>
+                <y>593.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1797.000000000</x>
+                <y>479.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1744.000000000</x>
+                <y>676.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1629.000000000</x>
+                <y>788.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.340909094</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.386363626</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.386363626</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.340909094</x>
+                <y>0.300000012</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1591.000000000</x>
+                <y>488.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1733.000000000</x>
+                <y>363.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1682.000000000</x>
+                <y>585.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1553.000000000</x>
+                <y>708.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.613636374</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.659090936</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.659090936</x>
+                <y>0.600000024</y>
+            </texCoord>
+            <texCoord>
+                <x>0.613636374</x>
+                <y>0.600000024</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1355.000000000</x>
+                <y>378.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1591.000000000</x>
+                <y>488.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1447.000000000</x>
+                <y>633.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1195.000000000</x>
+                <y>505.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.863636374</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.909090936</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.909090936</x>
+                <y>0.500000000</y>
+            </texCoord>
+            <texCoord>
+                <x>0.863636374</x>
+                <y>0.500000000</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1221.000000000</x>
+                <y>244.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1391.000000000</x>
+                <y>130.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1355.000000000</x>
+                <y>378.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1195.000000000</x>
+                <y>505.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.159090906</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.204545453</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.204545453</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.159090906</x>
+                <y>0.300000012</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>982.000000000</x>
+                <y>135.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1221.000000000</x>
+                <y>244.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1195.000000000</x>
+                <y>505.000000000</y>
+            </vertex>
+            <vertex>
+                <x>972.000000000</x>
+                <y>390.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.113636367</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.159090906</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.159090906</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.113636367</x>
+                <y>0.300000012</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1159.000000000</x>
+                <y>29.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1391.000000000</x>
+                <y>130.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1221.000000000</x>
+                <y>244.000000000</y>
+            </vertex>
+            <vertex>
+                <x>982.000000000</x>
+                <y>135.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.727272749</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.772727251</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.772727251</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.727272749</x>
+                <y>0.300000012</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>1502.000000000</x>
+                <y>266.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1733.000000000</x>
+                <y>363.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1591.000000000</x>
+                <y>488.000000000</y>
+            </vertex>
+            <vertex>
+                <x>1355.000000000</x>
+                <y>378.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.863636374</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.909090936</x>
+                <y>0.100000001</y>
+            </texCoord>
+            <texCoord>
+                <x>0.909090936</x>
+                <y>0.300000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.863636374</x>
+                <y>0.300000012</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>681.000000000</x>
+                <y>465.000000000</y>
+            </vertex>
+            <vertex>
+                <x>780.000000000</x>
+                <y>521.000000000</y>
+            </vertex>
+            <vertex>
+                <x>784.000000000</x>
+                <y>623.000000000</y>
+            </vertex>
+            <vertex>
+                <x>688.000000000</x>
+                <y>570.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1172,20 +1172,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>805.000000000</x>
-                <y>559.000000000</y>
+                <x>780.000000000</x>
+                <y>521.000000000</y>
             </vertex>
             <vertex>
-                <x>896.000000000</x>
-                <y>481.000000000</y>
+                <x>864.000000000</x>
+                <y>459.000000000</y>
             </vertex>
             <vertex>
-                <x>909.311096191</x>
-                <y>602.455627441</y>
+                <x>869.000000000</x>
+                <y>562.000000000</y>
             </vertex>
             <vertex>
-                <x>823.509887695</x>
-                <y>675.435852051</y>
+                <x>784.000000000</x>
+                <y>623.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1217,20 +1217,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>791.000000000</x>
-                <y>432.000000000</y>
+                <x>770.000000000</x>
+                <y>406.000000000</y>
             </vertex>
             <vertex>
-                <x>906.000000000</x>
-                <y>478.000000000</y>
+                <x>864.000000000</x>
+                <y>459.000000000</y>
             </vertex>
             <vertex>
-                <x>805.000000000</x>
-                <y>559.000000000</y>
+                <x>780.000000000</x>
+                <y>521.000000000</y>
             </vertex>
             <vertex>
-                <x>702.000000000</x>
-                <y>510.000000000</y>
+                <x>681.000000000</x>
+                <y>465.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1262,16 +1262,16 @@
     <surface type="0">
         <vertices>
             <vertex>
-                <x>1015.000000000</x>
-                <y>638.000000000</y>
+                <x>966.000000000</x>
+                <y>613.000000000</y>
             </vertex>
             <vertex>
-                <x>1132.000000000</x>
-                <y>716.000000000</y>
+                <x>1110.000000000</x>
+                <y>697.000000000</y>
             </vertex>
             <vertex>
-                <x>1032.000000000</x>
-                <y>842.000000000</y>
+                <x>966.000000000</x>
+                <y>814.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1341,20 +1341,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>3696.000000000</x>
-                <y>700.000000000</y>
+                <x>3643.000000000</x>
+                <y>671.000000000</y>
             </vertex>
             <vertex>
-                <x>3807.000000000</x>
-                <y>579.000000000</y>
+                <x>3792.000000000</x>
+                <y>549.000000000</y>
             </vertex>
             <vertex>
-                <x>3757.900634766</x>
-                <y>782.903442383</y>
+                <x>3774.000000000</x>
+                <y>745.000000000</y>
             </vertex>
             <vertex>
-                <x>3645.236572266</x>
-                <y>914.511596680</y>
+                <x>3632.000000000</x>
+                <y>868.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1386,20 +1386,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>3461.000000000</x>
-                <y>593.000000000</y>
+                <x>3440.000000000</x>
+                <y>565.000000000</y>
             </vertex>
             <vertex>
-                <x>3696.000000000</x>
-                <y>700.000000000</y>
+                <x>3643.000000000</x>
+                <y>671.000000000</y>
             </vertex>
             <vertex>
-                <x>3645.236572266</x>
-                <y>914.511596680</y>
+                <x>3632.000000000</x>
+                <y>868.000000000</y>
             </vertex>
             <vertex>
-                <x>3431.000000000</x>
-                <y>804.000000000</y>
+                <x>3439.000000000</x>
+                <y>765.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1431,20 +1431,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2135.000000000</x>
-                <y>731.000000000</y>
+                <x>2213.000000000</x>
+                <y>796.000000000</y>
             </vertex>
             <vertex>
-                <x>1974.000000000</x>
-                <y>617.000000000</y>
+                <x>2074.000000000</x>
+                <y>702.000000000</y>
             </vertex>
             <vertex>
-                <x>2185.000000000</x>
-                <y>510.000000000</y>
+                <x>2251.000000000</x>
+                <y>592.000000000</y>
             </vertex>
             <vertex>
-                <x>2351.000000000</x>
-                <y>613.000000000</y>
+                <x>2404.000000000</x>
+                <y>670.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1476,20 +1476,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>1974.000000000</x>
-                <y>617.000000000</y>
+                <x>2074.000000000</x>
+                <y>702.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2213.000000000</x>
+                <y>796.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2273.000000000</x>
+                <y>992.000000000</y>
             </vertex>
             <vertex>
                 <x>2135.000000000</x>
-                <y>731.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2166.000000000</x>
-                <y>956.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2016.000000000</x>
-                <y>836.000000000</y>
+                <y>894.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1521,20 +1521,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2135.000000000</x>
-                <y>731.000000000</y>
+                <x>2213.000000000</x>
+                <y>796.000000000</y>
             </vertex>
             <vertex>
-                <x>2351.000000000</x>
-                <y>613.000000000</y>
+                <x>2404.000000000</x>
+                <y>670.000000000</y>
             </vertex>
             <vertex>
-                <x>2374.000000000</x>
-                <y>832.000000000</y>
+                <x>2459.000000000</x>
+                <y>862.000000000</y>
             </vertex>
             <vertex>
-                <x>2166.000000000</x>
-                <y>956.000000000</y>
+                <x>2273.000000000</x>
+                <y>992.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1566,20 +1566,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2325.000000000</x>
-                <y>364.000000000</y>
+                <x>2350.000000000</x>
+                <y>463.000000000</y>
             </vertex>
             <vertex>
-                <x>2529.000000000</x>
-                <y>263.000000000</y>
+                <x>2534.000000000</x>
+                <y>344.000000000</y>
             </vertex>
             <vertex>
-                <x>2547.000000000</x>
-                <y>493.000000000</y>
+                <x>2586.000000000</x>
+                <y>551.000000000</y>
             </vertex>
             <vertex>
-                <x>2351.000000000</x>
-                <y>613.000000000</y>
+                <x>2404.000000000</x>
+                <y>670.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1611,20 +1611,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2154.000000000</x>
-                <y>264.000000000</y>
+                <x>2205.000000000</x>
+                <y>389.000000000</y>
             </vertex>
             <vertex>
-                <x>2325.000000000</x>
-                <y>364.000000000</y>
+                <x>2350.000000000</x>
+                <y>463.000000000</y>
             </vertex>
             <vertex>
-                <x>2351.000000000</x>
-                <y>613.000000000</y>
+                <x>2404.000000000</x>
+                <y>670.000000000</y>
             </vertex>
             <vertex>
-                <x>2185.000000000</x>
-                <y>510.000000000</y>
+                <x>2251.000000000</x>
+                <y>592.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1656,20 +1656,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2540.000000000</x>
-                <y>262.000000000</y>
+                <x>2534.000000000</x>
+                <y>344.000000000</y>
             </vertex>
             <vertex>
-                <x>2729.000000000</x>
-                <y>352.000000000</y>
+                <x>2708.000000000</x>
+                <y>423.000000000</y>
             </vertex>
             <vertex>
-                <x>2736.000000000</x>
-                <y>593.000000000</y>
+                <x>2746.000000000</x>
+                <y>637.000000000</y>
             </vertex>
             <vertex>
-                <x>2547.000000000</x>
-                <y>493.000000000</y>
+                <x>2586.000000000</x>
+                <y>551.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1701,20 +1701,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2351.000000000</x>
-                <y>613.000000000</y>
+                <x>2404.000000000</x>
+                <y>670.000000000</y>
             </vertex>
             <vertex>
-                <x>2547.000000000</x>
-                <y>493.000000000</y>
+                <x>2586.000000000</x>
+                <y>551.000000000</y>
             </vertex>
             <vertex>
-                <x>2564.000000000</x>
-                <y>701.000000000</y>
+                <x>2627.000000000</x>
+                <y>747.000000000</y>
             </vertex>
             <vertex>
-                <x>2374.000000000</x>
-                <y>832.000000000</y>
+                <x>2459.000000000</x>
+                <y>862.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1746,20 +1746,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2526.000000000</x>
-                <y>3.000000000</y>
+                <x>2490.000000000</x>
+                <y>116.000000000</y>
             </vertex>
             <vertex>
-                <x>2726.000000000</x>
-                <y>90.000000000</y>
+                <x>2662.000000000</x>
+                <y>185.000000000</y>
             </vertex>
             <vertex>
-                <x>2729.000000000</x>
-                <y>352.000000000</y>
+                <x>2708.000000000</x>
+                <y>423.000000000</y>
             </vertex>
             <vertex>
-                <x>2540.000000000</x>
-                <y>262.000000000</y>
+                <x>2534.000000000</x>
+                <y>344.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1791,20 +1791,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2729.000000000</x>
-                <y>352.000000000</y>
+                <x>2708.000000000</x>
+                <y>423.000000000</y>
             </vertex>
             <vertex>
-                <x>2944.000000000</x>
-                <y>468.000000000</y>
+                <x>2894.000000000</x>
+                <y>512.000000000</y>
             </vertex>
             <vertex>
-                <x>2933.000000000</x>
-                <y>710.000000000</y>
+                <x>2921.000000000</x>
+                <y>726.000000000</y>
             </vertex>
             <vertex>
-                <x>2736.000000000</x>
-                <y>593.000000000</y>
+                <x>2746.000000000</x>
+                <y>637.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1836,20 +1836,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2736.000000000</x>
-                <y>593.000000000</y>
+                <x>2746.000000000</x>
+                <y>637.000000000</y>
             </vertex>
             <vertex>
-                <x>2933.000000000</x>
-                <y>710.000000000</y>
+                <x>2921.000000000</x>
+                <y>726.000000000</y>
             </vertex>
             <vertex>
-                <x>2741.000000000</x>
-                <y>845.000000000</y>
+                <x>2740.000000000</x>
+                <y>867.000000000</y>
             </vertex>
             <vertex>
-                <x>2540.000000000</x>
-                <y>717.000000000</y>
+                <x>2565.000000000</x>
+                <y>766.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1881,20 +1881,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2540.000000000</x>
-                <y>717.000000000</y>
+                <x>2565.000000000</x>
+                <y>766.000000000</y>
             </vertex>
             <vertex>
-                <x>2741.000000000</x>
-                <y>845.000000000</y>
+                <x>2740.000000000</x>
+                <y>867.000000000</y>
             </vertex>
             <vertex>
-                <x>2734.000000000</x>
-                <y>1066.000000000</y>
+                <x>2771.000000000</x>
+                <y>1069.000000000</y>
             </vertex>
             <vertex>
-                <x>2549.000000000</x>
-                <y>939.000000000</y>
+                <x>2605.000000000</x>
+                <y>961.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1926,20 +1926,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2906.000000000</x>
-                <y>253.000000000</y>
+                <x>2889.000000000</x>
+                <y>307.000000000</y>
             </vertex>
             <vertex>
-                <x>3116.000000000</x>
-                <y>353.000000000</y>
+                <x>3074.000000000</x>
+                <y>387.000000000</y>
             </vertex>
             <vertex>
-                <x>2944.000000000</x>
-                <y>468.000000000</y>
+                <x>2894.000000000</x>
+                <y>512.000000000</y>
             </vertex>
             <vertex>
-                <x>2729.000000000</x>
-                <y>352.000000000</y>
+                <x>2708.000000000</x>
+                <y>423.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -1971,20 +1971,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2726.000000000</x>
-                <y>90.000000000</y>
+                <x>2662.000000000</x>
+                <y>185.000000000</y>
             </vertex>
             <vertex>
-                <x>2906.000000000</x>
-                <y>0.000000000</y>
+                <x>2857.000000000</x>
+                <y>71.000000000</y>
             </vertex>
             <vertex>
-                <x>2906.000000000</x>
-                <y>253.000000000</y>
+                <x>2889.000000000</x>
+                <y>307.000000000</y>
             </vertex>
             <vertex>
-                <x>2729.000000000</x>
-                <y>352.000000000</y>
+                <x>2708.000000000</x>
+                <y>423.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -2016,20 +2016,20 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2933.000000000</x>
-                <y>710.000000000</y>
+                <x>2921.000000000</x>
+                <y>726.000000000</y>
             </vertex>
             <vertex>
-                <x>3152.000000000</x>
-                <y>846.000000000</y>
+                <x>3115.000000000</x>
+                <y>831.000000000</y>
             </vertex>
             <vertex>
-                <x>3127.000000000</x>
-                <y>1063.000000000</y>
+                <x>3135.000000000</x>
+                <y>1033.000000000</y>
             </vertex>
             <vertex>
-                <x>2928.000000000</x>
-                <y>935.000000000</y>
+                <x>2945.000000000</x>
+                <y>930.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
@@ -2061,263 +2061,38 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>2944.000000000</x>
-                <y>468.000000000</y>
+                <x>2894.000000000</x>
+                <y>512.000000000</y>
             </vertex>
             <vertex>
-                <x>3116.000000000</x>
-                <y>353.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3098.000000000</x>
-                <y>591.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2933.000000000</x>
-                <y>710.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.204829544</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.250000000</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.250000000</x>
-                <y>0.597500026</y>
-            </texCoord>
-            <texCoord>
-                <x>0.204829544</x>
-                <y>0.597500026</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>3098.000000000</x>
-                <y>591.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3315.000000000</x>
-                <y>709.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3152.000000000</x>
-                <y>846.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2933.000000000</x>
-                <y>710.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.840624988</x>
-                <y>0.600000024</y>
-            </texCoord>
-            <texCoord>
-                <x>0.795738637</x>
-                <y>0.600000024</y>
-            </texCoord>
-            <texCoord>
-                <x>0.795738637</x>
-                <y>0.400000006</y>
-            </texCoord>
-            <texCoord>
-                <x>0.840624988</x>
-                <y>0.400000006</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>2741.000000000</x>
-                <y>845.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2933.000000000</x>
-                <y>710.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2928.000000000</x>
-                <y>935.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2734.000000000</x>
-                <y>1066.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.068181820</x>
-                <y>0.698750019</y>
-            </texCoord>
-            <texCoord>
-                <x>0.113636367</x>
-                <y>0.698750019</y>
-            </texCoord>
-            <texCoord>
-                <x>0.113636367</x>
-                <y>0.897499979</y>
-            </texCoord>
-            <texCoord>
-                <x>0.068181820</x>
-                <y>0.897499979</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>3116.000000000</x>
-                <y>353.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3341.000000000</x>
-                <y>462.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3315.000000000</x>
-                <y>709.000000000</y>
+                <x>3074.000000000</x>
+                <y>386.000000000</y>
             </vertex>
             <vertex>
                 <x>3098.000000000</x>
-                <y>591.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.250568181</x>
-                <y>0.402500004</y>
-            </texCoord>
-            <texCoord>
-                <x>0.295454532</x>
-                <y>0.402500004</y>
-            </texCoord>
-            <texCoord>
-                <x>0.295454532</x>
-                <y>0.598749995</y>
-            </texCoord>
-            <texCoord>
-                <x>0.250568181</x>
-                <y>0.598749995</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>3152.000000000</x>
-                <y>846.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3315.000000000</x>
-                <y>709.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3288.000000000</x>
-                <y>927.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3127.000000000</x>
-                <y>1063.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.159090906</x>
-                <y>0.701250017</y>
-            </texCoord>
-            <texCoord>
-                <x>0.204545453</x>
-                <y>0.701250017</y>
-            </texCoord>
-            <texCoord>
-                <x>0.204545453</x>
-                <y>0.899999976</y>
-            </texCoord>
-            <texCoord>
-                <x>0.159090906</x>
-                <y>0.899999976</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>3315.000000000</x>
-                <y>709.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3455.000000000</x>
                 <y>601.000000000</y>
             </vertex>
             <vertex>
-                <x>3431.000000000</x>
-                <y>804.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3288.000000000</x>
-                <y>927.000000000</y>
+                <x>2921.000000000</x>
+                <y>725.000000000</y>
             </vertex>
         </vertices>
         <texCoords>
             <texCoord>
-                <x>0.204545453</x>
-                <y>0.702499986</y>
+                <x>0.204829544</x>
+                <y>0.400000006</y>
             </texCoord>
             <texCoord>
                 <x>0.250000000</x>
-                <y>0.702499986</y>
+                <y>0.400000006</y>
             </texCoord>
             <texCoord>
                 <x>0.250000000</x>
-                <y>0.898750007</y>
+                <y>0.597500026</y>
             </texCoord>
             <texCoord>
-                <x>0.204545453</x>
-                <y>0.898750007</y>
+                <x>0.204829544</x>
+                <y>0.597500026</y>
             </texCoord>
         </texCoords>
         <source>
@@ -2331,155 +2106,380 @@
     <surface type="1">
         <vertices>
             <vertex>
-                <x>3341.000000000</x>
-                <y>462.000000000</y>
+                <x>3098.000000000</x>
+                <y>602.000000000</y>
             </vertex>
             <vertex>
-                <x>3495.000000000</x>
-                <y>363.000000000</y>
+                <x>3291.000000000</x>
+                <y>689.000000000</y>
             </vertex>
             <vertex>
-                <x>3461.000000000</x>
-                <y>593.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3315.000000000</x>
-                <y>709.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.295738637</x>
-                <y>0.402500004</y>
-            </texCoord>
-            <texCoord>
-                <x>0.340624988</x>
-                <y>0.402500004</y>
-            </texCoord>
-            <texCoord>
-                <x>0.340624988</x>
-                <y>0.598749995</y>
-            </texCoord>
-            <texCoord>
-                <x>0.295738637</x>
-                <y>0.598749995</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>2840.000000000</x>
-                <y>895.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2942.000000000</x>
-                <y>965.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2937.000000000</x>
-                <y>1070.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2838.000000000</x>
-                <y>1000.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.090909094</x>
-                <y>0.800000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.113636367</x>
-                <y>0.800000012</y>
-            </texCoord>
-            <texCoord>
-                <x>0.113636367</x>
-                <y>0.897499979</y>
-            </texCoord>
-            <texCoord>
-                <x>0.090909094</x>
-                <y>0.897499979</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>2942.000000000</x>
-                <y>965.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3031.000000000</x>
-                <y>899.000000000</y>
-            </vertex>
-            <vertex>
-                <x>3024.000000000</x>
-                <y>998.000000000</y>
-            </vertex>
-            <vertex>
-                <x>2937.000000000</x>
-                <y>1070.000000000</y>
-            </vertex>
-        </vertices>
-        <texCoords>
-            <texCoord>
-                <x>0.113920458</x>
-                <y>0.801249981</y>
-            </texCoord>
-            <texCoord>
-                <x>0.136363640</x>
-                <y>0.801249981</y>
-            </texCoord>
-            <texCoord>
-                <x>0.136363640</x>
-                <y>0.898750007</y>
-            </texCoord>
-            <texCoord>
-                <x>0.113920458</x>
-                <y>0.898750007</y>
-            </texCoord>
-        </texCoords>
-        <source>
-            <source-type>fbo</source-type>
-            <source-name>Scene One FBO Source</source-name>
-        </source>
-        <properties>
-            <perspectiveWarping>1</perspectiveWarping>
-        </properties>
-    </surface>
-    <surface type="1">
-        <vertices>
-            <vertex>
-                <x>2934.000000000</x>
+                <x>3118.000000000</x>
                 <y>830.000000000</y>
             </vertex>
             <vertex>
-                <x>3031.000000000</x>
-                <y>899.000000000</y>
+                <x>2921.000000000</x>
+                <y>726.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.840624988</x>
+                <y>0.600000024</y>
+            </texCoord>
+            <texCoord>
+                <x>0.795738637</x>
+                <y>0.600000024</y>
+            </texCoord>
+            <texCoord>
+                <x>0.795738637</x>
+                <y>0.400000006</y>
+            </texCoord>
+            <texCoord>
+                <x>0.840624988</x>
+                <y>0.400000006</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>2740.000000000</x>
+                <y>867.000000000</y>
             </vertex>
             <vertex>
-                <x>2943.000000000</x>
-                <y>965.000000000</y>
+                <x>2921.000000000</x>
+                <y>726.000000000</y>
             </vertex>
             <vertex>
-                <x>2841.000000000</x>
-                <y>895.000000000</y>
+                <x>2945.000000000</x>
+                <y>930.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2771.000000000</x>
+                <y>1069.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.068181820</x>
+                <y>0.698750019</y>
+            </texCoord>
+            <texCoord>
+                <x>0.113636367</x>
+                <y>0.698750019</y>
+            </texCoord>
+            <texCoord>
+                <x>0.113636367</x>
+                <y>0.897499979</y>
+            </texCoord>
+            <texCoord>
+                <x>0.068181820</x>
+                <y>0.897499979</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>3074.000000000</x>
+                <y>387.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3284.000000000</x>
+                <y>471.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3288.000000000</x>
+                <y>690.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3095.000000000</x>
+                <y>603.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.250568181</x>
+                <y>0.402500004</y>
+            </texCoord>
+            <texCoord>
+                <x>0.295454532</x>
+                <y>0.402500004</y>
+            </texCoord>
+            <texCoord>
+                <x>0.295454532</x>
+                <y>0.598749995</y>
+            </texCoord>
+            <texCoord>
+                <x>0.250568181</x>
+                <y>0.598749995</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>3115.000000000</x>
+                <y>831.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3288.000000000</x>
+                <y>690.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3294.000000000</x>
+                <y>897.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3135.000000000</x>
+                <y>1033.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.159090906</x>
+                <y>0.701250017</y>
+            </texCoord>
+            <texCoord>
+                <x>0.204545453</x>
+                <y>0.701250017</y>
+            </texCoord>
+            <texCoord>
+                <x>0.204545453</x>
+                <y>0.899999976</y>
+            </texCoord>
+            <texCoord>
+                <x>0.159090906</x>
+                <y>0.899999976</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>3288.000000000</x>
+                <y>690.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3440.000000000</x>
+                <y>565.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3439.000000000</x>
+                <y>765.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3294.000000000</x>
+                <y>897.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.204545453</x>
+                <y>0.702499986</y>
+            </texCoord>
+            <texCoord>
+                <x>0.250000000</x>
+                <y>0.702499986</y>
+            </texCoord>
+            <texCoord>
+                <x>0.250000000</x>
+                <y>0.898750007</y>
+            </texCoord>
+            <texCoord>
+                <x>0.204545453</x>
+                <y>0.898750007</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>3284.000000000</x>
+                <y>471.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3440.000000000</x>
+                <y>345.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3440.000000000</x>
+                <y>565.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3288.000000000</x>
+                <y>690.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.295738637</x>
+                <y>0.402500004</y>
+            </texCoord>
+            <texCoord>
+                <x>0.340624988</x>
+                <y>0.402500004</y>
+            </texCoord>
+            <texCoord>
+                <x>0.340624988</x>
+                <y>0.598749995</y>
+            </texCoord>
+            <texCoord>
+                <x>0.295738637</x>
+                <y>0.598749995</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>2846.000000000</x>
+                <y>904.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2939.000000000</x>
+                <y>958.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2953.000000000</x>
+                <y>1054.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2862.000000000</x>
+                <y>1001.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.090909094</x>
+                <y>0.800000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.113636367</x>
+                <y>0.800000012</y>
+            </texCoord>
+            <texCoord>
+                <x>0.113636367</x>
+                <y>0.897499979</y>
+            </texCoord>
+            <texCoord>
+                <x>0.090909094</x>
+                <y>0.897499979</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>2939.000000000</x>
+                <y>958.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3029.000000000</x>
+                <y>886.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3039.000000000</x>
+                <y>983.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2953.000000000</x>
+                <y>1054.000000000</y>
+            </vertex>
+        </vertices>
+        <texCoords>
+            <texCoord>
+                <x>0.113920458</x>
+                <y>0.801249981</y>
+            </texCoord>
+            <texCoord>
+                <x>0.136363640</x>
+                <y>0.801249981</y>
+            </texCoord>
+            <texCoord>
+                <x>0.136363640</x>
+                <y>0.898750007</y>
+            </texCoord>
+            <texCoord>
+                <x>0.113920458</x>
+                <y>0.898750007</y>
+            </texCoord>
+        </texCoords>
+        <source>
+            <source-type>fbo</source-type>
+            <source-name>Scene One FBO Source</source-name>
+        </source>
+        <properties>
+            <perspectiveWarping>1</perspectiveWarping>
+        </properties>
+    </surface>
+    <surface type="1">
+        <vertices>
+            <vertex>
+                <x>2937.000000000</x>
+                <y>837.000000000</y>
+            </vertex>
+            <vertex>
+                <x>3029.000000000</x>
+                <y>886.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2939.000000000</x>
+                <y>958.000000000</y>
+            </vertex>
+            <vertex>
+                <x>2846.000000000</x>
+                <y>904.000000000</y>
             </vertex>
         </vertices>
         <texCoords>

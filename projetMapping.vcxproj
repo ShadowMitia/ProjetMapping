@@ -179,6 +179,7 @@
     <ClCompile Include="src\PhysicalizedElement\PhysicalizedElement.cpp" />
     <ClCompile Include="src\PhysicalizedElement\PickUp.cpp" />
     <ClCompile Include="src\PhysicalizedElement\Platform.cpp" />
+    <ClCompile Include="src\PhysicalizedElement\Teleportable.cpp" />
     <ClCompile Include="src\Portal.cpp" />
     <ClCompile Include="src\ScenesMapping.cpp" />
     <ClCompile Include="src\Waterfalls.cpp" />

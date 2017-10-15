@@ -8,7 +8,7 @@
 
 #include "WorldsBox2d.h"
 void WorldsBox2d::setup(){
-
+	
   noGravityWell = ofRectangle(2500, 0, 1000, 800);
 
   world.init();
@@ -19,8 +19,10 @@ void WorldsBox2d::setup(){
 
   importPortal();
 
-  createAvatar(2680, 600);
-  //createAvatar(1200, 700);
+  createAvatar(90, 90);
+  createAvatar(90, 140);
+  createAvatar(2600, 90);
+  createAvatar(680, 140);
 
   for (auto &avatar : avatars)
     {
@@ -56,11 +58,20 @@ void WorldsBox2d::draw(){
   for (auto &portal : portals)
     {
       portal->draw();
-    }
-
-  for (auto &portal : perspectivePortals)
-    {
-      portal->draw();
+	  /*
+	  if (dynamic_cast<PerspectivePortal*>(portal))
+	  {
+		  //portal->draw();
+	  }
+	  else if (dynamic_cast<WorldPortal*>(portal))
+	  {
+		 portal->draw();
+	  }
+	  else if (dynamic_cast<EmptyPortal*>(portal))
+	  {
+		  portal->draw();
+	  }
+	  */
     }
 
   for (auto &platform : platforms)
@@ -199,11 +210,11 @@ void WorldsBox2d::importPortal(){
   constexpr const int sizeW = 3;
 
   /*
-    portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, ofRectangle(1560, 600, sizeW, sizeH)));
-    portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, ofRectangle(1800, 600, sizeW, sizeH)));
+    portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, ofRectangle(1560, 600, sizeW, sizeH)));
+    portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, ofRectangle(1800, 600, sizeW, sizeH)));
     portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, ofRectangle(1360, 650, sizeW, sizeH)));
     portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, ofRectangle(1560, 650, sizeW, sizeH)));
-    portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, ofRectangle(1500, 600, sizeW, sizeH)));
+    portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, ofRectangle(1500, 600, sizeW, sizeH)));
     perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
 
     portals[0]->linkTo(portals[1]);
@@ -233,34 +244,34 @@ void WorldsBox2d::importPortal(){
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2800, 80, sizeW, sizeH));// portal:16
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3040, 80, sizeW, sizeH));// portal:17
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3280, 80, sizeW, sizeH / 4));// portal:18
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 80, 80, sizeW, sizeH));// portal:19
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 359, 80, sizeW, sizeH / 2));// portal:20
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 560, 80, sizeW, sizeH / 2));// portal:21
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 80, 80, sizeW, sizeH));// portal:19
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 359, 80, sizeW, sizeH / 2));// portal:20
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 560, 80, sizeW, sizeH / 2));// portal:21
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 719, 80, sizeW, sizeH));// portal:22
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 800, 80, sizeW, sizeH / 2));// portal:23
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 880, 80, sizeW, sizeH / 2));// portal:24
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 1119, 80, sizeW, sizeH / 2));// portal:25
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 719, 80, sizeW, sizeH));// portal:22
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 800, 80, sizeW, sizeH / 2));// portal:23
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 880, 80, sizeW, sizeH / 2));// portal:24
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 1119, 80, sizeW, sizeH / 2));// portal:25
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3320, 80, sizeW, sizeH / 4));// portal:26
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Right, 879, 159, sizeW, sizeH / 4));// portal:27
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 3280, 199, sizeW, sizeH / 4));// portal:28
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3280, 120, sizeW, sizeH / 4));// portal:29
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 1200, 80, sizeW, sizeH));// portal:30
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1679, 80, sizeW, sizeH));// portal:31
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3280, 120, sizeW, sizeH / 4));// portal:29
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 1200, 80, sizeW, sizeH));// portal:30
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1679, 80, sizeW, sizeH));// portal:31
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2160, 80, sizeW, sizeH));// portal:32
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2160, 80, sizeW, sizeH));// portal:32
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2479, 80, sizeW, sizeH));// portal:33
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2479, 80, sizeW, sizeH));// portal:33
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2560, 80, sizeW, sizeH));// portal:34
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2719, 80, sizeW, sizeH));// portal:35
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2800, 80, sizeW, sizeH));// portal:36
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2959, 80, sizeW, sizeH));// portal:37
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3040, 80, sizeW, sizeH));// portal:38
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3199, 80, sizeW, sizeH));// portal:39
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3280, 80, sizeW, sizeH / 4));// portal:40
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3359, 80, sizeW, sizeH / 4));// portal:41
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2560, 80, sizeW, sizeH));// portal:34
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2719, 80, sizeW, sizeH));// portal:35
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2800, 80, sizeW, sizeH));// portal:36
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2959, 80, sizeW, sizeH));// portal:37
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3040, 80, sizeW, sizeH));// portal:38
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3199, 80, sizeW, sizeH));// portal:39
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3280, 80, sizeW, sizeH / 4));// portal:40
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3359, 80, sizeW, sizeH / 4));// portal:41
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 3280, 159, sizeW, sizeH / 4));// portal:42
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 80, 239, sizeW, sizeH));// portal:43
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 240, 239, sizeW, sizeH));// portal:44
@@ -268,12 +279,12 @@ void WorldsBox2d::importPortal(){
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 560, 239, sizeW, sizeH));// portal:46
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 2560, 239, sizeW, sizeH));// portal:47
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 2800, 239, sizeW, sizeH / 2));// portal:48
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3040, 240, sizeW, sizeH));// portal:49
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3199, 240, sizeW, sizeH));// portal:50
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3040, 240, sizeW, sizeH));// portal:49
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3199, 240, sizeW, sizeH));// portal:50
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3280, 240, sizeW, sizeH / 2));// portal:51
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3280, 240, sizeW, sizeH / 2));// portal:52
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3280, 240, sizeW, sizeH / 2));// portal:52
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 3280, 319, sizeW, sizeH / 2));// portal:53
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3360, 240, sizeW, sizeH / 2));// portal:54
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3360, 240, sizeW, sizeH / 2));// portal:54
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 80, 320, sizeW, sizeH));// portal:55
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 240, 320, sizeW, sizeH));// portal:56
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 400, 320, sizeW, sizeH));// portal:57
@@ -290,49 +301,49 @@ void WorldsBox2d::importPortal(){
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2160, 320, sizeW, sizeH));// portal:68
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2560, 320, sizeW, sizeH));// portal:69
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2800, 320, sizeW, sizeH / 2));// portal:70
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 80, 320, sizeW, sizeH));// portal:71
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 239, 320, sizeW, sizeH));// portal:72
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 80, 320, sizeW, sizeH));// portal:71
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 239, 320, sizeW, sizeH));// portal:72
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3439, 640, sizeW, sizeH / 2));// portal:73
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 399, 320, sizeW, sizeH));// portal:74
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 400, 320, sizeW, sizeH));// portal:75
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 719, 320, sizeW, sizeH));// portal:76
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3439, 640, sizeW, sizeH / 2));// portal:73
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 399, 320, sizeW, sizeH));// portal:74
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 400, 320, sizeW, sizeH));// portal:75
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 719, 320, sizeW, sizeH));// portal:76
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 720, 320, sizeW, sizeH));// portal:77
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 720, 320, sizeW, sizeH));// portal:77
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 879, 320, sizeW, sizeH));// portal:78
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 880, 320, sizeW, sizeH));// portal:79
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1040, 320, sizeW, sizeH));// portal:80
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 879, 320, sizeW, sizeH));// portal:78
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 880, 320, sizeW, sizeH));// portal:79
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1040, 320, sizeW, sizeH));// portal:80
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1359, 320, sizeW, sizeH / 2));// portal:81
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1359, 320, sizeW, sizeH / 2));// portal:81
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1359, 400, sizeW, sizeH / 2));// portal:82
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1359, 400, sizeW, sizeH / 2));// portal:82
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1439, 400, sizeW, sizeH / 2));// portal:83
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1519, 320, sizeW, sizeH / 2));// portal:84
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1439, 400, sizeW, sizeH / 2));// portal:83
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1519, 320, sizeW, sizeH / 2));// portal:84
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 1440, 399, sizeW, sizeH / 2));// portal:85
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1440, 400, sizeW, sizeH / 2));// portal:86
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1440, 400, sizeW, sizeH / 2));// portal:86
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 1440, 400, sizeW, sizeH / 2));// portal:87
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1519, 400, sizeW, sizeH / 2));// portal:88
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1519, 400, sizeW, sizeH / 2));// portal:88
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1520, 320, sizeW, sizeH / 2));// portal:89
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1520, 320, sizeW, sizeH / 2));// portal:89
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 1520, 399, sizeW, sizeH / 2));// portal:90
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1520, 400, sizeW, sizeH / 2));// portal:91
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1520, 400, sizeW, sizeH / 2));// portal:91
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 1520, 400, sizeW, sizeH / 2));// portal:92
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1599, 400, sizeW, sizeH / 2));// portal:93
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2000, 320, sizeW, sizeH / 2));// portal:94
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1599, 400, sizeW, sizeH / 2));// portal:93
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2000, 320, sizeW, sizeH / 2));// portal:94
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2000, 400, sizeW, sizeH / 2));// portal:95
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2000, 400, sizeW, sizeH / 2));// portal:95
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2560, 320, sizeW, sizeH));// portal:96
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2719, 320, sizeW, sizeH));// portal:97
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2800, 320, sizeW, sizeH));// portal:98
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2959, 320, sizeW, sizeH));// portal:99
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2560, 320, sizeW, sizeH));// portal:96
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2719, 320, sizeW, sizeH));// portal:97
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2800, 320, sizeW, sizeH));// portal:98
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2959, 320, sizeW, sizeH));// portal:99
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 3040, 399, sizeW, sizeH));// portal:100
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3280, 400, sizeW, sizeH / 2));// portal:101
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3280, 400, sizeW, sizeH / 2));// portal:101
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3280, 400, sizeW, sizeH / 2));// portal:102
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3359, 400, sizeW, sizeH / 2));// portal:103
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3359, 400, sizeW, sizeH / 2));// portal:103
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 80, 479, sizeW, sizeH));// portal:104
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 240, 479, sizeW, sizeH / 2));// portal:105
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 720, 479, sizeW, sizeH));// portal:106
@@ -361,63 +372,63 @@ void WorldsBox2d::importPortal(){
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2160, 560, sizeW, sizeH));// portal:129
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2560, 560, sizeW, sizeH / 2));// portal:130
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2800, 560, sizeW, sizeH));// portal:131
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 80, 560, sizeW, sizeH));// portal:132
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 239, 560, sizeW, sizeH / 2));// portal:133
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 80, 560, sizeW, sizeH));// portal:132
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 239, 560, sizeW, sizeH / 2));// portal:133
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 239, 640, sizeW, sizeH / 2));// portal:134
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 239, 640, sizeW, sizeH / 2));// portal:134
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 240, 560, sizeW, sizeH));// portal:135
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 240, 560, sizeW, sizeH));// portal:135
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 399, 560, sizeW, sizeH / 2));// portal:136
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 399, 560, sizeW, sizeH / 2));// portal:136
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 319, 639, sizeW, sizeH / 2));// portal:137
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 319, 640, sizeW, sizeH / 2));// portal:138
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 320, 640, sizeW, sizeH / 2));// portal:139
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 319, 640, sizeW, sizeH / 2));// portal:138
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 320, 640, sizeW, sizeH / 2));// portal:139
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 320, 640, sizeW, sizeH / 2));// portal:140
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 399, 640, sizeW, sizeH / 2));// portal:141
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 399, 640, sizeW, sizeH / 2));// portal:141
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 400, 560, sizeW, sizeH / 2));// portal:142
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 400, 560, sizeW, sizeH / 2));// portal:142
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 400, 639, sizeW, sizeH / 2));// portal:143
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 400, 640, sizeW, sizeH / 2));// portal:144
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 400, 640, sizeW, sizeH / 2));// portal:144
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 400, 640, sizeW, sizeH / 2));// portal:145
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 479, 640, sizeW, sizeH / 2));// portal:146
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 480, 640, sizeW, sizeH / 2));// portal:147
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 559, 560, sizeW, sizeH));// portal:148
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 479, 640, sizeW, sizeH / 2));// portal:146
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 480, 640, sizeW, sizeH / 2));// portal:147
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 559, 560, sizeW, sizeH));// portal:148
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 560, 560, sizeW, sizeH / 2));// portal:149
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 560, 560, sizeW, sizeH / 2));// portal:149
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 879, 560, sizeW, sizeH));// portal:150
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 880, 560, sizeW, sizeH));// portal:151
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1040, 560, sizeW, sizeH));// portal:152
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 879, 560, sizeW, sizeH));// portal:150
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 880, 560, sizeW, sizeH));// portal:151
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1040, 560, sizeW, sizeH));// portal:152
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1359, 560, sizeW, sizeH));// portal:153
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1359, 560, sizeW, sizeH));// portal:153
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1519, 560, sizeW, sizeH));// portal:154
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1520, 560, sizeW, sizeH));// portal:155
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 1840, 560, sizeW, sizeH));// portal:156
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1519, 560, sizeW, sizeH));// portal:154
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1520, 560, sizeW, sizeH));// portal:155
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 1840, 560, sizeW, sizeH));// portal:156
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1999, 560, sizeW, sizeH));// portal:157
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2319, 560, sizeW, sizeH));// portal:158
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2560, 560, sizeW, sizeH));// portal:159
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 2679, 560, sizeW, sizeH / 4));// portal:160
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1999, 560, sizeW, sizeH));// portal:157
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2319, 560, sizeW, sizeH));// portal:158
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2560, 560, sizeW, sizeH));// portal:159
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 2679, 560, sizeW, sizeH / 4));// portal:160
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 2560, 719, sizeW, sizeH));// portal:161
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2800, 560, sizeW, sizeH));// portal:162
-  portals.push_back(new EmptyPortal(Orientation::Horizontal, PortalDirection::Right, 2680, 639, sizeW, sizeH / 4));// portal:163
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2719, 560, sizeW, sizeH / 2));// portal:164
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2719, 640, sizeW, sizeH / 2));// portal:165
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2959, 560, sizeW, sizeH));// portal:166
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2800, 560, sizeW, sizeH));// portal:162
+  portals.push_back(new EmptyPortal(Orientation::Horizontal, PortalDirection::Right, 2680, 599, sizeW, sizeH / 4));// portal:163
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2719, 560, sizeW, sizeH / 2));// portal:164
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2719, 640, sizeW, sizeH / 2));// portal:165
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2959, 560, sizeW, sizeH));// portal:166
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 2800, 719, sizeW, sizeH));// portal:167
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3360, 560, sizeW, sizeH / 2));// portal:168
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3360, 560, sizeW, sizeH / 2));// portal:168
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3280, 640, sizeW, sizeH / 2));// portal:169
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3280, 640, sizeW, sizeH / 2));// portal:170
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3439, 560, sizeW, sizeH / 2));// portal:171
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1600, 400, sizeW, sizeH / 2));// portal:172
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3280, 640, sizeW, sizeH / 2));// portal:170
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3439, 560, sizeW, sizeH / 2));// portal:171
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1600, 400, sizeW, sizeH / 2));// portal:172
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3360, 560, sizeW, sizeH / 2));// portal:173
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 3280, 719, sizeW, sizeH / 2));// portal:174
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 3040, 560, sizeW, sizeH));// portal:175
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3040, 560, sizeW, sizeH / 2));// portal:176
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3040, 560, sizeW, sizeH / 2));// portal:176
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 3040, 719, sizeW, sizeH));// portal:177
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3199, 560, sizeW, sizeH));// portal:178
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3199, 560, sizeW, sizeH));// portal:178
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 560, 479, sizeW, sizeH));// portal:179
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 1200, 479, sizeW, sizeH));// portal:180
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 1840, 479, sizeW, sizeH));// portal:181
@@ -429,29 +440,29 @@ void WorldsBox2d::importPortal(){
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 1600, 320, sizeW, sizeH / 2));// portal:187
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2880, 320, sizeW, sizeH / 2));// portal:188
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 320, 479, sizeW, sizeH / 2));// portal:189
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 2919, 440, sizeW, sizeH / 4));// portal:190
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 2919, 440, sizeW, sizeH / 4));// portal:190
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 320, 560, sizeW, sizeH / 2));// portal:191
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 480, 560, sizeW, sizeH / 2));// portal:192
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 1920, 560, sizeW, sizeH / 2));// portal:193
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 2640, 560, sizeW, sizeH / 2));// portal:194
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3040, 640, sizeW, sizeH / 2));// portal:195
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 560, 560, sizeW, sizeH / 2));// portal:196
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3040, 640, sizeW, sizeH / 2));// portal:195
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 560, 560, sizeW, sizeH / 2));// portal:196
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 1079, 80, sizeW, sizeH / 2));// portal:197
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 1079, 80, sizeW, sizeH / 2));// portal:197
   portals.push_back(new EmptyPortal(Orientation::Horizontal, PortalDirection::Right, 2800, 199, sizeW, sizeH / 4));// portal:198
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Left, 960, 320, sizeW, sizeH / 2));// portal:199
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 2319, 320, sizeW, sizeH));// portal:200
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 2319, 320, sizeW, sizeH));// portal:200
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 880, 479, sizeW, sizeH ));// portal:201
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 3360, 719, sizeW, sizeH / 2));// portal:202
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 2840, 199, sizeW, sizeH / 4));// portal:203
-  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Left, 3320, 240, sizeW, sizeH / 4));// portal:204
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 2840, 199, sizeW, sizeH / 4));// portal:203
+  portals.push_back(new EmptyPortal(Orientation::Vertical, PortalDirection::Right, 3320, 240, sizeW, sizeH / 4));// portal:204
   portals.push_back(new EmptyPortal(Orientation::Horizontal, PortalDirection::Left, 3280, 280, sizeW, sizeH / 4));// portal:205
   portals.push_back(new EmptyPortal(Orientation::Horizontal, PortalDirection::Right, 2920, 439, sizeW, sizeH / 4));// portal:206
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 839, 80, sizeW, sizeH / 4));// portal:207
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 919, 80, sizeW, sizeH / 4));// portal:208
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 999, 80, sizeW, sizeH / 4));// portal:209
   portals.push_back(new WorldPortal(Orientation::Horizontal, PortalDirection::Right, 1079, 80, sizeW, sizeH / 4));// portal:210
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3399, 80, sizeW, sizeH / 4));// portal:211
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3399, 80, sizeW, sizeH / 4));// portal:211
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Left, 1360, 80, sizeW, sizeH));// portal:212
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Left, 2800, 80, sizeW, sizeH));// portal:213
@@ -464,17 +475,17 @@ void WorldsBox2d::importPortal(){
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Right, 3280, 199, sizeW, sizeH / 4));// portal:217
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 3280, 120, sizeW, sizeH / 4));// portal:218
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 3280, 120, sizeW, sizeH / 4));// portal:218
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2560, 80, sizeW, sizeH));// portal:219
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2560, 80, sizeW, sizeH));// portal:219
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2719, 80, sizeW, sizeH));// portal:220
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2719, 80, sizeW, sizeH));// portal:220
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2800, 80, sizeW, sizeH));// portal:221
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2800, 80, sizeW, sizeH));// portal:221
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 3280, 80, sizeW, sizeH / 4));// portal:222
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 3280, 80, sizeW, sizeH / 4));// portal:222
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 3359, 80, sizeW, sizeH / 4));// portal:223
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 3359, 80, sizeW, sizeH / 4));// portal:223
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Right, 3280, 159, sizeW, sizeH / 4));// portal:224
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
@@ -482,7 +493,7 @@ void WorldsBox2d::importPortal(){
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Right, 3280, 319, sizeW, sizeH / 2));// portal:226
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 3360, 240, sizeW, sizeH / 2));// portal:227
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 3360, 240, sizeW, sizeH / 2));// portal:227
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Left, 720, 320, sizeW, sizeH));// portal:228
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
@@ -512,9 +523,9 @@ void WorldsBox2d::importPortal(){
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Left, 400, 640, sizeW, sizeH / 2));// portal:241
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2719, 560, sizeW, sizeH / 2));// portal:242
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2719, 560, sizeW, sizeH / 2));// portal:242
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 2719, 640, sizeW, sizeH / 2));// portal:243
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 2719, 640, sizeW, sizeH / 2));// portal:243
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Left, 1440, 320, sizeW, sizeH / 2));// portal:244
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
@@ -528,9 +539,9 @@ void WorldsBox2d::importPortal(){
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
   portals.push_back(new PerspectivePortal(Orientation::Horizontal, PortalDirection::Left, 2640, 560, sizeW, sizeH / 2));// portal:249
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Left, 3040, 640, sizeW, sizeH / 2));// portal:250
+  portals.push_back(new PerspectivePortal(Orientation::Vertical, PortalDirection::Right, 3040, 640, sizeW, sizeH / 2));// portal:250
   perspectivePortals.push_back(static_cast<PerspectivePortal*>(portals.back()));
-  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Right, 3399, 80, sizeW, sizeH / 4));// portal:251
+  portals.push_back(new WorldPortal(Orientation::Vertical, PortalDirection::Left, 3399, 80, sizeW, sizeH / 4));// portal:251
 
   //angle; perspective  portals[],nullptr
 
@@ -589,7 +600,7 @@ void WorldsBox2d::importPortal(){
   portals[223]->linkTo(portals[203]);
   portals[42]->linkTo(portals[6]);
   portals[224]->linkTo(portals[163]);
-  portals[43]->linkTo(portals[177]);
+  portals[43]->linkTo(portals[57]);
   portals[44]->linkTo(portals[37]);
   portals[45]->linkTo(portals[65]);
   portals[46]->linkTo(portals[49]);
@@ -667,7 +678,7 @@ void WorldsBox2d::importPortal(){
   portals[234]->linkTo(portals[199]);
   portals[119]->linkTo(portals[98]);
   portals[235]->linkTo(portals[106]);
-  portals[120]->linkTo(portals[61]);
+  portals[120]->linkTo(portals[108]);
   portals[121]->linkTo(portals[69]);
   portals[122]->linkTo(portals[96]);
   portals[123]->linkTo(portals[113]);
@@ -701,7 +712,7 @@ void WorldsBox2d::importPortal(){
   portals[153]->linkTo(portals[155]);
   portals[156]->linkTo(portals[154]);
   portals[158]->linkTo(portals[132]);
-  portals[159]->linkTo(portals[120]);
+  portals[159]->linkTo(portals[61]);
   portals[161]->linkTo(portals[62]);
   portals[162]->linkTo(portals[10]);
   portals[164]->linkTo(portals[186]);

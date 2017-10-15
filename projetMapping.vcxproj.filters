@@ -553,6 +553,9 @@
     <ClCompile Include="src\PhysicalizedElement\PickUp.cpp">
       <Filter>src\PhysicalizedElement</Filter>
     </ClCompile>
+    <ClCompile Include="src\PhysicalizedElement\Teleportable.cpp">
+      <Filter>src\PhysicalizedElement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

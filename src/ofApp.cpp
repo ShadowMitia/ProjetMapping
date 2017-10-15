@@ -86,10 +86,12 @@ void ofApp::setup() {
 
 #ifdef USE_WIIMOTE
   wiiuse.addListener(this);
+  /*
   for (int i = 0; i < wiiuse.getNumberOfConnectedWiimotes(); i++)
     {
-      wiiuse.setLed(i, i + 1);
+      wiiuse.setLed(i, true);
     }
+	*/
 #endif
 
 }
@@ -129,6 +131,7 @@ void ofApp::keyReleased(int key){
 
   if (key == 'f')
     {
+	  std::cout << "Fullscreen!\n";
       fullscreen = !fullscreen;
       ofSetFullscreen(fullscreen);
     }

@@ -131,9 +131,9 @@ EmptyPortal::EmptyPortal(Orientation orientation, PortalDirection direction, ofR
     return;
   }
 
-  void EmptyPortal::draw() const
+ void EmptyPortal::draw() const
   {
-    ofSetColor(ofColor::dimGrey);
+    ofSetColor(ofColor::darkViolet);
     ofDrawRectangle(collisionRect);
     ofSetColor(ofColor::red); // pour debug seulement
     ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
@@ -146,7 +146,7 @@ void WorldPortal::linkTo(WorldPortal* portal)
     linkedPortal = portal;
   }
 
-PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, int x, int y, int h, int w) : PerspectivePortal(orientation, direction, ofRectangle(x, y, w, h))
+PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, int x, int y, int w, int h) : PerspectivePortal(orientation, direction, ofRectangle(x, y, w, h))
   {
 
   }
@@ -205,7 +205,7 @@ void PerspectivePortal::draw() const
     ofSetColor(ofColor::green);
     if (linkedPortal == nullptr)
       {
-	ofSetColor(ofColor::brown);
+		ofSetColor(ofColor::brown);
       }
     if (activated)
       {
