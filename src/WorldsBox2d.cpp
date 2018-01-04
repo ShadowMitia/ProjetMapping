@@ -21,9 +21,9 @@ void WorldsBox2d::setup(){
 
 
   createAvatar(960, 315);
-  createAvatar(90, 140);
-  createAvatar(2600, 90);
-  createAvatar(680, 140);
+  //createAvatar(90, 140);
+  //createAvatar(2600, 90);
+  //createAvatar(680, 140);
 
 
   for (auto &avatar : avatars)

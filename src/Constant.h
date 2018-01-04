@@ -48,9 +48,7 @@ AVATAR_FOOT : 0x0002
 PICKUP : 0x0010
 BLOCK : 0x0040
 PLATFORM : 0x100
-
-
- */
+*/
 
 
 

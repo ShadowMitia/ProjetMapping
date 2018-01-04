@@ -76,3 +76,7 @@ private:
 
 
 };
+
+class Portal{
+    
+};
