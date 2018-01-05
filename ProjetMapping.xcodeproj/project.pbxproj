@@ -142,6 +142,7 @@
 		B6840996567E78436F7ECFAB /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B047FF96258DC01792B272DB /* ETF.cpp */; };
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
 		BB51758A0089E41CEDEE257F /* Waterfalls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3B560358B97D761FB04DC23 /* Waterfalls.cpp */; };
+		BC6591321FFFEE4D0041830C /* Clone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC6591301FFFEE4D0041830C /* Clone.cpp */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
 		BF2CFA915EDBB99B0F92489A /* b2ChainShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52E6BAAF72BF7CDFDF5F9C /* b2ChainShape.cpp */; };
 		BF30D7A362CEBF9286D087FD /* b2WorldCallbacks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1325975A2867C7088859835 /* b2WorldCallbacks.cpp */; };
@@ -616,6 +617,9 @@
 		BA65337B3E631788AE2D018B /* RmGridColCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = RmGridColCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/RmGridColCmd.h; sourceTree = SOURCE_ROOT; };
 		BB644064DB39B263E7BCE7E6 /* b2BroadPhase.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2BroadPhase.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Collision/b2BroadPhase.h; sourceTree = SOURCE_ROOT; };
 		BBAF9D981351C596CA67CAF9 /* hybridtracker.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = hybridtracker.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/contrib/hybridtracker.hpp; sourceTree = SOURCE_ROOT; };
+		BC6591291FFE43E40041830C /* ImportData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportData.h; sourceTree = "<group>"; };
+		BC6591301FFFEE4D0041830C /* Clone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clone.cpp; sourceTree = "<group>"; };
+		BC6591311FFFEE4D0041830C /* Clone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clone.h; sourceTree = "<group>"; };
 		BCB571865BB25BC586CF80EC /* SetPresetCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SetPresetCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/SetPresetCmd.h; sourceTree = SOURCE_ROOT; };
 		BCBB74B9531974E1D5DA019B /* HexagonSurface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = HexagonSurface.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/HexagonSurface.cpp; sourceTree = SOURCE_ROOT; };
 		BDBE053980FA01FAD543D782 /* CmdManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CmdManager.cpp; path = ../../../addons/ofxPiMapper/src/Commands/CmdManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -1373,6 +1377,8 @@
 		86F4C4BECAC9744B5FEEFAA6 /* PhysicalizedElement */ = {
 			isa = PBXGroup;
 			children = (
+				197757155B0ACD88E20F5840 /* Portal.cpp */,
+				03280CA1C152374FC3ED2AF0 /* Portal.h */,
 				470F10D226DDFA3291930295 /* Avatar.cpp */,
 				73D9F79A5809641DF6731BA2 /* Avatar.h */,
 				D8AE0F0622A4EC98B927EFC5 /* ObjetBlock.cpp */,
@@ -1385,6 +1391,8 @@
 				C2E1098584184A0E8ED7C9D7 /* Platform.h */,
 				A0319A0DF7967B4639202292 /* Teleportable.cpp */,
 				B161D6CD0DE29FB0DC074A43 /* Teleportable.h */,
+				BC6591301FFFEE4D0041830C /* Clone.cpp */,
+				BC6591311FFFEE4D0041830C /* Clone.h */,
 			);
 			name = PhysicalizedElement;
 			sourceTree = "<group>";
@@ -1820,6 +1828,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				BC6591291FFE43E40041830C /* ImportData.h */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
@@ -1828,8 +1837,6 @@
 				4AF97E72D9FF66990E200D94 /* Ladder.h */,
 				1E155DBA7F4B3CF45BF2604B /* Light.h */,
 				86F4C4BECAC9744B5FEEFAA6 /* PhysicalizedElement */,
-				197757155B0ACD88E20F5840 /* Portal.cpp */,
-				03280CA1C152374FC3ED2AF0 /* Portal.h */,
 				91968DFB2F6469287CD05304 /* ScenesMapping.cpp */,
 				68AA73F611069A7925427D54 /* ScenesMapping.h */,
 				DA95C249C1ACE6032D763379 /* Timer.h */,
@@ -2236,6 +2243,7 @@
 				3B90107DB9BF4857E357FCA8 /* ofxPiMapper.cpp in Sources */,
 				892923A127FC7C57469FD078 /* BaseSource.cpp in Sources */,
 				7702233BBFB6E8D9E8B93CBC /* FboSource.cpp in Sources */,
+				BC6591321FFFEE4D0041830C /* Clone.cpp in Sources */,
 				95CB0A22296B3DB402835DCF /* ImageSource.cpp in Sources */,
 				588E33B9B0BD6F5A2E4DF31D /* OMXPlayerCache.cpp in Sources */,
 				A0C1CAB7B9C59DDDC960EB62 /* VideoSource.cpp in Sources */,

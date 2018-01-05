@@ -11,7 +11,7 @@
 #include "PhysicalizedElement/Avatar.h"
 #include "Constant.h"
 #include "ofxCv.h"
-
+#include "ImportData.h"
 #include "ofxGLFWJoystick.h"
 
 //#define USE_WIIMOTE

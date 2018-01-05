@@ -18,12 +18,13 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine){
     ground.setData(new dataSprite());
     dataSprite* data = (dataSprite*)ground.getData();
     data->sprite = Sprite::PLATFORM;
-    data->Element = this;
+    data->physicalizedElement = this;
 
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0100;
-    tempFilter.maskBits = 0xFFFF;
+    tempFilter.categoryBits = 0x0016;
+    tempFilter.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008;
     ground.setFilterData(tempFilter);
+    
 }
 
 void Platform::draw(){

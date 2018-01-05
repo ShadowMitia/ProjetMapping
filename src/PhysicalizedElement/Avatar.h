@@ -21,8 +21,6 @@ class Avatar : public Teleportable {
 public:
 
   Avatar(b2World* box2d);
-
-  ofxBox2dPolygon polygon;
   ofxBox2dRect    foot;
 
   bool jumping;

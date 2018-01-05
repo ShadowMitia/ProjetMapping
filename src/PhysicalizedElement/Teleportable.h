@@ -16,24 +16,25 @@ class WorldPortal;
 
 class Teleportable : public PhysicalizedElement {
 public:
-  virtual void update(ofRectangle gravityWell) = 0;
+    ofxBox2dPolygon polygon;
+
+    virtual void update(ofRectangle gravityWell) = 0;
     virtual void draw() = 0;
-  virtual void gravityCheck(ofRectangle gravityWell) = 0;
+    virtual void gravityCheck(ofRectangle gravityWell) = 0;
     
     virtual void createClone(ofVec2f translationClone) = 0;
     virtual void removeClone() = 0;
     virtual void teleportToClone() = 0;
     virtual bool hasClone() = 0;
 
-  ofVec2f getCenter() const;
+    ofVec2f getCenter() const;
 
-  ofRectangle getCollisionRect() const;
+    ofRectangle getCollisionRect() const;
 
-  bool inside(ofVec2f pos) const;
+    bool inside(ofVec2f pos) const;
 
   //ofVec2f getPosition() const;
 
-    
 public:
   ofRectangle collisionRect;
 

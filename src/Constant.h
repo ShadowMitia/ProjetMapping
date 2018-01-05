@@ -45,21 +45,26 @@ namespace VarConst
 Category bits:
 AVATAR : 0x0001
 AVATAR_FOOT : 0x0002
-PICKUP : 0x0010
-BLOCK : 0x0040
-PLATFORM : 0x100
+PICKUP : 0x0004
+BLOCK : 0x0008
+PLATFORM : 0x0016
+PORTAL : 0x0032
+CLONE : 0x0064
+
 */
 
 
 
-enum class Sprite { AVATAR, AVATAR_CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, UNKNOWN };
+enum class Sprite { AVATAR, CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, UNKNOWN, PORTAL };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
 enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
 
 class PhysicalizedElement;
+class Teleportable;
 
 struct dataSprite {
-  PhysicalizedElement* Element;
+  PhysicalizedElement* physicalizedElement;
+  Teleportable* teleportable = NULL;
   Sprite sprite = Sprite::UNKNOWN;
 };

@@ -19,29 +19,27 @@
 #include "Waterfalls.h"
 
 
-class WorldsBox2d {
+class WorldsBox2d :public ofThread{
 public:
     
   ofxBox2d                 world;
   ofRectangle              bounds;
-  vector<shared_ptr<ofxBox2dCircle>>	circles;
     
   std::vector< Avatar *> avatars;
   //std::vector< Avatar *> clodes;
   std::vector< WorldPortal * > portals;
+    std::vector<Portal *> porportal;
   std::vector< PerspectivePortal* > perspectivePortals;
   std::vector< Platform * > platforms;
   std::vector< ObjectBlock * > blocks;
   std::vector< Ladder * > ladders;
-  std::vector< PickUp*>  pickups;
+  std::vector< PickUp *>  pickups;
 
   Waterfalls*               warterfalls;
-    
-  std::vector<Teleportable*> teleportables;
+    std::vector<Teleportable*> teleportables;
 
     
   void setup();
-  void createCircle(float _x,float _y);
   void draw();
   void update();
   void createBoundsModif(float x, float y, float w, float h);
@@ -55,6 +53,5 @@ public:
   ofRectangle noGravityWell;
 
 private:
-
-  void importPortal();
+ void importPortal();
 };

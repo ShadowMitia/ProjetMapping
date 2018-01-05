@@ -8,6 +8,7 @@ struct dataSprite;
 class PhysicalizedElement {
 
 public:
+    
 	virtual void contactStart(dataSprite* OtherSprite);
 	virtual void contactEnd(dataSprite* OtherSprite);
 	virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {}

@@ -9,6 +9,7 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "PhysicalizedElement/Teleportable.h"
+#include "Clone.h"
 
 enum class Orientation { Horizontal, Vertical };
 enum class PortalDirection { Left, Right };
@@ -77,6 +78,55 @@ private:
 
 };
 
-class Portal{
+class Portal:public PhysicalizedElement{
+public:
+    Portal(b2World* box2d,ofRectangle _portal){
+        
+        polygon.setPhysics(0.0, 0.0, 0.0);
+        polygon.addVertex(-10,-10);
+        polygon.addVertex(10, -10);
+        polygon.addVertex(10, 10);
+        polygon.addVertex(-10,10);
+
+        
+        polygon.create(box2d);
+        polygon.body->SetGravityScale(0.0);
+        polygon.body->SetType(b2BodyType::b2_dynamicBody);
+
+        b2Filter tempFilter;
+        tempFilter.categoryBits = 0x0036;
+        tempFilter.maskBits =  0x0001;
+        polygon.setFilterData(tempFilter);
+        
+        polygon.setData(new dataSprite());
+        dataSprite* data = (dataSprite*) polygon.getData();
+        data->sprite = Sprite::PORTAL;
+        data->physicalizedElement = this;
+        data->teleportable = nullptr;
+        
+        polygon.setPosition(_portal.getX()+ _portal.width/2 + 20, _portal.getY()+_portal.height/2);
+        polygon.body->GetFixtureList()->SetSensor(true);
+        cout << polygon.body->GetFixtureList()->IsSensor() << endl;
+        
+    }
+    
+    void draw(){
+        ofSetColor(ofColor::darkRed);
+        polygon.draw();
+    }
+    
+    void contactStart(dataSprite* OtherSprite){
+        //PhysicalizedElement::contactStart(OtherSprite);
+        cout << "contactStart" << endl;
+        //new CloneBox2d(OtherSprite->teleportable);
+    }
+    void contactEnd(dataSprite* OtherSprite){
+        //PhysicalizedElement::contactEnd(OtherSprite);
+        cout << " contactEnd " << endl;
+    }
+private:
+    Portal *linkedPortal[2];
+    ofxBox2dPolygon polygon;
     
 };
+

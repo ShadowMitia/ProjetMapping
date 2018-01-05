@@ -40,7 +40,7 @@ PickUp::PickUp(b2World* box2d, ofPolyline polyline)
     pickUp.setData(new dataSprite);
     dataSprite* data = (dataSprite*)pickUp.getData();
     data->sprite = Sprite::PICKUP;
-    data->Element = this;
+    data->physicalizedElement = this;
 
     pickUp.body->SetGravityScale(0.0);
 }

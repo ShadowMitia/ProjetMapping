@@ -12,9 +12,10 @@ vector<ofPolyline> importImage(const string& path){
 
   ofxCv::ContourFinder contourFinder;
   contourFinder.setMinAreaRadius(0);
-  contourFinder.setMaxAreaRadius(1000); //1000 max
+  contourFinder.setMaxAreaRadius(100000); //1000 max
   contourFinder.setThreshold(100);
-  contourFinder.setFindHoles(true);
+  contourFinder.setInvert(true);
+  contourFinder.setFindHoles(false);
   contourFinder.findContours(image);
     
   for (int i = 0 ; i < contourFinder.getPolylines().size(); i++){
@@ -35,7 +36,7 @@ void ofApp::setup() {
   worlds = new WorldsBox2d;
   worlds->setup();
 
-  scene1 = new Scene1(worlds, "Map_prog_LD.png");
+  scene1 = new Scene1(worlds, "Test_Saut_Visible.png");
   scene2 = new Scene2(worlds);
 
   mapping.registerFboSource(scene1);
@@ -55,15 +56,15 @@ void ofApp::setup() {
   ////   Import Platform   /////
   worlds->platforms.clear();
 
-  std::vector<ofPolyline>  platforms = importImage("Map_prog_plateforme_blanc.png");
-  for (std::size_t i = 0; i < platforms.size() - 1; i++) {
+  std::vector<ofPolyline>  platforms = importImage("Test_Saut_Plateforme.png");
+  for (std::size_t i = 0; i < platforms.size() ; i++) {
     worlds->createPlatform(platforms[i]);
   }
 
   ////   Import Ladder   /////
 
-  std::vector<ofPolyline>  ladders = importImage("Map_prog_echelle_blanc.png");
-  for (std::size_t i =0; i< ladders.size()-1; i++) {
+  std::vector<ofPolyline>  ladders = importImage("Test_Saut_Echelle.png");
+  for (std::size_t i =0; i< ladders.size() ; i++) {
       worlds->createLadder(ladders[i]);
     }
 
@@ -72,14 +73,14 @@ void ofApp::setup() {
     std::vector<ofPolyline> boxes = importImage("Map_prog_bloc_blanc.png");
     for (std::size_t i = 0; i < boxes.size() - 1; i++)
     {
-      worlds->createBox(boxes[i]);
+      //worlds->createBox(boxes[i]);
     }
 
     // Import pickups
     std::vector<ofPolyline> pickups = importImage("Map_prog_pickup_blanc.png");
     for (std::size_t i = 0; i < pickups.size() - 1; i++)
     {
-      worlds->createPickup(pickups[i]);
+      //worlds->createPickup(pickups[i]);
     }
 
 #ifdef USE_WIIMOTE
@@ -110,7 +111,6 @@ void ofApp::keyPressed(int key)
   }
   mapping.keyPressed(key);
 }
-
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
 
@@ -191,13 +191,13 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
 	  return;
 	}
 
-      if ( aSprite->Element != nullptr)
+      if ( aSprite->physicalizedElement != nullptr)
 	{
-	  //aPhysicalizedElement->contactStart(bSprite);
+	  aSprite->physicalizedElement->contactStart(bSprite);
 	}
-      if ( aSprite->Element != nullptr)
+      if ( bSprite->physicalizedElement != nullptr)
 	{
-	  //bPhysicalizedElement->contactStart(aSprite);
+	  bSprite->physicalizedElement->contactStart(aSprite);
 	}
     }
 }
@@ -214,13 +214,13 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
 	  return;
 	}
 
-      if (aSprite->Element != nullptr)
+      if (aSprite->physicalizedElement != nullptr)
 	{
-	  aSprite->Element->contactEnd(bSprite);
+	  aSprite->physicalizedElement->contactEnd(bSprite);
 	}
-      if (bSprite->Element)
+      if (bSprite->physicalizedElement)
 	{
-	  bSprite->Element->contactEnd(aSprite);
+	  bSprite->physicalizedElement->contactEnd(aSprite);
 	}
     }
 }
@@ -242,14 +242,14 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 	  return;
 	}
 
-      if (aSprite->Element != nullptr)
+      if (aSprite->physicalizedElement != nullptr)
 	{
-	  aSprite->Element->PostSolve(bSprite, e.impulse);
+	  aSprite->physicalizedElement->PostSolve(bSprite, e.impulse);
 	}
 
-      if (bSprite->Element != nullptr)
+      if (bSprite->physicalizedElement != nullptr)
 	{
-	  bSprite->Element->PostSolve(aSprite, e.impulse);
+	  bSprite->physicalizedElement->PostSolve(aSprite, e.impulse);
 	}
     }
 }
