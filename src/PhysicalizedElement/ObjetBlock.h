@@ -5,6 +5,8 @@
 //  Created by FatDazz_mac on 05/08/2017.
 //
 //
+
+
 #pragma once
 
 #include "ofMain.h"
@@ -13,7 +15,7 @@
 #include "../Constant.h"
 #include "PhysicalizedElement.h"
 #include "Avatar.h"
-
+/*
 class ObjectBlock : public Teleportable {
 
 public:
@@ -79,3 +81,4 @@ private:
   PUSHED_FROM from = PUSHED_FROM::NONE;
   
 };
+/*

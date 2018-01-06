@@ -2,8 +2,14 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
+#include "Constant.h"
 
-struct dataSprite;
+
+class PhysicalizedElement;
+struct dataSprite {
+    PhysicalizedElement* physicalizedElement;
+    Sprite sprite = Sprite::UNKNOWN;
+};
 
 class PhysicalizedElement {
 

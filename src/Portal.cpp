@@ -8,213 +8,62 @@
 
 #include "Portal.h"
 #include "Constant.h"
-#include "Avatar.h"
-#include "PhysicalizedElement/ObjetBlock.h"
-#include "PhysicalizedElement/PickUp.h"
-#include "PhysicalizedElement/Avatar.h"
+#include "WorldsBox2d.h"
 
-WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, int x, int y, int width, int height) : WorldPortal(orientation, direction, ofRectangle(x, y, width, height))
-  {
-
-  }
-
-WorldPortal::WorldPortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : collisionRect(portal), orientation(orientation), direction(direction)
-  {
-
+Portal::Portal(b2World* _box2d,ofRectangle _portal, WorldsBox2d * _worldsBox2d){
+    box2d = _box2d;
+    worldsBox2d = _worldsBox2d;
+    polygon.setPhysics(0.0, 0.0, 0.0);
+    polygon.addVertex(-10,-10);
+    polygon.addVertex(10, -10);
+    polygon.addVertex(10, 10);
+    polygon.addVertex(-10,10);
     
-    if (orientation == Orientation::Horizontal)
-      {
-	std::swap(collisionRect.width, collisionRect.height);
-      }
-
-    static int cur_id = 0;
-    id = cur_id;
-    ++cur_id;
-  }
-
-ofRectangle WorldPortal::getCollisionRect() const
-{
-  return collisionRect;
+    
+    polygon.create(box2d);
+    polygon.body->SetGravityScale(0.0);
+    polygon.body->SetType(b2BodyType::b2_dynamicBody);
+    
+    b2Filter tempFilter;
+    tempFilter.categoryBits = 0x0036;
+    tempFilter.maskBits =  0x0001;
+    polygon.setFilterData(tempFilter);
+    
+    polygon.setData(new dataSprite());
+    dataSprite* data = (dataSprite*) polygon.getData();
+    data->sprite = Sprite::PORTAL;
+    data->physicalizedElement = this;
+    
+    polygon.setPosition(_portal.getX()+ _portal.width/2 + 20, _portal.getY()+_portal.height/2);
+    polygon.body->GetFixtureList()->SetSensor(true);
 }
 
-
-ofVec2f WorldPortal::getPosition() const
-{
-  return ofVec2f(collisionRect.x, collisionRect.y);
+void Portal::draw(){
+    ofSetColor(ofColor::darkRed);
+    polygon.draw();
+}
+b2World* Portal::getb2World(){
+    return box2d;
 }
 
-void WorldPortal::update(const std::vector<Teleportable*>& objects)
-  {
-    //if (linkedPortal == nullptr) return; // for debug, to be removed
-
-
-    for (const auto &obj : objects)
-      {
-	if (dynamic_cast<ObjectBlock*>(obj))
-	      {
-		std::cout << "MMMh\n";
-	      }
-	else if (dynamic_cast<PickUp*>(obj))
-	  {
-	    std::cout << "pickup\n";
-	  }
-	else if (dynamic_cast<Avatar*>(obj))
-	  {
-	    // std::cout << "avatar\n";
-	  }
-
-
-	bool intersects = obj->collisionRect.intersects(collisionRect);
-	bool cloned = obj->hasClone();
-	bool verticalPortal = (orientation == Orientation::Vertical);
-	bool left = (direction == PortalDirection::Left);
-	ofVec2f const &objCenter = obj->collisionRect.getCenter();
-	ofVec2f const &portalCenter = collisionRect.getCenter();
-
-	if (intersects && !cloned)
-	  {
-
-
-	    if ((left && verticalPortal && objCenter.x < portalCenter.x)
-		|| (!left && verticalPortal && objCenter.x > portalCenter.x)
-		|| (left && !verticalPortal && objCenter.y > portalCenter.y)
-		|| (!left && !verticalPortal && objCenter.y < portalCenter.y)
-		)
-	      {
-		obj->createClone(linkedPortal->collisionRect.getCenter() - portalCenter);
-		obj->cloningPortal.push_back(this);
-	      }
-	  }
-	else if (!intersects && cloned && std::find(obj->cloningPortal.begin(), obj->cloningPortal.end(), this) != obj->cloningPortal.end())
-	  {
-	    if ((left && verticalPortal && objCenter.x < obj->entryPoint.x)
-		|| (!left && verticalPortal && objCenter.x > obj->entryPoint.x)
-		|| (left && !verticalPortal && objCenter.y > obj->entryPoint.y)
-		|| (!left && !verticalPortal && objCenter.y < obj->entryPoint.y))
-	      {
-		obj->removeClone();
-		obj->cloningPortal.erase(std::find(obj->cloningPortal.begin(), obj->cloningPortal.end(), this));
-	      }
-	    else
-	      {
-		obj->teleportToClone();
-		obj->removeClone();
-		obj->cloningPortal.erase(std::find(obj->cloningPortal.begin(), obj->cloningPortal.end(), this));
-	      }
-	  }
-      }
-  }
-
-void WorldPortal::draw() const
-{
-    ofSetColor(ofColor::darkGreen);
-    if (linkedPortal == nullptr)
-      {
-	ofSetColor(ofColor::orange);
-      }
-    ofDrawRectangle(collisionRect);
-    ofSetColor(ofColor::red); // pour debug seulement
-    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
-    ofSetColor(ofColor::white);
-  }
-
-EmptyPortal::EmptyPortal(Orientation orientation, PortalDirection direction, int x, int y, int w, int h) : EmptyPortal(orientation, direction, ofRectangle(x, y, w, h))
-  {
-
-  }
-
-EmptyPortal::EmptyPortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : WorldPortal(orientation, direction, portal)
-  {
-
-  }
-
-  void EmptyPortal::update(const std::vector<Teleportable*>& objects)
-  {
-    return;
-  }
-
- void EmptyPortal::draw() const
-  {
-    ofSetColor(ofColor::darkViolet);
-    ofDrawRectangle(collisionRect);
-    ofSetColor(ofColor::red); // pour debug seulement
-    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
-    ofSetColor(ofColor::white);
-  }
-
-
-void WorldPortal::linkTo(WorldPortal* portal)
-  {
-    linkedPortal = portal;
-  }
-
-PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, int x, int y, int w, int h) : PerspectivePortal(orientation, direction, ofRectangle(x, y, w, h))
-  {
-
-  }
-
-
-PerspectivePortal::PerspectivePortal(Orientation orientation, PortalDirection direction, ofRectangle portal) : WorldPortal(orientation, direction, portal)
-{
-
+void Portal::contactStart(dataSprite* OtherSprite){
+    PhysicalizedElement::contactStart(OtherSprite);
+    cout << "contactStart" << endl;
+    CloneBox2d *temp;
+    temp  = new CloneBox2d(OtherSprite->physicalizedElement, this, nullptr);
+    worldsBox2d->clones.push_back(temp);
+    clones.push_back(temp);
 }
 
-
-void PerspectivePortal::setActive(bool active)
-  {
-    activated = active;
-  }
-
-void PerspectivePortal::update(const std::vector<Teleportable*>& objects)
-  {
-    if (!activated) return;
-
-    std::cout << "Actif\n";
-
-    for (auto& obj : objects)
-      {
-	if (dynamic_cast<Avatar*>(obj) != nullptr)
-	  {
-	    if (obj->perspectivePortal == this && collisionRect.intersects(obj->getCollisionRect()))
-	      {
-		obj->viewpoint = Viewpoint::MODE_ANGLE;
-		obj->createClone(linkedPortal->getCollisionRect().getCenter() - collisionRect.getCenter());
-		obj->teleportToClone();
-	      }
-	    else
-	      {
-		activated = false;
-	      }
-	  }
-	else
-	  {
-	    if (obj->perspectivePortal == this &&  collisionRect.intersects(obj->getCollisionRect()))
-	      {
-		obj->createClone(linkedPortal->getPosition());
-		obj->teleportToClone();
-	      }
-	  }
-      }
-  }
-
-bool PerspectivePortal::isActivated() const
-  {
-    return activated;
-  }
-
-void PerspectivePortal::draw() const
-  {
-    ofSetColor(ofColor::green);
-    if (linkedPortal == nullptr)
-      {
-		ofSetColor(ofColor::brown);
-      }
-    if (activated)
-      {
-	ofSetColor(ofColor::violet);
-      }
-    ofDrawRectangle(collisionRect);
-    ofSetColor(ofColor::red); // pour debug seulement
-    ofDrawBitmapString(id, collisionRect.getCenter()); // pour debug seulement
-    ofSetColor(ofColor::white);
-  }
+void Portal::contactEnd(dataSprite* OtherSprite){
+    PhysicalizedElement::contactEnd(OtherSprite);
+    for (int i = 0; i < clones.size(); ++i) {
+        Teleportable *objSource = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
+        if (clones[i]->objSource == objSource) {
+            clones[i]->statut++;
+            clones.erase(clones.begin()+i);
+            i = clones.size();
+        }
+    }
+    cout << " contactEnd " << endl;
+}

@@ -58,7 +58,6 @@ Avatar::Avatar(b2World* box2d)
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;
     data->physicalizedElement = this;
-    data->teleportable = this;
     
     foot.setData(new dataSprite());
     dataSprite* datafoot = (dataSprite*)foot.getData();
@@ -73,7 +72,7 @@ Avatar::Avatar(b2World* box2d)
 void Avatar::presUpdate()
 {
     foot.setPosition(polygon.getPosition() + ofVec2f(0,4));
-    collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
+    //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
 
 void Avatar::gravityCheck(ofRectangle gravityWell)
@@ -126,7 +125,7 @@ void Avatar::draw() {
         clone->draw();
     }
 }
-
+/*
 void Avatar::createClone(ofVec2f cloneTranslation) {
     if (clone) { return; }
     
@@ -158,7 +157,7 @@ bool Avatar::hasClone()
     return clone ? true : false;
     //return (clone == nullptr);
 }
-
+*/
 void Avatar::setPosition(ofVec2f vec)
 {
     setPosition(vec.x, vec.y);
@@ -167,7 +166,7 @@ void Avatar::setPosition(ofVec2f vec)
 void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
-    collisionRect.setPosition(x, y);
+    //collisionRect.setPosition(x, y);
 }
 
 void Avatar::move(float inputX)
@@ -339,7 +338,7 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
     }
     else if (OtherSprite->sprite == Sprite::PICKUP)
     {
-        static_cast<PickUp*>(OtherSprite->physicalizedElement)->setCollected();
+        //static_cast<PickUp*>(OtherSprite->physicalizedElement)->setCollected();
     }
 }
 
@@ -348,27 +347,3 @@ ofVec2f Avatar::getFootPosition()
     return foot.getPosition();
 }
 
-void Avatar::processPerspectivePortals(std::vector<PerspectivePortal*>& portals)
-{
-    
-    int distance = 100000000;
-    PerspectivePortal* portal = nullptr;
-    for (auto& p : portals)
-    {
-        if (p->getCollisionRect().getCenter().distance(getCenter()) < distance)
-        {
-            distance = p->getCollisionRect().getCenter().distance(getCenter());
-            portal = p;
-        }
-    }
-    
-    if (portal != nullptr)
-    {
-        perspectivePortal = portal;
-    }
-    
-    if (viewpoint == Viewpoint::MODE_PERSPECTIVE && perspectivePortal->getCollisionRect().inside(getCenter()))
-    {
-        perspectivePortal->setActive(true);
-    }
-}

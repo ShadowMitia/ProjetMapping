@@ -5,7 +5,7 @@
 //  Created by FatDazz_mac on 29/09/2017.
 //
 //
-
+/*
 #include "PickUp.h"
 
 PickUp::PickUp(b2World* box2d, ofPolyline polyline)
@@ -133,3 +133,4 @@ void PickUp::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
   PhysicalizedElement::PostSolve(OtherSprite, impulse);
 }
+ */

@@ -11,7 +11,6 @@
 #include "ofxBox2d.h"
 #include "Teleportable.h"
 #include "ofxGLFWJoystick.h"
-#include "ObjetBlock.h"
 #include "PhysicalizedElement.h"
 
 class PerspectivePortal;
@@ -37,17 +36,17 @@ private:
   float moveInputY;
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
-  void gravityCheck(ofRectangle gravityWell) override;
+  void gravityCheck(ofRectangle gravityWell) ;
 
 public:
 
   void presUpdate();
-  void update(ofRectangle gravityWell) override;
-  void draw() override;
-  void createClone(ofVec2f cloneTranslation) override;
-  void removeClone() override;
-  void teleportToClone() override;
-  bool hasClone() override;
+  void update(ofRectangle gravityWell) ;
+  void draw() ;
+  void createClone(ofVec2f cloneTranslation) ;
+  void removeClone() ;
+  void teleportToClone() ;
+  bool hasClone() ;
 
 
   ofVec2f getFootPosition();

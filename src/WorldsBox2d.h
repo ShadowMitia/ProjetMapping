@@ -12,12 +12,12 @@
 #include "Portal.h"
 #include "PhysicalizedElement/PhysicalizedElement.h"
 #include "PhysicalizedElement/Platform.h"
-#include "PhysicalizedElement/ObjetBlock.h"
-#include "PhysicalizedElement/PickUp.h"
+//#include "PhysicalizedElement/ObjetBlock.h"
+//#include "PhysicalizedElement/PickUp.h"
 #include "Constant.h"
 #include "Ladder.h"
 #include "Waterfalls.h"
-
+#include "Clone.h"
 
 class WorldsBox2d :public ofThread{
 public:
@@ -25,15 +25,11 @@ public:
   ofxBox2d                 world;
   ofRectangle              bounds;
     
-  std::vector< Avatar *> avatars;
-  //std::vector< Avatar *> clodes;
-  std::vector< WorldPortal * > portals;
+    std::vector< Avatar *> avatars;
     std::vector<Portal *> porportal;
-  std::vector< PerspectivePortal* > perspectivePortals;
-  std::vector< Platform * > platforms;
-  std::vector< ObjectBlock * > blocks;
-  std::vector< Ladder * > ladders;
-  std::vector< PickUp *>  pickups;
+    std::vector< Platform * > platforms;
+    std::vector< Ladder * > ladders;
+    std::vector< CloneBox2d *> clones;
 
   Waterfalls*               warterfalls;
     std::vector<Teleportable*> teleportables;

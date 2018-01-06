@@ -11,20 +11,21 @@
 #include "ofxBox2d.h"
 #include "Teleportable.h"
 #include "PhysicalizedElement.h"
-//#include "Portal.h"
-class Portal;
 
-class CloneBox2d {
+class Portal;
+class CloneBox2d: public PhysicalizedElement{
 public:
-    
+    int statut;
+    Teleportable* objSource;
+
     CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination);
-    
+    //~CloneBox2d();
     void update();
-    
+    void create();
+    void draw();
 
 private:
     ofxBox2dPolygon polygon;
-    Teleportable* objSource;
     Portal* portalSource = nullptr;
     Portal* portalDestination = nullptr;
     

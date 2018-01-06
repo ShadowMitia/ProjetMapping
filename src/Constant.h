@@ -58,13 +58,6 @@ CLONE : 0x0064
 enum class Sprite { AVATAR, CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, UNKNOWN, PORTAL };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
-enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
 
-class PhysicalizedElement;
-class Teleportable;
 
-struct dataSprite {
-  PhysicalizedElement* physicalizedElement;
-  Teleportable* teleportable = NULL;
-  Sprite sprite = Sprite::UNKNOWN;
-};
+
