@@ -22,7 +22,7 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine){
 
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0016;
-    tempFilter.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008;
+    tempFilter.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0064;
     ground.setFilterData(tempFilter);
     
 }

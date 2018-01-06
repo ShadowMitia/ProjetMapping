@@ -25,8 +25,11 @@ void WorldsBox2d::setup(){
     //createAvatar(2600, 90);
     //createAvatar(680, 140);
     
-    Portal *temp = new Portal(world.getWorld() ,ofRectangle(100, 0, 50, 150), this);
+    Portal *temp = new Portal(world.getWorld() ,ofRectangle(50, 0, 50, 150), this);
     porportal.push_back(temp);
+    temp = new Portal(world.getWorld() ,ofRectangle(250, 0, 50, 150), this);
+    porportal.push_back(temp);
+    porportal[0]->linke(porportal[1], nullptr);
     
     for (auto &avatar : avatars)
     {
@@ -43,7 +46,11 @@ void WorldsBox2d::draw(){
     
     
     
-    porportal[0]->draw();
+    //porportal[0]->draw();
+    for (auto &portal : porportal)
+    {
+        portal->draw();
+    }
     
     for (auto &platform : platforms)
     {

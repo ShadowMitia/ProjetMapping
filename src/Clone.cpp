@@ -17,21 +17,49 @@ CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, P
     portalSource = _portalSource;
     portalDestination = _portalDestination;
     statut = 0;
-
+    
+}
+CloneBox2d::~CloneBox2d(){
+    objSource->polygon.setPosition(polygon.getPosition());
 }
 void CloneBox2d::update(){
     if (statut == 0) {
         create();
     }
-    polygon.setPosition(objSource->polygon.getPosition().x + 100, objSource->polygon.getPosition().y);
+    
+    if (objSource->viewpoint == Viewpoint::MODE_ANGLE) {
+        portalDestination = portalSource->linkedPortal[0];}
+    else{
+        portalDestination = portalSource->linkedPortal[1];
+    }
+    
+    if (portalDestination != nullptr) {
+        ofPoint temp;
+        temp = objSource->getPosition() - portalSource->getPosition() + portalDestination->getPosition();
+        polygon.setPosition(temp);
+    }
 }
 void CloneBox2d::create(){
     statut++;
     polygon.addVertices(objSource->polygon.getVertices());
     polygon.setPhysics(0, 0, 0);
     polygon.create(portalSource->getb2World());
+    
+    polygon.body->SetType(b2BodyType::b2_dynamicBody);
+    polygon.body->SetFixedRotation(true);
+    
+    b2Filter tempFilter;
+    tempFilter.categoryBits = 0x0064;
+    tempFilter.maskBits = 0x0001 | 0x0004 | 0x0008 | 0x0016 ;
+    polygon.setFilterData(tempFilter);
+    
+    
 }
 void CloneBox2d::draw(){
     ofSetColor(ofColor::brown);
     polygon.draw();
+}
+
+void CloneBox2d::contactStart(dataSprite *OtherSprite){
+    cout << "contactStart" << endl;
 }

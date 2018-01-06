@@ -12,12 +12,15 @@
 
 Portal::Portal(b2World* _box2d,ofRectangle _portal, WorldsBox2d * _worldsBox2d){
     box2d = _box2d;
+    portalRect = _portal;
+    linkedPortal[0] = nullptr;
+    linkedPortal[1] = nullptr;
     worldsBox2d = _worldsBox2d;
     polygon.setPhysics(0.0, 0.0, 0.0);
-    polygon.addVertex(-10,-10);
-    polygon.addVertex(10, -10);
-    polygon.addVertex(10, 10);
-    polygon.addVertex(-10,10);
+    polygon.addVertex(-_portal.width/2,-_portal.height/2);
+    polygon.addVertex(_portal.width/2, -_portal.height/2);
+    polygon.addVertex(_portal.width/2, _portal.height/2);
+    polygon.addVertex(-_portal.width/2,_portal.height/2);
     
     
     polygon.create(box2d);
@@ -34,7 +37,7 @@ Portal::Portal(b2World* _box2d,ofRectangle _portal, WorldsBox2d * _worldsBox2d){
     data->sprite = Sprite::PORTAL;
     data->physicalizedElement = this;
     
-    polygon.setPosition(_portal.getX()+ _portal.width/2 + 20, _portal.getY()+_portal.height/2);
+    polygon.setPosition(_portal.x + _portal.width/2 , _portal.y + _portal.height/2);
     polygon.body->GetFixtureList()->SetSensor(true);
 }
 
@@ -48,7 +51,7 @@ b2World* Portal::getb2World(){
 
 void Portal::contactStart(dataSprite* OtherSprite){
     PhysicalizedElement::contactStart(OtherSprite);
-    cout << "contactStart" << endl;
+    //cout << "contactStart" << endl;
     CloneBox2d *temp;
     temp  = new CloneBox2d(OtherSprite->physicalizedElement, this, nullptr);
     worldsBox2d->clones.push_back(temp);
@@ -65,5 +68,13 @@ void Portal::contactEnd(dataSprite* OtherSprite){
             i = clones.size();
         }
     }
-    cout << " contactEnd " << endl;
+    //cout << " contactEnd " << endl;
+}
+void Portal::linke(Portal *_1, Portal *_2){
+    linkedPortal[0] = _1;
+    linkedPortal[1] = _2;
+}
+
+ofVec2f Portal::getPosition(){
+    return portalRect.getPosition();
 }

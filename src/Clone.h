@@ -19,10 +19,13 @@ public:
     Teleportable* objSource;
 
     CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination);
-    //~CloneBox2d();
+    ~CloneBox2d();
     void update();
     void create();
     void draw();
+    
+    void contactStart(dataSprite* OtherSprite);
+
 
 private:
     ofxBox2dPolygon polygon;

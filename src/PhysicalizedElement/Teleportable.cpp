@@ -21,3 +21,7 @@ ofVec2f Teleportable::getCenter() const
     return ofVec2f(collisionRect.x, collisionRect.y);
   }
 */
+
+ofVec2f Teleportable::getPosition(){
+    return polygon.getPosition();
+}

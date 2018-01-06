@@ -55,7 +55,6 @@ CLONE : 0x0064
 
 
 
-enum class Sprite { AVATAR, CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, UNKNOWN, PORTAL };
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
 

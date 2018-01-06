@@ -1371,6 +1371,8 @@
 		86F4C4BECAC9744B5FEEFAA6 /* PhysicalizedElement */ = {
 			isa = PBXGroup;
 			children = (
+				C6B21D719036E48CF5D0BDB1 /* Ladder.cpp */,
+				4AF97E72D9FF66990E200D94 /* Ladder.h */,
 				3F1DBE7BC677B57E16C6DCFD /* PhysicalizedElement.cpp */,
 				2744AC5205E3A8FDDF7FFD79 /* PhysicalizedElement.h */,
 				67DD44265A628EE9D26C6E63 /* Platform.cpp */,
@@ -1841,8 +1843,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				B82E386A449237D0A434B116 /* Constant.h */,
-				C6B21D719036E48CF5D0BDB1 /* Ladder.cpp */,
-				4AF97E72D9FF66990E200D94 /* Ladder.h */,
 				1E155DBA7F4B3CF45BF2604B /* Light.h */,
 				BC65913520010F690041830C /* PhysicWorld */,
 				91968DFB2F6469287CD05304 /* ScenesMapping.cpp */,
