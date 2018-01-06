@@ -81,7 +81,7 @@ private:
 class Portal:public PhysicalizedElement{
 public:
     Portal(b2World* box2d,ofRectangle _portal){
-        
+        worldBox2d = box2d;
         polygon.setPhysics(0.0, 0.0, 0.0);
         polygon.addVertex(-10,-10);
         polygon.addVertex(10, -10);
@@ -118,13 +118,15 @@ public:
     void contactStart(dataSprite* OtherSprite){
         //PhysicalizedElement::contactStart(OtherSprite);
         cout << "contactStart" << endl;
-        //new CloneBox2d(OtherSprite->teleportable);
+        CloneBox2d *temp;
+        temp  = new CloneBox2d(OtherSprite->teleportable, this, nullptr);
     }
     void contactEnd(dataSprite* OtherSprite){
         //PhysicalizedElement::contactEnd(OtherSprite);
         cout << " contactEnd " << endl;
     }
 private:
+    b2World* worldBox2d;
     Portal *linkedPortal[2];
     ofxBox2dPolygon polygon;
     
