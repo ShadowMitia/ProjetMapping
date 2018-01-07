@@ -20,7 +20,9 @@ CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, P
     
 }
 CloneBox2d::~CloneBox2d(){
-    objSource->polygon.setPosition(polygon.getPosition());
+    if (objSource->getPosition().x > portalSource->getPosition().x) {
+        objSource->polygon.setPosition(polygon.getPosition());
+    }
 }
 void CloneBox2d::update(){
     if (statut == 0) {
@@ -53,6 +55,11 @@ void CloneBox2d::create(){
     tempFilter.maskBits = 0x0001 | 0x0004 | 0x0008 | 0x0016 ;
     polygon.setFilterData(tempFilter);
     
+    polygon.setData(new dataSprite());
+    dataSprite* data = (dataSprite*)polygon.getData();
+    data->sprite = Sprite::CLONE;
+    data->physicalizedElement = this;
+    
     
 }
 void CloneBox2d::draw(){
@@ -61,5 +68,5 @@ void CloneBox2d::draw(){
 }
 
 void CloneBox2d::contactStart(dataSprite *OtherSprite){
-    cout << "contactStart" << endl;
+    cout << "contactStart Clone" << ofGetElapsedTimeMillis() << endl;
 }

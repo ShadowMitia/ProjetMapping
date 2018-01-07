@@ -12,12 +12,7 @@
 #include "Avatar.h"
 
 
-class Ladder{
+class Ladder: public PhysicalizedElement{
 public:
-    Ladder(int _x, int _y, int _w, int _h );
-    Ladder(ofRectangle _box);
-    Ladder(ofPolyline _poly);
-    ofRectangle ladderBox;
 
-  bool inside(Avatar* _avatar);
 };

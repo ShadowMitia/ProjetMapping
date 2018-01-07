@@ -5,7 +5,7 @@
 //  Created by FatDazz_mac on 05/08/2017.
 //
 //
-/*
+
 #include "ObjetBlock.h"
 
 
@@ -150,4 +150,4 @@ void ObjectBlock::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* imp
         falling = true;
     }
 }
- */
+ 

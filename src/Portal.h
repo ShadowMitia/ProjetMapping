@@ -33,6 +33,4 @@ private:
     b2World* box2d;
     ofxBox2dPolygon polygon;
     std::vector< CloneBox2d *> clones;
-
 };
-

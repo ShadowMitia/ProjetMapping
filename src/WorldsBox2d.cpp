@@ -25,9 +25,9 @@ void WorldsBox2d::setup(){
     //createAvatar(2600, 90);
     //createAvatar(680, 140);
     
-    Portal *temp = new Portal(world.getWorld() ,ofRectangle(50, 0, 50, 150), this);
+    Portal *temp = new Portal(world.getWorld() ,ofRectangle(75, 0, 2, 150), this);
     porportal.push_back(temp);
-    temp = new Portal(world.getWorld() ,ofRectangle(250, 0, 50, 150), this);
+    temp = new Portal(world.getWorld() ,ofRectangle(240, 0, 2, 150), this);
     porportal.push_back(temp);
     porportal[0]->linke(porportal[1], nullptr);
     
@@ -92,10 +92,10 @@ void WorldsBox2d::update()
         
         avatars[j]->modeDeplace = Deplacement::PLATFORM;
         for (std::size_t i = 0; i < ladders.size(); i++) {
-            if (ladders[i]->inside(avatars[j]))
+            /*if (ladders[i]->inside(avatars[j]))
             {
                 avatars[j]->modeDeplace = Deplacement::LADDER;
-            }
+            }*/
             
         }
         avatars[j]->update(noGravityWell);
@@ -122,15 +122,14 @@ void WorldsBox2d::createPlatform(ofPolyline polyline)
 
 void WorldsBox2d::createLadder(ofPolyline polyline)
 {
-    Ladder* edge = new Ladder(polyline);
-    ladders.push_back(edge);
+    //Ladder* edge = new Ladder(polyline);
+    //ladders.push_back(edge);
 }
 
 void WorldsBox2d::createPortal(){
     //Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
     //portals.push_back(plat);
 }
-
 
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     ofPolyline temp;

@@ -140,6 +140,7 @@
 		B6840996567E78436F7ECFAB /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B047FF96258DC01792B272DB /* ETF.cpp */; };
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
 		BB51758A0089E41CEDEE257F /* Waterfalls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B3B560358B97D761FB04DC23 /* Waterfalls.cpp */; };
+		BC121CA320021FB000D29628 /* SenserCollision.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC121CA120021FB000D29628 /* SenserCollision.cpp */; };
 		BC6591321FFFEE4D0041830C /* Clone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC6591301FFFEE4D0041830C /* Clone.cpp */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
 		BF2CFA915EDBB99B0F92489A /* b2ChainShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52E6BAAF72BF7CDFDF5F9C /* b2ChainShape.cpp */; };
@@ -613,6 +614,8 @@
 		BA65337B3E631788AE2D018B /* RmGridColCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = RmGridColCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/RmGridColCmd.h; sourceTree = SOURCE_ROOT; };
 		BB644064DB39B263E7BCE7E6 /* b2BroadPhase.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2BroadPhase.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Collision/b2BroadPhase.h; sourceTree = SOURCE_ROOT; };
 		BBAF9D981351C596CA67CAF9 /* hybridtracker.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = hybridtracker.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/contrib/hybridtracker.hpp; sourceTree = SOURCE_ROOT; };
+		BC121CA120021FB000D29628 /* SenserCollision.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SenserCollision.cpp; sourceTree = "<group>"; };
+		BC121CA220021FB000D29628 /* SenserCollision.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SenserCollision.hpp; sourceTree = "<group>"; };
 		BC6591291FFE43E40041830C /* ImportData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImportData.h; sourceTree = "<group>"; };
 		BC6591301FFFEE4D0041830C /* Clone.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clone.cpp; sourceTree = "<group>"; };
 		BC6591311FFFEE4D0041830C /* Clone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clone.h; sourceTree = "<group>"; };
@@ -1371,10 +1374,10 @@
 		86F4C4BECAC9744B5FEEFAA6 /* PhysicalizedElement */ = {
 			isa = PBXGroup;
 			children = (
-				C6B21D719036E48CF5D0BDB1 /* Ladder.cpp */,
-				4AF97E72D9FF66990E200D94 /* Ladder.h */,
 				3F1DBE7BC677B57E16C6DCFD /* PhysicalizedElement.cpp */,
 				2744AC5205E3A8FDDF7FFD79 /* PhysicalizedElement.h */,
+				C6B21D719036E48CF5D0BDB1 /* Ladder.cpp */,
+				4AF97E72D9FF66990E200D94 /* Ladder.h */,
 				67DD44265A628EE9D26C6E63 /* Platform.cpp */,
 				C2E1098584184A0E8ED7C9D7 /* Platform.h */,
 				197757155B0ACD88E20F5840 /* Portal.cpp */,
@@ -1382,6 +1385,8 @@
 				BC6591301FFFEE4D0041830C /* Clone.cpp */,
 				BC6591311FFFEE4D0041830C /* Clone.h */,
 				BC65913620010F980041830C /* TeleportableElement */,
+				BC121CA120021FB000D29628 /* SenserCollision.cpp */,
+				BC121CA220021FB000D29628 /* SenserCollision.hpp */,
 			);
 			name = PhysicalizedElement;
 			sourceTree = "<group>";
@@ -2184,6 +2189,7 @@
 				9BFDBA462B809FAF024A1BD5 /* del_impl.cpp in Sources */,
 				250A95BA26587BE85DB0A353 /* ofxCvColorImage.cpp in Sources */,
 				1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */,
+				BC121CA320021FB000D29628 /* SenserCollision.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
