@@ -28,42 +28,37 @@ Avatar::Avatar(b2World* box2d)
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.create(box2d);
-    
-    polygon.body->SetType(b2BodyType::b2_dynamicBody);
+    //polygon.create(box2d);
+    polygon.create(box2d, true);
     polygon.body->SetFixedRotation(true);
+    
+    b2Filter tempFilter;
+    tempFilter.categoryBits = 0x0001;
+    tempFilter.maskBits = 0x0001 | 0x0004 | 0x0008 | 0x0016 | 0x0032;
+    polygon.setFilterDataObjet(tempFilter);
+    tempFilter.categoryBits = 0x0002;
+    tempFilter.maskBits = 0x0016;
+    polygon.setFilterDataSide(tempFilter);
+    
+    /*
+    polygon.body->SetType(b2BodyType::b2_dynamicBody);
+    
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;
     tempFilter.maskBits = 0x0001 | 0x0004 | 0x0008 | 0x0016  ;
     polygon.setFilterData(tempFilter);
-    
-    /////////////// FOOT ///////////////
-    ofRectangle temp = polygon.getBoundingBox();
-    temp.height = 5;
-    temp.width = temp.width-2;
-    foot.setPhysics(0.0, 0.0, 0.0);
-    foot.setup(box2d, temp);
-    foot.body->SetGravityScale(0);
-    
-    tempFilter.categoryBits = 0x0002;
-    tempFilter.maskBits =  0x0016;
-    foot.setFilterData(tempFilter);
-    
-    moveInputX = 0.0f;
-    jumping = false;
-    ClicJump = false;
-    
+    */
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;
     data->physicalizedElement = this;
+    /////////////// FOOT ///////////////
     
-    foot.setData(new dataSprite());
-    dataSprite* datafoot = (dataSprite*)foot.getData();
-    datafoot->sprite = Sprite::FOOT;
-    datafoot->physicalizedElement = this;
-    
+    moveInputX = 0.0f;
+    jumping = false;
+    ClicJump = false;
+
     //polygon.fixture.isSensor = true;
     
     modeDeplace = Deplacement::PLATFORM;
@@ -71,7 +66,6 @@ Avatar::Avatar(b2World* box2d)
 
 void Avatar::presUpdate()
 {
-    foot.setPosition(polygon.getPosition() + ofVec2f(0,4));
     //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
 
@@ -117,8 +111,6 @@ void Avatar::update(ofRectangle gravityWell)
 void Avatar::draw() {
     ofSetColor(ofColor::blue);
     polygon.draw();
-    ofSetColor(ofColor::violet);
-    foot.draw();
     ofSetColor(ofColor::white);
     
     if (clone) {
@@ -299,28 +291,44 @@ void Avatar::keyReleased(int key)
     }
 }
 
-void Avatar::contactStart(dataSprite* OtherSprite)
+void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    PhysicalizedElement::contactStart(OtherSprite);
-    if (OtherSprite->sprite == Sprite::PLATFORM)
-    {
-        jumping = false;
-        if (!(abs(moveInputX) > 0))
+    
+    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
+    if (f == _fixture) {
+        cout << "DOWN " << ofGetElapsedTimef() <<endl;
+        if (OtherSprite->sprite == Sprite::PLATFORM)
         {
-            polygon.setVelocity(0, polygon.getVelocity().y);
+            cout << "ici" << endl;
+            jumping = false;
+            if (!(abs(moveInputX) > 0))
+            {
+                polygon.setVelocity(0, polygon.getVelocity().y);
+            }
         }
     }
+    /*
+    int oi = 0;
+    for (b2Fixture * f = polygon.body->GetFixtureList(); f; f = f->GetNext()) {
+        if (f == _fixture) {
+            cout << _fixture << endl;
+        }
+        ++oi;
+    }*/
+    
+    PhysicalizedElement::contactStart(_fixture ,OtherSprite);
+    
     
 }
 
-void Avatar::contactEnd(dataSprite* OtherSprite)
+void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     
-    PhysicalizedElement::contactEnd(OtherSprite);
+    PhysicalizedElement::contactEnd(_fixture, OtherSprite);
     
     if (OtherSprite->sprite == Sprite::PLATFORM)
     {
-        jumping = true;
+        //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombŽ  
     }
 }
 
@@ -328,9 +336,11 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
     PhysicalizedElement::PostSolve(OtherSprite, impulse);
     
-    if (OtherSprite->sprite == Sprite::PLATFORM)
+    if (OtherSprite->sprite == Sprite::PLATFORM && impulse->normalImpulses[0]< 1.f && impulse->normalImpulses[1]< 0.1 )
     {
-        jumping = false;
+        //cout << impulse->normalImpulses[0] << "  " << impulse->normalImpulses[1] << endl;
+
+        //jumping = false;
         if (!(abs(moveInputX) > 0))
         {
             polygon.setVelocity(0, polygon.getVelocity().y);
@@ -344,6 +354,6 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 
 ofVec2f Avatar::getFootPosition()
 {
-    return foot.getPosition();
+    return ofVec2f(0,0);
 }
 

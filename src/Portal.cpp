@@ -28,7 +28,7 @@ Portal::Portal(b2World* _box2d,ofRectangle _portal, WorldsBox2d * _worldsBox2d){
     polygon.body->SetType(b2BodyType::b2_kinematicBody); // regardé ça un peut plus pré
     
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0036;
+    tempFilter.categoryBits = 0x0032;
     tempFilter.maskBits =  0x0001;
     polygon.setFilterData(tempFilter);
     
@@ -49,8 +49,8 @@ b2World* Portal::getb2World(){
     return box2d;
 }
 
-void Portal::contactStart(dataSprite* OtherSprite){
-    PhysicalizedElement::contactStart(OtherSprite);
+void Portal::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
+    PhysicalizedElement::contactStart(_fixture, OtherSprite);
     //cout << "contactStart" << endl;
     CloneBox2d *temp;
     temp  = new CloneBox2d(OtherSprite->physicalizedElement, this, nullptr);
@@ -58,8 +58,8 @@ void Portal::contactStart(dataSprite* OtherSprite){
     clones.push_back(temp);
 }
 
-void Portal::contactEnd(dataSprite* OtherSprite){
-    PhysicalizedElement::contactEnd(OtherSprite);
+void Portal::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
+    PhysicalizedElement::contactEnd(_fixture, OtherSprite);
     for (int i = 0; i < clones.size(); ++i) {
         Teleportable *objSource = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
         if (clones[i]->objSource == objSource) {
@@ -70,6 +70,7 @@ void Portal::contactEnd(dataSprite* OtherSprite){
     }
     //cout << " contactEnd " << endl;
 }
+
 void Portal::linke(Portal *_1, Portal *_2){
     linkedPortal[0] = _1;
     linkedPortal[1] = _2;

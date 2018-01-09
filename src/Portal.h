@@ -22,8 +22,8 @@ public:
     Portal(b2World* _box2d,ofRectangle _portal, WorldsBox2d * _worldsBox2d);
     void draw();
     b2World* getb2World();
-    void contactStart(dataSprite* OtherSprite);
-    void contactEnd(dataSprite* OtherSprite);
+    void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
     

@@ -67,6 +67,6 @@ void CloneBox2d::draw(){
     polygon.draw();
 }
 
-void CloneBox2d::contactStart(dataSprite *OtherSprite){
-    cout << "contactStart Clone" << ofGetElapsedTimeMillis() << endl;
+void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite *OtherSprite){
+    //cout << "contactStart Clone" << ofGetElapsedTimeMillis() << endl;
 }

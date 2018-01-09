@@ -190,11 +190,11 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
         
         if ( aSprite->physicalizedElement != nullptr)
         {
-            aSprite->physicalizedElement->contactStart(bSprite);
+            aSprite->physicalizedElement->contactStart(e.a,bSprite);
         }
         if ( bSprite->physicalizedElement != nullptr)
         {
-            bSprite->physicalizedElement->contactStart(aSprite);
+            bSprite->physicalizedElement->contactStart(e.b,aSprite);
         }
     }
 }
@@ -210,11 +210,11 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
         
         if (aSprite->physicalizedElement != nullptr)
         {
-            aSprite->physicalizedElement->contactEnd(bSprite);
+            aSprite->physicalizedElement->contactEnd(e.a,bSprite);
         }
         if (bSprite->physicalizedElement != nullptr)
         {
-            bSprite->physicalizedElement->contactEnd(aSprite);
+            bSprite->physicalizedElement->contactEnd(e.b,aSprite);
         }
     }
 }

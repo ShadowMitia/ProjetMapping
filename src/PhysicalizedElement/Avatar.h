@@ -20,7 +20,6 @@ class Avatar : public Teleportable {
 public:
 
   Avatar(b2World* box2d);
-  ofxBox2dRect    foot;
 
   bool jumping;
   bool ClicJump;
@@ -63,8 +62,8 @@ public:
   void keyPressed(int key);
   void keyReleased(int key);
 
-  virtual void contactStart(dataSprite* OtherSprite) override;
-  virtual void contactEnd(dataSprite* OtherSprite) override;
+  virtual void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite) override;
+  virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite) override;
   virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
 
 };

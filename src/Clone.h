@@ -24,7 +24,7 @@ public:
     void create();
     void draw();
     
-    void contactStart(dataSprite* OtherSprite);
+    void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
 
 
 private:

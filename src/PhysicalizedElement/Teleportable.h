@@ -15,9 +15,8 @@
 enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
 
 class Teleportable : public PhysicalizedElement {
-    
 public:
-    ofxBox2dPolygon polygon;
+    ObjectGame polygon;
     ofVec2f getPosition();
     Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 };

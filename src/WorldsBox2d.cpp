@@ -25,7 +25,7 @@ void WorldsBox2d::setup(){
     //createAvatar(2600, 90);
     //createAvatar(680, 140);
     
-    Portal *temp = new Portal(world.getWorld() ,ofRectangle(75, 0, 2, 150), this);
+    Portal *temp = new Portal(world.getWorld() ,ofRectangle(43, 0, 2, 150), this);
     porportal.push_back(temp);
     temp = new Portal(world.getWorld() ,ofRectangle(240, 0, 2, 150), this);
     porportal.push_back(temp);
@@ -55,16 +55,17 @@ void WorldsBox2d::draw(){
     for (auto &platform : platforms)
     {
         ofSetHexColor(0xFF0000);
-        platform->ground.draw();
+        //platform->ground.draw();
     }
     for (auto &avatar : avatars) {
         avatar->draw();
+        //cout << avatar->polygon.getPosition() << endl;
     }
     for (auto &clone : clones) {
         clone->draw();
     }
     //warterfalls->draw();
-    //world.draw();
+    world.draw();
     
 }
 

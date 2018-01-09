@@ -25,3 +25,4 @@ ofVec2f Teleportable::getCenter() const
 ofVec2f Teleportable::getPosition(){
     return polygon.getPosition();
 }
+
