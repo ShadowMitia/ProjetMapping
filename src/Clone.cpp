@@ -47,7 +47,7 @@ void CloneBox2d::create(){
     polygon.setPhysics(0, 0, 0);
     //polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.create(portalSource->getb2World());
-    //polygon.body->SetType(b2BodyType::b2_dynamicBody);
+    polygon.body->SetType(b2BodyType::b2_dynamicBody);
     polygon.body->SetFixedRotation(true);
 
     b2Filter tempFilter;
@@ -73,7 +73,7 @@ void CloneBox2d::draw(){
 }
 
 void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite *OtherSprite){
-    //cout << "contactStart Clone" << ofGetElapsedTimeMillis() << endl;
+    cout << "contactStart Clone" << ofGetElapsedTimeMillis() << endl;
     
     //b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     //if (f == _fixture) {
