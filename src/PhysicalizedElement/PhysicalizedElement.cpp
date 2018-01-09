@@ -138,5 +138,6 @@ void ObjectGame::setFilterDataSide(b2Filter _filter){
         }
         
     }
+    
 }
 

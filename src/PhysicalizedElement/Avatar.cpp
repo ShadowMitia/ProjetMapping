@@ -34,7 +34,7 @@ Avatar::Avatar(b2World* box2d)
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0001;
-    tempFilter.maskBits = 0x0001 | 0x0004 | 0x0008 | 0x0016 | 0x0032;
+    tempFilter.maskBits = 0x0001 | 0x0016 | 0x0032;
     polygon.setFilterDataObjet(tempFilter);
     tempFilter.categoryBits = 0x0002;
     tempFilter.maskBits = 0x0016;
@@ -296,10 +296,9 @@ void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
     
     b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
-        cout << "DOWN " << ofGetElapsedTimef() <<endl;
+        //cout << "Avatar DOWN " << ofGetElapsedTimef() <<endl;
         if (OtherSprite->sprite == Sprite::PLATFORM)
         {
-            cout << "ici" << endl;
             jumping = false;
             if (!(abs(moveInputX) > 0))
             {
@@ -328,7 +327,7 @@ void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
     
     if (OtherSprite->sprite == Sprite::PLATFORM)
     {
-        //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombé  
+        //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombé
     }
 }
 

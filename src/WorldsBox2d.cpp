@@ -27,7 +27,7 @@ void WorldsBox2d::setup(){
     
     Portal *temp = new Portal(world.getWorld() ,ofRectangle(43, 0, 2, 150), this);
     porportal.push_back(temp);
-    temp = new Portal(world.getWorld() ,ofRectangle(240, 0, 2, 150), this);
+    temp = new Portal(world.getWorld() ,ofRectangle(237, 0, 2, 150), this);
     porportal.push_back(temp);
     porportal[0]->linke(porportal[1], nullptr);
     
@@ -101,7 +101,7 @@ void WorldsBox2d::update()
         }
         avatars[j]->update(noGravityWell);
     }
-    
+    // ne pas touché
     for (int i = 0; i< clones.size(); ++i) {
         if (clones[i]->statut>1) {
             delete clones[i];
