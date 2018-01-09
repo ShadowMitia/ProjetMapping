@@ -56,8 +56,11 @@ void CloneBox2d::create(){
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
-    data->sprite = Sprite::CLONE;
-    data->physicalizedElement = this;
+    if (data!=nullptr) { // cela ne regle pas la question danger !!!!!!!!!! sleep
+        data->sprite = Sprite::CLONE;
+        data->physicalizedElement = this;
+    }
+
     
     
 }
