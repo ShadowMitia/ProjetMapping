@@ -29,16 +29,15 @@ Avatar::Avatar(b2World* box2d)
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     //polygon.create(box2d);
+    polygon.FilterDataObjet.categoryBits = 0x0001;
+    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032;
+    polygon.FilterDataSide.categoryBits = 0x0002;
+    polygon.FilterDataSide.maskBits = 0x0016;
+    
     polygon.create(box2d, true);
     polygon.body->SetFixedRotation(true);
     
-    b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0001;
-    tempFilter.maskBits = 0x0001 | 0x0016 | 0x0032;
-    polygon.setFilterDataObjet(tempFilter);
-    tempFilter.categoryBits = 0x0002;
-    tempFilter.maskBits = 0x0016;
-    polygon.setFilterDataSide(tempFilter);
+
     
     /*
     polygon.body->SetType(b2BodyType::b2_dynamicBody);

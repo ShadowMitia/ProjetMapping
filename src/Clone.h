@@ -28,7 +28,9 @@ public:
 
 
 private:
-    ofxBox2dPolygon polygon;
+    //ofxBox2dPolygon polygon;
+    ObjectGame polygon;
+
     Portal* portalSource = nullptr;
     Portal* portalDestination = nullptr;
     

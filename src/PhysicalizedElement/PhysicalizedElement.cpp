@@ -26,6 +26,7 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
     b2BodyDef		bd;
     bd.type			= density <= 0.0 ? b2_staticBody : b2_dynamicBody;
     body			= b2dworld->CreateBody(&bd);
+    body->SetFixedRotation(true);
     
     if (_detectSide) {
         b2FixtureDef fixtureSide;
@@ -108,6 +109,10 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         body->CreateFixture(&fixture);
     }
     
+    setFilterDataObjet(FilterDataObjet);
+    setFilterDataSide(FilterDataSide);
+    
+    
     vector<ofPoint> pts = ofPolyline::getVertices();
     mesh.clear();
     ofPath path;
@@ -140,4 +145,3 @@ void ObjectGame::setFilterDataSide(b2Filter _filter){
     }
     
 }
-

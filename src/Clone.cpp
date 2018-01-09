@@ -44,20 +44,14 @@ void CloneBox2d::update(){
 void CloneBox2d::create(){
     statut++;
     polygon.addVertices(objSource->polygon.getVertices());
-    polygon.setPhysics(0, 0, 0);
+    polygon.setPhysics(10.f, 0, 0);
     //polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.create(portalSource->getb2World());
-    polygon.body->SetType(b2BodyType::b2_dynamicBody);
-    polygon.body->SetFixedRotation(true);
+    polygon.FilterDataObjet.categoryBits = 0x0064;
+    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016;
+    polygon.FilterDataSide.categoryBits = 0x0002;
+    polygon.FilterDataSide.maskBits = 0x0016;
 
-    b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0064;
-    tempFilter.maskBits = 0x0001 | 0x0016 ;
-    polygon.setFilterData(tempFilter); // je en comprend pas
-    //polygon.setFilterDataObjet(tempFilter);
-    tempFilter.categoryBits = 0x0002;
-    tempFilter.maskBits = 0x0001 | 0x0016;
-    //polygon.setFilterDataSide(tempFilter);
+    polygon.create(portalSource->getb2World(),true);
 
     
     polygon.setData(new dataSprite());
@@ -74,10 +68,9 @@ void CloneBox2d::draw(){
 
 void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite *OtherSprite){
     cout << "contactStart Clone" << ofGetElapsedTimeMillis() << endl;
-    
-    //b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-    //if (f == _fixture) {
-    //    cout << "Clone DOWN " << ofGetElapsedTimef() <<endl;}
-    
-    
+    if (polygon.body->GetFixtureList()->GetNext() != nullptr) {
+        b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
+        if (f == _fixture) {
+            cout << "Clone DOWN " << ofGetElapsedTimef() <<endl;}
+    }
 }
