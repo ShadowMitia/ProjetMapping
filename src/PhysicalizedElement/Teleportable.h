@@ -18,6 +18,8 @@ class Teleportable : public PhysicalizedElement {
 public:
     ObjectGame polygon;
     ofVec2f getPosition();
+    void setPosition(ofVec2f p);
+    
     Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 };
 

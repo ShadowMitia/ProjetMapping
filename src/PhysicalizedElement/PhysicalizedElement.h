@@ -26,7 +26,6 @@ struct dataSprite {
 struct dataSpriteSide: dataSprite{
     Side side = Side::DOWN;
 };
-
 class PhysicalizedElement {
 
 public:
@@ -35,7 +34,6 @@ public:
 	virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
 	virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {}
 };
-
 class ObjectGame: public ofxBox2dPolygon{
 public:
     void    create(b2World * b2dworld, bool _detectSide);

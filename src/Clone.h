@@ -25,12 +25,13 @@ public:
     void draw();
     
     void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
-
-
+    void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
+    
 private:
     //ofxBox2dPolygon polygon;
+    bool collision = false;
     ObjectGame polygon;
-
+    ofPoint PositionObjSource;
     Portal* portalSource = nullptr;
     Portal* portalDestination = nullptr;
     
