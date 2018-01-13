@@ -7,12 +7,35 @@
 //
 
 #include "Ladder.h"
-/*
-Ladder::Ladder(ofRectangle _box) : ladderBox(_box){}
-Ladder::Ladder(int _x, int _y, int _w, int _h ){
-    ladderBox.set(_x, _y, _w, _h);
+
+void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
+    
+    //ground.clear();
+    polygon.addVertexes(_groundLine);
+    polygon.setPhysics(0, 0, 0.5f); // (0.0, 0.1, 0.7)
+    polygon.create(_b2World);
+    
+    polygon.setData(new dataSprite());
+    dataSprite* data = (dataSprite*)polygon.getData();
+    data->sprite = Sprite::LADDER;
+    data->physicalizedElement = this;
+    
+    b2Filter tempFilter;
+    tempFilter.categoryBits = 0x0128;
+    tempFilter.maskBits = 0x0001;
+    polygon.setFilterData(tempFilter);
+    
+    polygon.body->GetFixtureList()->SetSensor(true);
 }
-Ladder::Ladder( ofPolyline _poly){
-    ladderBox = _poly.getBoundingBox();
+
+void Ladder::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
+    cout << "ici" << endl;
+    Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
+    objSource->SetGravityScale(.0f);
+    objSource->modeDeplace = Deplacement::LADDER;
 }
-*/
+void Ladder::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
+    Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
+    objSource->SetGravityScale(1.0f);
+    objSource->modeDeplace = Deplacement::PLATFORM;
+}

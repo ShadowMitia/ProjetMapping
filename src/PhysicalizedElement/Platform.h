@@ -13,17 +13,8 @@
 
 class Platform : public PhysicalizedElement {
 public:
-
-    ofxBox2dEdge ground;    
-    
-private:
-    float scale;
-    float rad;
-    ofVec2f translat;
-    
+    ofxBox2dEdge ground;
 public:
-    
     void create(b2World* _b2World, ofPolyline _groundLine);
     void draw();
-    
 };

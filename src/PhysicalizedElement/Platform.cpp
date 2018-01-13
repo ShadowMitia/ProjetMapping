@@ -29,3 +29,4 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine){
 void Platform::draw(){
     ground.draw();
 }
+

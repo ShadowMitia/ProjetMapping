@@ -25,14 +25,14 @@ public:
     
     Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _Output);
     void draw();
-    void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
-    void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
     
 private:
     WorldsBox2d* worldsBox2d;
-    b2World* box2d;
     ofxBox2dPolygon polygon;
     std::vector< CloneBox2d *> clones;
+    
+    void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
 };

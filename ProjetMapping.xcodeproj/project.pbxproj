@@ -298,7 +298,7 @@
 		26E4EEE253C8A6EFC3B3A639 /* warpers.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = warpers.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/stitching/detail/warpers.hpp; sourceTree = SOURCE_ROOT; };
 		271AF74D7380F148BDDFF40E /* del_interface.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = del_interface.hpp; path = ../../../addons/ofxLiquidFun/libs/triangle/del_interface.hpp; sourceTree = SOURCE_ROOT; };
 		27379686F7E144D6AE4D9A39 /* b2CircleShape.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2CircleShape.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Collision/Shapes/b2CircleShape.h; sourceTree = SOURCE_ROOT; };
-		2744AC5205E3A8FDDF7FFD79 /* PhysicalizedElement.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = PhysicalizedElement.h; path = src/PhysicalizedElement/PhysicalizedElement.h; sourceTree = SOURCE_ROOT; };
+		2744AC5205E3A8FDDF7FFD79 /* PhysicalizedElement.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = PhysicalizedElement.h; path = src/PhysicalizedElement/PhysicalizedElement.h; sourceTree = SOURCE_ROOT; };
 		27453C6FAE9B674FD694508D /* SelTexCoordCmd.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = SelTexCoordCmd.cpp; path = ../../../addons/ofxPiMapper/src/Commands/SelTexCoordCmd.cpp; sourceTree = SOURCE_ROOT; };
 		2834D88A62CD23F3DE2C47D1 /* ofxButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxButton.h; path = ../../../addons/ofxGui/src/ofxButton.h; sourceTree = SOURCE_ROOT; };
 		28F4383510244B2710239DDF /* b2ChainShape.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2ChainShape.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Collision/Shapes/b2ChainShape.h; sourceTree = SOURCE_ROOT; };
@@ -1376,8 +1376,8 @@
 			children = (
 				3F1DBE7BC677B57E16C6DCFD /* PhysicalizedElement.cpp */,
 				2744AC5205E3A8FDDF7FFD79 /* PhysicalizedElement.h */,
-				C6B21D719036E48CF5D0BDB1 /* Ladder.cpp */,
 				4AF97E72D9FF66990E200D94 /* Ladder.h */,
+				C6B21D719036E48CF5D0BDB1 /* Ladder.cpp */,
 				67DD44265A628EE9D26C6E63 /* Platform.cpp */,
 				C2E1098584184A0E8ED7C9D7 /* Platform.h */,
 				197757155B0ACD88E20F5840 /* Portal.cpp */,

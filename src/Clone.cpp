@@ -64,9 +64,7 @@ void CloneBox2d::update(){
         }
         
         if (polygon.tabCollision[2]){
-            objSource->polygon.setVelocity(objSource->polygon.getVelocity().x, 0);
             objSource->setPosition(ofVec2f(objSource->getPosition().x, this->polygon.getPosition().y));
-            //polygon.setPosition(PositionObjSource.x, PositionClone.y);
         }
             PositionClone = polygon.getPosition();
             temp = portalDestination->directionFunction(this); // fonction du portal end
@@ -110,7 +108,5 @@ void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
         cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = false;
         objSource->SetGravityScale(1.0f);
-
-
     }
 }

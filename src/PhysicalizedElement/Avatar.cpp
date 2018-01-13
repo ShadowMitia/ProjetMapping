@@ -36,17 +36,6 @@ Avatar::Avatar(b2World* box2d)
     polygon.create(box2d, true);
     polygon.body->SetFixedRotation(true);
     
-
-    
-    /*
-    polygon.body->SetType(b2BodyType::b2_dynamicBody);
-    
-    
-    b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0001;
-    tempFilter.maskBits = 0x0001 | 0x0004 | 0x0008 | 0x0016  ;
-    polygon.setFilterData(tempFilter);
-    */
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;
@@ -56,9 +45,7 @@ Avatar::Avatar(b2World* box2d)
     moveInputX = 0.0f;
     jumping = false;
     ClicJump = false;
-
     //polygon.fixture.isSensor = true;
-    
     modeDeplace = Deplacement::PLATFORM;
 }
 void Avatar::presUpdate()
@@ -80,28 +67,19 @@ void Avatar::update(ofRectangle gravityWell)
 {
     gravityCheck(gravityWell);
     
-    /*if (modeDeplace == Deplacement::PLATFORM)
+    if (modeDeplace == Deplacement::PLATFORM)
     {
-        polygon.body->SetGravityScale(1.0);
         move(moveInputX);
     }
     else
     {
-        polygon.body->SetGravityScale(0.0);
         move(moveInputX, moveInputY);
-    }*/
-    move(moveInputX);
-    
+    }
+    //move(moveInputX);
     
     if (jumping)
     {
         polygon.setVelocity(polygon.getVelocity().x - (VarConst::coefFrotementAir * polygon.getVelocity().x/VarConst::speedAvatarMax), polygon.getVelocity().y);
-    }
-    
-    if (clone)
-    {
-        clone->polygon.setVelocity(polygon.getVelocity());
-        clone->setPosition(polygon.getPosition() + cloneTranslation);
     }
 }
 void Avatar::draw()

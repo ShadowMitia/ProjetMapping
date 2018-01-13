@@ -13,18 +13,15 @@
  PLATFORM : 0x0016
  PORTAL : 0x0032
  CLONE : 0x0064
+ LADDER : 0x0128
  */
 
-enum class Sprite {UNKNOWN, AVATAR, CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, PORTAL, SIDE};
-enum class Side{ UP, DOWN, LEFT, RIGHT};
+enum class Sprite {UNKNOWN, AVATAR, CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, PORTAL, SIDE,LADDER};
 class PhysicalizedElement;
 
 struct dataSprite {
     PhysicalizedElement* physicalizedElement;
     Sprite sprite = Sprite::UNKNOWN;
-};
-struct dataSpriteSide: dataSprite{
-    Side side = Side::DOWN;
 };
 class PhysicalizedElement {
 

@@ -38,8 +38,8 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _
     
     
     polygon.create(worldsBox2d->world.getWorld());
-    polygon.body->SetGravityScale(0.0);
-    polygon.body->SetType(b2BodyType::b2_kinematicBody); // regardé ça un peut plus pré
+    //polygon.body->SetGravityScale(0.0);
+    polygon.body->SetType(b2BodyType::b2_staticBody); // regardé ça un peut plus pré
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0032;

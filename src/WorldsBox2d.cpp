@@ -115,8 +115,9 @@ void WorldsBox2d::createPlatform(ofPolyline polyline){
     platforms.push_back(edge);
 }
 void WorldsBox2d::createLadder(ofPolyline polyline){
-    //Ladder* edge = new Ladder(polyline);
-    //ladders.push_back(edge);
+    Ladder* edge = new Ladder();
+    edge->create(world.getWorld(), polyline);
+    ladders.push_back(edge);
 }
 void WorldsBox2d::createPortal(){
     //Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
