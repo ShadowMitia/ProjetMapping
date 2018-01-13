@@ -19,7 +19,7 @@ public:
     ObjectGame polygon;
     ofVec2f getPosition();
     void setPosition(ofVec2f p);
-    
+    void SetGravityScale(float32 scale);
     Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 };
 

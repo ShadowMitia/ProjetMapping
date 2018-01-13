@@ -32,8 +32,7 @@ public:
     std::vector< CloneBox2d *> clones;
 
   Waterfalls*               warterfalls;
-    std::vector<Teleportable*> teleportables;
-
+  std::vector<Teleportable*> teleportables;
     
   void setup();
   void draw();

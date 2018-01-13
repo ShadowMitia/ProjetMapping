@@ -84,7 +84,7 @@ void Avatar::update(ofRectangle gravityWell)
 {
     gravityCheck(gravityWell);
     
-    if (modeDeplace == Deplacement::PLATFORM)
+    /*if (modeDeplace == Deplacement::PLATFORM)
     {
         polygon.body->SetGravityScale(1.0);
         move(moveInputX);
@@ -93,7 +93,9 @@ void Avatar::update(ofRectangle gravityWell)
     {
         polygon.body->SetGravityScale(0.0);
         move(moveInputX, moveInputY);
-    }
+    }*/
+    move(moveInputX);
+    
     
     if (jumping)
     {

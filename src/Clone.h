@@ -17,6 +17,8 @@ class CloneBox2d: public PhysicalizedElement{
 public:
     int statut;
     Teleportable* objSource;
+    Portal* portalSource = nullptr;
+    Portal* portalDestination = nullptr;
 
     CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination);
     ~CloneBox2d();
@@ -32,7 +34,6 @@ private:
     bool collision = false;
     ObjectGame polygon;
     ofPoint PositionObjSource;
-    Portal* portalSource = nullptr;
-    Portal* portalDestination = nullptr;
-    
+    ofPoint PositionClone;
+
 };

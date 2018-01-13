@@ -11,24 +11,26 @@
 #include "PhysicalizedElement/Teleportable.h"
 #include "Clone.h"
 
-enum class Orientation { Horizontal, Vertical };
-enum class PortalDirection { Left, Right };
+enum class ConditionOutput{VerticalLeft,VerticalRight, Horizontal};
+enum class PortalDirection{leftDirection, rightDirection};
 class WorldsBox2d;
 
 class Portal:public PhysicalizedElement{
 public:
     Portal *linkedPortal[2];
-
-    Portal(b2World* _box2d,ofRectangle _portal, WorldsBox2d * _worldsBox2d);
-    void draw();
+    ofVec2f(*directionFunction)(CloneBox2d*);
+    bool(*conditionFunction)(float, CloneBox2d*);
     b2World* getb2World();
+    ofRectangle portalRect;
+    
+    Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _Output);
+    void draw();
     void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
     
 private:
-    ofRectangle portalRect;
     WorldsBox2d* worldsBox2d;
     b2World* box2d;
     ofxBox2dPolygon polygon;
