@@ -20,7 +20,6 @@ std::vector<ofPoint> loadPoints(const std::string& file) {
     }
     return pts;
 }
-
 Avatar::Avatar(b2World* box2d)
 {
     ////////// POLYGONE ///////////////////
@@ -62,12 +61,10 @@ Avatar::Avatar(b2World* box2d)
     
     modeDeplace = Deplacement::PLATFORM;
 }
-
 void Avatar::presUpdate()
 {
     //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
-
 void Avatar::gravityCheck(ofRectangle gravityWell)
 {
     if (gravityWell.inside(polygon.getPosition()))
@@ -79,7 +76,6 @@ void Avatar::gravityCheck(ofRectangle gravityWell)
         modeDeplace = Deplacement::PLATFORM;
     }
 }
-
 void Avatar::update(ofRectangle gravityWell)
 {
     gravityCheck(gravityWell);
@@ -108,8 +104,8 @@ void Avatar::update(ofRectangle gravityWell)
         clone->setPosition(polygon.getPosition() + cloneTranslation);
     }
 }
-
-void Avatar::draw() {
+void Avatar::draw()
+{
     ofSetColor(ofColor::blue);
     polygon.draw();
     ofSetColor(ofColor::white);
@@ -155,13 +151,11 @@ void Avatar::setPosition(ofVec2f vec)
 {
     setPosition(vec.x, vec.y);
 }
-
 void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
     //collisionRect.setPosition(x, y);
 }
-
 void Avatar::move(float inputX)
 {
     float speed = VarConst::speedAvatar;
@@ -178,7 +172,6 @@ void Avatar::move(float inputX)
     //polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
     polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, polygon.body->GetLinearVelocity().y));
 }
-
 void Avatar::move(float inputX,float inputY)
 {
     float speed = VarConst::speedAvatar;
@@ -189,7 +182,6 @@ void Avatar::move(float inputX,float inputY)
     impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
     polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
 }
-
 void Avatar::jump()
 {
     if (!jumping)
@@ -216,7 +208,6 @@ void Avatar::jump()
         polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
     }
 }
-
 void Avatar::keyPressed(int key)
 {
     if (key == OF_KEY_LEFT || key == 'q')
@@ -245,7 +236,6 @@ void Avatar::keyPressed(int key)
         jump();
     }
 }
-
 void Avatar::keyReleased(int key)
 {
     
@@ -291,13 +281,13 @@ void Avatar::keyReleased(int key)
         ClicJump = false;
     }
 }
-
 void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     
     b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
-        //cout << "Avatar DOWN " << ofGetElapsedTimef() <<endl;
+        cout << "Start Avatar DOWN " << ofGetElapsedTimef() <<endl;
+        
         if (OtherSprite->sprite == Sprite::PLATFORM)
         {
             jumping = false;
@@ -320,9 +310,12 @@ void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
     
     
 }
-
 void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
 {
+    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
+    if (f == _fixture) {
+        cout << "End Avatar DOWN " << ofGetElapsedTimef() <<endl;
+    }
     
     PhysicalizedElement::contactEnd(_fixture, OtherSprite);
     
@@ -331,7 +324,6 @@ void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
         //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombŽ
     }
 }
-
 void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
     PhysicalizedElement::PostSolve(OtherSprite, impulse);
@@ -351,9 +343,7 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
         //static_cast<PickUp*>(OtherSprite->physicalizedElement)->setCollected();
     }
 }
-
 ofVec2f Avatar::getFootPosition()
 {
     return ofVec2f(0,0);
 }
-

@@ -1636,10 +1636,10 @@
 		BC65913620010F980041830C /* TeleportableElement */ = {
 			isa = PBXGroup;
 			children = (
-				A0319A0DF7967B4639202292 /* Teleportable.cpp */,
 				B161D6CD0DE29FB0DC074A43 /* Teleportable.h */,
-				470F10D226DDFA3291930295 /* Avatar.cpp */,
+				A0319A0DF7967B4639202292 /* Teleportable.cpp */,
 				73D9F79A5809641DF6731BA2 /* Avatar.h */,
+				470F10D226DDFA3291930295 /* Avatar.cpp */,
 			);
 			name = TeleportableElement;
 			sourceTree = "<group>";

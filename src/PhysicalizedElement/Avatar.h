@@ -16,7 +16,6 @@
 class PerspectivePortal;
 
 class Avatar : public Teleportable {
-
 public:
 
   Avatar(b2World* box2d);

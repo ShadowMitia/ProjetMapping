@@ -34,27 +34,27 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         
         //RIGHT = 4, place END
         //fixtureSide.id = 4;
-        b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()-2);
-        b2Vec2 vec2 = b2Vec2(2/30.f, 0.f);
-        shape.SetAsBox(rect.x,1/30, vec2, 0.f);
+        b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()-1);
+        b2Vec2 vec2 = b2Vec2(6/30.f, 0.f);
+        shape.SetAsBox(1/30,rect.y, vec2, 0.f);
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
         //LEFT = 3, place END - 1
         //fixtureSide.id = 3;
-        vec2 = b2Vec2(-2/30.f,0.f);
-        shape.SetAsBox(rect.x, 1/30, vec2, 0.f);
+        vec2 = b2Vec2(-6/30.f,0.f);
+        shape.SetAsBox(1/30, rect.y, vec2, 0.f);
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
         //DOWN = 2,
         //fixtureSide.id = 2;
-        vec2 = b2Vec2(0.f, 2/30.f);
-        shape.SetAsBox(1/30, rect.y, vec2, 0.f);
+        vec2 = b2Vec2(0.f, 6/30.f);
+        shape.SetAsBox(rect.x, 1/30, vec2, 0.f);
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
         //UP = 1,
         //fixtureSide.id = 1;
-        vec2 = b2Vec2(0.f, -2/30.f);
-        shape.SetAsBox(1/30, rect.y, vec2, 0.f);
+        vec2 = b2Vec2(0.f, -6/30.f);
+        shape.SetAsBox(rect.x, 1/30, vec2, 0.f);
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
         
