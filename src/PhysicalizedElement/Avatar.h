@@ -34,29 +34,16 @@ private:
   float moveInputY;
   Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
 
-  void gravityCheck(ofRectangle gravityWell) ;
-
 public:
-
   void presUpdate();
   void update(ofRectangle gravityWell) ;
   void draw() ;
-  void createClone(ofVec2f cloneTranslation) ;
-  void removeClone() ;
-  void teleportToClone() ;
-  bool hasClone() ;
-
-
-  ofVec2f getFootPosition();
-
   void setPosition(ofVec2f vec);
   void setPosition(int x, int y);
 
 
-  void jump();
-  //void move(Direction _direction);
-  void move(float inputX);
-  void move(float inputX, float inputY);
+
+
 
   void keyPressed(int key);
   void keyReleased(int key);
@@ -65,4 +52,8 @@ public:
   virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite) override;
   virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
 
+private:
+    void move(float inputX);
+    void move(float inputX, float inputY);
+    void jump();
 };

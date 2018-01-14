@@ -97,7 +97,7 @@ void WorldsBox2d::update(){
         //avatars[j]->processPerspectivePortals(perspectivePortals);
         avatars[j]->presUpdate();
         
-        avatars[j]->modeDeplace = Deplacement::PLATFORM;
+        //avatars[j]->modeDeplace = Deplacement::PLATFORM;
         for (std::size_t i = 0; i < ladders.size(); i++) {
             /*if (ladders[i]->inside(avatars[j]))
              {

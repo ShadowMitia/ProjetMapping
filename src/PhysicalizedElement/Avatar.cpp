@@ -9,7 +9,6 @@
 #include "Platform.h"
 #include "PickUp.h"
 #include "../Portal.h"
-
 std::vector<ofPoint> loadPoints(const std::string& file) {
     std::vector<ofPoint> pts;
     std::vector <std::string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
@@ -52,20 +51,8 @@ void Avatar::presUpdate()
 {
     //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
-void Avatar::gravityCheck(ofRectangle gravityWell)
-{
-    if (gravityWell.inside(polygon.getPosition()))
-    {
-        modeDeplace = Deplacement::TOP;
-    }
-    else
-    {
-        modeDeplace = Deplacement::PLATFORM;
-    }
-}
 void Avatar::update(ofRectangle gravityWell)
 {
-    gravityCheck(gravityWell);
     
     if (modeDeplace == Deplacement::PLATFORM)
     {
@@ -92,39 +79,6 @@ void Avatar::draw()
         clone->draw();
     }
 }
-/*
-void Avatar::createClone(ofVec2f cloneTranslation) {
-    if (clone) { return; }
-    
-    this->cloneTranslation = cloneTranslation;
-    
-    clone = std::make_unique<Avatar>(polygon.getWorld());
-    clone->setPosition(cloneTranslation);
-    clone->polygon.setVelocity(polygon.getVelocity());
-    clone->polygon.create(polygon.getWorld());
-    
-    entryPoint = polygon.getPosition();
-}
-
-void Avatar::removeClone() {
-    clone = nullptr;
-    cloneTranslation.zero();
-    entryPoint.zero();
-}
-
-void Avatar::teleportToClone() {
-    auto vel = polygon.getVelocity();
-    polygon.setPosition(clone->polygon.getPosition());
-    polygon.setVelocity(vel);
-    cloneTranslation.zero();
-}
-
-bool Avatar::hasClone()
-{
-    return clone ? true : false;
-    //return (clone == nullptr);
-}
-*/
 void Avatar::setPosition(ofVec2f vec)
 {
     setPosition(vec.x, vec.y);
@@ -152,6 +106,7 @@ void Avatar::move(float inputX)
 }
 void Avatar::move(float inputX,float inputY)
 {
+    cout << "lulu" << endl;
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     b2Vec2 impulse;
@@ -320,8 +275,4 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
     {
         //static_cast<PickUp*>(OtherSprite->physicalizedElement)->setCollected();
     }
-}
-ofVec2f Avatar::getFootPosition()
-{
-    return ofVec2f(0,0);
 }
