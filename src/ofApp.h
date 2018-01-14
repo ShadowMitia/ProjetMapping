@@ -1,7 +1,5 @@
 #pragma once
 
-//#define USE_WIIMOTE
-
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxPiMapper.h"

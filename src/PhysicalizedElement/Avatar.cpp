@@ -106,7 +106,6 @@ void Avatar::move(float inputX)
 }
 void Avatar::move(float inputX,float inputY)
 {
-    cout << "lulu" << endl;
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     b2Vec2 impulse;

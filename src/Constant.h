@@ -35,12 +35,9 @@ namespace VarConst
 
   constexpr const float impulseLateralJumpAvatar = 5.f;	// var pour "lisser" la courbe de saut + on la monte, + la cloche s'applatit
   constexpr const float attenuationImpulseJump = 0.84f;	// var pour "attenuer" les saut latéraux par rapport aux sauts droits
-
-    
   constexpr const int MAX_WIIMOTES = 4;
 
 }
-
 /*
 Category bits:
 AVATAR : 0x0001
@@ -52,8 +49,6 @@ PORTAL : 0x0032
 CLONE : 0x0064
 
 */
-
-
 
 enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 enum class Deplacement { PLATFORM , TOP, LADDER, JUMP };
