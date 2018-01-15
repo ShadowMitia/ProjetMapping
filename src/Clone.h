@@ -30,10 +30,19 @@ public:
     void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
     
 private:
-    void (*collisionFonction)();
-    //void collisionFonctionAvatar();
+    void (CloneBox2d::*collisionFonction)();
+    void collisionFonctionAvatar();
     void collisionFonctionUnknown();
+    void (CloneBox2d::*contactStartFonction)(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void (CloneBox2d::*contactEndFonction)(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactStartAvatar(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactEndAvatar(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactStartUnknown(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactEndUnknown(b2Fixture* _fixture, dataSprite* OtherSprite);
+    
     ObjectGame polygon;
     ofPoint PositionObjSource;
     ofPoint PositionClone;
+    
+    
 };

@@ -29,7 +29,10 @@ public:
     void draw();
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
-    
+    void tqdqet(){
+        CloneBox2d * dqoih;
+        conditionFunction(1.0,dqoih);
+    };
 private:
     WorldsBox2d* worldsBox2d;
     ofxBox2dPolygon polygon;

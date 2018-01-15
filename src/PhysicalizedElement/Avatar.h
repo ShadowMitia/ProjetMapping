@@ -32,7 +32,7 @@ private:
     
 public:
     void presUpdate();
-    void update(ofRectangle gravityWell) ;
+    void update() ;
     void draw() ;
     void setPosition(ofVec2f vec);
     void setPosition(int x, int y);
