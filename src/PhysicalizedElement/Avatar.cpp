@@ -118,6 +118,7 @@ void Avatar::jump()
     if (!jumping)
     {
         setJumping(true);
+        cloneJump = false;
         // allez zou, on vire l'inertie du joueur pour ne pas avoir d'elan
         //polygon.setVelocity(0, 0);
         // impulsion droite
@@ -171,7 +172,7 @@ void Avatar::keyPressed(int key)
         jump();
     }
     else if (key == 'r'){
-        setJumping(0);
+        //setJumping(0);
     }
 }
 void Avatar::keyReleased(int key)
