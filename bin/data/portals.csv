@@ -1,0 +1,18 @@
+id,Nom Face,Cote,X,Y,W,H,PortalDirection,ConditionOutput,linkedPortal 01,linkedPortal 02
+0,,,48,48,2,159,left,verticalleft,3,-1
+1,,,207,48,2,159,right,verticalleft,2,-1
+2,,,256,48,2,159,left,verticalleft,1,-1
+3,,,416,48,2,159,right,verticalleft,0,-1
+4,,,48,256,2,159,left,verticalleft,7,-1
+5,,,207,256,2,159,right,verticalleft,6,-1
+6,,,256,256,2,159,left,verticalleft,5,-1
+7,,,416,256,2,159,right,verticalleft,4,-1
+8,,,,,,,,,,
+9,,,,,,,,,,
+10,,,,,,,,,,
+11,,,,,,,,,,
+12,,,,,,,,,,
+13,,,,,,,,,,
+14,,,,,,,,,,
+15,,,,,,,,,,
+16,,,,,,,,,,

@@ -19,6 +19,9 @@
 #include "Waterfalls.h"
 #include "Clone.h"
 
+#include <vector>
+
+
 class WorldsBox2d :public ofThread{
 public:
     

@@ -7,6 +7,40 @@
 //
 
 #include "WorldsBox2d.h"
+#include "utils.h"
+#include <cstdlib>
+
+std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world)
+{
+  std::vector<Portal*> portals(parameters.size());
+  for (auto params : parameters)
+    {
+      float x = std::atof(params[3].c_str());
+      float y = std::atof(params[4].c_str());
+      float w = std::atof(params[5].c_str());
+      float h = std::atof(params[6].c_str());
+      ConditionOutput co = "verticalleft" == params[7] ?
+	ConditionOutput::VerticalLeft : params[7] == "verticalright" ?
+	ConditionOutput::VerticalRight : ConditionOutput::Horizontal;
+      PortalDirection pd = params[8] == "left" ? PortalDirection::leftDirection : PortalDirection::rightDirection;
+
+      portals.push_back(new Portal(ofRectangle(x, y, w, h), world, pd, co));
+
+      int index1 = std::atoi(params[9].c_str());
+      int index2 = std::atoi(params[10].c_str());
+      //Portal* indexPortal1 = (index1 != -1) ? &portals[index1] : nullptr;
+      //Portal* indexPortal2 = (index2 != -1) ? &portals[index2] : nullptr;
+      Portal* portal1 = nullptr;
+      Portal* portal2 = nullptr;
+
+      portals.back()->linke(portal1, portal2);
+
+    }
+
+  return portals;
+}
+
+
 void WorldsBox2d::setup(){
     
     noGravityWell = ofRectangle(2500, 0, 1000, 800);
@@ -17,10 +51,11 @@ void WorldsBox2d::setup(){
     
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
     
-    importPortal();
+    //importPortal();
     
     createAvatar(100, 100);
     // 48, 208(-1), 256 et 416(-1)
+    /*
     Portal *temp;
     temp = new Portal(ofRectangle(48, 48, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
@@ -49,6 +84,9 @@ void WorldsBox2d::setup(){
     porportal[5]->linke(porportal[6], nullptr);
     porportal[6]->linke(porportal[5], nullptr);
     porportal[7]->linke(porportal[4], nullptr);
+    */
+
+    porportal = generatePortals(readCSV("portals.csv"), this);
 
     for (auto &avatar : avatars)
     {

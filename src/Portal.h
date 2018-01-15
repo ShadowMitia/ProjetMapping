@@ -10,9 +10,11 @@
 #include "ofxBox2d.h"
 #include "PhysicalizedElement/Teleportable.h"
 #include "Clone.h"
+#include "utils.h"
 
 enum class ConditionOutput{VerticalLeft,VerticalRight, Horizontal};
 enum class PortalDirection{leftDirection, rightDirection};
+
 class WorldsBox2d;
 
 class Portal:public PhysicalizedElement{
@@ -36,3 +38,4 @@ private:
     void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
 };
+

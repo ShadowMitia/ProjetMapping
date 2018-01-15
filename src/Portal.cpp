@@ -9,22 +9,27 @@
 #include "Portal.h"
 #include "Constant.h"
 #include "WorldsBox2d.h"
+
 bool leftCondition(float _x ,CloneBox2d* _clone){
     //cout << " leftCondition " << endl;
     if (_x > _clone->portalSource->getPosition().x) return true;
     else return false;
 }
+
 bool rightCondition(float _x ,CloneBox2d* _clone){
     //cout << " rightCondition " << endl;
     if (_x < _clone->portalSource->getPosition().x) return true;
     else return false;
 }
+
 ofVec2f leftDirection(CloneBox2d* _clone){
     return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition();
 }
+
 ofVec2f rightDirection(CloneBox2d* _clone){
     return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() - ofVec2f(_clone->portalDestination->portalRect.width, 0);
 }
+
 Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _output){
     portalRect = _portal;
     linkedPortal[0] = nullptr;
