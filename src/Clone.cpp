@@ -47,6 +47,10 @@ void CloneBox2d::collisionFonctionAvatar(){
         objSource->setPosition(ofVec2f(objSource->getPosition().x, polygon.getPosition().y));
         obj->setJumping(false);
     }
+    if (polygon.tabCollision[1]) {
+        objSource->setPosition(ofVec2f(objSource->getPosition().x, objSource->getPosition().y-1.5));
+
+    }
 }
 void CloneBox2d::create(){
     statut++;
@@ -115,20 +119,19 @@ void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
         polygon.tabCollision[4] = true;
     }
     
-    /*
-    dataSprite* data = (dataSprite*)(objSource->polygon.body->GetUserData());
-    if (data->sprite==Sprite::AVATAR) {
-        Avatar *obj = static_cast<Avatar*>(OtherSprite->physicalizedElement);
-        obj->setJumping(false);
-        cout << "jump clone " << obj->jumping<< endl;
-    }*/
-    
     f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
         //cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = true;
         objSource->SetGravityScale(0.0f);
     }
+    
+    f = polygon.body->GetFixtureList()->GetNext();
+    if (f == _fixture) {
+        //cout << "Star Clone TOP " << ofGetElapsedTimef() <<endl;
+        polygon.tabCollision[1] = true;
+    }
+
 }
 void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
     PhysicalizedElement::contactEnd(_fixture, OtherSprite);
@@ -144,6 +147,11 @@ void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
         //cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = false;
         objSource->SetGravityScale(1.0f);
+    }
+    f = polygon.body->GetFixtureList()->GetNext();
+    if (f == _fixture) {
+        //cout << "Star Clone TOP " << ofGetElapsedTimef() <<endl;
+        polygon.tabCollision[1] = false;
     }
 
 }
