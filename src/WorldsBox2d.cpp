@@ -9,7 +9,6 @@
 #include "WorldsBox2d.h"
 void WorldsBox2d::setup(){
     
-    noGravityWell = ofRectangle(2500, 0, 1000, 800);
     
     world.init();
     world.setGravity(0, VarConst::gravity);
@@ -24,18 +23,18 @@ void WorldsBox2d::setup(){
     Portal *temp;
     temp = new Portal(ofRectangle(48, 48, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
-    temp = new Portal(ofRectangle(207, 48, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
+    temp = new Portal(ofRectangle(206, 48, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
     porportal.push_back(temp);
     temp = new Portal(ofRectangle(256, 48, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
-    temp = new Portal(ofRectangle(416, 48, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
+    temp = new Portal(ofRectangle(415, 48, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
     porportal.push_back(temp);
     
     temp = new Portal(ofRectangle(48, 256, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
-    temp = new Portal(ofRectangle(207, 256, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
+    temp = new Portal(ofRectangle(206, 256, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
     porportal.push_back(temp);
-    temp = new Portal(ofRectangle(256, 256, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
+    temp = new Portal(ofRectangle(255, 256, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
     temp = new Portal(ofRectangle(416, 256, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
     porportal.push_back(temp);
@@ -109,7 +108,7 @@ void WorldsBox2d::update(){
     {
         //avatars[j]->presUpdate();
         
-        avatars[j]->update(noGravityWell);
+        avatars[j]->update();
     }
     
     //warterfalls->update();

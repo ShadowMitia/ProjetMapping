@@ -31,7 +31,7 @@ public:
     
 private:
     void (*collisionFonction)();
-    //void collisionFonctionAvatar();
+    void collisionFonctionAvatar();
     void collisionFonctionUnknown();
     ObjectGame polygon;
     ofPoint PositionObjSource;

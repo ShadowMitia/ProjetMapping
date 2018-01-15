@@ -23,9 +23,17 @@ CloneBox2d::~CloneBox2d(){
     }
     
 }
-void collisionFonctionAvatar(){
-    cout << "je suis la ha aha" << endl;
-    
+void CloneBox2d::collisionFonctionAvatar(){
+    if (polygon.tabCollision[4] && !polygon.tabCollision[2]) {
+        objSource->setPosition(ofVec2f(objSource->getPosition().x-1.5, objSource->getPosition().y));
+    }
+    if (polygon.tabCollision[3] && !polygon.tabCollision[2]) {
+        objSource->setPosition(ofVec2f(objSource->getPosition().x+1.5, objSource->getPosition().y));
+    }
+    /*
+    if (polygon.tabCollision[2]){
+        objSource->setPosition(ofVec2f(objSource->getPosition().x, this->polygon.getPosition().y));*/
+    }
 }
 
 void CloneBox2d::create(){
@@ -51,16 +59,19 @@ void CloneBox2d::create(){
     polygon.body->SetGravityScale(0.0);
     data = (dataSprite*)(objSource->polygon.body->GetUserData());
     if (data->sprite==Sprite::AVATAR) {
-        collisionFonction = collisionFonctionAvatar;
+        collisionFonction = &collisionFonctionAvatar;
     }
     else{
-        //collisionFonction = &CloneBox2d::collisionFonctionUnknown;
+        //collisionFonction =  &CloneBox2d::collisionFonctionUnknown;
     }
 }
 
-void CloneBox2d::collisionFonctionUnknown(){
+void CloneBox2d::collisionFonctionUnknown(){ // le 1.5 est arbitraire à changer 
     if (polygon.tabCollision[4] && !polygon.tabCollision[2]) {
-        //objSource->setPosition(ofVec2f(portalSource->getPosition().x - objSource->polygon.getBoundingBox().getMaxX(), objSource->getPosition().y));
+        objSource->setPosition(ofVec2f(objSource->getPosition().x-1.5, objSource->getPosition().y));
+    }
+    if (polygon.tabCollision[3] && !polygon.tabCollision[2]) {
+        objSource->setPosition(ofVec2f(objSource->getPosition().x+1.5, objSource->getPosition().y));
     }
     if (polygon.tabCollision[2]){
         objSource->setPosition(ofVec2f(objSource->getPosition().x, this->polygon.getPosition().y));
@@ -83,6 +94,7 @@ void CloneBox2d::update(){
         
             //collisionFonction();
             collisionFonctionUnknown();
+            PositionObjSource = objSource->getPosition();
             PositionClone = polygon.getPosition();
             temp = portalDestination->directionFunction(this); // fonction du portal end
             polygon.setPosition(temp);

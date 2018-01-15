@@ -3,7 +3,6 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 
-
 /*
  Category bits:
  AVATAR : 0x0001

@@ -9,7 +9,8 @@
 #include "Platform.h"
 //#include "PickUp.h"
 #include "../Portal.h"
-std::vector<ofPoint> loadPoints(const std::string& file) {
+std::vector<ofPoint> loadPoints(const std::string& file)
+{
     std::vector<ofPoint> pts;
     std::vector <std::string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
     for (unsigned int i = 0; i < ptsStr.size(); i += 2) {
@@ -51,7 +52,7 @@ void Avatar::presUpdate()
 {
     //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
-void Avatar::update(ofRectangle gravityWell)
+void Avatar::update()
 {
     
     if (modeDeplace == Deplacement::PLATFORM)
@@ -113,7 +114,7 @@ void Avatar::move(float inputX,float inputY)
 }
 void Avatar::jump()
 {
-    cout << "jump:" <<  jumping << endl;
+    //cout << "jump:" <<  jumping << endl;
     if (!jumping)
     {
         setJumping(true);
@@ -138,7 +139,8 @@ void Avatar::jump()
         polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
     }
 }
-void Avatar::setJumping(bool _bool){
+void Avatar::setJumping(bool _bool)
+{
     jumping = _bool;
 }
 void Avatar::keyPressed(int key)

@@ -45,7 +45,6 @@ public:
   void createBox(ofPolyline _polyline);
   void createPickup(ofPolyline polyline);
 
-  ofRectangle noGravityWell;
 
 private:
  void importPortal();

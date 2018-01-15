@@ -25,6 +25,7 @@ ofVec2f leftDirection(CloneBox2d* _clone){
 ofVec2f rightDirection(CloneBox2d* _clone){
     return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() - ofVec2f(_clone->portalDestination->portalRect.width, 0);
 }
+
 Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _output){
     portalRect = _portal;
     linkedPortal[0] = nullptr;
