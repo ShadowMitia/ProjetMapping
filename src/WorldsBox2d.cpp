@@ -19,17 +19,37 @@ void WorldsBox2d::setup(){
     
     importPortal();
     
-    createAvatar(0, 0);
-    //createAvatar(90, 140);
-    //createAvatar(2600, 90);
-    //createAvatar(680, 140);
+    createAvatar(100, 100);
+    // 48, 208(-1), 256 et 416(-1)
+    Portal *temp;
+    temp = new Portal(ofRectangle(48, 48, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
+    porportal.push_back(temp);
+    temp = new Portal(ofRectangle(207, 48, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
+    porportal.push_back(temp);
+    temp = new Portal(ofRectangle(256, 48, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
+    porportal.push_back(temp);
+    temp = new Portal(ofRectangle(416, 48, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
+    porportal.push_back(temp);
     
-    Portal *temp = new Portal(ofRectangle(43, 0, 2, 150), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
+    temp = new Portal(ofRectangle(48, 256, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
-    temp = new Portal(ofRectangle(237, 0, 2, 150), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
+    temp = new Portal(ofRectangle(207, 256, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
     porportal.push_back(temp);
-    porportal[0]->linke(porportal[1], nullptr);
-    porportal[1]->linke(porportal[0], nullptr);
+    temp = new Portal(ofRectangle(256, 256, 2, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
+    porportal.push_back(temp);
+    temp = new Portal(ofRectangle(416, 256, 2, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
+    porportal.push_back(temp);
+    
+    
+    porportal[0]->linke(porportal[3], nullptr);
+    porportal[1]->linke(porportal[2], nullptr);
+    porportal[2]->linke(porportal[1], nullptr);
+    porportal[3]->linke(porportal[0], nullptr);
+    porportal[4]->linke(porportal[7], nullptr);
+    porportal[5]->linke(porportal[6], nullptr);
+    porportal[6]->linke(porportal[5], nullptr);
+    porportal[7]->linke(porportal[4], nullptr);
+
     for (auto &avatar : avatars)
     {
         teleportables.push_back(avatar);
@@ -70,18 +90,11 @@ void WorldsBox2d::createAvatar(int x, int y){
     avatars.push_back(avatar);
 }
 void WorldsBox2d::update(){
-    // supprimes les pickups collect√©s et les enleves de box2d et de la liste des pickups
-    
-    //pickups.erase(std::remove_if(pickups.begin(), pickups.end(), [&](auto& p){ bool res = p->isCollected(); if (res) { std::remove(teleportables.begin(), teleportables.end(), p); world.getWorld()->DestroyBody(p->pickUp.body);} return res; }), pickups.end());
-    
 
-    
     world.update();
     
     // delect clone
     // ne pas touché
-    
-    
     for (int i = 0; i< clones.size(); ++i) {
         if (clones[i]->statut>1) {
             // téléportation
@@ -94,19 +107,11 @@ void WorldsBox2d::update(){
 
     for (std::size_t j = 0; j < avatars.size(); j++)
     {
-        //avatars[j]->processPerspectivePortals(perspectivePortals);
-        avatars[j]->presUpdate();
+        //avatars[j]->presUpdate();
         
-        //avatars[j]->modeDeplace = Deplacement::PLATFORM;
-        for (std::size_t i = 0; i < ladders.size(); i++) {
-            /*if (ladders[i]->inside(avatars[j]))
-             {
-             avatars[j]->modeDeplace = Deplacement::LADDER;
-             }*/
-            
-        }
         avatars[j]->update(noGravityWell);
     }
+    
     //warterfalls->update();
 }
 void WorldsBox2d::createPlatform(ofPolyline polyline){

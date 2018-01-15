@@ -36,7 +36,7 @@ void ofApp::setup() {
     worlds = new WorldsBox2d;
     worlds->setup();
     
-    scene1 = new Scene1(worlds, "Test_Saut_Visible.png");
+    scene1 = new Scene1(worlds, "Map_test_portails_back.png");
     scene2 = new Scene2(worlds);
     
     mapping.registerFboSource(scene1);
@@ -56,20 +56,20 @@ void ofApp::setup() {
     ////   Import Platform   /////
     worlds->platforms.clear();
     
-    std::vector<ofPolyline>  platforms = importImage("Test_Saut_Plateforme.png");
+    std::vector<ofPolyline>  platforms = importImage("Map_test_portails_plateformes.png");
     for (std::size_t i = 0; i < platforms.size() ; i++) {
         worlds->createPlatform(platforms[i]);
     }
     
     ////   Import Ladder   /////
     
-    std::vector<ofPolyline>  ladders = importImage("Test_Saut_Echelle.png");
+    std::vector<ofPolyline>  ladders = importImage("Map_test_portails_echelles.png");
     for (std::size_t i =0; i< ladders.size() ; i++) {
         worlds->createLadder(ladders[i]);
     }
     
     // Import blocs
-    
+    /*
     std::vector<ofPolyline> boxes = importImage("Map_prog_bloc_blanc.png");
     for (std::size_t i = 0; i < boxes.size() - 1; i++)
     {
@@ -81,7 +81,7 @@ void ofApp::setup() {
     for (std::size_t i = 0; i < pickups.size() - 1; i++)
     {
         //worlds->createPickup(pickups[i]);
-    }
+    }*/
     
 #ifdef USE_WIIMOTE
     wiiuse.addListener(this);

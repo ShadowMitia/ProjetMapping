@@ -30,10 +30,10 @@ public:
     void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
     
 private:
-    //ofxBox2dPolygon polygon;
-    bool collision = false;
+    void (*collisionFonction)();
+    //void collisionFonctionAvatar();
+    void collisionFonctionUnknown();
     ObjectGame polygon;
     ofPoint PositionObjSource;
     ofPoint PositionClone;
-
 };

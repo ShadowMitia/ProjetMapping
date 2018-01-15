@@ -8,6 +8,7 @@
 
 #include "Clone.h"
 #include "Portal.h"
+#include "Avatar.h"
 CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination){
     
     objSource = static_cast<Teleportable*>(_objSource);
@@ -22,6 +23,11 @@ CloneBox2d::~CloneBox2d(){
     }
     
 }
+void collisionFonctionAvatar(){
+    cout << "je suis la ha aha" << endl;
+    
+}
+
 void CloneBox2d::create(){
     statut++;
     for (int i= 0; i < 5; ++i) {
@@ -43,6 +49,22 @@ void CloneBox2d::create(){
         data->physicalizedElement = this;
     }
     polygon.body->SetGravityScale(0.0);
+    data = (dataSprite*)(objSource->polygon.body->GetUserData());
+    if (data->sprite==Sprite::AVATAR) {
+        collisionFonction = collisionFonctionAvatar;
+    }
+    else{
+        //collisionFonction = &CloneBox2d::collisionFonctionUnknown;
+    }
+}
+
+void CloneBox2d::collisionFonctionUnknown(){
+    if (polygon.tabCollision[4] && !polygon.tabCollision[2]) {
+        //objSource->setPosition(ofVec2f(portalSource->getPosition().x - objSource->polygon.getBoundingBox().getMaxX(), objSource->getPosition().y));
+    }
+    if (polygon.tabCollision[2]){
+        objSource->setPosition(ofVec2f(objSource->getPosition().x, this->polygon.getPosition().y));
+    }
 }
 void CloneBox2d::update(){
     if (statut == 0) {
@@ -58,19 +80,12 @@ void CloneBox2d::update(){
     
     if (portalDestination != nullptr) {
         ofPoint temp;
-
-        if (polygon.tabCollision[4] && !polygon.tabCollision[2]) {
-            //objSource->setPosition(ofVec2f(portalSource->getPosition().x - objSource->polygon.getBoundingBox().getMaxX(), objSource->getPosition().y));
-        }
         
-        if (polygon.tabCollision[2]){
-            objSource->setPosition(ofVec2f(objSource->getPosition().x, this->polygon.getPosition().y));
-        }
+            //collisionFonction();
+            collisionFonctionUnknown();
             PositionClone = polygon.getPosition();
             temp = portalDestination->directionFunction(this); // fonction du portal end
             polygon.setPosition(temp);
-    
-
     }
     
 }
@@ -80,20 +95,26 @@ void CloneBox2d::draw(){
 }
 void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite *OtherSprite){
     //cout << "contactStart Clone: " << endl;
-        b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
-        if (f == _fixture) {
-            //cout << "Star Clone RIGHT " << ofGetElapsedTimef() <<endl;
-            polygon.tabCollision[4] = true;
-            
-            
-        }
-        f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-        if (f == _fixture) {
-            cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
-            polygon.tabCollision[2] = true;
-            objSource->SetGravityScale(0.0f);
-
-        }
+    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
+    if (f == _fixture) {
+        //cout << "Star Clone RIGHT " << ofGetElapsedTimef() <<endl;
+        polygon.tabCollision[4] = true;
+    }
+    
+    /*
+    dataSprite* data = (dataSprite*)(objSource->polygon.body->GetUserData());
+    if (data->sprite==Sprite::AVATAR) {
+        Avatar *obj = static_cast<Avatar*>(OtherSprite->physicalizedElement);
+        obj->setJumping(false);
+        cout << "jump clone " << obj->jumping<< endl;
+    }*/
+    
+    f = polygon.body->GetFixtureList()->GetNext()->GetNext();
+    if (f == _fixture) {
+        //cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
+        polygon.tabCollision[2] = true;
+        objSource->SetGravityScale(0.0f);
+    }
 }
 void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
     PhysicalizedElement::contactEnd(_fixture, OtherSprite);
@@ -105,8 +126,9 @@ void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
     
     f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
-        cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
+        //cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = false;
         objSource->SetGravityScale(1.0f);
     }
+
 }

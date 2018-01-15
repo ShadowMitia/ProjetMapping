@@ -14,8 +14,8 @@ namespace VarConst
   constexpr const int UNIT = 240;
   //constexpr const int WidthWorld2D = 20 * UNIT;
   //constexpr const int HeightWorld2D = 4 * UNIT;
-  constexpr const int WidthWorld2D = 800;
-  constexpr const int HeightWorld2D = 150;
+  constexpr const int WidthWorld2D = 464;
+  constexpr const int HeightWorld2D = 464;
     
   constexpr const float gravity = 30.0f;
   //constexpr const float gravity = 0.0f;

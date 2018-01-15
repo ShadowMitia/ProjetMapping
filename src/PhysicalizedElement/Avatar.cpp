@@ -7,7 +7,7 @@
 //
 #include "Avatar.h"
 #include "Platform.h"
-#include "PickUp.h"
+//#include "PickUp.h"
 #include "../Portal.h"
 std::vector<ofPoint> loadPoints(const std::string& file) {
     std::vector<ofPoint> pts;
@@ -42,9 +42,9 @@ Avatar::Avatar(b2World* box2d)
     /////////////// FOOT ///////////////
     
     moveInputX = 0.0f;
-    jumping = false;
-    ClicJump = false;
-    //polygon.fixture.isSensor = true;
+    setJumping(false);
+    clicJump = false;
+    cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
 }
 void Avatar::presUpdate()
@@ -74,10 +74,7 @@ void Avatar::draw()
     ofSetColor(ofColor::blue);
     polygon.draw();
     ofSetColor(ofColor::white);
-    
-    if (clone) {
-        clone->draw();
-    }
+
 }
 void Avatar::setPosition(ofVec2f vec)
 {
@@ -106,7 +103,6 @@ void Avatar::move(float inputX)
 }
 void Avatar::move(float inputX,float inputY)
 {
-    cout << "lulu" << endl;
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     b2Vec2 impulse;
@@ -117,9 +113,10 @@ void Avatar::move(float inputX,float inputY)
 }
 void Avatar::jump()
 {
+    cout << "jump:" <<  jumping << endl;
     if (!jumping)
     {
-        jumping = true;
+        setJumping(true);
         // allez zou, on vire l'inertie du joueur pour ne pas avoir d'elan
         //polygon.setVelocity(0, 0);
         // impulsion droite
@@ -140,6 +137,9 @@ void Avatar::jump()
         
         polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
     }
+}
+void Avatar::setJumping(bool _bool){
+    jumping = _bool;
 }
 void Avatar::keyPressed(int key)
 {
@@ -163,10 +163,13 @@ void Avatar::keyPressed(int key)
     {
         viewpoint = Viewpoint::MODE_PERSPECTIVE;
     }
-    else if (key == ' ' && !ClicJump)
+    else if (key == ' ' && !clicJump)
     {
-        ClicJump = true;
+        clicJump = true;
         jump();
+    }
+    else if (key == 'r'){
+        setJumping(0);
     }
 }
 void Avatar::keyReleased(int key)
@@ -211,7 +214,7 @@ void Avatar::keyReleased(int key)
     }
     else if (key == ' ')
     {
-        ClicJump = false;
+        clicJump = false;
     }
 }
 void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
@@ -219,11 +222,11 @@ void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
     
     b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
-        cout << "Start Avatar DOWN " << ofGetElapsedTimef() <<endl;
+        //cout << "Start Avatar DOWN " << ofGetElapsedTimef() <<endl;
         
         if (OtherSprite->sprite == Sprite::PLATFORM)
         {
-            jumping = false;
+            setJumping(false);
             if (!(abs(moveInputX) > 0))
             {
                 polygon.setVelocity(0, polygon.getVelocity().y);
@@ -247,7 +250,7 @@ void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
-        cout << "End Avatar DOWN " << ofGetElapsedTimef() <<endl;
+        //cout << "End Avatar DOWN " << ofGetElapsedTimef() <<endl;
     }
     
     PhysicalizedElement::contactEnd(_fixture, OtherSprite);

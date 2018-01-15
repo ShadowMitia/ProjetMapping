@@ -8,7 +8,6 @@
 
 #include "ScenesMapping.h"
 
-
 void Scene1::draw()
 {
     ofClear(0);

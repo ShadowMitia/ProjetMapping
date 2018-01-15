@@ -29,7 +29,6 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
 }
 
 void Ladder::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
-    cout << "ici" << endl;
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
     objSource->SetGravityScale(.0f);
     objSource->modeDeplace = Deplacement::LADDER;
