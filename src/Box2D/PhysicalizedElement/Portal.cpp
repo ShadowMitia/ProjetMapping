@@ -43,7 +43,6 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _
     
     
     polygon.create(worldsBox2d->world.getWorld());
-    //polygon.body->SetGravityScale(0.0);
     polygon.body->SetType(b2BodyType::b2_staticBody); // regardé ça un peut plus pré
     
     b2Filter tempFilter;
@@ -68,8 +67,6 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _
         case PortalDirection::rightDirection : directionFunction = rightDirection; break;
     }
     
-    //directionFunction = leftDirection;
-    //conditionFunction = leftCondition;
 }
 void Portal::draw(){
     ofSetColor(ofColor::darkRed);

@@ -10,7 +10,7 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Constant.h"
-#include "PhysicalizedElement/Teleportable.h"
+//#include "PhysicalizedElement/Teleportable.h"
 #include "ofxLiquidFun.h"
 
 

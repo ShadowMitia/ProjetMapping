@@ -48,8 +48,7 @@ void CloneBox2d::collisionFonctionAvatar(){
         obj->setJumping(false);
     }
     if (polygon.tabCollision[1]) {
-        objSource->setPosition(ofVec2f(objSource->getPosition().x, objSource->getPosition().y-1.5));
-
+        objSource->setPosition(ofVec2f(objSource->getPosition().x, objSource->getPosition().y+1));
     }
 }
 void CloneBox2d::create(){

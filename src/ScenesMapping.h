@@ -12,7 +12,7 @@
 #include "ofxPiMapper.h"
 #include "FboSource.h"
 #include "WorldsBox2d.h"
-#include "PhysicalizedElement/Avatar.h"
+#include "Avatar.h"
 #include "Light.h"
 
 

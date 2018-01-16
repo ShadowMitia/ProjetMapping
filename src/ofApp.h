@@ -8,7 +8,7 @@
 #include "ofxBox2d.h"
 #include "WorldsBox2d.h"
 #include "ScenesMapping.h"
-#include "PhysicalizedElement/Avatar.h"
+#include "Avatar.h"
 #include "Constant.h"
 #include "ofxCv.h"
 #include "ImportData.h"

@@ -8,7 +8,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxBox2d.h"
-#include "PhysicalizedElement/Teleportable.h"
+#include "Teleportable/Teleportable.h"
 #include "Clone.h"
 #include "utils.h"
 
@@ -29,10 +29,7 @@ public:
     void draw();
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
-    void tqdqet(){
-        CloneBox2d * dqoih;
-        conditionFunction(1.0,dqoih);
-    };
+
 private:
     WorldsBox2d* worldsBox2d;
     ofxBox2dPolygon polygon;
