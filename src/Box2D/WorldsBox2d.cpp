@@ -80,8 +80,8 @@ void WorldsBox2d::setup(){
     porportal[2]->linke(porportal[1], nullptr);
     porportal[3]->linke(porportal[0], nullptr);
     porportal[4]->linke(porportal[7], nullptr);
-    porportal[5]->linke(porportal[6], nullptr);
-    porportal[6]->linke(porportal[5], nullptr);
+    porportal[5]->linke(porportal[6], porportal[0]);
+    porportal[6]->linke(porportal[5], porportal[3]);
     porportal[7]->linke(porportal[4], nullptr);
     
 

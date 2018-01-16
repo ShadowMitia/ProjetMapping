@@ -162,7 +162,7 @@ void Avatar::keyPressed(int key)
     {
         moveInputY = 1.0f;
     }
-    else if (key == OF_KEY_LEFT_CONTROL)
+    else if (key == OF_KEY_LEFT_ALT)
     {
         viewpoint = Viewpoint::MODE_PERSPECTIVE;
     }
@@ -211,7 +211,7 @@ void Avatar::keyReleased(int key)
         }
         
     }
-    else if (key == OF_KEY_LEFT_CONTROL)
+    else if (key == OF_KEY_LEFT_ALT)
     {
         viewpoint = Viewpoint::MODE_ANGLE;
     }

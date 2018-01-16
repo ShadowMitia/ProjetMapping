@@ -27,9 +27,7 @@ public:
     
 private:
     float moveInputX;
-    float moveInputY;
-    Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
-    
+    float moveInputY;    
 public:
     void presUpdate();
     void update() ;
