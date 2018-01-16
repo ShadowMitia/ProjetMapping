@@ -29,6 +29,10 @@ private:
     float moveInputX;
     float moveInputY;    
 public:
+    void(Avatar::*move)(float inputX, float inputY);
+    void movePlatform(float inputX, float inputY);
+    void moveNord(float inputX, float inputY);
+    
     void presUpdate();
     void update() ;
     void draw() ;
@@ -44,7 +48,8 @@ public:
     virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
     
 private:
-    void move(float inputX);
-    void move(float inputX, float inputY);
+    
+    //void move(float inputX);
+    //void move(float inputX, float inputY);
     void jump();
 };

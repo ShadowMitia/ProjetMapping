@@ -47,6 +47,8 @@ Avatar::Avatar(b2World* box2d)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
+    move=&Avatar::movePlatform;
+    
 }
 void Avatar::presUpdate()
 {
@@ -55,15 +57,7 @@ void Avatar::presUpdate()
 void Avatar::update()
 {
     
-    if (modeDeplace == Deplacement::PLATFORM)
-    {
-        move(moveInputX);
-    }
-    else
-    {
-        move(moveInputX, moveInputY);
-    }
-    //move(moveInputX);
+    (*this.*move)(moveInputX, moveInputY);
     
     if (jumping)
     {
@@ -86,6 +80,7 @@ void Avatar::setPosition(int x, int y)
     polygon.setPosition(x, y);
     //collisionRect.setPosition(x, y);
 }
+/*
 void Avatar::move(float inputX)
 {
     float speed = VarConst::speedAvatar;
@@ -111,6 +106,23 @@ void Avatar::move(float inputX,float inputY)
     impulse.y = speed * inputY * 1.0f;
     impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
     polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
+}
+ */
+void Avatar::movePlatform(float inputX, float inputY){
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    if (jumping)
+    {
+        
+        speed = VarConst::speedAvatarAirControl;
+        speedMax = VarConst::speedAvatarAirControlMax;
+    }
+    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, polygon.body->GetLinearVelocity().y));
+}
+void Avatar::moveNord(float inputX, float inputY) {
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, inputY * speedMax));
 }
 void Avatar::jump()
 {
@@ -282,3 +294,5 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
         //static_cast<PickUp*>(OtherSprite->physicalizedElement)->setCollected();
     }
 }
+
+

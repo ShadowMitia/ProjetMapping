@@ -31,10 +31,10 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
 void Ladder::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
     objSource->SetGravityScale(.0f);
-    objSource->modeDeplace = Deplacement::LADDER;
+    objSource->move= &Avatar::moveNord;
 }
 void Ladder::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
     objSource->SetGravityScale(1.0f);
-    objSource->modeDeplace = Deplacement::PLATFORM;
+    objSource->move= &Avatar::movePlatform;
 }

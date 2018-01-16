@@ -161,8 +161,3 @@ void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     obj->cloneJump = true;
 }
 void CloneBox2d::contactEndUnknown(b2Fixture *_fixture, dataSprite *OtherSprite){}
-
-
-
-
-
