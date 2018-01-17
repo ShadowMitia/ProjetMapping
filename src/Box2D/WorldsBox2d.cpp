@@ -65,7 +65,7 @@ void WorldsBox2d::setup(){
     
     createAvatar(100, 100);
     // 48, 208(-1), 256 et 416(-1)
-    /*
+    
     Portal *temp;
     temp = new Portal(ofRectangle(48, 48, 3, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
@@ -94,9 +94,9 @@ void WorldsBox2d::setup(){
     porportal[5]->linke(porportal[6], porportal[0]);
     porportal[6]->linke(porportal[5], porportal[3]);
     porportal[7]->linke(porportal[4], nullptr);
-    */
-
-    porportal = generatePortals(readCSV("data/portals.csv"), this);
+    
+    
+    //porportal = generatePortals(readCSV("data/portals.csv"), this);
 
     for (auto &avatar : avatars)
     {

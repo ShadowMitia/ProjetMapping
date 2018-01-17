@@ -25,7 +25,6 @@ CloneBox2d::~CloneBox2d(){
     }
     
 }
-
 void CloneBox2d::create(){
     statut++;
     for (int i= 0; i < 5; ++i) {
@@ -77,7 +76,10 @@ void CloneBox2d::update(){
             PositionClone = polygon.getPosition();
             temp = portalDestination->directionFunction(this); // fonction du portal end
             polygon.setPosition(temp);
-    }else polygon.setPosition(0., 0.);
+    }else{
+        polygon.setPosition(0., 0.);
+        portalSource->nullFunction(this);
+    }
 }
 void CloneBox2d::draw(){
     ofSetColor(ofColor::brown);

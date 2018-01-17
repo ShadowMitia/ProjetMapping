@@ -615,6 +615,7 @@
 		BCF69FB3200F846C00A0F48D /* CloneOther.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CloneOther.h; path = Box2D/PhysicalizedElement/CloneOther.h; sourceTree = "<group>"; };
 		BCF69FB5200F851600A0F48D /* ConditionOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConditionOutput.h; path = Box2D/PhysicalizedElement/ConditionOutput.h; sourceTree = "<group>"; };
 		BCF69FB6200F864600A0F48D /* PortalDirection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PortalDirection.h; path = Box2D/PhysicalizedElement/PortalDirection.h; sourceTree = "<group>"; };
+		BCF69FB72010038000A0F48D /* ConditionNull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConditionNull.h; sourceTree = "<group>"; };
 		BDBE053980FA01FAD543D782 /* CmdManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CmdManager.cpp; path = ../../../addons/ofxPiMapper/src/Commands/CmdManager.cpp; sourceTree = SOURCE_ROOT; };
 		BEB021F1F92E6E734BB409A2 /* b2StackAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2StackAllocator.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Common/b2StackAllocator.cpp; sourceTree = SOURCE_ROOT; };
 		BF85CBDEA83E69E3C0C7B0F8 /* ofxBox2dEdge.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dEdge.h; path = ../../../addons/ofxLiquidFun/src/ofxBox2dEdge.h; sourceTree = SOURCE_ROOT; };
@@ -1653,6 +1654,7 @@
 				E3EFB10EA7365727BA5173D4 /* Portal.cpp */,
 				BCF69FB5200F851600A0F48D /* ConditionOutput.h */,
 				BCF69FB6200F864600A0F48D /* PortalDirection.h */,
+				BCF69FB72010038000A0F48D /* ConditionNull.h */,
 			);
 			name = Portal;
 			sourceTree = "<group>";

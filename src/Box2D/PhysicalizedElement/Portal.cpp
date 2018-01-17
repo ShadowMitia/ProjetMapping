@@ -12,6 +12,16 @@
 #include "ConditionOutput.h"
 #include "PortalDirection.h"
 
+void leftNull(CloneBox2d* _clone){
+    if (_clone->objSource->getPosition().x<_clone->portalSource->getPosition().x + 8 ) {
+        _clone->objSource->setPosition(ofVec2f(_clone->portalSource->getPosition().x + 8,_clone->objSource->getPosition().y));
+    }
+}
+void rightNull(CloneBox2d* _clone){
+    if (_clone->objSource->getPosition().x>_clone->portalSource->getPosition().x - 6 ) {
+        _clone->objSource->setPosition(ofVec2f(_clone->portalSource->getPosition().x - 6,_clone->objSource->getPosition().y));
+    }
+}
 
 
 Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _output){
@@ -43,8 +53,12 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _
     polygon.body->GetFixtureList()->SetSensor(true);
     
     switch(_output){
-        case ConditionOutput::VerticalLeft: conditionFunction = leftCondition; break;
-        case ConditionOutput::VerticalRight: conditionFunction = rightCondition; break;
+        case ConditionOutput::VerticalLeft: conditionFunction = leftCondition;
+            nullFunction = leftNull;
+            break;
+        case ConditionOutput::VerticalRight: conditionFunction = rightCondition;
+            nullFunction = rightNull;
+            break;
     
     }
     switch (_direction) {
@@ -87,3 +101,4 @@ void Portal::linke(Portal *_1, Portal *_2){
 ofVec2f Portal::getPosition(){
     return portalRect.getPosition();
 }
+

@@ -19,6 +19,8 @@ class WorldsBox2d;
 
 class Portal:public PhysicalizedElement{
 public:
+    
+    void (*nullFunction)(CloneBox2d*);
     Portal *linkedPortal[2];
     ofVec2f(*directionFunction)(CloneBox2d*);
     bool(*conditionFunction)(float, CloneBox2d*);
