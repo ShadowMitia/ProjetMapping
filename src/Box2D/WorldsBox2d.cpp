@@ -10,11 +10,17 @@
 #include "utils.h"
 #include <cstdlib>
 
+#include <iostream>
+
 std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world)
 {
-  std::vector<Portal*> portals(parameters.size());
+  std::vector<Portal*> portals;
   for (auto params : parameters)
     {
+      if (params[3].empty())
+	{
+	  break;
+	}
       float x = std::atof(params[3].c_str());
       float y = std::atof(params[4].c_str());
       float w = std::atof(params[5].c_str());
@@ -25,15 +31,20 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
       PortalDirection pd = params[8] == "left" ? PortalDirection::leftDirection : PortalDirection::rightDirection;
 
       portals.push_back(new Portal(ofRectangle(x, y, w, h), world, pd, co));
+    }
 
+  for (auto params : parameters)
+    {
+      if (params[3].empty())
+	{
+	  break;
+	}
       int index1 = std::atoi(params[9].c_str());
       int index2 = std::atoi(params[10].c_str());
-      //Portal* indexPortal1 = (index1 != -1) ? &portals[index1] : nullptr;
-      //Portal* indexPortal2 = (index2 != -1) ? &portals[index2] : nullptr;
-      Portal* portal1 = nullptr;
-      Portal* portal2 = nullptr;
-
-      portals.back()->linke(portal1, portal2);
+      std::cout << index1 << ' ' << index2 << '\n';
+      Portal* indexPortal1 = (index1 == -1) ? nullptr : portals[index1];
+      Portal* indexPortal2 = (index2 == -1) ? nullptr : portals[index2];
+      portals.back()->linke(indexPortal1, indexPortal2);
 
     }
 
@@ -54,7 +65,7 @@ void WorldsBox2d::setup(){
     
     createAvatar(100, 100);
     // 48, 208(-1), 256 et 416(-1)
-    
+    /*
     Portal *temp;
     temp = new Portal(ofRectangle(48, 48, 3, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
@@ -83,9 +94,9 @@ void WorldsBox2d::setup(){
     porportal[5]->linke(porportal[6], porportal[0]);
     porportal[6]->linke(porportal[5], porportal[3]);
     porportal[7]->linke(porportal[4], nullptr);
-    
+    */
 
-    //porportal = generatePortals(readCSV("portals.csv"), this);
+    porportal = generatePortals(readCSV("data/portals.csv"), this);
 
     for (auto &avatar : avatars)
     {
