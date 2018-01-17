@@ -141,6 +141,7 @@
 		B5F050DAFDC878A0E173FDD8 /* b2CircleContact.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619F900B8B36F185A8F81C8C /* b2CircleContact.cpp */; };
 		B6840996567E78436F7ECFAB /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B047FF96258DC01792B272DB /* ETF.cpp */; };
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
+		BCF69FB2200F821200A0F48D /* CloneAvatar.h in Sources */ = {isa = PBXBuildFile; fileRef = BCF69FB0200F821200A0F48D /* CloneAvatar.h */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
 		BF2CFA915EDBB99B0F92489A /* b2ChainShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52E6BAAF72BF7CDFDF5F9C /* b2ChainShape.cpp */; };
 		BF30D7A362CEBF9286D087FD /* b2WorldCallbacks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1325975A2867C7088859835 /* b2WorldCallbacks.cpp */; };
@@ -610,6 +611,10 @@
 		BBAF9D981351C596CA67CAF9 /* hybridtracker.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = hybridtracker.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/contrib/hybridtracker.hpp; sourceTree = SOURCE_ROOT; };
 		BCB571865BB25BC586CF80EC /* SetPresetCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SetPresetCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/SetPresetCmd.h; sourceTree = SOURCE_ROOT; };
 		BCBB74B9531974E1D5DA019B /* HexagonSurface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = HexagonSurface.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/HexagonSurface.cpp; sourceTree = SOURCE_ROOT; };
+		BCF69FB0200F821200A0F48D /* CloneAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CloneAvatar.h; path = Box2D/PhysicalizedElement/CloneAvatar.h; sourceTree = "<group>"; };
+		BCF69FB3200F846C00A0F48D /* CloneOther.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CloneOther.h; path = Box2D/PhysicalizedElement/CloneOther.h; sourceTree = "<group>"; };
+		BCF69FB5200F851600A0F48D /* ConditionOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConditionOutput.h; path = Box2D/PhysicalizedElement/ConditionOutput.h; sourceTree = "<group>"; };
+		BCF69FB6200F864600A0F48D /* PortalDirection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PortalDirection.h; path = Box2D/PhysicalizedElement/PortalDirection.h; sourceTree = "<group>"; };
 		BDBE053980FA01FAD543D782 /* CmdManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CmdManager.cpp; path = ../../../addons/ofxPiMapper/src/Commands/CmdManager.cpp; sourceTree = SOURCE_ROOT; };
 		BEB021F1F92E6E734BB409A2 /* b2StackAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2StackAllocator.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Common/b2StackAllocator.cpp; sourceTree = SOURCE_ROOT; };
 		BF85CBDEA83E69E3C0C7B0F8 /* ofxBox2dEdge.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dEdge.h; path = ../../../addons/ofxLiquidFun/src/ofxBox2dEdge.h; sourceTree = SOURCE_ROOT; };
@@ -1302,16 +1307,14 @@
 		778DD45F453F8D5B8CB477D3 /* PhysicalizedElement */ = {
 			isa = PBXGroup;
 			children = (
+				BCF69FB4200F84E300A0F48D /* Portal */,
+				BCF69FAF200F81A800A0F48D /* Clone */,
 				C869FE7AA8157831F7A45E56 /* PhysicalizedElement.h */,
 				357F7D3F76E5ED805EC0F243 /* PhysicalizedElement.cpp */,
 				DD6886BE6922252FABE36532 /* Platform.h */,
 				C9D6A10FD19ABD4D0113F23F /* Platform.cpp */,
 				D9D8C7FB461CC6FDFAEA7526 /* Ladder.h */,
 				CD13BB7DC0F02E4373F2BDF2 /* Ladder.cpp */,
-				4BCE62D57B7AF0638B7B19FE /* Clone.h */,
-				255B0F9D660A04545D8060C3 /* Clone.cpp */,
-				D5A7EA1B84864AA2C7D2466B /* Portal.h */,
-				E3EFB10EA7365727BA5173D4 /* Portal.cpp */,
 				4EC23B43EDF6FDE2BB79719A /* Teleportable */,
 			);
 			name = PhysicalizedElement;
@@ -1630,6 +1633,28 @@
 				1F4FB5C423662B96ADFDCC0B /* ofxXmlSettings */,
 			);
 			name = addons;
+			sourceTree = "<group>";
+		};
+		BCF69FAF200F81A800A0F48D /* Clone */ = {
+			isa = PBXGroup;
+			children = (
+				4BCE62D57B7AF0638B7B19FE /* Clone.h */,
+				255B0F9D660A04545D8060C3 /* Clone.cpp */,
+				BCF69FB0200F821200A0F48D /* CloneAvatar.h */,
+				BCF69FB3200F846C00A0F48D /* CloneOther.h */,
+			);
+			name = Clone;
+			sourceTree = "<group>";
+		};
+		BCF69FB4200F84E300A0F48D /* Portal */ = {
+			isa = PBXGroup;
+			children = (
+				D5A7EA1B84864AA2C7D2466B /* Portal.h */,
+				E3EFB10EA7365727BA5173D4 /* Portal.cpp */,
+				BCF69FB5200F851600A0F48D /* ConditionOutput.h */,
+				BCF69FB6200F864600A0F48D /* PortalDirection.h */,
+			);
+			name = Portal;
 			sourceTree = "<group>";
 		};
 		BF5A80FE8AD602DDF10433AD /* src */ = {
@@ -2265,6 +2290,7 @@
 				85649EB44DE8F0A3BF8430F9 /* SurfaceManager.cpp in Sources */,
 				C3A616FB3A463C17E327F395 /* SurfaceStack.cpp in Sources */,
 				C0EB2D2E383BA9DE417ADB38 /* TriangleSurface.cpp in Sources */,
+				BCF69FB2200F821200A0F48D /* CloneAvatar.h in Sources */,
 				868F230C6074263277ED9B07 /* BaseJoint.cpp in Sources */,
 				42BCE929D520D8872171239A /* CircleJoint.cpp in Sources */,
 				1F4453EA1589AD79F4B34493 /* RadioList.cpp in Sources */,
