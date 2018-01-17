@@ -49,6 +49,9 @@ Avatar::Avatar(b2World* box2d)
     modeDeplace = Deplacement::PLATFORM;
     move=&Avatar::movePlatform;
     
+    for (int i= 0; i<5; ++i) {
+        tabSideClone[i] = true;
+    }
 }
 void Avatar::presUpdate()
 {
@@ -61,7 +64,7 @@ void Avatar::update()
     
     if (jumping)
     {
-        polygon.setVelocity(polygon.getVelocity().x - (VarConst::coefFrotementAir * polygon.getVelocity().x/VarConst::speedAvatarMax), polygon.getVelocity().y);
+        // polygon.setVelocity(polygon.getVelocity().x - (VarConst::coefFrotementAir * polygon.getVelocity().x/VarConst::speedAvatarMax), polygon.getVelocity().y);
     }
 }
 void Avatar::draw()
@@ -78,7 +81,6 @@ void Avatar::setPosition(ofVec2f vec)
 void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
-    //collisionRect.setPosition(x, y);
 }
 /*
 void Avatar::move(float inputX)
@@ -113,11 +115,15 @@ void Avatar::movePlatform(float inputX, float inputY){
     float speedMax = VarConst::speedAvatarMax;
     if (jumping)
     {
-        
         speed = VarConst::speedAvatarAirControl;
         speedMax = VarConst::speedAvatarAirControlMax;
     }
-    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, polygon.body->GetLinearVelocity().y));
+    
+    if (inputX>0.f) {
+        inputX=inputX*tabSideClone[4];
+    }else inputX=inputX*tabSideClone[3];
+
+    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,tabSideClone[1] * polygon.body->GetLinearVelocity().y));
 }
 void Avatar::moveNord(float inputX, float inputY) {
     float speed = VarConst::speedAvatar;
@@ -160,7 +166,7 @@ void Avatar::keyPressed(int key)
 {
     if (key == OF_KEY_LEFT || key == 'q')
     {
-        moveInputX = -1.0f;
+        moveInputX = -1.0f * tabSideClone[3];
     }
     else if (key == OF_KEY_RIGHT || key == 'd')
     {
@@ -288,10 +294,6 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
         {
             polygon.setVelocity(0, polygon.getVelocity().y);
         }
-    }
-    else if (OtherSprite->sprite == Sprite::PICKUP)
-    {
-        //static_cast<PickUp*>(OtherSprite->physicalizedElement)->setCollected();
     }
 }
 

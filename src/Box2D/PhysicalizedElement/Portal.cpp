@@ -23,11 +23,13 @@ bool rightCondition(float _x ,CloneBox2d* _clone){
 }
 
 ofVec2f leftDirection(CloneBox2d* _clone){
-    return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition();
+    //cout << " leftDirection " << endl;
+    return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() + ofVec2f(_clone->portalDestination->portalRect.width-1, 0);
 }
 
 ofVec2f rightDirection(CloneBox2d* _clone){
-    return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() - ofVec2f(_clone->portalDestination->portalRect.width, 0);
+    //cout << " rightDirection " << endl;
+    return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() - ofVec2f(_clone->portalDestination->portalRect.width-1, 0);
 }
 
 Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _output){
@@ -61,6 +63,7 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _
     switch(_output){
         case ConditionOutput::VerticalLeft: conditionFunction = leftCondition; break;
         case ConditionOutput::VerticalRight: conditionFunction = rightCondition; break;
+    
     }
     switch (_direction) {
         case PortalDirection::leftDirection : directionFunction = leftDirection; break;

@@ -23,6 +23,7 @@ public:
     bool clicJump;
     bool cloneJump;
     Deplacement modeDeplace;
+    bool tabSideClone[5];
     
     
 private:

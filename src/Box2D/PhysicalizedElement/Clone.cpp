@@ -18,7 +18,7 @@ CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, P
     
 }
 CloneBox2d::~CloneBox2d(){
-    if (portalDestination->conditionFunction(objSource->getPosition().x,this)) {
+    if (portalDestination!=nullptr && portalDestination->conditionFunction(objSource->getPosition().x,this)) {
         objSource->polygon.setPosition(polygon.getPosition());
     }
     
@@ -36,19 +36,16 @@ void CloneBox2d::collisionFonctionUnknown(){ // le 1.5 est arbitraire à changer
 }
 void CloneBox2d::collisionFonctionAvatar(){
     Avatar *obj = static_cast<Avatar*>(objSource);
-    if (polygon.tabCollision[4] && !polygon.tabCollision[2]) {
-        objSource->setPosition(ofVec2f(objSource->getPosition().x-1.5, objSource->getPosition().y));
+    if (polygon.tabCollision[4]) {
     }
-    if (polygon.tabCollision[3] && !polygon.tabCollision[2]) {
-        objSource->setPosition(ofVec2f(objSource->getPosition().x+1.5, objSource->getPosition().y));
+    if (polygon.tabCollision[3]) {
     }
     
-    if (polygon.tabCollision[2] && obj->cloneJump){
+    if (polygon.tabCollision[2] && obj->cloneJump && !polygon.tabCollision[1]){
         objSource->setPosition(ofVec2f(objSource->getPosition().x, polygon.getPosition().y));
         obj->setJumping(false);
     }
     if (polygon.tabCollision[1]) {
-        objSource->setPosition(ofVec2f(objSource->getPosition().x, objSource->getPosition().y+1));
     }
 }
 void CloneBox2d::create(){
@@ -102,7 +99,7 @@ void CloneBox2d::update(){
             PositionClone = polygon.getPosition();
             temp = portalDestination->directionFunction(this); // fonction du portal end
             polygon.setPosition(temp);
-    }
+    }else polygon.setPosition(0., 0.);
 }
 void CloneBox2d::draw(){
     ofSetColor(ofColor::brown);
@@ -130,6 +127,15 @@ void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
         //cout << "Star Clone TOP " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[1] = true;
     }
+    f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
+    if (f == _fixture) {
+        //cout << "Star Clone Left " << ofGetElapsedTimef() <<endl;
+    }
+    f = polygon.body->GetFixtureList();
+    if (f == _fixture) {
+        //cout << "Star Clone [0] " << ofGetElapsedTimef() <<endl;
+    }
+
 
 }
 void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
@@ -154,10 +160,44 @@ void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
     }
 
 }
-void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){}
+void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
+    Avatar *obj = static_cast<Avatar*>(objSource);
+    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
+    if (f == _fixture) {
+        //cout << "start Clone Right -2 " << ofGetElapsedTimef() <<endl;
+        obj->tabSideClone[3] =false;
+    }
+    f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
+    if (f == _fixture) {
+        cout << "Start Clone RIGHT  " << ofGetElapsedTimef() <<endl;
+        obj->tabSideClone[4] =false;
+    }
+    f = polygon.body->GetFixtureList()->GetNext();
+    if (f == _fixture) {
+        if (!obj->tabSideClone[3] || !obj->tabSideClone[4]) {
+            cout << "ici" << endl;
+            obj->tabSideClone[1] =false;
+        }
+    }
+}
 void CloneBox2d::contactStartUnknown(b2Fixture *_fixture, dataSprite *OtherSprite){}
 void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     Avatar *obj = static_cast<Avatar*>(objSource);
     obj->cloneJump = true;
+    
+    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
+    if (f == _fixture) {
+        //cout << "End Clone RIGHT " << ofGetElapsedTimef() <<endl;
+        obj->tabSideClone[3] =true;
+    }
+    f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
+    if (f == _fixture) {
+        cout << "end Clone RIGHT " << ofGetElapsedTimef() <<endl;
+        obj->tabSideClone[4] =true;
+    }
+    f = polygon.body->GetFixtureList()->GetNext();
+    if (f == _fixture) {
+        obj->tabSideClone[1] =true;
+    }
 }
 void CloneBox2d::contactEndUnknown(b2Fixture *_fixture, dataSprite *OtherSprite){}
