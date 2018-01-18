@@ -14,13 +14,21 @@
 
 void CloneBox2d::collisionFonctionAvatar(){
     Avatar *obj = static_cast<Avatar*>(objSource);
+    
+    if (polygon.tabCollision[1] && polygon.tabCollision[2]) {
+        portalSource->nullFunction(this);
+    }
     if (polygon.tabCollision[4]) {
     }
     if (polygon.tabCollision[3]) {
     }
     
-    if (polygon.tabCollision[2] && obj->cloneJump && !polygon.tabCollision[1]){
-        objSource->setPosition(ofVec2f(objSource->getPosition().x, polygon.getPosition().y));
+    if (polygon.tabCollision[2] && obj->cloneJump )//&& !polygon.tabCollision[1])
+    {
+        ofVec2f p ;
+        p.x = objSource->getPosition().x;
+        p.y = polygon.getPosition().y - portalDestination->getPosition().y +portalSource->getPosition().y;
+        objSource->setPosition(p);
         obj->setJumping(false);
     }
     if (polygon.tabCollision[1]) {

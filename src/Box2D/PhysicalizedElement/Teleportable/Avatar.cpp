@@ -182,7 +182,10 @@ void Avatar::keyPressed(int key)
     }
     else if (key == OF_KEY_LEFT_ALT)
     {
-        viewpoint = Viewpoint::MODE_PERSPECTIVE;
+        if (viewpoint == Viewpoint::MODE_PERSPECTIVE) {
+            viewpoint = Viewpoint::MODE_ANGLE;
+        }
+        else viewpoint = Viewpoint::MODE_PERSPECTIVE;
     }
     else if (key == ' ' && !clicJump)
     {
@@ -231,7 +234,7 @@ void Avatar::keyReleased(int key)
     }
     else if (key == OF_KEY_LEFT_ALT)
     {
-        viewpoint = Viewpoint::MODE_ANGLE;
+        //viewpoint = Viewpoint::MODE_ANGLE;
     }
     else if (key == ' ')
     {

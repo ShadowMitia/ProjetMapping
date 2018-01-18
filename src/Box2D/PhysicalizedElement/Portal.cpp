@@ -11,18 +11,7 @@
 #include "WorldsBox2d.h"
 #include "ConditionOutput.h"
 #include "PortalDirection.h"
-
-void leftNull(CloneBox2d* _clone){
-    if (_clone->objSource->getPosition().x<_clone->portalSource->getPosition().x + 8 ) {
-        _clone->objSource->setPosition(ofVec2f(_clone->portalSource->getPosition().x + 8,_clone->objSource->getPosition().y));
-    }
-}
-void rightNull(CloneBox2d* _clone){
-    if (_clone->objSource->getPosition().x>_clone->portalSource->getPosition().x - 6 ) {
-        _clone->objSource->setPosition(ofVec2f(_clone->portalSource->getPosition().x - 6,_clone->objSource->getPosition().y));
-    }
-}
-
+#include "ConditionNull.h"
 
 Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _output){
     portalRect = _portal;
@@ -92,7 +81,6 @@ void Portal::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
             i = clones.size();
         }
     }
-    //cout << " contactEnd " << endl;
 }
 void Portal::linke(Portal *_1, Portal *_2){
     linkedPortal[0] = _1;
