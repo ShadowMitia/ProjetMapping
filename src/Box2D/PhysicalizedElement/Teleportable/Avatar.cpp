@@ -57,15 +57,11 @@ void Avatar::presUpdate()
 {
     //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
-void Avatar::update(bool input[6])
+void Avatar::update(Shift *s)
 {
-    
-    moveInputX = input[1]*tabSideClone[4] - input[0]*tabSideClone[3];
-    moveInputY = input[2] - input[3];
-    
-    
+    moveInputX = s->directionalCross[1]*tabSideClone[4] - s->directionalCross[0]*tabSideClone[3];
+    moveInputY = s->directionalCross[3] - s->directionalCross[2];
     (*this.*move)(moveInputX, moveInputY);
-    
     if (jumping)
     {
         // polygon.setVelocity(polygon.getVelocity().x - (VarConst::coefFrotementAir * polygon.getVelocity().x/VarConst::speedAvatarMax), polygon.getVelocity().y);

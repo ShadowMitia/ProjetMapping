@@ -12,6 +12,7 @@
 #include "Teleportable.h"
 #include "ofxGLFWJoystick.h"
 #include "PhysicalizedElement.h"
+#include "shift.h"
 
 
 class Avatar : public Teleportable {
@@ -35,7 +36,7 @@ public:
     void moveNord(float inputX, float inputY);
     
     void presUpdate();
-    void update(bool input[6]) ;
+    void update(Shift *s) ;
     void draw() ;
     void setPosition(ofVec2f vec);
     void setPosition(int x, int y);

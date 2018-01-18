@@ -20,7 +20,7 @@
 #include "Clone.h"
 
 #include <vector>
-
+#include "shift.h"
 
 class WorldsBox2d :public ofThread{
 public:
@@ -39,7 +39,7 @@ public:
     
   void setup();
   void draw();
-  void update(bool input[4][6]);
+    void update(Shift (*input)[4]);
   void createBoundsModif(float x, float y, float w, float h);
   void createAvatar(int x, int y);
   void createPlatform(ofPolyline _polyline);

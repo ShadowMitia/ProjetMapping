@@ -156,7 +156,7 @@ void WorldsBox2d::createAvatar(int x, int y){
     avatar->setPosition(x, y);
     avatars.push_back(avatar);
 }
-void WorldsBox2d::update(bool input[4][6]){
+void WorldsBox2d::update(Shift (*input)[4]){
 
     world.update();
     

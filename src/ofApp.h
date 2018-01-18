@@ -13,7 +13,7 @@
 #include "ofxCv.h"
 #include "ImportData.h"
 #include "ofxGLFWJoystick.h"
-
+#include "shift.h"
 //#define USE_WIIMOTE
 
 #ifdef USE_WIIMOTE
@@ -65,8 +65,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
         
     private:
         void input();
-        bool inputButton[4][6] = { { false } };
-        
+        Shift inputButton[4];
         bool fullscreen = false;
         
 #ifdef USE_WIIMOTE

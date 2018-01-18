@@ -92,7 +92,7 @@ void ofApp::setup() {
 void ofApp::update(){
     input();
     scene1->update();
-    worlds->update(inputButton);
+    worlds->update(&inputButton);
     mapping.update();
     
 }
@@ -113,19 +113,18 @@ void ofApp::keyPressed(int key)
     if (key == OF_KEY_LEFT || key == 'q')
     {
         //moveInputX = -1.0f * tabSideClone[3];
-        inputButton[0][0] = true;
+        inputButton[0].directionalCross[0] = true;
     }
     else if (key == OF_KEY_RIGHT || key == 'd')
     {
-        inputButton[0][1] = true;
-    }
+        inputButton[0].directionalCross[1] = true;    }
     else if (key == OF_KEY_UP || key == 'z')
     {
-        inputButton[0][2] = true;
+        inputButton[0].directionalCross[2] = true;
     }
     else if (key == OF_KEY_DOWN || key == 's')
     {
-        inputButton[0][3] = true;
+        inputButton[0].directionalCross[3] = true;
     }
     
     
@@ -145,20 +144,17 @@ void ofApp::keyReleased(int key){
     if (key == OF_KEY_LEFT || key == 'q')
     {
         //moveInputX = -1.0f * tabSideClone[3];
-        inputButton[0][0] = false;
-    }
+        inputButton[0].directionalCross[0] = false;    }
     else if (key == OF_KEY_RIGHT || key == 'd')
     {
-        inputButton[0][1] = false;
-    }
+        inputButton[0].directionalCross[1] = false;    }
     else if (key == OF_KEY_UP || key == 'z')
-    {
-        inputButton[0][2] = false;
+    {        
+        inputButton[0].directionalCross[2] = false;
     }
     else if (key == OF_KEY_DOWN || key == 's')
     {
-        inputButton[0][3] = false;
-    }
+        inputButton[0].directionalCross[3] = false;    }
     
     
     
@@ -312,9 +308,9 @@ void ofApp::input() {
     }
     
     ofxGLFWJoystick::one().update();
-    
+    /*
     for (int joystickID = 0; joystickID < 1; joystickID++) {
-        
+
         if (inputButton[joystickID][2] != ofxGLFWJoystick::one().getButtonValue(13, joystickID)) {
             if (!inputButton[joystickID][3])inputButton[joystickID][2] = ofxGLFWJoystick::one().getButtonValue(13, joystickID);
             if (!inputButton[joystickID][3] && !inputButton[joystickID][2])worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT);
@@ -337,7 +333,7 @@ void ofApp::input() {
             if (inputButton[joystickID][5])worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT_CONTROL);
             else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
         }
-    }
+    }*/
 }
 
 #ifdef USE_WIIMOTE
