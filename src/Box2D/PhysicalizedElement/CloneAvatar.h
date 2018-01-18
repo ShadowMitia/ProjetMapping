@@ -39,7 +39,7 @@ void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite
     Avatar *obj = static_cast<Avatar*>(objSource);
     b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
     if (f == _fixture) {
-        cout << "start Clone Left " << ofGetElapsedTimef() <<endl;
+        //cout << "start Clone Left " << ofGetElapsedTimef() <<endl;
         obj->tabSideClone[3] =false;
     }
     f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
@@ -50,7 +50,7 @@ void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite
     f = polygon.body->GetFixtureList()->GetNext();
     if (f == _fixture) {
         if (!obj->tabSideClone[3] || !obj->tabSideClone[4]) {
-            cout << "ici" << endl;
+            //cout << "ici" << endl;
             obj->tabSideClone[1] =false;
         }
     }
@@ -62,7 +62,7 @@ void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     
     b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
     if (f == _fixture) {
-        cout << "End Clone Left " << ofGetElapsedTimef() <<endl;
+        //out << "End Clone Left " << ofGetElapsedTimef() <<endl;
         obj->tabSideClone[3] =true;
     }
     f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();

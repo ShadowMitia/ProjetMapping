@@ -101,7 +101,6 @@ void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
         //cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = true;
         objSource->SetGravityScale(0.0f);
-        cout << "je suis al" << endl;
     }
     
     f = polygon.body->GetFixtureList()->GetNext();

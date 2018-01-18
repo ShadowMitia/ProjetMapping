@@ -97,4 +97,3 @@ void Portal::linke(Portal *_1, Portal *_2){
 ofVec2f Portal::getPosition(){
     return portalRect.getPosition();
 }
-

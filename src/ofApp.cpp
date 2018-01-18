@@ -185,7 +185,6 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
     {
         dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
         dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
-        
         if (aSprite == nullptr || bSprite == nullptr)return;
         
         if ( aSprite->physicalizedElement != nullptr)

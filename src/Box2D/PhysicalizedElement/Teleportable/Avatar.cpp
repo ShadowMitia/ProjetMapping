@@ -291,7 +291,6 @@ void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
     if (OtherSprite->sprite == Sprite::PLATFORM && impulse->normalImpulses[0]< 1.f && impulse->normalImpulses[1]< 0.1 )
     {
         //cout << impulse->normalImpulses[0] << "  " << impulse->normalImpulses[1] << endl;
-
         //jumping = false;
         if (!(abs(moveInputX) > 0))
         {
