@@ -35,7 +35,7 @@ public:
     void moveNord(float inputX, float inputY);
     
     void presUpdate();
-    void update() ;
+    void update(bool input[6]) ;
     void draw() ;
     void setPosition(ofVec2f vec);
     void setPosition(int x, int y);
@@ -50,7 +50,5 @@ public:
     
 private:
     
-    //void move(float inputX);
-    //void move(float inputX, float inputY);
     void jump();
 };

@@ -39,7 +39,7 @@ public:
     
   void setup();
   void draw();
-  void update();
+  void update(bool input[4][6]);
   void createBoundsModif(float x, float y, float w, float h);
   void createAvatar(int x, int y);
   void createPlatform(ofPolyline _polyline);

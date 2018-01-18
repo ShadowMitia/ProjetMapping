@@ -92,7 +92,7 @@ void ofApp::setup() {
 void ofApp::update(){
     input();
     scene1->update();
-    worlds->update();
+    worlds->update(inputButton);
     mapping.update();
     
 }
@@ -109,6 +109,30 @@ void ofApp::keyPressed(int key)
     for (int i = 0; i<worlds->avatars.size(); i++) {
         worlds->avatars[i]->keyPressed(key);
     }
+    
+    if (key == OF_KEY_LEFT || key == 'q')
+    {
+        //moveInputX = -1.0f * tabSideClone[3];
+        inputButton[0][0] = true;
+    }
+    else if (key == OF_KEY_RIGHT || key == 'd')
+    {
+        inputButton[0][1] = true;
+    }
+    else if (key == OF_KEY_UP || key == 'z')
+    {
+        inputButton[0][2] = true;
+    }
+    else if (key == OF_KEY_DOWN || key == 's')
+    {
+        inputButton[0][3] = true;
+    }
+    
+    
+    
+    
+    
+    
     mapping.keyPressed(key);
 }
 //--------------------------------------------------------------
@@ -117,6 +141,27 @@ void ofApp::keyReleased(int key){
     for (int i = 0; i<worlds->avatars.size(); i++) {
         worlds->avatars[i]->keyReleased(key);
     }
+    
+    if (key == OF_KEY_LEFT || key == 'q')
+    {
+        //moveInputX = -1.0f * tabSideClone[3];
+        inputButton[0][0] = false;
+    }
+    else if (key == OF_KEY_RIGHT || key == 'd')
+    {
+        inputButton[0][1] = false;
+    }
+    else if (key == OF_KEY_UP || key == 'z')
+    {
+        inputButton[0][2] = false;
+    }
+    else if (key == OF_KEY_DOWN || key == 's')
+    {
+        inputButton[0][3] = false;
+    }
+    
+    
+    
     
     mapping.keyReleased(key);
     

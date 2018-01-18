@@ -57,8 +57,12 @@ void Avatar::presUpdate()
 {
     //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
-void Avatar::update()
+void Avatar::update(bool input[6])
 {
+    
+    moveInputX = input[1]*tabSideClone[4] - input[0]*tabSideClone[3];
+    moveInputY = input[2] - input[3];
+    
     
     (*this.*move)(moveInputX, moveInputY);
     
@@ -164,23 +168,8 @@ void Avatar::setJumping(bool _bool)
 }
 void Avatar::keyPressed(int key)
 {
-    if (key == OF_KEY_LEFT || key == 'q')
-    {
-        moveInputX = -1.0f * tabSideClone[3];
-    }
-    else if (key == OF_KEY_RIGHT || key == 'd')
-    {
-        moveInputX = 1.0f;
-    }
-    else if (key == OF_KEY_UP || key == 'z')
-    {
-        moveInputY = -1.0f;
-    }
-    else if (key == OF_KEY_DOWN || key == 's')
-    {
-        moveInputY = 1.0f;
-    }
-    else if (key == OF_KEY_LEFT_ALT)
+    
+     if (key == OF_KEY_LEFT_ALT)
     {
         if (viewpoint == Viewpoint::MODE_PERSPECTIVE) {
             viewpoint = Viewpoint::MODE_ANGLE;
@@ -192,47 +181,12 @@ void Avatar::keyPressed(int key)
         clicJump = true;
         jump();
     }
-    else if (key == 'r'){
-        //setJumping(0);
-    }
+
 }
 void Avatar::keyReleased(int key)
 {
     
-    if (key == OF_KEY_LEFT || key == 'q')
-    {
-        moveInputX = 0.0f;
-        
-        if (!jumping || modeDeplace != Deplacement::PLATFORM) {
-            polygon.setVelocity(0, polygon.getVelocity().y);
-        }
-        
-    }
-    else if (key == OF_KEY_RIGHT || key == 'd')
-    {
-        moveInputX = 0.0f;
-        if (!jumping || modeDeplace != Deplacement::PLATFORM) {
-            polygon.setVelocity(0, polygon.getVelocity().y);
-        }
-        
-    }
-    else if (key ==  OF_KEY_UP || key == 'z')
-    {
-        moveInputY = 0.0f;
-        if (!jumping || modeDeplace != Deplacement::PLATFORM) {
-            polygon.setVelocity(polygon.getVelocity().x,0);
-        }
-        
-    }
-    else if (key == OF_KEY_DOWN || key =='s')
-    {
-        moveInputY = 0.0f;
-        if (!jumping|| modeDeplace != Deplacement::PLATFORM) {
-            polygon.setVelocity(polygon.getVelocity().x,0) ;
-        }
-        
-    }
-    else if (key == OF_KEY_LEFT_ALT)
+    if (key == OF_KEY_LEFT_ALT)
     {
         //viewpoint = Viewpoint::MODE_ANGLE;
     }

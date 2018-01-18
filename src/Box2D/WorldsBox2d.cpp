@@ -156,7 +156,7 @@ void WorldsBox2d::createAvatar(int x, int y){
     avatar->setPosition(x, y);
     avatars.push_back(avatar);
 }
-void WorldsBox2d::update(){
+void WorldsBox2d::update(bool input[4][6]){
 
     world.update();
     
@@ -176,7 +176,7 @@ void WorldsBox2d::update(){
     {
         //avatars[j]->presUpdate();
         
-        avatars[j]->update();
+        avatars[j]->update(input[j]);
     }
     
     //warterfalls->update();
