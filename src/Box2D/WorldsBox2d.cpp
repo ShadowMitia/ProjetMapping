@@ -27,7 +27,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
       float h = std::atof(params[6].c_str());
       ConditionOutput co = "verticalleft" == params[7] ?
 	ConditionOutput::VerticalLeft : params[7] == "verticalright" ?
-	ConditionOutput::VerticalRight : ConditionOutput::Horizontal;
+	ConditionOutput::VerticalRight : ConditionOutput::HorizontalTop;
       PortalDirection pd = params[8] == "left" ? PortalDirection::leftDirection : PortalDirection::rightDirection;
 
       portals.push_back(new Portal(ofRectangle(x, y, w, h), world, pd, co));
@@ -85,6 +85,16 @@ void WorldsBox2d::setup(){
     temp = new Portal(ofRectangle(414, 256, 3, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
     porportal.push_back(temp);
     
+    temp = new Portal(ofRectangle(48, 206, 159, 3), this,PortalDirection::downDirection,ConditionOutput::HorizontalDown);
+    porportal.push_back(temp);
+    temp = new Portal(ofRectangle(256, 206, 159, 3), this,PortalDirection::downDirection,ConditionOutput::HorizontalDown);
+    porportal.push_back(temp);
+    
+    temp = new Portal(ofRectangle(48, 256, 159, 3), this,PortalDirection::topDirection,ConditionOutput::HorizontalTop);
+    porportal.push_back(temp);
+    temp = new Portal(ofRectangle(256, 256, 159, 3), this,PortalDirection::topDirection,ConditionOutput::HorizontalTop);
+    porportal.push_back(temp);
+    
     
     porportal[0]->linke(porportal[3], nullptr);
     porportal[1]->linke(porportal[2], nullptr);
@@ -94,6 +104,15 @@ void WorldsBox2d::setup(){
     porportal[5]->linke(porportal[6], porportal[0]);
     porportal[6]->linke(porportal[5], porportal[3]);
     porportal[7]->linke(porportal[4], nullptr);
+    
+    porportal[8]->linke(porportal[10], nullptr);
+    porportal[9]->linke(porportal[11], nullptr);
+    porportal[10]->linke(porportal[8], nullptr);
+    porportal[11]->linke(porportal[9], nullptr);
+
+
+
+
     
     
     //porportal = generatePortals(readCSV("data/portals.csv"), this);

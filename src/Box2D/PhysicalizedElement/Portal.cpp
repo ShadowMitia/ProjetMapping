@@ -48,11 +48,19 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _
         case ConditionOutput::VerticalRight: conditionFunction = rightCondition;
             nullFunction = rightNull;
             break;
+        case ConditionOutput::HorizontalTop: conditionFunction = topCondition;
+            nullFunction = rightNull;// a faire
+            break;
+        case ConditionOutput::HorizontalDown: conditionFunction = downCondition;
+            nullFunction = rightNull; // a faire
+            break;
     
     }
     switch (_direction) {
         case PortalDirection::leftDirection : directionFunction = leftDirection; break;
         case PortalDirection::rightDirection : directionFunction = rightDirection; break;
+        case PortalDirection::topDirection : directionFunction = topDirection; break;
+        case PortalDirection::downDirection : directionFunction = downDirection; break;
     }
     
 }

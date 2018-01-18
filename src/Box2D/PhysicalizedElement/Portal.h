@@ -12,8 +12,8 @@
 #include "Clone.h"
 #include "utils.h"
 
-enum class ConditionOutput{VerticalLeft,VerticalRight, Horizontal};
-enum class PortalDirection{leftDirection, rightDirection};
+enum class ConditionOutput{VerticalLeft,VerticalRight, HorizontalTop, HorizontalDown};
+enum class PortalDirection{leftDirection, rightDirection, topDirection, downDirection};
 
 class WorldsBox2d;
 
@@ -23,7 +23,7 @@ public:
     void (*nullFunction)(CloneBox2d*);
     Portal *linkedPortal[2];
     ofVec2f(*directionFunction)(CloneBox2d*);
-    bool(*conditionFunction)(float, CloneBox2d*);
+    bool(*conditionFunction)(ofVec2f, CloneBox2d*);
     b2World* getb2World();
     ofRectangle portalRect;
     

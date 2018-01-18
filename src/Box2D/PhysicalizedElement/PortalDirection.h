@@ -19,3 +19,13 @@ ofVec2f rightDirection(CloneBox2d* _clone){
     //cout << " rightDirection " << endl;
     return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() - ofVec2f(_clone->portalDestination->portalRect.width-1, 0);
 }
+
+ofVec2f topDirection(CloneBox2d* _clone){
+    //cout << " leftDirection " << endl;
+    return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() + ofVec2f(0, _clone->portalDestination->portalRect.height-1);
+}
+
+ofVec2f downDirection(CloneBox2d* _clone){
+    //cout << " rightDirection " << endl;
+    return _clone->objSource->getPosition() - _clone->portalSource->getPosition() + _clone->portalDestination->getPosition() - ofVec2f(0,_clone->portalDestination->portalRect.height-1 );
+}

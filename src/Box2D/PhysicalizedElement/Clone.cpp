@@ -20,10 +20,11 @@ CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, P
     
 }
 CloneBox2d::~CloneBox2d(){
-    if (portalDestination!=nullptr && portalDestination->conditionFunction(objSource->getPosition().x,this)) {
+    if (portalDestination!=nullptr && portalDestination->conditionFunction(objSource->getPosition(),this)) {
+        ofVec2f v = objSource->getVelocity();
         objSource->polygon.setPosition(polygon.getPosition());
+        objSource->setVelocity(v);
     }
-    
 }
 void CloneBox2d::create(){
     statut++;
@@ -100,6 +101,7 @@ void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
         //cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = true;
         objSource->SetGravityScale(0.0f);
+        cout << "je suis al" << endl;
     }
     
     f = polygon.body->GetFixtureList()->GetNext();

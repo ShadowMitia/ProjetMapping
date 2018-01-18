@@ -10,14 +10,23 @@
 #include "Clone.h"
 
 
-bool leftCondition(float _x ,CloneBox2d* _clone){
+bool leftCondition(ofVec2f p ,CloneBox2d* _clone){
     //cout << " leftCondition " << endl;
-    if (_x > _clone->portalSource->getPosition().x) return true;
+    if (p.x > _clone->portalSource->getPosition().x) return true;
     else return false;
 }
-
-bool rightCondition(float _x ,CloneBox2d* _clone){
+bool rightCondition(ofVec2f p ,CloneBox2d* _clone){
     //cout << " rightCondition " << endl;
-    if (_x < _clone->portalSource->getPosition().x) return true;
+    if (p.x < _clone->portalSource->getPosition().x) return true;
+    else return false;
+}
+bool topCondition(ofVec2f p ,CloneBox2d* _clone){
+    //cout << " rightCondition " << endl;
+    if (p.y > _clone->portalSource->getPosition().y) return true;
+    else return false;
+}
+bool downCondition(ofVec2f p ,CloneBox2d* _clone){
+    //cout << " rightCondition " << endl;
+    if (p.y < _clone->portalSource->getPosition().y) return true;
     else return false;
 }
