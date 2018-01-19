@@ -47,7 +47,8 @@ Avatar::Avatar(b2World* box2d)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
-    move=&Avatar::movePlatform;
+    move=&Avatar::moveNord;
+    polygon.body->SetGravityScale(0.0);
     
     for (int i= 0; i<5; ++i) {
         tabSideClone[i] = true;
@@ -216,15 +217,21 @@ void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
         ++oi;
     }*/
     
+    f = polygon.body->GetFixtureList();
+    if (_fixture == f) {
+        cout << "Start Avatar  " << ofGetElapsedTimef() <<endl;
+    }
+    
+    
     PhysicalizedElement::contactStart(_fixture ,OtherSprite);
     
     
 }
 void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
+    b2Fixture * f = polygon.body->GetFixtureList();
     if (f == _fixture) {
-        //cout << "End Avatar DOWN " << ofGetElapsedTimef() <<endl;
+        cout << "End Avatar  " << ofGetElapsedTimef() <<endl;
     }
     
     PhysicalizedElement::contactEnd(_fixture, OtherSprite);
@@ -234,19 +241,32 @@ void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
         //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombŽ
     }
 }
-void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
+void Avatar::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
-    PhysicalizedElement::PostSolve(OtherSprite, impulse);
+    PhysicalizedElement::PostSolve(_fixture,OtherSprite, impulse);
+    b2Fixture * f = polygon.body->GetFixtureList();
+    if (_fixture == f) {
+        cout << "PostSolve x: " << impulse->normalImpulses[0] << " y: " << impulse->normalImpulses[1] << " time: " << ofGetElapsedTimeMillis() << endl;
+    }
     
     if (OtherSprite->sprite == Sprite::PLATFORM && impulse->normalImpulses[0]< 1.f && impulse->normalImpulses[1]< 0.1 )
     {
         //cout << impulse->normalImpulses[0] << "  " << impulse->normalImpulses[1] << endl;
         //jumping = false;
+        /*
         if (!(abs(moveInputX) > 0))
         {
             polygon.setVelocity(0, polygon.getVelocity().y);
-        }
+        }*/
     }
+}
+void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
+{
+    b2Fixture * f = polygon.body->GetFixtureList();
+    if (_fixture == f) {
+        cout << "PreSolve  x: "<<e.oldManifold->localNormal.x << " y: " << e.oldManifold->localNormal.y <<  " time: " << ofGetElapsedTimeMillis() <<endl;
+    }
+
 }
 
 

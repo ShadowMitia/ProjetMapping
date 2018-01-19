@@ -28,7 +28,8 @@ public:
     
 	virtual void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
 	virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
-	virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {}
+	virtual void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) {}
+    virtual void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e){};
 };
 class ObjectGame: public ofxBox2dPolygon{
 public:

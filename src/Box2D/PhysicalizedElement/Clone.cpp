@@ -98,7 +98,7 @@ void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
     
     f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
-        //cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
+        cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = true;
         objSource->SetGravityScale(0.0f);
     }
@@ -130,7 +130,7 @@ void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
     
     f = polygon.body->GetFixtureList()->GetNext()->GetNext();
     if (f == _fixture) {
-        //cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
+        cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
         polygon.tabCollision[2] = false;
         objSource->SetGravityScale(1.0f);
     }

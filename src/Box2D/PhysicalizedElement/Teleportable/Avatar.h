@@ -47,7 +47,8 @@ public:
     
     virtual void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite) override;
-    virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
+    virtual void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
+    virtual void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e) override;
     
 private:
     

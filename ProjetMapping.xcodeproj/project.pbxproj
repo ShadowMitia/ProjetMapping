@@ -1309,15 +1309,15 @@
 		778DD45F453F8D5B8CB477D3 /* PhysicalizedElement */ = {
 			isa = PBXGroup;
 			children = (
-				BCF69FB4200F84E300A0F48D /* Portal */,
-				BCF69FAF200F81A800A0F48D /* Clone */,
 				C869FE7AA8157831F7A45E56 /* PhysicalizedElement.h */,
 				357F7D3F76E5ED805EC0F243 /* PhysicalizedElement.cpp */,
+				4EC23B43EDF6FDE2BB79719A /* Teleportable */,
+				BCF69FB4200F84E300A0F48D /* Portal */,
+				BCF69FAF200F81A800A0F48D /* Clone */,
 				DD6886BE6922252FABE36532 /* Platform.h */,
 				C9D6A10FD19ABD4D0113F23F /* Platform.cpp */,
 				D9D8C7FB461CC6FDFAEA7526 /* Ladder.h */,
 				CD13BB7DC0F02E4373F2BDF2 /* Ladder.cpp */,
-				4EC23B43EDF6FDE2BB79719A /* Teleportable */,
 			);
 			name = PhysicalizedElement;
 			sourceTree = "<group>";
