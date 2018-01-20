@@ -47,8 +47,8 @@ Avatar::Avatar(b2World* box2d)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
-    move=&Avatar::moveNord;
-    polygon.body->SetGravityScale(0.0);
+    move=&Avatar::movePlatform;
+    //polygon.body->SetGravityScale(0.0);
     
     for (int i= 0; i<5; ++i) {
         tabSideClone[i] = true;
@@ -83,34 +83,7 @@ void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
 }
-/*
-void Avatar::move(float inputX)
-{
-    float speed = VarConst::speedAvatar;
-    float speedMax = VarConst::speedAvatarMax;
-    if (jumping)
-    {
-        
-        speed = VarConst::speedAvatarAirControl;
-        speedMax = VarConst::speedAvatarAirControlMax;
-    }
-    b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
-    
-    impulse *= (1 - std::min(std::abs(polygon.getVelocity().x), speedMax) / speedMax);
-    //polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
-    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, polygon.body->GetLinearVelocity().y));
-}
-void Avatar::move(float inputX,float inputY)
-{
-    float speed = VarConst::speedAvatar;
-    float speedMax = VarConst::speedAvatarMax;
-    b2Vec2 impulse;
-    impulse.x = speed * inputX * 1.0f;
-    impulse.y = speed * inputY * 1.0f;
-    impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
-    polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
-}
- */
+
 void Avatar::movePlatform(float inputX, float inputY){
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
@@ -219,7 +192,7 @@ void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
     
     f = polygon.body->GetFixtureList();
     if (_fixture == f) {
-        cout << "Start Avatar  " << ofGetElapsedTimef() <<endl;
+        //cout << "Start Avatar  " << ofGetElapsedTimef() <<endl;
     }
     
     
@@ -231,7 +204,7 @@ void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     b2Fixture * f = polygon.body->GetFixtureList();
     if (f == _fixture) {
-        cout << "End Avatar  " << ofGetElapsedTimef() <<endl;
+        //cout << "End Avatar  " << ofGetElapsedTimef() <<endl;
     }
     
     PhysicalizedElement::contactEnd(_fixture, OtherSprite);
@@ -246,7 +219,7 @@ void Avatar::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2Cont
     PhysicalizedElement::PostSolve(_fixture,OtherSprite, impulse);
     b2Fixture * f = polygon.body->GetFixtureList();
     if (_fixture == f) {
-        cout << "PostSolve x: " << impulse->normalImpulses[0] << " y: " << impulse->normalImpulses[1] << " time: " << ofGetElapsedTimeMillis() << endl;
+        //cout << "PostSolve x: " << impulse->normalImpulses[0] << " y: " << impulse->normalImpulses[1] << " time: " << ofGetElapsedTimeMillis() << endl;
     }
     
     if (OtherSprite->sprite == Sprite::PLATFORM && impulse->normalImpulses[0]< 1.f && impulse->normalImpulses[1]< 0.1 )
@@ -264,7 +237,7 @@ void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreCon
 {
     b2Fixture * f = polygon.body->GetFixtureList();
     if (_fixture == f) {
-        cout << "PreSolve  x: "<<e.oldManifold->localNormal.x << " y: " << e.oldManifold->localNormal.y <<  " time: " << ofGetElapsedTimeMillis() <<endl;
+       // cout << "PreSolve  x: "<<e.oldManifold->localNormal.x << " y: " << e.oldManifold->localNormal.y <<  " time: " << ofGetElapsedTimeMillis() <<endl;
     }
 
 }

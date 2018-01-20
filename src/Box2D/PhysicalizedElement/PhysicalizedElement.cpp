@@ -53,9 +53,9 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         body->CreateFixture(&fixtureSide);
         //UP = 1,
         //fixtureSide.id = 1;
-        vec2 = b2Vec2(0.f, -4.89/30.f);
-        shape.SetAsBox(rect.x-2/30.f, 2/30.f, vec2, 0.f);
-        fixtureSide.shape		= &shape;
+        vec2 = b2Vec2(0.f, -2.8/30.f);
+        shape.SetAsBox(rect.x-3/30.f, 2/30.f, vec2, 0.f);
+        fixtureSide.shape = &shape;
         body->CreateFixture(&fixtureSide);        
     }
 

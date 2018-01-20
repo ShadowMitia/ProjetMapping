@@ -32,8 +32,8 @@ void CloneBox2d::create(){
         polygon.tabCollision[i]= false;
     }
     polygon.addVertices(objSource->polygon.getVertices());
-    polygon.setPhysics(10.f, 0, 0);
-    //polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
+    //polygon.setPhysics(10.f, 0, 0);
+    polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.FilterDataObjet.categoryBits = 0x0064;
     polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016;
     polygon.FilterDataSide.categoryBits = 0x0002;
@@ -58,10 +58,7 @@ void CloneBox2d::create(){
     }
 }
 void CloneBox2d::update(){
-    if (statut == 0) {
-        create();
-        PositionClone = polygon.getPosition();
-    }
+    if (statut == 0)create();
     
     if (objSource->viewpoint == Viewpoint::MODE_ANGLE) {
         portalDestination = portalSource->linkedPortal[0];}
@@ -71,12 +68,18 @@ void CloneBox2d::update(){
     
     if (portalDestination != nullptr) {
         ofPoint temp;
-        
             (*this.*collisionFonction)();
-            PositionObjSource = objSource->getPosition();
-            PositionClone = polygon.getPosition();
-            temp = portalDestination->directionFunction(this); // fonction du portal end
+
+        if (polygon.tabCollision[0]) {
+            polygon.setVelocity(objSource->getVelocity());
+            temp =portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
+            objSource->setPosition(temp);
+        }
+        else{
+            temp = portalDestination->portalRect.position - portalSource->getObjPosition(objSource->getPosition()); // fonction du portal end
             polygon.setPosition(temp);
+        }
+        
     }else{
         polygon.setPosition(0., 0.);
         portalSource->nullFunction(this);
@@ -88,56 +91,42 @@ void CloneBox2d::draw(){
 }
 void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
     //cout << "contactStart Clone: " << endl;
-    (*this.*contactStartFonction)(_fixture,OtherSprite);
+    //(*this.*contactStartFonction)(_fixture,OtherSprite);
     
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone RIGHT " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[4] = true;
-    }
-    
-    f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-    if (f == _fixture) {
-        cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[2] = true;
-        objSource->SetGravityScale(0.0f);
-    }
-    
-    f = polygon.body->GetFixtureList()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone TOP " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[1] = true;
-    }
-    f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone Left " << ofGetElapsedTimef() <<endl;
-    }
+    b2Fixture * f ;
     f = polygon.body->GetFixtureList();
-    if (f == _fixture) {
-        //cout << "Star Clone [0] " << ofGetElapsedTimef() <<endl;
+    if (f == _fixture) { cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
+        polygon.tabCollision[0] = true;
+        //objSource->setVelocity(ofVec2f(0, 0)); // a mettre dans l'le preSolver pour savoir quelle sens
     }
-
 
 }
 void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
     PhysicalizedElement::contactEnd(_fixture, OtherSprite);
-    (*this.*contactEndFonction)(_fixture,OtherSprite);
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "End Clone RIGHT " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[4] = false; 
-    }
+    //(*this.*contactEndFonction)(_fixture,OtherSprite);
+    b2Fixture * f;
+    f = polygon.body->GetFixtureList();
+    if (f == _fixture) { cout << "End Clone " << ofGetElapsedTimef() <<endl;
+        polygon.tabCollision[0] = false;
     
-    f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-    if (f == _fixture) {
-        cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[2] = false;
-        objSource->SetGravityScale(1.0f);
-    }
-    f = polygon.body->GetFixtureList()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone TOP " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[1] = false;
     }
 
+}
+void CloneBox2d::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
+{
+    PhysicalizedElement::PostSolve(_fixture,OtherSprite, impulse);
+    b2Fixture * f = polygon.body->GetFixtureList();
+    if (_fixture == f) {
+        cout << "PostSolve x: " << impulse->normalImpulses[0] << " y: " << impulse->normalImpulses[1] << " time: " << ofGetElapsedTimeMillis() << endl;
+        
+    }
+
+}
+void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
+{
+    b2Fixture * f = polygon.body->GetFixtureList();
+    if (_fixture == f) {
+         cout << "PreSolve  x: "<<e.oldManifold->localNormal.x << " y: " << e.oldManifold->localNormal.y <<  " time: " << ofGetElapsedTimeMillis() <<endl;
+    }
+    
 }

@@ -14,8 +14,7 @@
 
 void CloneBox2d::collisionFonctionAvatar(){
     Avatar *obj = static_cast<Avatar*>(objSource);
-    
-    if (polygon.tabCollision[1] && polygon.tabCollision[2]) {
+    /*if (polygon.tabCollision[1] && polygon.tabCollision[2]) {
         portalSource->nullFunction(this);
     }
     if (polygon.tabCollision[4]) {
@@ -32,11 +31,19 @@ void CloneBox2d::collisionFonctionAvatar(){
         obj->setJumping(false);
     }
     if (polygon.tabCollision[1]) {
-    }
+    }*/
+    
+    
 }
 
 void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     Avatar *obj = static_cast<Avatar*>(objSource);
+    b2Fixture * f = polygon.body->GetFixtureList();
+    if (f == _fixture){
+        
+    }
+    
+    /*
     b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
     if (f == _fixture) {
         //cout << "start Clone Left " << ofGetElapsedTimef() <<endl;
@@ -53,7 +60,7 @@ void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite
             //cout << "ici" << endl;
             obj->tabSideClone[1] =false;
         }
-    }
+    }*/
 }
 
 void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
@@ -72,6 +79,6 @@ void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     }
     f = polygon.body->GetFixtureList()->GetNext();
     if (f == _fixture) {
-        obj->tabSideClone[1] =true;
+        //obj->tabSideClone[1] =true;
     }
 }
