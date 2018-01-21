@@ -33,7 +33,7 @@ Avatar::Avatar(b2World* box2d)
     polygon.FilterDataSide.categoryBits = 0x0002;
     polygon.FilterDataSide.maskBits = 0x0016;
     
-    polygon.create(box2d, true);
+    polygon.create(box2d, false);
     polygon.body->SetFixedRotation(true);
     
     polygon.setData(new dataSprite());
@@ -47,8 +47,8 @@ Avatar::Avatar(b2World* box2d)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
-    move=&Avatar::moveNord;
-    polygon.body->SetGravityScale(0.0);
+    move=&Avatar::movePlatform;
+    //polygon.body->SetGravityScale(0.0);
     
     for (int i= 0; i<5; ++i) {
         tabSideClone[i] = true;
@@ -166,8 +166,7 @@ void Avatar::keyReleased(int key)
 }
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
+    b2Fixture * f = polygon.body->GetFixtureList();
     if (f == _fixture) {
         //cout << "Start Avatar DOWN " << ofGetElapsedTimef() <<endl;
         if (OtherSprite->sprite == Sprite::PLATFORM)
@@ -179,17 +178,8 @@ void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
             }
         }
     }
-    /*
-    int oi = 0;
-    for (b2Fixture * f = polygon.body->GetFixtureList(); f; f = f->GetNext()) {
-        if (f == _fixture) {
-            cout << _fixture << endl;
-        }
-        ++oi;
-    }*/
-    
     f = polygon.body->GetFixtureList();
-    if (_fixture == f) {
+    if (_fixture == f && false) {
         if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
             cout << "Start Avatar  " << ofGetElapsedTimef() <<endl;
             cout << "x: "<<e.contact->GetManifold()->localPoint.x << " y: " << e.contact->GetManifold()->localPoint.y << endl;
@@ -197,23 +187,10 @@ void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
             //cout << 0.2 * 30 << endl;
         }
     }
-
     //PhysicalizedElement::contactStart(_fixture ,OtherSprite);
 }
 void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    b2Fixture * f ;
-    f = polygon.body->GetFixtureList();
-    if (_fixture == f) {
-        /*
-        cout << "End Avatar  " << ofGetElapsedTimef() << endl;
-        cout << "x: "<<e.contact->GetManifold()->points[0].localPoint.x << " y: " << e.contact->GetManifold()->points[0].localPoint.y << endl;
-        cout << "x: "<<e.contact->GetManifold()->points[1].localPoint.x << " y: " << e.contact->GetManifold()->points[1].localPoint.y << endl;
-        cout << "x: "<<e.contact->GetManifold()->localPoint.x << " y: " << e.contact->GetManifold()->localPoint.y << endl;
-        cout << "normal x: "<<e.contact->GetManifold()->localNormal.x << " y: " << e.contact->GetManifold()->localNormal.y << endl;*/
-
-    }
-    
     /*
     int condition = 0;
     for (int i=0; i<2; i++) {
@@ -225,7 +202,6 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
         }
     }
     */
-    
     //PhysicalizedElement::contactEnd(_fixture, OtherSprite);
     
     if (OtherSprite->sprite == Sprite::PLATFORM)
@@ -254,9 +230,5 @@ void Avatar::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2Cont
 }
 void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
 {
-    b2Fixture * f = polygon.body->GetFixtureList();
-    if (_fixture == f) {
        // cout << "PreSolve  x: "<<e.oldManifold->localNormal.x << " y: " << e.oldManifold->localNormal.y <<  " time: " << ofGetElapsedTimeMillis() <<endl;
-    }
-
 }

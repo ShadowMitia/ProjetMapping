@@ -67,7 +67,7 @@ void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     Avatar *obj = static_cast<Avatar*>(objSource);
     obj->cloneJump = true;
     
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
+    /*b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
     if (f == _fixture) {
         //out << "End Clone Left " << ofGetElapsedTimef() <<endl;
         obj->tabSideClone[3] =true;
@@ -80,5 +80,5 @@ void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     f = polygon.body->GetFixtureList()->GetNext();
     if (f == _fixture) {
         //obj->tabSideClone[1] =true;
-    }
+    }*/
 }

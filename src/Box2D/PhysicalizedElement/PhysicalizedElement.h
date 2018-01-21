@@ -37,5 +37,5 @@ public:
     void    setFilterDataObjet(b2Filter _filter);
     void    setFilterDataSide(b2Filter _filter);
     b2Filter FilterDataObjet,FilterDataSide;
-    bool tabCollision[5]; //faire un pt tab ou new tab[1] ou new tab[5];
+    int tabCollision[5] = {0}; //faire un pt tab ou new tab[1] ou new tab[5];
 };
