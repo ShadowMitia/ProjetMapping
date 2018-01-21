@@ -39,7 +39,7 @@ private:
     ofxBox2dPolygon polygon;
     std::vector< CloneBox2d *> clones;
     
-    void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
-    void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
 };
 

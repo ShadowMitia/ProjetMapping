@@ -26,8 +26,8 @@ class PhysicalizedElement {
 
 public:
     
-	virtual void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
-	virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
+	virtual void contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite);
+	virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
 	virtual void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) {}
     virtual void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e){};
 };

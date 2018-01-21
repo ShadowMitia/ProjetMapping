@@ -1,11 +1,13 @@
 #include "PhysicalizedElement.h"
 
-void PhysicalizedElement::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
+void PhysicalizedElement::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     
 }
-void PhysicalizedElement::contactEnd(b2Fixture* _fixture,dataSprite* OtherSprite){
+void PhysicalizedElement::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture,dataSprite* OtherSprite){
     
 }
+
+
 void ObjectGame::create(b2World * b2dworld, bool _detectSide){
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());

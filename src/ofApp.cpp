@@ -1,5 +1,5 @@
 #include "ofApp.h"
-
+#include "b2Contact.h"
 
 vector<ofPolyline> importImage(const string& path){
     ofImage image;
@@ -227,15 +227,16 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
         dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
         dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
         if (aSprite == nullptr || bSprite == nullptr)return;
-        
+                
         if ( aSprite->physicalizedElement != nullptr)
         {
-            aSprite->physicalizedElement->contactStart(e.a,bSprite);
+            aSprite->physicalizedElement->contactStart(e,e.a,bSprite);
         }
         if ( bSprite->physicalizedElement != nullptr)
         {
-            bSprite->physicalizedElement->contactStart(e.b,aSprite);
+            bSprite->physicalizedElement->contactStart(e,e.b,aSprite);
         }
+
     }
 }
 
@@ -246,15 +247,16 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
         dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
         dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
         
+
         if (aSprite == nullptr || bSprite == nullptr)return;
         
         if (aSprite->physicalizedElement != nullptr)
         {
-            aSprite->physicalizedElement->contactEnd(e.a,bSprite);
+            aSprite->physicalizedElement->contactEnd(e,e.a,bSprite);
         }
         if (bSprite->physicalizedElement != nullptr)
         {
-            bSprite->physicalizedElement->contactEnd(e.b,aSprite);
+            bSprite->physicalizedElement->contactEnd(e,e.b,aSprite);
         }
     }
 }

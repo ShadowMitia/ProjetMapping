@@ -45,8 +45,8 @@ public:
     void keyPressed(int key);
     void keyReleased(int key);
     
-    virtual void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite) override;
-    virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite) override;
+    virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
+    virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
     virtual void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e) override;
     

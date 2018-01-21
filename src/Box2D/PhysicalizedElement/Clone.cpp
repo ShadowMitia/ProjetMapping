@@ -89,7 +89,7 @@ void CloneBox2d::draw(){
     ofSetColor(ofColor::brown);
     polygon.draw();
 }
-void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
+void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     //cout << "contactStart Clone: " << endl;
     //(*this.*contactStartFonction)(_fixture,OtherSprite);
     
@@ -101,8 +101,8 @@ void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
     }
 
 }
-void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
-    PhysicalizedElement::contactEnd(_fixture, OtherSprite);
+void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+    //PhysicalizedElement::contactEnd(_fixture, OtherSprite);
     //(*this.*contactEndFonction)(_fixture,OtherSprite);
     b2Fixture * f;
     f = polygon.body->GetFixtureList();
@@ -127,6 +127,20 @@ void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPr
     b2Fixture * f = polygon.body->GetFixtureList();
     if (_fixture == f) {
          cout << "PreSolve  x: "<<e.oldManifold->localNormal.x << " y: " << e.oldManifold->localNormal.y <<  " time: " << ofGetElapsedTimeMillis() <<endl;
+        if (e.oldManifold->localNormal.x == -1) {
+            polygon.tabCollision[4] = true;
+        }
+        if (e.oldManifold->localNormal.x == 1) {
+            polygon.tabCollision[3] = true;
+        }
+        if (e.oldManifold->localNormal.y == -1) {
+            cout <<"ici"<< endl;
+            polygon.tabCollision[1] = true;
+        }
+        if (e.oldManifold->localNormal.y == 1) {
+            polygon.tabCollision[2] = true;
+        }
+        
     }
     
 }

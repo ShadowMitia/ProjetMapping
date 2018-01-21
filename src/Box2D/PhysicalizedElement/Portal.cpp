@@ -64,16 +64,16 @@ void Portal::draw(){
 b2World* Portal::getb2World(){
     return worldsBox2d->world.getWorld();
 }
-void Portal::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
-    PhysicalizedElement::contactStart(_fixture, OtherSprite);
+void Portal::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+    //PhysicalizedElement::contactStart(_fixture, OtherSprite);
     //cout << "contactStart" << endl;
     CloneBox2d *temp;
     temp  = new CloneBox2d(OtherSprite->physicalizedElement, this, nullptr);
     worldsBox2d->clones.push_back(temp);
     clones.push_back(temp);
 }
-void Portal::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
-    PhysicalizedElement::contactEnd(_fixture, OtherSprite);
+void Portal::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
+    //PhysicalizedElement::contactEnd(_fixture, OtherSprite);
     for (int i = 0; i < clones.size(); ++i) {
         Teleportable *objSource = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
         if (clones[i]->objSource == objSource) {
