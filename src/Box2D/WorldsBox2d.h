@@ -25,30 +25,29 @@
 class WorldsBox2d :public ofThread{
 public:
     
-  ofxBox2d                 world;
-  ofRectangle              bounds;
+    ofxBox2d                 world;
+    ofRectangle              bounds;
     
     std::vector< Avatar *> avatars;
     std::vector<Portal *> porportal;
     std::vector< Platform * > platforms;
     std::vector< Ladder * > ladders;
     std::vector< CloneBox2d *> clones;
-
-  Waterfalls*               warterfalls;
-  std::vector<Teleportable*> teleportables;
     
-  void setup();
-  void draw();
+    Waterfalls*               warterfalls;
+    std::vector< Teleportable* > teleportables;
+    
+    void setup();
+    void draw();
     void update(Shift (*input)[4]);
-  void createBoundsModif(float x, float y, float w, float h);
-  void createAvatar(int x, int y);
-  void createPlatform(ofPolyline _polyline);
-  void createPortal();
-  void createLadder(ofPolyline _polyline);
-  void createBox(ofPolyline _polyline);
-  void createPickup(ofPolyline polyline);
-
-
+    void createBoundsModif(float x, float y, float w, float h);
+    void createAvatar(int x, int y);
+    void createPlatform(ofPolyline _polyline);
+    void createPortal();
+    void createLadder(ofPolyline _polyline);
+    void createBox(ofPolyline _polyline);
+    void createPickup(ofPolyline polyline);
+    
 private:
- void importPortal();
+    void importPortal();
 };

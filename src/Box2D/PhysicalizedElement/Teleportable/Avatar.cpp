@@ -202,7 +202,6 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
             polygon.tabCollision[3]--;
         }
     }
-    
     if (OtherSprite->sprite == Sprite::PLATFORM)
     {
         //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombŽ
@@ -210,8 +209,14 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
 }
 void Avatar::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
+    
 }
 void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
 {
-
+    if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            setJumping(false);
+        }
+    }
+    
 }

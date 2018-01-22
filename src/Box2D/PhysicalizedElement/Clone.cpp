@@ -11,7 +11,8 @@
 #include "Avatar.h"
 #include "CloneAvatar.h"
 #include "CloneOther.h"
-CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination){
+CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination)
+{
     
     objSource = static_cast<Teleportable*>(_objSource);
     portalSource = _portalSource;
@@ -19,14 +20,16 @@ CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, P
     statut = 0;
     
 }
-CloneBox2d::~CloneBox2d(){
+CloneBox2d::~CloneBox2d()
+{
     if (portalDestination!=nullptr && portalDestination->conditionFunction(objSource->getPosition(),this)) {
         ofVec2f v = objSource->getVelocity();
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
     }
 }
-void CloneBox2d::create(){
+void CloneBox2d::create()
+{
     statut++;
     polygon.addVertices(objSource->polygon.getVertices());
     //polygon.setPhysics(10.f, 0, 0);
@@ -55,31 +58,33 @@ void CloneBox2d::create(){
         collisionFonction =  &CloneBox2d::collisionFonctionUnknown;
     }
 }
-void CloneBox2d::update(){
+void CloneBox2d::update()
+{
     if (statut == 0)create();
     
     if (objSource->viewpoint == Viewpoint::MODE_ANGLE) {
         portalDestination = portalSource->linkedPortal[0];}
     else{
-        portalDestination = portalSource->linkedPortal[1];
-    }
+        portalDestination = portalSource->linkedPortal[1];}
     
     if (portalDestination != nullptr) {
         ofPoint temp;
         
         if (polygon.tabCollision[1] || polygon.tabCollision[2]|| polygon.tabCollision[3] || polygon.tabCollision[4]) {
             //cout << "ici "<< ofGetElapsedTimeMillis()<<endl;
-            ofVec2f vTemp = polygon.getVelocity();
+            ofVec2f vTemp = ofVec2f(0.f, 0.f);
             
             if (polygon.tabCollision[1] || polygon.tabCollision[2]) {
-                vTemp.x = objSource->getVelocity().x;
+                
             }
             if (polygon.tabCollision[3] || polygon.tabCollision[4]){
-                vTemp.y = objSource->getVelocity().y;
+                vTemp.x = objSource->getVelocity().x;
             }
-            polygon.setVelocity(vTemp); // << ici le probleme du clone qui acroche les sides  <<-----
+            vTemp = objSource->getVelocity();
+            polygon.setVelocity(objSource->getVelocity()); // << ici le probleme du clone qui acroche les sides  <<-----
             temp =portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
             objSource->setPosition(temp);
+            objSource->setVelocity(vTemp);
         }
         else{
             temp = portalDestination->portalRect.position - portalSource->getObjPosition(objSource->getPosition()); // fonction du portal end
@@ -88,14 +93,15 @@ void CloneBox2d::update(){
         
     }else{
         polygon.setPosition(0., 0.);
-        portalSource->nullFunction(this);
-    }
+        portalSource->nullFunction(this);}
 }
-void CloneBox2d::draw(){
+void CloneBox2d::draw()
+{
     ofSetColor(ofColor::brown);
     polygon.draw();
 }
-void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite)
+{
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]++;
@@ -114,7 +120,8 @@ void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSp
     //objSource->setVelocity(ofVec2f(0, 0)); // a mettre dans l'le preSolver pour savoir quelle sens
     
 }
-void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite)
+{
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
