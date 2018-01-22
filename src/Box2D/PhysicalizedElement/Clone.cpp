@@ -43,6 +43,7 @@ void CloneBox2d::create(){
         data->sprite = Sprite::CLONE;
         data->physicalizedElement = this;
     }
+    
     polygon.body->SetGravityScale(0.0);
     data = (dataSprite*)(objSource->polygon.body->GetUserData());
     if (data->sprite==Sprite::AVATAR) {
@@ -65,11 +66,18 @@ void CloneBox2d::update(){
     
     if (portalDestination != nullptr) {
         ofPoint temp;
-            //(*this.*collisionFonction)();
-
+        
         if (polygon.tabCollision[1] || polygon.tabCollision[2]|| polygon.tabCollision[3] || polygon.tabCollision[4]) {
             //cout << "ici "<< ofGetElapsedTimeMillis()<<endl;
-            polygon.setVelocity(objSource->getVelocity());
+            ofVec2f vTemp = polygon.getVelocity();
+            
+            if (polygon.tabCollision[1] || polygon.tabCollision[2]) {
+                vTemp.x = objSource->getVelocity().x;
+            }
+            if (polygon.tabCollision[3] || polygon.tabCollision[4]){
+                vTemp.y = objSource->getVelocity().y;
+            }
+            polygon.setVelocity(vTemp); // << ici le probleme du clone qui acroche les sides  <<-----
             temp =portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
             objSource->setPosition(temp);
         }
@@ -88,60 +96,44 @@ void CloneBox2d::draw(){
     polygon.draw();
 }
 void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
-    //cout << "contactStart Clone: " << endl;
-    //(*this.*contactStartFonction)(_fixture,OtherSprite);
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
-    if (e.contact->GetManifold()->localNormal.y < 0.f) {
-        //cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[2]++;
-    }
-    if (e.contact->GetManifold()->localNormal.y > 0.f) {
-        //cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[1]++;
-    }
-    if (e.contact->GetManifold()->localNormal.x < 0.f) {
-        //cout << "Start Clone Rignt  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[4]++;
-    }
-    if (e.contact->GetManifold()->localNormal.x > 0.f) {
-        //cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[3]++;
-    }
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]++;
+        }
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]++;
+        }
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]++;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]++;
+        }
     }
     
-        //objSource->setVelocity(ofVec2f(0, 0)); // a mettre dans l'le preSolver pour savoir quelle sens
-
+    //objSource->setVelocity(ofVec2f(0, 0)); // a mettre dans l'le preSolver pour savoir quelle sens
+    
 }
 void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
-    //PhysicalizedElement::contactEnd(_fixture, OtherSprite);
-    //(*this.*contactEndFonction)(_fixture,OtherSprite);
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
-    if (e.contact->GetManifold()->localNormal.y < 0.f) {
-        //cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[2]--;
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]--;
+        }
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]--;
+        }
     }
-    if (e.contact->GetManifold()->localNormal.y > 0.f) {
-        //cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[1]--;
-    }
-    if (e.contact->GetManifold()->localNormal.x < 0.f) {
-        //cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[4]--;
-    }
-    if (e.contact->GetManifold()->localNormal.x > 0.f) {
-        //cout << "Start Clone ok  " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[3]--;
-    }
-    }
-
     
-
 }
 void CloneBox2d::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
-    PhysicalizedElement::PostSolve(_fixture,OtherSprite, impulse);
-
-
+    
 }
 void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
 {

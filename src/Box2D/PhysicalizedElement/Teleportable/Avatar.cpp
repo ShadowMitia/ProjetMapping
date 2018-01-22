@@ -50,17 +50,14 @@ Avatar::Avatar(b2World* box2d)
     move=&Avatar::movePlatform;
     //polygon.body->SetGravityScale(0.0);
     
-    for (int i= 0; i<5; ++i) {
-        tabSideClone[i] = true;
-    }
+
 }
 void Avatar::presUpdate()
 {
-    //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
 void Avatar::update(Shift *s)
 {
-    moveInputX = s->directionalCross[1]*tabSideClone[4] - s->directionalCross[0]*tabSideClone[3];
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
     moveInputY = s->directionalCross[3] - s->directionalCross[2];
     (*this.*move)(moveInputX, moveInputY);
     if (jumping)
@@ -93,10 +90,10 @@ void Avatar::movePlatform(float inputX, float inputY){
     }
     
     if (inputX>0.f) {
-        inputX=inputX*tabSideClone[4];
-    }else inputX=inputX*tabSideClone[3];
+        inputX=inputX;
+    }else inputX=inputX;
 
-    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,tabSideClone[1] * polygon.body->GetLinearVelocity().y));
+    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,polygon.body->GetLinearVelocity().y));
 }
 void Avatar::moveNord(float inputX, float inputY) {
     float speed = VarConst::speedAvatar;
@@ -105,7 +102,6 @@ void Avatar::moveNord(float inputX, float inputY) {
 }
 void Avatar::jump()
 {
-    //cout << "jump:" <<  jumping << endl;
     if (!jumping)
     {
         setJumping(true);
@@ -166,43 +162,44 @@ void Avatar::keyReleased(int key)
 }
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    b2Fixture * f = polygon.body->GetFixtureList();
-    if (f == _fixture) {
-        //cout << "Start Avatar DOWN " << ofGetElapsedTimef() <<endl;
-        if (OtherSprite->sprite == Sprite::PLATFORM)
-        {
+    
+    if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]++;
             setJumping(false);
             if (!(abs(moveInputX) > 0))
             {
                 polygon.setVelocity(0, polygon.getVelocity().y);
             }
         }
-    }
-    f = polygon.body->GetFixtureList();
-    if (_fixture == f && false) {
-        if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
-            cout << "Start Avatar  " << ofGetElapsedTimef() <<endl;
-            cout << "x: "<<e.contact->GetManifold()->localPoint.x << " y: " << e.contact->GetManifold()->localPoint.y << endl;
-            cout << "normal x: "<<e.contact->GetManifold()->localNormal.x << " y: " << e.contact->GetManifold()->localNormal.y << endl;
-            //cout << 0.2 * 30 << endl;
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]++;
+        }
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]++;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]++;
         }
     }
     //PhysicalizedElement::contactStart(_fixture ,OtherSprite);
 }
 void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    /*
-    int condition = 0;
-    for (int i=0; i<2; i++) {
-        if (e.contact->GetManifold()->points[i].localPoint.x) {
-            ++condition;
+    if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]--;
         }
-        if (e.contact->GetManifold()->points[i].localPoint.y) {
-            ++condition;
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]--;
         }
     }
-    */
-    //PhysicalizedElement::contactEnd(_fixture, OtherSprite);
     
     if (OtherSprite->sprite == Sprite::PLATFORM)
     {
@@ -211,24 +208,8 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
 }
 void Avatar::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
-    PhysicalizedElement::PostSolve(_fixture,OtherSprite, impulse);
-    b2Fixture * f = polygon.body->GetFixtureList();
-    if (_fixture == f) {
-        //cout << "PostSolve x: " << impulse->normalImpulses[0] << " y: " << impulse->normalImpulses[1] << " time: " << ofGetElapsedTimeMillis() << endl;
-    }
-    
-    if (OtherSprite->sprite == Sprite::PLATFORM && impulse->normalImpulses[0]< 1.f && impulse->normalImpulses[1]< 0.1 )
-    {
-        //cout << impulse->normalImpulses[0] << "  " << impulse->normalImpulses[1] << endl;
-        //jumping = false;
-        /*
-        if (!(abs(moveInputX) > 0))
-        {
-            polygon.setVelocity(0, polygon.getVelocity().y);
-        }*/
-    }
 }
 void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
 {
-       // cout << "PreSolve  x: "<<e.oldManifold->localNormal.x << " y: " << e.oldManifold->localNormal.y <<  " time: " << ofGetElapsedTimeMillis() <<endl;
+
 }
