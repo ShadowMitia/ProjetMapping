@@ -26,9 +26,10 @@ class PhysicalizedElement {
 
 public:
     
-	virtual void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
-	virtual void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
-	virtual void PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse) {}
+	virtual void contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite);
+	virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
+	virtual void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) {}
+    virtual void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e){};
 };
 class ObjectGame: public ofxBox2dPolygon{
 public:
@@ -36,5 +37,5 @@ public:
     void    setFilterDataObjet(b2Filter _filter);
     void    setFilterDataSide(b2Filter _filter);
     b2Filter FilterDataObjet,FilterDataSide;
-    bool tabCollision[5]; //faire un pt tab ou new tab[1] ou new tab[5];
+    int tabCollision[5] = {0}; //faire un pt tab ou new tab[1] ou new tab[5];
 };

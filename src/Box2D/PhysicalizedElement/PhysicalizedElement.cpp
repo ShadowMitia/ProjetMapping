@@ -1,11 +1,15 @@
 #include "PhysicalizedElement.h"
 
-void PhysicalizedElement::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
+
+
+void PhysicalizedElement::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     
 }
-void PhysicalizedElement::contactEnd(b2Fixture* _fixture,dataSprite* OtherSprite){
+void PhysicalizedElement::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture,dataSprite* OtherSprite){
     
 }
+
+// code ObjetGame 
 void ObjectGame::create(b2World * b2dworld, bool _detectSide){
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());
@@ -23,7 +27,7 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
     body			= b2dworld->CreateBody(&bd);
     body->SetFixedRotation(true);
     
-    if (_detectSide) {
+    /*if (_detectSide) {
         b2FixtureDef fixtureSide;
         b2PolygonShape shape;
         fixtureSide.density		= 0;
@@ -48,16 +52,16 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         //DOWN = 2,
         //fixtureSide.id = 2;
         vec2 = b2Vec2(0.f, 4.89/30.f);
-        shape.SetAsBox(rect.x -2/30.f, 1/30.f, vec2, 0.f);
+        shape.SetAsBox(rect.x -2/30.f, 2/30.f, vec2, 0.f);
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
         //UP = 1,
         //fixtureSide.id = 1;
-        vec2 = b2Vec2(0.f, -4.89/30.f);
-        shape.SetAsBox(rect.x-2/30.f, 1/30.f, vec2, 0.f);
-        fixtureSide.shape		= &shape;
+        vec2 = b2Vec2(0.f, -2.8/30.f);
+        shape.SetAsBox(rect.x-3/30.f, 2/30.f, vec2, 0.f);
+        fixtureSide.shape = &shape;
         body->CreateFixture(&fixtureSide);        
-    }
+    }*/
 
     if(ofxBox2dPolygon::bIsTriangulated) {
         
@@ -82,6 +86,7 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
             fixture.restitution = bounce;
             fixture.friction	= friction;
             fixture.shape		= &shape;
+            fixture.isSensor    = false;
             body->CreateFixture(&fixture);
         }
         
@@ -104,7 +109,7 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
     }
     
     setFilterDataObjet(FilterDataObjet);
-    setFilterDataSide(FilterDataSide);
+    //setFilterDataSide(FilterDataSide);
     
     
     vector<ofPoint> pts = ofPolyline::getVertices();

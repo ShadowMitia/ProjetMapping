@@ -28,17 +28,14 @@ CloneBox2d::~CloneBox2d(){
 }
 void CloneBox2d::create(){
     statut++;
-    for (int i= 0; i < 5; ++i) {
-        polygon.tabCollision[i]= false;
-    }
     polygon.addVertices(objSource->polygon.getVertices());
-    polygon.setPhysics(10.f, 0, 0);
-    //polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
+    //polygon.setPhysics(10.f, 0, 0);
+    polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.FilterDataObjet.categoryBits = 0x0064;
     polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016;
     polygon.FilterDataSide.categoryBits = 0x0002;
     polygon.FilterDataSide.maskBits = 0x0016;
-    polygon.create(portalSource->getb2World(),true);
+    polygon.create(portalSource->getb2World(),false);
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
@@ -46,6 +43,7 @@ void CloneBox2d::create(){
         data->sprite = Sprite::CLONE;
         data->physicalizedElement = this;
     }
+    
     polygon.body->SetGravityScale(0.0);
     data = (dataSprite*)(objSource->polygon.body->GetUserData());
     if (data->sprite==Sprite::AVATAR) {
@@ -58,10 +56,7 @@ void CloneBox2d::create(){
     }
 }
 void CloneBox2d::update(){
-    if (statut == 0) {
-        create();
-        PositionClone = polygon.getPosition();
-    }
+    if (statut == 0)create();
     
     if (objSource->viewpoint == Viewpoint::MODE_ANGLE) {
         portalDestination = portalSource->linkedPortal[0];}
@@ -72,11 +67,25 @@ void CloneBox2d::update(){
     if (portalDestination != nullptr) {
         ofPoint temp;
         
-            (*this.*collisionFonction)();
-            PositionObjSource = objSource->getPosition();
-            PositionClone = polygon.getPosition();
-            temp = portalDestination->directionFunction(this); // fonction du portal end
+        if (polygon.tabCollision[1] || polygon.tabCollision[2]|| polygon.tabCollision[3] || polygon.tabCollision[4]) {
+            //cout << "ici "<< ofGetElapsedTimeMillis()<<endl;
+            ofVec2f vTemp = polygon.getVelocity();
+            
+            if (polygon.tabCollision[1] || polygon.tabCollision[2]) {
+                vTemp.x = objSource->getVelocity().x;
+            }
+            if (polygon.tabCollision[3] || polygon.tabCollision[4]){
+                vTemp.y = objSource->getVelocity().y;
+            }
+            polygon.setVelocity(vTemp); // << ici le probleme du clone qui acroche les sides  <<-----
+            temp =portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
+            objSource->setPosition(temp);
+        }
+        else{
+            temp = portalDestination->portalRect.position - portalSource->getObjPosition(objSource->getPosition()); // fonction du portal end
             polygon.setPosition(temp);
+        }
+        
     }else{
         polygon.setPosition(0., 0.);
         portalSource->nullFunction(this);
@@ -86,58 +95,47 @@ void CloneBox2d::draw(){
     ofSetColor(ofColor::brown);
     polygon.draw();
 }
-void CloneBox2d::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite){
-    //cout << "contactStart Clone: " << endl;
-    (*this.*contactStartFonction)(_fixture,OtherSprite);
-    
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone RIGHT " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[4] = true;
+void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+    if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]++;
+        }
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]++;
+        }
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]++;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]++;
+        }
     }
     
-    f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone DONW " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[2] = true;
-        objSource->SetGravityScale(0.0f);
-    }
+    //objSource->setVelocity(ofVec2f(0, 0)); // a mettre dans l'le preSolver pour savoir quelle sens
     
-    f = polygon.body->GetFixtureList()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone TOP " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[1] = true;
-    }
-    f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone Left " << ofGetElapsedTimef() <<endl;
-    }
-    f = polygon.body->GetFixtureList();
-    if (f == _fixture) {
-        //cout << "Star Clone [0] " << ofGetElapsedTimef() <<endl;
-    }
-
-
 }
-void CloneBox2d::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite){
-    PhysicalizedElement::contactEnd(_fixture, OtherSprite);
-    (*this.*contactEndFonction)(_fixture,OtherSprite);
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "End Clone RIGHT " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[4] = false; 
+void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+    if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]--;
+        }
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]--;
+        }
     }
     
-    f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "End Clone DONW " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[2] = false;
-        objSource->SetGravityScale(1.0f);
-    }
-    f = polygon.body->GetFixtureList()->GetNext();
-    if (f == _fixture) {
-        //cout << "Star Clone TOP " << ofGetElapsedTimef() <<endl;
-        polygon.tabCollision[1] = false;
-    }
-
+}
+void CloneBox2d::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
+{
+    
+}
+void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
+{
+    
 }

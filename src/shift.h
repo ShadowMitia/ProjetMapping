@@ -8,7 +8,7 @@
 
 #pragma once
 
-class Shift{
+struct Shift{
 public:
     bool directionalCross[4] = { false };
     bool a = false;

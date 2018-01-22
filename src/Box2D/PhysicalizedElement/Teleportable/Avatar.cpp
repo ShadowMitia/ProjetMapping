@@ -29,11 +29,11 @@ Avatar::Avatar(b2World* box2d)
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     //polygon.create(box2d);
     polygon.FilterDataObjet.categoryBits = 0x0001;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032;
+    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032 | 0x0128;
     polygon.FilterDataSide.categoryBits = 0x0002;
     polygon.FilterDataSide.maskBits = 0x0016;
     
-    polygon.create(box2d, true);
+    polygon.create(box2d, false);
     polygon.body->SetFixedRotation(true);
     
     polygon.setData(new dataSprite());
@@ -48,18 +48,16 @@ Avatar::Avatar(b2World* box2d)
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
     move=&Avatar::movePlatform;
+    //polygon.body->SetGravityScale(0.0);
     
-    for (int i= 0; i<5; ++i) {
-        tabSideClone[i] = true;
-    }
+
 }
 void Avatar::presUpdate()
 {
-    //collisionRect.set(polygon.getBoundingBox().getStandardized() + polygon.getPosition());
 }
 void Avatar::update(Shift *s)
 {
-    moveInputX = s->directionalCross[1]*tabSideClone[4] - s->directionalCross[0]*tabSideClone[3];
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
     moveInputY = s->directionalCross[3] - s->directionalCross[2];
     (*this.*move)(moveInputX, moveInputY);
     if (jumping)
@@ -82,35 +80,8 @@ void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
 }
-/*
-void Avatar::move(float inputX)
+void Avatar::movePlatform(float inputX, float inputY)
 {
-    float speed = VarConst::speedAvatar;
-    float speedMax = VarConst::speedAvatarMax;
-    if (jumping)
-    {
-        
-        speed = VarConst::speedAvatarAirControl;
-        speedMax = VarConst::speedAvatarAirControlMax;
-    }
-    b2Vec2 impulse = speed * inputX * b2Vec2(1.0f, 0.0f);
-    
-    impulse *= (1 - std::min(std::abs(polygon.getVelocity().x), speedMax) / speedMax);
-    //polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
-    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, polygon.body->GetLinearVelocity().y));
-}
-void Avatar::move(float inputX,float inputY)
-{
-    float speed = VarConst::speedAvatar;
-    float speedMax = VarConst::speedAvatarMax;
-    b2Vec2 impulse;
-    impulse.x = speed * inputX * 1.0f;
-    impulse.y = speed * inputY * 1.0f;
-    impulse *= (1 - std::min(polygon.getVelocity().length(), speedMax) / speedMax);
-    polygon.body->ApplyLinearImpulse(impulse, polygon.body->GetLocalCenter(), true);
-}
- */
-void Avatar::movePlatform(float inputX, float inputY){
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     if (jumping)
@@ -120,19 +91,19 @@ void Avatar::movePlatform(float inputX, float inputY){
     }
     
     if (inputX>0.f) {
-        inputX=inputX*tabSideClone[4];
-    }else inputX=inputX*tabSideClone[3];
+        inputX=inputX;
+    }else inputX=inputX;
 
-    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,tabSideClone[1] * polygon.body->GetLinearVelocity().y));
+    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,polygon.body->GetLinearVelocity().y));
 }
-void Avatar::moveNord(float inputX, float inputY) {
+void Avatar::moveNord(float inputX, float inputY)
+{
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, inputY * speedMax));
 }
 void Avatar::jump()
 {
-    //cout << "jump:" <<  jumping << endl;
     if (!jumping)
     {
         setJumping(true);
@@ -191,62 +162,56 @@ void Avatar::keyReleased(int key)
         clicJump = false;
     }
 }
-void Avatar::contactStart(b2Fixture* _fixture, dataSprite* OtherSprite)
+void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "Start Avatar DOWN " << ofGetElapsedTimef() <<endl;
-        
-        if (OtherSprite->sprite == Sprite::PLATFORM)
-        {
+    if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]++;
             setJumping(false);
             if (!(abs(moveInputX) > 0))
             {
                 polygon.setVelocity(0, polygon.getVelocity().y);
             }
         }
-    }
-    /*
-    int oi = 0;
-    for (b2Fixture * f = polygon.body->GetFixtureList(); f; f = f->GetNext()) {
-        if (f == _fixture) {
-            cout << _fixture << endl;
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]++;
         }
-        ++oi;
-    }*/
-    
-    PhysicalizedElement::contactStart(_fixture ,OtherSprite);
-    
-    
-}
-void Avatar::contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite)
-{
-    b2Fixture * f = polygon.body->GetFixtureList()->GetNext()->GetNext();
-    if (f == _fixture) {
-        //cout << "End Avatar DOWN " << ofGetElapsedTimef() <<endl;
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]++;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]++;
+        }
     }
-    
-    PhysicalizedElement::contactEnd(_fixture, OtherSprite);
+    //PhysicalizedElement::contactStart(_fixture ,OtherSprite);
+}
+void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
+{
+    if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+            polygon.tabCollision[2]--;
+            setJumping(true);
+        }
+        if (e.contact->GetManifold()->localNormal.y > 0.f) {
+            polygon.tabCollision[1]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x < 0.f) {
+            polygon.tabCollision[4]--;
+        }
+        if (e.contact->GetManifold()->localNormal.x > 0.f) {
+            polygon.tabCollision[3]--;
+        }
+    }
     
     if (OtherSprite->sprite == Sprite::PLATFORM)
     {
         //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombŽ
     }
 }
-void Avatar::PostSolve(dataSprite* OtherSprite, const b2ContactImpulse* impulse)
+void Avatar::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
-    PhysicalizedElement::PostSolve(OtherSprite, impulse);
-    
-    if (OtherSprite->sprite == Sprite::PLATFORM && impulse->normalImpulses[0]< 1.f && impulse->normalImpulses[1]< 0.1 )
-    {
-        //cout << impulse->normalImpulses[0] << "  " << impulse->normalImpulses[1] << endl;
-        //jumping = false;
-        if (!(abs(moveInputX) > 0))
-        {
-            polygon.setVelocity(0, polygon.getVelocity().y);
-        }
-    }
 }
+void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
+{
 
-
+}

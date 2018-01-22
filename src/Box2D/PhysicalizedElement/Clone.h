@@ -26,8 +26,8 @@ public:
     void create();
     void draw();
     
-    void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
-    void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
+    void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     
 private:
     void (CloneBox2d::*collisionFonction)();
@@ -39,6 +39,10 @@ private:
     void contactEndAvatar(b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactStartUnknown(b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactEndUnknown(b2Fixture* _fixture, dataSprite* OtherSprite);
+    
+    void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
+    void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e) override;
+
     
     ObjectGame polygon;
     ofPoint PositionObjSource;

@@ -22,7 +22,6 @@ public:
     
     void (*nullFunction)(CloneBox2d*);
     Portal *linkedPortal[2];
-    ofVec2f(*directionFunction)(CloneBox2d*);
     bool(*conditionFunction)(ofVec2f, CloneBox2d*);
     b2World* getb2World();
     ofRectangle portalRect;
@@ -31,13 +30,16 @@ public:
     void draw();
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
-
+    ofVec2f getObjPosition(ofVec2f p){
+        return  portalRect.position - p;
+    }
+    
 private:
     WorldsBox2d* worldsBox2d;
     ofxBox2dPolygon polygon;
     std::vector< CloneBox2d *> clones;
     
-    void contactStart(b2Fixture* _fixture, dataSprite* OtherSprite);
-    void contactEnd(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
 };
 
