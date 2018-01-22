@@ -29,7 +29,7 @@ Avatar::Avatar(b2World* box2d)
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     //polygon.create(box2d);
     polygon.FilterDataObjet.categoryBits = 0x0001;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032;
+    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032 | 0x0128;
     polygon.FilterDataSide.categoryBits = 0x0002;
     polygon.FilterDataSide.maskBits = 0x0016;
     
@@ -80,7 +80,8 @@ void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
 }
-void Avatar::movePlatform(float inputX, float inputY){
+void Avatar::movePlatform(float inputX, float inputY)
+{
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     if (jumping)
@@ -95,7 +96,8 @@ void Avatar::movePlatform(float inputX, float inputY){
 
     polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,polygon.body->GetLinearVelocity().y));
 }
-void Avatar::moveNord(float inputX, float inputY) {
+void Avatar::moveNord(float inputX, float inputY)
+{
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, inputY * speedMax));
@@ -162,7 +164,6 @@ void Avatar::keyReleased(int key)
 }
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]++;
@@ -189,6 +190,7 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
+            setJumping(true);
         }
         if (e.contact->GetManifold()->localNormal.y > 0.f) {
             polygon.tabCollision[1]--;
