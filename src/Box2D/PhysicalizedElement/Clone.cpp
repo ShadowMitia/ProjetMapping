@@ -74,11 +74,16 @@ void CloneBox2d::update()
             //cout << "ici "<< ofGetElapsedTimeMillis()<<endl;
             ofVec2f vTemp = ofVec2f(0.f, 0.f);
             
+            if (polygon.tabCollision[2]) {
+                Avatar* a = static_cast<Avatar*>(objSource);
+                a->setJumping(false); // il y a de l'idŽe mais a ne marche pas
+            }
+            
             if (polygon.tabCollision[1] || polygon.tabCollision[2]) {
                 
             }
             if (polygon.tabCollision[3] || polygon.tabCollision[4]){
-                vTemp.x = objSource->getVelocity().x;
+                //vTemp.x = objSource->getVelocity().x;
             }
             vTemp = objSource->getVelocity();
             polygon.setVelocity(objSource->getVelocity()); // << ici le probleme du clone qui acroche les sides  <<-----
