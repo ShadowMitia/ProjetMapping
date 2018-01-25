@@ -47,7 +47,7 @@ void CloneBox2d::create()
         data->physicalizedElement = this;
     }
     
-    polygon.body->SetGravityScale(0.0);
+    polygon.body->SetGravityScale(1.0);
     data = (dataSprite*)(objSource->polygon.body->GetUserData());
     if (data->sprite==Sprite::AVATAR) {
         collisionFonction = &CloneBox2d::collisionFonctionAvatar;
@@ -62,30 +62,26 @@ void CloneBox2d::update()
 {
     if (statut == 0)create();
     
-    if (objSource->viewpoint == Viewpoint::MODE_ANGLE) {
+    if (objSource->viewpoint == Viewpoint::MODE_ANGLE){
         portalDestination = portalSource->linkedPortal[0];}
     else{
         portalDestination = portalSource->linkedPortal[1];}
     
     if (portalDestination != nullptr) {
         ofPoint temp;
-        
+
         if (polygon.tabCollision[1] || polygon.tabCollision[2]|| polygon.tabCollision[3] || polygon.tabCollision[4]) {
-            //cout << "ici "<< ofGetElapsedTimeMillis()<<endl;
-            ofVec2f vTemp = ofVec2f(0.f, 0.f);
             
+            if (objSource->polygon.tabCollision[2]) {
+                polygon.body->SetGravityScale(0.0);
+            }else polygon.body->SetGravityScale(1.0);
+
+            ofVec2f vTemp = ofVec2f(0.f, 0.f);
+            vTemp = objSource->getVelocity();
             if (polygon.tabCollision[2]) {
                 Avatar* a = static_cast<Avatar*>(objSource);
                 a->setJumping(false); // il y a de l'idŽe mais a ne marche pas
             }
-            
-            if (polygon.tabCollision[1] || polygon.tabCollision[2]) {
-                
-            }
-            if (polygon.tabCollision[3] || polygon.tabCollision[4]){
-                //vTemp.x = objSource->getVelocity().x;
-            }
-            vTemp = objSource->getVelocity();
             polygon.setVelocity(objSource->getVelocity()); // << ici le probleme du clone qui acroche les sides  <<-----
             temp =portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
             objSource->setPosition(temp);
@@ -108,6 +104,7 @@ void CloneBox2d::draw()
 void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        cout << "clone Start contact" << endl;
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]++;
         }
@@ -128,6 +125,7 @@ void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSp
 void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
+        cout << "clone End contact" << endl;
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
         }

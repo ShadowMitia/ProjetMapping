@@ -127,6 +127,8 @@ void Avatar::jump()
         impulse = impulseH * (1 - polygon.getVelocity().x/VarConst::speedAvatarMax);
         
         polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
+        
+        
     }
 }
 void Avatar::setJumping(bool _bool)
