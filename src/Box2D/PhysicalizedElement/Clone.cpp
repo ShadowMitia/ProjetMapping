@@ -46,8 +46,7 @@ void CloneBox2d::create()
         data->sprite = Sprite::CLONE;
         data->physicalizedElement = this;
     }
-    
-    polygon.body->SetGravityScale(1.0);
+    polygon.body->SetGravityScale(0.0);
     data = (dataSprite*)(objSource->polygon.body->GetUserData());
     if (data->sprite==Sprite::AVATAR) {
         collisionFonction = &CloneBox2d::collisionFonctionAvatar;
@@ -73,14 +72,16 @@ void CloneBox2d::update()
         if (polygon.tabCollision[1] || polygon.tabCollision[2]|| polygon.tabCollision[3] || polygon.tabCollision[4]) {
             
             if (objSource->polygon.tabCollision[2]) {
-                polygon.body->SetGravityScale(0.0);
-            }else polygon.body->SetGravityScale(1.0);
-
+                //polygon.body->SetGravityScale(0.0);
+            }else{ //polygon.body->SetGravityScale(1.0);
+            }
             ofVec2f vTemp = ofVec2f(0.f, 0.f);
             vTemp = objSource->getVelocity();
             if (polygon.tabCollision[2]) {
                 Avatar* a = static_cast<Avatar*>(objSource);
                 a->setJumping(false); // il y a de l'idŽe mais a ne marche pas
+                
+                vTemp.y = 0;
             }
             polygon.setVelocity(objSource->getVelocity()); // << ici le probleme du clone qui acroche les sides  <<-----
             temp =portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
