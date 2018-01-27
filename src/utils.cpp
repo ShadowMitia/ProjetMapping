@@ -38,8 +38,10 @@ std::vector<std::vector<std::string>> readCSV(std::string const& csvFile)
       std::string tmp;
       while (std::getline(iss, tmp, ','))
       {
+	std::cout << tmp << ' ';
         values.back().push_back(trim(tmp));
        }
+      std::cout << '\n';
     }
   return values;
   }

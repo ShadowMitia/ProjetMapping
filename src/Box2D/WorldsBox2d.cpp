@@ -22,18 +22,55 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
       float y = std::atof(params[4].c_str());
       float w = std::atof(params[5].c_str());
       float h = std::atof(params[6].c_str());
-      ConditionOutput co = "verticalleft" == params[7] ?
-	ConditionOutput::VerticalLeft : params[7] == "verticalright" ?
-	ConditionOutput::VerticalRight : ConditionOutput::HorizontalTop;
-      PortalDirection pd = params[8] == "left" ? PortalDirection::leftDirection : PortalDirection::rightDirection;
 
+      std::cout << ofVec4f(x, y, w, h) << '\n';
+      ConditionOutput co;
+      if ("left" == params[7])
+	{
+	  std::cout << "vertical left\n";
+	  co = ConditionOutput::VerticalLeft;
+	}
+      else if ("right" == params[7])
+	{
+	  std::cout << "vertical right\n";
+	   co = ConditionOutput::VerticalRight;
+	}
+      else if ("down" == params[7])
+	{
+	  co = ConditionOutput::HorizontalDown;
+	}
+      else if ("top" == params[7])
+	{
+	  std::cout << "vertical top\n";
+	  co = ConditionOutput::HorizontalTop;
+	}
+
+      PortalDirection pd;
+      if ("verticalleft" == params[8])
+	{
+	  pd = PortalDirection::leftDirection;
+	}
+      else if ("verticalright" == params[8])
+	{
+	  pd = PortalDirection::rightDirection;
+	}
+      else if ("horizontaldown" == params[8])
+	{
+	  pd = PortalDirection::downDirection;
+	}
+      else if ("horiontaltop" == params[8])
+	{
+	  pd = PortalDirection::topDirection;
+	}
       portals.push_back(new Portal(ofRectangle(x, y, w, h), world, pd, co));
     }
 
+  int index = 0;
   for (auto params : parameters)
     {
       if (params[3].empty())
 	{
+	  index++;
 	  break;
 	}
       int index1 = std::atoi(params[9].c_str());
@@ -41,9 +78,13 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
       std::cout << index1 << ' ' << index2 << '\n';
       Portal* indexPortal1 = (index1 == -1) ? nullptr : portals[index1];
       Portal* indexPortal2 = (index2 == -1) ? nullptr : portals[index2];
-      portals.back()->linke(indexPortal1, indexPortal2);
+      std::cout << indexPortal1 << ' ' << indexPortal2 << '\n';
+      portals[index]->linke(indexPortal1, indexPortal2);
+      index++;
 
     }
+
+  std::cout << "toto: " << index << '\n';
 
   return portals;
 }
@@ -60,7 +101,9 @@ void WorldsBox2d::setup(){
     
     createAvatar( 100 , 300 );
     // 48, 208(-1), 256 et 416(-1)
-    
+
+
+    /*
     Portal *temp;
     temp = new Portal(ofRectangle(48, 48, 3, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
     porportal.push_back(temp);
@@ -107,10 +150,10 @@ void WorldsBox2d::setup(){
 
 
 
-
+*/
     
     
-    //porportal = generatePortals(readCSV("data/portals.csv"), this);
+    porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
 
     for (auto &avatar : avatars)
     {
@@ -164,7 +207,9 @@ void WorldsBox2d::update(Shift (*input)[4]){
             clones.erase(clones.begin()+i);
             --i;
         }
-        else{clones[i]->update();} // update clone
+        else{
+	  clones[i]->update();
+	} // update clone
     }
 
     for (std::size_t j = 0; j < avatars.size(); j++)
