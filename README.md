@@ -7,12 +7,15 @@ Projet Mapping Interactif avec des apoiliens
 Télécharger openFrameworks 0.9.8 ici: http://openframeworks.cc/download/
 Installer visual studio 2015: http://openframeworks.cc/setup/vs/ (l'addon VS est optionel)
 
-Installer git. Le plus rapide: https://desktop.github.com/
+Installer git.
+L'interface graphique: https://desktop.github.com/
+ET les outils (obligatoire pour les scripts): https://github.com/git-for-windows/git/releases/download/v2.16.1.windows.1/Git-2.16.1-64-bit.exe
 
 Dans git cloner le dépot https://github.com/ShadowMitia/ProjetMapping.git et le placer dans racineopenframeworks/apps/myApps
 
 
 Il faut ensuite télécharger (ou cloner) les addons suivant et les mettres dans racineopenframeoworks/addons
+Il y a le script "installAddons.bat" pour installer ça sous windows une fois que le projet est installé.
 - https://github.com/kylemcdonald/ofxCv (prendre la branch stable pour la version 0.9.8)
 - https://github.com/armadillu/ofxGLFWJoystick
 - https://github.com/ShadowMitia/ofxLiquidFun
