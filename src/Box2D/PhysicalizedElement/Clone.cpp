@@ -11,6 +11,16 @@
 #include "Avatar.h"
 #include "CloneAvatar.h"
 #include "CloneOther.h"
+
+
+ofVec2f CloneBox2d::multyMatrix(ofVec2f v){
+    ofVec2f i;
+    i.x = matrixTrans[0]*v.x + matrixTrans[1]*v.y;
+    i.y = matrixTrans[2]*v.x + matrixTrans[0]*v.y;
+    return i;
+    
+}
+
 CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination)
 {
     
@@ -26,6 +36,7 @@ CloneBox2d::~CloneBox2d()
         ofVec2f v = objSource->getVelocity();
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
+        
     }
 }
 void CloneBox2d::create()
@@ -56,6 +67,7 @@ void CloneBox2d::create()
     else{
         collisionFonction =  &CloneBox2d::collisionFonctionUnknown;
     }
+    
 }
 void CloneBox2d::update()
 {
@@ -68,7 +80,6 @@ void CloneBox2d::update()
     
     if (portalDestination != nullptr) {
         ofPoint temp;
-
         if (polygon.tabCollision[1] || polygon.tabCollision[2]|| polygon.tabCollision[3] || polygon.tabCollision[4]) {
             
             if (objSource->polygon.tabCollision[2]) {
@@ -80,17 +91,25 @@ void CloneBox2d::update()
             if (polygon.tabCollision[2]) {
                 Avatar* a = static_cast<Avatar*>(objSource);
                 a->setJumping(false); // il y a de l'idŽe mais a ne marche pas
-                
                 vTemp.y = 0;
             }
             polygon.setVelocity(objSource->getVelocity()); // << ici le probleme du clone qui acroche les sides  <<-----
-            temp =portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
+            const ofVec2f (Portal::*fonction)(ofVec2f) = portalDestination->getObjPosition;
+            temp = portalSource->portalRect.position - (portalDestination->*fonction)(polygon.getPosition());
+            //temp = portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
             objSource->setPosition(temp);
             objSource->setVelocity(vTemp);
         }
         else{
-            temp = portalDestination->portalRect.position - portalSource->getObjPosition(objSource->getPosition()); // fonction du portal end
-            polygon.setPosition(temp);
+            const ofVec2f (Portal::*fonction)(ofVec2f) = portalDestination->getObjPosition;
+            //temp = portalDestination->portalRect.position - (portalSource->*fonction)(objSource->getPosition());
+            //temp = portalDestination->portalRect.position - (portalSource->*getObjPosition)(objSource->getPosition()); // fonction du portal end
+            temp = (portalSource->*fonction)(objSource->getPosition());
+            matrixTrans[0] = - (portalSource->orient.x * portalSource->orient.y) - (portalDestination->orient.x * portalDestination->orient.y);
+            matrixTrans[1] = (portalSource->orient.x * portalDestination->orient.y) - (portalDestination->orient.x * portalSource->orient.y);
+            matrixTrans[2] = (portalDestination->orient.x * portalSource->orient.y) - (portalSource->orient.x * portalDestination->orient.y);
+            temp = portalDestination->portalRect.position -  multyMatrix(temp);
+            polygon.setPosition(temp);  // *this.*contactStartFonction
         }
         
     }else{
@@ -150,3 +169,7 @@ void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPr
 {
     
 }
+
+
+
+

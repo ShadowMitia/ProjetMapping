@@ -45,5 +45,10 @@ private:
     ofPoint PositionObjSource;
     ofPoint PositionClone;
     
+    float matrixTrans[3];
+    ofVec2f multyMatrix(ofVec2f v);
+    
+    
+    
     
 };

@@ -47,10 +47,9 @@ Avatar::Avatar(b2World* box2d)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
-    move=&Avatar::movePlatform;
+    setMove(Deplacement::TOP);
+    //move=&Avatar::movePlatform;
     //polygon.body->SetGravityScale(0.0);
-    
-
 }
 void Avatar::presUpdate()
 {
@@ -221,4 +220,14 @@ void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreCon
         }
     }
     
+}
+
+void Avatar::setMove(Deplacement _move){
+    switch (_move) {
+        case Deplacement::PLATFORM :
+            move=&Avatar::movePlatform;
+            break;
+        case Deplacement::TOP :
+            move=&Avatar::moveNord;
+    }
 }

@@ -14,6 +14,7 @@
 #include "PhysicalizedElement.h"
 #include "shift.h"
 
+enum class Deplacement { PLATFORM , TOP };
 
 class Avatar : public Teleportable {
 public:
@@ -45,10 +46,13 @@ public:
     void keyPressed(int key);
     void keyReleased(int key);
     
+    void setMove(Deplacement move);
+    
     virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
     virtual void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e) override;
+    
     
 private:
     

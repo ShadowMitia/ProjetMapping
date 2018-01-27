@@ -30,16 +30,21 @@ public:
     void draw();
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
-    ofVec2f getObjPosition(ofVec2f p){
-        return  portalRect.position - p;
-    }
+    const ofVec2f (Portal::*getObjPosition)(ofVec2f p);
+    ofVec2f orient;
     
 private:
     WorldsBox2d* worldsBox2d;
     ofxBox2dPolygon polygon;
     std::vector< CloneBox2d *> clones;
-    
     void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
+    const ofVec2f getObjPositionLeft(ofVec2f p){
+        return  portalRect.position - p;
+    }
+    const ofVec2f getObjPositionRight(ofVec2f p){
+        return  portalRect.position  - p;
+    }
 };
+
 

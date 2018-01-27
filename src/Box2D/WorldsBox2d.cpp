@@ -9,11 +9,8 @@
 #include "WorldsBox2d.h"
 #include "utils.h"
 #include <cstdlib>
-
 #include <iostream>
-
-std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world)
-{
+std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world){
   std::vector<Portal*> portals;
   for (auto params : parameters)
     {
@@ -50,8 +47,6 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 
   return portals;
 }
-
-
 void WorldsBox2d::setup(){
     
     
@@ -63,7 +58,7 @@ void WorldsBox2d::setup(){
     
     //importPortal();
     
-    createAvatar(100, 100);
+    createAvatar( 100 , 300 );
     // 48, 208(-1), 256 et 416(-1)
     
     Portal *temp;
@@ -206,4 +201,5 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
 }
 /// attention code deguelas ///
 void WorldsBox2d::importPortal(){
+    
 }

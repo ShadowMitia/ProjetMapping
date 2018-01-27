@@ -10,7 +10,6 @@
 #include "Constant.h"
 #include "WorldsBox2d.h"
 #include "ConditionOutput.h"
-#include "PortalDirection.h"
 #include "ConditionNull.h"
 
 Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _output){
@@ -43,19 +42,26 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _
     
     switch(_output){
         case ConditionOutput::VerticalLeft: conditionFunction = leftCondition;
+            orient = ofVec2f(1, 0);
+            getObjPosition = &Portal::getObjPositionLeft;
             nullFunction = leftNull;
             break;
         case ConditionOutput::VerticalRight: conditionFunction = rightCondition;
+            orient = ofVec2f(-1, 0);
             nullFunction = rightNull;
+            getObjPosition = &Portal::getObjPositionRight;
             break;
         case ConditionOutput::HorizontalTop: conditionFunction = topCondition;
+            orient = ofVec2f(0, 1);
+            getObjPosition = &Portal::getObjPositionLeft;
             nullFunction = rightNull;// a faire
             break;
         case ConditionOutput::HorizontalDown: conditionFunction = downCondition;
+            orient = ofVec2f(0, -1);
+            getObjPosition = &Portal::getObjPositionLeft;
             nullFunction = rightNull; // a faire
             break;
     }
-    
 }
 void Portal::draw(){
     ofSetColor(ofColor::darkRed);
