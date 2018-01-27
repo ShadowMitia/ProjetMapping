@@ -16,7 +16,7 @@
 ofVec2f CloneBox2d::multyMatrix(ofVec2f v){
     ofVec2f i;
     i.x = matrixTrans[0]*v.x + matrixTrans[1]*v.y;
-    i.y = matrixTrans[2]*v.x + matrixTrans[0]*v.y;
+    i.y = -matrixTrans[1]*v.x + matrixTrans[0]*v.y;
     return i;
     
 }
@@ -105,15 +105,14 @@ void CloneBox2d::update()
             //temp = portalDestination->portalRect.position - (portalSource->*fonction)(objSource->getPosition());
             //temp = portalDestination->portalRect.position - (portalSource->*getObjPosition)(objSource->getPosition()); // fonction du portal end
             temp = (portalSource->*fonction)(objSource->getPosition());
-            matrixTrans[0] = - (portalSource->orient.x * portalSource->orient.y) - (portalDestination->orient.x * portalDestination->orient.y);
-            matrixTrans[1] = (portalSource->orient.x * portalDestination->orient.y) - (portalDestination->orient.x * portalSource->orient.y);
-            matrixTrans[2] = (portalDestination->orient.x * portalSource->orient.y) - (portalSource->orient.x * portalDestination->orient.y);
+            matrixTrans[0] = - (portalSource->orient.x * portalDestination->orient.x) - (portalSource->orient.y * portalDestination->orient.y);
+            matrixTrans[1] = (portalSource->orient.x * portalDestination->orient.y) - (portalSource->orient.y * portalDestination->orient.x);
             temp = portalDestination->portalRect.position -  multyMatrix(temp);
             polygon.setPosition(temp);  // *this.*contactStartFonction
         }
         
     }else{
-        polygon.setPosition(0., 0.);
+        polygon.setPosition(0. , 0.);
         portalSource->nullFunction(this);}
 }
 void CloneBox2d::draw()
