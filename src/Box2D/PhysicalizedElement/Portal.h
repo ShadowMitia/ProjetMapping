@@ -11,6 +11,8 @@
 #include "Teleportable/Teleportable.h"
 #include "Clone.h"
 #include "utils.h"
+#include "Avatar.h"
+
 
 enum class ConditionOutput{VerticalLeft,VerticalRight, HorizontalTop, HorizontalDown};
 enum class PortalDirection{leftDirection, rightDirection, topDirection, downDirection};
@@ -26,12 +28,13 @@ public:
     b2World* getb2World();
     ofRectangle portalRect;
     
-    Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,PortalDirection _direction,ConditionOutput _Output);
+    Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Direction _direction,ConditionOutput _Output);
     void draw();
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
     const ofVec2f (Portal::*getObjPosition)(ofVec2f p);
     ofVec2f orient;
+    Direction direct;
     
 private:
     WorldsBox2d* worldsBox2d;
@@ -45,6 +48,7 @@ private:
     const ofVec2f getObjPositionRight(ofVec2f p){
         return  portalRect.position  - p;
     }
+    
 };
 
 
