@@ -32,7 +32,7 @@ id,Coin ou Arête,Nom Face,Cote,x,y,w,h,linkedPortal1,linkedPortal2,Deplacement,
 30,Arête,C3 S,left,256,256,3,159,27,19,PLATFORM,,,,,,,,,,,,
 31,Arête,C3 S,right,415,256,3,159,33,-1,PLATFORM,,,,,,,,,,,,
 32,Arête,C3 E,top,464,256,159,3,36,-1,TOP,,,,,,,,,,,,
-33,Arête,C3 E,left,464,256,3,159,31,-1,PLATFORM,,id,Coin ou Arête,Nom Face,Cote,X,Y,W,H,linkedPortal 01,linkedPortal 02,Deplacement
+33,Arête,C3 E,left,464,256,3,159,31,-1,PLATFORM,,,,,,,,,,,linkedPortal 02,Deplacement
 34,Arête,C3 H,top,672,256,159,3,39,39,TOP,,,,,,,,,,,,
 35,Arête,C3 H,left,672,256,3,159,25,9,PLATFORM,,,,,,,,,,,,
 36,Arête,C3 H,right,831,256,3,159,32,-1,PLATFORM,,,,,,,,,,,,

@@ -20,7 +20,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
     {
       if (parameters[i][4].empty())
 	{
-	  break;
+	  continue;
 	}
       float x = std::atof(parameters[i][4].c_str());
       float y = std::atof(parameters[i][5].c_str());
@@ -81,7 +81,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
       {
 	if (parameters[i][4].empty())
 	{
-	  break;
+	  continue;
 	}
 	int index1 = std::atoi(parameters[i][8].c_str());
 	int index2 = std::atoi(parameters[i][9].c_str());
