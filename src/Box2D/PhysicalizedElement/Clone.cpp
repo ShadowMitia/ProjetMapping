@@ -97,9 +97,14 @@ void CloneBox2d::update()
                 vTemp.y = 0;
             }
             polygon.setVelocity(objSource->getVelocity()); // << ici le probleme du clone qui acroche les sides  <<-----
-            const ofVec2f (Portal::*fonction)(ofVec2f) = portalDestination->getObjPosition;
-            temp = portalSource->portalRect.position - (portalDestination->*fonction)(polygon.getPosition());
-            //temp = portalSource->portalRect.position - portalDestination->getObjPosition(polygon.getPosition());
+            //temp = portalSource->portalRect.position - (portalDestination->*fonction)(polygon.getPosition());
+            const ofVec2f (Portal::*fonction)(ofVec2f) = portalSource->getObjPosition;
+            
+            temp = (portalDestination->*fonction)(polygon.getPosition());
+            matrixTrans[0] =  -(portalSource->orient.x * portalDestination->orient.x) -(portalSource->orient.y * portalDestination->orient.y);
+            matrixTrans[1] =  (portalSource->orient.x * portalDestination->orient.y) - (portalSource->orient.y * portalDestination->orient.x);
+            temp = portalSource->portalRect.position -  multyMatrix(temp);
+            
             objSource->setPosition(temp);
             objSource->setVelocity(vTemp);
         }
@@ -126,7 +131,7 @@ void CloneBox2d::draw()
 void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
-        cout << "clone Start contact" << endl;
+        //cout << "clone Start contact" << endl;
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]++;
         }
@@ -147,7 +152,7 @@ void CloneBox2d::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSp
 void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
-        cout << "clone End contact" << endl;
+        //cout << "clone End contact" << endl;
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
         }
