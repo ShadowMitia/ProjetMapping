@@ -10,6 +10,9 @@
 #include "utils.h"
 #include <cstdlib>
 #include <iostream>
+
+#include "PhysicalizedElement/Teleportable/Avatar.h"
+
 std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world){
   std::vector<Portal*> portals;
 
@@ -45,8 +48,33 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 	{
 	  std::cout << "Invalid condition output: " << parameters[i][3] << " for id: " << i << '\n';
 	}
-      PortalDirection pd = PortalDirection::leftDirection;
-      portals.push_back(new Portal(ofRectangle(x, y, w, h), world, pd, co));
+
+      Deplacement d = Deplacement::PLATFORM;
+      if ("PLATFORM" == parameters[i][10])
+	{
+	  d = Deplacement::PLATFORM;
+	}
+      else if ("TOP" == parameters[i][10])
+	{
+	  d = Deplacement::TOP;
+	}
+      else if ("DOWN" == parameters[i][10])
+	{
+	  d = Deplacement::DOWN;
+	}
+      else if ("LEFT" == parameters[i][10])
+	{
+	  d = Deplacement::LEFT;
+	}
+      else if ("RIGHT" == parameters[i][10])
+	{
+	  d = Deplacement::RIGHT;
+	}
+      else
+	{
+	  std::cout << "Invalid deplacement: " << parameters[i][10] << " for id: " << i << '\n';
+	}
+      portals.push_back(new Portal(ofRectangle(x, y, w, h), world, d, co));
     }
 
   for (std::size_t i = 0; i < parameters.size(); ++i)

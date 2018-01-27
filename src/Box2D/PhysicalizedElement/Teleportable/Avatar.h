@@ -14,7 +14,7 @@
 #include "PhysicalizedElement.h"
 #include "shift.h"
 
-enum class Deplacement { PLATFORM , TOP };
+enum class Deplacement { PLATFORM , TOP, DOWN, LEFT, RIGHT };
 
 class Avatar : public Teleportable {
 public:
