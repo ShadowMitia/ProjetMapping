@@ -47,7 +47,7 @@ Avatar::Avatar(b2World* box2d)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
-    setMove(Deplacement::TOP);
+    setMove(Deplacement::PLATFORM);
     //move=&Avatar::movePlatform;
     //polygon.body->SetGravityScale(0.0);
 }
