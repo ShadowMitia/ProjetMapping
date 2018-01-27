@@ -1,18 +1,54 @@
-id,Nom Face,Cote,X,Y,W,H,PortalDirection,ConditionOutput,linkedPortal 01,linkedPortal 02
-0,,,48,48,3,159,left,verticalleft,3,-1
-1,,,206,48,3,159,right,verticalright,2,-1
-2,,,256,48,3,159,left,verticalleft,1,-1
-3,,,415,48,3,159,right,verticalright,0,-1
-4,,,48,256,3,159,left,verticalleft,7,-1
-5,,,207,256,3,159,right,verticalright,6,0
-6,,,255,256,3,159,left,verticalleft,5,3
-7,,,414,256,3,159,right,verticalright,4,-1
-8,,,48,206,159,3,down,horizontaldown,10,-1
-9,,,256,206,159,3,down,horizontaldown,11,11
-10,,,48,256,159,3,top,horizontaltop,8,-1
-11,,,256,256,159,3,top,horizontaltop,9,-1
-12,,,,,,,,,,
-13,,,,,,,,,,
-14,,,,,,,,,,
-15,,,,,,,,,,
-16,,,,,,,,,,
+id,Coin ou Arête,Nom Face,Cote,X,Y,W,H,linkedPortal 01,linkedPortal 02
+0,Arête,C0 O,top,48,692,159,3,16,16
+1,Arête,C0 O,right,207,692,3,159,3,3
+2,Arête,C1 O,top,256,692,159,3,8,28
+3,Arête,C1 O,left,256,692,3,159,1,1
+4,Arête,C1 O,right,415,692,3,159,6,-1
+5,Arête,C1 S,top,464,692,159,3,10,20
+6,Arête,C1 S,left,464,692,3,159,4,-1
+7,Arête,C1 H,top,692,692,159,3,20,-1
+8,Arête,C1 H,left,692,692,3,159,2,-1
+9,Arête,C1 H,right,851,692,3,159,28,-1
+10,Arête,C1 H,down,692,851,159,3,5,-1
+11,Arête,C2 N,top,48,464,3,159,21,-1
+12,Arête,C2 N,right,207,464,3,159,14,-1
+13,Arête,C2 O,top,256,464,159,3,22,-1
+14,Arête,C2 O,left,256,464,3,159,12,-1
+15,Arête,C2 O,right,451,464,3,159,18,28
+16,Arête,C2 O,down,256,623,159,3,0,0
+17,Arête,C2 S,top,464,464,159,3,24,-1
+18,Arête,C2 S,left,464,464,3,159,15,-1
+19,Arête,C2 S,right,623,464,3,159,29,-1
+20,Arête,C2 S,down,464,623,159,3,7,-1
+21,Arête,C2 H,top,692,464,159,3,11,-1
+22,Arête,C2 H,left,692,464,3,159,13,-1
+23,Arête,C2 H,right,851,464,3,159,38,38
+24,Arête,C2 H,down,692,623,159,3,17,7
+25,Arête,C3 O,top,48,256,159,3,35,-1
+26,Arête,C3 O,left,48,256,3,159,19,-1
+27,Arête,C3 O,right,207,256,3,159,30,-1
+28,Arête,C3 O,down,48,415,159,3,9,-1
+29,Arête,C3 S,top,256,256,159,3,37,-1
+30,Arête,C3 S,left,256,256,3,159,27,19
+31,Arête,C3 S,right,415,256,3,159,33,-1
+32,Arête,C3 E,top,464,256,159,3,36,-1
+33,Arête,C3 E,left,464,256,3,159,31,-1
+34,Arête,C3 H,top,692,256,159,3,39,39
+35,Arête,C3 H,left,692,256,3,159,25,9
+36,Arête,C3 H,right,851,256,3,159,32,-1
+37,Arête,C3 H,down,692,415,159,3,29,29
+38,Arête,C4 H,left,692,48,3,159,23,23
+39,Arête,C4 H,down,692,207,159,3,34,34
+40,,,,,,,,,
+41,,,,,,,,,
+42,,,,,,,,,
+43,,,,,,,,,
+44,,,,,,,,,
+45,,,,,,,,,
+46,,,,,,,,,
+47,,,,,,,,,
+48,,,,,,,,,
+49,,,,,,,,,
+50,,,,,,,,,
+51,,,,,,,,,
+52,,,,,,,,,

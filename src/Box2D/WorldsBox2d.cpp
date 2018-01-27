@@ -15,69 +15,48 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 
   for (std::size_t i = 0; i < parameters.size(); ++i)
     {
-      if (parameters[i][3].empty())
+      if (parameters[i][4].empty())
 	{
 	  break;
 	}
-      float x = std::atof(parameters[i][3].c_str());
-      float y = std::atof(parameters[i][4].c_str());
-      float w = std::atof(parameters[i][5].c_str());
-      float h = std::atof(parameters[i][6].c_str());
+      float x = std::atof(parameters[i][4].c_str());
+      float y = std::atof(parameters[i][5].c_str());
+      float w = std::atof(parameters[i][6].c_str());
+      float h = std::atof(parameters[i][7].c_str());
 
       ConditionOutput co = ConditionOutput::VerticalLeft;
-      if ("left" == parameters[i][7])
+      if ("left" == parameters[i][3])
 	{
 	  co = ConditionOutput::VerticalLeft;
 	}
-      else if ("right" == parameters[i][7])
+      else if ("right" == parameters[i][3])
 	{
 	   co = ConditionOutput::VerticalRight;
 	}
-      else if ("down" == parameters[i][7])
+      else if ("down" == parameters[i][3])
 	{
 	  co = ConditionOutput::HorizontalDown;
 	}
-      else if ("top" == parameters[i][7])
+      else if ("top" == parameters[i][3])
 	{
 	  co = ConditionOutput::HorizontalTop;
 	}
       else
 	{
-	  std::cout << "Invalid condition output: " << parameters[i][7] << " for id: " << i << '\n';
+	  std::cout << "Invalid condition output: " << parameters[i][3] << " for id: " << i << '\n';
 	}
-
       PortalDirection pd = PortalDirection::leftDirection;
-      if ("verticalleft" == parameters[i][8])
-	{
-	  pd = PortalDirection::leftDirection;
-	}
-      else if ("verticalright" == parameters[i][8])
-	{
-	  pd = PortalDirection::rightDirection;
-	}
-      else if ("horizontaldown" == parameters[i][8])
-	{
-	  pd = PortalDirection::downDirection;
-	}
-      else if ("horizontaltop" == parameters[i][8])
-	{
-	  pd = PortalDirection::topDirection;
-	}
-      else
-	{
-	  std::cout << "Invalid Portal Direction: " << parameters[i][8] << " for id: " << i << '\n';
-	}
       portals.push_back(new Portal(ofRectangle(x, y, w, h), world, pd, co));
     }
 
   for (std::size_t i = 0; i < parameters.size(); ++i)
       {
-	if (parameters[i][3].empty())
+	if (parameters[i][4].empty())
 	{
 	  break;
 	}
-	int index1 = std::atoi(parameters[i][9].c_str());
-	int index2 = std::atoi(parameters[i][10].c_str());
+	int index1 = std::atoi(parameters[i][8].c_str());
+	int index2 = std::atoi(parameters[i][9].c_str());
 	Portal* indexPortal1 = (index1 == -1) ? nullptr : portals[index1];
 	Portal* indexPortal2 = (index2 == -1) ? nullptr : portals[index2];
 	portals[i]->linke(indexPortal1, indexPortal2);
