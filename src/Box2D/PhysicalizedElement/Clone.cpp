@@ -36,6 +36,10 @@ CloneBox2d::~CloneBox2d()
         ofVec2f v = objSource->getVelocity();
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
+        Avatar* objAvatar = static_cast<Avatar*>(objSource);
+        //objAvatar->setMove();
+
+        
 
         
     }
