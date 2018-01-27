@@ -130,7 +130,7 @@ PROJECT_LDFLAGS+ = -lwiiuse
 #   Note: Leave a leading space when adding list items with the += operator
 ################################################################################
 # PROJECT_OPTIMIZATION_CFLAGS_RELEASE = 
-PROJECT_OPTIMIZATION_CFLAGS_DEBUG = -Og
+# PROJECT_OPTIMIZATION_CFLAGS_DEBUG = -Og
 
 ################################################################################
 # PROJECT COMPILERS
