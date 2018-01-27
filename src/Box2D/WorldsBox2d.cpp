@@ -24,15 +24,13 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
       float h = std::atof(params[6].c_str());
 
       std::cout << ofVec4f(x, y, w, h) << '\n';
-      ConditionOutput co;
+      ConditionOutput co = ConditionOutput::VerticalLeft;
       if ("left" == params[7])
 	{
-	  std::cout << "vertical left\n";
 	  co = ConditionOutput::VerticalLeft;
 	}
       else if ("right" == params[7])
 	{
-	  std::cout << "vertical right\n";
 	   co = ConditionOutput::VerticalRight;
 	}
       else if ("down" == params[7])
@@ -45,7 +43,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 	  co = ConditionOutput::HorizontalTop;
 	}
 
-      PortalDirection pd;
+      PortalDirection pd = PortalDirection::leftDirection;
       if ("verticalleft" == params[8])
 	{
 	  pd = PortalDirection::leftDirection;
