@@ -37,7 +37,7 @@ CloneBox2d::~CloneBox2d()
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
         Avatar* objAvatar = static_cast<Avatar*>(objSource);
-        //objAvatar->setMove();
+        objAvatar->setMove(portalDestination->direct);
 
         
 

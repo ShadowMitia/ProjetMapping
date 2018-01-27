@@ -28,13 +28,13 @@ public:
     b2World* getb2World();
     ofRectangle portalRect;
     
-    Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Direction _direction,ConditionOutput _Output);
+    Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _direction,ConditionOutput _Output);
     void draw();
     void linke(Portal * _1, Portal* _2);
     ofVec2f getPosition();
     const ofVec2f (Portal::*getObjPosition)(ofVec2f p);
     ofVec2f orient;
-    Direction direct;
+    Deplacement direct;
     
 private:
     WorldsBox2d* worldsBox2d;

@@ -53,7 +53,7 @@ CLONE : 0x0064
 
 
 
-enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
+//enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
 
 
 
