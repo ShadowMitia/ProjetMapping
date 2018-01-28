@@ -47,7 +47,7 @@ Avatar::Avatar(b2World* box2d)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
-    setMove(Deplacement::TOP);
+    setMove(Deplacement::PLATFORM);
     //polygon.body->SetGravityScale(0.0);
 }
 void Avatar::presUpdate()
@@ -98,8 +98,31 @@ void Avatar::moveNord(float inputX, float inputY)
 {
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
-    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax, inputY * speedMax));
+    polygon.body->SetLinearVelocity(b2Vec2( -inputX * speedMax, -inputY * speedMax));
 }
+void Avatar::moveSud(float inputX, float inputY)
+{
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    polygon.body->SetLinearVelocity(b2Vec2( + inputX * speedMax,  + inputY * speedMax));
+}
+
+void Avatar::moveOuest(float inputX, float inputY)
+{
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    polygon.body->SetLinearVelocity(b2Vec2( -inputY * speedMax, inputX * speedMax));
+}
+
+void Avatar::moveEst(float inputX, float inputY)
+{
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    polygon.body->SetLinearVelocity(b2Vec2( inputY * speedMax, -inputX * speedMax));
+}
+
+
+
 void Avatar::jump()
 {
     if (!jumping)
@@ -225,12 +248,24 @@ void Avatar::setMove(Deplacement _move){
     switch (_move) {
         case Deplacement::PLATFORM :
             cout << "PLATFORM" << endl;
-            //move=&Avatar::movePlatform;
-            move=&Avatar::moveNord;
-
+            move=&Avatar::movePlatform;
+            //move=&Avatar::moveNord;
             break;
         case Deplacement::TOP :
-            cout << "TOP" << endl;
+            cout << "Nord" << endl;
             move=&Avatar::moveNord;
+            break;
+        case Deplacement::DOWN :
+            cout << "Sud" << endl;
+            move=&Avatar::moveSud;
+            break;
+        case Deplacement::LEFT :
+            cout << "Ouest" << endl;
+            move=&Avatar::moveOuest;
+            break;
+        case Deplacement::RIGHT :
+            cout << "Est" << endl;
+            move=&Avatar::moveEst;
+            break;
     }
 }

@@ -30,7 +30,7 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
 void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
     objSource->SetGravityScale(.0f);
-    objSource->setMove(Deplacement::TOP);
+    objSource->setMove(Deplacement::DOWN);
 }
 void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);

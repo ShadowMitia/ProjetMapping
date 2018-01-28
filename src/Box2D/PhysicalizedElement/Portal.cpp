@@ -54,12 +54,12 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _dire
         case ConditionOutput::HorizontalTop: conditionFunction = topCondition;
             orient = ofVec2f(0, 1);
             getObjPosition = &Portal::getObjPositionLeft;
-            nullFunction = rightNull;// a faire
+            nullFunction = topNull;// a faire
             break;
         case ConditionOutput::HorizontalDown: conditionFunction = downCondition;
             orient = ofVec2f(0, -1);
             getObjPosition = &Portal::getObjPositionLeft;
-            nullFunction = rightNull; // a faire
+            nullFunction = downNull; // a faire
             break;
     }
     direct = _direction;

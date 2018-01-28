@@ -36,7 +36,10 @@ public:
     void(Avatar::*move)(float inputX, float inputY);
     void movePlatform(float inputX, float inputY);
     void moveNord(float inputX, float inputY);
-    
+    void moveSud(float inputX, float inputY);
+    void moveEst(float inputX, float inputY);
+    void moveOuest(float inputX, float inputY);
+
     void presUpdate();
     void update(Shift *s) ;
     void draw() ;
