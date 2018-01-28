@@ -43,10 +43,10 @@ private:
     void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite);
     const ofVec2f getObjPositionLeft(ofVec2f p){
-        return  portalRect.position - p;
+        return  portalRect.getCenter() - p;
     }
     const ofVec2f getObjPositionRight(ofVec2f p){
-        return  portalRect.position  - p;
+        return  portalRect.getCenter()  - p;
     }
     
 };

@@ -13,14 +13,14 @@
 #include "CloneOther.h"
 
 
-ofVec2f CloneBox2d::multyMatrix(ofVec2f v){
+ofVec2f CloneBox2d::multyMatrix(ofVec2f v)
+{
     ofVec2f i;
     i.x = matrixTrans[0]*v.x + matrixTrans[1]*v.y;
     i.y = -matrixTrans[1]*v.x + matrixTrans[0]*v.y;
     return i;
     
 }
-
 CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination)
 {
     
@@ -32,7 +32,7 @@ CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, P
 }
 CloneBox2d::~CloneBox2d()
 {
-    if (portalDestination!=nullptr && portalDestination->conditionFunction(objSource->getPosition(),this)) {
+    if (portalDestination!=nullptr && portalSource->conditionFunction(objSource->getPosition(),this)) {
         ofVec2f v = objSource->getVelocity();
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
@@ -103,7 +103,7 @@ void CloneBox2d::update()
             temp = (portalDestination->*fonction)(polygon.getPosition());
             matrixTrans[0] =  -(portalSource->orient.x * portalDestination->orient.x) -(portalSource->orient.y * portalDestination->orient.y);
             matrixTrans[1] =  (portalSource->orient.x * portalDestination->orient.y) - (portalSource->orient.y * portalDestination->orient.x);
-            temp = portalSource->portalRect.position -  multyMatrix(temp);
+            temp = portalSource->portalRect.getCenter() -  multyMatrix(temp);
             
             objSource->setPosition(temp);
             objSource->setVelocity(vTemp);
@@ -115,7 +115,7 @@ void CloneBox2d::update()
             temp = (portalSource->*fonction)(objSource->getPosition());
             matrixTrans[0] = - (portalSource->orient.x * portalDestination->orient.x) - (portalSource->orient.y * portalDestination->orient.y);
             matrixTrans[1] = (portalSource->orient.x * portalDestination->orient.y) - (portalSource->orient.y * portalDestination->orient.x);
-            temp = portalDestination->portalRect.position -  multyMatrix(temp);
+            temp = portalDestination->portalRect.getCenter() -  multyMatrix(temp);
             polygon.setPosition(temp);  // *this.*contactStartFonction
         }
         
@@ -174,7 +174,6 @@ void CloneBox2d::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2
 }
 void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
 {
-    
 }
 
 

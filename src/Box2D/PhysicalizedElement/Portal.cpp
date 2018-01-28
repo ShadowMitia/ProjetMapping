@@ -95,5 +95,5 @@ void Portal::linke(Portal *_1, Portal *_2){
     linkedPortal[1] = _2;
 }
 ofVec2f Portal::getPosition(){
-    return portalRect.getPosition();
+    return portalRect.getCenter();
 }
