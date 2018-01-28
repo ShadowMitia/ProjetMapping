@@ -103,6 +103,7 @@ void CloneBox2d::update()
             temp = (portalDestination->*fonction)(polygon.getPosition());
             matrixTrans[0] =  -(portalSource->orient.x * portalDestination->orient.x) -(portalSource->orient.y * portalDestination->orient.y);
             matrixTrans[1] =  (portalSource->orient.x * portalDestination->orient.y) - (portalSource->orient.y * portalDestination->orient.x);
+            matrixTrans[1] = - matrixTrans[1];
             temp = portalSource->portalRect.getCenter() -  multyMatrix(temp);
             
             objSource->setPosition(temp);
