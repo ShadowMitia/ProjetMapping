@@ -15,7 +15,18 @@
 #include "shift.h"
 
 
-enum class Deplacement { PLATFORM, TOP, DOWN, LEFT, RIGHT };
+enum class Deplacement { PLATFORM, TOP, DOWN, LEFT, RIGHT, PLATFORMLADDER };
+class Avatar;
+class coyoteTime: public ofThread{
+public:
+    ofTimer time;
+    Avatar* a;
+    coyoteTime(uint64_t _time, Avatar* _a){
+        a = _a;
+        time.setPeriodicEvent(_time);
+    }
+    void threadedFunction();
+};
 
 class Avatar : public Teleportable {
 public:
@@ -31,7 +42,8 @@ public:
     
 private:
     float moveInputX;
-    float moveInputY;    
+    float moveInputY;
+    coyoteTime* ct;
 public:
     void(Avatar::*move)(float inputX, float inputY);
     void movePlatform(float inputX, float inputY);
@@ -62,3 +74,5 @@ private:
     
     void jump();
 };
+
+

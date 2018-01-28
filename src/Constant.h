@@ -17,19 +17,25 @@ namespace VarConst
   constexpr const int WidthWorld2D = 464;
   constexpr const int HeightWorld2D = 464;
     
-  constexpr const float gravity = 30.0f;
-  //constexpr const float gravity = 0.0f;
+constexpr const float gravity = 15.0f;
+constexpr const float speedAvatarMax = 1.50f; // v max
+constexpr const float densityAvatar = 26.0f;
+constexpr const float bounceAvatar = 0.0001f;
+constexpr const float frictionAvatar = 0.0f;
+constexpr const float impulseJumpAvatar = 28.0f;			// impulsion de base pour les sauts
+constexpr const float speedAvatarAirControlMax = 1.5f;
+constexpr const uint64_t coyoteTime = 100000000;
 
+    
+    
   constexpr const float speedAvatar = 1.0f;  // a
-  constexpr const float speedAvatarMax = 1.75f; // v max
-  constexpr const float speedAvatarAirControl = 1.0f;
-  constexpr const float speedAvatarAirControlMax = 1.75f;
-  constexpr const float coefFrotementAir = 0.04;
-  constexpr const float densityAvatar = 10.0f;
-  constexpr const float bounceAvatar = 0.0001f;
-  constexpr const float frictionAvatar = 0.0f;
+  
+  
+    constexpr const float speedAvatarAirControl = 1.0f;
+  constexpr const float coefFrotementAir = 0.00;
+  
 
-  constexpr const float impulseJumpAvatar = 15.0f;			// impulsion de base pour les sauts
+  //constexpr const float impulseJumpAvatar = 15.0f;			// impulsion de base pour les sauts
 
   //constexpr const float impulseJumpAvatar = 10.3f;			// impulsion de base pour les sauts
 

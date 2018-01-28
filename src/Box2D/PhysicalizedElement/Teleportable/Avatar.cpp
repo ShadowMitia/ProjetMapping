@@ -49,6 +49,8 @@ Avatar::Avatar(b2World* box2d)
     modeDeplace = Deplacement::PLATFORM;
     setMove(Deplacement::PLATFORM);
     //polygon.body->SetGravityScale(0.0);
+    
+    ct = new coyoteTime(VarConst::coyoteTime,this);
 }
 void Avatar::presUpdate()
 {
@@ -106,23 +108,18 @@ void Avatar::moveSud(float inputX, float inputY)
     float speedMax = VarConst::speedAvatarMax;
     polygon.body->SetLinearVelocity(b2Vec2( + inputX * speedMax,  + inputY * speedMax));
 }
-
 void Avatar::moveOuest(float inputX, float inputY)
 {
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     polygon.body->SetLinearVelocity(b2Vec2( -inputY * speedMax, inputX * speedMax));
 }
-
 void Avatar::moveEst(float inputX, float inputY)
 {
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     polygon.body->SetLinearVelocity(b2Vec2( inputY * speedMax, -inputX * speedMax));
 }
-
-
-
 void Avatar::jump()
 {
     if (!jumping)
@@ -213,7 +210,8 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
-            setJumping(true);
+            //setJumping(true);
+            ct->startThread();
         }
         if (e.contact->GetManifold()->localNormal.y > 0.f) {
             polygon.tabCollision[1]--;
@@ -243,8 +241,8 @@ void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreCon
     }
     
 }
-
-void Avatar::setMove(Deplacement _move){
+void Avatar::setMove(Deplacement _move)
+{
     switch (_move) {
         case Deplacement::PLATFORM :
             cout << "PLATFORM" << endl;
@@ -268,4 +266,11 @@ void Avatar::setMove(Deplacement _move){
             move=&Avatar::moveEst;
             break;
     }
+}
+
+
+void coyoteTime::threadedFunction() {
+    time.reset();
+    time.waitNext();
+    a->setJumping(true);
 }

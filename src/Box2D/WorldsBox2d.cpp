@@ -103,59 +103,8 @@ void WorldsBox2d::setup(){
     
     //importPortal();
     
-    createAvatar( 100 , 300 );
+    createAvatar( 10 , 30 );
     // 48, 208(-1), 256 et 416(-1)
-
-
-    /*
-    Portal *temp;
-    temp = new Portal(ofRectangle(48, 48, 3, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(206, 48, 3, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(256, 48, 3, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(415, 48, 3, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
-    porportal.push_back(temp);
-    
-    temp = new Portal(ofRectangle(48, 256, 3, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(207, 256, 3, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(255, 256, 3, 159), this,PortalDirection::leftDirection,ConditionOutput::VerticalLeft);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(414, 256, 3, 159), this,PortalDirection::rightDirection,ConditionOutput::VerticalRight);
-    porportal.push_back(temp);
-    
-    temp = new Portal(ofRectangle(48, 206, 159, 3), this,PortalDirection::downDirection,ConditionOutput::HorizontalDown);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(256, 206, 159, 3), this,PortalDirection::downDirection,ConditionOutput::HorizontalDown);
-    porportal.push_back(temp);
-    
-    temp = new Portal(ofRectangle(48, 256, 159, 3), this,PortalDirection::topDirection,ConditionOutput::HorizontalTop);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(256, 256, 159, 3), this,PortalDirection::topDirection,ConditionOutput::HorizontalTop);
-    porportal.push_back(temp);
-    
-    
-    porportal[0]->linke(porportal[3], nullptr);
-    porportal[1]->linke(porportal[2], nullptr);
-    porportal[2]->linke(porportal[1], nullptr);
-    porportal[3]->linke(porportal[0], nullptr);
-    porportal[4]->linke(porportal[7], nullptr);
-    porportal[5]->linke(porportal[6], porportal[0]);
-    porportal[6]->linke(porportal[5], porportal[3]);
-    porportal[7]->linke(porportal[4], nullptr);
-    
-    porportal[8]->linke(porportal[10], nullptr);
-    porportal[9]->linke(porportal[11], porportal[11]);
-    porportal[10]->linke(porportal[8], nullptr);
-    porportal[11]->linke(porportal[9], nullptr);
-
-
-
-*/
-    
     
     porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
 
