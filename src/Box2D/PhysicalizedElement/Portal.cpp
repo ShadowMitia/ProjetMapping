@@ -65,7 +65,7 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _dire
     direct = _direction;
 }
 void Portal::draw(){
-    ofSetColor(ofColor::darkRed);
+    ofSetColor(ofColor::darkSlateBlue);
     polygon.draw();
 }
 b2World* Portal::getb2World(){
