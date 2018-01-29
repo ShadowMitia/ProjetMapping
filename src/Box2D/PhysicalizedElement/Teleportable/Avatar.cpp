@@ -268,7 +268,6 @@ void Avatar::setMove(Deplacement _move)
     }
 }
 
-
 void coyoteTime::threadedFunction() {
     time.reset();
     time.waitNext();

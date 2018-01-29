@@ -103,7 +103,7 @@ void WorldsBox2d::setup(){
     
     //importPortal();
     
-    createAvatar( 10 , 30 );
+    createAvatar( 100 , 300 );
     // 48, 208(-1), 256 et 416(-1)
     
     porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);

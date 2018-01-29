@@ -89,12 +89,15 @@ void CloneBox2d::update()
                 //polygon.body->SetGravityScale(0.0);
             }else{ //polygon.body->SetGravityScale(1.0);
             }
+            
             ofVec2f vTemp = ofVec2f(0.f, 0.f);
             vTemp = objSource->getVelocity();
             if (polygon.tabCollision[2]) {
                 Avatar* a = static_cast<Avatar*>(objSource);
                 a->setJumping(false); // il y a de l'idŽe mais a ne marche pas
-                vTemp.y = 0;
+                if (vTemp.y > 0) {
+                    vTemp.y = 0;
+                }
             }
             polygon.setVelocity(objSource->getVelocity()); // << ici le probleme du clone qui acroche les sides  <<-----
             //temp = portalSource->portalRect.position - (portalDestination->*fonction)(polygon.getPosition());
