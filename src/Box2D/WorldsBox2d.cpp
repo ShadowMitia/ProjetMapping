@@ -111,33 +111,35 @@ void WorldsBox2d::setup(){
     
     
      Portal *temp;
-     temp = new Portal(ofRectangle(48-2, 48, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
+     temp = new Portal(ofRectangle(48 - 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(208 +2, 48, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
+     temp = new Portal(ofRectangle(207 + 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(256 -2, 48, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
+     temp = new Portal(ofRectangle(256 - 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(415 +2 , 48, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
-     porportal.push_back(temp);
-     
-     temp = new Portal(ofRectangle(48-2, 256, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(207+2, 256, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(255-2, 256, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(414+2, 256, 3, 159), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
+     temp = new Portal(ofRectangle(415 + 2 , 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
      porportal.push_back(temp);
      
-     temp = new Portal(ofRectangle(48, 206+2, 159, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalDown);
+     temp = new Portal(ofRectangle(48 - 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(256, 206+2, 159, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalDown);
+     temp = new Portal(ofRectangle(207 + 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
+     porportal.push_back(temp);
+     temp = new Portal(ofRectangle(255 - 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
+     porportal.push_back(temp);
+     temp = new Portal(ofRectangle(414 + 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
      porportal.push_back(temp);
      
-     temp = new Portal(ofRectangle(48, 256-2, 159, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalTop);
+     temp = new Portal(ofRectangle(48 - 2, 208 + 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalDown);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(256, 256-2, 159, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalTop);
+     temp = new Portal(ofRectangle(256 - 2, 208 + 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalDown);
      porportal.push_back(temp);
+     
+     temp = new Portal(ofRectangle(48 - 2, 256 - 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalTop);
+     porportal.push_back(temp);
+     temp = new Portal(ofRectangle(256 - 2, 256 - 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalTop);
+     porportal.push_back(temp);
+    
+    
     
      porportal[0]->linke(porportal[3], nullptr);
      porportal[1]->linke(porportal[2], nullptr);
