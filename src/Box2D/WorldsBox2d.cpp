@@ -194,6 +194,11 @@ void WorldsBox2d::draw(){
     for (auto &clone : clones) {
         clone->draw();
     }
+    
+    for (auto &ladder : ladders) {
+        ladder->draw();
+    }
+    //ladders[0]->draw();
     //warterfalls->draw();
     world.draw();
     

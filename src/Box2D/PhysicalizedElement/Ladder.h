@@ -11,12 +11,26 @@
 #include "Constant.h"
 #include "Avatar.h"
 
+class ObjectLadder:public ofxBox2dPolygon{
+public:
+    void create(b2World * b2dworld);
+};
+
 
 class Ladder: public PhysicalizedElement{
 public:
-    ofxBox2dPolygon polygon;
+    ObjectLadder polygon;
     void create(b2World* _b2World, ofPolyline _groundLine);
-    void draw();
+    void draw(){
+        b2Fixture *f = polygon.body->GetFixtureList()->GetNext();
+        b2PolygonShape* shape = static_cast<b2PolygonShape*>(f->GetShape());
+        ofSetColor(ofColor::mediumVioletRed);
+        ofDrawCircle(shape->m_vertices[0].x*30, shape->m_vertices[0].y*30 , 2);
+        ofDrawCircle(shape->m_vertices[1].x*30, shape->m_vertices[1].y*30 , 2);
+        ofDrawCircle(shape->m_vertices[2].x*30, shape->m_vertices[2].y*30 , 2);
+        ofDrawCircle(shape->m_vertices[3].x*30, shape->m_vertices[3].y*30 , 2);
+        
+    };
     void contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite);
 };

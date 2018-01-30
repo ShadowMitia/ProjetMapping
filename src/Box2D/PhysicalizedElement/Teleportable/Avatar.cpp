@@ -245,24 +245,24 @@ void Avatar::setMove(Deplacement _move)
 {
     switch (_move) {
         case Deplacement::PLATFORM :
-            cout << "PLATFORM" << endl;
+            //cout << "PLATFORM" << endl;
             move=&Avatar::movePlatform;
             //move=&Avatar::moveNord;
             break;
         case Deplacement::TOP :
-            cout << "Nord" << endl;
+            //cout << "Nord" << endl;
             move=&Avatar::moveNord;
             break;
         case Deplacement::DOWN :
-            cout << "Sud" << endl;
+            //cout << "Sud" << endl;
             move=&Avatar::moveSud;
             break;
         case Deplacement::LEFT :
-            cout << "Ouest" << endl;
+            //cout << "Ouest" << endl;
             move=&Avatar::moveOuest;
             break;
         case Deplacement::RIGHT :
-            cout << "Est" << endl;
+            //cout << "Est" << endl;
             move=&Avatar::moveEst;
             break;
     }

@@ -25,15 +25,24 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     tempFilter.maskBits = 0x0001;
     polygon.setFilterData(tempFilter);
     
-    polygon.body->GetFixtureList()->SetSensor(true);
+    //polygon.body->GetFixtureList()->SetSensor(true);
 }
 void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
     objSource->SetGravityScale(.0f);
     objSource->setMove(Deplacement::DOWN);
     
+    b2Fixture* f = polygon.body->GetFixtureList()->GetNext();
+    if (e.a == f || e.b == f) {
+        cout << "normal x:"  <<e.contact->GetManifold()->localNormal.x <<" normal y:"  <<e.contact->GetManifold()->localNormal.y <<" time: " << ofGetSystemTime() <<endl;
+    }
+
+
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
-        if (e.contact->GetManifold()->localNormal.y < 0.f) {}
+        
+        if (e.contact->GetManifold()->localNormal.y < 0.f) {
+        
+        }
 
     }
 }
@@ -41,4 +50,93 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
     objSource->SetGravityScale(1.0f);
     objSource->setMove(Deplacement::PLATFORM);
+}
+
+// code ObjectLadder
+void ObjectLadder::create(b2World * b2dworld){
+    if(size() <= 3) {
+        ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());
+        return;
+    }
+    
+    if (body != NULL) {
+        b2dworld->DestroyBody(body);
+        body = NULL;
+    }
+    
+    // create the body from the world (1)
+    b2BodyDef		bd;
+    bd.type			= density <= 0.0 ? b2_staticBody : b2_dynamicBody;
+    body			= b2dworld->CreateBody(&bd);
+    body->SetFixedRotation(true);
+    
+    ofxBox2dPolygon::makeConvexPoly();
+    vector<ofPoint> pts = ofPolyline::getVertices();
+    
+    
+    {
+     b2FixtureDef fixtureSide;
+     b2PolygonShape shape;
+     fixtureSide.density		= 0;
+     fixtureSide.restitution = 0;
+     fixtureSide.friction	= 0;
+     fixtureSide.isSensor    = true;
+     //UP, DOWN, LEFT, RIGHT};
+     
+     //RIGHT = 4, place END
+     //fixtureSide.id = 4;
+         b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()- getBoundingBox().getCenter());
+         b2Vec2 vec2 = screenPtToWorldPt(getBoundingBox().getCenter()+ofVec2f(0,getBoundingBox().getCenter().y - getBoundingBox().getMax().y));
+        //vec2 = b2Vec2(0.f, 0.f);
+        shape.SetAsBox(rect.x,4/30,vec2,0.f);
+        fixtureSide.shape		= &shape;
+        body->CreateFixture(&fixtureSide);
+     /*//LEFT = 3, place END - 1
+     //fixtureSide.id = 3;
+     vec2 = b2Vec2(-4.89/30.f,0.f);
+     shape.SetAsBox(2/30.f, rect.y, vec2, 0.f);
+     fixtureSide.shape		= &shape;
+     body->CreateFixture(&fixtureSide);
+     //DOWN = 2,
+     //fixtureSide.id = 2;
+     vec2 = b2Vec2(0.f, 4.89/30.f);
+     shape.SetAsBox(rect.x -2/30.f, 2/30.f, vec2, 0.f);
+     fixtureSide.shape		= &shape;
+     body->CreateFixture(&fixtureSide);
+     //UP = 1,
+     //fixtureSide.id = 1;
+     vec2 = b2Vec2(0.f, -2.8/30.f);
+     shape.SetAsBox(rect.x-3/30.f, 2/30.f, vec2, 0.f);
+     fixtureSide.shape = &shape;
+     body->CreateFixture(&fixtureSide);*/
+     }
+    
+        vector<b2Vec2>verts;
+        for (int i=0; i<MIN((int)pts.size(), b2_maxPolygonVertices); i++) {
+            verts.push_back(screenPtToWorldPt(pts[i]));
+        }
+        b2PolygonShape shape;
+        shape.Set(&verts[0], verts.size()-1);
+        fixture.shape		= &shape;
+        fixture.density		= density;
+        fixture.restitution = bounce;
+        fixture.friction	= friction;
+        fixture.isSensor    = true;
+        body->CreateFixture(&fixture);
+    
+
+    mesh.clear();
+    ofPath path;
+    ofPoint center = getCentroid2D();
+    for (int i=0; i<pts.size(); i++) {
+        ofPoint p(pts[i].x, pts[i].y);
+        p -= center;
+        path.lineTo(p);
+    }
+    mesh = path.getTessellation();
+    mesh.setUsage(GL_STATIC_DRAW);
+    
+    flagHasChanged();
+    alive = true;
+
 }
