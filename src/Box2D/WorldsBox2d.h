@@ -29,9 +29,9 @@ public:
     ofRectangle              bounds;
     
     std::vector< Avatar *> avatars;
-    std::vector<Portal *> porportal;
-    std::vector< Platform * > platforms;
-    std::vector< Ladder * > ladders;
+    std::vector< Portal *> porportal;
+    std::vector< Platform *> platforms;
+    std::vector< Ladder *> ladders;
     std::vector< CloneBox2d *> clones;
     
     Waterfalls*               warterfalls;

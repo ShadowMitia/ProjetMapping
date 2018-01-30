@@ -113,20 +113,20 @@ void WorldsBox2d::setup(){
      Portal *temp;
      temp = new Portal(ofRectangle(48 - 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(207 + 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
+     temp = new Portal(ofRectangle(207 + 1, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
      porportal.push_back(temp);
      temp = new Portal(ofRectangle(256 - 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(415 + 2 , 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
+     temp = new Portal(ofRectangle(415 + 1 , 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
      porportal.push_back(temp);
      
      temp = new Portal(ofRectangle(48 - 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(207 + 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
+     temp = new Portal(ofRectangle(207 + 1, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(255 - 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
+     temp = new Portal(ofRectangle(256 - 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
-     temp = new Portal(ofRectangle(414 + 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
+     temp = new Portal(ofRectangle(415 + 1, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
      porportal.push_back(temp);
      
      temp = new Portal(ofRectangle(48 - 2, 208 + 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalDown);
@@ -139,6 +139,10 @@ void WorldsBox2d::setup(){
      temp = new Portal(ofRectangle(256 - 2, 256 - 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalTop);
      porportal.push_back(temp);
     
+    temp = new Portal(ofRectangle(207 + 1, 256 - 2, 3, 3), this,Deplacement::PLATFORM,ConditionOutput::CornerTopRight);
+    porportal.push_back(temp);
+    temp = new Portal(ofRectangle(256 - 2, 208 + 1, 3, 3), this,Deplacement::PLATFORM,ConditionOutput::CornerDownLeft);
+    porportal.push_back(temp);
     
     
      porportal[0]->linke(porportal[3], nullptr);
@@ -154,7 +158,12 @@ void WorldsBox2d::setup(){
      porportal[9]->linke(porportal[11], porportal[11]);
      porportal[10]->linke(porportal[8], nullptr);
      porportal[11]->linke(porportal[9], nullptr);
-     
+    
+    porportal[12]->linke(porportal[13], nullptr);
+    porportal[13]->linke(porportal[12], nullptr);
+
+
+    
 
     for (auto &avatar : avatars)
     {

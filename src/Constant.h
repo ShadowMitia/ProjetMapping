@@ -31,8 +31,8 @@ constexpr const uint64_t coyoteTime = 100000000;
   constexpr const float speedAvatar = 1.0f;  // a
   
   
-    constexpr const float speedAvatarAirControl = 1.0f;
-  constexpr const float coefFrotementAir = 0.00;
+constexpr const float speedAvatarAirControl = 1.0f;
+constexpr const float coefFrotementAir = 0.00;
   
 
   //constexpr const float impulseJumpAvatar = 15.0f;			// impulsion de base pour les sauts

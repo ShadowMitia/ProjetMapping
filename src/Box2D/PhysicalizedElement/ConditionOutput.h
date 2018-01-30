@@ -30,3 +30,6 @@ bool downCondition(ofVec2f p ,CloneBox2d* _clone){
     if (p.y > _clone->portalSource->getPosition().y) return true;
     else return false;
 }
+bool nonCondition(ofVec2f p ,CloneBox2d* _clone){
+    return false;
+}

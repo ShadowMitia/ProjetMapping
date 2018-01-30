@@ -34,3 +34,4 @@ void downNull(CloneBox2d* _clone){
         _clone->objSource->setPosition(ofVec2f(_clone->objSource->getPosition().x, _clone->portalSource->getPosition().y - 6));
     }
 }
+void NoNull(CloneBox2d* _clone){}
