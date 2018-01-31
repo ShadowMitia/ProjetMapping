@@ -33,5 +33,10 @@ void downNull(CloneBox2d* _clone){
     if (_clone->objSource->getPosition().y>_clone->portalSource->getPosition().y - 6 ) {
         _clone->objSource->setPosition(ofVec2f(_clone->objSource->getPosition().x, _clone->portalSource->getPosition().y - 6));
     }
+    dataSprite* data = (dataSprite*) _clone->objSource->polygon.body->GetUserData();
+    if (data->sprite == Sprite::AVATAR){
+        Avatar *a = static_cast<Avatar*>(data->physicalizedElement);
+        a->setJumping(false);
+    }
 }
 void NoNull(CloneBox2d* _clone){}
