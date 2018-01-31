@@ -73,6 +73,17 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _dire
             getObjPosition = &Portal::getObjPositionLeft;
             nullFunction = NoNull;
             break;
+        case ConditionOutput::CornerDownRight: conditionFunction = nonCondition;
+            orient = ofVec2f(0, -1);
+            getObjPosition = &Portal::getObjPositionLeft;
+            nullFunction = NoNull;
+            break;
+            
+        case ConditionOutput::CornerTopLeft: conditionFunction = nonCondition;
+            orient = ofVec2f(0, 1);
+            getObjPosition = &Portal::getObjPositionLeft;
+            nullFunction = NoNull;
+            break;
     }
     direct = _direction;
 }
