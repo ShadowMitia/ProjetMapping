@@ -30,9 +30,8 @@ public:
 
 class Avatar : public Teleportable {
 public:
-    bool jumping;
-
     Avatar(b2World* box2d);
+    bool jumping;
     
     bool clicJump;
     bool cloneJump;
@@ -47,6 +46,9 @@ private:
 public:
     void(Avatar::*move)(float inputX, float inputY);
     void movePlatform(float inputX, float inputY);
+    void moveCardinalPoint(float inputX, float inputY);
+    void movePlatformPointSud(float inputX, float inputY);
+    
     void moveNord(float inputX, float inputY);
     void moveSud(float inputX, float inputY);
     void moveEst(float inputX, float inputY);

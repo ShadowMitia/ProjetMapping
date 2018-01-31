@@ -91,11 +91,18 @@ void Avatar::movePlatform(float inputX, float inputY)
     }
     
     if (inputX>0.f) {
-        inputX=inputX;
+        inputX=inputX; /// je ne comprend pas cette ligne
     }else inputX=inputX;
 
     polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,polygon.body->GetLinearVelocity().y));
 }
+
+void Avatar::moveCardinalPoint(float inputX, float inputY)
+{
+    polygon.body->SetLinearVelocity(b2Vec2( inputX ,  inputY ));
+}
+
+
 void Avatar::moveNord(float inputX, float inputY)
 {
     float speed = VarConst::speedAvatar;

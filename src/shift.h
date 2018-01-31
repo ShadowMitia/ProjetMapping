@@ -9,7 +9,6 @@
 #pragma once
 
 struct Shift{
-public:
     bool directionalCross[4] = { false };
     bool a = false;
     bool b = false;
