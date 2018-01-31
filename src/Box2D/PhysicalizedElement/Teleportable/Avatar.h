@@ -14,7 +14,6 @@
 #include "PhysicalizedElement.h"
 #include "shift.h"
 
-
 enum class Deplacement { PLATFORM, TOP, DOWN, LEFT, RIGHT, PLATFORMLADDER };
 class Avatar;
 class coyoteTime: public ofThread{
@@ -36,25 +35,11 @@ public:
     bool clicJump;
     bool cloneJump;
     Deplacement modeDeplace;
-    bool tabSideClone[5];
+    bool lockLadder = false;
     
-    
-private:
-    float moveInputX;
-    float moveInputY;
-    coyoteTime* ct;
 public:
-    void(Avatar::*move)(float inputX, float inputY);
-    void movePlatform(float inputX, float inputY);
-    void moveCardinalPoint(float inputX, float inputY);
-    void movePlatformPointSud(float inputX, float inputY);
-    
-    void moveNord(float inputX, float inputY);
-    void moveSud(float inputX, float inputY);
-    void moveEst(float inputX, float inputY);
-    void moveOuest(float inputX, float inputY);
 
-    void presUpdate();
+    void presUpdate(Shift *s);
     void update(Shift *s) ;
     void draw() ;
     void setPosition(ofVec2f vec);
@@ -66,15 +51,28 @@ public:
     
     void setMove(Deplacement move);
     
+
+
+private:
+    float moveInputX;
+    float moveInputY;
+    coyoteTime* ct;
+    void jump();
+    
+    void(Avatar::*preMove)(Shift *s);
+    void movePlatform(Shift *s);
+    void moveNord(Shift *s);
+    void moveSud(Shift *s);
+    void moveEst(Shift *s);
+    void moveOuest(Shift *s);
+    void moveLadder(Shift *s);
+    
     virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
     virtual void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e) override;
     
     
-private:
-    
-    void jump();
 };
 
 

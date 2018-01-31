@@ -212,6 +212,7 @@ void WorldsBox2d::update(Shift (*input)[4]){
 
     world.update();
     
+
     // delect clone
     // ne pas touché
     for (int i = 0; i< clones.size(); ++i) {
@@ -226,11 +227,11 @@ void WorldsBox2d::update(Shift (*input)[4]){
 	} // update clone
     }
 
-    for (std::size_t j = 0; j < avatars.size(); j++)
-    {
-        //avatars[j]->presUpdate();
-        
-        avatars[j]->update(input[j]);
+
+    for (std::size_t j = 0; j < avatars.size(); j++){
+    avatars[j]->presUpdate(input[j]);
+
+    avatars[j]->update(input[j]);
     }
     
     //warterfalls->update();

@@ -116,7 +116,6 @@ void ofApp::keyPressed(int key)
     
     if (key == OF_KEY_LEFT || key == 'q')
     {
-        //moveInputX = -1.0f * tabSideClone[3];
         inputButton[0].directionalCross[0] = true;
     }
     else if (key == OF_KEY_RIGHT || key == 'd')
@@ -147,7 +146,6 @@ void ofApp::keyReleased(int key){
     
     if (key == OF_KEY_LEFT || key == 'q')
     {
-        //moveInputX = -1.0f * tabSideClone[3];
         inputButton[0].directionalCross[0] = false;    }
     else if (key == OF_KEY_RIGHT || key == 'd')
     {

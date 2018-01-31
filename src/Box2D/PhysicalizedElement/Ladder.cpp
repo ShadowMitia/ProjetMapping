@@ -29,25 +29,41 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
 }
 void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
-    objSource->SetGravityScale(.0f);
-    objSource->setMove(Deplacement::DOWN);
+;
     
     b2Fixture* f = polygon.body->GetFixtureList()->GetNext();
     if (e.a == f || e.b == f) {
+        cout << "sortie" << endl;
+        objSource->SetGravityScale(.0f);
+        objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
         objSource->setJumping(false);
-        objSource->setMove(Deplacement::PLATFORM);
+        objSource->lockLadder=true;
+        objSource->setMove(Deplacement::PLATFORMLADDER);
     }
-
-    
+    f=polygon.body->GetFixtureList();
+    if (e.a == f || e.b == f) {
+        cout << "Ladder" << endl;
+        objSource->SetGravityScale(.0f);
+        objSource->setMove(Deplacement::DOWN);
+    }
 }
 void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
-    b2Fixture* f = polygon.body->GetFixtureList()->GetNext();
-    if (e.a != f || e.b != f) {
+
+    b2Fixture* f = polygon.body->GetFixtureList();
+    cout << "Ladder end" << endl;
+    if (!objSource->lockLadder) {
         objSource->SetGravityScale(1.0f);
         objSource->setMove(Deplacement::PLATFORM);
     }
 
+    f = polygon.body->GetFixtureList()->GetNext();
+    if (e.a == f || e.b == f) {
+        cout << "sortie end" << endl;
+        objSource->lockLadder=false;
+        objSource->SetGravityScale(1.0f);// ici problem
+        objSource->setMove(Deplacement::PLATFORM);
+    }
 }
 
 // code ObjectLadder
@@ -84,9 +100,11 @@ void ObjectLadder::create(b2World * b2dworld){
      //RIGHT = 4, place END
      //fixtureSide.id = 4;
          b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()- getBoundingBox().getCenter());
-         b2Vec2 vec2 = screenPtToWorldPt(getBoundingBox().getCenter()+ofVec2f(0,getBoundingBox().getCenter().y - getBoundingBox().getMax().y));
+        b2Vec2 vec2 = screenPtToWorldPt(getBoundingBox().getCenter()
+                                        + ofVec2f(0,getBoundingBox().getCenter().y
+                                        - getBoundingBox().getMax().y-3));
         //vec2 = b2Vec2(0.f, 0.f);
-        shape.SetAsBox(rect.x,4/30,vec2,0.f);
+        shape.SetAsBox(rect.x,3/30.f,vec2,0.f);
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
      /*//LEFT = 3, place END - 1

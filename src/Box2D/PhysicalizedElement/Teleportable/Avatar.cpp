@@ -52,14 +52,14 @@ Avatar::Avatar(b2World* box2d)
     
     ct = new coyoteTime(VarConst::coyoteTime,this);
 }
-void Avatar::presUpdate()
+void Avatar::presUpdate(Shift *s)
 {
+    (*this.*preMove)(s);
 }
 void Avatar::update(Shift *s)
 {
-    moveInputX = s->directionalCross[1] - s->directionalCross[0];
-    moveInputY = s->directionalCross[3] - s->directionalCross[2];
-    (*this.*move)(moveInputX, moveInputY);
+    polygon.setVelocity(moveInputX, moveInputY);
+    
     if (jumping)
     {
         // polygon.setVelocity(polygon.getVelocity().x - (VarConst::coefFrotementAir * polygon.getVelocity().x/VarConst::speedAvatarMax), polygon.getVelocity().y);
@@ -80,8 +80,13 @@ void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
 }
-void Avatar::movePlatform(float inputX, float inputY)
+
+/////////////// move avatar ///////////////
+void Avatar::movePlatform(Shift *s)
 {
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
+    moveInputY = polygon.body->GetLinearVelocity().y;
+
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     if (jumping)
@@ -89,44 +94,88 @@ void Avatar::movePlatform(float inputX, float inputY)
         speed = VarConst::speedAvatarAirControl;
         speedMax = VarConst::speedAvatarAirControlMax;
     }
+    moveInputX = moveInputX* speedMax;
     
-    if (inputX>0.f) {
-        inputX=inputX; /// je ne comprend pas cette ligne
-    }else inputX=inputX;
-
-    polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,polygon.body->GetLinearVelocity().y));
+    //polygon.body->SetLinearVelocity(b2Vec2( inputX * speedMax,polygon.body->GetLinearVelocity().y));
 }
-
-void Avatar::moveCardinalPoint(float inputX, float inputY)
+void Avatar::moveNord(Shift *s)
 {
-    polygon.body->SetLinearVelocity(b2Vec2( inputX ,  inputY ));
-}
-
-
-void Avatar::moveNord(float inputX, float inputY)
-{
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
+    moveInputY = s->directionalCross[3] - s->directionalCross[2];
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
-    polygon.body->SetLinearVelocity(b2Vec2( -inputX * speedMax, -inputY * speedMax));
+    moveInputX = -moveInputX*speedMax;
+    moveInputY = -moveInputY*speedMax;
+
+    //polygon.body->SetLinearVelocity(b2Vec2( -inputX * speedMax, -inputY * speedMax));
 }
-void Avatar::moveSud(float inputX, float inputY)
+void Avatar::moveSud(Shift *s)
 {
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
+    moveInputY = s->directionalCross[3] - s->directionalCross[2];
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
-    polygon.body->SetLinearVelocity(b2Vec2( + inputX * speedMax,  + inputY * speedMax));
+    moveInputX = moveInputX*speedMax;
+    moveInputY = moveInputY*speedMax;
+    //polygon.body->SetLinearVelocity(b2Vec2( + inputX * speedMax,  + inputY * speedMax));
 }
-void Avatar::moveOuest(float inputX, float inputY)
+void Avatar::moveOuest(Shift *s)
 {
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
+    moveInputY = s->directionalCross[3] - s->directionalCross[2];
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
-    polygon.body->SetLinearVelocity(b2Vec2( -inputY * speedMax, inputX * speedMax));
+    moveInputX = -moveInputY * speedMax;
+    moveInputY = moveInputX * speedMax;
+    //polygon.body->SetLinearVelocity(b2Vec2( -inputY * speedMax, inputX * speedMax));
 }
-void Avatar::moveEst(float inputX, float inputY)
+void Avatar::moveEst(Shift *s)
 {
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
+    moveInputY = s->directionalCross[3] - s->directionalCross[2];
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
-    polygon.body->SetLinearVelocity(b2Vec2( inputY * speedMax, -inputX * speedMax));
+    moveInputX = moveInputY * speedMax;
+    moveInputY = -moveInputX * speedMax;
+    //polygon.body->SetLinearVelocity(b2Vec2( inputY * speedMax, -inputX * speedMax));
 }
+void Avatar::moveLadder(Shift *s){
+    moveInputX = s->directionalCross[1] - s->directionalCross[0];
+    moveInputY = s->directionalCross[3] - s->directionalCross[2];
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    moveInputX = moveInputX * speedMax;
+    if ((s->directionalCross[3] - s->directionalCross[2])==0) moveInputY = polygon.body->GetLinearVelocity().y;
+}
+void Avatar::setMove(Deplacement _move)
+{
+    switch (_move) {
+        case Deplacement::PLATFORM :
+            //cout << "PLATFORM" << endl;
+            preMove=&Avatar::movePlatform;
+            //move=&Avatar::moveNord;
+            break;
+        case Deplacement::TOP :
+            //cout << "Nord" << endl;
+            preMove=&Avatar::moveNord;
+            break;
+        case Deplacement::DOWN :
+            //cout << "Sud" << endl;
+            preMove=&Avatar::moveSud;
+            break;
+        case Deplacement::LEFT :
+            //cout << "Ouest" << endl;
+            preMove=&Avatar::moveOuest;
+            break;
+        case Deplacement::RIGHT :
+            //cout << "Est" << endl;
+            preMove=&Avatar::moveEst;
+            break;
+        case Deplacement::PLATFORMLADDER:
+            preMove=&Avatar::moveLadder;
+    }
+}
+/////////////// jump avatar ///////////////
 void Avatar::jump()
 {
     if (!jumping)
@@ -160,6 +209,8 @@ void Avatar::setJumping(bool _bool)
 {
     jumping = _bool;
 }
+
+
 void Avatar::keyPressed(int key)
 {
     
@@ -189,6 +240,7 @@ void Avatar::keyReleased(int key)
         clicJump = false;
     }
 }
+/////////////// collision avatar ///////////////
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
@@ -217,7 +269,6 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
-            //setJumping(true);
             ct->startThread();
         }
         if (e.contact->GetManifold()->localNormal.y > 0.f) {
@@ -248,32 +299,8 @@ void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreCon
     }
     
 }
-void Avatar::setMove(Deplacement _move)
-{
-    switch (_move) {
-        case Deplacement::PLATFORM :
-            //cout << "PLATFORM" << endl;
-            move=&Avatar::movePlatform;
-            //move=&Avatar::moveNord;
-            break;
-        case Deplacement::TOP :
-            //cout << "Nord" << endl;
-            move=&Avatar::moveNord;
-            break;
-        case Deplacement::DOWN :
-            //cout << "Sud" << endl;
-            move=&Avatar::moveSud;
-            break;
-        case Deplacement::LEFT :
-            //cout << "Ouest" << endl;
-            move=&Avatar::moveOuest;
-            break;
-        case Deplacement::RIGHT :
-            //cout << "Est" << endl;
-            move=&Avatar::moveEst;
-            break;
-    }
-}
+
+
 
 void coyoteTime::threadedFunction() {
     time.reset();
