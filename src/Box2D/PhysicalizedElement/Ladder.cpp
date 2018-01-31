@@ -33,7 +33,6 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     
     b2Fixture* f = polygon.body->GetFixtureList()->GetNext();
     if (e.a == f || e.b == f) {
-        cout << "sortie" << endl;
         objSource->SetGravityScale(.0f);
         objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
         objSource->setJumping(false);
@@ -42,7 +41,6 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     }
     f=polygon.body->GetFixtureList();
     if (e.a == f || e.b == f) {
-        cout << "Ladder" << endl;
         objSource->SetGravityScale(.0f);
         objSource->setMove(Deplacement::DOWN);
     }
@@ -51,7 +49,6 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
 
     b2Fixture* f = polygon.body->GetFixtureList();
-    cout << "Ladder end" << endl;
     if (!objSource->lockLadder) {
         objSource->SetGravityScale(1.0f);
         objSource->setMove(Deplacement::PLATFORM);
@@ -59,7 +56,6 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
 
     f = polygon.body->GetFixtureList()->GetNext();
     if (e.a == f || e.b == f) {
-        cout << "sortie end" << endl;
         objSource->lockLadder=false;
         objSource->SetGravityScale(1.0f);// ici problem
         objSource->setMove(Deplacement::PLATFORM);

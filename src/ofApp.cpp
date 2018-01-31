@@ -129,11 +129,9 @@ void ofApp::keyPressed(int key)
     {
         inputButton[0].directionalCross[3] = true;
     }
-    
-    
-    
-    
-    
+    else if (key ==' '){
+        inputButton[0].a = true;
+    }
     
     mapping.keyPressed(key);
 }
@@ -157,6 +155,9 @@ void ofApp::keyReleased(int key){
     else if (key == OF_KEY_DOWN || key == 's')
     {
         inputButton[0].directionalCross[3] = false;    }
+    else if (key ==' '){
+        inputButton[0].a = false;
+    }
     
     
     

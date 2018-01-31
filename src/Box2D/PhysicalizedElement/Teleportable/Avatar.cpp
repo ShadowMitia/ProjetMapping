@@ -54,10 +54,18 @@ Avatar::Avatar(b2World* box2d)
 }
 void Avatar::presUpdate(Shift *s)
 {
-    (*this.*preMove)(s);
+
 }
 void Avatar::update(Shift *s)
 {
+    if (s->a && !clicJump) {
+        clicJump = true;
+        jump();
+    }
+    if (!s->a && clicJump) {
+        clicJump = false;
+    }
+    (*this.*preMove)(s);
     polygon.setVelocity(moveInputX, moveInputY);
     
     if (jumping)
@@ -221,12 +229,7 @@ void Avatar::keyPressed(int key)
         }
         else viewpoint = Viewpoint::MODE_PERSPECTIVE;
     }
-    else if (key == ' ' && !clicJump)
-    {
-        clicJump = true;
-        jump();
-    }
-
+    
 }
 void Avatar::keyReleased(int key)
 {
@@ -234,10 +237,6 @@ void Avatar::keyReleased(int key)
     if (key == OF_KEY_LEFT_ALT)
     {
         //viewpoint = Viewpoint::MODE_ANGLE;
-    }
-    else if (key == ' ')
-    {
-        clicJump = false;
     }
 }
 /////////////// collision avatar ///////////////
