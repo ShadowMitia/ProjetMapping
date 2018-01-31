@@ -51,6 +51,7 @@ Avatar::Avatar(b2World* box2d)
     //polygon.body->SetGravityScale(0.0);
     
     ct = new coyoteTime(VarConst::coyoteTime,this);
+    jt = new jumpTime(VarConst::jumpTime,this);
 }
 void Avatar::presUpdate(Shift *s)
 {
@@ -63,6 +64,8 @@ void Avatar::update(Shift *s)
         jump();
     }
     if (!s->a && clicJump) {
+        jt->stopThread();
+        polygon.body->SetGravityScale(1.0);
         clicJump = false;
     }
     (*this.*preMove)(s);
@@ -207,7 +210,8 @@ void Avatar::jump()
          impulse *= VarConst::attenuationImpulseJump;
          }*/
         impulse = impulseH * (1 - polygon.getVelocity().x/VarConst::speedAvatarMax);
-        
+        polygon.body->SetGravityScale(VarConst::gravityJumpTime);
+        jt->startThread();
         polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
         
         
@@ -305,4 +309,10 @@ void coyoteTime::threadedFunction() {
     time.reset();
     time.waitNext();
     a->setJumping(true);
+}
+
+void jumpTime::threadedFunction(){
+    time.reset();
+    time.waitNext();
+    a->polygon.body->SetGravityScale(1.0);
 }

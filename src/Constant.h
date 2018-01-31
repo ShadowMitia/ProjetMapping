@@ -25,6 +25,8 @@ constexpr const float frictionAvatar = 0.0f;
 constexpr const float impulseJumpAvatar = 28.0f;			// impulsion de base pour les sauts
 constexpr const float speedAvatarAirControlMax = 1.5f;
 constexpr const uint64_t coyoteTime = 100000000;
+constexpr const uint64_t jumpTime = 130000000;
+constexpr const uint64_t gravityJumpTime = 0.25;
 
     
     

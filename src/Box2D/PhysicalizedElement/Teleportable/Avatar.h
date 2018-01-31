@@ -27,6 +27,17 @@ public:
     void threadedFunction();
 };
 
+class jumpTime: public ofThread{
+public:
+    ofTimer time;
+    Avatar* a;
+    jumpTime(uint64_t _time, Avatar* _a){
+        a = _a;
+        time.setPeriodicEvent(_time);
+    }
+    void threadedFunction();
+};
+
 class Avatar : public Teleportable {
 public:
     Avatar(b2World* box2d);
@@ -57,6 +68,7 @@ private:
     float moveInputX;
     float moveInputY;
     coyoteTime* ct;
+    jumpTime*   jt;
     void jump();
     
     void(Avatar::*preMove)(Shift *s);
