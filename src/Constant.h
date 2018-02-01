@@ -22,15 +22,15 @@ constexpr const float speedAvatarMax = 1.50f; // v max
 constexpr const float densityAvatar = 26.0f;
 constexpr const float bounceAvatar = 0.0001f;
 constexpr const float frictionAvatar = 0.0f;
-constexpr const float impulseJumpAvatar = 28.0f;			// impulsion de base pour les sauts
+constexpr const float impulseJumpAvatar = 25.0f;			// impulsion de base pour les sauts
 constexpr const float speedAvatarAirControlMax = 1.5f;
 constexpr const uint64_t coyoteTime = 100000000;
-constexpr const uint64_t jumpTime = 130000000;
-constexpr const uint64_t gravityJumpTime = 0.25;
+constexpr const uint64_t jumpTime = 220000000;
+constexpr const uint64_t gravityJumpTime = 0.1;
 
     
     
-  constexpr const float speedAvatar = 1.0f;  // a
+constexpr const float speedAvatar = 1.0f;  // a
   
   
 constexpr const float speedAvatarAirControl = 1.0f;

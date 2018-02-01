@@ -44,7 +44,7 @@ private:
     ObjectGame polygon;
     ofPoint PositionObjSource;
     ofPoint PositionClone;
-    
+    bool lockTransfer = false;
     float matrixTrans[2];
     ofVec2f multyMatrix(ofVec2f v);
     
