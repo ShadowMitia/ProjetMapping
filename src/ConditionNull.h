@@ -12,12 +12,16 @@
 
 void leftNull(CloneBox2d* _clone){
     if (_clone->objSource->getPosition().x<_clone->portalSource->getPosition().x + 8 ) {
+        ofVec2f v = _clone->objSource->getVelocity();
         _clone->objSource->setPosition(ofVec2f(_clone->portalSource->getPosition().x + 8,_clone->objSource->getPosition().y));
+        _clone->objSource->setVelocity(v);
     }
 }
 void rightNull(CloneBox2d* _clone){
     if (_clone->objSource->getPosition().x>_clone->portalSource->getPosition().x - 6 ) {
+        ofVec2f v = _clone->objSource->getVelocity();
         _clone->objSource->setPosition(ofVec2f(_clone->portalSource->getPosition().x - 6,_clone->objSource->getPosition().y));
+        _clone->objSource->setVelocity(v);
     }
 }
 void topNull(CloneBox2d* _clone){
