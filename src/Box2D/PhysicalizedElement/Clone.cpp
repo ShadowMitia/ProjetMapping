@@ -76,15 +76,19 @@ void CloneBox2d::update()
 {
     if (statut == 0)create();
     
-    Portal *tempPortal = portalDestination;
-
-    if (objSource->viewpoint == Viewpoint::MODE_ANGLE){
-        portalDestination = portalSource->linkedPortal[0];}
-    else{
-        portalDestination = portalSource->linkedPortal[1];}
-    if (tempPortal != portalDestination) {
-        for (int i = 1; i<5; ++i) {
-            polygon.tabCollision[i] = 0;
+    const ofVec2f (Portal::*f)(ofVec2f) = portalSource->getObjPosition;
+    ofPoint t = (portalSource->*f)(objSource->getPosition());
+    t=t*portalSource->orient;
+    if (t.x + t.y< - 4.8  ) {
+        Portal *tempPortal = portalDestination;
+        if (objSource->viewpoint == Viewpoint::MODE_ANGLE){
+            portalDestination = portalSource->linkedPortal[0];}
+        else{
+            portalDestination = portalSource->linkedPortal[1];}
+        if (tempPortal != portalDestination) {
+            for (int i = 1; i<5; ++i) {
+                polygon.tabCollision[i] = 0;
+            }
         }
     }
     

@@ -62,14 +62,14 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     
     if (e.a == f || e.b == f) {
         if (!objSource->lockLadderTop && !objSource->lockLadderDown) {
-            cout << "end Ladder " << endl;
+            cout << "End Ladder " << endl;
             objSource->SetGravityScale(1.0f);
             objSource->setMove(Deplacement::PLATFORM);
         }
     }
     f = f->GetNext();
     if (e.a == f || e.b == f) {
-        cout << "end LadderDown " << endl;
+        cout << "End LadderDown " << endl;
         objSource->lockLadderDown = false;
         objSource->SetGravityScale(0.0f);// ici problem
         
@@ -77,13 +77,14 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     
     f = f->GetNext();
     if (e.a == f || e.b == f) {
-        cout << "end LadderTop " << endl;
+        cout << "End LadderTop " << endl;
         objSource->lockLadderTop=false;
         objSource->SetGravityScale(1.0f);// ici problem
         objSource->setMove(Deplacement::PLATFORM);
     }
 }
-// code ObjectLadder
+
+// Code ObjectLadder //
 void ObjectLadder::create(b2World * b2dworld){
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());
