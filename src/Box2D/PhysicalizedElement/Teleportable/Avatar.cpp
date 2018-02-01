@@ -51,7 +51,6 @@ Avatar::Avatar(b2World* box2d)
     //polygon.body->SetGravityScale(0.0);
     
     ct = new coyoteTime(VarConst::coyoteTime,this);
-    jt = new jumpTime(VarConst::jumpTime,this);
 }
 void Avatar::presUpdate(Shift *s)
 {
@@ -92,7 +91,6 @@ void Avatar::setPosition(int x, int y)
 {
     polygon.setPosition(x, y);
 }
-
 /////////////// move avatar ///////////////
 void Avatar::movePlatform(Shift *s)
 {
@@ -151,7 +149,8 @@ void Avatar::moveEst(Shift *s)
     moveInputY = -moveInputX * speedMax;
     //polygon.body->SetLinearVelocity(b2Vec2( inputY * speedMax, -inputX * speedMax));
 }
-void Avatar::moveLadder(Shift *s){
+void Avatar::moveLadder(Shift *s)
+{
     moveInputX = s->directionalCross[1] - s->directionalCross[0];
     moveInputY = s->directionalCross[3] - s->directionalCross[2];
     float speed = VarConst::speedAvatar;
@@ -195,8 +194,6 @@ void Avatar::jump()
         setJumping(true);
         cloneJump = false;
         polygon.setVelocity(polygon.getVelocity().x, - VarConst::impulseJumpAvatarMAX);
-        
-        
     }
 }
 void Avatar::setJumping(bool _bool)
@@ -282,14 +279,9 @@ void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreCon
     }
     
 }
-
-void coyoteTime::threadedFunction() {
+void coyoteTime::threadedFunction()
+{
     time.reset();
     time.waitNext();
     a->setJumping(true);
-}
-void jumpTime::threadedFunction(){
-    time.reset();
-    time.waitNext();
-    a->polygon.body->SetGravityScale(1.0);
 }

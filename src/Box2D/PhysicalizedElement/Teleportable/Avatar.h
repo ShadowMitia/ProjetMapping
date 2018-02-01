@@ -27,16 +27,6 @@ public:
     void threadedFunction();
 };
 
-class jumpTime: public ofThread{
-public:
-    ofTimer time;
-    Avatar* a;
-    jumpTime(uint64_t _time, Avatar* _a){
-        a = _a;
-        time.setPeriodicEvent(_time);
-    }
-    void threadedFunction();
-};
 
 class Avatar : public Teleportable {
 public:
@@ -46,9 +36,8 @@ public:
     bool clicJump;
     bool cloneJump;
     Deplacement modeDeplace;
-    bool lockLadder = false;
-    
-public:
+    bool lockLadderTop = false;
+    bool lockLadderDown =false;
 
     void presUpdate(Shift *s);
     void update(Shift *s) ;
@@ -68,7 +57,6 @@ private:
     float moveInputX;
     float moveInputY;
     coyoteTime* ct;
-    jumpTime*   jt;
     void jump();
     
     void(Avatar::*preMove)(Shift *s);

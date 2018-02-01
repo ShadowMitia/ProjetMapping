@@ -27,7 +27,7 @@ public:
     ObjectLadder polygon;
     void create(b2World* _b2World, ofPolyline _groundLine);
     void draw(){
-        b2Fixture *f = polygon.body->GetFixtureList()->GetNext();
+        b2Fixture *f = polygon.body->GetFixtureList()->GetNext()->GetNext();
         b2PolygonShape* shape = static_cast<b2PolygonShape*>(f->GetShape());
         ofSetColor(ofColor::mediumVioletRed);
         ofDrawCircle(shape->m_vertices[0].x*30, shape->m_vertices[0].y*30 , 1);

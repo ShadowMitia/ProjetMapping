@@ -15,6 +15,7 @@
 class Portal;
 class CloneBox2d: public PhysicalizedElement{
 public:
+    
     int statut;
     Teleportable* objSource;
     Portal* portalSource = nullptr;
@@ -30,6 +31,7 @@ public:
     void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     
 private:
+    
     void (CloneBox2d::*collisionFonction)();
     void collisionFonctionAvatar();
     void collisionFonctionUnknown();
@@ -47,8 +49,5 @@ private:
     bool lockTransfer = false;
     float matrixTrans[2];
     ofVec2f multyMatrix(ofVec2f v);
-    
-    
-    
     
 };

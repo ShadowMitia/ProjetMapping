@@ -29,39 +29,60 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
 }
 void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
-;
     
-    b2Fixture* f = polygon.body->GetFixtureList()->GetNext();
+    b2Fixture* f = polygon.body->GetFixtureList();
     if (e.a == f || e.b == f) {
+        cout << "Start Ladder " << endl;
+        objSource->lockLadderDown =true;
+        //objSource->setMove(Deplacement::DOWN);
+    }
+    
+    f = f->GetNext();
+    if (e.a == f || e.b == f) {
+        cout << "Start LadderDown " << endl;
+        objSource->SetGravityScale(.0f);
+        objSource->setMove(Deplacement::PLATFORMLADDER);
+        //objSource->setJumping(true);
+    }
+    
+    f = f->GetNext();
+    if (e.a == f || e.b == f) {
+        cout << "Start LadderTop " << endl;
+        objSource->lockLadderTop=true;
         objSource->SetGravityScale(.0f);
         objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
         objSource->setJumping(false);
-        objSource->lockLadder=true;
         objSource->setMove(Deplacement::PLATFORMLADDER);
-    }
-    f=polygon.body->GetFixtureList();
-    if (e.a == f || e.b == f) {
-        objSource->SetGravityScale(.0f);
-        objSource->setMove(Deplacement::DOWN);
     }
 }
 void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
-
+    
     b2Fixture* f = polygon.body->GetFixtureList();
-    if (!objSource->lockLadder) {
-        objSource->SetGravityScale(1.0f);
-        objSource->setMove(Deplacement::PLATFORM);
-    }
-
-    f = polygon.body->GetFixtureList()->GetNext();
+    
     if (e.a == f || e.b == f) {
-        objSource->lockLadder=false;
+        if (!objSource->lockLadderTop && !objSource->lockLadderDown) {
+            cout << "end Ladder " << endl;
+            objSource->SetGravityScale(1.0f);
+            objSource->setMove(Deplacement::PLATFORM);
+        }
+    }
+    f = f->GetNext();
+    if (e.a == f || e.b == f) {
+        cout << "end LadderDown " << endl;
+        objSource->lockLadderDown = false;
+        objSource->SetGravityScale(0.0f);// ici problem
+        
+    }
+    
+    f = f->GetNext();
+    if (e.a == f || e.b == f) {
+        cout << "end LadderTop " << endl;
+        objSource->lockLadderTop=false;
         objSource->SetGravityScale(1.0f);// ici problem
         objSource->setMove(Deplacement::PLATFORM);
     }
 }
-
 // code ObjectLadder
 void ObjectLadder::create(b2World * b2dworld){
     if(size() <= 3) {
@@ -85,58 +106,62 @@ void ObjectLadder::create(b2World * b2dworld){
     
     
     {
-     b2FixtureDef fixtureSide;
-     b2PolygonShape shape;
-     fixtureSide.density		= 0;
-     fixtureSide.restitution = 0;
-     fixtureSide.friction	= 0;
-     fixtureSide.isSensor    = true;
-     //UP, DOWN, LEFT, RIGHT};
-     
-     //RIGHT = 4, place END
-     //fixtureSide.id = 4;
-         b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()- getBoundingBox().getCenter());
+        b2FixtureDef fixtureSide;
+        b2PolygonShape shape;
+        fixtureSide.density		= 0;
+        fixtureSide.restitution = 0;
+        fixtureSide.friction	= 0;
+        fixtureSide.isSensor    = true;
+        //UP, DOWN, LEFT, RIGHT};
+        
+        //RIGHT = 4, place END
+        //fixtureSide.id = 4;
+        b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()- getBoundingBox().getCenter());
         b2Vec2 vec2 = screenPtToWorldPt(getBoundingBox().getCenter()
                                         + ofVec2f(0,getBoundingBox().getCenter().y
-                                        - getBoundingBox().getMax().y-3));
+                                                  - getBoundingBox().getMax().y-3));
         //vec2 = b2Vec2(0.f, 0.f);
         shape.SetAsBox(rect.x,3/30.f,vec2,0.f);
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
-     /*//LEFT = 3, place END - 1
-     //fixtureSide.id = 3;
-     vec2 = b2Vec2(-4.89/30.f,0.f);
-     shape.SetAsBox(2/30.f, rect.y, vec2, 0.f);
-     fixtureSide.shape		= &shape;
-     body->CreateFixture(&fixtureSide);
-     //DOWN = 2,
-     //fixtureSide.id = 2;
-     vec2 = b2Vec2(0.f, 4.89/30.f);
-     shape.SetAsBox(rect.x -2/30.f, 2/30.f, vec2, 0.f);
-     fixtureSide.shape		= &shape;
-     body->CreateFixture(&fixtureSide);
-     //UP = 1,
-     //fixtureSide.id = 1;
-     vec2 = b2Vec2(0.f, -2.8/30.f);
-     shape.SetAsBox(rect.x-3/30.f, 2/30.f, vec2, 0.f);
-     fixtureSide.shape = &shape;
-     body->CreateFixture(&fixtureSide);*/
-     }
+        //LEFT = 3, place END - 1
+        //fixtureSide.id = 3;
+        vec2 = screenPtToWorldPt(getBoundingBox().getCenter()
+                                 + ofVec2f(0,getBoundingBox().getCenter().y
+                                           - getBoundingBox().getMin().y-3));
+        
+        shape.SetAsBox(rect.x, 3/30.f, vec2, 0.f);
+        fixtureSide.shape		= &shape;
+        body->CreateFixture(&fixtureSide);
+        
+        /*//DOWN = 2,
+         //fixtureSide.id = 2;
+         vec2 = b2Vec2(0.f, 4.89/30.f);
+         shape.SetAsBox(rect.x -2/30.f, 2/30.f, vec2, 0.f);
+         fixtureSide.shape		= &shape;
+         body->CreateFixture(&fixtureSide);
+         //UP = 1,
+         //fixtureSide.id = 1;
+         vec2 = b2Vec2(0.f, -2.8/30.f);
+         shape.SetAsBox(rect.x-3/30.f, 2/30.f, vec2, 0.f);
+         fixtureSide.shape = &shape;
+         body->CreateFixture(&fixtureSide);*/
+    }
     
-        vector<b2Vec2>verts;
-        for (int i=0; i<MIN((int)pts.size(), b2_maxPolygonVertices); i++) {
-            verts.push_back(screenPtToWorldPt(pts[i]));
-        }
-        b2PolygonShape shape;
-        shape.Set(&verts[0], verts.size()-1);
-        fixture.shape		= &shape;
-        fixture.density		= density;
-        fixture.restitution = bounce;
-        fixture.friction	= friction;
-        fixture.isSensor    = true;
-        body->CreateFixture(&fixture);
+    vector<b2Vec2>verts;
+    for (int i=0; i<MIN((int)pts.size(), b2_maxPolygonVertices); i++) {
+        verts.push_back(screenPtToWorldPt(pts[i]));
+    }
+    b2PolygonShape shape;
+    shape.Set(&verts[0], verts.size()-1);
+    fixture.shape		= &shape;
+    fixture.density		= density;
+    fixture.restitution = bounce;
+    fixture.friction	= friction;
+    fixture.isSensor    = true;
+    body->CreateFixture(&fixture);
     
-
+    
     mesh.clear();
     ofPath path;
     ofPoint center = getCentroid2D();
@@ -150,7 +175,7 @@ void ObjectLadder::create(b2World * b2dworld){
     
     flagHasChanged();
     alive = true;
-
+    
 }
 void ObjectPlatformLadder::create(b2World * b2dworld){
     if(size() <= 3) {
