@@ -26,8 +26,6 @@ vector<ofPolyline> importImage(const string& path){
     }
     return poly;
 }
-
-
 //--------------------------------------------------------------
 void ofApp::setup() {
     

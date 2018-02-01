@@ -703,7 +703,6 @@
 		DCC24025AD26B4554B000385 /* Gui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = Gui.cpp; path = ../../../addons/ofxPiMapper/src/Gui/Gui.cpp; sourceTree = SOURCE_ROOT; };
 		DCF5B69973BBD1D53EB851D0 /* LogitechF310.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = LogitechF310.h; path = ../../../addons/ofxGLFWJoystick/src/LogitechF310.h; sourceTree = SOURCE_ROOT; };
 		DD6886BE6922252FABE36532 /* Platform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = Platform.h; path = src/Box2D/PhysicalizedElement/Platform.h; sourceTree = SOURCE_ROOT; };
-		DD824960CC4439CBF57B978E /* ImportData.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ImportData.h; path = src/ImportData.h; sourceTree = SOURCE_ROOT; };
 		DEA2EDC0AFD59176FDEDC222 /* ofxCvShortImage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxCvShortImage.h; path = ../../../addons/ofxOpenCv/src/ofxCvShortImage.h; sourceTree = SOURCE_ROOT; };
 		DEB9567092083B5760FEA90E /* b2PulleyJoint.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = b2PulleyJoint.h; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Joints/b2PulleyJoint.h; sourceTree = SOURCE_ROOT; };
 		DF0C7B74CA21E3F3C01B16A2 /* b2ChainAndCircleContact.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2ChainAndCircleContact.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Dynamics/Contacts/b2ChainAndCircleContact.cpp; sourceTree = SOURCE_ROOT; };
@@ -1879,7 +1878,6 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				DD98FC544A9C83C1A1DE7A25 /* Box2D */,
 				B82E386A449237D0A434B116 /* Constant.h */,
-				DD824960CC4439CBF57B978E /* ImportData.h */,
 				1E155DBA7F4B3CF45BF2604B /* Light.h */,
 				91968DFB2F6469287CD05304 /* ScenesMapping.cpp */,
 				68AA73F611069A7925427D54 /* ScenesMapping.h */,

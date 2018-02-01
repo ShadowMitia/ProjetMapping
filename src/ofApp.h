@@ -11,7 +11,6 @@
 #include "Avatar.h"
 #include "Constant.h"
 #include "ofxCv.h"
-#include "ImportData.h"
 #include "ofxGLFWJoystick.h"
 #include "shift.h"
 //#define USE_WIIMOTE

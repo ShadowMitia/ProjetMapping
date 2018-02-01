@@ -64,8 +64,9 @@ void Avatar::update(Shift *s)
         jump();
     }
     if (!s->a && clicJump) {
-        jt->stopThread();
-        polygon.body->SetGravityScale(1.0);
+        if (polygon.getVelocity().y < - VarConst::impulseJumpAvatarMIN) {
+            polygon.setVelocity(polygon.getVelocity().x,  - VarConst::impulseJumpAvatarMIN);
+        }
         clicJump = false;
     }
     (*this.*preMove)(s);
@@ -193,26 +194,7 @@ void Avatar::jump()
     {
         setJumping(true);
         cloneJump = false;
-        // allez zou, on vire l'inertie du joueur pour ne pas avoir d'elan
-        //polygon.setVelocity(0, 0);
-        // impulsion droite
-        b2Vec2 impulseH = VarConst::impulseJumpAvatar * b2Vec2(0.0f, -1.0f);
-        // impulsion latterale
-        b2Vec2 impulseL = VarConst::impulseLateralJumpAvatar * moveInputX * b2Vec2(1.0f, 0.0f);
-        //calcul de la direction et intensité du saut
-        b2Vec2 impulse = impulseH + impulseL;
-        impulse *= impulseH.Length() / impulse.Length();
-        
-        //si on ne saute pas droit, on attenue le saut pour ne pas avoir l'impression que le joueur accelere en sautant
-        /*
-         if (abs(moveInputX) > 0)
-         {
-         impulse *= VarConst::attenuationImpulseJump;
-         }*/
-        impulse = impulseH * (1 - polygon.getVelocity().x/VarConst::speedAvatarMax);
-        polygon.body->SetGravityScale(VarConst::gravityJumpTime);
-        jt->startThread();
-        polygon.body->ApplyLinearImpulse(impulseH, polygon.body->GetLocalCenter(), true);
+        polygon.setVelocity(polygon.getVelocity().x, - VarConst::impulseJumpAvatarMAX);
         
         
     }
@@ -221,8 +203,6 @@ void Avatar::setJumping(bool _bool)
 {
     jumping = _bool;
 }
-
-
 void Avatar::keyPressed(int key)
 {
     
@@ -303,14 +283,11 @@ void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreCon
     
 }
 
-
-
 void coyoteTime::threadedFunction() {
     time.reset();
     time.waitNext();
     a->setJumping(true);
 }
-
 void jumpTime::threadedFunction(){
     time.reset();
     time.waitNext();
