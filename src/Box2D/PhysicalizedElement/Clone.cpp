@@ -50,9 +50,7 @@ void CloneBox2d::create()
     //polygon.setPhysics(10.f, 0, 0);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.FilterDataObjet.categoryBits = 0x0064;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016;
-    polygon.FilterDataSide.categoryBits = 0x0002;
-    polygon.FilterDataSide.maskBits = 0x0016;
+    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016| 0x0008;
     polygon.create(portalSource->getb2World(),false);
     
     polygon.setData(new dataSprite());
@@ -72,10 +70,12 @@ void CloneBox2d::create()
         collisionFonction =  &CloneBox2d::collisionFonctionUnknown;
     }
     
-    if (objSource->viewpoint == Viewpoint::MODE_ANGLE){
-        portalDestination = portalSource->linkedPortal[0];}
+    if (!objSource->viewPoint){
+        portal = false;
+        portalDestination = portalSource->linkedPortal[portal];}
     else{
-        portalDestination = portalSource->linkedPortal[1];}
+        portal = true;
+        portalDestination = portalSource->linkedPortal[portal];}
 }
 void CloneBox2d::update()
 {
@@ -87,15 +87,17 @@ void CloneBox2d::update()
     if (t.x < - 3  || t.y < -3) {
         Portal *tempPortal = portalDestination;
         if (!objSource->viewPoint){
-            portalDestination = portalSource->linkedPortal[0];}
+            portal = false;
+            portalDestination = portalSource->linkedPortal[portal];}
         else{
-            portalDestination = portalSource->linkedPortal[1];}
+            portal = true;
+            portalDestination = portalSource->linkedPortal[portal];}
         if (tempPortal != portalDestination) {
             for (int i = 1; i<5; ++i) {
                 polygon.tabCollision[i] = 0;
             }
         }
-    }
+    }else objSource->viewPoint=portal;
     
     if (portalDestination != nullptr) {
         ofPoint temp;
@@ -201,7 +203,3 @@ void CloneBox2d::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2
 void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
 {
 }
-
-
-
-

@@ -143,6 +143,7 @@
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
 		BCB52972201E0CB0001A35E1 /* PlatformLadder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCB52970201E0CB0001A35E1 /* PlatformLadder.cpp */; };
 		BCF69FB2200F821200A0F48D /* CloneAvatar.h in Sources */ = {isa = PBXBuildFile; fileRef = BCF69FB0200F821200A0F48D /* CloneAvatar.h */; };
+		BCFE3EC22024F04100B66E00 /* ObjBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCFE3EC02024F04100B66E00 /* ObjBlock.cpp */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
 		BF2CFA915EDBB99B0F92489A /* b2ChainShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52E6BAAF72BF7CDFDF5F9C /* b2ChainShape.cpp */; };
 		BF30D7A362CEBF9286D087FD /* b2WorldCallbacks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1325975A2867C7088859835 /* b2WorldCallbacks.cpp */; };
@@ -619,6 +620,8 @@
 		BCF69FB5200F851600A0F48D /* ConditionOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConditionOutput.h; path = Box2D/PhysicalizedElement/ConditionOutput.h; sourceTree = "<group>"; };
 		BCF69FB72010038000A0F48D /* ConditionNull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConditionNull.h; sourceTree = "<group>"; };
 		BCF69FB820114FF800A0F48D /* shift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shift.h; sourceTree = "<group>"; };
+		BCFE3EC02024F04100B66E00 /* ObjBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjBlock.cpp; path = Box2D/PhysicalizedElement/Teleportable/ObjBlock.cpp; sourceTree = "<group>"; };
+		BCFE3EC12024F04100B66E00 /* ObjBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjBlock.h; path = Box2D/PhysicalizedElement/Teleportable/ObjBlock.h; sourceTree = "<group>"; };
 		BDBE053980FA01FAD543D782 /* CmdManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CmdManager.cpp; path = ../../../addons/ofxPiMapper/src/Commands/CmdManager.cpp; sourceTree = SOURCE_ROOT; };
 		BEB021F1F92E6E734BB409A2 /* b2StackAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2StackAllocator.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Common/b2StackAllocator.cpp; sourceTree = SOURCE_ROOT; };
 		BF85CBDEA83E69E3C0C7B0F8 /* ofxBox2dEdge.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dEdge.h; path = ../../../addons/ofxLiquidFun/src/ofxBox2dEdge.h; sourceTree = SOURCE_ROOT; };
@@ -1160,6 +1163,8 @@
 				631150619F0590AD8D6E2C75 /* Avatar.h */,
 				9890663DFB10C6DE1A5B4095 /* Teleportable.cpp */,
 				7C11B17C768802156CF3C9A2 /* Teleportable.h */,
+				BCFE3EC02024F04100B66E00 /* ObjBlock.cpp */,
+				BCFE3EC12024F04100B66E00 /* ObjBlock.h */,
 			);
 			name = Teleportable;
 			sourceTree = "<group>";
@@ -2160,6 +2165,7 @@
 				D454A93592CDD8538BD16BD2 /* ofxBox2dBaseShape.cpp in Sources */,
 				87D2F402BEEF5E3CADC9DEB0 /* ofxBox2dCircle.cpp in Sources */,
 				C456A2128B1FD676B183B037 /* ofxBox2dEdge.cpp in Sources */,
+				BCFE3EC22024F04100B66E00 /* ObjBlock.cpp in Sources */,
 				E68D55BE4AE4CA5B729522EA /* ofxBox2dJoint.cpp in Sources */,
 				81E8321493F1FC980D766F87 /* ofxBox2dParticleSystem.cpp in Sources */,
 				2524F40639A33E4A34DF0F1C /* ofxBox2dPolygon.cpp in Sources */,

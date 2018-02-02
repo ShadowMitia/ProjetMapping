@@ -10,7 +10,6 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Teleportable.h"
-#include "ofxGLFWJoystick.h"
 #include "PhysicalizedElement.h"
 #include "shift.h"
 

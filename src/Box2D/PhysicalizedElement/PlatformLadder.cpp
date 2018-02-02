@@ -30,13 +30,11 @@ void PlatformLadder::create(b2World* _b2World, ofPolyline _groundLine){
 
 void PlatformLadder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
-    
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             objSource->SetGravityScale(.0f);
             objSource->setMove(Deplacement::PLATFORMLADDER);
         }
-        
     }
 }
 

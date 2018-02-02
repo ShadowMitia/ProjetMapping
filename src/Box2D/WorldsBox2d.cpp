@@ -11,8 +11,6 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "PhysicalizedElement/Teleportable/Avatar.h"
-
 std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world){
   std::vector<Portal*> portals;
 
@@ -105,7 +103,7 @@ void WorldsBox2d::setup(Shift (*input)[4]){
     
     createAvatar( 100 , 300,input[0]);
     // 48, 208(-1), 256 et 416(-1)
-    
+    creataBlock(170, 300);
     //porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
     
     
@@ -200,6 +198,9 @@ void WorldsBox2d::draw(){
     for (auto &ladder : ladders) {
         ladder->draw();
     }
+    for (auto &block : blocks){
+        block->draw();
+    }
     //ladders[0]->draw();
     //warterfalls->draw();
     world.draw();
@@ -264,4 +265,9 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
 /// attention code deguelas ///
 void WorldsBox2d::importPortal(){
     
+}
+void WorldsBox2d::creataBlock(int x, int y){
+    ObjBlock * block = new ObjBlock(world.getWorld());
+    block->setPosition(x, y);
+    blocks.push_back(block);
 }

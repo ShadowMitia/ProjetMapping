@@ -18,6 +18,7 @@
 #include "Ladder.h"
 #include "Waterfalls.h"
 #include "Clone.h"
+#include "ObjBlock.h"
 
 #include <vector>
 #include "shift.h"
@@ -33,6 +34,8 @@ public:
     std::vector< Platform *> platforms;
     std::vector< Ladder *> ladders;
     std::vector< CloneBox2d *> clones;
+    std::vector<ObjBlock *> blocks;
+    
     
     Waterfalls*               warterfalls;
     std::vector< Teleportable* > teleportables;
@@ -41,6 +44,7 @@ public:
     void draw();
     void update(Shift (*input)[4]);
     void createBoundsModif(float x, float y, float w, float h);
+    void creataBlock( int x, int y);
     void createAvatar(int x, int y, Shift *_s);
     void createPlatform(ofPolyline _polyline);
     void createPortal();

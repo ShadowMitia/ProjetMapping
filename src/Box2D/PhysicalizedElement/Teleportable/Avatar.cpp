@@ -9,6 +9,7 @@
 #include "Platform.h"
 //#include "PickUp.h"
 #include "../Portal.h"
+
 std::vector<ofPoint> loadPoints(const std::string& file)
 {
     std::vector<ofPoint> pts;
@@ -20,6 +21,7 @@ std::vector<ofPoint> loadPoints(const std::string& file)
     }
     return pts;
 }
+
 Avatar::Avatar(b2World* box2d,Shift *_s)
 {
     ////////// POLYGONE ///////////////////
@@ -29,9 +31,7 @@ Avatar::Avatar(b2World* box2d,Shift *_s)
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     //polygon.create(box2d);
     polygon.FilterDataObjet.categoryBits = 0x0001;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032 | 0x0128;
-    polygon.FilterDataSide.categoryBits = 0x0002;
-    polygon.FilterDataSide.maskBits = 0x0016;
+    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032 | 0x0008 | 0x0128;
     
     polygon.create(box2d, false);
     polygon.body->SetFixedRotation(true);
@@ -211,6 +211,12 @@ void Avatar::keyReleased(int key)
 /////////////// collision avatar ///////////////
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
+    if (OtherSprite->sprite==Sprite::BLOCK) {
+        if (e.contact->GetManifold()->localNormal.y == 1) {
+            setJumping(false);
+        }
+    }
+    
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]++;

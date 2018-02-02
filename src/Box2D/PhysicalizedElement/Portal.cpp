@@ -29,7 +29,7 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _dire
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0032;
-    tempFilter.maskBits =  0x0001;
+    tempFilter.maskBits =  0x0001| 0x0008;
     polygon.setFilterData(tempFilter);
     
     polygon.setData(new dataSprite());
