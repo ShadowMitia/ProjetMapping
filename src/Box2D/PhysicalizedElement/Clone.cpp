@@ -86,7 +86,7 @@ void CloneBox2d::update()
     t = t*portalSource->orient;
     if (t.x < - 3  || t.y < -3) {
         Portal *tempPortal = portalDestination;
-        if (objSource->viewpoint == Viewpoint::MODE_ANGLE){
+        if (!objSource->viewPoint){
             portalDestination = portalSource->linkedPortal[0];}
         else{
             portalDestination = portalSource->linkedPortal[1];}

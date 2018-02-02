@@ -30,17 +30,17 @@ public:
 
 class Avatar : public Teleportable {
 public:
-    Avatar(b2World* box2d);
+    Avatar(b2World* box2d,Shift *s);
     bool jumping;
-    
+    Shift *s;
     bool clicJump;
     bool cloneJump;
     Deplacement modeDeplace;
     bool lockLadderTop = false;
     bool lockLadderDown =false;
 
-    void presUpdate(Shift *s);
-    void update(Shift *s) ;
+    void presUpdate();
+    void update() ;
     void draw() ;
     void setPosition(ofVec2f vec);
     void setPosition(int x, int y);

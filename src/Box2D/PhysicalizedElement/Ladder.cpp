@@ -31,14 +31,14 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
     
     b2Fixture* f = polygon.body->GetFixtureList();
-    if (e.a == f || e.b == f) {
+    if (_fixture == f) {
         cout << "Start Ladder " << endl;
         objSource->lockLadderDown =true;
         //objSource->setMove(Deplacement::DOWN);
     }
     
     f = f->GetNext();
-    if (e.a == f || e.b == f) {
+    if (_fixture == f) {
         cout << "Start LadderDown " << endl;
         objSource->SetGravityScale(.0f);
         objSource->setMove(Deplacement::PLATFORMLADDER);
@@ -46,7 +46,7 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     }
     
     f = f->GetNext();
-    if (e.a == f || e.b == f) {
+    if (_fixture == f) {
         cout << "Start LadderTop " << endl;
         objSource->lockLadderTop=true;
         objSource->SetGravityScale(.0f);
@@ -60,7 +60,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     
     b2Fixture* f = polygon.body->GetFixtureList();
     
-    if (e.a == f || e.b == f) {
+    if (_fixture == f) {
         if (!objSource->lockLadderTop && !objSource->lockLadderDown) {
             cout << "End Ladder " << endl;
             objSource->SetGravityScale(1.0f);
@@ -68,7 +68,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
         }
     }
     f = f->GetNext();
-    if (e.a == f || e.b == f) {
+    if (_fixture == f) {
         cout << "End LadderDown " << endl;
         objSource->lockLadderDown = false;
         objSource->SetGravityScale(0.0f);// ici problem
@@ -76,7 +76,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     }
     
     f = f->GetNext();
-    if (e.a == f || e.b == f) {
+    if (_fixture == f) {
         cout << "End LadderTop " << endl;
         objSource->lockLadderTop=false;
         objSource->SetGravityScale(1.0f);// ici problem

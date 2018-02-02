@@ -32,7 +32,7 @@ void ofApp::setup() {
     ofSetLogLevel(OF_LOG_SILENT);
     
     worlds = new WorldsBox2d;
-    worlds->setup();
+    worlds->setup(&inputButton);
     
     scene1 = new Scene1(worlds, "Map_test_portails_back.png");
     //scene1 = new Scene1(worlds, "map_saut.jpg");
@@ -129,6 +129,9 @@ void ofApp::keyPressed(int key)
     }
     else if (key ==' '){
         inputButton[0].a = true;
+    }
+    else if (key == OF_KEY_LEFT_ALT){
+        inputButton[0].b = !inputButton[0].b;
     }
     
     mapping.keyPressed(key);

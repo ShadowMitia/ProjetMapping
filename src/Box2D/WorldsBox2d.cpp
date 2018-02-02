@@ -92,7 +92,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 
   return portals;
 }
-void WorldsBox2d::setup(){
+void WorldsBox2d::setup(Shift (*input)[4]){
     
     
     world.init();
@@ -103,13 +103,14 @@ void WorldsBox2d::setup(){
     
     //importPortal();
     
-    createAvatar( 100 , 300 );
+    createAvatar( 100 , 300,input[0]);
     // 48, 208(-1), 256 et 416(-1)
     
     //porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
     
     
-    
+     ofRectangle rec = ofRectangle(0, 0, 5, 5);
+     rec.setFromCenter(0, 0, 5, 5);
      Portal *temp;
      temp = new Portal(ofRectangle(48 - 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
      porportal.push_back(temp);
@@ -204,8 +205,8 @@ void WorldsBox2d::draw(){
     world.draw();
     
 }
-void WorldsBox2d::createAvatar(int x, int y){
-    Avatar * avatar = new Avatar(world.getWorld());
+void WorldsBox2d::createAvatar(int x, int y, Shift *_s){
+    Avatar * avatar = new Avatar(world.getWorld(),_s);
     avatar->setPosition(x, y);
     avatars.push_back(avatar);
 }
@@ -230,9 +231,9 @@ void WorldsBox2d::update(Shift (*input)[4]){
 
 
     for (std::size_t j = 0; j < avatars.size(); j++){
-    avatars[j]->presUpdate(input[j]);
+    avatars[j]->presUpdate();
 
-    avatars[j]->update(input[j]);
+    avatars[j]->update();
     }
     
     //warterfalls->update();

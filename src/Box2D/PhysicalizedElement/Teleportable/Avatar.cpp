@@ -20,7 +20,7 @@ std::vector<ofPoint> loadPoints(const std::string& file)
     }
     return pts;
 }
-Avatar::Avatar(b2World* box2d)
+Avatar::Avatar(b2World* box2d,Shift *_s)
 {
     ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
@@ -51,12 +51,13 @@ Avatar::Avatar(b2World* box2d)
     //polygon.body->SetGravityScale(0.0);
     
     ct = new coyoteTime(VarConst::coyoteTime,this);
+    s=_s;
 }
-void Avatar::presUpdate(Shift *s)
+void Avatar::presUpdate()
 {
 
 }
-void Avatar::update(Shift *s)
+void Avatar::update()
 {
     if (s->a && !clicJump) {
         clicJump = true;
@@ -68,6 +69,7 @@ void Avatar::update(Shift *s)
         }
         clicJump = false;
     }
+    viewPoint = s->b;
     (*this.*preMove)(s);
     polygon.setVelocity(moveInputX, moveInputY);
     
@@ -202,23 +204,9 @@ void Avatar::setJumping(bool _bool)
 }
 void Avatar::keyPressed(int key)
 {
-    
-     if (key == OF_KEY_LEFT_ALT)
-    {
-        if (viewpoint == Viewpoint::MODE_PERSPECTIVE) {
-            viewpoint = Viewpoint::MODE_ANGLE;
-        }
-        else viewpoint = Viewpoint::MODE_PERSPECTIVE;
-    }
-    
 }
 void Avatar::keyReleased(int key)
 {
-    
-    if (key == OF_KEY_LEFT_ALT)
-    {
-        //viewpoint = Viewpoint::MODE_ANGLE;
-    }
 }
 /////////////// collision avatar ///////////////
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)

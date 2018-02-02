@@ -23,5 +23,6 @@ public:
     void setVelocity(ofVec2f v);
     void SetGravityScale(float32 scale);
     Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
+    bool viewPoint = false;
 };
 

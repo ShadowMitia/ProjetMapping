@@ -37,11 +37,11 @@ public:
     Waterfalls*               warterfalls;
     std::vector< Teleportable* > teleportables;
     
-    void setup();
+    void setup(Shift (*input)[4]);
     void draw();
     void update(Shift (*input)[4]);
     void createBoundsModif(float x, float y, float w, float h);
-    void createAvatar(int x, int y);
+    void createAvatar(int x, int y, Shift *_s);
     void createPlatform(ofPolyline _polyline);
     void createPortal();
     void createLadder(ofPolyline _polyline);

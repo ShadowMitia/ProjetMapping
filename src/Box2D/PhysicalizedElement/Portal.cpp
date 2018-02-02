@@ -36,8 +36,7 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _dire
     dataSprite* data = (dataSprite*) polygon.getData();
     data->sprite = Sprite::PORTAL;
     data->physicalizedElement = this;
-    
-    polygon.setPosition(_portal.x + _portal.width/2 , _portal.y + _portal.height/2);
+    polygon.setPosition(_portal.getCenter());
     polygon.body->GetFixtureList()->SetSensor(true);
     
     switch(_output){
