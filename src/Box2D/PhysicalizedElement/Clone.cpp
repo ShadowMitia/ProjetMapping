@@ -37,6 +37,7 @@ CloneBox2d::~CloneBox2d()
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
         
+        //// atention bug ici
         Avatar* objAvatar = static_cast<Avatar*>(objSource);
         objAvatar->setMove(portalDestination->direct);
         
@@ -71,6 +72,10 @@ void CloneBox2d::create()
         collisionFonction =  &CloneBox2d::collisionFonctionUnknown;
     }
     
+    if (objSource->viewpoint == Viewpoint::MODE_ANGLE){
+        portalDestination = portalSource->linkedPortal[0];}
+    else{
+        portalDestination = portalSource->linkedPortal[1];}
 }
 void CloneBox2d::update()
 {
@@ -78,8 +83,8 @@ void CloneBox2d::update()
     
     const ofVec2f (Portal::*f)(ofVec2f) = portalSource->getObjPosition;
     ofPoint t = (portalSource->*f)(objSource->getPosition());
-    t=t*portalSource->orient;
-    if (t.x + t.y< - 4.8  ) {
+    t = t*portalSource->orient;
+    if (t.x < - 3  || t.y < -3) {
         Portal *tempPortal = portalDestination;
         if (objSource->viewpoint == Viewpoint::MODE_ANGLE){
             portalDestination = portalSource->linkedPortal[0];}
