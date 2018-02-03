@@ -48,7 +48,6 @@ void ObjBlock::draw(){
     ofSetColor(ofColor::white);
 }
 void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
-    cout << "contact Block" <<  ofGetElapsedTimeMicros()<< endl;
     if (OtherSprite->sprite == Sprite::AVATAR) {
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
     }
@@ -57,6 +56,5 @@ void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSpri
 void ObjBlock::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         polygon.body->SetLinearVelocity(b2Vec2(0, 0));
-        //_fixture->GetBody()->GetLinearVelocity()
     }
 }

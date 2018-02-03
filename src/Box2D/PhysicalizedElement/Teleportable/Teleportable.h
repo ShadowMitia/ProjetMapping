@@ -10,19 +10,19 @@
 #include "ofMain.h"
 #include "../Constant.h"
 #include "PhysicalizedElement.h"
-
-
-enum class Viewpoint { MODE_ANGLE, MODE_PERSPECTIVE };
+#include "Face.h"
 
 class Teleportable : public PhysicalizedElement {
 public:
+    Face* face;
     ObjectGame polygon;
     ofVec2f getPosition();
     ofVec2f getVelocity();
     void setPosition(ofVec2f p);
     void setVelocity(ofVec2f v);
+    
     void SetGravityScale(float32 scale);
-    Viewpoint viewpoint = Viewpoint::MODE_ANGLE;
+    
     bool viewPoint = false;
 };
 

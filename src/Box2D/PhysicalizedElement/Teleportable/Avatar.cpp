@@ -8,7 +8,7 @@
 #include "Avatar.h"
 #include "Platform.h"
 //#include "PickUp.h"
-#include "../Portal.h"
+#include "Portal.h"
 
 std::vector<ofPoint> loadPoints(const std::string& file)
 {
