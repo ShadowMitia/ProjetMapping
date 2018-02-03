@@ -11,76 +11,81 @@
 #include <cstdlib>
 #include <iostream>
 
+
 std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world){
   std::vector<Portal*> portals;
 
   for (std::size_t i = 0; i < parameters.size(); ++i)
     {
-      if (parameters[i][4].empty())
+      if (parameters[i][4].empty() && parameters[i][5].empty())
 	{
 	  continue;
 	}
+
       float x = std::atof(parameters[i][4].c_str());
       float y = std::atof(parameters[i][5].c_str());
       float w = std::atof(parameters[i][6].c_str());
       float h = std::atof(parameters[i][7].c_str());
 
+      std::vector<std::tuple<std::string, ConditionOutput>> conditions = {
+	{"left", ConditionOutput::VerticalLeft},
+	{"right", ConditionOutput::VerticalRight},
+	{"top", ConditionOutput::HorizontalTop},
+	{"down", ConditionOutput::HorizontalDown},
+	{"cornertopleft", ConditionOutput::CornerTopLeft},
+	{"cornertopright", ConditionOutput::CornerTopRight},
+	{"cornerdownleft", ConditionOutput::CornerDownLeft},
+	{"cornerdownright", ConditionOutput::CornerDownRight},
+      };
+
+      bool found = false;
       ConditionOutput co = ConditionOutput::VerticalLeft;
-      if ("left" == parameters[i][3])
+      for (auto condition : conditions)
 	{
-	  co = ConditionOutput::VerticalLeft;
+	  if (std::get<0>(condition) == ofToLower(parameters[i][3]))
+	    {
+	      co = std::get<1>(condition);
+	      found = true;
+	      break;
+	    }
 	}
-      else if ("right" == parameters[i][3])
-	{
-	   co = ConditionOutput::VerticalRight;
-	}
-      else if ("down" == parameters[i][3])
-	{
-	  co = ConditionOutput::HorizontalDown;
-	}
-      else if ("top" == parameters[i][3])
-	{
-	  co = ConditionOutput::HorizontalTop;
-	}
-      else
+
+      if (!found)
 	{
 	  std::cout << "Invalid condition output: " << parameters[i][3] << " for id: " << i << '\n';
 	}
 
+      std::vector<std::tuple<std::string, Deplacement>> deplacements = {
+	{"platform", Deplacement::PLATFORM},
+	{"top", Deplacement::TOP},
+	{"down", Deplacement::DOWN},
+	{"left", Deplacement::LEFT},
+	{"right", Deplacement::RIGHT},
+      };
+
       Deplacement d = Deplacement::PLATFORM;
-      if ("PLATFORM" == parameters[i][10])
+
+      found = false;
+      for (auto condition : deplacements)
 	{
-	  d = Deplacement::PLATFORM;
+	  if (std::get<0>(condition) == ofToLower(parameters[i][10]))
+	    {
+	      d = std::get<1>(condition);
+	      found = true;
+	      break;
+	    }
 	}
-      else if ("TOP" == parameters[i][10])
-	{
-	  d = Deplacement::TOP;
-	}
-      else if ("DOWN" == parameters[i][10])
-	{
-	  d = Deplacement::DOWN;
-	}
-      else if ("LEFT" == parameters[i][10])
-	{
-	  d = Deplacement::LEFT;
-	}
-      else if ("RIGHT" == parameters[i][10])
-	{
-	  d = Deplacement::RIGHT;
-	}
-      else
+
+      if (!found)
 	{
 	  std::cout << "Invalid deplacement: " << parameters[i][10] << " for id: " << i << '\n';
 	}
+
       portals.push_back(new Portal(ofRectangle(x, y, w, h), world, d, co));
     }
 
-  for (std::size_t i = 0; i < parameters.size(); ++i)
+  for (std::size_t i = 0; i < portals.size(); ++i)
       {
-	if (parameters[i][4].empty())
-	{
-	  continue;
-	}
 	int index1 = std::atoi(parameters[i][8].c_str());
 	int index2 = std::atoi(parameters[i][9].c_str());
 	Portal* indexPortal1 = (index1 == -1) ? nullptr : portals[index1];
@@ -90,6 +95,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 
   return portals;
 }
+
 void WorldsBox2d::setup(Shift (*input)[4]){
     
     
@@ -104,9 +110,9 @@ void WorldsBox2d::setup(Shift (*input)[4]){
     createAvatar( 100 , 300,input[0]);
     // 48, 208(-1), 256 et 416(-1)
     creataBlock(170, 300);
-    //porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
+
     
-    
+
      ofRectangle rec = ofRectangle(0, 0, 5, 5);
      rec.setFromCenter(0, 0, 5, 5);
      Portal *temp;
@@ -163,7 +169,8 @@ void WorldsBox2d::setup(Shift (*input)[4]){
     porportal[13]->linke(porportal[12], nullptr);
 
 
-    
+
+    //porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
 
     for (auto &avatar : avatars)
     {
