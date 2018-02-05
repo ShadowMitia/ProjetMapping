@@ -10,5 +10,6 @@
 
 struct Face{
     ofRectangle rect;
-    Face * matrix[3][3];
+    Face * matrix[9];
 };
+
