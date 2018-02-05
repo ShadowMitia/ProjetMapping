@@ -11,13 +11,23 @@
 void Scene1::draw()
 {
     ofClear(0);
+    
+    drawMap.begin();
+    background.draw(0, 0);
+    drawMap.end();
+    transform.setFboIni(&drawMap);
+    
+    
+    drawMap.draw(0, 0);
+
+    
+    
     //ofBackground(200, 200, 0);
     renderPlatform();
-    image.draw(0, 0);
+    background.draw(0, 0);
     worldsBox2d->draw();
-
     // creation du mask pour les ombres
-    mask.begin();
+    /*mask.begin();
     ofBackground(0, 0, 0);
     for (std::size_t i = 0; i < worldsBox2d->avatars.size(); i++) {
         lightRender.lights[i].vel.x = worldsBox2d->avatars[i]->polygon.getPosition().x;
@@ -31,7 +41,7 @@ void Scene1::draw()
     }
     mask.end();
 
-    //mask.draw(0,0);
+    //mask.draw(0,0);*/
 }
 
 void Scene1::renderObjects()

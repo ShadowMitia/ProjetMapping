@@ -13,7 +13,9 @@
 #include "ofxCv.h"
 #include "ofxGLFWJoystick.h"
 #include "shift.h"
+#include "Face.h"
 //#define USE_WIIMOTE
+
 
 #ifdef USE_WIIMOTE
 #include "ofxWiiuse.h"
@@ -28,6 +30,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
         
     public:
         
+        Face faces[4];
         bool intput[4][6];
         void setup() override;
         void update() override;

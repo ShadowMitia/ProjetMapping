@@ -70,20 +70,12 @@ void ofApp::setup() {
         worlds->createLadder(ladders[i]);
     }
     
-    // Import blocs
-    /*
-    std::vector<ofPolyline> boxes = importImage("Map_prog_bloc_blanc.png");
-    for (std::size_t i = 0; i < boxes.size() - 1; i++)
-    {
-        //worlds->createBox(boxes[i]);
-    }
     
-    // Import pickups
-    std::vector<ofPolyline> pickups = importImage("Map_prog_pickup_blanc.png");
-    for (std::size_t i = 0; i < pickups.size() - 1; i++)
-    {
-        //worlds->createPickup(pickups[i]);
-    }*/
+    ofPoint p;
+    p =ofPoint(0,0);
+    //faces[0].rect.set(p, <#float w#>, <#float h#>);
+    
+    
     
 #ifdef USE_WIIMOTE
     wiiuse.addListener(this);
