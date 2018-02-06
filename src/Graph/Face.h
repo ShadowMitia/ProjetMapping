@@ -12,7 +12,7 @@
 
 struct Face{
     ofRectangle rect;
-    Face * matrix[9];
+    Face * matrix[1][9];
 };
 
 class Transform{
@@ -34,14 +34,14 @@ public:
     void update(Face* face, ofVec2f p, ofRectangle imag){
         
         ofMatrix3x3 matrixX , matrixY;
-        matrixX.set(face->matrix[0]->rect.x, face->matrix[1]->rect.x, face->matrix[2]->rect.x,
-                    face->matrix[3]->rect.x, face->matrix[4]->rect.x, face->matrix[5]->rect.x,
-                    face->matrix[6]->rect.x, face->matrix[7]->rect.x, face->matrix[8]->rect.x);
+        matrixX.set(face->matrix[0][0]->rect.x, face->matrix[0][1]->rect.x, face->matrix[0][2]->rect.x,
+                    face->matrix[0][3]->rect.x, face->matrix[0][4]->rect.x, face->matrix[0][5]->rect.x,
+                    face->matrix[0][6]->rect.x, face->matrix[0][7]->rect.x, face->matrix[0][8]->rect.x);
         
         
-        matrixY.set(face->matrix[0]->rect.y, face->matrix[1]->rect.y, face->matrix[2]->rect.y,
-                    face->matrix[3]->rect.y, face->matrix[4]->rect.y, face->matrix[5]->rect.y,
-                    face->matrix[6]->rect.y, face->matrix[7]->rect.y, face->matrix[8]->rect.y);
+        matrixY.set(face->matrix[0][0]->rect.y, face->matrix[0][1]->rect.y, face->matrix[0][2]->rect.y,
+                    face->matrix[0][3]->rect.y, face->matrix[0][4]->rect.y, face->matrix[0][5]->rect.y,
+                    face->matrix[0][6]->rect.y, face->matrix[0][7]->rect.y, face->matrix[0][8]->rect.y);
         
         
 
