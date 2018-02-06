@@ -32,6 +32,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
     public:
         
         Face faces[13];
+        vector<SpriteObj*> sprites;
         bool intput[4][6];
         void setup() override;
         void update() override;

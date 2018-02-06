@@ -96,7 +96,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
   return portals;
 }
 
-void WorldsBox2d::setup(Shift (*input)[4]){
+void WorldsBox2d::setup(){
     
     
     world.init();
@@ -173,10 +173,6 @@ void WorldsBox2d::setup(Shift (*input)[4]){
 
     porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
 
-    for (auto &avatar : avatars)
-    {
-        teleportables.push_back(avatar);
-    }
     
     warterfalls = new Waterfalls(&world);
     
@@ -219,7 +215,7 @@ void WorldsBox2d::createAvatar(AvatarDef* _avatarDef){
     avatar->setPosition(_avatarDef->positionInit.x, _avatarDef->positionInit.y);
     avatars.push_back(avatar);
 }
-void WorldsBox2d::update(Shift (*input)[4]){
+void WorldsBox2d::update(){
 
     world.update();
     

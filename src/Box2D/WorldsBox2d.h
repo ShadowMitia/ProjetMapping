@@ -40,9 +40,9 @@ public:
     Waterfalls*               warterfalls;
     std::vector< Teleportable* > teleportables;
     
-    void setup(Shift (*input)[4]);
+    void setup();
     void draw();
-    void update(Shift (*input)[4]);
+    void update();
     void createBoundsModif(float x, float y, float w, float h);
     void creataBlock( int x, int y);
     void createAvatar(AvatarDef* _avatarDef);

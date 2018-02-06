@@ -36,6 +36,7 @@ CloneBox2d::~CloneBox2d()
         ofVec2f v = objSource->getVelocity();
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
+        objSource->sprite->face = portalDestination->face;
         
         //// atention bug ici
         Avatar* objAvatar = static_cast<Avatar*>(objSource);

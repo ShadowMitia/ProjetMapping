@@ -12,7 +12,7 @@
 #include "Clone.h"
 #include "utils.h"
 #include "Avatar.h"
-
+#include "Face.h"
 
 enum class ConditionOutput{VerticalLeft,VerticalRight, HorizontalTop, HorizontalDown, CornerTopLeft, CornerTopRight, CornerDownLeft, CornerDownRight};
 //enum class PortalDirection{leftDirection, rightDirection, topDirection, downDirection};
@@ -24,6 +24,7 @@ public:
     
     ofVec2f orient;
     Deplacement direct;
+    Face* face;
     Portal *linkedPortal[2];
     ofRectangle portalRect;
     b2World* getb2World();
@@ -38,6 +39,7 @@ public:
     void draw();
     
 private:
+    
     WorldsBox2d* worldsBox2d;
     ofxBox2dPolygon polygon;
     std::vector< CloneBox2d *> clones;

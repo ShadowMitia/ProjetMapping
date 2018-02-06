@@ -12,9 +12,10 @@
 #include "PhysicalizedElement.h"
 #include "Face.h"
 
+class SpriteObj;
 class Teleportable : public PhysicalizedElement {
 public:
-    Face* face;
+    SpriteObj* sprite;
     ObjectGame polygon;
     ofVec2f getPosition();
     ofVec2f getVelocity();

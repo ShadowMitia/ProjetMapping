@@ -9,6 +9,7 @@
 
 #include "ofMain.h"
 #include "Constant.h"
+#include "Sprite.h"
 
 struct Face{
     ofRectangle rect;
@@ -31,17 +32,17 @@ public:
     void setFboIni(ofFbo* _fboIni){
         fboIni =_fboIni;
     }
-    void update(Face* face, ofVec2f p, ofRectangle imag){
+    void update(SpriteObj *_sprites){
         
         ofMatrix3x3 matrixX , matrixY;
-        matrixX.set(face->matrix[0][0]->rect.x, face->matrix[0][1]->rect.x, face->matrix[0][2]->rect.x,
-                    face->matrix[0][3]->rect.x, face->matrix[0][4]->rect.x, face->matrix[0][5]->rect.x,
-                    face->matrix[0][6]->rect.x, face->matrix[0][7]->rect.x, face->matrix[0][8]->rect.x);
+        matrixX.set(_sprites->face->matrix[0][0]->rect.x, _sprites->face->matrix[0][1]->rect.x, _sprites->face->matrix[0][2]->rect.x,
+                    _sprites->face->matrix[0][3]->rect.x, _sprites->face->matrix[0][4]->rect.x, _sprites->face->matrix[0][5]->rect.x,
+                    _sprites->face->matrix[0][6]->rect.x, _sprites->face->matrix[0][7]->rect.x, _sprites->face->matrix[0][8]->rect.x);
         
         
-        matrixY.set(face->matrix[0][0]->rect.y, face->matrix[0][1]->rect.y, face->matrix[0][2]->rect.y,
-                    face->matrix[0][3]->rect.y, face->matrix[0][4]->rect.y, face->matrix[0][5]->rect.y,
-                    face->matrix[0][6]->rect.y, face->matrix[0][7]->rect.y, face->matrix[0][8]->rect.y);
+        matrixY.set(_sprites->face->matrix[0][0]->rect.y, _sprites->face->matrix[0][1]->rect.y, _sprites->face->matrix[0][2]->rect.y,
+                    _sprites->face->matrix[0][3]->rect.y, _sprites->face->matrix[0][4]->rect.y, _sprites->face->matrix[0][5]->rect.y,
+                    _sprites->face->matrix[0][6]->rect.y, _sprites->face->matrix[0][7]->rect.y, _sprites->face->matrix[0][8]->rect.y);
         
         
 
@@ -54,8 +55,8 @@ public:
         ofDrawRectangle(ofPoint(0,0), 3*40, 3*40);
         transform.end();
         // placement asset
-        //imag.draw(p);
-        ofDrawRectangle(imag);
+        _sprites->draw();
+        
         fboTransform.end();
         
         fboIni->begin();

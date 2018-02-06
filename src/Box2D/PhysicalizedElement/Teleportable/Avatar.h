@@ -28,8 +28,6 @@ public:
 class Avatar : public Teleportable {
 public:
     Avatar(AvatarDef* _avatarDef);
-    
-    AvatarDef* avatarDef;
     Shift *s;
     bool jumping;
     bool clicJump;

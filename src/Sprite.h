@@ -9,16 +9,16 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Face.h"
+//#include "Face.h"
 #include "shift.h"
 #include "Box2D.h"
 
-
+class Face;
 class SpriteObj{
 public:
     ofVec2f positionInit;
-    ofImage spriteImage;
     Face* face;
+    Face* faceIni;
     b2World* world;
     virtual void draw(){};
 };
@@ -26,7 +26,9 @@ public:
 class Avatar;
 class AvatarDef: public SpriteObj{
 public:
+    ofImage spriteImage;
     Shift* s;
     Avatar* a;
-    void draw(){};
+    void draw();
 };
+

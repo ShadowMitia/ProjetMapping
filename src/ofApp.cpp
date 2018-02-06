@@ -44,11 +44,6 @@ void ofApp::setup() {
     mapping.registerFboSource(scene2);
     mapping.setup();
     
-    //importPortial();
-    
-    
-
-    
     ////   Import Platform   /////
     worlds->platforms.clear();
     
@@ -68,8 +63,6 @@ void ofApp::setup() {
     
     
     
-    
-    
     ofPoint p;
     p =ofPoint(0,0);
     //faces[0].rect.set(p, <#float w#>, <#float h#>);
@@ -82,7 +75,6 @@ void ofApp::setup() {
     avatarDef->s= &inputButton[0];
     avatarDef->face = &faces[1];
     worlds->createAvatar(avatarDef);
-    
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
@@ -141,7 +133,6 @@ void ofApp::keyPressed(int key)
         inputButton[0].b = !inputButton[0].b;
     }
     
-    mapping.keyPressed(key);
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
@@ -170,7 +161,6 @@ void ofApp::keyReleased(int key){
     
     
     
-    mapping.keyReleased(key);
     
     if (key == 'f')
     {
