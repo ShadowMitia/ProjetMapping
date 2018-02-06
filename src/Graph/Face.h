@@ -13,7 +13,7 @@
 
 struct Face{
     ofRectangle rect;
-    Face * matrix[1][9];
+    Face * matrix[2][9];
 };
 
 class Transform{

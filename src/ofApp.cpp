@@ -26,9 +26,59 @@ vector<ofPolyline> importImage(const string& path){
     }
     return poly;
 }
+
+
+
+void ofApp::generateFaces()
+{
+  std::vector<std::vector<std::string>> f = readCSV("faces.csv");
+
+  for (std::size_t i = 0; i < f.size(); i += 2)
+    {
+      int id1 = std::atoi(f[i][0].c_str());
+      int id2 = std::atoi(f[i+1][0].c_str());
+
+      float x1 = std::atof(f[i][3].c_str());
+      float y1 = std::atof(f[i][4].c_str());
+      float w1 = std::atof(f[i][5].c_str());
+      float h1 = std::atof(f[i][6].c_str());
+      float x2 = std::atof(f[i][3].c_str());
+      float y2 = std::atof(f[i][4].c_str());
+      float w2 = std::atof(f[i][5].c_str());
+      float h2 = std::atof(f[i][6].c_str());
+
+      faces[id1].rect = ofRectangle(x1, y1, w1, h1);
+      faces[id2].rect = ofRectangle(x2, y2, w2, h2);
+    }
+
+
+  for (std::size_t i = 0; i < 14; i += 2)
+    {
+      faces[i].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
+      faces[i].matrix[0][1] = &faces[std::atoi(f[i][8].c_str())];
+      faces[i].matrix[0][2] = &faces[std::atoi(f[i][9].c_str())];
+      faces[i].matrix[0][3] = &faces[std::atoi(f[i][10].c_str())];
+      faces[i].matrix[0][4] = &faces[std::atoi(f[i][11].c_str())];
+      faces[i].matrix[0][5] = &faces[std::atoi(f[i][12].c_str())];
+      faces[i].matrix[0][6] = &faces[std::atoi(f[i][13].c_str())];
+      faces[i].matrix[0][7] = &faces[std::atoi(f[i][14].c_str())];
+      faces[i].matrix[0][8] = &faces[std::atoi(f[i][15].c_str())];
+
+      faces[i+1].matrix[1][0] = &faces[std::atoi(f[i+1][7].c_str())];
+      faces[i+1].matrix[1][1] = &faces[std::atoi(f[i+1][8].c_str())];
+      faces[i+1].matrix[1][2] = &faces[std::atoi(f[i+1][9].c_str())];
+      faces[i+1].matrix[1][3] = &faces[std::atoi(f[i+1][10].c_str())];
+      faces[i+1].matrix[1][4] = &faces[std::atoi(f[i+1][11].c_str())];
+      faces[i+1].matrix[1][5] = &faces[std::atoi(f[i+1][12].c_str())];
+      faces[i+1].matrix[1][6] = &faces[std::atoi(f[i+1][13].c_str())];
+      faces[i+1].matrix[1][7] = &faces[std::atoi(f[i+1][14].c_str())];
+      faces[i+1].matrix[1][8] = &faces[std::atoi(f[i+1][15].c_str())];
+    }
+}
+
 //--------------------------------------------------------------
 void ofApp::setup() {
-    
+
     ofSetLogLevel(OF_LOG_SILENT);
     
     worlds = new WorldsBox2d;

@@ -77,5 +77,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
         void onWiiuseMotionEvent(ofxWiiuseMotionEventArgs& args) override;
         void onWiiuseIRTrackingEvent(ofxWiiuseIRTrackingEventArgs& args) override;
 #endif
-        
+
+	void generateFaces();
+
     };

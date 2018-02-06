@@ -261,11 +261,8 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     temp.addVertex(ofPoint(x,y));
     createPlatform(temp);
 }
-/// attention code deguelas ///
-void WorldsBox2d::importPortal(){
-    //porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
 
-}
+
 void WorldsBox2d::creataBlock(int x, int y){
     ObjBlock * block = new ObjBlock(world.getWorld());
     block->setPosition(x, y);
