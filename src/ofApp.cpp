@@ -32,9 +32,10 @@ void ofApp::setup() {
     ofSetLogLevel(OF_LOG_SILENT);
     
     worlds = new WorldsBox2d;
-    worlds->setup(&inputButton);
+    worlds->setup();
     worlds->world.enableEvents();
     worlds->world.getWorld();
+    
     scene1 = new Scene1(worlds, "Map_test_portails_back.png");
     //scene1 = new Scene1(worlds, "map_saut.jpg");
 
@@ -46,7 +47,6 @@ void ofApp::setup() {
     
     ////   Import Platform   /////
     worlds->platforms.clear();
-    
     std::vector<ofPolyline>  platforms = importImage("Map_test_portails_plateformes.png");
     //std::vector<ofPolyline>  platforms = importImage("map_plateform_saut.jpg");
     for (std::size_t i = 0; i < platforms.size() ; i++) {
@@ -54,7 +54,6 @@ void ofApp::setup() {
     }
     
     ////   Import Ladder   /////
-    
     std::vector<ofPolyline>  ladders = importImage("Map_test_portails_echelles.png");
     //std::vector<ofPolyline>  ladders = importImage("map_echelle_saut.jpg");
     for (std::size_t i =0; i< ladders.size() ; i++) {
@@ -75,6 +74,7 @@ void ofApp::setup() {
     avatarDef->s= &inputButton[0];
     avatarDef->face = &faces[1];
     worlds->createAvatar(avatarDef);
+    sprites.push_back(static_cast<SpriteObj*>(avatarDef));
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
@@ -93,7 +93,7 @@ void ofApp::setup() {
 void ofApp::update(){
     input();
     scene1->update();
-    worlds->update(&inputButton);
+    worlds->update();
     mapping.update();
     
 }
@@ -133,6 +133,7 @@ void ofApp::keyPressed(int key)
         inputButton[0].b = !inputButton[0].b;
     }
     
+    //mapping.keyPressed(key);
 }
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key){
@@ -161,6 +162,7 @@ void ofApp::keyReleased(int key){
     
     
     
+    //mapping.keyReleased(key);
     
     if (key == 'f')
     {
