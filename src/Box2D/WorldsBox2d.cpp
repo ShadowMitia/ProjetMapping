@@ -103,16 +103,17 @@ void WorldsBox2d::setup(Shift (*input)[4]){
     world.setGravity(0, VarConst::gravity);
     world.setFPS(60.0);
     
+    
+    
     //createBoundsModif(0, 0, 3520, 800); // modif monde ici
     
     //importPortal();
-    
-    createAvatar( 100 , 300,input[0]);
+
     // 48, 208(-1), 256 et 416(-1)
-    creataBlock(170, 300);
+    //creataBlock(170, 300);
 
     
-
+/*
      ofRectangle rec = ofRectangle(0, 0, 5, 5);
      rec.setFromCenter(0, 0, 5, 5);
      Portal *temp;
@@ -167,10 +168,10 @@ void WorldsBox2d::setup(Shift (*input)[4]){
     porportal[12]->linke(porportal[13], nullptr);
     //porportal[12]->linke(nullptr, nullptr);
     porportal[13]->linke(porportal[12], nullptr);
+*/
 
 
-
-    //porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
+    porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
 
     for (auto &avatar : avatars)
     {
@@ -213,9 +214,9 @@ void WorldsBox2d::draw(){
     world.draw();
     
 }
-void WorldsBox2d::createAvatar(int x, int y, Shift *_s){
-    Avatar * avatar = new Avatar(world.getWorld(),_s);
-    avatar->setPosition(x, y);
+void WorldsBox2d::createAvatar(AvatarDef* _avatarDef){
+    Avatar * avatar = new Avatar(_avatarDef);
+    avatar->setPosition(_avatarDef->positionInit.x, _avatarDef->positionInit.y);
     avatars.push_back(avatar);
 }
 void WorldsBox2d::update(Shift (*input)[4]){

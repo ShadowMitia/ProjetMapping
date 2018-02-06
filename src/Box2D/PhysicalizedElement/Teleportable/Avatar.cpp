@@ -22,8 +22,10 @@ std::vector<ofPoint> loadPoints(const std::string& file)
     return pts;
 }
 
-Avatar::Avatar(b2World* box2d,Shift *_s)
+Avatar::Avatar(AvatarDef* _avatarDef)
 {
+    avatarDef = _avatarDef;
+    avatarDef->a = this;
     ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
@@ -33,7 +35,7 @@ Avatar::Avatar(b2World* box2d,Shift *_s)
     polygon.FilterDataObjet.categoryBits = 0x0001;
     polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032 | 0x0008 | 0x0128;
     
-    polygon.create(box2d, false);
+    polygon.create(avatarDef->world, false);
     polygon.body->SetFixedRotation(true);
     
     polygon.setData(new dataSprite());
@@ -51,7 +53,7 @@ Avatar::Avatar(b2World* box2d,Shift *_s)
     //polygon.body->SetGravityScale(0.0);
     
     ct = new coyoteTime(VarConst::coyoteTime,this);
-    s=_s;
+    s=_avatarDef->s;
 }
 void Avatar::presUpdate()
 {

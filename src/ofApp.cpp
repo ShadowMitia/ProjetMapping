@@ -33,7 +33,8 @@ void ofApp::setup() {
     
     worlds = new WorldsBox2d;
     worlds->setup(&inputButton);
-    
+    worlds->world.enableEvents();
+    worlds->world.getWorld();
     scene1 = new Scene1(worlds, "Map_test_portails_back.png");
     //scene1 = new Scene1(worlds, "map_saut.jpg");
 
@@ -44,14 +45,9 @@ void ofApp::setup() {
     mapping.setup();
     
     //importPortial();
-    worlds->world.enableEvents();
     
-    ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
-    ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
-#ifdef CUSTOM_BOX2D_TIM
-    ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
-    ofAddListener(worlds->world.PreSolveEvents, this, &ofApp::PreSolve);
-#endif // CUSTOM_BOX2D_TIM
+    
+
     
     ////   Import Platform   /////
     worlds->platforms.clear();
@@ -71,10 +67,30 @@ void ofApp::setup() {
     }
     
     
+    
+    
+    
     ofPoint p;
     p =ofPoint(0,0);
     //faces[0].rect.set(p, <#float w#>, <#float h#>);
     
+    
+    
+    
+    AvatarDef *avatarDef = new AvatarDef();
+    avatarDef->positionInit=ofVec2f(100, 300);
+    avatarDef->world = worlds->world.getWorld();
+    avatarDef->s= &inputButton[0];
+    
+    worlds->createAvatar(avatarDef);
+    
+    
+    ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
+    ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
+#ifdef CUSTOM_BOX2D_TIM
+    ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
+    ofAddListener(worlds->world.PreSolveEvents, this, &ofApp::PreSolve);
+#endif // CUSTOM_BOX2D_TIM
     
     
 #ifdef USE_WIIMOTE

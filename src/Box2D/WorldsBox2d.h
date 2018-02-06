@@ -45,7 +45,7 @@ public:
     void update(Shift (*input)[4]);
     void createBoundsModif(float x, float y, float w, float h);
     void creataBlock( int x, int y);
-    void createAvatar(int x, int y, Shift *_s);
+    void createAvatar(AvatarDef* _avatarDef);
     void createPlatform(ofPolyline _polyline);
     void createPortal();
     void createLadder(ofPolyline _polyline);

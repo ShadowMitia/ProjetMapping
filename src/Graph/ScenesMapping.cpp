@@ -21,7 +21,6 @@ void Scene1::draw()
     drawMap.draw(0, 0);
 
     
-    
     //ofBackground(200, 200, 0);
     renderPlatform();
     background.draw(0, 0);

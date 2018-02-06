@@ -12,7 +12,7 @@
 #include "Teleportable.h"
 #include "PhysicalizedElement.h"
 #include "shift.h"
-
+#include "Sprite.h"
 enum class Deplacement { PLATFORM, TOP, DOWN, LEFT, RIGHT, PLATFORMLADDER };
 class Avatar;
 class coyoteTime: public ofThread{
@@ -25,11 +25,11 @@ public:
     }
     void threadedFunction();
 };
-
-
 class Avatar : public Teleportable {
 public:
-    Avatar(b2World* box2d,Shift *s);
+    Avatar(AvatarDef* _avatarDef);
+    
+    AvatarDef* avatarDef;
     bool jumping;
     Shift *s;
     bool clicJump;

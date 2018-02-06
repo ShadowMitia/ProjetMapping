@@ -14,6 +14,7 @@
 #include "ofxGLFWJoystick.h"
 #include "shift.h"
 #include "Face.h"
+#include "Sprite.h"
 //#define USE_WIIMOTE
 
 
