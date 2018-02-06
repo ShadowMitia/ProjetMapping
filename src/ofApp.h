@@ -31,7 +31,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
         
     public:
         
-        Face faces[4];
+        Face faces[13];
         bool intput[4][6];
         void setup() override;
         void update() override;

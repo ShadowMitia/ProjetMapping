@@ -76,12 +76,11 @@ void ofApp::setup() {
     
     
     
-    
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->positionInit=ofVec2f(100, 300);
     avatarDef->world = worlds->world.getWorld();
     avatarDef->s= &inputButton[0];
-    
+    avatarDef->face = &faces[1];
     worlds->createAvatar(avatarDef);
     
     

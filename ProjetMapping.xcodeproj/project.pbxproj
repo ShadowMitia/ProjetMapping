@@ -1801,6 +1801,8 @@
 		D840E3624CB2BCE149B9D522 /* Graph */ = {
 			isa = PBXGroup;
 			children = (
+				BC41C6E32029C3F90053ADF5 /* Sprite.cpp */,
+				BC41C6E42029C3F90053ADF5 /* Sprite.h */,
 				0C20AEB7393564863C634818 /* Face.h */,
 				928DBE45562252291901753F /* Light.h */,
 				05B0C3D4C783AF2E9935CB27 /* ScenesMapping.cpp */,
@@ -1910,8 +1912,6 @@
 				DA95C249C1ACE6032D763379 /* Timer.h */,
 				F61E2FA33DB68D77A29E36B7 /* utils.cpp */,
 				7C39EAC4AD92BF1D4365B8BC /* utils.h */,
-				BC41C6E32029C3F90053ADF5 /* Sprite.cpp */,
-				BC41C6E42029C3F90053ADF5 /* Sprite.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

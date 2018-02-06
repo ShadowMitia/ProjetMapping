@@ -30,8 +30,8 @@ public:
     Avatar(AvatarDef* _avatarDef);
     
     AvatarDef* avatarDef;
-    bool jumping;
     Shift *s;
+    bool jumping;
     bool clicJump;
     bool cloneJump;
     Deplacement modeDeplace;

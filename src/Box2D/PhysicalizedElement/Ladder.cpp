@@ -32,14 +32,14 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     
     b2Fixture* f = polygon.body->GetFixtureList();
     if (_fixture == f) {
-        cout << "Start Ladder " << endl;
+        //cout << "Start Ladder " << endl;
         objSource->lockLadderDown =true;
         //objSource->setMove(Deplacement::DOWN);
     }
     
     f = f->GetNext();
     if (_fixture == f) {
-        cout << "Start LadderDown " << endl;
+        //cout << "Start LadderDown " << endl;
         objSource->SetGravityScale(.0f);
         objSource->setMove(Deplacement::PLATFORMLADDER);
         //objSource->setJumping(true);
@@ -47,7 +47,7 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     
     f = f->GetNext();
     if (_fixture == f) {
-        cout << "Start LadderTop " << endl;
+        //cout << "Start LadderTop " << endl;
         objSource->lockLadderTop=true;
         objSource->SetGravityScale(.0f);
         objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
@@ -62,14 +62,14 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     
     if (_fixture == f) {
         if (!objSource->lockLadderTop && !objSource->lockLadderDown) {
-            cout << "End Ladder " << endl;
+            //cout << "End Ladder " << endl;
             objSource->SetGravityScale(1.0f);
             objSource->setMove(Deplacement::PLATFORM);
         }
     }
     f = f->GetNext();
     if (_fixture == f) {
-        cout << "End LadderDown " << endl;
+        //cout << "End LadderDown " << endl;
         objSource->lockLadderDown = false;
         objSource->SetGravityScale(0.0f);// ici problem
         
@@ -77,7 +77,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     
     f = f->GetNext();
     if (_fixture == f) {
-        cout << "End LadderTop " << endl;
+        //cout << "End LadderTop " << endl;
         objSource->lockLadderTop=false;
         objSource->SetGravityScale(1.0f);// ici problem
         objSource->setMove(Deplacement::PLATFORM);
