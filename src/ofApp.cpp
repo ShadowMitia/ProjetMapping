@@ -67,6 +67,8 @@ void ofApp::setup() {
     //faces[0].rect.set(p, <#float w#>, <#float h#>);
     
     
+    worlds->createPortal();
+    
     
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->positionInit=ofVec2f(100, 300);

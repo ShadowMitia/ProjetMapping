@@ -169,10 +169,6 @@ void WorldsBox2d::setup(){
     //porportal[12]->linke(nullptr, nullptr);
     porportal[13]->linke(porportal[12], nullptr);
 */
-
-
-    porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
-
     
     warterfalls = new Waterfalls(&world);
     
@@ -254,8 +250,7 @@ void WorldsBox2d::createLadder(ofPolyline polyline){
     ladders.push_back(edge);
 }
 void WorldsBox2d::createPortal(){
-    //Portal *plat = new Portal( Portal::Orientation::HORIZONTAL, 50, 525, 35, 75 );
-    //portals.push_back(plat);
+    porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
 }
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     ofPolyline temp;
@@ -268,7 +263,8 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
 }
 /// attention code deguelas ///
 void WorldsBox2d::importPortal(){
-    
+    //porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this);
+
 }
 void WorldsBox2d::creataBlock(int x, int y){
     ObjBlock * block = new ObjBlock(world.getWorld());
