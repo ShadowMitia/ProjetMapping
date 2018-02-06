@@ -96,6 +96,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
   return portals;
 }
 
+
 void WorldsBox2d::setup(){
     
     
@@ -229,7 +230,6 @@ void WorldsBox2d::update(){
 	  clones[i]->update();
 	} // update clone
     }
-
 
     for (std::size_t j = 0; j < avatars.size(); j++){
     avatars[j]->presUpdate();

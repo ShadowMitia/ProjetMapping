@@ -1,7 +1,5 @@
 #pragma once
-
 //#define USE_WIIMOTE
-
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxPiMapper.h"
@@ -31,7 +29,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
         
     public:
         
-        Face faces[13];
+        Face faces[14];
         vector<SpriteObj*> sprites;
         bool intput[4][6];
         void setup() override;
