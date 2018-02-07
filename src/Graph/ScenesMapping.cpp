@@ -31,7 +31,7 @@ void Scene1::draw()
     //renderPlatform();
     background.draw(0, 0);
     drawMap.draw(0, 0);
-    transform.fboTransform.draw(0, 0);
+    //transform.fboTransform.draw(0, 0);
     worldsBox2d->draw();
     // creation du mask pour les ombres
     /*mask.begin();

@@ -40,37 +40,29 @@ void ofApp::generateFaces()
       float y1 = std::atof(f[i][4].c_str());
       float w1 = std::atof(f[i][5].c_str());
       float h1 = std::atof(f[i][6].c_str());
-      float x2 = std::atof(f[i][3].c_str());
-      float y2 = std::atof(f[i][4].c_str());
-      float w2 = std::atof(f[i][5].c_str());
-      float h2 = std::atof(f[i][6].c_str());
 
       faces[id1].rect = ofRectangle(x1, y1, w1, h1);
-      //faces[id2].rect = ofRectangle(x2, y2, w2, h2);
-        //cout << " id1 " << id1 << " id2 " << id2 << endl;
-    }
-
-  for (std::size_t i = 0; i < 14; i += 1)
-    {
-      faces[i].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
-      faces[i].matrix[0][1] = &faces[std::atoi(f[i][8].c_str())];
-      faces[i].matrix[0][2] = &faces[std::atoi(f[i][9].c_str())];
-      faces[i].matrix[0][3] = &faces[std::atoi(f[i][10].c_str())];
-      faces[i].matrix[0][4] = &faces[std::atoi(f[i][11].c_str())];
-      faces[i].matrix[0][5] = &faces[std::atoi(f[i][12].c_str())];
-      faces[i].matrix[0][6] = &faces[std::atoi(f[i][13].c_str())];
-      faces[i].matrix[0][7] = &faces[std::atoi(f[i][14].c_str())];
-      faces[i].matrix[0][8] = &faces[std::atoi(f[i][15].c_str())];
-
-      faces[i].matrix[1][0] = &faces[std::atoi(f[i+1][7].c_str())];
-      faces[i].matrix[1][1] = &faces[std::atoi(f[i+1][8].c_str())];
-      faces[i].matrix[1][2] = &faces[std::atoi(f[i+1][9].c_str())];
-      faces[i].matrix[1][3] = &faces[std::atoi(f[i+1][10].c_str())];
-      faces[i].matrix[1][4] = &faces[std::atoi(f[i+1][11].c_str())];
-      faces[i].matrix[1][5] = &faces[std::atoi(f[i+1][12].c_str())];
-      faces[i].matrix[1][6] = &faces[std::atoi(f[i+1][13].c_str())];
-      faces[i].matrix[1][7] = &faces[std::atoi(f[i+1][14].c_str())];
-      faces[i].matrix[1][8] = &faces[std::atoi(f[i+1][15].c_str())];
+    cout << " id1 " << id1 << " id2 " << id2 << endl;
+        
+        faces[id1].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
+        faces[id1].matrix[0][1] = &faces[std::atoi(f[i][8].c_str())];
+        faces[id1].matrix[0][2] = &faces[std::atoi(f[i][9].c_str())];
+        faces[id1].matrix[0][3] = &faces[std::atoi(f[i][10].c_str())];
+        faces[id1].matrix[0][4] = &faces[std::atoi(f[i][11].c_str())];
+        faces[id1].matrix[0][5] = &faces[std::atoi(f[i][12].c_str())];
+        faces[id1].matrix[0][6] = &faces[std::atoi(f[i][13].c_str())];
+        faces[id1].matrix[0][7] = &faces[std::atoi(f[i][14].c_str())];
+        faces[id1].matrix[0][8] = &faces[std::atoi(f[i][15].c_str())];
+        
+        faces[id1].matrix[1][0] = &faces[std::atoi(f[i+1][7].c_str())];
+        faces[id1].matrix[1][1] = &faces[std::atoi(f[i+1][8].c_str())];
+        faces[id1].matrix[1][2] = &faces[std::atoi(f[i+1][9].c_str())];
+        faces[id1].matrix[1][3] = &faces[std::atoi(f[i+1][10].c_str())];
+        faces[id1].matrix[1][4] = &faces[std::atoi(f[i+1][11].c_str())];
+        faces[id1].matrix[1][5] = &faces[std::atoi(f[i+1][12].c_str())];
+        faces[id1].matrix[1][6] = &faces[std::atoi(f[i+1][13].c_str())];
+        faces[id1].matrix[1][7] = &faces[std::atoi(f[i+1][14].c_str())];
+        faces[id1].matrix[1][8] = &faces[std::atoi(f[i+1][15].c_str())];
     }
 }
 
@@ -139,6 +131,7 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    sprites[0]->face = &faces[tempI];
     input();
     scene1->update();
     worlds->update();
@@ -181,6 +174,10 @@ void ofApp::keyPressed(int key)
         inputButton[0].b = !inputButton[0].b;
     }
     
+    if (key == 'm') {
+        tempI++;
+        cout << "tempI: " << tempI << endl;
+    }
     //mapping.keyPressed(key);
 }
 //--------------------------------------------------------------

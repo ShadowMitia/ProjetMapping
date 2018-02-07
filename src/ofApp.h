@@ -29,6 +29,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
         
     public:
         
+        int tempI = 0;
         Face faces[14];
         vector<SpriteObj*> sprites;
         bool intput[4][6];

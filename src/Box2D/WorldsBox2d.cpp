@@ -81,7 +81,7 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 	  std::cout << "Invalid deplacement: " << parameters[i][10] << " for id: " << i << '\n';
 	}
 
-        int idFace = std::atoi(parameters[i][11].c_str());
+    int idFace = std::atoi(parameters[i][11].c_str());
       portals.push_back(new Portal(ofRectangle(x, y, w, h), world, d, co, input[idFace]));
     }
 

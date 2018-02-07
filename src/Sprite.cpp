@@ -11,7 +11,7 @@
 void AvatarDef::draw(){
     ofRectangle temp;
     temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
-    temp.setFromCenter(160, 160, 12, 12);
-    ofSetColor(ofColor::azure);
+    //temp.setFromCenter(160, 160, 12, 12);
+    ofSetColor(ofColor::black);
     ofDrawRectangle(temp);
 }

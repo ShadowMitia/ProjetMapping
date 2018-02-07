@@ -15,7 +15,7 @@ float mod40(float x){
 }
 
 void main(void) {
-    vec4 tot = vec4(0.0,0.0,0.0,0.0);
+    vec4 tot = vec4(1.0,0.0,0.0,1.0);
     //int i = 2;
     //int j = 1;
     
