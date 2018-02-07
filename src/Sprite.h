@@ -31,6 +31,6 @@ public:
     Shift* s;
     Avatar* a;
     void draw();
-    ofVec2f getPositionTranform(){};
+    ofVec2f getPositionTranform();
 };
 

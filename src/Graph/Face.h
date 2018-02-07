@@ -35,14 +35,14 @@ public:
     void update(SpriteObj *_sprites){
         
         ofMatrix3x3 matrixX , matrixY;
-        matrixX.set(_sprites->face->matrix[0][0]->rect.x, _sprites->face->matrix[0][1]->rect.x, _sprites->face->matrix[0][2]->rect.x,
-                    _sprites->face->matrix[0][3]->rect.x, _sprites->face->matrix[0][4]->rect.x, _sprites->face->matrix[0][5]->rect.x,
-                    _sprites->face->matrix[0][6]->rect.x, _sprites->face->matrix[0][7]->rect.x, _sprites->face->matrix[0][8]->rect.x);
+        matrixX.set(_sprites->face->matrix[0][0]->rect.x, _sprites->face->matrix[0][3]->rect.x, _sprites->face->matrix[0][6]->rect.x,
+                    _sprites->face->matrix[0][1]->rect.x, _sprites->face->matrix[0][4]->rect.x, _sprites->face->matrix[0][7]->rect.x,
+                    _sprites->face->matrix[0][2]->rect.x, _sprites->face->matrix[0][5]->rect.x, _sprites->face->matrix[0][8]->rect.x);
         
         
-        matrixY.set(_sprites->face->matrix[0][0]->rect.y, _sprites->face->matrix[0][1]->rect.y, _sprites->face->matrix[0][2]->rect.y,
-                    _sprites->face->matrix[0][3]->rect.y, _sprites->face->matrix[0][4]->rect.y, _sprites->face->matrix[0][5]->rect.y,
-                    _sprites->face->matrix[0][6]->rect.y, _sprites->face->matrix[0][7]->rect.y, _sprites->face->matrix[0][8]->rect.y);
+        matrixY.set(_sprites->face->matrix[0][0]->rect.y, _sprites->face->matrix[0][3]->rect.y, _sprites->face->matrix[0][6]->rect.y,
+                    _sprites->face->matrix[0][1]->rect.y, _sprites->face->matrix[0][4]->rect.y, _sprites->face->matrix[0][7]->rect.y,
+                    _sprites->face->matrix[0][2]->rect.y, _sprites->face->matrix[0][5]->rect.y, _sprites->face->matrix[0][8]->rect.y);
         
         
 
