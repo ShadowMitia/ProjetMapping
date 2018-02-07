@@ -21,6 +21,7 @@ public:
     Face* faceIni;
     b2World* world;
     virtual void draw(){};
+    virtual ofVec2f getPositionTranform(){};
 };
 
 class Avatar;
@@ -30,5 +31,6 @@ public:
     Shift* s;
     Avatar* a;
     void draw();
+    ofVec2f getPositionTranform(){};
 };
 

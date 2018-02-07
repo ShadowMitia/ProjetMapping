@@ -12,7 +12,7 @@
 #include <iostream>
 
 
-std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world,Face (*input)[14]){
+std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const& parameters, WorldsBox2d* world,Face *input){
   std::vector<Portal*> portals;
 
   for (std::size_t i = 0; i < parameters.size(); ++i)
@@ -82,7 +82,8 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 	}
 
     int idFace = std::atoi(parameters[i][11].c_str());
-      portals.push_back(new Portal(ofRectangle(x, y, w, h), world, d, co, input[idFace]));
+        //cout << "salut  "<< idFace << endl;
+      portals.push_back(new Portal(ofRectangle(x, y, w, h), world, d, co, &input[idFace]));
     }
 
   for (std::size_t i = 0; i < portals.size(); ++i)
@@ -250,7 +251,7 @@ void WorldsBox2d::createLadder(ofPolyline polyline){
     edge->create(world.getWorld(), polyline);
     ladders.push_back(edge);
 }
-void WorldsBox2d::createPortal(Face (*input)[14]){
+void WorldsBox2d::createPortal(Face *input){
     porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this,input);
 }
 void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {

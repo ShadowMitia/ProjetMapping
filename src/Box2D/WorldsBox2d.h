@@ -47,7 +47,7 @@ public:
     void creataBlock( int x, int y);
     void createAvatar(AvatarDef* _avatarDef);
     void createPlatform(ofPolyline _polyline);
-    void createPortal(Face (*input)[14]);
+    void createPortal(Face *input);
     void createLadder(ofPolyline _polyline);
     void createBox(ofPolyline _polyline);
     void createPickup(ofPolyline polyline);

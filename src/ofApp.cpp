@@ -42,8 +42,7 @@ void ofApp::generateFaces()
       float h1 = std::atof(f[i][6].c_str());
 
       faces[id1].rect = ofRectangle(x1, y1, w1, h1);
-    cout << " id1 " << id1 << " id2 " << id2 << endl;
-        
+    //cout << " id1 " << id1 << " id2 " << id2 << endl;
         faces[id1].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
         faces[id1].matrix[0][1] = &faces[std::atoi(f[i][8].c_str())];
         faces[id1].matrix[0][2] = &faces[std::atoi(f[i][9].c_str())];
@@ -105,7 +104,7 @@ void ofApp::setup() {
     
     
     generateFaces();
-    worlds->createPortal(&faces);
+    worlds->createPortal(faces);
     
     
     AvatarDef *avatarDef = new AvatarDef();
@@ -131,7 +130,7 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    sprites[0]->face = &faces[tempI];
+    //sprites[0]->face = &faces[tempI];
     input();
     scene1->update();
     worlds->update();
