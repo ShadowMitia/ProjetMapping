@@ -20,7 +20,7 @@ class Transform{
 public:
     Transform(){
         
-        fboTransform.allocate(159*3, 159*3); // changer 159
+        fboTransform.allocate(160*3, 160*3); // changer 159
         if(!transform.load("passTransform.vert", "transform.frag")) {
             printf("transform.frag\n");
         }
@@ -52,26 +52,29 @@ public:
         transform.setUniformTexture("u_texture", fboIni->getTexture(), 0);
         transform.setUniformMatrix3f("matrixX", matrixX);
         transform.setUniformMatrix3f("matrixY", matrixY);
-        ofDrawRectangle(ofPoint(0,0), 3*40, 3*40);
+        ofSetColor(ofColor::white, 0);
+        //ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
         transform.end();
         // placement asset
         _sprites->draw();
-        
         fboTransform.end();
         
+        //fboSortie.allocate(fboIni->getWidth(), fboIni->getHeight());
+        //fboSortie.begin();
         fboIni->begin();
         transformInv.begin();
         transformInv.setUniformTexture("u_texture", fboTransform.getTexture(), 0);
         transformInv.setUniformMatrix3f("matrixX", matrixX);
         transformInv.setUniformMatrix3f("matrixY", matrixY);
-        ofDrawRectangle(ofPoint(0,0), 160, 160);
+        ofDrawRectangle(ofPoint(0,0), fboIni->getWidth(), fboIni->getHeight());
         transformInv.end();
         fboIni->end();
+        //fboSortie.end();
     }
     
     ofFbo* fboIni;
     ofShader transform;
     ofFbo fboTransform;
     ofShader transformInv;
-    
+    ofFbo fboSortie;
 };

@@ -27,8 +27,6 @@ vector<ofPolyline> importImage(const string& path){
     return poly;
 }
 
-
-
 void ofApp::generateFaces()
 {
   std::vector<std::vector<std::string>> f = readCSV(ofToDataPath("faces.csv"));
@@ -86,7 +84,7 @@ void ofApp::setup() {
     worlds->world.enableEvents();
     worlds->world.getWorld();
     
-    scene1 = new Scene1(worlds, "Map_test_portails_back.png");
+    scene1 = new Scene1(worlds, "Map_test_portails_back.png",&sprites);
     //scene1 = new Scene1(&sprites, "Map_test_portails_back.png");
 
     //scene1 = new Scene1(worlds, "map_saut.jpg");
@@ -122,7 +120,7 @@ void ofApp::setup() {
     avatarDef->positionInit=ofVec2f(100, 300);
     avatarDef->world = worlds->world.getWorld();
     avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[1];
+    avatarDef->face = &faces[9];
     worlds->createAvatar(avatarDef);
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
     

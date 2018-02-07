@@ -23,7 +23,7 @@ public:
     int lightSize;
     LightRender lightRender;
     ofImage background;
-    //vector<SpriteObj*>* sprites;
+    vector<SpriteObj*>* sprites;
     Transform transform;
     ofFbo drawMap;
     WorldsBox2d* worldsBox2d;
@@ -35,7 +35,8 @@ public:
     void renderPlatform();
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
-    Scene1(WorldsBox2d* _worldsBox2d, string path){
+    Scene1(WorldsBox2d* _worldsBox2d, string path, vector<SpriteObj*>* _sprites){
+        sprites=_sprites;
         background.load(path);
         name = "Scene One FBO Source";
         allocate(background.getWidth(), background.getHeight());
