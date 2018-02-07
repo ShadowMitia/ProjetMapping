@@ -15,17 +15,18 @@
 #include "Avatar.h"
 #include "Light.h"
 #include "Face.h"
+//#include "Sprite.h"
 
 class Scene1 : public ofx::piMapper::FboSource
 {
 public:
     int lightSize;
     LightRender lightRender;
-    WorldsBox2d *       worldsBox2d;
     ofImage background;
-    
+    //vector<SpriteObj*>* sprites;
     Transform transform;
     ofFbo drawMap;
+    WorldsBox2d* worldsBox2d;
     ofFbo mask;
     
     void update();
@@ -33,11 +34,13 @@ public:
     void renderObjects();
     void renderPlatform();
     
+    //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(WorldsBox2d* _worldsBox2d, string path){
         background.load(path);
         name = "Scene One FBO Source";
         allocate(background.getWidth(), background.getHeight());
         worldsBox2d =_worldsBox2d;
+        //sprites = _sprites;
         
         lightSize = 256;
         ofDisableArbTex();  // <-- Very Important

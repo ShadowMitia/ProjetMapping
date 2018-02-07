@@ -31,7 +31,7 @@ vector<ofPolyline> importImage(const string& path){
 
 void ofApp::generateFaces()
 {
-  std::vector<std::vector<std::string>> f = readCSV("faces.csv");
+  std::vector<std::vector<std::string>> f = readCSV(ofToDataPath("faces.csv"));
 
   for (std::size_t i = 0; i < f.size(); i += 2)
     {
@@ -51,8 +51,8 @@ void ofApp::generateFaces()
       faces[id2].rect = ofRectangle(x2, y2, w2, h2);
     }
 
-
-  for (std::size_t i = 0; i < 14; i += 2)
+    cout << " ici  "<< f.size() << endl;
+  for (std::size_t i = 0; i < 14; i += 1)
     {
       faces[i].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
       faces[i].matrix[0][1] = &faces[std::atoi(f[i][8].c_str())];
@@ -87,6 +87,8 @@ void ofApp::setup() {
     worlds->world.getWorld();
     
     scene1 = new Scene1(worlds, "Map_test_portails_back.png");
+    //scene1 = new Scene1(&sprites, "Map_test_portails_back.png");
+
     //scene1 = new Scene1(worlds, "map_saut.jpg");
 
     scene2 = new Scene2(worlds);
@@ -112,12 +114,8 @@ void ofApp::setup() {
     
     
     
-    ofPoint p;
-    p =ofPoint(0,0);
-    //faces[0].rect.set(p, <#float w#>, <#float h#>);
-    
-    
-    worlds->createPortal();
+    generateFaces();
+    worlds->createPortal(&faces);
     
     
     AvatarDef *avatarDef = new AvatarDef();
@@ -498,7 +496,6 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
 
 void ofApp::onWiiuseMotionEvent(ofxWiiuseMotionEventArgs& args)
 {
-    
 }
 
 void ofApp::onWiiuseIRTrackingEvent(ofxWiiuseIRTrackingEventArgs& args)

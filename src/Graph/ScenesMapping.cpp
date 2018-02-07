@@ -17,8 +17,10 @@ void Scene1::draw()
     drawMap.end();
     transform.setFboIni(&drawMap);
     
+    //transform.update(sprites->at(0));
     
     drawMap.draw(0, 0);
+    
 
     
     //ofBackground(200, 200, 0);
@@ -51,6 +53,7 @@ void Scene1::renderObjects()
 void Scene1::renderPlatform()
 {
   //ofBackground(0, 0, 0, 0);
+    
     for (auto &platform : worldsBox2d->platforms)
     {
         ofSetHexColor(0xFF0000);

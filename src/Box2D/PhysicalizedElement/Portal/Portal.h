@@ -29,7 +29,7 @@ public:
     ofRectangle portalRect;
     b2World* getb2World();
     
-    Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _direction,ConditionOutput _Output);
+    Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _direction,ConditionOutput _Output,Face* _face);
     
     void (*nullFunction)(CloneBox2d*);
     bool(*conditionFunction)(ofVec2f, CloneBox2d*);

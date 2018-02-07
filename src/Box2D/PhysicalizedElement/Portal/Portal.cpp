@@ -12,7 +12,8 @@
 #include "ConditionOutput.h"
 #include "ConditionNull.h"
 
-Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _direction,ConditionOutput _output){
+Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _direction,ConditionOutput _output, Face* _face){
+    face = _face;
     portalRect = _portal;
     linkedPortal[0] = nullptr;
     linkedPortal[1] = nullptr;
