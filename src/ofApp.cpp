@@ -89,22 +89,20 @@ void ofApp::setup() {
     ////   Import Platform   /////
     worlds->platforms.clear();
     std::vector<ofPolyline>  platforms = importImage("Map_test_portails_plateformes.png");
-    //std::vector<ofPolyline>  platforms = importImage("map_plateform_saut.jpg");
     for (std::size_t i = 0; i < platforms.size() ; i++) {
         worlds->createPlatform(platforms[i]);
     }
     
     ////   Import Ladder   /////
     std::vector<ofPolyline>  ladders = importImage("Map_test_portails_echelles.png");
-    //std::vector<ofPolyline>  ladders = importImage("map_echelle_saut.jpg");
     for (std::size_t i =0; i< ladders.size() ; i++) {
         worlds->createLadder(ladders[i]);
     }
     
     
     
-    generateFaces();
-    worlds->createPortal(faces);
+    //generateFaces();
+    //worlds->createPortal(faces);
     
     
     AvatarDef *avatarDef = new AvatarDef();

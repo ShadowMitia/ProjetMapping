@@ -14,6 +14,7 @@
 struct Face{
     ofRectangle rect;
     Face * matrix[2][9];
+    ofMatrix3x3 matrixR[2];
 };
 
 class Transform{
@@ -66,6 +67,8 @@ public:
         transformInv.setUniformTexture("u_texture", fboTransform.getTexture(), 0);
         transformInv.setUniformMatrix3f("matrixX", matrixX);
         transformInv.setUniformMatrix3f("matrixY", matrixY);
+        transformInv.setUniformMatrix3f("matrixR", _sprites->face->matrixR[0]);
+
         ofDrawRectangle(ofPoint(0,0), fboIni->getWidth(), fboIni->getHeight());
         transformInv.end();
         fboIni->end();
