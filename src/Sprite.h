@@ -16,12 +16,17 @@
 class Face;
 class SpriteObj{
 public:
-    ofVec2f positionInit;
+
     Face* face;
-    Face* faceIni;
-    b2World* world;
+
     virtual void draw(){};
     virtual ofVec2f getPositionTranform(){};
+    virtual void reset(){};
+    
+    ofVec2f positionInit;
+    Face* faceIni;
+    b2World* world;
+    
 };
 
 class Avatar;
@@ -32,5 +37,6 @@ public:
     Avatar* a;
     void draw();
     ofVec2f getPositionTranform();
+    void reset();
 };
 

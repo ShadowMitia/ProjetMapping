@@ -19,3 +19,8 @@ void AvatarDef::draw(){
 ofVec2f AvatarDef::getPositionTranform(){
     return  a->getPosition() - face->rect.getPosition() + 160;
 }
+void AvatarDef::reset(){
+    a->setPosition(positionInit);
+    face = faceIni;
+    a->setMove(Deplacement::PLATFORM);
+}
