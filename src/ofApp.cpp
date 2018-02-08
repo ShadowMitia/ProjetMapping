@@ -103,12 +103,12 @@ void ofApp::setup() {
     
     
     
-    generateFaces();
-    worlds->createPortal(faces);
+    //generateFaces();
+    //worlds->createPortal(faces);
     
     
     AvatarDef *avatarDef = new AvatarDef();
-    avatarDef->positionInit=ofVec2f(100, 300);
+    avatarDef->positionInit=ofVec2f(10, 10);
     avatarDef->world = worlds->world.getWorld();
     avatarDef->s= &inputButton[0];
     avatarDef->face = &faces[9];
