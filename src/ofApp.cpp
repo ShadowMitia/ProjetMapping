@@ -30,19 +30,16 @@ vector<ofPolyline> importImage(const string& path){
 void ofApp::generateFaces()
 {
   std::vector<std::vector<std::string>> f = readCSV(ofToDataPath("faces.csv"));
-
-  for (std::size_t i = 0; i <12*2; i += 2)
+  for (std::size_t i = 0; i <nbFace*2; i += 2)
     {
       int id1 = std::atoi(f[i][0].c_str());
-      int id2 = std::atoi(f[i+1][0].c_str());
-
       float x1 = std::atof(f[i][3].c_str());
       float y1 = std::atof(f[i][4].c_str());
       float w1 = std::atof(f[i][5].c_str());
       float h1 = std::atof(f[i][6].c_str());
 
-      faces[id1].rect = ofRectangle(x1, y1, w1, h1);
-    //cout << " id1 " << id1 << " id2 " << id2 << endl;
+        faces[id1].rect = ofRectangle(x1, y1, w1, h1);
+        //cout << " id1 " << id1 << " id2 " << id2 << endl;
         faces[id1].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
         faces[id1].matrix[0][1] = &faces[std::atoi(f[i][9].c_str())];
         faces[id1].matrix[0][2] = &faces[std::atoi(f[i][11].c_str())];
@@ -54,21 +51,29 @@ void ofApp::generateFaces()
         faces[id1].matrix[0][8] = &faces[std::atoi(f[i][23].c_str())];
         
         faces[id1].matrix[1][0] = &faces[std::atoi(f[i+1][7].c_str())];
-        faces[id1].matrix[1][1] = &faces[std::atoi(f[i+1][8].c_str())];
-        faces[id1].matrix[1][2] = &faces[std::atoi(f[i+1][9].c_str())];
-        faces[id1].matrix[1][3] = &faces[std::atoi(f[i+1][10].c_str())];
-        faces[id1].matrix[1][4] = &faces[std::atoi(f[i+1][11].c_str())];
-        faces[id1].matrix[1][5] = &faces[std::atoi(f[i+1][12].c_str())];
-        faces[id1].matrix[1][6] = &faces[std::atoi(f[i+1][13].c_str())];
-        faces[id1].matrix[1][7] = &faces[std::atoi(f[i+1][14].c_str())];
-        faces[id1].matrix[1][8] = &faces[std::atoi(f[i+1][15].c_str())];
+        faces[id1].matrix[1][1] = &faces[std::atoi(f[i+1][9].c_str())];
+        faces[id1].matrix[1][2] = &faces[std::atoi(f[i+1][11].c_str())];
+        faces[id1].matrix[1][3] = &faces[std::atoi(f[i+1][13].c_str())];
+        faces[id1].matrix[1][4] = &faces[std::atoi(f[i+1][15].c_str())];
+        faces[id1].matrix[1][5] = &faces[std::atoi(f[i+1][17].c_str())];
+        faces[id1].matrix[1][6] = &faces[std::atoi(f[i+1][19].c_str())];
+        faces[id1].matrix[1][7] = &faces[std::atoi(f[i+1][21].c_str())];
+        faces[id1].matrix[1][8] = &faces[std::atoi(f[i+1][23].c_str())];
+        
+        faces[id1].matrixR[0].set(std::atoi(f[i][8].c_str()), std::atoi(f[i][10].c_str()), std::atoi(f[i][12].c_str()),
+                                  std::atoi(f[i][14].c_str()), std::atoi(f[i][16].c_str()), std::atoi(f[i][18].c_str()),
+                                  std::atoi(f[i][20].c_str()), std::atoi(f[i][22].c_str()), std::atoi(f[i][14].c_str()));
+        faces[id1].matrixR[1].set(std::atoi(f[i+1][8].c_str()), std::atoi(f[i+1][10].c_str()), std::atoi(f[i+1][12].c_str()),
+                                  std::atoi(f[i+1][14].c_str()), std::atoi(f[i+1][16].c_str()), std::atoi(f[i+1][18].c_str()),
+                                  std::atoi(f[i+1][20].c_str()), std::atoi(f[i+1][22].c_str()), std::atoi(f[i+1][14].c_str()));
     }
+    
 }
 
 //--------------------------------------------------------------
 void ofApp::setup() {
 
-    for (int i= 0; i<12; i++) {
+    for (int i= 0; i<nbFace; i++) {
         faces[i].idFace=i;
     }
     ofSetLogLevel(OF_LOG_SILENT);

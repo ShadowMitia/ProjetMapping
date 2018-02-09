@@ -29,8 +29,6 @@ namespace VarConst
     constexpr const uint64_t jumpTime = 220000000;
     constexpr const uint64_t gravityJumpTime = 0.1;
     
-    
-    
     constexpr const float speedAvatar = 1.0f;  // a
     
     
@@ -59,9 +57,6 @@ namespace VarConst
  CLONE : 0x0064
  */
 
-
-
 //enum class Direction { LEFT, RIGHT, TOP, LOW, JUMP };
-
 
 

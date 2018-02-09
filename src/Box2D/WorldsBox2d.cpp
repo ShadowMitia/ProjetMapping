@@ -98,7 +98,6 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
   return portals;
 }
 
-
 void WorldsBox2d::setup(){
     
     
@@ -106,72 +105,9 @@ void WorldsBox2d::setup(){
     world.setGravity(0, VarConst::gravity);
     world.setFPS(60.0);
     
-    
-    
-    //createBoundsModif(0, 0, 3520, 800); // modif monde ici
-    
-    //importPortal();
-
-    // 48, 208(-1), 256 et 416(-1)
     //creataBlock(170, 300);
 
     
-/*
-     ofRectangle rec = ofRectangle(0, 0, 5, 5);
-     rec.setFromCenter(0, 0, 5, 5);
-     Portal *temp;
-     temp = new Portal(ofRectangle(48 - 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(207 + 1, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(256 - 2, 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(415 + 1 , 48 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
-     porportal.push_back(temp);
-     
-     temp = new Portal(ofRectangle(48 - 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(207 + 1, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(256 - 2, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalLeft);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(415 + 1, 256 - 2, 3, 159 + 7), this,Deplacement::PLATFORM,ConditionOutput::VerticalRight);
-     porportal.push_back(temp);
-     
-     temp = new Portal(ofRectangle(48 - 2, 208 + 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalDown);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(256 - 2, 208 + 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalDown);
-     porportal.push_back(temp);
-     
-     temp = new Portal(ofRectangle(48 - 2, 256 - 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalTop);
-     porportal.push_back(temp);
-     temp = new Portal(ofRectangle(256 - 2, 256 - 2, 159 + 7, 3), this,Deplacement::PLATFORM,ConditionOutput::HorizontalTop);
-     porportal.push_back(temp);
-    
-    temp = new Portal(ofRectangle(207 + 1, 256 - 2, 3, 3), this,Deplacement::PLATFORM,ConditionOutput::CornerTopRight);
-    porportal.push_back(temp);
-    temp = new Portal(ofRectangle(256 - 2, 208 + 1, 3, 3), this,Deplacement::PLATFORM,ConditionOutput::CornerDownLeft);
-    porportal.push_back(temp);
-    
-    
-     porportal[0]->linke(porportal[3], nullptr);
-     porportal[1]->linke(porportal[2], nullptr);
-     porportal[2]->linke(porportal[1], nullptr);
-     porportal[3]->linke(porportal[0], nullptr);
-     porportal[4]->linke(porportal[7], nullptr);
-     porportal[5]->linke(porportal[6], porportal[0]);
-     porportal[6]->linke(porportal[5], porportal[3]);
-     porportal[7]->linke(porportal[4], nullptr);
-     
-     porportal[8]->linke(porportal[10], nullptr);
-     porportal[9]->linke(porportal[11], porportal[11]);
-     porportal[10]->linke(porportal[8], nullptr);
-     porportal[11]->linke(porportal[9], nullptr);
-    
-    porportal[12]->linke(porportal[13], nullptr);
-    //porportal[12]->linke(nullptr, nullptr);
-    porportal[13]->linke(porportal[12], nullptr);
-*/
     
     warterfalls = new Waterfalls(&world);
     
@@ -263,8 +199,6 @@ void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
     temp.addVertex(ofPoint(x,y));
     createPlatform(temp);
 }
-
-
 void WorldsBox2d::creataBlock(int x, int y){
     ObjBlock * block = new ObjBlock(world.getWorld());
     block->setPosition(x, y);
