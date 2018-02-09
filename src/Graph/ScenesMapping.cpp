@@ -19,7 +19,7 @@ void Scene1::draw()
     
     drawMap.end();
     transform.setFboIni(&drawMap);
-    //transform.update(sprites->at(0));
+    transform.update(sprites->at(0));
     
     //transform.fboSortie.draw(0, 0);
     //ofBackground(200, 200, 0);

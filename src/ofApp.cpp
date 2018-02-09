@@ -31,7 +31,7 @@ void ofApp::generateFaces()
 {
   std::vector<std::vector<std::string>> f = readCSV(ofToDataPath("faces.csv"));
 
-  for (std::size_t i = 0; i <14*2; i += 2)
+  for (std::size_t i = 0; i <12*2; i += 2)
     {
       int id1 = std::atoi(f[i][0].c_str());
       int id2 = std::atoi(f[i+1][0].c_str());
@@ -44,14 +44,14 @@ void ofApp::generateFaces()
       faces[id1].rect = ofRectangle(x1, y1, w1, h1);
     //cout << " id1 " << id1 << " id2 " << id2 << endl;
         faces[id1].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
-        faces[id1].matrix[0][1] = &faces[std::atoi(f[i][8].c_str())];
-        faces[id1].matrix[0][2] = &faces[std::atoi(f[i][9].c_str())];
-        faces[id1].matrix[0][3] = &faces[std::atoi(f[i][10].c_str())];
-        faces[id1].matrix[0][4] = &faces[std::atoi(f[i][11].c_str())];
-        faces[id1].matrix[0][5] = &faces[std::atoi(f[i][12].c_str())];
-        faces[id1].matrix[0][6] = &faces[std::atoi(f[i][13].c_str())];
-        faces[id1].matrix[0][7] = &faces[std::atoi(f[i][14].c_str())];
-        faces[id1].matrix[0][8] = &faces[std::atoi(f[i][15].c_str())];
+        faces[id1].matrix[0][1] = &faces[std::atoi(f[i][9].c_str())];
+        faces[id1].matrix[0][2] = &faces[std::atoi(f[i][11].c_str())];
+        faces[id1].matrix[0][3] = &faces[std::atoi(f[i][13].c_str())];
+        faces[id1].matrix[0][4] = &faces[std::atoi(f[i][15].c_str())];
+        faces[id1].matrix[0][5] = &faces[std::atoi(f[i][17].c_str())];
+        faces[id1].matrix[0][6] = &faces[std::atoi(f[i][19].c_str())];
+        faces[id1].matrix[0][7] = &faces[std::atoi(f[i][21].c_str())];
+        faces[id1].matrix[0][8] = &faces[std::atoi(f[i][23].c_str())];
         
         faces[id1].matrix[1][0] = &faces[std::atoi(f[i+1][7].c_str())];
         faces[id1].matrix[1][1] = &faces[std::atoi(f[i+1][8].c_str())];
@@ -68,6 +68,9 @@ void ofApp::generateFaces()
 //--------------------------------------------------------------
 void ofApp::setup() {
 
+    for (int i= 0; i<12; i++) {
+        faces[i].idFace=i;
+    }
     ofSetLogLevel(OF_LOG_SILENT);
     
     worlds = new WorldsBox2d;
@@ -101,15 +104,15 @@ void ofApp::setup() {
     
     
     
-    //generateFaces();
-    //worlds->createPortal(faces);
+    generateFaces();
+    worlds->createPortal(faces);
     
     
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->positionInit=ofVec2f(100, 300);
     avatarDef->world = worlds->world.getWorld();
     avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[9];
+    avatarDef->face = &faces[1];
     worlds->createAvatar(avatarDef);
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
     

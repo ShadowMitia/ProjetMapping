@@ -12,6 +12,7 @@
 #include "Sprite.h"
 
 struct Face{
+    int idFace;
     ofRectangle rect;
     Face * matrix[2][9];
     ofMatrix3x3 matrixR[2];

@@ -16,6 +16,7 @@
 //#define USE_WIIMOTE
 
 
+
 #ifdef USE_WIIMOTE
 #include "ofxWiiuse.h"
 #endif
@@ -30,7 +31,7 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener {
     public:
         
         int tempI = 0;
-        Face faces[14];
+        Face faces[12];
         vector<SpriteObj*> sprites;
         bool intput[4][6];
         void setup() override;
