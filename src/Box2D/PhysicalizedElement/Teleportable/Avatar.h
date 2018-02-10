@@ -13,6 +13,7 @@
 #include "PhysicalizedElement.h"
 #include "shift.h"
 #include "Sprite.h"
+#include "Ladder.h"
 enum class Deplacement { PLATFORM, TOP, DOWN, LEFT, RIGHT, PLATFORMLADDER };
 class Avatar;
 class coyoteTime: public ofThread{
@@ -25,6 +26,8 @@ public:
     }
     void threadedFunction();
 };
+
+//struct LockLadder;
 class Avatar : public Teleportable {
 public:
     Avatar(AvatarDef* _avatarDef);
@@ -33,7 +36,7 @@ public:
     bool clicJump;
     bool cloneJump;
     Deplacement modeDeplace;
-    bool lockLadderTop = false;
+    LockLadder lockLadder;
     bool lockLadderDown =false;
 
     void presUpdate();

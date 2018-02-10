@@ -136,7 +136,6 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    //sprites[0]->face = &faces[tempI];
     input();
     scene1->update();
     worlds->update();
@@ -186,7 +185,8 @@ void ofApp::keyPressed(int key)
     //mapping.keyPressed(key);
 }
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
+void ofApp::keyReleased(int key)
+{
     
     for (int i = 0; i<worlds->avatars.size(); i++) {
         worlds->avatars[i]->keyReleased(key);
@@ -223,11 +223,13 @@ void ofApp::keyReleased(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
+void ofApp::mouseMoved(int x, int y )
+{
 }
 
 //--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
+void ofApp::mouseDragged(int x, int y, int button)
+{
     mapping.mouseDragged(x, y, button);
 }
 

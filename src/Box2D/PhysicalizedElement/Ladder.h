@@ -9,7 +9,13 @@
 #pragma once
 #include "ofMain.h"
 #include "Constant.h"
-#include "Avatar.h"
+#include "PhysicalizedElement.h"
+
+struct LockLadder{
+    bool ladderTop = false;
+    bool ladderDown =false;
+    bool ladder = false;
+};
 
 class ObjectPlatformLadder: public ofxBox2dPolygon{
 public:

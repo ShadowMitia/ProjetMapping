@@ -7,6 +7,7 @@
 //
 
 #include "Ladder.h"
+#include "Avatar.h"
 
 void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     
@@ -48,7 +49,7 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     f = f->GetNext();
     if (_fixture == f) {
         //cout << "Start LadderTop " << endl;
-        objSource->lockLadderTop=true;
+        objSource->lockLadder.ladderTop = true;
         objSource->SetGravityScale(.0f);
         objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
         objSource->setJumping(false);
@@ -61,7 +62,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     b2Fixture* f = polygon.body->GetFixtureList();
     
     if (_fixture == f) {
-        if (!objSource->lockLadderTop && !objSource->lockLadderDown) {
+        if (!objSource->lockLadder.ladderTop && !objSource->lockLadderDown) {
             //cout << "End Ladder " << endl;
             objSource->SetGravityScale(1.0f);
             objSource->setMove(Deplacement::PLATFORM);
@@ -78,7 +79,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     f = f->GetNext();
     if (_fixture == f) {
         //cout << "End LadderTop " << endl;
-        objSource->lockLadderTop=false;
+        objSource->lockLadder.ladderTop = false;
         objSource->SetGravityScale(1.0f);// ici problem
         objSource->setMove(Deplacement::PLATFORM);
     }
