@@ -60,12 +60,12 @@ void ofApp::generateFaces()
         faces[id1].matrix[1][7] = &faces[std::atoi(f[i+1][21].c_str())];
         faces[id1].matrix[1][8] = &faces[std::atoi(f[i+1][23].c_str())];
         
-        faces[id1].matrixR[1].set(std::atoi(f[i+1][8].c_str()), std::atoi(f[i+1][10].c_str()), std::atoi(f[i+1][12].c_str()),
-                                  std::atoi(f[i+1][14].c_str()), std::atoi(f[i+1][16].c_str()), std::atoi(f[i+1][18].c_str()),
-                                  std::atoi(f[i+1][20].c_str()), std::atoi(f[i+1][22].c_str()), std::atoi(f[i+1][14].c_str()));
         faces[id1].matrixR[0].set(std::atoi(f[i][8].c_str()), std::atoi(f[i][14].c_str()), std::atoi(f[i][20].c_str()),
                                   std::atoi(f[i][10].c_str()), std::atoi(f[i][16].c_str()), std::atoi(f[i][22].c_str()),
                                   std::atoi(f[i][12].c_str()), std::atoi(f[i][18].c_str()), std::atoi(f[i][24].c_str()));
+        faces[id1].matrixR[1].set(std::atoi(f[i+1][8].c_str()), std::atoi(f[i+1][14].c_str()), std::atoi(f[i+1][20].c_str()),
+                                  std::atoi(f[i+1][10].c_str()), std::atoi(f[i+1][16].c_str()), std::atoi(f[i+1][22].c_str()),
+                                  std::atoi(f[i+1][12].c_str()), std::atoi(f[i+1][18].c_str()), std::atoi(f[i+1][24].c_str()));
     }
     
 }
