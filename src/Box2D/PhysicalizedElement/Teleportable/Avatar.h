@@ -27,7 +27,6 @@ public:
     void threadedFunction();
 };
 
-//struct LockLadder;
 class Avatar : public Teleportable {
 public:
     Avatar(AvatarDef* _avatarDef);
@@ -37,7 +36,6 @@ public:
     bool cloneJump;
     Deplacement modeDeplace;
     LockLadder lockLadder;
-    bool lockLadderDown =false;
 
     void presUpdate();
     void update() ;
@@ -50,8 +48,6 @@ public:
     void keyReleased(int key);
     
     void setMove(Deplacement move);
-    
-
 
 private:
     float moveInputX;
