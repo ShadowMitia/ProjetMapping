@@ -80,12 +80,11 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     f = f->GetNext();
     if (_fixture == f) {
         cout << "End LadderTop " << endl;
-        objSource->lockLadder.ladderTop = false;
-        if (!objSource->lockLadder.ladder) {
-            //objSource->SetGravityScale(1.0f);// ici problem
-            //objSource->setMove(Deplacement::PLATFORM); /// regardŽ la
+        if (!objSource->lockLadder.ladder && objSource->lockLadder.ladderTop) {
+            objSource->SetGravityScale(1.0f);// ici problem
+            objSource->setMove(Deplacement::PLATFORM); /// regardŽ la
         }
-
+        objSource->lockLadder.ladderTop = false;
 
     }
 }
