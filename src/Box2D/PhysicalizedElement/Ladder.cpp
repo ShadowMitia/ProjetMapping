@@ -69,7 +69,6 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
         if (!objSource->lockLadder.ladderTop) {
             objSource->SetGravityScale(1.0f);
             objSource->setMove(Deplacement::PLATFORM);
-            cout << "ici" << endl;
         }
     }
     f = f->GetNext();

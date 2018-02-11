@@ -41,6 +41,7 @@ CloneBox2d::~CloneBox2d()
         //// atention bug ici
         Avatar* objAvatar = static_cast<Avatar*>(objSource);
         objAvatar->lockLadder.ladder =  objAvatar->lockLadder.ladderDown = objAvatar->lockLadder.ladderTop = false;
+        objAvatar->SetGravityScale(1.0); // regardŽ si bien ici
         objAvatar->setMove(portalDestination->direct);
         
     }

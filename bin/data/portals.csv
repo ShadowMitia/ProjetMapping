@@ -15,7 +15,7 @@ id,Coin ou Arête,Nom Face,Cote,x,y,w,h,linkedPortal1,linkedPortal2,Deplacement,
 13,Arête,C4 O,left,464,208,3,159,7,-1,PLATFORM,5
 14,Arête,C4 O,right,623,208,3,159,20,-1,PLATFORM,5
 15,Arête,C4 O,down,464,367,159,3,29,-1,PLATFORM,5
-16,Arête,C1 S,top,464,416,159,3,30,-1,PLATFORM,6
+16,Arête,C1 S,top,464,416,159,3,30,8,PLATFORM,6
 17,Arête,C1 S,left,464,416,3,159,11,-1,PLATFORM,6
 18,Arête,C1 S,right,623,416,3,159,23,23,PLATFORM,6
 19,Arête,C4 S,top,672,208,159,3,35,-1,PLATFORM,7
@@ -26,9 +26,9 @@ id,Coin ou Arête,Nom Face,Cote,x,y,w,h,linkedPortal1,linkedPortal2,Deplacement,
 24,Arête,C3 H,left,880,208,3,159,0,-1,LEFT,9
 25,Arête,C3 H,right,1039,208,3,159,31,31,RIGHT,9
 26,Arête,C3 H,down,880,367,159,3,5,27,DOWN,9
-27,Arête,C1 H,top,880,416,159,3,8,-1,TOP,10
+27,Arête,C1 H,top,880,416,159,3,8,-1,DOWN,10
 28,Arête,C1 H,left,880,416,3,159,9,-1,LEFT,10
-29,Arête,C1 H,right,1039,416,3,159,15,-1,RIGHT,10
+29,Arête,C1 H,right,1039,416,3,159,15,-1,LEFT,10
 30,Arête,C1 H,down,880,575,159,3,16,-1,DOWN,10
 31,Arête,C5 H,left,1088,208,3,159,25,25,LEFT,11
 32,Arête,C5 H,down,1088,367,159,3,33,33,DOWN,11
