@@ -69,6 +69,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
         if (!objSource->lockLadder.ladderTop) {
             objSource->SetGravityScale(1.0f);
             objSource->setMove(Deplacement::PLATFORM);
+            cout << "ici" << endl;
         }
     }
     f = f->GetNext();
@@ -81,8 +82,8 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
         cout << "End LadderTop " << endl;
         objSource->lockLadder.ladderTop = false;
         if (!objSource->lockLadder.ladder) {
-            objSource->SetGravityScale(1.0f);// ici problem
-            objSource->setMove(Deplacement::PLATFORM);
+            //objSource->SetGravityScale(1.0f);// ici problem
+            //objSource->setMove(Deplacement::PLATFORM); /// regardé la
         }
 
 
