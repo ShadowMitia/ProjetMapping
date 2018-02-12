@@ -21,6 +21,8 @@ public:
     virtual ofVec2f getPositionTranform(){};
     virtual void create(){};
     virtual void reset(){};
+    virtual bool isActif(){};
+
     
     ofVec2f positionInit;
     Face* faceIni;
@@ -39,18 +41,20 @@ public:
     ofVec2f getPositionTranform() override;
     void create() override;
     void reset() override;
+    bool isActif() override;
 };
 
 class ObjBlock;
 class ObjBlockDef: public SpriteObj{
 public:
-    bool actif  = true;
     ofImage spriteImage;
     ObjBlock * b;
     void draw() override;
     ofVec2f getPositionTranform() override;
     void create() override;
     void reset() override;
+    bool isActif() override;
+
     
 };
 
@@ -64,6 +68,8 @@ public:
     ofVec2f getPositionTranform() override;
     void create() override;
     void reset() override;
+    bool isActif() override;
+
 };
 
 

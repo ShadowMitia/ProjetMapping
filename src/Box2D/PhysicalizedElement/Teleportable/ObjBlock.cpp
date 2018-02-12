@@ -30,16 +30,12 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
 }
 
 void ObjBlock::draw(){
-    ofSetColor(ofColor::black);
+    ofSetColor(ofColor::navajoWhite);
     polygon.draw();
     ofSetColor(ofColor::white);
 }
 
-void ObjBlock::update(){
-    if (delectObj) {
-        delete this;
-    }
-}
+
 void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());

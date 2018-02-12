@@ -27,9 +27,3 @@ ObjPickup::ObjPickup(b2World* box2d){
     data->sprite = Sprite::PICKUP;
     data->physicalizedElement = this;
 }
-void ObjPickup::update(){
-    if (delectObj) {
-        delete this;
-    }
-
-}

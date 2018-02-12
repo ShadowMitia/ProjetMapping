@@ -15,11 +15,9 @@
 
 class ObjBlock: public Teleportable{
 public:
-
-    bool delectObj = false;
+    
     ObjBlock(ObjBlockDef* _objBlockDef);
     void draw();
-    void update() override;
     
 private:
     virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;

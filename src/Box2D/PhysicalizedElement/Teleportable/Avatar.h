@@ -37,7 +37,7 @@ public:
     LockLadder lockLadder;
 
     void presUpdate();
-    void update() override;
+    void update();
     void draw() ;
     void setJumping(bool _bool);
     
@@ -47,6 +47,7 @@ public:
     void setMove(Deplacement move);
 
 private:
+    
     float moveInputX;
     float moveInputY;
     coyoteTime* ct;

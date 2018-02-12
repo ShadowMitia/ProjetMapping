@@ -118,7 +118,8 @@ void ofApp::setup() {
     avatarDef->world = worlds;
     avatarDef->s= &inputButton[0];
     avatarDef->face = &faces[1];
-    worlds->createAvatar(avatarDef);
+    avatarDef->create();
+    //worlds->createAvatar(avatarDef);
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
@@ -182,6 +183,7 @@ void ofApp::keyPressed(int key)
         tempI++;
         cout << "tempI: " << tempI << endl;
     }
+
     //mapping.keyPressed(key);
 }
 //--------------------------------------------------------------

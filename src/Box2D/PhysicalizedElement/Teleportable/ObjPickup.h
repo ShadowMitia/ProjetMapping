@@ -14,10 +14,9 @@
 
 class ObjPickup: public Teleportable{
 public:
-    bool delectObj;
     ObjPickup(b2World* box2d);
     void draw();
-    void update() override;
+
 private:
     virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;

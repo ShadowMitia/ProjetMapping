@@ -163,13 +163,6 @@ void WorldsBox2d::update(){
 	} // update clone
     }
 
-    for (int i= 0; i<blocks.size(); ++i) {
-        if (blocks[i]->delectObj == true) {
-            delete blocks[i];
-            blocks.erase(blocks.begin()+i);
-            --i;
-        }
-    }
     
     for (int i = 0; i < avatars.size(); ++i){
         avatars[i]->update();
