@@ -62,22 +62,21 @@ void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite
     Avatar *obj = static_cast<Avatar*>(objSource);
     if (OtherSprite->sprite==Sprite::LADDER) {
         Ladder *l = static_cast<Ladder*>(OtherSprite->physicalizedElement);
-        
-        ladder = true;
+        ladderTouch = true;
     }
 }
 
 void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     Avatar *obj = static_cast<Avatar*>(objSource);
     if (OtherSprite->sprite==Sprite::LADDER) {
-        ladder = false;
+        ladderTouch = false;
     }
     
 }
 
 void CloneBox2d::delectCloneAvatar(){
     Avatar* objAvatar = static_cast<Avatar*>(objSource);
-    if (ladder) {
+    if (ladderTouch) {
         objAvatar->lockLadder.ladderDown = objAvatar->lockLadder.ladderTop = false;
         objAvatar->SetGravityScale(0.0); // regardŽ si bien ici
         objAvatar->setMove(Deplacement::DOWN); // changer pas Ladder
