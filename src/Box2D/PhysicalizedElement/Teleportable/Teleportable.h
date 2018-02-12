@@ -12,6 +12,10 @@
 #include "PhysicalizedElement.h"
 #include "Face.h"
 
+
+
+std::vector<ofPoint> loadPoints(const std::string& file);
+
 class SpriteObj;
 class Teleportable : public PhysicalizedElement {
 public:

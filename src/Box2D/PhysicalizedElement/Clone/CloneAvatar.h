@@ -61,6 +61,8 @@ void CloneBox2d::collisionFonctionAvatar(){
 void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
     Avatar *obj = static_cast<Avatar*>(objSource);
     if (OtherSprite->sprite==Sprite::LADDER) {
+        Ladder *l = static_cast<Ladder*>(OtherSprite->physicalizedElement);
+        
         ladder = true;
     }
     

@@ -138,9 +138,9 @@ void ObjectLadder::create(b2World * b2dworld){
         //fixtureSide.id = 3;
         vec2 = screenPtToWorldPt(getBoundingBox().getCenter()
                                  + ofVec2f(0,getBoundingBox().getCenter().y
-                                           - getBoundingBox().getMin().y+2));
+                                           - getBoundingBox().getMin().y-2));
         
-        shape.SetAsBox(rect.x, 1/30.f, vec2, 0.f);
+        shape.SetAsBox(rect.x, 2/30.f, vec2, 0.f); // le 2/30 et pour evitŽ que le clone contactEnd avant la teleportation
         fixtureSide.shape		= &shape;
         body->CreateFixture(&fixtureSide);
         

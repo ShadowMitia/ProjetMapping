@@ -9,7 +9,6 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "Face.h"
 #include "shift.h"
 #include "Box2D.h"
 
@@ -18,7 +17,6 @@ class SpriteObj{
 public:
 
     Face* face;
-
     virtual void draw(){};
     virtual ofVec2f getPositionTranform(){};
     virtual void reset(){};
@@ -39,4 +37,27 @@ public:
     ofVec2f getPositionTranform();
     void reset();
 };
+
+class ObjBlock;
+class ObjBlockDef: public SpriteObj{
+    
+    bool actif  = true;
+    ofImage spriteImage;
+    ObjBlock * b;
+    void draw();
+    ofVec2f getPositionTranform();
+    void reset();
+    
+};
+
+class ObjPickup;
+class ObjPickupDef: public SpriteObj {
+    bool actif  = true;
+    ofImage spriteImage;
+    ObjPickup * pkup;
+    void draw();
+    ofVec2f getPositionTranform();
+    void reset();
+};
+
 

@@ -8,12 +8,11 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxBox2d.h"
 #include "Teleportable.h"
-#include "PhysicalizedElement.h"
 #include "shift.h"
 #include "Sprite.h"
 #include "Ladder.h"
+
 enum class Deplacement { PLATFORM, TOP, DOWN, LEFT, RIGHT, PLATFORMLADDER };
 class Avatar;
 class coyoteTime: public ofThread{
