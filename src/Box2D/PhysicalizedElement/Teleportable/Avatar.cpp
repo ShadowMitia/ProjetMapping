@@ -9,6 +9,7 @@
 #include "Platform.h"
 //#include "PickUp.h"
 #include "Portal.h"
+#include "WorldsBox2d.h"
 
 
 Avatar::Avatar(AvatarDef* _avatarDef)
@@ -24,7 +25,7 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     polygon.FilterDataObjet.categoryBits = 0x0001;
     polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032 | 0x0008 | 0x0128;
     
-    polygon.create(_avatarDef->world, false);
+    polygon.create(_avatarDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
     
     polygon.setData(new dataSprite());
@@ -76,14 +77,6 @@ void Avatar::draw()
     polygon.draw();
     ofSetColor(ofColor::white);
 
-}
-void Avatar::setPosition(ofVec2f vec)
-{
-    setPosition(vec.x, vec.y);
-}
-void Avatar::setPosition(int x, int y)
-{
-    polygon.setPosition(x, y);
 }
 /////////////// move avatar ///////////////
 void Avatar::movePlatform(Shift *s)

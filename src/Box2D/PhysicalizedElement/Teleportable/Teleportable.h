@@ -27,6 +27,7 @@ public:
     void setVelocity(ofVec2f v);
     
     void SetGravityScale(float32 scale);
-
     bool viewPoint = false;
+    
+    virtual void update(){};
 };

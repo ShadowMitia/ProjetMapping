@@ -27,17 +27,17 @@ public:
     
     ofxBox2d                 world;
 
-    
-    std::vector< Avatar *> avatars;
     std::vector< Portal *> porportal;
     std::vector< Platform *> platforms;
     std::vector< Ladder *> ladders;
+    std::vector< Avatar *> avatars;
+    
     std::vector< CloneBox2d *> clones;
+    
     std::vector< ObjBlock *> blocks;
     
     
     Waterfalls*               warterfalls;
-    std::vector< Teleportable* > teleportables;
     
     void setup();
     void draw();
@@ -49,8 +49,8 @@ public:
     void createPlatform(ofPolyline _polyline);
     void createPortal(Face *input);
     void createLadder(ofPolyline _polyline);
-
     
-private:
-    void importPortal();
+    void threadedFunction(){
+        //update();
+    };
 };

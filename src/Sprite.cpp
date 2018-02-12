@@ -10,6 +10,7 @@
 #include "Avatar.h"
 #include "ObjBlock.h"
 #include "ObjPickup.h"
+#include "WorldsBox2d.h"
 
 void AvatarDef::draw(){
     ofRectangle temp;
@@ -21,6 +22,9 @@ void AvatarDef::draw(){
 }
 ofVec2f AvatarDef::getPositionTranform(){
     return  a->getPosition() - face->rect.getPosition() + 160;
+}
+void AvatarDef::create(){
+    world->createAvatar(this);
 }
 void AvatarDef::reset(){
     a->setPosition(positionInit);
@@ -42,7 +46,9 @@ void ObjBlockDef::draw(){
     }
 
 }
-void ObjBlockDef::reset(){}
+void ObjBlockDef::reset(){
+
+}
 
 ofVec2f ObjPickupDef::getPositionTranform(){
     return pkup->getPosition() - face->rect.getPosition() + 160;

@@ -1165,12 +1165,12 @@
 		4EC23B43EDF6FDE2BB79719A /* Teleportable */ = {
 			isa = PBXGroup;
 			children = (
+				7C11B17C768802156CF3C9A2 /* Teleportable.h */,
+				9890663DFB10C6DE1A5B4095 /* Teleportable.cpp */,
 				F836D3C6303174D5B7CE6DAB /* Avatar.cpp */,
 				631150619F0590AD8D6E2C75 /* Avatar.h */,
 				71F54817F24CE6CC8B35F10D /* ObjBlock.cpp */,
 				09BDAC9C2EA184E9CB3B6479 /* ObjBlock.h */,
-				9890663DFB10C6DE1A5B4095 /* Teleportable.cpp */,
-				7C11B17C768802156CF3C9A2 /* Teleportable.h */,
 				BCF9C661202D194B001D2269 /* ObjPickup.cpp */,
 				BCF9C662202D194B001D2269 /* ObjPickup.h */,
 			);
@@ -1323,17 +1323,17 @@
 		778DD45F453F8D5B8CB477D3 /* PhysicalizedElement */ = {
 			isa = PBXGroup;
 			children = (
+				C869FE7AA8157831F7A45E56 /* PhysicalizedElement.h */,
+				357F7D3F76E5ED805EC0F243 /* PhysicalizedElement.cpp */,
+				4EC23B43EDF6FDE2BB79719A /* Teleportable */,
+				E2FF41C9A0E4233628D23219 /* Portal */,
 				8979F99E87C336FAEA5E2E9C /* Clone */,
 				CD13BB7DC0F02E4373F2BDF2 /* Ladder.cpp */,
 				D9D8C7FB461CC6FDFAEA7526 /* Ladder.h */,
-				357F7D3F76E5ED805EC0F243 /* PhysicalizedElement.cpp */,
-				C869FE7AA8157831F7A45E56 /* PhysicalizedElement.h */,
 				C9D6A10FD19ABD4D0113F23F /* Platform.cpp */,
 				DD6886BE6922252FABE36532 /* Platform.h */,
 				8F838F4E7CAA51F25637E45D /* PlatformLadder.cpp */,
 				88E5E6A37304881C87C809C1 /* PlatformLadder.h */,
-				E2FF41C9A0E4233628D23219 /* Portal */,
-				4EC23B43EDF6FDE2BB79719A /* Teleportable */,
 			);
 			name = PhysicalizedElement;
 			sourceTree = "<group>";
@@ -1440,8 +1440,8 @@
 		8979F99E87C336FAEA5E2E9C /* Clone */ = {
 			isa = PBXGroup;
 			children = (
-				C126E7F9F8F4BD8CBF8E3824 /* Clone.cpp */,
 				22199F14FD82B0DE600A21E7 /* Clone.h */,
+				C126E7F9F8F4BD8CBF8E3824 /* Clone.cpp */,
 				8EFA9A3E01055328872EE77C /* CloneAvatar.h */,
 				42D73981BBCD8A6538FEDCDF /* CloneOther.h */,
 				6F18A867CF26DFF317BA1987 /* ConditionOutput.h */,
@@ -1849,11 +1849,11 @@
 		DD98FC544A9C83C1A1DE7A25 /* Box2D */ = {
 			isa = PBXGroup;
 			children = (
+				D0375C8FD8841CFDB7BDFBBE /* WorldsBox2d.cpp */,
+				EC4B382A97F4D96AE25B372D /* WorldsBox2d.h */,
 				778DD45F453F8D5B8CB477D3 /* PhysicalizedElement */,
 				DA78DDAA520D939998592189 /* Waterfalls.cpp */,
 				9B5CA0D232D72399A0F1230B /* Waterfalls.h */,
-				D0375C8FD8841CFDB7BDFBBE /* WorldsBox2d.cpp */,
-				EC4B382A97F4D96AE25B372D /* WorldsBox2d.h */,
 			);
 			name = Box2D;
 			sourceTree = "<group>";
@@ -1908,8 +1908,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				DD98FC544A9C83C1A1DE7A25 /* Box2D */,
 				B82E386A449237D0A434B116 /* Constant.h */,
+				DD98FC544A9C83C1A1DE7A25 /* Box2D */,
 				D840E3624CB2BCE149B9D522 /* Graph */,
 				BCDDCD40C16594B9C08407FD /* Input */,
 				14D739EB782E84E421105278 /* Sprite.cpp */,

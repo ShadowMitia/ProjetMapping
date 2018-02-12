@@ -11,12 +11,16 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Teleportable.h"
+#include "Sprite.h"
 
 class ObjBlock: public Teleportable{
 public:
-    ObjBlock(b2World* box2d);
-    void setPosition(float x, float y);
+
+    bool delectObj = false;
+    ObjBlock(ObjBlockDef* _objBlockDef);
     void draw();
+    void update() override;
+    
 private:
     virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;

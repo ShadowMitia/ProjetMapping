@@ -100,15 +100,9 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 
 void WorldsBox2d::setup(){
     
-    
     world.init();
     world.setGravity(0, VarConst::gravity);
     world.setFPS(60.0);
-    
-    //creataBlock(170, 300);
-
-    
-    
     warterfalls = new Waterfalls(&world);
     
 }
@@ -147,7 +141,7 @@ void WorldsBox2d::draw(){
 }
 void WorldsBox2d::createAvatar(AvatarDef* _avatarDef){
     Avatar * avatar = new Avatar(_avatarDef);
-    avatar->setPosition(_avatarDef->positionInit.x, _avatarDef->positionInit.y);
+    avatar->setPosition(_avatarDef->positionInit);
     avatars.push_back(avatar);
 }
 void WorldsBox2d::update(){
@@ -169,10 +163,16 @@ void WorldsBox2d::update(){
 	} // update clone
     }
 
-    for (std::size_t j = 0; j < avatars.size(); j++){
-    avatars[j]->presUpdate();
-
-    avatars[j]->update();
+    for (int i= 0; i<blocks.size(); ++i) {
+        if (blocks[i]->delectObj == true) {
+            delete blocks[i];
+            blocks.erase(blocks.begin()+i);
+            --i;
+        }
+    }
+    
+    for (int i = 0; i < avatars.size(); ++i){
+        avatars[i]->update();
     }
     
     //warterfalls->update();
@@ -191,7 +191,7 @@ void WorldsBox2d::createPortal(Face *input){
     porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this,input);
 }
 void WorldsBox2d::creataBlock(ObjBlockDef * _objBlockDef){
-    ObjBlock * block = new ObjBlock(_objBlockDef->world);
-    block->setPosition(_objBlockDef->positionInit.x, _objBlockDef->positionInit.y);
+    ObjBlock * block = new ObjBlock( _objBlockDef);
+    block->setPosition(_objBlockDef->positionInit);
     blocks.push_back(block);
 }

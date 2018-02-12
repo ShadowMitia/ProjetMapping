@@ -26,8 +26,6 @@ namespace VarConst
     constexpr const float impulseJumpAvatarMIN = 2.6f;
     constexpr const float speedAvatarAirControlMax = 1.5f;
     constexpr const uint64_t coyoteTime = 70000000;
-    constexpr const uint64_t jumpTime = 220000000;
-    constexpr const uint64_t gravityJumpTime = 0.1;
     
     constexpr const float speedAvatar = 1.0f;  // a
     

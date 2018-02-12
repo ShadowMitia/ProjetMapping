@@ -37,10 +37,8 @@ public:
     LockLadder lockLadder;
 
     void presUpdate();
-    void update() ;
+    void update() override;
     void draw() ;
-    void setPosition(ofVec2f vec);
-    void setPosition(int x, int y);
     void setJumping(bool _bool);
     
     void keyPressed(int key);

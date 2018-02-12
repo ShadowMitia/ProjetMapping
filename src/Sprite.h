@@ -10,8 +10,8 @@
 
 #include "ofMain.h"
 #include "shift.h"
-#include "Box2D.h"
 
+class WorldsBox2d;
 class Face;
 class SpriteObj{
 public:
@@ -19,11 +19,13 @@ public:
     Face* face;
     virtual void draw(){};
     virtual ofVec2f getPositionTranform(){};
+    virtual void create(){};
     virtual void reset(){};
     
     ofVec2f positionInit;
     Face* faceIni;
-    b2World* world;
+    //b2World* world;
+    WorldsBox2d* world;
     
 };
 
@@ -33,31 +35,35 @@ public:
     ofImage spriteImage;
     Shift* s;
     Avatar* a;
-    void draw();
-    ofVec2f getPositionTranform();
-    void reset();
+    void draw()override;
+    ofVec2f getPositionTranform() override;
+    void create() override;
+    void reset() override;
 };
 
 class ObjBlock;
 class ObjBlockDef: public SpriteObj{
-    
+public:
     bool actif  = true;
     ofImage spriteImage;
     ObjBlock * b;
-    void draw();
-    ofVec2f getPositionTranform();
-    void reset();
+    void draw() override;
+    ofVec2f getPositionTranform() override;
+    void create() override;
+    void reset() override;
     
 };
 
 class ObjPickup;
 class ObjPickupDef: public SpriteObj {
+public:
     bool actif  = true;
     ofImage spriteImage;
     ObjPickup * pkup;
-    void draw();
-    ofVec2f getPositionTranform();
-    void reset();
+    void draw() override;
+    ofVec2f getPositionTranform() override;
+    void create() override;
+    void reset() override;
 };
 
 
