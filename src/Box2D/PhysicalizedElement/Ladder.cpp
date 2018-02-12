@@ -23,69 +23,74 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0128;
-    tempFilter.maskBits = 0x0001;
+    tempFilter.maskBits = 0x0001 | 0x0064;
     polygon.setFilterData(tempFilter);
     
-    //polygon.body->GetFixtureList()->SetSensor(true);
 }
 void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
-    Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
-    
-    b2Fixture* f = polygon.body->GetFixtureList();
-    if (_fixture == f) {
-        cout << "Start Ladder " << endl;
-        objSource->lockLadder.ladder = true;
-        if (objSource->lockLadder.ladderTop) {
+    if (OtherSprite->sprite==Sprite::AVATAR) {
+        Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
+        b2Fixture* f = polygon.body->GetFixtureList();
+        if (_fixture == f) {
+            cout << "Start Ladder " << endl;
+            objSource->lockLadder.ladder = true;
+            if (objSource->lockLadder.ladderTop) {
+                objSource->setMove(Deplacement::DOWN);
+            }
+        }
+        f = f->GetNext();
+        if (_fixture == f) {
+            cout << "Start LadderDown " << endl;
+            objSource->lockLadder.ladderDown = true;
+            objSource->SetGravityScale(.0f);
             objSource->setMove(Deplacement::DOWN);
+            //objSource->setJumping(true);
+        }
+        f = f->GetNext();
+        if (_fixture == f) {
+            cout << "Start LadderTop " << endl;
+            objSource->lockLadder.ladderTop = true;
+            objSource->SetGravityScale(.0f);
+            objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
+            objSource->setJumping(false);
+            objSource->setMove(Deplacement::PLATFORMLADDER);
         }
     }
     
-    f = f->GetNext();
-    if (_fixture == f) {
-        cout << "Start LadderDown " << endl;
-        objSource->lockLadder.ladderDown = true;
-        objSource->SetGravityScale(.0f);
-        objSource->setMove(Deplacement::DOWN);
-        //objSource->setJumping(true);
-    }
-    
-    f = f->GetNext();
-    if (_fixture == f) {
-        cout << "Start LadderTop " << endl;
-        objSource->lockLadder.ladderTop = true;
-        objSource->SetGravityScale(.0f);
-        objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
-        objSource->setJumping(false);
-        objSource->setMove(Deplacement::PLATFORMLADDER);
-    }
+    // pour les Clone voir dans contactStart du clone ( Avatar )
+
 }
 void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
-    Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
+    if (OtherSprite->sprite==Sprite::AVATAR) {
+        Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
+        
+        b2Fixture* f = polygon.body->GetFixtureList();
+        if (_fixture == f) {
+            objSource->lockLadder.ladder = false;
+            cout << "End Ladder " << endl;
+            if (!objSource->lockLadder.ladderTop) {
+                objSource->SetGravityScale(1.0f);
+                objSource->setMove(Deplacement::PLATFORM);
+            }
+        }
+        f = f->GetNext();
+        if (_fixture == f) {
+            cout << "End LadderDown " << endl;
+            objSource->lockLadder.ladderDown = false;
+        }
+        f = f->GetNext();
+        if (_fixture == f) {
+            cout << "End LadderTop " << endl;
+            if (!objSource->lockLadder.ladder && objSource->lockLadder.ladderTop) {
+                objSource->SetGravityScale(1.0f);// ici problem
+                objSource->setMove(Deplacement::PLATFORM); /// regardŽ la
+            }
+            objSource->lockLadder.ladderTop = false;
+            
+        }
+    }
     
-    b2Fixture* f = polygon.body->GetFixtureList();
-    if (_fixture == f) {
-        objSource->lockLadder.ladder = false;
-        cout << "End Ladder " << endl;
-        if (!objSource->lockLadder.ladderTop) {
-            objSource->SetGravityScale(1.0f);
-            objSource->setMove(Deplacement::PLATFORM);
-        }
-    }
-    f = f->GetNext();
-    if (_fixture == f) {
-        cout << "End LadderDown " << endl;
-        objSource->lockLadder.ladderDown = false;
-    }
-    f = f->GetNext();
-    if (_fixture == f) {
-        cout << "End LadderTop " << endl;
-        if (!objSource->lockLadder.ladder && objSource->lockLadder.ladderTop) {
-            objSource->SetGravityScale(1.0f);// ici problem
-            objSource->setMove(Deplacement::PLATFORM); /// regardŽ la
-        }
-        objSource->lockLadder.ladderTop = false;
-
-    }
+    // pour les Clone voir dans contactStart du clone ( Avatar )
 }
 
 // Code ObjectLadder //
@@ -149,6 +154,7 @@ void ObjectLadder::create(b2World * b2dworld){
         
     }
 }
+
 void ObjectPlatformLadder::create(b2World * b2dworld){
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());

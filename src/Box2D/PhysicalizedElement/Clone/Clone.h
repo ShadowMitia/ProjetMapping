@@ -20,6 +20,7 @@ public:
     Teleportable* objSource;
     Portal* portalSource = nullptr;
     Portal* portalDestination = nullptr;
+    
 
     CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination);
     ~CloneBox2d();
@@ -31,23 +32,33 @@ public:
     void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     
 private:
-    bool portal;
+    bool portalView;
     void (CloneBox2d::*collisionFonction)();
     void collisionFonctionAvatar();
-    void collisionFonctionUnknown();
+    void collisionFonctionOther();
+    
     void (CloneBox2d::*contactStartFonction)(b2Fixture* _fixture, dataSprite* OtherSprite);
     void (CloneBox2d::*contactEndFonction)(b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactStartAvatar(b2Fixture* _fixture, dataSprite* OtherSprite);
     void contactEndAvatar(b2Fixture* _fixture, dataSprite* OtherSprite);
-    void contactStartUnknown(b2Fixture* _fixture, dataSprite* OtherSprite);
-    void contactEndUnknown(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactStartOther(b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactEndOther(b2Fixture* _fixture, dataSprite* OtherSprite);
+    
     void PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse) override;
     void PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e) override;
+    
+    void (CloneBox2d::*delectClone)();
+    void delectCloneAvatar();
+    void delectCloneOther();
+
+    
     ObjectGame polygon;
     ofPoint PositionObjSource;
     ofPoint PositionClone;
     bool lockTransfer = false;
     float matrixTrans[2];
     ofVec2f multyMatrix(ofVec2f v);
+    
+    bool ladder;
     
 };
