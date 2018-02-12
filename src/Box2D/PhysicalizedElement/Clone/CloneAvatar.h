@@ -65,8 +65,6 @@ void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite
         
         ladder = true;
     }
-    
-
 }
 
 void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
@@ -87,6 +85,9 @@ void CloneBox2d::delectCloneAvatar(){
     else{
     objAvatar->lockLadder.ladder =  objAvatar->lockLadder.ladderDown = objAvatar->lockLadder.ladderTop = false;
     objAvatar->SetGravityScale(1.0); // regardŽ si bien ici
-    objAvatar->setMove(portalDestination->direct);
+        if (objAvatar->modeDeplace == Deplacement::PLATFORM || objAvatar->modeDeplace == Deplacement::LADDER) {
+            cout << "changement de mode "<< endl;
+            objAvatar->setMove(portalDestination->direct);
+        }
     }
 }

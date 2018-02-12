@@ -190,17 +190,8 @@ void WorldsBox2d::createLadder(ofPolyline polyline){
 void WorldsBox2d::createPortal(Face *input){
     porportal = generatePortals(readCSV(ofToDataPath("portals.csv")), this,input);
 }
-void WorldsBox2d::createBoundsModif(float x, float y, float w, float h) {
-    ofPolyline temp;
-    temp.addVertex(ofPoint(x,y));
-    temp.addVertex(ofPoint(w,y));
-    temp.addVertex(ofPoint(w,h));
-    temp.addVertex(ofPoint(x,h));
-    temp.addVertex(ofPoint(x,y));
-    createPlatform(temp);
-}
-void WorldsBox2d::creataBlock(int x, int y){
-    ObjBlock * block = new ObjBlock(world.getWorld());
-    block->setPosition(x, y);
+void WorldsBox2d::creataBlock(ObjBlockDef * _objBlockDef){
+    ObjBlock * block = new ObjBlock(_objBlockDef->world);
+    block->setPosition(_objBlockDef->positionInit.x, _objBlockDef->positionInit.y);
     blocks.push_back(block);
 }

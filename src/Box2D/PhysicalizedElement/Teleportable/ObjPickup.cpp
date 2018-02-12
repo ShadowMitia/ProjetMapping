@@ -24,6 +24,6 @@ ObjPickup::ObjPickup(b2World* box2d){
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
-    data->sprite = Sprite::BLOCK;
+    data->sprite = Sprite::PICKUP;
     data->physicalizedElement = this;
 }

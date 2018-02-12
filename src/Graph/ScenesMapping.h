@@ -63,9 +63,6 @@ public:
 };
 
 
-
-
-
 class Scene2 : public ofx::piMapper::FboSource
 {
 public:

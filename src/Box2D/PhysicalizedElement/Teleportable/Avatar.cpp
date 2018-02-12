@@ -38,8 +38,7 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     clicJump = false;
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
-    setMove(Deplacement::PLATFORM);
-    //polygon.body->SetGravityScale(0.0);
+    setMove(modeDeplace);
     
     ct = new coyoteTime(VarConst::coyoteTime,this);
     s=_avatarDef->s;
@@ -143,33 +142,42 @@ void Avatar::moveLadder(Shift *s)
     float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     moveInputX = moveInputX * speedMax;
-    if ((s->directionalCross[3] - s->directionalCross[2])==0) moveInputY = polygon.body->GetLinearVelocity().y;
+    //if ((s->directionalCross[3] - s->directionalCross[2])==0) moveInputY = polygon.body->GetLinearVelocity().y;
+    if (clicJump) { // je ne suis pas sur de cette thechnique
+         moveInputY = polygon.body->GetLinearVelocity().y;
+    }
 }
 void Avatar::setMove(Deplacement _move)
 {
     switch (_move) {
         case Deplacement::PLATFORM :
             //cout << "PLATFORM" << endl;
+            modeDeplace = Deplacement::PLATFORM;
             preMove=&Avatar::movePlatform;
             //move=&Avatar::moveNord;
             break;
         case Deplacement::TOP :
             //cout << "Nord" << endl;
+            modeDeplace = Deplacement::TOP;
             preMove=&Avatar::moveNord;
             break;
         case Deplacement::DOWN :
             //cout << "Sud" << endl;
+            modeDeplace = Deplacement::DOWN;
             preMove=&Avatar::moveSud;
             break;
         case Deplacement::LEFT :
             //cout << "Ouest" << endl;
+            modeDeplace = Deplacement::LEFT;
             preMove=&Avatar::moveOuest;
             break;
         case Deplacement::RIGHT :
             //cout << "Est" << endl;
+            modeDeplace = Deplacement::RIGHT;
             preMove=&Avatar::moveEst;
             break;
-        case Deplacement::PLATFORMLADDER:
+        case Deplacement::LADDER:
+            modeDeplace = Deplacement::LADDER;
             preMove=&Avatar::moveLadder;
     }
 }
@@ -228,7 +236,10 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
-            ct->startThread();
+            if (OtherSprite->sprite==Sprite::PLATFORM && modeDeplace!=Deplacement::LADDER) {
+                ct->startThread();
+            }
+            
         }
         if (e.contact->GetManifold()->localNormal.y > 0.f) {
             polygon.tabCollision[1]--;
@@ -240,10 +251,7 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
             polygon.tabCollision[3]--;
         }
     }
-    if (OtherSprite->sprite == Sprite::PLATFORM)
-    {
-        //jumping = true; // bug pour jump mais doit etre remis pour le faite de tombé
-    }
+
 }
 void Avatar::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {

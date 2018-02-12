@@ -53,7 +53,7 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
             objSource->SetGravityScale(.0f);
             objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
             objSource->setJumping(false);
-            objSource->setMove(Deplacement::PLATFORMLADDER);
+            objSource->setMove(Deplacement::LADDER);
         }
     }
     

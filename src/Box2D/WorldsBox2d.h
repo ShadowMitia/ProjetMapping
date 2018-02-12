@@ -12,8 +12,7 @@
 #include "Portal.h"
 #include "PhysicalizedElement/PhysicalizedElement.h"
 #include "PhysicalizedElement/Platform.h"
-//#include "PhysicalizedElement/ObjetBlock.h"
-//#include "PhysicalizedElement/PickUp.h"
+
 #include "Constant.h"
 #include "Ladder.h"
 #include "Waterfalls.h"
@@ -27,14 +26,14 @@ class WorldsBox2d :public ofThread{
 public:
     
     ofxBox2d                 world;
-    ofRectangle              bounds;
+
     
     std::vector< Avatar *> avatars;
     std::vector< Portal *> porportal;
     std::vector< Platform *> platforms;
     std::vector< Ladder *> ladders;
     std::vector< CloneBox2d *> clones;
-    std::vector<ObjBlock *> blocks;
+    std::vector< ObjBlock *> blocks;
     
     
     Waterfalls*               warterfalls;
@@ -43,14 +42,14 @@ public:
     void setup();
     void draw();
     void update();
-    void createBoundsModif(float x, float y, float w, float h);
-    void creataBlock( int x, int y);
+    
+    void creataBlock( ObjBlockDef * _objBlockDef);
     void createAvatar(AvatarDef* _avatarDef);
+    
     void createPlatform(ofPolyline _polyline);
     void createPortal(Face *input);
     void createLadder(ofPolyline _polyline);
-    void createBox(ofPolyline _polyline);
-    void createPickup(ofPolyline polyline);
+
     
 private:
     void importPortal();

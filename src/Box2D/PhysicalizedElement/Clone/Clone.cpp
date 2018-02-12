@@ -38,13 +38,7 @@ CloneBox2d::~CloneBox2d()
         objSource->setVelocity(v);
         objSource->sprite->face = portalDestination->face;
         
-        (*this.*delectClone)();
-        //// atention bug ici
-        Avatar* objAvatar = static_cast<Avatar*>(objSource);
-        objAvatar->lockLadder.ladder =  objAvatar->lockLadder.ladderDown = objAvatar->lockLadder.ladderTop = false;
-        objAvatar->SetGravityScale(1.0); // regardŽ si bien ici
-        objAvatar->setMove(portalDestination->direct);
-        
+        (*this.*delectClone)();        
     }
 }
 void CloneBox2d::create()
