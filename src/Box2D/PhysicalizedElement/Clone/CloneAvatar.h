@@ -85,8 +85,11 @@ void CloneBox2d::delectCloneAvatar(){
     else{
     objAvatar->lockLadder.ladder =  objAvatar->lockLadder.ladderDown = objAvatar->lockLadder.ladderTop = false;
     objAvatar->SetGravityScale(1.0); // regardŽ si bien ici
-        if (objAvatar->modeDeplace == Deplacement::PLATFORM || objAvatar->modeDeplace == Deplacement::LADDER) {
+        if ((objAvatar->modeDeplace == Deplacement::PLATFORM || objAvatar->modeDeplace == Deplacement::LADDER)) {
             cout << "changement de mode "<< endl;
+            objAvatar->setMove(portalDestination->direct);
+        }
+        if (portalDestination->direct == Deplacement::PLATFORM) {
             objAvatar->setMove(portalDestination->direct);
         }
     }

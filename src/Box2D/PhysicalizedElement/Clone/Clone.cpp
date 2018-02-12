@@ -38,7 +38,8 @@ CloneBox2d::~CloneBox2d()
         objSource->setVelocity(v);
         objSource->sprite->face = portalDestination->face;
         
-        (*this.*delectClone)();        
+        (*this.*delectClone)();
+        
     }
 }
 void CloneBox2d::create()
