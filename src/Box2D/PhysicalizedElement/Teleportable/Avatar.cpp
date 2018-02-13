@@ -11,6 +11,17 @@
 #include "Portal.h"
 #include "WorldsBox2d.h"
 
+/*
+ Category bits:
+ PLATFORM : 0x0001
+ PORTAL   : 0x0002
+ LADDER   : 0x0004
+ CLONE    : 0x0008
+ AVATAR   : 0x0010
+ BLOCK    : 0x0020
+ PICKUP   : 0x0040
+ MUSHROOM : 0x0080
+ */
 
 Avatar::Avatar(AvatarDef* _avatarDef)
 {
@@ -19,20 +30,20 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
-    //polygon.triangulatePoly();
+    
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    //polygon.create(box2d);
-    polygon.FilterDataObjet.categoryBits = 0x0001;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016 | 0x0032 | 0x0008 | 0x0128;
+    polygon.FilterDataObjet.categoryBits = 0x0010;
+    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
     
     polygon.create(_avatarDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
-    
+    polygon.setFilterDataSide(polygon.FilterDataObjet);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;
     data->physicalizedElement = this;
     /////////////// FOOT ///////////////
+    
     
     moveInputX = 0.0f;
     setJumping(false);
@@ -40,7 +51,6 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     cloneJump = false;
     modeDeplace = Deplacement::PLATFORM;
     setMove(modeDeplace);
-    
     ct = new coyoteTime(VarConst::coyoteTime,this);
     s=_avatarDef->s;
 }

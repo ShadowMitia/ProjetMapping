@@ -7,6 +7,17 @@
 //
 
 #include "Platform.h"
+/*
+ Category bits:
+ PLATFORM : 0x0001
+ PORTAL   : 0x0002
+ LADDER   : 0x0004
+ CLONE    : 0x0008
+ AVATAR   : 0x0010
+ BLOCK    : 0x0020
+ PICKUP   : 0x0040
+ MUSHROOM : 0x0080
+ */
 
 void Platform::create(b2World *_b2World, ofPolyline _groundLine){
     
@@ -21,8 +32,8 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine){
     data->physicalizedElement = this;
 
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0016;
-    tempFilter.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0064;
+    tempFilter.categoryBits = 0x0001;
+    tempFilter.maskBits = 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
     ground.setFilterData(tempFilter);
 }
 

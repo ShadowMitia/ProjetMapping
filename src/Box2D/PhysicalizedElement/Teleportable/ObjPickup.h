@@ -11,10 +11,11 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Teleportable.h"
+#include "Sprite.h"
 
 class ObjPickup: public Teleportable{
 public:
-    ObjPickup(b2World* box2d);
+    ObjPickup(ObjPickupDef* _objPickupDef);
     void draw();
 
 private:

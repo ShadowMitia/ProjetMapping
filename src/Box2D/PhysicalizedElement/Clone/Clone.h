@@ -22,7 +22,7 @@ public:
     Portal* portalDestination = nullptr;
     
 
-    CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination);
+    CloneBox2d(Teleportable* _objSource, Portal* _portalSource, Portal* _portalDestination);
     ~CloneBox2d();
     void update();
     void create();

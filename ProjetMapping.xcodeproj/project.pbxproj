@@ -145,6 +145,7 @@
 		B896EC05CFBC0EDFDEC784F5 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14D739EB782E84E421105278 /* Sprite.cpp */; };
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
 		BCF9C663202D194B001D2269 /* ObjPickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF9C661202D194B001D2269 /* ObjPickup.cpp */; };
+		BCF9C666203242A6001D2269 /* Mushroom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF9C664203242A6001D2269 /* Mushroom.cpp */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
 		BF2CFA915EDBB99B0F92489A /* b2ChainShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52E6BAAF72BF7CDFDF5F9C /* b2ChainShape.cpp */; };
 		BF30D7A362CEBF9286D087FD /* b2WorldCallbacks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1325975A2867C7088859835 /* b2WorldCallbacks.cpp */; };
@@ -627,6 +628,8 @@
 		BCBB74B9531974E1D5DA019B /* HexagonSurface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = HexagonSurface.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/HexagonSurface.cpp; sourceTree = SOURCE_ROOT; };
 		BCF9C661202D194B001D2269 /* ObjPickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjPickup.cpp; path = Box2D/PhysicalizedElement/Teleportable/ObjPickup.cpp; sourceTree = "<group>"; };
 		BCF9C662202D194B001D2269 /* ObjPickup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjPickup.h; path = Box2D/PhysicalizedElement/Teleportable/ObjPickup.h; sourceTree = "<group>"; };
+		BCF9C664203242A6001D2269 /* Mushroom.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mushroom.cpp; path = Box2D/PhysicalizedElement/Teleportable/Mushroom.cpp; sourceTree = "<group>"; };
+		BCF9C665203242A6001D2269 /* Mushroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mushroom.h; path = Box2D/PhysicalizedElement/Teleportable/Mushroom.h; sourceTree = "<group>"; };
 		BDBE053980FA01FAD543D782 /* CmdManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CmdManager.cpp; path = ../../../addons/ofxPiMapper/src/Commands/CmdManager.cpp; sourceTree = SOURCE_ROOT; };
 		BEB021F1F92E6E734BB409A2 /* b2StackAllocator.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = b2StackAllocator.cpp; path = ../../../addons/ofxLiquidFun/libs/Box2D/Common/b2StackAllocator.cpp; sourceTree = SOURCE_ROOT; };
 		BF85CBDEA83E69E3C0C7B0F8 /* ofxBox2dEdge.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBox2dEdge.h; path = ../../../addons/ofxLiquidFun/src/ofxBox2dEdge.h; sourceTree = SOURCE_ROOT; };
@@ -1173,6 +1176,8 @@
 				09BDAC9C2EA184E9CB3B6479 /* ObjBlock.h */,
 				BCF9C661202D194B001D2269 /* ObjPickup.cpp */,
 				BCF9C662202D194B001D2269 /* ObjPickup.h */,
+				BCF9C664203242A6001D2269 /* Mushroom.cpp */,
+				BCF9C665203242A6001D2269 /* Mushroom.h */,
 			);
 			name = Teleportable;
 			sourceTree = "<group>";
@@ -2330,6 +2335,7 @@
 				B27F2ADC894A4C463E892AFE /* SurfaceFactory.cpp in Sources */,
 				85649EB44DE8F0A3BF8430F9 /* SurfaceManager.cpp in Sources */,
 				C3A616FB3A463C17E327F395 /* SurfaceStack.cpp in Sources */,
+				BCF9C666203242A6001D2269 /* Mushroom.cpp in Sources */,
 				C0EB2D2E383BA9DE417ADB38 /* TriangleSurface.cpp in Sources */,
 				868F230C6074263277ED9B07 /* BaseJoint.cpp in Sources */,
 				42BCE929D520D8872171239A /* CircleJoint.cpp in Sources */,

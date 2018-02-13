@@ -16,7 +16,7 @@ void PlatformLadder::create(b2World* _b2World, ofPolyline _groundLine){
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
-    data->sprite = Sprite::PLATFORMLADDER;
+    data->sprite = Sprite::LADDER;
     data->physicalizedElement = this;
     
     b2Filter tempFilter;

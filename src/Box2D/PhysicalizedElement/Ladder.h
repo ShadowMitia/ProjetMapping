@@ -25,6 +25,7 @@ class ObjectLadder:public ofxBox2dPolygon{
 public:
     void create(b2World * b2dworld);
 };
+
 class Ladder: public PhysicalizedElement{
 public:
     ObjectLadder polygon;

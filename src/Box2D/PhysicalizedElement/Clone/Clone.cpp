@@ -12,6 +12,17 @@
 #include "CloneAvatar.h"
 #include "CloneOther.h"
 
+/*
+ Category bits:
+ PLATFORM : 0x0001
+ PORTAL   : 0x0002
+ LADDER   : 0x0004
+ CLONE    : 0x0008
+ AVATAR   : 0x0010
+ BLOCK    : 0x0020
+ PICKUP   : 0x0040
+ MUSHROOM : 0x0080
+ */
 
 ofVec2f CloneBox2d::multyMatrix(ofVec2f v)
 {
@@ -21,10 +32,10 @@ ofVec2f CloneBox2d::multyMatrix(ofVec2f v)
     return i;
     
 }
-CloneBox2d::CloneBox2d(PhysicalizedElement* _objSource, Portal* _portalSource, Portal* _portalDestination)
+CloneBox2d::CloneBox2d(Teleportable* _objSource, Portal* _portalSource, Portal* _portalDestination)
 {
     
-    objSource = static_cast<Teleportable*>(_objSource);
+    objSource = _objSource;
     portalSource = _portalSource;
     portalDestination = _portalDestination;
     statut = 0;
@@ -48,17 +59,18 @@ void CloneBox2d::create()
     polygon.addVertices(objSource->polygon.getVertices());
     //polygon.setPhysics(10.f, 0, 0);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.FilterDataObjet.categoryBits = 0x0064;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0016| 0x0008 |0x0128;
+    polygon.FilterDataObjet.categoryBits = 0x0008;
+    polygon.FilterDataObjet.maskBits = 0x0001| 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
     polygon.create(portalSource->getb2World(),false);
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
+    
     if (data!=nullptr) { // cela ne regle pas la question danger !!!!!!!!!! sleep
         data->sprite = Sprite::CLONE;
         data->physicalizedElement = this;
     }
-    polygon.body->SetGravityScale(0.0);
+    
     data = (dataSprite*)(objSource->polygon.body->GetUserData());
     if (data->sprite==Sprite::AVATAR) {
         collisionFonction = &CloneBox2d::collisionFonctionAvatar;
@@ -79,6 +91,11 @@ void CloneBox2d::create()
     else{
         portalView = true;
         portalDestination = portalSource->linkedPortal[portalView];}
+    
+
+    
+    polygon.body->SetGravityScale(0.0);
+
 }
 void CloneBox2d::update()
 {

@@ -9,6 +9,17 @@
 #include "Ladder.h"
 #include "Avatar.h"
 
+/*
+ Category bits:
+ PLATFORM : 0x0001
+ PORTAL   : 0x0002
+ LADDER   : 0x0004
+ CLONE    : 0x0008
+ AVATAR   : 0x0010
+ BLOCK    : 0x0020
+ PICKUP   : 0x0040
+ MUSHROOM : 0x0080
+ */
 void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     
     //ground.clear();
@@ -22,8 +33,8 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     data->physicalizedElement = this;
     
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0128;
-    tempFilter.maskBits = 0x0001 | 0x0064;
+    tempFilter.categoryBits = 0x0004;
+    tempFilter.maskBits = 0x0010 | 0x0008;
     polygon.setFilterData(tempFilter);
     
 }
@@ -58,7 +69,7 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     }
     
     // pour les Clone voir dans contactStart du clone ( Avatar )
-
+    
 }
 void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite==Sprite::AVATAR) {
@@ -176,50 +187,29 @@ void ObjectPlatformLadder::create(b2World * b2dworld){
     vector<ofPoint> pts = ofPolyline::getVertices();
     
     
-    {
-        b2FixtureDef fixtureSide;
-        b2PolygonShape shape;
-        fixtureSide.density		= 0;
-        fixtureSide.restitution = 0;
-        fixtureSide.friction	= 0;
-        fixtureSide.isSensor    = true;
-        //UP, DOWN, LEFT, RIGHT};
-        
-        //RIGHT = 4, place END
-        //fixtureSide.id = 4;
-        b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()- getBoundingBox().getCenter());
-        b2Vec2 vec2 = screenPtToWorldPt(getBoundingBox().getCenter()+ofVec2f(0,getBoundingBox().getCenter().y - getBoundingBox().getMax().y));
-        //vec2 = b2Vec2(0.f, 0.f);
-        shape.SetAsBox(rect.x,4/30,vec2,0.f);
-        fixtureSide.shape		= &shape;
-        body->CreateFixture(&fixtureSide);
-        /*//LEFT = 3, place END - 1
-         //fixtureSide.id = 3;
-         vec2 = b2Vec2(-4.89/30.f,0.f);
-         shape.SetAsBox(2/30.f, rect.y, vec2, 0.f);
-         fixtureSide.shape		= &shape;
-         body->CreateFixture(&fixtureSide);
-         //DOWN = 2,
-         //fixtureSide.id = 2;
-         vec2 = b2Vec2(0.f, 4.89/30.f);
-         shape.SetAsBox(rect.x -2/30.f, 2/30.f, vec2, 0.f);
-         fixtureSide.shape		= &shape;
-         body->CreateFixture(&fixtureSide);
-         //UP = 1,
-         //fixtureSide.id = 1;
-         vec2 = b2Vec2(0.f, -2.8/30.f);
-         shape.SetAsBox(rect.x-3/30.f, 2/30.f, vec2, 0.f);
-         fixtureSide.shape = &shape;
-         body->CreateFixture(&fixtureSide);*/
-    }
+    b2FixtureDef fixtureSide;
+    b2PolygonShape shape;
+    fixtureSide.density		= 0;
+    fixtureSide.restitution = 0;
+    fixtureSide.friction	= 0;
+    fixtureSide.isSensor    = true;
+    //UP, DOWN, LEFT, RIGHT};
+    
+    b2Vec2 rect = screenPtToWorldPt(getBoundingBox().getMax()- getBoundingBox().getCenter());
+    b2Vec2 vec2 = screenPtToWorldPt(getBoundingBox().getCenter()+ofVec2f(0,getBoundingBox().getCenter().y - getBoundingBox().getMax().y));
+    shape.SetAsBox(rect.x,4/30,vec2,0.f);
+    fixtureSide.shape		= &shape;
+    body->CreateFixture(&fixtureSide);
+    
+    
     
     vector<b2Vec2>verts;
     for (int i=0; i<MIN((int)pts.size(), b2_maxPolygonVertices); i++) {
         verts.push_back(screenPtToWorldPt(pts[i]));
     }
-    b2PolygonShape shape;
-    shape.Set(&verts[0], verts.size()-1);
-    fixture.shape		= &shape;
+    b2PolygonShape shap;
+    shap.Set(&verts[0], verts.size()-1);
+    fixture.shape		= &shap;
     fixture.density		= density;
     fixture.restitution = bounce;
     fixture.friction	= friction;

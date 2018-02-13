@@ -11,6 +11,18 @@
 #include "WorldsBox2d.h"
 #include "ConditionOutput.h"
 #include "ConditionNull.h"
+/*
+ Category bits:
+ PLATFORM : 0x0001
+ PORTAL   : 0x0002
+ LADDER   : 0x0004
+ CLONE    : 0x0008
+ AVATAR   : 0x0010
+ BLOCK    : 0x0020
+ PICKUP   : 0x0040
+ MUSHROOM : 0x0080
+ */
+
 
 Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _direction,ConditionOutput _output, Face* _face){
     face = _face;
@@ -29,8 +41,8 @@ Portal::Portal(ofRectangle _portal, WorldsBox2d * _worldsBox2d,Deplacement _dire
     polygon.body->SetType(b2BodyType::b2_staticBody); // regardé ça un peut plus pré
     
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0032;
-    tempFilter.maskBits =  0x0001| 0x0008;
+    tempFilter.categoryBits = 0x0002;
+    tempFilter.maskBits = 0x0010 ;
     polygon.setFilterData(tempFilter);
     
     polygon.setData(new dataSprite());
@@ -96,11 +108,13 @@ b2World* Portal::getb2World(){
 }
 void Portal::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     //PhysicalizedElement::contactStart(_fixture, OtherSprite);
-    //cout << "contactStart" << endl;
     CloneBox2d *temp;
-    temp  = new CloneBox2d(OtherSprite->physicalizedElement, this, nullptr);
+    Teleportable *objSource = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
+
+    temp  = new CloneBox2d(objSource, this, nullptr);
     worldsBox2d->clones.push_back(temp);
     clones.push_back(temp);
+
 }
 void Portal::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite){
     //PhysicalizedElement::contactEnd(_fixture, OtherSprite);

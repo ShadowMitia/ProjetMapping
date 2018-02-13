@@ -5,17 +5,16 @@
 
 /*
  Category bits:
- AVATAR : 0x0001
- SIDE : 0x0002
- PICKUP : 0x0004
- BLOCK : 0x0008
- PLATFORM : 0x0016
- PORTAL : 0x0032
- CLONE : 0x0064
- LADDER : 0x0128
+ PLATFORM : 0x0001
+ PORTAL   : 0x0002
+ LADDER   : 0x0004
+ CLONE    : 0x0008
+ AVATAR   : 0x0010
+ BLOCK    : 0x0020
+ PICKUP   : 0x0040
+ MUSHROOM : 0x0080
  */
-
-enum class Sprite {UNKNOWN, AVATAR, CLONE, FOOT, WATER, PLATFORM, BLOCK, PICKUP, PORTAL, SIDE,LADDER, PLATFORMLADDER};
+enum class Sprite {UNKNOWN, AVATAR, CLONE, PLATFORM, BLOCK, PICKUP, PORTAL ,LADDER, MUSHROOM};
 class PhysicalizedElement;
 
 struct dataSprite {
@@ -33,6 +32,7 @@ public:
 };
 class ObjectGame: public ofxBox2dPolygon{
 public:
+    void    createObjMushroom(b2World * b2dworld, bool _detectSide);
     void    create(b2World * b2dworld, bool _detectSide);
     void    setFilterDataObjet(b2Filter _filter);
     void    setFilterDataSide(b2Filter _filter);
