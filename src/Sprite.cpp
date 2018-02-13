@@ -77,5 +77,25 @@ bool ObjPickupDef::isActif(){
     return pkup->polygon.body->IsActive();
 }
 void ObjPickupDef::create(){
+}
+
+ofVec2f ObjMushroomDef::getPositionTranform(){
+    return mroom->getPosition() - face->rect.getPosition() + 160;
     
 }
+void ObjMushroomDef::draw(){
+        ofRectangle temp;
+        temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
+        ofVec2f tempP = getPositionTranform();
+        temp.setFromCenter(tempP.x, tempP.y, 12, 12);
+        ofSetColor(ofColor::violet);
+        ofDrawRectangle(temp);
+}
+void ObjMushroomDef::reset(){}
+bool ObjMushroomDef::isActif(){
+    return mroom->polygon.body->IsActive();
+}
+void ObjMushroomDef::create(){
+    world->createMushroom(this);
+}
+

@@ -37,7 +37,7 @@ void main(void) {
                     x = mod40(x);
                     y = mod40(y);
                     tot = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
-                    tot = vec4(1.0,0.0,0.0,1.0);
+                    //tot = vec4(1.0,0.0,0.0,1.0);
 
                     break;
                 }
@@ -47,7 +47,7 @@ void main(void) {
                     x = mod40(x);
                     y = mod40(y);
                     tot = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
-                    tot = vec4(1.0,1.0,0.0,1.0);
+                    //tot = vec4(1.0,1.0,0.0,1.0);
 
                     break;
                 }
@@ -57,7 +57,7 @@ void main(void) {
                     x = mod40(x);
                     y = mod40(y);
                     tot = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
-                    tot = vec4(0.0,0.0,1.0,1.0);
+                    //tot = vec4(0.0,0.0,1.0,1.0);
                     break;
                 }
                 

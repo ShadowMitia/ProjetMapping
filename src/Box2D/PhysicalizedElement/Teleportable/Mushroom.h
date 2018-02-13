@@ -16,5 +16,9 @@
 class ObjMushroom: public Teleportable{
 public:
     ObjMushroom(ObjMushroomDef *_ObjMushroomDef);
-    ofxBox2dPolygon MushroomSensor, MushroomTron;
+    
+    void draw();
+    //ofxBox2dPolygon MushroomSensor, MushroomTron;
+    virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
+    virtual void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
 };

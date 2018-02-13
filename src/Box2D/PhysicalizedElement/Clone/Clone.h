@@ -17,6 +17,7 @@ class CloneBox2d: public PhysicalizedElement{
 public:
     
     int statut;
+    bool top = false;
     Teleportable* objSource;
     Portal* portalSource = nullptr;
     Portal* portalDestination = nullptr;

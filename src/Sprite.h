@@ -76,12 +76,12 @@ class ObjMushroom;
 class ObjMushroomDef: public SpriteObj{
 public:
     ofImage spriteImage;
-    ObjMushroom * Mroom;
-    void draw(){} ;
-    ofVec2f getPositionTranform(){} ;
-    void create(){} ;
-    void reset(){} ;
-    bool isActif(){} ;
+    ObjMushroom * mroom;
+    void draw() ;
+    ofVec2f getPositionTranform() ;
+    void create() ;
+    void reset() ;
+    bool isActif() ;
     
 };
 

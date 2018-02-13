@@ -18,7 +18,7 @@
 #include "Waterfalls.h"
 #include "Clone.h"
 #include "ObjBlock.h"
-
+#include "Mushroom.h"
 #include <vector>
 #include "shift.h"
 
@@ -35,6 +35,7 @@ public:
     std::vector< CloneBox2d *> clones;
     
     std::vector< ObjBlock *> blocks;
+    std::vector<ObjMushroom *> Mushrooms;
     
     
     Waterfalls*               warterfalls;
@@ -45,10 +46,11 @@ public:
     
     void creataBlock( ObjBlockDef * _objBlockDef);
     void createAvatar(AvatarDef* _avatarDef);
-    
+    void createMushroom(ObjMushroomDef* _objMushroomDef);
     void createPlatform(ofPolyline _polyline);
     void createPortal(Face *input);
     void createLadder(ofPolyline _polyline);
+
     
     void threadedFunction(){
         //update();

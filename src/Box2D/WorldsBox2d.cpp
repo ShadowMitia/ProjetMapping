@@ -134,6 +134,10 @@ void WorldsBox2d::draw(){
     for (auto &block : blocks){
         block->draw();
     }
+    
+    for (auto &mroom : Mushrooms){
+        mroom->draw();
+    }
     //ladders[0]->draw();
     //warterfalls->draw();
     world.draw();
@@ -187,4 +191,9 @@ void WorldsBox2d::creataBlock(ObjBlockDef * _objBlockDef){
     ObjBlock * block = new ObjBlock( _objBlockDef);
     block->setPosition(_objBlockDef->positionInit);
     blocks.push_back(block);
+}
+void WorldsBox2d::createMushroom(ObjMushroomDef *_objMushroomDef){
+    ObjMushroom *mroom = new ObjMushroom(_objMushroomDef);
+    mroom->setPosition(_objMushroomDef->positionInit);
+    Mushrooms.push_back(mroom);
 }

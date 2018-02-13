@@ -8,6 +8,7 @@
 
 #include "Mushroom.h"
 #include "WorldsBox2d.h"
+#include "Clone.h"
 /*
  Category bits:
  PLATFORM : 0x0001
@@ -61,7 +62,7 @@ void ObjectGame::createObjMushroom(b2World * b2dworld, bool _detectSide){
             fixture.restitution = bounce;
             fixture.friction	= friction;
             fixture.shape		= &shape;
-            fixture.isSensor    = false;
+            fixture.isSensor    = true;
             body->CreateFixture(&fixture);
         }
         
@@ -100,17 +101,19 @@ void ObjectGame::createObjMushroom(b2World * b2dworld, bool _detectSide){
     flagHasChanged();
     alive = true;
 }
-
-
 ObjMushroom::ObjMushroom(ObjMushroomDef *_ObjMushroomDef){
     sprite = static_cast<SpriteObj*>(_ObjMushroomDef);
-    _ObjMushroomDef->Mroom = this;
+    _ObjMushroomDef->mroom = this;
     ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
+    for (int i= 0; i<pts.size(); ++i) {
+        pts[i].scale(23);
+    }
+    
     polygon.addVertices(pts);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.FilterDataObjet.categoryBits = 0x0080;
-    polygon.FilterDataObjet.maskBits =  0x0001 ;
+    polygon.FilterDataObjet.maskBits =  0x0010 | 0x0008 ;
     
     polygon.createObjMushroom(_ObjMushroomDef->world->world.getWorld(), false);
     
@@ -119,6 +122,24 @@ ObjMushroom::ObjMushroom(ObjMushroomDef *_ObjMushroomDef){
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::MUSHROOM;
     data->physicalizedElement = this;
+    polygon.body->SetGravityScale(0.0);
+}
+void ObjMushroom::draw(){
+    ofSetColor(ofColor::violet);
+    polygon.draw();
+    ofSetColor(ofColor::white);
+}
+void ObjMushroom::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+    if (OtherSprite->sprite == Sprite::CLONE) {
+        CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
+        clone->top = true;
+    }
     
-    
+}
+void ObjMushroom::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) {
+    cout << "ici" << endl;
+    if (OtherSprite->sprite == Sprite::CLONE) {
+        CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
+        clone->top = false;
+    }
 }

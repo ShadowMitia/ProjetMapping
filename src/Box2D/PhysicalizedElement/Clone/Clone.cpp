@@ -48,7 +48,7 @@ CloneBox2d::~CloneBox2d()
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
         objSource->sprite->face = portalDestination->face;
-        
+        objSource->top = top;
         (*this.*delectClone)();
         
     }

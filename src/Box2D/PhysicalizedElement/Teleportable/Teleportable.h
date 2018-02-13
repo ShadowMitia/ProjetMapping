@@ -19,6 +19,7 @@ std::vector<ofPoint> loadPoints(const std::string& file);
 class SpriteObj;
 class Teleportable : public PhysicalizedElement {
 public:
+    bool top = false;
     SpriteObj* sprite;
     ObjectGame polygon;
     ofVec2f getPosition();
