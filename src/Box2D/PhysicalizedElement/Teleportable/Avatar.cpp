@@ -32,12 +32,9 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     polygon.addVertices(pts);
     
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.FilterDataObjet.categoryBits = 0x0010;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
-    
     polygon.create(_avatarDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
-    polygon.setFilterDataSide(polygon.FilterDataObjet);
+    _avatarDef->setFilter();
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;

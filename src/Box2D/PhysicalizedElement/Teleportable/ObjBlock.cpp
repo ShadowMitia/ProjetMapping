@@ -28,12 +28,10 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     //polygon.create(box2d);
-    polygon.FilterDataObjet.categoryBits = 0x0020;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 |0x0020 | 0x0040 | 0x0080;
-    
     polygon.create(_objBlockDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
     
+    _objBlockDef->setFilter();
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::BLOCK;
@@ -46,13 +44,11 @@ void ObjBlock::draw(){
     ofSetColor(ofColor::white);
 }
 
-
 void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
     }
 }
-
 void ObjBlock::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         polygon.body->SetLinearVelocity(b2Vec2(0, 0));

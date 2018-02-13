@@ -108,7 +108,7 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         body->CreateFixture(&fixture);
     }
     
-    setFilterDataObjet(FilterDataObjet);
+    //setFilterDataObjet(FilterDataObjet);
     //setFilterDataSide(FilterDataSide);
     
     

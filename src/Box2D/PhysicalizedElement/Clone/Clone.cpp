@@ -48,7 +48,7 @@ CloneBox2d::~CloneBox2d()
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
         objSource->sprite->face = portalDestination->face;
-        objSource->top = top;
+        objSource->sprite->layer = layer;
         (*this.*delectClone)();
         
     }
@@ -59,10 +59,11 @@ void CloneBox2d::create()
     polygon.addVertices(objSource->polygon.getVertices());
     //polygon.setPhysics(10.f, 0, 0);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.FilterDataObjet.categoryBits = 0x0008;
-    polygon.FilterDataObjet.maskBits = 0x0001| 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
     polygon.create(portalSource->getb2World(),false);
-    
+    b2Filter tempFilter;
+    tempFilter.categoryBits = 0x0008;
+    tempFilter.maskBits = 0x0001| 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
+    polygon.body->GetFixtureList()->SetFilterData(tempFilter);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     

@@ -25,7 +25,7 @@ public:
     ofImage background;
     vector<SpriteObj*>* sprites;
     Transform transform;
-    ofFbo drawMap;
+    ofFbo layer[nbLayer];
     WorldsBox2d* worldsBox2d;
     ofFbo mask;
     
@@ -56,7 +56,7 @@ public:
         ofClear(0);
         mask.end();
         
-        drawMap.allocate(background.getWidth(), background.getHeight());
+        layer[0].allocate(background.getWidth(), background.getHeight());
     }
     
     

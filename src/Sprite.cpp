@@ -11,7 +11,20 @@
 #include "ObjBlock.h"
 #include "ObjPickup.h"
 #include "WorldsBox2d.h"
-
+/*
+Category bits:
+PLATFORM : 0x0001
+PORTAL   : 0x0002
+LADDER   : 0x0004
+CLONE    : 0x0008
+AVATAR   : 0x0010
+BLOCK    : 0x0020
+PICKUP   : 0x0040
+MUSHROOM : 0x0080
+*/
+void AvatarDef::setFilter(){
+    a->polygon.body->GetFixtureList()->SetFilterData(filterAvatar);
+}
 void AvatarDef::draw(){
     ofRectangle temp;
     temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
@@ -35,6 +48,9 @@ bool AvatarDef::isActif(){
     return a->polygon.body->IsActive();
 }
 
+void ObjBlockDef::setFilter(){
+    b->polygon.body->GetFixtureList()->SetFilterData(filterObjBlock);
+}
 ofVec2f ObjBlockDef::getPositionTranform(){
     return b->getPosition() - face->rect.getPosition() + 160;
 }
@@ -58,6 +74,9 @@ void ObjBlockDef::create(){
     world->creataBlock(this);
 }
 
+void ObjPickupDef::setFilter(){
+    pkup->polygon.body->GetFixtureList()->SetFilterData(filterObjPickup);
+}
 ofVec2f ObjPickupDef::getPositionTranform(){
     return pkup->getPosition() - face->rect.getPosition() + 160;
 

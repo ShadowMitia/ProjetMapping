@@ -146,7 +146,7 @@ void ofApp::keyPressed(int key)
         //tempI++;
         //cout << "tempI: " << tempI << endl;
         cout << "position avatar: " << sprites[0]->world->avatars[0]->getPosition() << endl;
-        cout << "top avatar: " << sprites[0]->world->avatars[0]->top << endl;
+        cout << "top avatar: " << sprites[0]->layer << endl;
         
     }
 

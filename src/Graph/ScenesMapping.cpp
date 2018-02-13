@@ -10,15 +10,15 @@
 
 void Scene1::draw()
 {
-    ofClear(0);
     
-    drawMap.begin();
-    ofClear(0, 0, 0, 0);
-    //ofBackground(200, 200, 0);
-    //background.draw(0, 0);
+    //ofClear(0);
+    for (int i=0; i<nbLayer; ++i) {
+        layer[i].begin();
+        ofClear(0, 0, 0, 0);
+        layer[i].end();
+    }
+    transform.setFboIni(layer);
     
-    drawMap.end();
-    transform.setFboIni(&drawMap);
     transform.update(sprites->at(0));
     
     //transform.fboSortie.draw(0, 0);
@@ -28,7 +28,10 @@ void Scene1::draw()
     background.draw(0, 0);
     worldsBox2d->draw();
     ofSetColor(ofColor::white);
-    drawMap.draw(0, 0);
+    
+    for (int i=0; i<nbLayer; ++i) {
+        layer[i].draw(0, 0);
+    }
     
     //transform.fboTransform.draw(0, 0);
 

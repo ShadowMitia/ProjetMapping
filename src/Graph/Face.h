@@ -31,8 +31,8 @@ public:
             printf("transformInv.frag\n");
         }
     }
-    void setFboIni(ofFbo* _fboIni){
-        fboIni =_fboIni;
+    void setFboIni(ofFbo (*_fboIni)){
+        fboIni = _fboIni;
     }
     void update(SpriteObj *_sprites){
         
@@ -47,36 +47,27 @@ public:
                     _sprites->face->matrix[0][2]->rect.y, _sprites->face->matrix[0][5]->rect.y, _sprites->face->matrix[0][8]->rect.y);
         
         
-
         fboTransform.begin();
         ofClear(0,0,0,0);
-        transform.begin();
-        transform.setUniformTexture("u_texture", fboIni->getTexture(), 0);
-        transform.setUniformMatrix3f("matrixX", matrixX);
-        transform.setUniformMatrix3f("matrixY", matrixY);
-        ofSetColor(ofColor::white, 0);
-        //ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
-        transform.end();
-        // placement asset
         _sprites->draw();
         fboTransform.end();
         
         //fboSortie.allocate(fboIni->getWidth(), fboIni->getHeight());
         //fboSortie.begin();
-        fboIni->begin();
+        fboIni[_sprites->layer].begin();
         transformInv.begin();
         transformInv.setUniformTexture("u_texture", fboTransform.getTexture(), 0);
         transformInv.setUniformMatrix3f("matrixX", matrixX);
         transformInv.setUniformMatrix3f("matrixY", matrixY);
         transformInv.setUniformMatrix3f("matrixR", _sprites->face->matrixR[0]);
 
-        ofDrawRectangle(ofPoint(0,0), fboIni->getWidth(), fboIni->getHeight());
+        ofDrawRectangle(ofPoint(0,0), fboIni[0].getWidth(), fboIni[0].getHeight());
         transformInv.end();
-        fboIni->end();
+        fboIni[_sprites->layer].end();
         //fboSortie.end();
     }
     
-    ofFbo* fboIni;
+    ofFbo (*fboIni);
     ofShader transform;
     ofFbo fboTransform;
     ofShader transformInv;

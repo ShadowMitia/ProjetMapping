@@ -30,13 +30,12 @@ ObjPickup::ObjPickup(ObjPickupDef* _objPickupDef){
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    //polygon.create(box2d);
-    polygon.FilterDataObjet.categoryBits = 0x0040;
-    polygon.FilterDataObjet.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 | 0x0020 | 0x0080;
-    
+
     polygon.create(_objPickupDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
     
+    _objPickupDef->setFilter();
+
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::PICKUP;
