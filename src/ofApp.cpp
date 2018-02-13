@@ -81,8 +81,9 @@ void ofApp::setup() {
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
     objMushroomDef->positionInit = ofVec2f(266, 289);
     objMushroomDef->world= worlds;
-    objMushroomDef->face = &faces[1];
+    objMushroomDef->face = &faces[3];
     objMushroomDef->create();
+    sprites.push_back(static_cast<SpriteObj*>(objMushroomDef));
     
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);

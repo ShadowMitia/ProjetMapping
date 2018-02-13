@@ -132,21 +132,20 @@ void ObjMushroom::draw(){
 void ObjMushroom::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::CLONE) {
         CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
-        clone->layer = 0;
+        clone->layer = 2;
         Teleportable* telport = static_cast<Teleportable*>(clone->objSource);
-        telport->sprite->layer = 0;
+        telport->sprite->layer = 2;
 
     }
     
 }
 void ObjMushroom::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) {
-    cout << "ici" << endl;
     if (OtherSprite->sprite == Sprite::CLONE) {
         CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
-        clone->layer = 2;
+        clone->layer = 0;
     }
     else{
         Teleportable* telport = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
-        telport->sprite->layer = 2;
+        telport->sprite->layer = 0;
     }
 }

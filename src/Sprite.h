@@ -111,7 +111,7 @@ public:
     ObjMushroomDef(){
         filterObjMushroom.categoryBits = 0x0080;
         filterObjMushroom.maskBits =  0x0010 | 0x0008 ;
-        layer = 2;
+        layer = 1;
     }
     
     b2Filter filterObjMushroom;

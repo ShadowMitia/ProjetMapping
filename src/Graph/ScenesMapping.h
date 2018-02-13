@@ -55,8 +55,10 @@ public:
         mask.begin();
         ofClear(0);
         mask.end();
+        for (int i=0; i<nbLayer; ++i) {
+            layer[i].allocate(background.getWidth(), background.getHeight());
+        }
         
-        layer[0].allocate(background.getWidth(), background.getHeight());
     }
     
     

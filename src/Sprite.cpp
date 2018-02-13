@@ -104,10 +104,10 @@ ofVec2f ObjMushroomDef::getPositionTranform(){
 }
 void ObjMushroomDef::draw(){
         ofRectangle temp;
-        temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
+        //temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
         ofVec2f tempP = getPositionTranform();
-        temp.setFromCenter(tempP.x, tempP.y, 12, 12);
-        ofSetColor(ofColor::violet);
+        temp.setFromCenter(tempP.x, tempP.y, 31, 31);
+        ofSetColor(ofColor::darkViolet);
         ofDrawRectangle(temp);
 }
 void ObjMushroomDef::reset(){}

@@ -20,6 +20,7 @@ void Scene1::draw()
     transform.setFboIni(layer);
     
     transform.update(sprites->at(0));
+    transform.update(sprites->at(1));
     
     //transform.fboSortie.draw(0, 0);
     //ofBackground(200, 200, 0);
