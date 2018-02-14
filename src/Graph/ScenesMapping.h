@@ -22,7 +22,7 @@ class Scene1 : public ofx::piMapper::FboSource
 public:
     int lightSize;
     LightRender lightRender;
-    ofImage background;
+    ofImage background, plaforms;
     vector<SpriteObj*>* sprites;
     
     WorldsBox2d* worldsBox2d;
@@ -33,6 +33,7 @@ public:
     void renderObjects();
     void renderPlatform();
     
+    ofFbo fboFaceShadow;
     
     ofFbo layer[nbLayer];
     ofFbo fboFace;
@@ -44,14 +45,16 @@ public:
     ofShader transformInv;
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
-    Scene1(WorldsBox2d* _worldsBox2d, string path, vector<SpriteObj*>* _sprites){
+    Scene1(WorldsBox2d* _worldsBox2d, string background_name, vector<SpriteObj*>* _sprites, string plaforms_name){
         name = "Scene One FBO Source";
         sprites=_sprites;
-        background.load(path);
+        background.load(background_name);
+        plaforms.load(plaforms_name);
         allocate(background.getWidth(), background.getHeight());
         worldsBox2d =_worldsBox2d;
         
         fboFace.allocate(160*3, 160*3);
+        fboFaceShadow.allocate(160*3, 160*3);
         for (int i=0; i<nbLayer; ++i) {
             layer[i].allocate(background.getWidth(), background.getHeight());
         }
@@ -68,9 +71,11 @@ public:
         lightSize = 256;
         ofDisableArbTex();  // <-- Very Important
         lightRender.setup(lightSize,lightSize);
-        lightRender.setRenderFunction(this, &Scene1::renderObjects);
         lightRender.setRenderFunction(this, &Scene1::renderPlatform);
-        lightRender.addLight(lightSize/2, lightSize/2);
+        
+        lightRender.setRenderFunction(this, &Scene1::renderObjects);
+        
+        //lightRender.addLight(lightSize/2, lightSize/2);
         
         mask.allocate(background.getWidth(), background.getHeight());
         

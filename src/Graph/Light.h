@@ -19,8 +19,8 @@ public:
     }
     ofFloatColor color;
     ofPoint pos, vel;
-    virtual ofPoint getPosition(){};
-    float radius;
+    virtual ofVec2f getPositionTranform(){};
+    float radius = 100;
 };
 
 class LightRender {
@@ -137,7 +137,7 @@ public:
         ofPopMatrix();
     }
     //--------------------------------------------------------------
-    void renderLights(ofFbo * layer,Light *light) {
+    void renderLights(ofFbo * end ,Light *light) {
 
         /*
          objectsFBO.begin();
@@ -146,7 +146,7 @@ public:
          objectsFBO.end();
          */
 
-        lightFBO.begin();
+        end->begin();
         ofClear(0, 0, 0);
 
         glEnable(GL_BLEND);
@@ -160,7 +160,7 @@ public:
             ofClear(0, 0, 0, 0);
             //occludersShader.begin();
             ofPushMatrix();
-            ofTranslate(-light->vel.x + (width / 2), - light->vel.y + (width / 2));
+            ofTranslate(-light->getPositionTranform().x + (width / 2), - light->getPositionTranform().y + (width / 2));
             //ofTranslate((width/2)-light.pos.x, (height/2)-light.pos.y);
             callRenderRunction(); // image occuders
             ofPopMatrix();
@@ -184,7 +184,7 @@ public:
             shadowMapFBOPlatform.begin();
             shadowMapShader.begin();
             ofClear(0, 0, 0, 0);
-            shadowMapShader.setUniform2f("lightLocation", light->pos.x, light->pos.y);
+            shadowMapShader.setUniform2f("lightLocation", width/2, height/2);
             shadowMapShader.setUniform2f("resolution", width, height);
             shadowMapShader.setUniformTexture("u_texture", occludersFBOPlaform.getTexture(), 0);
             occludersFBOPlaform.draw(0, 0);
@@ -213,7 +213,7 @@ public:
             //lightShader.setUniformTexture("u_objects_tex", objectsFBO.getTextureReference(), 1);
 
 
-            lightShader.setUniform2f("lightLocation", light->pos.x, light->pos.y);
+            lightShader.setUniform2f("lightLocation", width/2, height/2);
             lightShader.setUniform3f("lightColor", light->color.r, light->color.g, light->color.b);
             lightShader.setUniform1f("u_radius", light->radius);
             ofSetColor(255, 0, 255, 100);
@@ -229,7 +229,7 @@ public:
         }
         glDisable(GL_BLEND);
         
-        lightFBO.end();
+        end->end();
         
     }
     //--------------------------------------------------------------

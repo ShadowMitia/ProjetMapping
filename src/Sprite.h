@@ -11,6 +11,7 @@
 #include "ofMain.h"
 #include "shift.h"
 #include "b2Fixture.h"
+#include "Light.h"
 
 /*
  Category bits:
@@ -46,7 +47,7 @@ public:
 };
 
 class Avatar;
-class AvatarDef: public SpriteObj{
+class AvatarDef: public SpriteObj, public Light{
 public:
     AvatarDef(){
         filterAvatar.categoryBits = 0x0010;

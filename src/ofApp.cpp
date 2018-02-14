@@ -39,7 +39,7 @@ void ofApp::setup() {
     worlds->world.enableEvents();
     worlds->world.getWorld();
     
-    scene1 = new Scene1(worlds, "Map_test_portails_back.png",&sprites);
+    scene1 = new Scene1(worlds, "Map_test_portails_back.png",&sprites,"Map_plateformes.png");
     //scene1 = new Scene1(&sprites, "Map_test_portails_back.png");
 
     //scene1 = new Scene1(worlds, "map_saut.jpg");

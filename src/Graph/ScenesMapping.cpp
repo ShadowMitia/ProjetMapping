@@ -15,8 +15,12 @@ void Scene1::draw()
     for (int i=0; i<nbLayer; ++i) {
         layer[i].begin();
         ofClear(0, 0, 0, 0);
+        if (i==0) {
+            plaforms.draw(0, 0);
+        }
         layer[i].end();
     }
+
     //transform.setFboIni(layer);
     
     //transform.update(sprites->at(0));
@@ -29,6 +33,7 @@ void Scene1::draw()
     ////////
     
     fillMatrix(sprites->at(0));
+    
     fboFace.begin();
     ofClear(0,0,0,0);
     sprites->at(0)->draw();
@@ -41,15 +46,31 @@ void Scene1::draw()
     fboFace.end();
     faceToLayer(sprites->at(1)->layer);
     
+    fillMatrix(sprites->at(0));
+    fboFace.begin();
+    ofClear(0,0,0,0);
+    fboFace.end();
+    
+    layerToFace(0);
+    
+    Light* light = dynamic_cast<Light *>(sprites->at(0));
+    lightRender.renderLights(&fboFaceShadow, light);
+    
+
     ///////
+
+    
     background.draw(0, 0);
-    worldsBox2d->draw();
+    //worldsBox2d->draw();
     ofSetColor(ofColor::white);
     
     for (int i=0; i<nbLayer; ++i) {
-        layer[i].draw(0, 0);
+        //layer[i].draw(0, 0);
     }
     
+    //layer[0].draw(0, 0);
+    layer[0].draw(0, 0);
+    fboFaceShadow.draw(0, 0);
     //transform.fboTransform.draw(0, 0);
     
     // creation du mask pour les ombres
@@ -77,14 +98,7 @@ void Scene1::renderObjects()
 
 void Scene1::renderPlatform()
 {
-    //ofBackground(0, 0, 0, 0);
-    
-    for (auto &platform : worldsBox2d->platforms)
-    {
-        ofSetHexColor(0xFF0000);
-        platform->ground.draw();
-    }
-    ofSetColor(ofColor::white);
+    fboFace.draw(0,0);
 }
 
 void Scene1::update()
@@ -114,7 +128,18 @@ void Scene1::faceToLayer(int _layer){
     transformInv.end();
     layer[_layer].end();
 }
-
+void Scene1::layerToFace(int _layer){
+    fboFace.begin();
+    ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
+    transform.begin();
+    transform.setUniformTexture("u_texture", layer[_layer].getTexture(), 0);
+    transform.setUniformMatrix3f("matrixX", matrix[0]);
+    transform.setUniformMatrix3f("matrixY", matrix[1]);
+    ofSetColor(ofColor::white, 0);
+    ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
+    transform.end();
+    fboFace.end();
+}
 void Scene2::draw()
 {
     ofSetColor(ofColor::white);
