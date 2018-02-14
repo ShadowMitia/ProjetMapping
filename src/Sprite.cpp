@@ -32,6 +32,7 @@ void AvatarDef::draw(){
     temp.setFromCenter(tempP.x, tempP.y, 12, 12);
     ofSetColor(ofColor::black);
     ofDrawRectangle(temp);
+    ofSetColor(ofColor::white);
 }
 ofVec2f AvatarDef::getPositionTranform(){
     return  a->getPosition() - face->rect.getPosition() + 160;

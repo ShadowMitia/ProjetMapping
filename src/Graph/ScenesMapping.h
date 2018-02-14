@@ -24,8 +24,7 @@ public:
     LightRender lightRender;
     ofImage background;
     vector<SpriteObj*>* sprites;
-    Transform transform;
-    ofFbo layer[nbLayer];
+    
     WorldsBox2d* worldsBox2d;
     ofFbo mask;
     
@@ -34,14 +33,37 @@ public:
     void renderObjects();
     void renderPlatform();
     
+    
+    ofFbo layer[nbLayer];
+    ofFbo fboFace;
+    ofMatrix3x3 matrix[3];
+    void fillMatrix(SpriteObj* _sprite);
+    void faceToLayer(int layer);
+    void layerToFace(int layer);
+    ofShader transform;
+    ofShader transformInv;
+    
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(WorldsBox2d* _worldsBox2d, string path, vector<SpriteObj*>* _sprites){
+        name = "Scene One FBO Source";
         sprites=_sprites;
         background.load(path);
-        name = "Scene One FBO Source";
         allocate(background.getWidth(), background.getHeight());
         worldsBox2d =_worldsBox2d;
-        //sprites = _sprites;
+        
+        fboFace.allocate(160*3, 160*3);
+        for (int i=0; i<nbLayer; ++i) {
+            layer[i].allocate(background.getWidth(), background.getHeight());
+        }
+        if(!transform.load("passTransform.vert", "transform.frag")) {
+            printf("transform.frag\n");
+        }
+        //fboSortie.allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
+        if(!transformInv.load("passTransform.vert", "transformInv.frag")) {
+            printf("transformInv.frag\n");
+        }
+
+        
         
         lightSize = 256;
         ofDisableArbTex();  // <-- Very Important
@@ -55,9 +77,7 @@ public:
         mask.begin();
         ofClear(0);
         mask.end();
-        for (int i=0; i<nbLayer; ++i) {
-            layer[i].allocate(background.getWidth(), background.getHeight());
-        }
+
         
     }
     
