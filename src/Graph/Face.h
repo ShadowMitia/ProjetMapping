@@ -18,10 +18,6 @@ struct Face{
     ofMatrix3x3 matrixR[2];
 };
 
-
-
-
-
 /* fonction groupir
  fboTransform.begin();
  ofClear(0,0,0,0);

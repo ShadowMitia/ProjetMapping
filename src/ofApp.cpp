@@ -71,9 +71,9 @@ void ofApp::setup() {
     
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->world = worlds;
-    avatarDef->positionInit=ofVec2f(80, 250);
+    avatarDef->positionInit=ofVec2f(385.15, 426.349);
     avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[1];
+    avatarDef->face = &faces[4];
     avatarDef->create();
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
     spritesAvatar.push_back(static_cast<SpriteObj*>(avatarDef));
@@ -148,7 +148,7 @@ void ofApp::keyPressed(int key)
         //tempI++;
         //cout << "tempI: " << tempI << endl;
         cout << "position avatar: " << sprites[0]->world->avatars[0]->getPosition() << endl;
-        cout << "top avatar: " << sprites[0]->layer << endl;
+        cout << "top avatar: " << sprites[0]->face->matrixR[0] << endl;
         
     }
 
