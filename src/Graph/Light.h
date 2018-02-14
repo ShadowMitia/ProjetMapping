@@ -20,7 +20,7 @@ public:
     ofFloatColor color;
     ofPoint pos, vel;
     virtual ofVec2f getPositionTranform(){};
-    float radius = 100;
+    float radius = 60;
 };
 
 class LightRender {
@@ -166,6 +166,7 @@ public:
             ofPopMatrix();
             //occludersShader.end();
             occludersFBOPlaform.end();
+            //occludersFBOPlaform.draw(0, 0);
 
 
             /*occludersFBOObjet.begin();

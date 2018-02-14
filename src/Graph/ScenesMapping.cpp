@@ -38,13 +38,13 @@ void Scene1::draw()
     ofClear(0,0,0,0);
     sprites->at(0)->draw();
     fboFace.end();
-    faceToLayer(sprites->at(0)->layer);
+    faceToLayer(1);
     fillMatrix(sprites->at(1));
     fboFace.begin();
     ofClear(0,0,0,0);
     sprites->at(1)->draw();
     fboFace.end();
-    faceToLayer(sprites->at(1)->layer);
+    faceToLayer(1);
     
     fillMatrix(sprites->at(0));
     fboFace.begin();
@@ -55,6 +55,12 @@ void Scene1::draw()
     
     Light* light = dynamic_cast<Light *>(sprites->at(0));
     lightRender.renderLights(&fboFaceShadow, light);
+    fboFace.begin();
+    ofPushMatrix();
+    ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
+    fboFaceShadow.draw(0, 0);
+    fboFace.end();
+    faceToLayer(0);
     
 
     ///////
@@ -65,12 +71,12 @@ void Scene1::draw()
     ofSetColor(ofColor::white);
     
     for (int i=0; i<nbLayer; ++i) {
-        //layer[i].draw(0, 0);
+        layer[i].draw(0, 0);
     }
     
     //layer[0].draw(0, 0);
-    layer[0].draw(0, 0);
-    fboFaceShadow.draw(0, 0);
+    layer[1].draw(0, 0);
+    //fboFaceShadow.draw(0, 0);
     //transform.fboTransform.draw(0, 0);
     
     // creation du mask pour les ombres
