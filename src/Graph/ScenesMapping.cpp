@@ -35,23 +35,22 @@ void Scene1::draw()
     }
     
     //transform.fboTransform.draw(0, 0);
-
+    
     // creation du mask pour les ombres
     /*mask.begin();
-    ofBackground(0, 0, 0);
-    for (std::size_t i = 0; i < worldsBox2d->avatars.size(); i++) {
-        lightRender.lights[i].vel.x = worldsBox2d->avatars[i]->polygon.getPosition().x;
-        lightRender.lights[i].vel.y = worldsBox2d->avatars[i]->polygon.getPosition().y;
-        lightRender.radius = 50.0;
-        lightRender.renderLights();
-        ofPushMatrix();
-        ofTranslate(worldsBox2d->avatars[i]->polygon.getPosition().x - (lightSize / 2), worldsBox2d->avatars[i]->polygon.getPosition().y - (lightSize / 2));
-        lightRender.draw();
-        ofPopMatrix();
-    }
-    mask.end();
-
-    //mask.draw(0,0);*/
+     ofBackground(0, 0, 0);
+     for (std::size_t i = 0; i < worldsBox2d->avatars.size(); i++) {
+     lightRender.lights[i].vel.x = worldsBox2d->avatars[i]->polygon.getPosition().x;
+     lightRender.lights[i].vel.y = worldsBox2d->avatars[i]->polygon.getPosition().y;
+     lightRender.radius = 50.0;
+     lightRender.renderLights();
+     ofPushMatrix();
+     ofTranslate(worldsBox2d->avatars[i]->polygon.getPosition().x - (lightSize / 2), worldsBox2d->avatars[i]->polygon.getPosition().y - (lightSize / 2));
+     lightRender.draw();
+     ofPopMatrix();
+     }
+     mask.end();
+     //mask.draw(0,0);*/
 }
 
 void Scene1::renderObjects()
@@ -61,7 +60,7 @@ void Scene1::renderObjects()
 
 void Scene1::renderPlatform()
 {
-  //ofBackground(0, 0, 0, 0);
+    //ofBackground(0, 0, 0, 0);
     
     for (auto &platform : worldsBox2d->platforms)
     {
@@ -73,7 +72,7 @@ void Scene1::renderPlatform()
 
 void Scene1::update()
 {
-
+    
 }
 
 void Scene2::draw()

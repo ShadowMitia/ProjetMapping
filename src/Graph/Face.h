@@ -60,7 +60,7 @@ public:
         transformInv.setUniformMatrix3f("matrixX", matrixX);
         transformInv.setUniformMatrix3f("matrixY", matrixY);
         transformInv.setUniformMatrix3f("matrixR", _sprites->face->matrixR[0]);
-
+        
         ofDrawRectangle(ofPoint(0,0), fboIni[0].getWidth(), fboIni[0].getHeight());
         transformInv.end();
         fboIni[_sprites->layer].end();
@@ -73,4 +73,3 @@ public:
     ofShader transformInv;
     ofFbo fboSortie;
 };
-

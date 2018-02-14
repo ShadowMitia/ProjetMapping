@@ -11,7 +11,7 @@
 #include "ofMain.h"
 #include "Poco/BasicEvent.h"
 #include "Poco/Delegate.h"
-
+// ofEnableBlendMode regarde ça alex
 class Light {
 public:
     Light() {
@@ -19,6 +19,8 @@ public:
     }
     ofFloatColor color;
     ofPoint pos, vel;
+    virtual ofPoint getPosition(){};
+    float radius;
 };
 
 class LightRender {
@@ -29,9 +31,10 @@ private:
     ofShader occludersShader, shadowMapShader, lightShader;
 public:
     
-    float radius;
-    vector <Light> lights;
-    ofFbo occludersFBOPlaform,occludersFBOObjet, shadowMapFBOPlatform, shadowMapFBOObjet , objectsFBO, lightFBO;
+    
+    ofFbo occludersFBOPlaform,//occludersFBOObjet,
+          shadowMapFBOPlatform, //shadowMapFBOObjet ,
+          objectsFBO, lightFBO;
     int width, height;
 
     LightRender() {
@@ -51,10 +54,9 @@ public:
     void setup(int w, int h) {
 
         ofDisableArbTex();  // <-- Very Important
-
         width = w;height=h;
         occludersFBOPlaform.allocate(width, height, GL_RGBA);
-        occludersFBOObjet.allocate(width, height, GL_RGBA);
+        //occludersFBOObjet.allocate(width, height, GL_RGBA);
         lightFBO.allocate(width, height, GL_RGBA);
         objectsFBO.allocate(width, height, GL_RGBA);
 
@@ -68,7 +70,7 @@ public:
         s.internalformat = GL_RGBA;
         s.useDepth = false;
         shadowMapFBOPlatform.allocate(s);
-        shadowMapFBOObjet.allocate(s);
+        //shadowMapFBOObjet.allocate(s);
 
         ofFbo::Settings lightS;
         lightS.width  = width;
@@ -93,7 +95,7 @@ public:
         Light p;
         p.pos.set(x, y);
         p.vel.set(0, ofRandom(0.2, 1.0));
-        lights.push_back(p);
+        //lights.push_back(p);
     }
     void callRenderRunction() {
         try {
@@ -123,19 +125,19 @@ public:
         ofEnableAlphaBlending();
         ofSetColor(255);
         occludersFBOPlaform.draw(0, 0);
-        occludersFBOObjet.draw(0, 0);
+        //occludersFBOObjet.draw(0, 0);
         ofSetColor(255);
         shadowMapFBOPlatform.draw(width, 0, width, height);
 
-        for(int i=0; i<lights.size(); i++) {
+        /*for(int i=0; i<lights.size(); i++) {
             ofSetColor(255, 255, 0);
             ofDrawCircle(lights[i].pos.x, lights[i].pos.y, 5,5);
-        }
+        }*/
 
         ofPopMatrix();
     }
     //--------------------------------------------------------------
-    void renderLights() {
+    void renderLights(ofFbo * layer,Light *light) {
 
         /*
          objectsFBO.begin();
@@ -149,11 +151,8 @@ public:
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
-
-        for(int i=0; i<lights.size(); i++) {
-            Light light = lights[i];
-
-
+        
+         {
             // -------------------------------
             // Occlusion Map
             // -------------------------------
@@ -161,7 +160,7 @@ public:
             ofClear(0, 0, 0, 0);
             //occludersShader.begin();
             ofPushMatrix();
-            ofTranslate(-light.vel.x + (width / 2), - light.vel.y + (width / 2));
+            ofTranslate(-light->vel.x + (width / 2), - light->vel.y + (width / 2));
             //ofTranslate((width/2)-light.pos.x, (height/2)-light.pos.y);
             callRenderRunction(); // image occuders
             ofPopMatrix();
@@ -169,14 +168,14 @@ public:
             occludersFBOPlaform.end();
 
 
-            occludersFBOObjet.begin();
+            /*occludersFBOObjet.begin();
             ofClear(0, 0, 0, 0);
             //occludersShader.begin();
             ofPushMatrix();
             ofTranslate(-light.vel.x + (width / 2), - light.vel.x + (width / 2));
             callRenderRunction2(); // image occuders
             ofPopMatrix();
-            occludersFBOObjet.end();
+            occludersFBOObjet.end();*/
 
 
             // -------------------------------
@@ -185,7 +184,7 @@ public:
             shadowMapFBOPlatform.begin();
             shadowMapShader.begin();
             ofClear(0, 0, 0, 0);
-            shadowMapShader.setUniform2f("lightLocation", lights[i].pos.x, lights[i].pos.y);
+            shadowMapShader.setUniform2f("lightLocation", light->pos.x, light->pos.y);
             shadowMapShader.setUniform2f("resolution", width, height);
             shadowMapShader.setUniformTexture("u_texture", occludersFBOPlaform.getTexture(), 0);
             occludersFBOPlaform.draw(0, 0);
@@ -193,15 +192,15 @@ public:
             shadowMapFBOPlatform.end();
 
 
-            shadowMapFBOObjet.begin();
+            /*shadowMapFBOObjet.begin();
             shadowMapShader.begin();
             ofClear(0, 0, 0, 0);
             shadowMapShader.setUniform2f("lightLocation", lights[i].pos.x, lights[i].pos.y);
             shadowMapShader.setUniform2f("resolution", width, height);
-            shadowMapShader.setUniformTexture("u_texture", occludersFBOObjet.getTexture(), 0);
+            //shadowMapShader.setUniformTexture("u_texture", occludersFBOObjet.getTexture(), 0);
             occludersFBOObjet.draw(0, 0);
             shadowMapShader.end();
-            shadowMapFBOObjet.end();
+            shadowMapFBOObjet.end();*/
 
             // -------------------------------
             // Shadows
@@ -209,14 +208,14 @@ public:
             lightShader.begin();
             lightShader.setUniform2f("resolution", width, height);
             lightShader.setUniformTexture("u_texturePlaform", shadowMapFBOPlatform.getTexture(), 0);
-            lightShader.setUniformTexture("u_textureObjet", shadowMapFBOObjet.getTexture(), 1);
+            //lightShader.setUniformTexture("u_textureObjet", shadowMapFBOObjet.getTexture(), 1);
 
             //lightShader.setUniformTexture("u_objects_tex", objectsFBO.getTextureReference(), 1);
 
 
-            lightShader.setUniform2f("lightLocation", lights[i].pos.x, lights[i].pos.y);
-            lightShader.setUniform3f("lightColor", lights[i].color.r, lights[i].color.g, lights[i].color.b);
-            lightShader.setUniform1f("u_radius", radius);
+            lightShader.setUniform2f("lightLocation", light->pos.x, light->pos.y);
+            lightShader.setUniform3f("lightColor", light->color.r, light->color.g, light->color.b);
+            lightShader.setUniform1f("u_radius", light->radius);
             ofSetColor(255, 0, 255, 100);
             
             glBegin(GL_QUADS); {

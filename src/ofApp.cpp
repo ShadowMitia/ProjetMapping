@@ -26,7 +26,6 @@ vector<ofPolyline> importImage(const string& path){
     }
     return poly;
 }
-
 //--------------------------------------------------------------
 void ofApp::setup() {
 
@@ -71,23 +70,25 @@ void ofApp::setup() {
     
     
     AvatarDef *avatarDef = new AvatarDef();
-    avatarDef->positionInit=ofVec2f(80, 250);
     avatarDef->world = worlds;
+    avatarDef->positionInit=ofVec2f(80, 250);
     avatarDef->s= &inputButton[0];
     avatarDef->face = &faces[1];
     avatarDef->create();
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
+    spritesAvatar.push_back(static_cast<SpriteObj*>(avatarDef));
     
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
-    objMushroomDef->positionInit = ofVec2f(266, 289);
     objMushroomDef->world= worlds;
+    objMushroomDef->positionInit = ofVec2f(266, 289);
     objMushroomDef->face = &faces[3];
     objMushroomDef->create();
     sprites.push_back(static_cast<SpriteObj*>(objMushroomDef));
-    
+    spritesSolide.push_back(static_cast<SpriteObj*>(objMushroomDef));
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
+    
 #ifdef CUSTOM_BOX2D_TIM
     ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
     ofAddListener(worlds->world.PreSolveEvents, this, &ofApp::PreSolve);
