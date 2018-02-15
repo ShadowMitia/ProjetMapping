@@ -94,6 +94,14 @@ void ofApp::setup() {
     sprites.push_back(static_cast<SpriteObj*>(pkup));
     spritesLight.push_back(static_cast<SpriteObj*>(pkup));
     
+    ObjBlockDef *block = new ObjBlockDef();
+    block->world=worlds;
+    block->positionInit =ofVec2f(100, 100);
+    block->face =&faces[0];
+    block->create();
+    sprites.push_back(static_cast<SpriteObj*>(block));
+    spritesSolide.push_back(static_cast<SpriteObj*>(block));
+    
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
     

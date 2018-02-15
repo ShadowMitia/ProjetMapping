@@ -7,7 +7,7 @@ uniform sampler2DRect u_texture;
 uniform mat3 matrixX;
 uniform mat3 matrixY;
 uniform mat3 matrixR;
-
+uniform int mode;
 
 //alpha threshold for our occlusion map
 
