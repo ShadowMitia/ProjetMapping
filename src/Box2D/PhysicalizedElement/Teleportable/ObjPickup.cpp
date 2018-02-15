@@ -28,7 +28,7 @@ ObjPickup::ObjPickup(ObjPickupDef* _objPickupDef){
     _objPickupDef->pkup = this;
     deactive = new deActive(100000,this);
     
-    std::vector<ofPoint> pts = loadPoints("avatar.dat");
+    std::vector<ofPoint> pts = loadPoints("ObjPickup.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);

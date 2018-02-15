@@ -57,9 +57,9 @@ ofVec2f ObjBlockDef::getPositionTranform(){
 }
 void ObjBlockDef::draw(){
         ofRectangle temp;
-        temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
+        temp.setFromCenter(160*3/2, 160*3/2, 18, 18);
         ofVec2f tempP = getPositionTranform();
-        temp.setFromCenter(tempP.x, tempP.y, 12, 12);
+        temp.setFromCenter(tempP.x, tempP.y, 18, 18);
         ofSetColor(ofColor::red);
         ofDrawRectangle(temp);
 
@@ -85,9 +85,9 @@ ofVec2f ObjPickupDef::getPositionTranform(){
 void ObjPickupDef::draw(){
     if (actif) {
         ofRectangle temp;
-        temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
+        temp.setFromCenter(160*3/2, 160*3/2, 8, 8);
         ofVec2f tempP = getPositionTranform();
-        temp.setFromCenter(tempP.x, tempP.y, 12, 12);
+        temp.setFromCenter(tempP.x, tempP.y, 8, 8);
         ofSetColor(ofColor::yellow);
         ofDrawRectangle(temp);
     }
@@ -108,7 +108,7 @@ void ObjMushroomDef::draw(){
         ofRectangle temp;
         //temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
         ofVec2f tempP = getPositionTranform();
-        temp.setFromCenter(tempP.x, tempP.y, 31, 31);
+        temp.setFromCenter(tempP.x, tempP.y, 48, 48);
         ofSetColor(ofColor::darkViolet);
         ofDrawRectangle(temp);
 }

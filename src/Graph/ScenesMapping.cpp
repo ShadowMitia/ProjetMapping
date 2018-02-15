@@ -27,45 +27,20 @@ void Scene1::draw()
     }
 
 
-    
-    fillMatrix(sprites->at(0));
-    
-    fboFace.begin();
-    ofClear(0,0,0,0);
-    sprites->at(0)->draw();
-    fboFace.end();
-    faceToLayer(2);
-    
-    fillMatrix(sprites->at(1));
-    fboFace.begin();
-    ofClear(0,0,0,0);
-    sprites->at(1)->draw();
-    fboFace.end();
-    faceToLayer(2);
-    
-    if (sprites->at(2)->isActif()) {
-        fillMatrix(sprites->at(2));
-        fboFace.begin();
-        ofClear(0,0,0,0);
-        sprites->at(2)->draw();
-        fboFace.end();
-        faceToLayer(2);
+    for (int i = 0; i<sprites->size(); ++i) {
+        if (sprites->at(i)->isActif()) {
+            fillMatrix(sprites->at(i));
+            fboFace.begin();
+            ofClear(0,0,0,0);
+            sprites->at(i)->draw();
+            fboFace.end();
+            faceToLayer(2,0);
+        }
+
     }
 
-
     
-    
-    
-    
-    
-    fillMatrix(sprites->at(0));
-    fboFace.begin();
-    ofClear(0,0,0,0);
-    fboFace.end();
-    
-    layerToFace(0);
-    
-    
+   /*
     Light* light = dynamic_cast<Light *>(sprites->at(0));
     lightRender.renderLights(&fboFaceShadow, light);
     fboFace.begin();
@@ -74,9 +49,7 @@ void Scene1::draw()
     ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
     fboFaceShadow.draw(0, 0);
     fboFace.end();
-    ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
     faceToLayer(1);
-    ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ALPHA);
     if (sprites->at(2)->isActif()) {
         fillMatrix(sprites->at(2));
         fboFace.begin();
@@ -94,24 +67,22 @@ void Scene1::draw()
         fboFaceShadow.draw(0, 0);
         fboFace.end();
         
-        ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
         faceToLayer(1);
-        ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ALPHA);
     }
-    
+    */
     //ofDisableBlendMode();
 
     ///////
 
-    
     background.draw(0, 0);
-    //worldsBox2d->draw();
+    
     ofSetColor(ofColor::white);
     
     for (int i=1; i<nbLayer; ++i) {
         layer[i].draw(0, 0);
     }
     
+    // worldsBox2d->draw();
     //layer[0].draw(0, 0);
     //fboFaceShadow.draw(0, 0);
     //transform.fboTransform.draw(0, 0);
@@ -157,11 +128,12 @@ void Scene1::fillMatrix(SpriteObj *_sprite)
     matrix[2] = _sprite->face->matrixR[0];
 
 }
-void Scene1::faceToLayer(int _layer)
+void Scene1::faceToLayer(int _layer, int mode)
 {
     layer[_layer].begin();
     ofSetColor(ofColor::white);
     ShaderFaceToLayer.begin();
+    ShaderFaceToLayer.setUniform1i("mode", mode);
     ShaderFaceToLayer.setUniformTexture("u_texture", fboFace.getTexture(), 0);
     ShaderFaceToLayer.setUniformMatrix3f("matrixX", matrix[0]);
     ShaderFaceToLayer.setUniformMatrix3f("matrixY", matrix[1]);

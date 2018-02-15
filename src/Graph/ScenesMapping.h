@@ -39,7 +39,7 @@ public:
     ofFbo fboFace;
     ofMatrix3x3 matrix[3];
     void fillMatrix(SpriteObj* _sprite);
-    void faceToLayer(int layer);
+    void faceToLayer(int layer, int mode);
     void layerToFace(int layer);
     ofShader ShaderLayerToFace;
     ofShader ShaderFaceToLayer;

@@ -105,7 +105,7 @@ ObjMushroom::ObjMushroom(ObjMushroomDef *_ObjMushroomDef){
     sprite = static_cast<SpriteObj*>(_ObjMushroomDef);
     _ObjMushroomDef->mroom = this;
     ////////// POLYGONE ///////////////////
-    std::vector<ofPoint> pts = loadPoints("avatar.dat");
+    std::vector<ofPoint> pts = loadPoints("Mushroom.dat");
     for (int i= 0; i<pts.size(); ++i) {
         pts[i].scale(23);
     }

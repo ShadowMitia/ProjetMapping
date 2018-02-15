@@ -28,7 +28,7 @@ vector<ofPolyline> importImage(const string& path){
 }
 //--------------------------------------------------------------
 void ofApp::setup() {
-
+    
     for (int i= 0; i<nbFace; i++) {
         faces[i].idFace=i;
     }
@@ -41,9 +41,9 @@ void ofApp::setup() {
     
     scene1 = new Scene1(worlds, "Map_test_portails_back.png",&sprites,"Map_plateformes.png");
     //scene1 = new Scene1(&sprites, "Map_test_portails_back.png");
-
+    
     //scene1 = new Scene1(worlds, "map_saut.jpg");
-
+    
     scene2 = new Scene2(worlds);
     
     mapping.registerFboSource(scene1);
@@ -71,36 +71,39 @@ void ofApp::setup() {
     
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->world = worlds;
-    avatarDef->positionInit=ofVec2f(385.15, 426.349);
+    avatarDef->positionInit=ofVec2f(88, 552);
     avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[4];
+    avatarDef->face = &faces[2];
     avatarDef->create();
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
     spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
     
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
     objMushroomDef->world= worlds;
-    objMushroomDef->positionInit = ofVec2f(266, 289);
-    objMushroomDef->face = &faces[3];
+    objMushroomDef->positionInit = ofVec2f(968, 440);
+    objMushroomDef->face = &faces[10];
     objMushroomDef->create();
     sprites.push_back(static_cast<SpriteObj*>(objMushroomDef));
     spritesSolide.push_back(static_cast<SpriteObj*>(objMushroomDef));
     
     ObjPickupDef *pkup = new ObjPickupDef();
     pkup->world = worlds;
-    pkup->positionInit = ofVec2f(89.6505, 561.55);
-    pkup->face = & faces[2];
+    pkup->positionInit = ofVec2f(196, 356);
+    pkup->face = & faces[1];
     pkup->create();
     sprites.push_back(static_cast<SpriteObj*>(pkup));
     spritesLight.push_back(static_cast<SpriteObj*>(pkup));
     
+    
     ObjBlockDef *block = new ObjBlockDef();
     block->world=worlds;
-    block->positionInit =ofVec2f(100, 100);
-    block->face =&faces[0];
+    block->positionInit =ofVec2f(1004, 252);
+    block->face =&faces[9];
     block->create();
     sprites.push_back(static_cast<SpriteObj*>(block));
     spritesSolide.push_back(static_cast<SpriteObj*>(block));
+    
+    
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
@@ -167,7 +170,7 @@ void ofApp::keyPressed(int key)
         cout << "top avatar: " << sprites[0]->face->idFace << endl;
         
     }
-
+    
     //mapping.keyPressed(key);
 }
 //--------------------------------------------------------------
@@ -185,7 +188,7 @@ void ofApp::keyReleased(int key)
     {
         inputButton[0].directionalCross[1] = false;    }
     else if (key == OF_KEY_UP || key == 'z')
-    {        
+    {
         inputButton[0].directionalCross[2] = false;
     }
     else if (key == OF_KEY_DOWN || key == 's')
@@ -268,7 +271,7 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
         dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
         dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
         if (aSprite == nullptr || bSprite == nullptr)return;
-                
+        
         if ( aSprite->physicalizedElement != nullptr)
         {
             aSprite->physicalizedElement->contactStart(e,e.a,bSprite);
@@ -278,7 +281,7 @@ void ofApp::contactStart(ofxBox2dContactArgs &e)
         {
             bSprite->physicalizedElement->contactStart(e,e.b,aSprite);
         }
-
+        
     }
 }
 
@@ -289,7 +292,7 @@ void ofApp::contactEnd(ofxBox2dContactArgs &e)
         dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
         dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
         
-
+        
         if (aSprite == nullptr || bSprite == nullptr)return;
         
         if (aSprite->physicalizedElement != nullptr)
@@ -326,7 +329,7 @@ void ofApp::PreSolve(ofxBox2dPreContactArgs &e)
             bSprite->physicalizedElement->PreSolve(e.b,aSprite,e);
         }
     }
-
+    
 }
 
 void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
@@ -374,31 +377,31 @@ void ofApp::input() {
     
     ofxGLFWJoystick::one().update();
     /*
-    for (int joystickID = 0; joystickID < 1; joystickID++) {
-
-        if (inputButton[joystickID][2] != ofxGLFWJoystick::one().getButtonValue(13, joystickID)) {
-            if (!inputButton[joystickID][3])inputButton[joystickID][2] = ofxGLFWJoystick::one().getButtonValue(13, joystickID);
-            if (!inputButton[joystickID][3] && !inputButton[joystickID][2])worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT);
-            else worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT);
-        }
-        if (inputButton[joystickID][3] != ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
-            if (!inputButton[joystickID][2])inputButton[joystickID][3] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
-            
-            if (!inputButton[joystickID][3])worlds->avatars[joystickID]->keyReleased(OF_KEY_RIGHT);
-            else worlds->avatars[joystickID]->keyPressed(OF_KEY_RIGHT);
-        }
-        if (inputButton[joystickID][4] != ofxGLFWJoystick::one().getButtonValue(1, joystickID)) {
-            inputButton[joystickID][4] = ofxGLFWJoystick::one().getButtonValue(1, joystickID);
-            if (inputButton[joystickID][4]) worlds->avatars[joystickID]->keyPressed(' ');
-            else worlds->avatars[joystickID]->keyReleased(' ');
-        }
-        if (inputButton[joystickID][5] != ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
-            inputButton[joystickID][5] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
-            
-            if (inputButton[joystickID][5])worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT_CONTROL);
-            else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
-        }
-    }*/
+     for (int joystickID = 0; joystickID < 1; joystickID++) {
+     
+     if (inputButton[joystickID][2] != ofxGLFWJoystick::one().getButtonValue(13, joystickID)) {
+     if (!inputButton[joystickID][3])inputButton[joystickID][2] = ofxGLFWJoystick::one().getButtonValue(13, joystickID);
+     if (!inputButton[joystickID][3] && !inputButton[joystickID][2])worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT);
+     else worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT);
+     }
+     if (inputButton[joystickID][3] != ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
+     if (!inputButton[joystickID][2])inputButton[joystickID][3] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
+     
+     if (!inputButton[joystickID][3])worlds->avatars[joystickID]->keyReleased(OF_KEY_RIGHT);
+     else worlds->avatars[joystickID]->keyPressed(OF_KEY_RIGHT);
+     }
+     if (inputButton[joystickID][4] != ofxGLFWJoystick::one().getButtonValue(1, joystickID)) {
+     inputButton[joystickID][4] = ofxGLFWJoystick::one().getButtonValue(1, joystickID);
+     if (inputButton[joystickID][4]) worlds->avatars[joystickID]->keyPressed(' ');
+     else worlds->avatars[joystickID]->keyReleased(' ');
+     }
+     if (inputButton[joystickID][5] != ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
+     inputButton[joystickID][5] = ofxGLFWJoystick::one().getButtonValue(2, joystickID);
+     
+     if (inputButton[joystickID][5])worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT_CONTROL);
+     else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
+     }
+     }*/
 }
 
 #ifdef USE_WIIMOTE
@@ -417,75 +420,75 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
     {
         case OFXWIIUSE_BUTTON_UP_PRESSED:
         {
-	  //worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
-	  inputButton[args.first - 1].directionalCross[2] = true;
+            //worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
+            inputButton[args.first - 1].directionalCross[2] = true;
             break;
         }
-    case OFXWIIUSE_BUTTON_UP_RELEASED:
+        case OFXWIIUSE_BUTTON_UP_RELEASED:
         {
-	  //worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
-	  inputButton[args.first - 1].directionalCross[2] = false;
-	  break;
+            //worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
+            inputButton[args.first - 1].directionalCross[2] = false;
+            break;
         }
         case OFXWIIUSE_BUTTON_DOWN_PRESSED:
         {
-	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_RIGHT);
-	  inputButton[args.first - 1].directionalCross[3] = true;
-	  break;
+            //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_RIGHT);
+            inputButton[args.first - 1].directionalCross[3] = true;
+            break;
         }
-
+            
         case OFXWIIUSE_BUTTON_DOWN_RELEASED:
         {
-	  //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_RIGHT);
-	    inputButton[args.first - 1].directionalCross[3] = false;
+            //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_RIGHT);
+            inputButton[args.first - 1].directionalCross[3] = false;
             break;
         }
         case OFXWIIUSE_BUTTON_LEFT_PRESSED:
         {
-	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_DOWN);
-	  	  inputButton[args.first - 1].directionalCross[0] = true;
+            //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_DOWN);
+            inputButton[args.first - 1].directionalCross[0] = true;
             break;
         }
         case OFXWIIUSE_BUTTON_LEFT_RELEASED:
         {
-	  //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_DOWN);
-	  	  inputButton[args.first - 1].directionalCross[0] = false;
+            //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_DOWN);
+            inputButton[args.first - 1].directionalCross[0] = false;
             break;
         }
         case OFXWIIUSE_BUTTON_RIGHT_PRESSED:
         {
-	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
-	  inputButton[args.first - 1].directionalCross[1] = true;
+            //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
+            inputButton[args.first - 1].directionalCross[1] = true;
             break;
         }
         case OFXWIIUSE_BUTTON_RIGHT_RELEASED:
         {
-	  //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_UP);
-	  inputButton[args.first - 1].directionalCross[1] = false;
+            //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_UP);
+            inputButton[args.first - 1].directionalCross[1] = false;
             break;
         }
         case OFXWIIUSE_BUTTON_ONE_PRESSED:
         {
-	  //            worlds->avatars[args.first - 1]->keyPressed(' ');
-	  inputButton[args.first - 1].a = true;
+            //            worlds->avatars[args.first - 1]->keyPressed(' ');
+            inputButton[args.first - 1].a = true;
             break;
         }
         case OFXWIIUSE_BUTTON_ONE_RELEASED:
         {
-	  //            worlds->avatars[args.first - 1]->keyReleased(' ');
-	  	  inputButton[args.first - 1].a = false;
+            //            worlds->avatars[args.first - 1]->keyReleased(' ');
+            inputButton[args.first - 1].a = false;
             break;
         }
         case OFXWIIUSE_BUTTON_TWO_PRESSED:
         {
-	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT_CONTROL);
-	  	  inputButton[args.first - 1].b = true;
+            //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT_CONTROL);
+            inputButton[args.first - 1].b = true;
             break;
         }
         case OFXWIIUSE_BUTTON_TWO_RELEASED:
         {
             worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
-	    	  inputButton[args.first - 1].b = false;
+            inputButton[args.first - 1].b = false;
             break;
         }
             

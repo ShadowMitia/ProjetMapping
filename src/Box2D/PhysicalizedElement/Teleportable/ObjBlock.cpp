@@ -23,7 +23,7 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     
     sprite = static_cast<SpriteObj*>(_objBlockDef);
     _objBlockDef->b = this;
-    std::vector<ofPoint> pts = loadPoints("avatar.dat");
+    std::vector<ofPoint> pts = loadPoints("ObjBlock.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
@@ -36,6 +36,8 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::BLOCK;
     data->physicalizedElement = this;
+    
+    polygon.body->SetGravityScale(1.0);
 }
 
 void ObjBlock::draw(){
