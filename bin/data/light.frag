@@ -1,3 +1,4 @@
+
 #ifdef GL_ES
 #define LOWP lowp
 precision mediump float;
@@ -16,14 +17,13 @@ uniform vec2 lightLocation;
 uniform vec3 lightColor;
 uniform float u_radius;
 uniform vec2        resolution;
-uniform sampler2D   u_texturePlaform;
-uniform sampler2D   u_textureObjet;
+uniform sampler2D   u_texturePlaform;// u_texture; //
 uniform sampler2D   u_objects_tex;
 
 // ----------------------------------------------------------
 //sample from the 1D distance map
-float sample(vec2 coord, float r , sampler2D _texture) {
-    return step(r, texture2D(_texture, coord).r);
+float sample(vec2 coord, float r) {
+    return step(r, texture2D(u_texturePlaform, coord).r);
 }
 
 // ----------------------------------------------------------
@@ -37,47 +37,41 @@ void main() {
     float theta     = atan(norm.y, norm.x);
     float r         = length(norm);
     float coord     = (theta + PI) / (2.0*PI);
-    float ombre;
     
     vec2 tc = vec2(coord, 0.0);
     
-    float plaform = sample(tc, r, u_texturePlaform);
-    float objet = sample(tc, r, u_textureObjet);
+    // not using this for now...
+    //vec4 objectsColor = texture2D(u_objects_tex, vec2(gl_FragCoord.xy)/resolution);
     
-    if (plaform == 0.0) {
-        ombre = 0.07;//0.7;
-    }
-    else{
-        if (objet == 0.0) {
-            ombre = 0.03;//0.3
-        }
-        else{
-            ombre = 0.0;// 1.0
-        }
-
-    }
+    //the center tex coord, which gives us hard shadows
+    float center = sample(tc, r);
     
-    float radius = u_radius;
-    float bleed = 0.0;
-    float linearizeFactor = 0.9;
+    //we multiply the blur amount by our distance from center
+    //this leads to more blurriness as the shadow "fades away"
+    float blur = (1./resolution.x) * smoothstep(1.0, 0.0, r);
+    
+    //now we use a simple gaussian blur
+    float sum = 0.0;
+    
+    sum += sample(vec2(tc.x - 4.0*blur, tc.y), r) * 0.05;
+    sum += sample(vec2(tc.x - 3.0*blur, tc.y), r) * 0.09;
+    sum += sample(vec2(tc.x - 2.0*blur, tc.y), r) * 0.12;
+    sum += sample(vec2(tc.x - 1.0*blur, tc.y), r) * 0.15;
+    
+    sum += center * 0.16;
+    
+    sum += sample(vec2(tc.x + 1.0*blur, tc.y), r) * 0.15;
+    sum += sample(vec2(tc.x + 2.0*blur, tc.y), r) * 0.12;
+    sum += sample(vec2(tc.x + 3.0*blur, tc.y), r) * 0.09;
+    sum += sample(vec2(tc.x + 4.0*blur, tc.y), r) * 0.05;
+    
+    
     float distance = length(lightLocation - gl_FragCoord.xy);
-    float attenuation = (radius - distance) * (bleed / pow(distance, 2.0) + linearizeFactor / radius);
-    attenuation = clamp(1.0 - attenuation, 0.0, 1.0);
-    
-    
-    float intensity = (10.0 / distance);
-    
-    if (attenuation == 1.0) {
-        gl_FragColor = vec4(0.0,0.0,0.0,0.0);
-    }
-    else{
-        gl_FragColor = vec4(0.0, 0.0, 0.0, attenuation + ombre);
-
-    }
-    
-
-
-
+    //lightColor = vec3(1.0,1.0,1.0)
+    float intensity = (20.0 / distance) * sum;
+    vec4 frag =vec4(lightColor, 1) * vec4(1.0-intensity, 1.0-intensity, 1.0-intensity, 1.0-intensity);
+    frag = vec4(1.0,1.0,1.0,1.0-intensity);
+    gl_FragColor = frag;
 }
 
 

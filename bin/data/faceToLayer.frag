@@ -7,7 +7,7 @@ uniform sampler2DRect u_texture;
 uniform mat3 matrixX;
 uniform mat3 matrixY;
 uniform mat3 matrixR;
-
+uniform int mode;
 
 //alpha threshold for our occlusion map
 
@@ -17,7 +17,6 @@ float mod40(float x){
 
 void main(void) {
     vec4 tot = vec4(0.0,0.0,0.0,0.0);
-    
     for (int i = 0; i<3; ++i) {
         for (int j = 0 ; j<3; ++j) {
             if (pos.x > matrixX[i][j] && pos.x < matrixX[i][j] + 160.0 && pos.y > matrixY[i][j] && pos.y < matrixY[i][j] + 160.0) {
@@ -65,6 +64,16 @@ void main(void) {
             }
         }
     }
-    gl_FragColor = tot;
     
-}
+    mode = 0;
+    if (mode == 0) {
+        gl_FragColor = tot;
+    }
+    else if (mode == 1) {
+        //gl_FragColor = vec4(max(tot.rgb + gl_Color.rgb,1.0),min(tot.a,gl_Color.a));
+        gl_FragColor = tot;
+    }
+    else{
+        l_FragColor = tot;
+    }
+    }

@@ -23,7 +23,6 @@ public:
     }
     void threadedFunction();
 };
-
 class ObjPickup: public Teleportable{
 public:
     ObjPickup(ObjPickupDef* _objPickupDef);

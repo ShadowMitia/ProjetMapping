@@ -6,7 +6,9 @@
 //
 //
 
+enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 #include "ScenesMapping.h"
+
 
 void Scene1::draw()
 {
@@ -17,6 +19,9 @@ void Scene1::draw()
         ofClear(0, 0, 0, 0);
         if (i==0) {
             plaforms.draw(0, 0);
+        }
+        if (i==1) {
+            //ofBackground(ofColor::black);
         }
         layer[i].end();
     }
@@ -29,14 +34,14 @@ void Scene1::draw()
     ofClear(0,0,0,0);
     sprites->at(0)->draw();
     fboFace.end();
-    faceToLayer(1);
+    faceToLayer(2);
     
     fillMatrix(sprites->at(1));
     fboFace.begin();
     ofClear(0,0,0,0);
     sprites->at(1)->draw();
     fboFace.end();
-    faceToLayer(1);
+    faceToLayer(2);
     
     if (sprites->at(2)->isActif()) {
         fillMatrix(sprites->at(2));
@@ -44,10 +49,12 @@ void Scene1::draw()
         ofClear(0,0,0,0);
         sprites->at(2)->draw();
         fboFace.end();
-        faceToLayer(1);
+        faceToLayer(2);
     }
 
 
+    
+    
     
     
     
@@ -58,6 +65,7 @@ void Scene1::draw()
     
     layerToFace(0);
     
+    
     Light* light = dynamic_cast<Light *>(sprites->at(0));
     lightRender.renderLights(&fboFaceShadow, light);
     fboFace.begin();
@@ -66,14 +74,15 @@ void Scene1::draw()
     ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
     fboFaceShadow.draw(0, 0);
     fboFace.end();
+    ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
     faceToLayer(1);
-    
+    ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ALPHA);
     if (sprites->at(2)->isActif()) {
         fillMatrix(sprites->at(2));
         fboFace.begin();
         ofClear(0,0,0,0);
         fboFace.end();
-        
+
         layerToFace(0);
         
         Light* light = dynamic_cast<Light *>(sprites->at(2));
@@ -84,9 +93,13 @@ void Scene1::draw()
         ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
         fboFaceShadow.draw(0, 0);
         fboFace.end();
+        
+        ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ADD);
         faceToLayer(1);
+        ofEnableBlendMode(ofBlendMode::OF_BLENDMODE_ALPHA);
     }
     
+    //ofDisableBlendMode();
 
     ///////
 
@@ -125,18 +138,16 @@ void Scene1::renderObjects()
 {
     //image.draw(0, 0);
 }
-
 void Scene1::renderPlatform()
 {
     fboFace.draw(0,0);
 }
-
 void Scene1::update()
 {
     
 }
-
-void Scene1::fillMatrix(SpriteObj *_sprite){
+void Scene1::fillMatrix(SpriteObj *_sprite)
+{
     matrix[0].set(_sprite->face->matrix[0][0]->rect.x, _sprite->face->matrix[0][3]->rect.x, _sprite->face->matrix[0][6]->rect.x,
                   _sprite->face->matrix[0][1]->rect.x, _sprite->face->matrix[0][4]->rect.x, _sprite->face->matrix[0][7]->rect.x,
                   _sprite->face->matrix[0][2]->rect.x, _sprite->face->matrix[0][5]->rect.x, _sprite->face->matrix[0][8]->rect.x);
@@ -146,7 +157,8 @@ void Scene1::fillMatrix(SpriteObj *_sprite){
     matrix[2] = _sprite->face->matrixR[0];
 
 }
-void Scene1::faceToLayer(int _layer){
+void Scene1::faceToLayer(int _layer)
+{
     layer[_layer].begin();
     ofSetColor(ofColor::white);
     ShaderFaceToLayer.begin();
@@ -158,7 +170,8 @@ void Scene1::faceToLayer(int _layer){
     ShaderFaceToLayer.end();
     layer[_layer].end();
 }
-void Scene1::layerToFace(int _layer){
+void Scene1::layerToFace(int _layer)
+{
     fboFace.begin();
     ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
     ShaderLayerToFace.begin();

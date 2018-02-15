@@ -25,7 +25,6 @@ public:
     }
     void threadedFunction();
 };
-
 class Avatar : public Teleportable {
 public:
     Avatar(AvatarDef* _avatarDef);
@@ -68,5 +67,3 @@ private:
     
     
 };
-
-
