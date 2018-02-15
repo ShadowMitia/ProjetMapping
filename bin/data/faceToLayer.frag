@@ -7,7 +7,7 @@ uniform sampler2DRect u_texture;
 uniform mat3 matrixX;
 uniform mat3 matrixY;
 uniform mat3 matrixR;
-uniform int mode;
+
 
 //alpha threshold for our occlusion map
 
@@ -64,8 +64,8 @@ void main(void) {
             }
         }
     }
-    
-    mode = 0;
+    gl_FragColor = tot;
+    /*
     if (mode == 0) {
         gl_FragColor = tot;
     }
@@ -74,6 +74,7 @@ void main(void) {
         gl_FragColor = tot;
     }
     else{
-        l_FragColor = tot;
-    }
+        gl_FragColor = tot;
+    }*/
+    
     }
