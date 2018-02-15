@@ -23,8 +23,10 @@
 
 ObjPickup::ObjPickup(ObjPickupDef* _objPickupDef){
     
+    
     sprite = static_cast<SpriteObj*>(_objPickupDef);
     _objPickupDef->pkup = this;
+    deactive = new deActive(100000,this);
     
     std::vector<ofPoint> pts = loadPoints("avatar.dat");
     polygon.addVertices(pts);
@@ -44,6 +46,18 @@ ObjPickup::ObjPickup(ObjPickupDef* _objPickupDef){
 
 void ObjPickup::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
-        _fixture->GetBody()->SetActive(false);
+        deactive->startThread();
     }
+}
+
+void ObjPickup::contactEnd(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
+    
+}
+
+void deActive::threadedFunction()
+{
+    pckup->setPosition(ofVec2f(0, 0));
+    time.reset();
+    time.waitNext();
+    pckup->polygon.body->SetActive(false);
 }

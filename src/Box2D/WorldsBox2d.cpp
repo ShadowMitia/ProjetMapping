@@ -148,6 +148,13 @@ void WorldsBox2d::createAvatar(AvatarDef* _avatarDef){
     avatar->setPosition(_avatarDef->positionInit);
     avatars.push_back(avatar);
 }
+
+void WorldsBox2d::createPickUp(ObjPickupDef *_objPickupDef){
+    ObjPickup * pkup = new ObjPickup(_objPickupDef);
+    pkup->setPosition(_objPickupDef->positionInit);
+    pickups.push_back(pkup);
+    
+}
 void WorldsBox2d::update(){
 
     world.update();

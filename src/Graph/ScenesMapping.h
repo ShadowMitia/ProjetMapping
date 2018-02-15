@@ -41,8 +41,8 @@ public:
     void fillMatrix(SpriteObj* _sprite);
     void faceToLayer(int layer);
     void layerToFace(int layer);
-    ofShader transform;
-    ofShader transformInv;
+    ofShader ShaderLayerToFace;
+    ofShader ShaderFaceToLayer;
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(WorldsBox2d* _worldsBox2d, string background_name, vector<SpriteObj*>* _sprites, string plaforms_name){
@@ -58,11 +58,11 @@ public:
         for (int i=0; i<nbLayer; ++i) {
             layer[i].allocate(background.getWidth(), background.getHeight());
         }
-        if(!transform.load("passTransform.vert", "transform.frag")) {
+        if(!ShaderLayerToFace.load("passTransform.vert", "layerToFace.frag")) {
             printf("transform.frag\n");
         }
         //fboSortie.allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
-        if(!transformInv.load("passTransform.vert", "transformInv.frag")) {
+        if(!ShaderFaceToLayer.load("passTransform.vert", "faceToLayer.frag")) {
             printf("transformInv.frag\n");
         }
 

@@ -12,7 +12,7 @@
 #include "Portal.h"
 #include "PhysicalizedElement/PhysicalizedElement.h"
 #include "PhysicalizedElement/Platform.h"
-
+#include "ObjPickup.h"
 #include "Constant.h"
 #include "Ladder.h"
 #include "Waterfalls.h"
@@ -34,6 +34,7 @@ public:
     
     std::vector< CloneBox2d *> clones;
     
+    std::vector<ObjPickup*> pickups;
     std::vector< ObjBlock *> blocks;
     std::vector<ObjMushroom *> Mushrooms;
     
@@ -47,6 +48,8 @@ public:
     void creataBlock( ObjBlockDef * _objBlockDef);
     void createAvatar(AvatarDef* _avatarDef);
     void createMushroom(ObjMushroomDef* _objMushroomDef);
+    void createPickUp(ObjPickupDef* _objPickupDef);
+    
     void createPlatform(ofPolyline _polyline);
     void createPortal(Face *input);
     void createLadder(ofPolyline _polyline);

@@ -86,12 +86,13 @@ public:
 };
 
 class ObjPickup;
-class ObjPickupDef: public SpriteObj {
+class ObjPickupDef: public SpriteObj, public Light {
 public:
     
     ObjPickupDef(){
         filterObjPickup.categoryBits = 0x0040;
         filterObjPickup.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 | 0x0020 | 0x0080;
+        radius = 26;
     }
     b2Filter filterObjPickup;
     bool actif  = true;

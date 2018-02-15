@@ -97,6 +97,7 @@ bool ObjPickupDef::isActif(){
     return pkup->polygon.body->IsActive();
 }
 void ObjPickupDef::create(){
+    world->createPickUp(this);
 }
 
 ofVec2f ObjMushroomDef::getPositionTranform(){

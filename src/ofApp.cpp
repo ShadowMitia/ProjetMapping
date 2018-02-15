@@ -76,7 +76,7 @@ void ofApp::setup() {
     avatarDef->face = &faces[4];
     avatarDef->create();
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
-    spritesAvatar.push_back(static_cast<SpriteObj*>(avatarDef));
+    spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
     
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
     objMushroomDef->world= worlds;
@@ -85,6 +85,14 @@ void ofApp::setup() {
     objMushroomDef->create();
     sprites.push_back(static_cast<SpriteObj*>(objMushroomDef));
     spritesSolide.push_back(static_cast<SpriteObj*>(objMushroomDef));
+    
+    ObjPickupDef *pkup = new ObjPickupDef();
+    pkup->world = worlds;
+    pkup->positionInit = ofVec2f(89.6505, 561.55);
+    pkup->face = & faces[2];
+    pkup->create();
+    sprites.push_back(static_cast<SpriteObj*>(pkup));
+    spritesLight.push_back(static_cast<SpriteObj*>(pkup));
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
@@ -148,7 +156,7 @@ void ofApp::keyPressed(int key)
         //tempI++;
         //cout << "tempI: " << tempI << endl;
         cout << "position avatar: " << sprites[0]->world->avatars[0]->getPosition() << endl;
-        cout << "top avatar: " << sprites[0]->face->matrixR[0] << endl;
+        cout << "top avatar: " << sprites[0]->face->idFace << endl;
         
     }
 

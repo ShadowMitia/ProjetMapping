@@ -21,16 +21,7 @@ void Scene1::draw()
         layer[i].end();
     }
 
-    //transform.setFboIni(layer);
-    
-    //transform.update(sprites->at(0));
-    //transform.update(sprites->at(1));
-    
-    //transform.fboSortie.draw(0, 0);
-    //ofBackground(200, 200, 0);
-    //renderPlatform();
-    
-    ////////
+
     
     fillMatrix(sprites->at(0));
     
@@ -39,12 +30,26 @@ void Scene1::draw()
     sprites->at(0)->draw();
     fboFace.end();
     faceToLayer(1);
+    
     fillMatrix(sprites->at(1));
     fboFace.begin();
     ofClear(0,0,0,0);
     sprites->at(1)->draw();
     fboFace.end();
     faceToLayer(1);
+    
+    if (sprites->at(2)->isActif()) {
+        fillMatrix(sprites->at(2));
+        fboFace.begin();
+        ofClear(0,0,0,0);
+        sprites->at(2)->draw();
+        fboFace.end();
+        faceToLayer(1);
+    }
+
+
+    
+    
     
     fillMatrix(sprites->at(0));
     fboFace.begin();
@@ -56,11 +61,31 @@ void Scene1::draw()
     Light* light = dynamic_cast<Light *>(sprites->at(0));
     lightRender.renderLights(&fboFaceShadow, light);
     fboFace.begin();
+    ofClear(0,0,0,0);
     ofPushMatrix();
     ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
     fboFaceShadow.draw(0, 0);
     fboFace.end();
-    faceToLayer(0);
+    faceToLayer(1);
+    
+    if (sprites->at(2)->isActif()) {
+        fillMatrix(sprites->at(2));
+        fboFace.begin();
+        ofClear(0,0,0,0);
+        fboFace.end();
+        
+        layerToFace(0);
+        
+        Light* light = dynamic_cast<Light *>(sprites->at(2));
+        lightRender.renderLights(&fboFaceShadow, light);
+        fboFace.begin();
+        ofClear(0,0,0,0);
+        ofPushMatrix();
+        ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
+        fboFaceShadow.draw(0, 0);
+        fboFace.end();
+        faceToLayer(1);
+    }
     
 
     ///////
@@ -70,12 +95,11 @@ void Scene1::draw()
     //worldsBox2d->draw();
     ofSetColor(ofColor::white);
     
-    for (int i=0; i<nbLayer; ++i) {
+    for (int i=1; i<nbLayer; ++i) {
         layer[i].draw(0, 0);
     }
     
     //layer[0].draw(0, 0);
-    layer[1].draw(0, 0);
     //fboFaceShadow.draw(0, 0);
     //transform.fboTransform.draw(0, 0);
     
@@ -125,25 +149,25 @@ void Scene1::fillMatrix(SpriteObj *_sprite){
 void Scene1::faceToLayer(int _layer){
     layer[_layer].begin();
     ofSetColor(ofColor::white);
-    transformInv.begin();
-    transformInv.setUniformTexture("u_texture", fboFace.getTexture(), 0);
-    transformInv.setUniformMatrix3f("matrixX", matrix[0]);
-    transformInv.setUniformMatrix3f("matrixY", matrix[1]);
-    transformInv.setUniformMatrix3f("matrixR", matrix[2]);
+    ShaderFaceToLayer.begin();
+    ShaderFaceToLayer.setUniformTexture("u_texture", fboFace.getTexture(), 0);
+    ShaderFaceToLayer.setUniformMatrix3f("matrixX", matrix[0]);
+    ShaderFaceToLayer.setUniformMatrix3f("matrixY", matrix[1]);
+    ShaderFaceToLayer.setUniformMatrix3f("matrixR", matrix[2]);
     ofDrawRectangle(ofPoint(0,0), layer[_layer].getWidth(), layer[_layer].getHeight());
-    transformInv.end();
+    ShaderFaceToLayer.end();
     layer[_layer].end();
 }
 void Scene1::layerToFace(int _layer){
     fboFace.begin();
     ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
-    transform.begin();
-    transform.setUniformTexture("u_texture", layer[_layer].getTexture(), 0);
-    transform.setUniformMatrix3f("matrixX", matrix[0]);
-    transform.setUniformMatrix3f("matrixY", matrix[1]);
+    ShaderLayerToFace.begin();
+    ShaderLayerToFace.setUniformTexture("u_texture", layer[_layer].getTexture(), 0);
+    ShaderLayerToFace.setUniformMatrix3f("matrixX", matrix[0]);
+    ShaderLayerToFace.setUniformMatrix3f("matrixY", matrix[1]);
     ofSetColor(ofColor::white, 0);
     ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
-    transform.end();
+    ShaderLayerToFace.end();
     fboFace.end();
 }
 void Scene2::draw()
