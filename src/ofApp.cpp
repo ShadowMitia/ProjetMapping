@@ -409,62 +409,75 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
     {
         case OFXWIIUSE_BUTTON_UP_PRESSED:
         {
-            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
+	  //worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
+	  inputButton[args.first - 1].directionalCross[2] = true;
             break;
+        }
+    case OFXWIIUSE_BUTTON_UP_RELEASED:
+        {
+	  //worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT);
+	  inputButton[args.first - 1].directionalCross[2] = false;
+	  break;
         }
         case OFXWIIUSE_BUTTON_DOWN_PRESSED:
         {
-            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_RIGHT);
-            break;
+	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_RIGHT);
+	  inputButton[args.first - 1].directionalCross[3] = true;
+	  break;
         }
-        case OFXWIIUSE_BUTTON_UP_RELEASED:
-        {
-            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT);
-            break;
-        }
+
         case OFXWIIUSE_BUTTON_DOWN_RELEASED:
         {
-            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_RIGHT);
+	  //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_RIGHT);
+	    inputButton[args.first - 1].directionalCross[3] = false;
             break;
         }
         case OFXWIIUSE_BUTTON_LEFT_PRESSED:
         {
-            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_DOWN);
+	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_DOWN);
+	  	  inputButton[args.first - 1].directionalCross[0] = true;
             break;
         }
         case OFXWIIUSE_BUTTON_LEFT_RELEASED:
         {
-            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_DOWN);
+	  //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_DOWN);
+	  	  inputButton[args.first - 1].directionalCross[0] = false;
             break;
         }
         case OFXWIIUSE_BUTTON_RIGHT_PRESSED:
         {
-            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
+	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_UP);
+	  inputButton[args.first - 1].directionalCross[1] = true;
             break;
         }
         case OFXWIIUSE_BUTTON_RIGHT_RELEASED:
         {
-            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_UP);
+	  //            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_UP);
+	  inputButton[args.first - 1].directionalCross[1] = false;
             break;
         }
         case OFXWIIUSE_BUTTON_ONE_PRESSED:
         {
-            worlds->avatars[args.first - 1]->keyPressed(' ');
+	  //            worlds->avatars[args.first - 1]->keyPressed(' ');
+	  inputButton[args.first - 1].a = true;
             break;
         }
         case OFXWIIUSE_BUTTON_ONE_RELEASED:
         {
-            worlds->avatars[args.first - 1]->keyReleased(' ');
+	  //            worlds->avatars[args.first - 1]->keyReleased(' ');
+	  	  inputButton[args.first - 1].a = false;
             break;
         }
         case OFXWIIUSE_BUTTON_TWO_PRESSED:
         {
-            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT_CONTROL);
+	  //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT_CONTROL);
+	  	  inputButton[args.first - 1].b = true;
             break;
         }
         case OFXWIIUSE_BUTTON_TWO_RELEASED:
         {
             worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
+	    	  inputButton[args.first - 1].b = false;
             break;
         }
             

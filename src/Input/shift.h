@@ -9,7 +9,7 @@
 #pragma once
 
 struct Shift{
-    bool directionalCross[4] = { false };
+  bool directionalCross[4] = { false }; // haut gauche bas droite
     bool a = false;
     bool b = false;
 };

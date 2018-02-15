@@ -1,5 +1,5 @@
 #pragma once
-//#define USE_WIIMOTE
+
 #include "ofMain.h"
 #include "ofxGui.h"
 #include "ofxPiMapper.h"
@@ -13,14 +13,13 @@
 #include "shift.h"
 #include "Face.h"
 #include "Sprite.h"
-//#define USE_WIIMOTE
 
+#define USE_WIIMOTE
 
 #ifdef USE_WIIMOTE
 #include "ofxWiiuse.h"
 #endif
 #define nbFace  13
-
 
 #ifdef USE_WIIMOTE
 class ofApp : public ofBaseApp, public ofxWiiuseListener {
