@@ -82,7 +82,9 @@ void Scene1::draw()
         layer[i].draw(0, 0);
     }
     
-    // worldsBox2d->draw();
+     worldsBox2d->draw();
+    
+    
     //layer[0].draw(0, 0);
     //fboFaceShadow.draw(0, 0);
     //transform.fboTransform.draw(0, 0);
