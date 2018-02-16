@@ -34,7 +34,7 @@ void Scene1::draw()
             ofClear(0,0,0,0);
             sprites->at(i)->draw();
             fboFace.end();
-            faceToLayer(2,0);
+            faceToLayer(sprites->at(i)->layer,0);
         }
 
     }
@@ -82,7 +82,7 @@ void Scene1::draw()
         layer[i].draw(0, 0);
     }
     
-     worldsBox2d->draw();
+     //worldsBox2d->draw();
     
     
     //layer[0].draw(0, 0);

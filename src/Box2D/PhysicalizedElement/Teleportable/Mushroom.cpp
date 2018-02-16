@@ -132,9 +132,8 @@ void ObjMushroom::draw(){
 void ObjMushroom::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::CLONE) {
         CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
-        clone->layer = 2;
-        Teleportable* telport = static_cast<Teleportable*>(clone->objSource);
-        telport->sprite->layer = 2;
+        clone->objSource->sprite->layer = clone->objSource->sprite->layer + 4;
+        clone->layer = clone->objSource->sprite->layer;
 
     }
     
@@ -142,10 +141,12 @@ void ObjMushroom::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataS
 void ObjMushroom::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) {
     if (OtherSprite->sprite == Sprite::CLONE) {
         CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
-        clone->layer = 0;
+        clone->layer = clone->layer = clone->objSource->sprite->layerIni;
     }
     else{
         Teleportable* telport = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
-        telport->sprite->layer = 0;
+        telport->sprite->layer = telport->sprite->layerIni;
+        telport->sprite->setFilter(telport->sprite->getFilter());
+        telport->sprite->setFilter( telport->sprite->getFilter());
     }
 }

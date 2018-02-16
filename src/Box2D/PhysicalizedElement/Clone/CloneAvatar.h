@@ -76,6 +76,7 @@ void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
 
 void CloneBox2d::delectCloneAvatar(){
     Avatar* objAvatar = static_cast<Avatar*>(objSource);
+    
     if (ladderTouch) {
         objAvatar->lockLadder.ladderDown = objAvatar->lockLadder.ladderTop = false;
         objAvatar->SetGravityScale(0.0); // regardé si bien ici

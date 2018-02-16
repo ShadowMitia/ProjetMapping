@@ -17,6 +17,20 @@
 #include "Face.h"
 //#include "Sprite.h"
 
+
+/*Layer
+ Layer 0 -> background
+ Layer 1 -> platforms & objets
+ Layer 2 -> Ombres platforms & objets
+ Layer 3 -> Avatar & Light
+ Layer 4 -> Mushroom (top)
+ Layer 5 -> Objets
+ Layer 6 -> Ombres on Mushroom
+ Layer 7 -> Avatar & Light
+ Layer 8 -> Mask
+ 
+*/
+
 class Scene1 : public ofx::piMapper::FboSource
 {
 public:
@@ -27,7 +41,6 @@ public:
     
     WorldsBox2d* worldsBox2d;
     ofFbo mask;
-    
     void update();
     void draw();
     void renderObjects();

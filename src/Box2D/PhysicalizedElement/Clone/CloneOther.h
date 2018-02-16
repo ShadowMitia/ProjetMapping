@@ -59,7 +59,6 @@ void CloneBox2d::collisionFonctionOther(){
 void CloneBox2d::contactStartOther(b2Fixture *_fixture, dataSprite *OtherSprite){}
 void CloneBox2d::contactEndOther(b2Fixture *_fixture, dataSprite *OtherSprite){}
 void CloneBox2d::delectCloneOther(){
-    cout << " objSource->SetGravityScale(1.0):  " << endl;
     objSource->SetGravityScale(1.0);
     
 }

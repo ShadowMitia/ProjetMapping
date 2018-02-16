@@ -31,7 +31,7 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     polygon.create(_objBlockDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
     
-    _objBlockDef->setFilter();
+    _objBlockDef->setFilter(_objBlockDef->filterObjBlock);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::BLOCK;

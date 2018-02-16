@@ -48,7 +48,12 @@ CloneBox2d::~CloneBox2d()
         objSource->polygon.setPosition(polygon.getPosition());
         objSource->setVelocity(v);
         objSource->sprite->face = portalDestination->face;
-        objSource->sprite->layer = layer;
+        if (layer > 4 ) { //  deffinir  le layer top
+            objSource->sprite->layer = layer; // je crois c que  est inutil 
+            b2Filter tempFilter = objSource->sprite->getFilter();
+            tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+            objSource->sprite->setFilter(tempFilter);
+        }
         (*this.*delectClone)();
         
     }
@@ -67,6 +72,13 @@ void CloneBox2d::create()
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     
+    
+    if (layer == 6) { //  deffinir  le layer top
+        b2Filter tempFilter = objSource->sprite->getFilter();
+        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        objSource->sprite->setFilter(tempFilter);
+    }
+    
     if (data!=nullptr) { // cela ne regle pas la question danger !!!!!!!!!! sleep
         data->sprite = Sprite::CLONE;
         data->physicalizedElement = this;
@@ -74,14 +86,12 @@ void CloneBox2d::create()
     
     data = (dataSprite*)(objSource->polygon.body->GetUserData());
     if (data->sprite==Sprite::AVATAR) {
-        cout << "avatar" << endl;
         collisionFonction = &CloneBox2d::collisionFonctionAvatar;
         delectClone = &CloneBox2d::delectCloneAvatar;
         contactStartFonction = &CloneBox2d::contactStartAvatar;
         contactEndFonction = &CloneBox2d::contactEndAvatar;
     }
     else{
-        cout << "autre "<< endl;
         collisionFonction =  &CloneBox2d::collisionFonctionOther;
         delectClone = &CloneBox2d::delectCloneOther;
         contactStartFonction = &CloneBox2d::contactStartOther;

@@ -88,9 +88,14 @@ void ofApp::setup() {
     
     ObjPickupDef *pkup = new ObjPickupDef();
     pkup->world = worlds;
-    pkup->positionInit = ofVec2f(196, 356);
-    pkup->face = & faces[1];
+    pkup->positionInit = ofVec2f(968, 440);
+    pkup->face = & faces[10];
     pkup->create();
+    b2Filter tempFilter = pkup->getFilter();
+    tempFilter.categoryBits = 0x0100;
+    tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+    pkup->setFilter(tempFilter);
+    pkup->layer = 6;
     sprites.push_back(static_cast<SpriteObj*>(pkup));
     spritesLight.push_back(static_cast<SpriteObj*>(pkup));
     

@@ -22,8 +22,8 @@ BLOCK    : 0x0020
 PICKUP   : 0x0040
 MUSHROOM : 0x0080
 */
-void AvatarDef::setFilter(){
-    a->polygon.body->GetFixtureList()->SetFilterData(filterAvatar);
+void AvatarDef::setFilter(b2Filter filter){
+    a->polygon.body->GetFixtureList()->SetFilterData(filter);
 }
 void AvatarDef::draw(){
     ofRectangle temp;
@@ -49,8 +49,8 @@ bool AvatarDef::isActif(){
     return a->polygon.body->IsActive();
 }
 
-void ObjBlockDef::setFilter(){
-    b->polygon.body->GetFixtureList()->SetFilterData(filterObjBlock);
+void ObjBlockDef::setFilter(b2Filter filter){
+    b->polygon.body->GetFixtureList()->SetFilterData(filter);
 }
 ofVec2f ObjBlockDef::getPositionTranform(){
     return b->getPosition() - face->rect.getPosition() + 160;
@@ -75,8 +75,8 @@ void ObjBlockDef::create(){
     world->creataBlock(this);
 }
 
-void ObjPickupDef::setFilter(){
-    pkup->polygon.body->GetFixtureList()->SetFilterData(filterObjPickup);
+void ObjPickupDef::setFilter(b2Filter filter){
+    pkup->polygon.body->GetFixtureList()->SetFilterData(filter);
 }
 ofVec2f ObjPickupDef::getPositionTranform(){
     return pkup->getPosition() - face->rect.getPosition() + 160;
@@ -112,6 +112,7 @@ void ObjMushroomDef::draw(){
         ofSetColor(ofColor::darkViolet);
         ofDrawRectangle(temp);
 }
+
 void ObjMushroomDef::reset(){}
 bool ObjMushroomDef::isActif(){
     return mroom->polygon.body->IsActive();

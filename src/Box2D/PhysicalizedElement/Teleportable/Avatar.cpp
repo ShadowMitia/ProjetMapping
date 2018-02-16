@@ -34,7 +34,7 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.create(_avatarDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
-    _avatarDef->setFilter();
+    _avatarDef->setFilter(_avatarDef->filterAvatar);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;

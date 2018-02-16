@@ -36,7 +36,7 @@ ObjPickup::ObjPickup(ObjPickupDef* _objPickupDef){
     polygon.create(_objPickupDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
     
-    _objPickupDef->setFilter();
+    _objPickupDef->setFilter(_objPickupDef->filterObjPickup);
 
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
