@@ -48,6 +48,10 @@ void AvatarDef::reset(){
 bool AvatarDef::isActif(){
     return a->polygon.body->IsActive();
 }
+bool AvatarDef::getViewPoint(){
+    return a->viewPoint;
+}
+
 
 void ObjBlockDef::setFilter(b2Filter filter){
     b->polygon.body->GetFixtureList()->SetFilterData(filter);
@@ -74,6 +78,9 @@ bool ObjBlockDef::isActif(){
 void ObjBlockDef::create(){
     world->creataBlock(this);
 }
+bool ObjBlockDef::getViewPoint(){
+    return b->viewPoint;
+}
 
 void ObjPickupDef::setFilter(b2Filter filter){
     pkup->polygon.body->GetFixtureList()->SetFilterData(filter);
@@ -98,6 +105,9 @@ bool ObjPickupDef::isActif(){
 }
 void ObjPickupDef::create(){
     world->createPickUp(this);
+}
+bool ObjPickupDef::getViewPoint(){
+    pkup->viewPoint;
 }
 
 ofVec2f ObjMushroomDef::getPositionTranform(){

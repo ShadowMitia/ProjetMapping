@@ -70,7 +70,7 @@ void main() {
     //lightColor = vec3(1.0,1.0,1.0)
     float intensity = (20.0 / distance) * sum;
     vec4 frag =vec4(lightColor, 1) * vec4(1.0-intensity, 1.0-intensity, 1.0-intensity, 1.0-intensity);
-    frag = vec4(1.0,1.0,1.0,1.0-intensity);
+    frag = vec4(1.0,1.0,1.0,(1.0-intensity)/u_radius);
     gl_FragColor = frag;
 }
 

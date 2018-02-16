@@ -35,7 +35,7 @@ public:
     std::vector< CloneBox2d *> clones;
     
     std::vector<ObjPickup*> pickups;
-    std::vector< ObjBlock *> blocks;
+    std::vector<ObjBlock *> blocks;
     std::vector<ObjMushroom *> Mushrooms;
     
     

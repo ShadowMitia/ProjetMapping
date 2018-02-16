@@ -18,18 +18,28 @@
 //#include "Sprite.h"
 
 
-/*Layer
+/*  Layer
  Layer 0 -> background
- Layer 1 -> platforms & objets
- Layer 2 -> Ombres platforms & objets
+ Layer 1 -> Ombres platforms & objets
+ Layer 2 -> Platforms & objets
  Layer 3 -> Avatar & Light
  Layer 4 -> Mushroom (top)
- Layer 5 -> Objets
- Layer 6 -> Ombres on Mushroom
+ Layer 5 -> Ombres on Mushroom
+ Layer 6 -> Objets
  Layer 7 -> Avatar & Light
  Layer 8 -> Mask
- 
-*/
+ */
+
+
+class Scene1Def{
+public:
+    WorldsBox2d* worldsBox2d;
+    string background_name;
+    string plaforms_name;
+    vector<SpriteObj*>* _sprites;
+    vector<SpriteObj*>* _spritesLight;
+    
+};
 
 class Scene1 : public ofx::piMapper::FboSource
 {
@@ -58,13 +68,13 @@ public:
     ofShader ShaderFaceToLayer;
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
-    Scene1(WorldsBox2d* _worldsBox2d, string background_name, vector<SpriteObj*>* _sprites, string plaforms_name){
+    Scene1(Scene1Def def){
         name = "Scene One FBO Source";
-        sprites=_sprites;
-        background.load(background_name);
-        plaforms.load(plaforms_name);
+        sprites= def._sprites;
+        background.load(def.background_name);
+        plaforms.load(def.plaforms_name);
         allocate(background.getWidth(), background.getHeight());
-        worldsBox2d =_worldsBox2d;
+        worldsBox2d =def.worldsBox2d;
         
         fboFace.allocate(160*3, 160*3);
         fboFaceShadow.allocate(160*3, 160*3);
@@ -91,7 +101,6 @@ public:
         //lightRender.addLight(lightSize/2, lightSize/2);
         
         mask.allocate(background.getWidth(), background.getHeight());
-        
         mask.begin();
         ofClear(0);
         mask.end();

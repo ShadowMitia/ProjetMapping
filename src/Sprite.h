@@ -25,17 +25,16 @@
  MUSHROOM : 0x0080
  */
 
-/*Layer
+/*  Layer
  Layer 0 -> background
- Layer 1 -> platforms & objets
- Layer 2 -> Ombres platforms & objets
+ Layer 1 -> Ombres platforms & objets
+ Layer 2 -> Platforms & objets
  Layer 3 -> Avatar & Light
  Layer 4 -> Mushroom (top)
- Layer 5 -> Objets
- Layer 6 -> Ombres on Mushroom
+ Layer 5 -> Ombres on Mushroom
+ Layer 6 -> Objets
  Layer 7 -> Avatar & Light
  Layer 8 -> Mask
- 
  */
 
 class WorldsBox2d;
@@ -51,6 +50,7 @@ public:
     virtual bool isActif(){};
     virtual void setFilter( b2Filter filter){};
     virtual b2Filter getFilter(){};
+    virtual bool getViewPoint(){};
 
     int layer,layerIni;
     ofVec2f positionInit;
@@ -79,6 +79,7 @@ public:
     bool isActif() override;
     void setFilter(b2Filter filter) override;
     b2Filter getFilter(){ return filterAvatar;};
+    bool getViewPoint() override;
 
 };
 
@@ -88,7 +89,7 @@ public:
     ObjBlockDef(){
         filterObjBlock.categoryBits = 0x0020;
         filterObjBlock.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 |0x0020 | 0x0040 | 0x0080;
-        layerIni = layer =  1;
+        layerIni = layer =  2;
     }
     b2Filter filterObjBlock;
     ofImage spriteImage;
@@ -100,6 +101,7 @@ public:
     bool isActif() override;
     void setFilter(b2Filter filter) override;
     b2Filter getFilter(){return filterObjBlock;};
+    bool getViewPoint() override;
 
     
 };
@@ -111,7 +113,7 @@ public:
     ObjPickupDef(){
         filterObjPickup.categoryBits = 0x0040;
         filterObjPickup.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 | 0x0020 | 0x0080;
-        radius = 26;
+        radius = 0.5;
         layerIni = layer =  3;
     }
     b2Filter filterObjPickup;
@@ -125,6 +127,7 @@ public:
     bool isActif() override;
     void setFilter(b2Filter filter) override;
     b2Filter getFilter(){return filterObjPickup;};
+    bool getViewPoint() override;
 
 };
 
@@ -145,7 +148,7 @@ public:
     void create() ;
     void reset() ;
     bool isActif();
-    
+    bool getViewPoint(){return false;};
     
     
 };

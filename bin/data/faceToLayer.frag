@@ -66,22 +66,18 @@ void main(void) {
         }
     }
     
-    gl_FragColor = tot;
+    //gl_FragColor = tot;
 
     if (mode == 1) {
-        gl_FragColor = vec4(max(tot.rgb + gl_Color.rgb,1.0),min(tot.a,gl_Color.a));
+        //gl_FragColor = vec4(max(tot.rgb + gl_Color.rgb,1.0),min(tot.a,gl_Color.a));
+        if (tot.a == 1.0) {
+            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.0);
+        }else{
+           gl_FragColor = tot;
+        }
+        
+        //gl_FragColor = vec4(0.,1.,0.,1.);
     }else{
        gl_FragColor = tot;
     }
-    
-    /*if (mode == 0) {
-        gl_FragColor = tot;
-    }
-    else if (mode == 1) {
-        gl_FragColor = vec4(max(tot.rgb + gl_Color.rgb,1.0),min(tot.a,gl_Color.a));
-        //gl_FragColor = tot;
-    }
-    else{
-        gl_FragColor = tot
-    };*/
 }

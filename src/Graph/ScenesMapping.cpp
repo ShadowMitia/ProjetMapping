@@ -17,7 +17,7 @@ void Scene1::draw()
     for (int i=0; i<nbLayer; ++i) {
         layer[i].begin();
         ofClear(0, 0, 0, 0);
-        if (i==0) {
+        if (i==2) {
             plaforms.draw(0, 0);
         }
         if (i==1) {
@@ -26,7 +26,7 @@ void Scene1::draw()
         layer[i].end();
     }
 
-
+    // Affiche tout les sprites
     for (int i = 0; i<sprites->size(); ++i) {
         if (sprites->at(i)->isActif()) {
             fillMatrix(sprites->at(i));
@@ -39,8 +39,13 @@ void Scene1::draw()
 
     }
 
+    fillMatrix(sprites->at(0));
+    fboFace.begin();
+    ofClear(0,0,0,0);
+    fboFace.end();
     
-   /*
+    layerToFace(1);
+    
     Light* light = dynamic_cast<Light *>(sprites->at(0));
     lightRender.renderLights(&fboFaceShadow, light);
     fboFace.begin();
@@ -49,14 +54,15 @@ void Scene1::draw()
     ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
     fboFaceShadow.draw(0, 0);
     fboFace.end();
-    faceToLayer(1);
+    faceToLayer(2,1);
+    
     if (sprites->at(2)->isActif()) {
         fillMatrix(sprites->at(2));
         fboFace.begin();
         ofClear(0,0,0,0);
         fboFace.end();
 
-        layerToFace(0);
+        layerToFace(1);
         
         Light* light = dynamic_cast<Light *>(sprites->at(2));
         lightRender.renderLights(&fboFaceShadow, light);
@@ -67,20 +73,23 @@ void Scene1::draw()
         fboFaceShadow.draw(0, 0);
         fboFace.end();
         
-        faceToLayer(1);
+        faceToLayer(2,1);
     }
-    */
-    //ofDisableBlendMode();
+    
 
-    ///////
-
-    background.draw(0, 0);
+    
+    
+    
+    
+    
+    //background.draw(0, 0);
     
     ofSetColor(ofColor::white);
     
     for (int i=1; i<nbLayer; ++i) {
-        layer[i].draw(0, 0);
+        //layer[i].draw(0, 0);
     }
+    layer[2].draw(0, 0);
     
      //worldsBox2d->draw();
     
@@ -121,13 +130,14 @@ void Scene1::update()
 }
 void Scene1::fillMatrix(SpriteObj *_sprite)
 {
-    matrix[0].set(_sprite->face->matrix[0][0]->rect.x, _sprite->face->matrix[0][3]->rect.x, _sprite->face->matrix[0][6]->rect.x,
-                  _sprite->face->matrix[0][1]->rect.x, _sprite->face->matrix[0][4]->rect.x, _sprite->face->matrix[0][7]->rect.x,
-                  _sprite->face->matrix[0][2]->rect.x, _sprite->face->matrix[0][5]->rect.x, _sprite->face->matrix[0][8]->rect.x);
-    matrix[1].set(_sprite->face->matrix[0][0]->rect.y, _sprite->face->matrix[0][3]->rect.y, _sprite->face->matrix[0][6]->rect.y,
-                 _sprite->face->matrix[0][1]->rect.y, _sprite->face->matrix[0][4]->rect.y, _sprite->face->matrix[0][7]->rect.y,
-                 _sprite->face->matrix[0][2]->rect.y, _sprite->face->matrix[0][5]->rect.y, _sprite->face->matrix[0][8]->rect.y);
-    matrix[2] = _sprite->face->matrixR[0];
+    bool i = _sprite->getViewPoint();
+    matrix[0].set(_sprite->face->matrix[i][0]->rect.x, _sprite->face->matrix[i][3]->rect.x, _sprite->face->matrix[i][6]->rect.x,
+                  _sprite->face->matrix[i][1]->rect.x, _sprite->face->matrix[i][4]->rect.x, _sprite->face->matrix[i][7]->rect.x,
+                  _sprite->face->matrix[i][2]->rect.x, _sprite->face->matrix[i][5]->rect.x, _sprite->face->matrix[i][8]->rect.x);
+    matrix[1].set(_sprite->face->matrix[i][0]->rect.y, _sprite->face->matrix[i][3]->rect.y, _sprite->face->matrix[i][6]->rect.y,
+                 _sprite->face->matrix[i][1]->rect.y, _sprite->face->matrix[i][4]->rect.y, _sprite->face->matrix[i][7]->rect.y,
+                 _sprite->face->matrix[i][2]->rect.y, _sprite->face->matrix[i][5]->rect.y, _sprite->face->matrix[i][8]->rect.y);
+    matrix[2] = _sprite->face->matrixR[i];
 
 }
 void Scene1::faceToLayer(int _layer, int mode)

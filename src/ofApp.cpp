@@ -38,12 +38,13 @@ void ofApp::setup() {
     worlds->setup();
     worlds->world.enableEvents();
     worlds->world.getWorld();
-    
-    scene1 = new Scene1(worlds, "Map_test_portails_back.png",&sprites,"Map_plateformes.png");
-    //scene1 = new Scene1(&sprites, "Map_test_portails_back.png");
-    
-    //scene1 = new Scene1(worlds, "map_saut.jpg");
-    
+    Scene1Def def;
+    def._sprites = &sprites;
+    def.worldsBox2d = worlds;
+    def.background_name = "Map_test_portails_back.png";
+    def.plaforms_name = "Map_plateformes.png";
+    scene1 = new Scene1(def);
+
     scene2 = new Scene2(worlds);
     
     mapping.registerFboSource(scene1);
@@ -88,14 +89,14 @@ void ofApp::setup() {
     
     ObjPickupDef *pkup = new ObjPickupDef();
     pkup->world = worlds;
-    pkup->positionInit = ofVec2f(968, 440);
-    pkup->face = & faces[10];
+    pkup->positionInit = ofVec2f(161.833, 289.55);
+    pkup->face = & faces[1];
     pkup->create();
     b2Filter tempFilter = pkup->getFilter();
     tempFilter.categoryBits = 0x0100;
     tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-    pkup->setFilter(tempFilter);
-    pkup->layer = 6;
+    //pkup->setFilter(tempFilter);
+    //pkup->layer = 6;
     sprites.push_back(static_cast<SpriteObj*>(pkup));
     spritesLight.push_back(static_cast<SpriteObj*>(pkup));
     
