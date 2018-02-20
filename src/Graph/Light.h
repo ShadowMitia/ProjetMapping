@@ -20,7 +20,7 @@ public:
     ofFloatColor color;
     ofPoint pos, vel;
     virtual ofVec2f getPositionTranform(){};
-    float radius = 1.0;
+    float radius = 0.50;
 };
 
 class LightRender {

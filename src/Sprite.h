@@ -113,7 +113,7 @@ public:
     ObjPickupDef(){
         filterObjPickup.categoryBits = 0x0040;
         filterObjPickup.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 | 0x0020 | 0x0080;
-        radius = 0.5;
+        radius = 0.2;
         layerIni = layer =  3;
     }
     b2Filter filterObjPickup;

@@ -72,20 +72,6 @@ void main(void) {
     
     
     if (mode == 1) {
-        /*
-            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.0);
-        if (src.a != 0.9 && shadow.a == 1.0) {
-            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.9);
-        }
-        if (src.a != 0.9 && shadow.a == 0.0) {
-            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.0);
-        }
-        if (src.a == 0.9 && shadow.a == 0.0) {
-            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.0);
-        }
-        if (src.a == 0.9 && shadow.a == 1.0) {
-            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.9);
-        }*/
         if (shadow.a != 0.0) {
             if (src.a != 0) {
                 shadow = vec4(vec3(0.0,0.0,0.0), min(shadow.a,src.a));
