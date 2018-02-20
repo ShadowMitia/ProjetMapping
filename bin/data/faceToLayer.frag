@@ -74,10 +74,10 @@ void main(void) {
     if (mode == 1) {
         if (shadow.a != 0.0) {
             if (src.a != 0) {
-                shadow = vec4(vec3(0.0,0.0,0.0), min(shadow.a,src.a));
+                shadow = vec4(vec3(0.0,0.0,0.0), min(min(shadow.a,src.a),0.9));
             }
             else{
-                shadow = vec4(vec3(0.0,0.0,0.0), shadow.a);
+                shadow = vec4(vec3(0.0,0.0,0.0), min(shadow.a,0.9));
             }
         }
         else{
