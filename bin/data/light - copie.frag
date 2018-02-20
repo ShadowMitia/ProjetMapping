@@ -53,29 +53,24 @@ void main() {
     //now we use a simple gaussian blur
     float sum = 0.0;
     
-    //sum += sample(vec2(tc.x - 4.0*blur, tc.y), r) * 0.05;
-    //sum += sample(vec2(tc.x - 3.0*blur, tc.y), r) * 0.09;
-    //sum += sample(vec2(tc.x - 2.0*blur, tc.y), r) * 0.12;
-    //sum += sample(vec2(tc.x - 1.0*blur, tc.y), r) * 0.15;
+    sum += sample(vec2(tc.x - 4.0*blur, tc.y), r) * 0.05;
+    sum += sample(vec2(tc.x - 3.0*blur, tc.y), r) * 0.09;
+    sum += sample(vec2(tc.x - 2.0*blur, tc.y), r) * 0.12;
+    sum += sample(vec2(tc.x - 1.0*blur, tc.y), r) * 0.15;
     
-    sum += center * 0.99;
+    sum += center * 0.16;
     
-    //sum += sample(vec2(tc.x + 1.0*blur, tc.y), r) * 0.15;
-    //sum += sample(vec2(tc.x + 2.0*blur, tc.y), r) * 0.12;
-    //sum += sample(vec2(tc.x + 3.0*blur, tc.y), r) * 0.09;
-    //sum += sample(vec2(tc.x + 4.0*blur, tc.y), r) * 0.05;
+    sum += sample(vec2(tc.x + 1.0*blur, tc.y), r) * 0.15;
+    sum += sample(vec2(tc.x + 2.0*blur, tc.y), r) * 0.12;
+    sum += sample(vec2(tc.x + 3.0*blur, tc.y), r) * 0.09;
+    sum += sample(vec2(tc.x + 4.0*blur, tc.y), r) * 0.05;
     
     
     float distance = length(lightLocation - gl_FragCoord.xy);
     //lightColor = vec3(1.0,1.0,1.0)
-    float intensity = (pow(distance/256.0,0.07)) * sum;
-    //intensity = sum;
-    vec4 frag =  vec4(lightColor, 1) * vec4(1.0-intensity, 1.0-intensity, 1.0-intensity, 1.0-intensity);
+    float intensity = (pow(distance/256.0,0.06)) * sum;
+    vec4 frag =vec4(lightColor, 1) * vec4(1.0-intensity, 1.0-intensity, 1.0-intensity, 1.0-intensity);
     frag = vec4(0.0,0.0,0.0,intensity);
-    if (intensity == 0.0) {
-        frag = vec4(0.0,0.0,0.0,1.0);
-
-    }
     gl_FragColor = frag;
 }
 

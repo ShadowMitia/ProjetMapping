@@ -3,6 +3,7 @@ varying vec3 pos;
 
 //uniform values
 uniform sampler2DRect u_texture;
+uniform sampler2DRect u_texture_src;
 
 uniform int mode;
 uniform mat3 matrixX;
@@ -17,7 +18,7 @@ float mod40(float x){
 
 void main(void) {
 
-    vec4 tot = vec4(0.0,0.0,0.0,0.0);
+    vec4 shadow = vec4(0.0,0.0,0.0,0.0);
     for (int i = 0; i<3; ++i) {
         for (int j = 0 ; j<3; ++j) {
             if (pos.x > matrixX[i][j] && pos.x < matrixX[i][j] + 160.0 && pos.y > matrixY[i][j] && pos.y < matrixY[i][j] + 160.0) {
@@ -27,8 +28,8 @@ void main(void) {
                     float y = matrixY[i][j] - pos.y;
                     x = mod40(x);
                     y = mod40(y);
-                    tot = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
-                    //tot = vec4(1.0,1.0,0.0,1.0);
+                    shadow = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
+                    //shadow = vec4(1.0,1.0,0.0,1.0);
                     break;
                 }
                 if (matrixR[i][j]== 90.0) {
@@ -36,8 +37,8 @@ void main(void) {
                     float y = matrixY[i][j] - pos.y;
                     x = mod40(x);
                     y = mod40(y);
-                    tot = texture2DRect(u_texture,vec2(160.0*(i+1) - y,160.0*j+ x));
-                    //tot = vec4(1.0,0.0,0.0,1.0);
+                    shadow = texture2DRect(u_texture,vec2(160.0*(i+1) - y,160.0*j+ x));
+                    //shadow = vec4(1.0,0.0,0.0,1.0);
 
                     break;
                 }
@@ -46,8 +47,8 @@ void main(void) {
                     float y = matrixY[i][j] - pos.y;
                     x = mod40(x);
                     y = mod40(y);
-                    tot = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
-                    //tot = vec4(1.0,1.0,0.0,1.0);
+                    shadow = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
+                    //shadow = vec4(1.0,1.0,0.0,1.0);
 
                     break;
                 }
@@ -56,8 +57,8 @@ void main(void) {
                     float y = matrixY[i][j] - pos.y;
                     x = mod40(x);
                     y = mod40(y);
-                    tot = texture2DRect(u_texture,vec2(160.0*i + y,160.0*j + x));
-                    //tot = vec4(0.0,0.0,1.0,1.0);
+                    shadow = texture2DRect(u_texture,vec2(160.0*i + y,160.0*j + x));
+                    //shadow = vec4(0.0,0.0,1.0,1.0);
                     break;
                 }
                 
@@ -66,18 +67,45 @@ void main(void) {
         }
     }
     
-    //gl_FragColor = tot;
-
+    //gl_FragColor = shadow;
+    vec4 src  =  texture2DRect(u_texture_src,pos.xy);
+    
+    
     if (mode == 1) {
-        //gl_FragColor = vec4(max(tot.rgb + gl_Color.rgb,1.0),min(tot.a,gl_Color.a));
-        if (tot.a == 1.0) {
+        /*
             gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.0);
-        }else{
-           gl_FragColor = tot;
+        if (src.a != 0.9 && shadow.a == 1.0) {
+            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.9);
+        }
+        if (src.a != 0.9 && shadow.a == 0.0) {
+            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.0);
+        }
+        if (src.a == 0.9 && shadow.a == 0.0) {
+            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.0);
+        }
+        if (src.a == 0.9 && shadow.a == 1.0) {
+            gl_FragColor = vec4(vec3(0.0,0.0,0.0), 0.9);
+        }*/
+        if (shadow.a != 0.0) {
+            if (src.a != 0) {
+                shadow = vec4(vec3(0.0,0.0,0.0), min(shadow.a,src.a));
+            }
+            else{
+                shadow = vec4(vec3(0.0,0.0,0.0), shadow.a);
+            }
+        }
+        else{
+            //gl_FragColor = vec4(src);
+            shadow = vec4(src);
         }
         
-        //gl_FragColor = vec4(0.,1.,0.,1.);
-    }else{
-       gl_FragColor = tot;
+        if (shadow.a == 1.0 || shadow.a == 0.0) {
+            shadow.a = 0.9;
+        }
+        //gl_FragColor = vec4(src.rgb, min(shadow.a,src.a));
+        gl_FragColor = shadow;
+    }else
+    {
+       gl_FragColor = shadow;
     }
 }
