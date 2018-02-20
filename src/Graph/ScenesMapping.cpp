@@ -50,7 +50,6 @@ void Scene1::draw()
     
     fboFace.begin();
     ofClear(0,0,0,0);
-    //ofBackground(ofColor::black);
     ofPushMatrix();
     ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
     fboFaceShadow.draw(0, 0);
@@ -58,7 +57,6 @@ void Scene1::draw()
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ZERO);
     faceToLayer(1,1);
-    
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     if (sprites->at(2)->isActif()) {
         fillMatrix(sprites->at(2));
@@ -83,16 +81,14 @@ void Scene1::draw()
     }
     
 
-
-
     background.draw(0, 0);
     
     ofSetColor(ofColor::white);
     
     for (int i=1; i<nbLayer; ++i) {
-        //layer[i].draw(0, 0);
+        layer[i].draw(0, 0);
     }
-    layer[1].draw(0, 0);
+    //layer[1].draw(0, 0);
 
     //layer[2].draw(0, 0);
     
@@ -149,30 +145,20 @@ void Scene1::fillMatrix(SpriteObj *_sprite)
 }
 void Scene1::faceToLayer(int _layer, int mode)
 {
-    int i = _layer;
-    ofTexture tempTexture;
-    if (_layer == 1) {
-        tempTexture = layer[_layer].getTexture();
-        //layer[_layer].begin();
-        //ofClear(0, 0, 0, 0);
-        //layer[_layer].end();
-    }
-    layer[i].begin();
+
+    layer[_layer].begin();
     //ofSetColor(ofColor::white);
     ShaderFaceToLayer.begin();
     ShaderFaceToLayer.setUniform1i("mode", mode);
     ShaderFaceToLayer.setUniformTexture("u_texture", fboFace.getTexture(), 0);
-    ShaderFaceToLayer.setUniformTexture("u_texture_src", tempTexture, 1);
+    ShaderFaceToLayer.setUniformTexture("u_texture_src", layer[_layer].getTexture(), 1);
     ShaderFaceToLayer.setUniformMatrix3f("matrixX", matrix[0]);
     ShaderFaceToLayer.setUniformMatrix3f("matrixY", matrix[1]);
     ShaderFaceToLayer.setUniformMatrix3f("matrixR", matrix[2]);
     ofDrawRectangle(ofPoint(0,0), layer[_layer].getWidth(), layer[_layer].getHeight());
     ShaderFaceToLayer.end();
-    layer[i].end();
+    layer[_layer].end();
     
-    if (_layer == 1) {
-        
-    }
 }
 void Scene1::layerToFace(int _layer)
 {

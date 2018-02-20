@@ -49,7 +49,9 @@ public:
     virtual void reset(){};
     virtual bool isActif(){};
     virtual void setFilter( b2Filter filter){};
-    virtual b2Filter getFilter(){};
+    virtual b2Filter getFilter(){
+        b2Filter temp;
+        return temp;};
     virtual bool getViewPoint(){};
 
     int layer,layerIni;

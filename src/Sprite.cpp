@@ -30,7 +30,7 @@ void AvatarDef::draw(){
     temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
     ofVec2f tempP = getPositionTranform();
     temp.setFromCenter(tempP.x, tempP.y, 12, 12);
-    ofSetColor(ofColor::black);
+    ofSetColor(ofColor::orange);
     ofDrawRectangle(temp);
     ofSetColor(ofColor::white);
 }
@@ -107,7 +107,7 @@ void ObjPickupDef::create(){
     world->createPickUp(this);
 }
 bool ObjPickupDef::getViewPoint(){
-    pkup->viewPoint;
+    return pkup->viewPoint;
 }
 
 ofVec2f ObjMushroomDef::getPositionTranform(){

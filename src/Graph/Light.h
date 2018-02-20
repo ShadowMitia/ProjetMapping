@@ -148,6 +148,7 @@ public:
 
         end->begin();
         ofClear(0, 0, 0);
+        ofBackground(ofColor::black); // bug de la ligne
 
         glEnable(GL_BLEND);
         glBlendFunc(GL_ONE, GL_ONE);
@@ -163,10 +164,8 @@ public:
             ofTranslate(-light->getPositionTranform().x + (width / 2), - light->getPositionTranform().y + (width / 2));
             //ofTranslate((width/2)-light.pos.x, (height/2)-light.pos.y);
              
-             
              callRenderRunction(); // image occuders
            
-             
              ofPopMatrix();
             //occludersShader.end();
             occludersFBOPlaform.end();
