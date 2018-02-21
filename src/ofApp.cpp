@@ -130,6 +130,7 @@ void ofApp::update(){
     input();
     scene1->update();
     worlds->update();
+    worlds->startThread();
     mapping.update();
     
 }

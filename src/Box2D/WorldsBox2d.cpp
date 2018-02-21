@@ -157,7 +157,7 @@ void WorldsBox2d::createPickUp(ObjPickupDef *_objPickupDef){
 }
 void WorldsBox2d::update(){
 
-    world.update();
+    //world.update();
     
 
     // delect clone

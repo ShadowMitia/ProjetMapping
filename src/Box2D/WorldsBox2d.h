@@ -57,5 +57,6 @@ public:
     
     void threadedFunction(){
         //update();
+        world.update();
     };
 };
