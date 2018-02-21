@@ -69,6 +69,7 @@ public:
         filterAvatar.categoryBits = 0x0010;
         filterAvatar.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
         layerIni = layer =  3;
+        color.set(ofColor::orange);
     }
     b2Filter filterAvatar;
     ofImage spriteImage;
@@ -80,7 +81,7 @@ public:
     void reset() override;
     bool isActif() override;
     void setFilter(b2Filter filter) override;
-    b2Filter getFilter(){ return filterAvatar;};
+    b2Filter getFilter(){ return filterAvatar;} ;
     bool getViewPoint() override;
 
 };
@@ -117,6 +118,7 @@ public:
         filterObjPickup.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 | 0x0020 | 0x0080;
         radius = 0.2;
         layerIni = layer =  3;
+        color.set(ofColor::yellow);
     }
     b2Filter filterObjPickup;
     bool actif  = true;

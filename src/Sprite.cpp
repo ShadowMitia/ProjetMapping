@@ -22,6 +22,7 @@ BLOCK    : 0x0020
 PICKUP   : 0x0040
 MUSHROOM : 0x0080
 */
+
 void AvatarDef::setFilter(b2Filter filter){
     a->polygon.body->GetFixtureList()->SetFilterData(filter);
 }
