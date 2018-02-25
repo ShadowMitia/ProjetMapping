@@ -44,15 +44,15 @@ public:
 
     Face* face;
     virtual void draw(){};
-    virtual ofVec2f getPositionTranform(){};
+	virtual ofVec2f getPositionTranform() { return ofVec2f(0.0); };
     virtual void create(){};
     virtual void reset(){};
-    virtual bool isActif(){};
+	virtual bool isActif() { return true; };
     virtual void setFilter( b2Filter filter){};
     virtual b2Filter getFilter(){
         b2Filter temp;
         return temp;};
-    virtual bool getViewPoint(){};
+	virtual bool getViewPoint() { return true; };
 
     int layer,layerIni;
     ofVec2f positionInit;

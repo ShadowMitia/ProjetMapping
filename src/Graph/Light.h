@@ -19,7 +19,7 @@ public:
     }
     ofFloatColor color;
     ofPoint pos, vel;
-    virtual ofVec2f getPositionTranform(){};
+	virtual ofVec2f getPositionTranform() { return ofVec2f(0.0); };
     float radius = 0.50;
 };
 

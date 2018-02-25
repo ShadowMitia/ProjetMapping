@@ -7,8 +7,8 @@
 		<ClCompile Include="src\main.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
-		<ClCompile Include="src\Box2D\PhysicalizedElement\Clone.cpp">
-			<Filter>src\Box2D\PhysicalizedElement</Filter>
+		<ClCompile Include="src\Box2D\PhysicalizedElement\Clone\Clone.cpp">
+			<Filter>src\Box2D\PhysicalizedElement\Clone</Filter>
 		</ClCompile>
 		<ClCompile Include="src\Box2D\PhysicalizedElement\Ladder.cpp">
 			<Filter>src\Box2D\PhysicalizedElement</Filter>
@@ -19,10 +19,22 @@
 		<ClCompile Include="src\Box2D\PhysicalizedElement\Platform.cpp">
 			<Filter>src\Box2D\PhysicalizedElement</Filter>
 		</ClCompile>
-		<ClCompile Include="src\Box2D\PhysicalizedElement\Portal.cpp">
+		<ClCompile Include="src\Box2D\PhysicalizedElement\PlatformLadder.cpp">
 			<Filter>src\Box2D\PhysicalizedElement</Filter>
 		</ClCompile>
+		<ClCompile Include="src\Box2D\PhysicalizedElement\Portal\Portal.cpp">
+			<Filter>src\Box2D\PhysicalizedElement\Portal</Filter>
+		</ClCompile>
 		<ClCompile Include="src\Box2D\PhysicalizedElement\Teleportable\Avatar.cpp">
+			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Box2D\PhysicalizedElement\Teleportable\Mushroom.cpp">
+			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Box2D\PhysicalizedElement\Teleportable\ObjBlock.cpp">
+			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Box2D\PhysicalizedElement\Teleportable\ObjPickup.cpp">
 			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
 		</ClCompile>
 		<ClCompile Include="src\Box2D\PhysicalizedElement\Teleportable\Teleportable.cpp">
@@ -34,13 +46,16 @@
 		<ClCompile Include="src\Box2D\WorldsBox2d.cpp">
 			<Filter>src\Box2D</Filter>
 		</ClCompile>
+		<ClCompile Include="src\Graph\ScenesMapping.cpp">
+			<Filter>src\Graph</Filter>
+		</ClCompile>
 		<ClCompile Include="src\main.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
 		<ClCompile Include="src\ofApp.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
-		<ClCompile Include="src\ScenesMapping.cpp">
+		<ClCompile Include="src\Sprite.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
 		<ClCompile Include="src\utils.cpp">
@@ -499,6 +514,18 @@
 		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\ImageSource.cpp">
 			<Filter>addons\ofxPiMapper\src\Sources</Filter>
 		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlide.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlideShowSource.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlideTransition.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlideTransitionFactory.cpp">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Sources\OMXPlayerCache.cpp">
 			<Filter>addons\ofxPiMapper\src\Sources</Filter>
 		</ClCompile>
@@ -506,6 +533,9 @@
 			<Filter>addons\ofxPiMapper\src\Sources</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\BaseSurface.cpp">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\CircleSurface.cpp">
 			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\GridWarpSurface.cpp">
@@ -528,6 +558,12 @@
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Surfaces\TriangleSurface.cpp">
 			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Types\Vec2.cpp">
+			<Filter>addons\ofxPiMapper\src\Types</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\Types\Vec3.cpp">
+			<Filter>addons\ofxPiMapper\src\Types</Filter>
 		</ClCompile>
 		<ClCompile Include="..\..\..\addons\ofxPiMapper\src\UserInterface\BaseJoint.cpp">
 			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
@@ -564,8 +600,20 @@
 		<Filter Include="src\Box2D\PhysicalizedElement">
 			<UniqueIdentifier>{35D71391-7DD2-07BD-762A-DD82}</UniqueIdentifier>
 		</Filter>
+		<Filter Include="src\Box2D\PhysicalizedElement\Clone">
+			<UniqueIdentifier>{682F72F1-F811-1C81-9B1F-89F8}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="src\Box2D\PhysicalizedElement\Portal">
+			<UniqueIdentifier>{0DC7E5D7-1C82-A990-1DB7-BD28}</UniqueIdentifier>
+		</Filter>
 		<Filter Include="src\Box2D\PhysicalizedElement\Teleportable">
 			<UniqueIdentifier>{4E12C0FB-6C8E-FB2D-5D8C-BB48}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="src\Graph">
+			<UniqueIdentifier>{CB167AB2-4456-B887-D45B-AA93}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="src\Input">
+			<UniqueIdentifier>{DB15F8D2-3664-5A4C-F827-2674}</UniqueIdentifier>
 		</Filter>
 		<Filter Include="addons">
 			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
@@ -771,6 +819,9 @@
 		<Filter Include="addons\ofxPiMapper\src\Surfaces">
 			<UniqueIdentifier>{BE960821-ADA7-3D52-D23C-9EBA}</UniqueIdentifier>
 		</Filter>
+		<Filter Include="addons\ofxPiMapper\src\Types">
+			<UniqueIdentifier>{4EA7547D-6BF9-0D43-C591-1212}</UniqueIdentifier>
+		</Filter>
 		<Filter Include="addons\ofxPiMapper\src\UserInterface">
 			<UniqueIdentifier>{C1A8C1ED-CEAF-9302-802C-C509}</UniqueIdentifier>
 		</Filter>
@@ -791,17 +842,17 @@
 		<ClInclude Include="src\ofApp.h">
 			<Filter>src</Filter>
 		</ClInclude>
-		<ClInclude Include="src\Box2D\PhysicalizedElement\Clone.h">
-			<Filter>src\Box2D\PhysicalizedElement</Filter>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Clone\Clone.h">
+			<Filter>src\Box2D\PhysicalizedElement\Clone</Filter>
 		</ClInclude>
-		<ClInclude Include="src\Box2D\PhysicalizedElement\CloneAvatar.h">
-			<Filter>src\Box2D\PhysicalizedElement</Filter>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Clone\CloneAvatar.h">
+			<Filter>src\Box2D\PhysicalizedElement\Clone</Filter>
 		</ClInclude>
-		<ClInclude Include="src\Box2D\PhysicalizedElement\CloneOther.h">
-			<Filter>src\Box2D\PhysicalizedElement</Filter>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Clone\CloneOther.h">
+			<Filter>src\Box2D\PhysicalizedElement\Clone</Filter>
 		</ClInclude>
-		<ClInclude Include="src\Box2D\PhysicalizedElement\ConditionOutput.h">
-			<Filter>src\Box2D\PhysicalizedElement</Filter>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Clone\ConditionOutput.h">
+			<Filter>src\Box2D\PhysicalizedElement\Clone</Filter>
 		</ClInclude>
 		<ClInclude Include="src\Box2D\PhysicalizedElement\Ladder.h">
 			<Filter>src\Box2D\PhysicalizedElement</Filter>
@@ -812,10 +863,25 @@
 		<ClInclude Include="src\Box2D\PhysicalizedElement\Platform.h">
 			<Filter>src\Box2D\PhysicalizedElement</Filter>
 		</ClInclude>
-		<ClInclude Include="src\Box2D\PhysicalizedElement\Portal.h">
+		<ClInclude Include="src\Box2D\PhysicalizedElement\PlatformLadder.h">
 			<Filter>src\Box2D\PhysicalizedElement</Filter>
 		</ClInclude>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Portal\ConditionNull.h">
+			<Filter>src\Box2D\PhysicalizedElement\Portal</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Portal\Portal.h">
+			<Filter>src\Box2D\PhysicalizedElement\Portal</Filter>
+		</ClInclude>
 		<ClInclude Include="src\Box2D\PhysicalizedElement\Teleportable\Avatar.h">
+			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Teleportable\Mushroom.h">
+			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Teleportable\ObjBlock.h">
+			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Box2D\PhysicalizedElement\Teleportable\ObjPickup.h">
 			<Filter>src\Box2D\PhysicalizedElement\Teleportable</Filter>
 		</ClInclude>
 		<ClInclude Include="src\Box2D\PhysicalizedElement\Teleportable\Teleportable.h">
@@ -827,25 +893,25 @@
 		<ClInclude Include="src\Box2D\WorldsBox2d.h">
 			<Filter>src\Box2D</Filter>
 		</ClInclude>
-		<ClInclude Include="src\ConditionNull.h">
-			<Filter>src</Filter>
-		</ClInclude>
 		<ClInclude Include="src\Constant.h">
 			<Filter>src</Filter>
 		</ClInclude>
-		<ClInclude Include="src\ImportData.h">
-			<Filter>src</Filter>
+		<ClInclude Include="src\Graph\Face.h">
+			<Filter>src\Graph</Filter>
 		</ClInclude>
-		<ClInclude Include="src\Light.h">
-			<Filter>src</Filter>
+		<ClInclude Include="src\Graph\Light.h">
+			<Filter>src\Graph</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Graph\ScenesMapping.h">
+			<Filter>src\Graph</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Input\shift.h">
+			<Filter>src\Input</Filter>
 		</ClInclude>
 		<ClInclude Include="src\ofApp.h">
 			<Filter>src</Filter>
 		</ClInclude>
-		<ClInclude Include="src\ScenesMapping.h">
-			<Filter>src</Filter>
-		</ClInclude>
-		<ClInclude Include="src\shift.h">
+		<ClInclude Include="src\Sprite.h">
 			<Filter>src</Filter>
 		</ClInclude>
 		<ClInclude Include="src\Timer.h">
@@ -1865,6 +1931,18 @@
 		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\ImageSource.h">
 			<Filter>addons\ofxPiMapper\src\Sources</Filter>
 		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlide.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlideShowSource.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlideTransition.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\magSlideTransitionFactory.h">
+			<Filter>addons\ofxPiMapper\src\Sources</Filter>
+		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Sources\OMXPlayerCache.h">
 			<Filter>addons\ofxPiMapper\src\Sources</Filter>
 		</ClInclude>
@@ -1878,6 +1956,9 @@
 			<Filter>addons\ofxPiMapper\src\Sources</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\BaseSurface.h">
+			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\CircleSurface.h">
 			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\GridWarpSurface.h">
@@ -1903,6 +1984,12 @@
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Surfaces\TriangleSurface.h">
 			<Filter>addons\ofxPiMapper\src\Surfaces</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Types\Vec2.h">
+			<Filter>addons\ofxPiMapper\src\Types</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\Types\Vec3.h">
+			<Filter>addons\ofxPiMapper\src\Types</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxPiMapper\src\UserInterface\BaseJoint.h">
 			<Filter>addons\ofxPiMapper\src\UserInterface</Filter>
