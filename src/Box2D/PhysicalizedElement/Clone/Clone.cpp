@@ -107,7 +107,7 @@ void CloneBox2d::create()
     
 
     
-    polygon.body->SetGravityScale(1.0);
+    polygon.body->SetGravityScale(0.0);
 
 }
 void CloneBox2d::update()
@@ -189,7 +189,6 @@ void CloneBox2d::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSpri
 }
 void CloneBox2d::PostSolve(b2Fixture* _fixture,dataSprite* OtherSprite, const b2ContactImpulse* impulse)
 {
-    
 }
 void CloneBox2d::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreContactArgs e)
 {

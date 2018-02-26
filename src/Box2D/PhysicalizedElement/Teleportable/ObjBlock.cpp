@@ -48,6 +48,8 @@ void ObjBlock::draw(){
 
 void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
+        Avatar * a = dynamic_cast<Avatar*>(OtherSprite->physicalizedElement);
+        viewPoint = a->viewPoint;
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
     }
 }

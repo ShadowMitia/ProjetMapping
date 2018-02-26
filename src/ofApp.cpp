@@ -20,7 +20,10 @@ vector<ofPolyline> importImage(const string& path){
     
     for (int i = 0 ; i < contourFinder.getPolylines().size(); i++){
         ofPolyline tempPoly;
-        tempPoly = contourFinder.getPolyline(i);
+        for (int j = 0; j<contourFinder.getPolyline(i).getVertices().size(); j++) {
+            tempPoly.addVertex(contourFinder.getPolyline(i).getVertices()[j] + ofPoint(1,1));
+        }
+        //tempPoly = contourFinder.getPolyline(i);
         tempPoly.addVertex(tempPoly.getVertices().at(0));
         poly.push_back(tempPoly);
     }
@@ -55,14 +58,7 @@ void ofApp::setup() {
     worlds->platforms.clear();
     std::vector<ofPolyline>  platforms = importImage("Map_test_portails_plateformes.png");
     for (std::size_t i = 0; i < platforms.size() ; i++) {
-        ofPolyline temp;
-        for (int j = 0; j< platforms[i].getVertices().size(); j++) {
-            //temp.getVertices()[j] = temp.getVertices()[j] + ofPoint(1,1,0);
-            temp.addVertex(platforms[i].getVertices()[j] + ofPoint(1,1));
-            //cout << platforms[i].getVertices()[j] << endl;
-        }
-        worlds->createPlatform(temp);
-        //worlds->createPlatform(platforms[i]);
+        worlds->createPlatform(platforms[i]);
     }
     
     ////   Import Ladder   /////

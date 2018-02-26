@@ -12,7 +12,7 @@ enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 
 void Scene1::draw()
 {
-   /*
+
     //ofClear(0);
     for (int i=0; i<nbLayer; ++i) {
         layer[i].begin();
@@ -80,17 +80,17 @@ void Scene1::draw()
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     }
     
-*/
+
     background.draw(0, 0);
     
     ofSetColor(ofColor::white);
     
     for (int i=1; i<nbLayer; ++i) {
-        //layer[i].draw(0, 0);
+        layer[i].draw(0, 0);
     }
 
     // debug mode
-     worldsBox2d->draw();
+    //worldsBox2d->draw();
     
     //fboFace.draw(0, 0);
     
