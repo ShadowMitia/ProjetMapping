@@ -7,6 +7,7 @@ uniform sampler2DRect u_texture;
 
 uniform mat3 matrixX;
 uniform mat3 matrixY;
+uniform mat3 matrixR;
 
 
 
@@ -22,6 +23,23 @@ void main(void) {
     div = vec2(pos.x/160.0,pos.y/160.0);
     int i = int(floor(div.x)) ;
     int j = int(floor(div.y)) ;
-    vec4 tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+    vec4 tot;
+    
+    if (matrixR[i][j] == 0.0) {
+         tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+    }
+    if (matrixR[i][j]== 90.0) {
+        //tot = texture2DRect(u_texture,vec2(matrixY[i][j] + mod40(pos.y),matrixX[i][j] + mod40(pos.x)));
+        tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+
+    }
+    if (matrixR[i][j]== 180.0) {
+         tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+    }
+    if (matrixR[i][j]== 270.0) {
+         tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+    }
+    
+    
     gl_FragColor = tot;
 }

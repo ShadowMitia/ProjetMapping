@@ -123,7 +123,6 @@ void ObjMushroomDef::draw(){
         ofSetColor(ofColor::darkViolet);
         ofDrawRectangle(temp);
 }
-
 void ObjMushroomDef::reset(){}
 bool ObjMushroomDef::isActif(){
     return mroom->polygon.body->IsActive();

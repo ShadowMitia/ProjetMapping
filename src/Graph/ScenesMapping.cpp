@@ -12,7 +12,7 @@ enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 
 void Scene1::draw()
 {
-    
+   /*
     //ofClear(0);
     for (int i=0; i<nbLayer; ++i) {
         layer[i].begin();
@@ -80,43 +80,23 @@ void Scene1::draw()
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     }
     
-
+*/
     background.draw(0, 0);
     
     ofSetColor(ofColor::white);
     
     for (int i=1; i<nbLayer; ++i) {
-        layer[i].draw(0, 0);
+        //layer[i].draw(0, 0);
     }
-    //layer[1].draw(0, 0);
 
-    //layer[2].draw(0, 0);
-    
-    //layer[3].draw(0,0);
-     //worldsBox2d->draw();
+    // debug mode
+     worldsBox2d->draw();
     
     //fboFace.draw(0, 0);
     
     //layer[0].draw(0, 0);
     //fboFaceShadow.draw(0, 0);
-    //transform.fboTransform.draw(0, 0);
-    
-    // creation du mask pour les ombres
-    
-    /*mask.begin();
-     ofBackground(0, 0, 0);
-     for (std::size_t i = 0; i < worldsBox2d->avatars.size(); i++) {
-     lightRender.lights[i].vel.x = worldsBox2d->avatars[i]->polygon.getPosition().x;
-     lightRender.lights[i].vel.y = worldsBox2d->avatars[i]->polygon.getPosition().y;
-     lightRender.radius = 50.0;
-     lightRender.renderLights();
-     ofPushMatrix();
-     ofTranslate(worldsBox2d->avatars[i]->polygon.getPosition().x - (lightSize / 2), worldsBox2d->avatars[i]->polygon.getPosition().y - (lightSize / 2));
-     lightRender.draw();
-     ofPopMatrix();
-     }
-     mask.end();
-     //mask.draw(0,0);*/
+
 }
 
 void Scene1::renderObjects()
@@ -168,6 +148,7 @@ void Scene1::layerToFace(int _layer)
     ShaderLayerToFace.setUniformTexture("u_texture", layer[_layer].getTexture(), 0);
     ShaderLayerToFace.setUniformMatrix3f("matrixX", matrix[0]);
     ShaderLayerToFace.setUniformMatrix3f("matrixY", matrix[1]);
+    ShaderLayerToFace.setUniformMatrix3f("matrixR", matrix[2]);
     ofSetColor(ofColor::white, 0);
     ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
     ShaderLayerToFace.end();

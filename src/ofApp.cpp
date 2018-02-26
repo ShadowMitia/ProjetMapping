@@ -55,7 +55,14 @@ void ofApp::setup() {
     worlds->platforms.clear();
     std::vector<ofPolyline>  platforms = importImage("Map_test_portails_plateformes.png");
     for (std::size_t i = 0; i < platforms.size() ; i++) {
-        worlds->createPlatform(platforms[i]);
+        ofPolyline temp;
+        for (int j = 0; j< platforms[i].getVertices().size(); j++) {
+            //temp.getVertices()[j] = temp.getVertices()[j] + ofPoint(1,1,0);
+            temp.addVertex(platforms[i].getVertices()[j] + ofPoint(1,1));
+            //cout << platforms[i].getVertices()[j] << endl;
+        }
+        worlds->createPlatform(temp);
+        //worlds->createPlatform(platforms[i]);
     }
     
     ////   Import Ladder   /////

@@ -117,8 +117,9 @@ void WorldsBox2d::draw(){
     
     for (auto &platform : platforms)
     {
-        ofSetHexColor(0xFF0000);
-        //platform->ground.draw();
+        //ofSetHexColor(0xFF0000);
+        ofSetColor(ofColor::red);
+        platform->ground.draw();
     }
     for (auto &avatar : avatars) {
         avatar->draw();
@@ -138,6 +139,7 @@ void WorldsBox2d::draw(){
     for (auto &mroom : Mushrooms){
         mroom->draw();
     }
+    
     //ladders[0]->draw();
     //warterfalls->draw();
     world.draw();

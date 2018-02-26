@@ -107,7 +107,7 @@ void CloneBox2d::create()
     
 
     
-    polygon.body->SetGravityScale(0.0);
+    polygon.body->SetGravityScale(1.0);
 
 }
 void CloneBox2d::update()

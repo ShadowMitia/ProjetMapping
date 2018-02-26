@@ -68,17 +68,14 @@ void main() {
     
     float distance = length(lightLocation - gl_FragCoord.xy);
     vec3 lightColorP = vec3(1.0,0.0,0.0);
-    float intensity = (pow(distance/(256.0 * u_radius),0.07)) * sum;
+    float intensity = (pow(distance/(256.0 * u_radius),0.3)) * sum;
     //intensity = sum;
     vec4 frag =  vec4(lightColorP, 1) * vec4(intensity,intensity, intensity,intensity);
     frag = vec4(1.0 - intensity ,1.0 - intensity,1.0 - intensity,intensity) * vec4(lightColor, 1);
     if (intensity == 0.0) {
         frag = vec4(0.0,0.0,0.0,1.0);
     }
-    
     gl_FragColor = frag;
 }
-
-
 
 
