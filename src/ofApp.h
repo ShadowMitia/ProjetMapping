@@ -14,7 +14,7 @@
 #include "Face.h"
 #include "Sprite.h"
 
-//#define USE_WIIMOTE
+#define USE_WIIMOTE
 
 #ifdef USE_WIIMOTE
 #include "ofxWiiuse.h"
