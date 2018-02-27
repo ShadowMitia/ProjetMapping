@@ -49,12 +49,19 @@ void ObjBlock::draw(){
 void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         Avatar * a = dynamic_cast<Avatar*>(OtherSprite->physicalizedElement);
+        cout << "viewPoint: " << viewPoint <<  " a->viewPoint: " <<   a->viewPoint << endl;
         viewPoint = a->viewPoint;
+        polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
+    }
+    if (OtherSprite->sprite == Sprite::CLONE) {
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
     }
 }
 void ObjBlock::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
+        polygon.body->SetLinearVelocity(b2Vec2(0, 0));
+    }
+    if (OtherSprite->sprite == Sprite::CLONE) {
         polygon.body->SetLinearVelocity(b2Vec2(0, 0));
     }
 }

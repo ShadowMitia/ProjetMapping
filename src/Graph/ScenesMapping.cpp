@@ -20,7 +20,8 @@ void Scene1::draw()
         if (i==2) {
             plaforms.draw(0, 0);
         }
-        if (i==1) {
+        if (i==nbLayer-1) {
+            worldsBox2d->draw(); //non alex
         }
         layer[i].end();
     }
@@ -80,7 +81,6 @@ void Scene1::draw()
         ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     }
     
-
     background.draw(0, 0);
     
     ofSetColor(ofColor::white);
@@ -90,6 +90,7 @@ void Scene1::draw()
     }
 
     // debug mode
+    ofPopMatrix();
     //worldsBox2d->draw();
     
     //fboFace.draw(0, 0);
