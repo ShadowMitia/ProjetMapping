@@ -21,7 +21,7 @@ void Scene1::draw()
             plaforms.draw(0, 0);
         }
         if (i==nbLayer-1) {
-            worldsBox2d->draw(); //non alex
+            //worldsBox2d->draw(); //non alex
         }
         layer[i].end();
     }
@@ -40,46 +40,52 @@ void Scene1::draw()
 
     }
 
-    fillMatrix(sprites->at(0));
+    
+    for (int i = 2; i<sprites->size()-1; i++) {
+        if (sprites->at(i)->isActif()) {
+            fillMatrix(sprites->at(i));
+            fboFace.begin();
+            ofClear(0,0,0,0);
+            fboFace.end();
+            
+            layerToFace(2);
+            
+            Light* light = dynamic_cast<Light *>(sprites->at(i));
+            lightRender.renderLights(&fboFaceShadow, light);
+            fboFace.begin();
+            ofClear(0,0,0,0);
+            ofPushMatrix();
+            ofTranslate(light->getPositionTranform().x - lightSize/2, light->getPositionTranform().y-lightSize/2);
+            fboFaceShadow.draw(0, 0);
+            fboFace.end();
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_ONE, GL_ZERO);
+            faceToLayer(1,1);
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+        }
+    }
+    
+    
+    fillMatrix(sprites->at(sprites->size()-1));
     fboFace.begin();
     ofClear(0,0,0,0);
     fboFace.end();
     layerToFace(2);
     
-    Light* light = dynamic_cast<Light *>(sprites->at(0));
+    Light* light = dynamic_cast<Light *>(sprites->at(sprites->size()-1));
     lightRender.renderLights(&fboFaceShadow, light);
     
     fboFace.begin();
     ofClear(0,0,0,0);
     ofPushMatrix();
-    ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
+    ofTranslate(light->getPositionTranform().x - lightSize/2, light->getPositionTranform().y-lightSize/2);
     fboFaceShadow.draw(0, 0);
     fboFace.end();
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ZERO);
     faceToLayer(1,1);
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    if (sprites->at(2)->isActif()) {
-        fillMatrix(sprites->at(2));
-        fboFace.begin();
-        ofClear(0,0,0,0);
-        fboFace.end();
 
-        layerToFace(2);
-        
-        Light* light = dynamic_cast<Light *>(sprites->at(2));
-        lightRender.renderLights(&fboFaceShadow, light);
-        fboFace.begin();
-        ofClear(0,0,0,0);
-        ofPushMatrix();
-        ofTranslate(light->getPositionTranform().x - 256/2, light->getPositionTranform().y-256/2);
-        fboFaceShadow.draw(0, 0);
-        fboFace.end();
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_ONE, GL_ZERO);
-        faceToLayer(1,1);
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    }
     
     background.draw(0, 0);
     

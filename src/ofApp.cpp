@@ -72,16 +72,6 @@ void ofApp::setup() {
     generateFaces();
     worlds->createPortal(faces);
     
-    
-    AvatarDef *avatarDef = new AvatarDef();
-    avatarDef->world = worlds;
-    avatarDef->positionInit=ofVec2f(104.249, 289.55);
-    avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[1];
-    avatarDef->create();
-    sprites.push_back(static_cast<SpriteObj*>(avatarDef));
-    spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
-    
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
     objMushroomDef->world= worlds;
     objMushroomDef->positionInit = ofVec2f(968, 440);
@@ -89,19 +79,6 @@ void ofApp::setup() {
     objMushroomDef->create();
     sprites.push_back(static_cast<SpriteObj*>(objMushroomDef));
     spritesSolide.push_back(static_cast<SpriteObj*>(objMushroomDef));
-    
-    ObjPickupDef *pkup = new ObjPickupDef();
-    pkup->world = worlds;
-    pkup->positionInit = ofVec2f(161.833, 289.55);
-    pkup->face = & faces[1];
-    pkup->create();
-    b2Filter tempFilter = pkup->getFilter();
-    tempFilter.categoryBits = 0x0100;
-    tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-    //pkup->setFilter(tempFilter);
-    //pkup->layer = 6;
-    sprites.push_back(static_cast<SpriteObj*>(pkup));
-    spritesLight.push_back(static_cast<SpriteObj*>(pkup));
     
     
     ObjBlockDef *block = new ObjBlockDef();
@@ -111,6 +88,98 @@ void ofApp::setup() {
     block->create();
     sprites.push_back(static_cast<SpriteObj*>(block));
     spritesSolide.push_back(static_cast<SpriteObj*>(block));
+    
+  
+    ///    ObjPickupDef
+    
+    {ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(196, 356);
+        pkup->face = & faces[1];
+        pkup->create();
+        b2Filter tempFilter = pkup->getFilter();
+        tempFilter.categoryBits = 0x0100;
+        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        //pkup->setFilter(tempFilter);
+        //pkup->layer = 6;
+        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+    
+    {ObjPickupDef *pkup = new ObjPickupDef();
+    pkup->world = worlds;
+    pkup->positionInit = ofVec2f(164, 452);
+    pkup->face = & faces[2];
+    pkup->create();
+    b2Filter tempFilter = pkup->getFilter();
+    tempFilter.categoryBits = 0x0100;
+    tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+    //pkup->setFilter(tempFilter);
+    //pkup->layer = 6;
+    sprites.push_back(static_cast<SpriteObj*>(pkup));
+    spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+    
+    {ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(396, 228);
+        pkup->face = & faces[3];
+        pkup->create();
+        b2Filter tempFilter = pkup->getFilter();
+        tempFilter.categoryBits = 0x0100;
+        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        //pkup->setFilter(tempFilter);
+        //pkup->layer = 6;
+        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+    
+    {ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(500, 244);
+        pkup->face = & faces[5];
+        pkup->create();
+        b2Filter tempFilter = pkup->getFilter();
+        tempFilter.categoryBits = 0x0100;
+        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        //pkup->setFilter(tempFilter);
+        //pkup->layer = 6;
+        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+    
+    {ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(708, 244);
+        pkup->face = & faces[7];
+        pkup->create();
+        b2Filter tempFilter = pkup->getFilter();
+        tempFilter.categoryBits = 0x0100;
+        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        //pkup->setFilter(tempFilter);
+        //pkup->layer = 6;
+        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+
+    {ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(284, 524);
+        pkup->face = & faces[4];
+        pkup->create();
+        b2Filter tempFilter = pkup->getFilter();
+        tempFilter.categoryBits = 0x0100;
+        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        //pkup->setFilter(tempFilter);
+        //pkup->layer = 6;
+        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+    
+    // Avatar
+    AvatarDef *avatarDef = new AvatarDef();
+    avatarDef->world = worlds;
+    avatarDef->positionInit=ofVec2f(104.249, 289.55);
+    avatarDef->s= &inputButton[0];
+    avatarDef->face = &faces[1];
+    avatarDef->create();
+    sprites.push_back(static_cast<SpriteObj*>(avatarDef));
+    spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
+
     
     
     
@@ -126,6 +195,9 @@ void ofApp::setup() {
 #ifdef USE_WIIMOTE
     wiiuse.addListener(this);
 #endif
+    
+    ofxGLFWJoystick::one().printJoystickList();
+
 }
 
 //--------------------------------------------------------------
@@ -373,36 +445,42 @@ void ofApp::input() {
     wiiuse.update();
 #endif
     
+    ofxGLFWJoystick::one().update();
+
+    for (int i = 0; i<4; i++) {
+        inputButton[0].directionalCross[i] = false;
+    }
     
-    bool temp[2] = {false, false};
     
     if (ofxGLFWJoystick::one().getAxisValue(0, 0) > 0.5 || ofxGLFWJoystick::one().getAxisValue(0, 0) < -0.5) {
         if (ofxGLFWJoystick::one().getAxisValue(0, 0)>0) {
-            temp[1] = true;
+            
+            inputButton[0].directionalCross[1] = true;
         }
         else {
-            temp[0] = true;
+            inputButton[0].directionalCross[0] = true;
+        }
+    }
+
+    if (ofxGLFWJoystick::one().getAxisValue(1, 0) > 0.5 || ofxGLFWJoystick::one().getAxisValue(1, 0) < -0.5) {
+        if (ofxGLFWJoystick::one().getAxisValue(1, 0)>0) {
+
+            inputButton[0].directionalCross[3] = true ;
+        }
+        else {
+            inputButton[0].directionalCross[2] = true ;
+
         }
     }
     
-    ofxGLFWJoystick::one().update();
-    /*
-     for (int joystickID = 0; joystickID < 1; joystickID++) {
-     
-     if (inputButton[joystickID][2] != ofxGLFWJoystick::one().getButtonValue(13, joystickID)) {
-     if (!inputButton[joystickID][3])inputButton[joystickID][2] = ofxGLFWJoystick::one().getButtonValue(13, joystickID);
-     if (!inputButton[joystickID][3] && !inputButton[joystickID][2])worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT);
-     else worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT);
-     }
-     if (inputButton[joystickID][3] != ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
-     if (!inputButton[joystickID][2])inputButton[joystickID][3] = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
-     
-     if (!inputButton[joystickID][3])worlds->avatars[joystickID]->keyReleased(OF_KEY_RIGHT);
-     else worlds->avatars[joystickID]->keyPressed(OF_KEY_RIGHT);
-     }
-     if (inputButton[joystickID][4] != ofxGLFWJoystick::one().getButtonValue(1, joystickID)) {
-     inputButton[joystickID][4] = ofxGLFWJoystick::one().getButtonValue(1, joystickID);
-     if (inputButton[joystickID][4]) worlds->avatars[joystickID]->keyPressed(' ');
+    inputButton[0].a = ofxGLFWJoystick::one().getButtonValue(11, 0);
+    inputButton[0].b = ofxGLFWJoystick::one().getButtonValue(13, 0);
+    
+    
+    /* for (int joystickID = 0; joystickID < 1; joystickID++) {
+     if (inputButton[joystickID].a != ofxGLFWJoystick::one().getButtonValue(11, joystickID)) {
+     inputButton[joystickID].a = ofxGLFWJoystick::one().getButtonValue(11, joystickID);
+     if (inputButton[joystickID].a) worlds->avatars[joystickID]->keyPressed(' ');
      else worlds->avatars[joystickID]->keyReleased(' ');
      }
      if (inputButton[joystickID][5] != ofxGLFWJoystick::one().getButtonValue(2, joystickID)) {
@@ -410,8 +488,9 @@ void ofApp::input() {
      
      if (inputButton[joystickID][5])worlds->avatars[joystickID]->keyPressed(OF_KEY_LEFT_CONTROL);
      else worlds->avatars[joystickID]->keyReleased(OF_KEY_LEFT_CONTROL);
-     }
      }*/
+     
+    
 }
 
 #ifdef USE_WIIMOTE

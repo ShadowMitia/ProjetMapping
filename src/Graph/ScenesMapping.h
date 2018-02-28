@@ -92,6 +92,7 @@ public:
         
         
         lightSize = 256;
+        lightSize = 160;
         ofDisableArbTex();  // <-- Very Important
         lightRender.setup(lightSize,lightSize);
         lightRender.setRenderFunction(this, &Scene1::renderPlatform);
@@ -104,8 +105,6 @@ public:
         mask.begin();
         ofClear(0);
         mask.end();
-
-        
     }
     
     
