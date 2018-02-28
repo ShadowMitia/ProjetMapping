@@ -41,7 +41,7 @@ void Scene1::draw()
     }
 
     
-    for (int i = 2; i<sprites->size()-1; i++) {
+    for (int i = sprites->size(); i<sprites->size()-1; i++) {
         if (sprites->at(i)->isActif()) {
             fillMatrix(sprites->at(i));
             fboFace.begin();

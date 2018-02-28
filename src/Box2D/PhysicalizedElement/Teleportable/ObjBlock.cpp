@@ -38,6 +38,8 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     data->physicalizedElement = this;
     
     polygon.body->SetGravityScale(1.0);
+    
+    rT = new resteTime(15000000000.0, this);
 }
 
 void ObjBlock::draw(){
@@ -49,13 +51,14 @@ void ObjBlock::draw(){
 void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         Avatar * a = dynamic_cast<Avatar*>(OtherSprite->physicalizedElement);
-        cout << "viewPoint: " << viewPoint <<  " a->viewPoint: " <<   a->viewPoint << endl;
+        //cout << "viewPoint: " << viewPoint <<  " a->viewPoint: " <<   a->viewPoint << endl;
         viewPoint = a->viewPoint;
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
     }
     if (OtherSprite->sprite == Sprite::CLONE) {
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
     }
+    //rT->stopThread();
 }
 void ObjBlock::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
@@ -64,4 +67,14 @@ void ObjBlock::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite
     if (OtherSprite->sprite == Sprite::CLONE) {
         polygon.body->SetLinearVelocity(b2Vec2(0, 0));
     }
+    //rT->startThread();
+}
+
+void resteTime::threadedFunction(){
+    cout << "Debut " << endl;
+    time.reset();
+    time.waitNext();
+    b->sprite->reset();
+    cout << "Fin " << endl;
+
 }

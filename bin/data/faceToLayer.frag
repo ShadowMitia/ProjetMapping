@@ -75,12 +75,12 @@ void main(void) {
         if (shadow.a != 0.0) {
             if (src.a != 0) {
                 //shadow = vec4(vec3(0.0,0.0,0.0), min(min(shadow.a,src.a),0.9));
-                shadow = vec4(max(shadow.r,src.r),max(shadow.g,src.g), max(shadow.b,src.b),min(min(shadow.a,src.a),0.9));
+                shadow = vec4(max(shadow.r,src.r),max(shadow.g,src.g), max(shadow.b,src.b),min(min(shadow.a,src.a),0.7));
 
             }
             else{
                 //shadow = vec4(vec3(0.0,0.0,0.0), min(shadow.a,0.9));
-                shadow = vec4(shadow.rgb, min(shadow.a,0.9));
+                shadow = vec4(shadow.rgb, min(shadow.a,0.7));
 
             }
         }
@@ -90,10 +90,10 @@ void main(void) {
         }
         
         if (shadow.a == 0.0) {
-            shadow = vec4(vec3(0.0,0.0,0.0),0.9);
+            shadow = vec4(vec3(0.0,0.0,0.0),0.7);
         }
-        if (shadow.a == 0.9) {
-            shadow = vec4(vec3(0.0,0.0,0.0),0.9);
+        if (shadow.a == 0.7) {
+            shadow = vec4(vec3(0.0,0.0,0.0),0.7);
         }
         //gl_FragColor = vec4(src.rgb, min(shadow.a,src.a));
         gl_FragColor = shadow;

@@ -13,11 +13,24 @@
 #include "Teleportable.h"
 #include "Sprite.h"
 
+class ObjBlock;
+class resteTime: public ofThread{
+public:
+    ofTimer time;
+    ObjBlock* b;
+    resteTime(uint64_t _time, ObjBlock* _b){
+        b = _b;
+        time.setPeriodicEvent(_time);
+    }
+    void threadedFunction();
+};
+
 class ObjBlock: public Teleportable{
 public:
     
     ObjBlock(ObjBlockDef* _objBlockDef);
     void draw();
+    resteTime *rT;
     
 private:
     virtual void contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;

@@ -9,7 +9,6 @@ vector<ofPolyline> importImage(const string& path){
     {
         throw std::invalid_argument(path);
     }
-    
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
     contourFinder.setMaxAreaRadius(100000); //1000 max
@@ -91,7 +90,19 @@ void ofApp::setup() {
     
   
     ///    ObjPickupDef
-    
+    {ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1228, 228);
+        pkup->face = & faces[10];
+        pkup->create();
+        b2Filter tempFilter = pkup->getFilter();
+        tempFilter.categoryBits = 0x0100;
+        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        pkup->setFilter(tempFilter);
+        pkup->layer = 7;
+        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
         pkup->positionInit = ofVec2f(196, 356);
@@ -170,6 +181,10 @@ void ofApp::setup() {
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
+    
+
+    
+    
     // Avatar
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->world = worlds;
@@ -213,6 +228,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     //scene1->draw();
+    ofBackground(ofColor::black);
     mapping.draw();
 }
 
