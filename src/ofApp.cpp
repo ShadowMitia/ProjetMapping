@@ -188,7 +188,7 @@ void ofApp::setup() {
     // Avatar
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->world = worlds;
-    avatarDef->positionInit=ofVec2f(104.249, 289.55);
+    avatarDef->positionInit=ofVec2f(150.513, 226.55);
     avatarDef->s= &inputButton[0];
     avatarDef->face = &faces[1];
     avatarDef->create();
@@ -217,10 +217,12 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    input();
+    //input();
     scene1->update();
-    worlds->update();
-    worlds->startThread();
+    if (!worlds->isThreadRunning()) {
+        worlds->update();
+        worlds->startThread();
+    }else cout << "ATTENTION BOX2D RAM" << endl;
     mapping.update();
     
 }
@@ -264,8 +266,8 @@ void ofApp::keyPressed(int key)
     if (key == 'm') {
         //tempI++;
         //cout << "tempI: " << tempI << endl;
-        cout << "position avatar: " << sprites[0]->world->avatars[0]->getPosition() << endl;
-        cout << "top avatar: " << sprites[0]->face->idFace << endl;
+        cout << "position avatar: " << sprites[sprites.size()-1]->world->avatars[0]->getPosition() << endl;
+        cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
         
     }
     

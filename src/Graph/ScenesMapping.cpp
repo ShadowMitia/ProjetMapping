@@ -87,12 +87,15 @@ void Scene1::draw()
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
     
-    background.draw(0, 0);
-    
+    //background.draw(0, 0);
+    ofBackground(ofColor::white);
     ofSetColor(ofColor::white);
     
     for (int i=1; i<nbLayer; ++i) {
-        layer[i].draw(0, 0);
+        if (i!=20) {
+            layer[i].draw(0, 0);
+
+        }
     }
 
     // debug mode

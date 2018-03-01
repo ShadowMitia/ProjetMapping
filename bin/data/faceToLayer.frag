@@ -57,7 +57,7 @@ void main(void) {
                     float y = matrixY[i][j] - pos.y;
                     x = mod40(x);
                     y = mod40(y);
-                    shadow = texture2DRect(u_texture,vec2(160.0*i + y,160.0*j + x));
+                    shadow = texture2DRect(u_texture,vec2(160.0*i + y,160.0*(j+1) - x));
                     //shadow = vec4(0.0,0.0,1.0,1.0);
                     break;
                 }

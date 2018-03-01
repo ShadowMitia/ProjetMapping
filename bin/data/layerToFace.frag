@@ -29,17 +29,15 @@ void main(void) {
          tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
     }
     if (matrixR[i][j]== 90.0) {
-        //tot = texture2DRect(u_texture,vec2(matrixY[i][j] + mod40(pos.y),matrixX[i][j] + mod40(pos.x)));
-        tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+        tot = texture2DRect(u_texture,vec2( matrixX[i][j] + 160.0 - mod40(pos.y), matrixY[i][j] + mod40(pos.x)));
 
     }
     if (matrixR[i][j]== 180.0) {
          tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
     }
     if (matrixR[i][j]== 270.0) {
-         tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+         tot = texture2DRect(u_texture,vec2( matrixX[i][j] + mod40(pos.y), matrixY[i][j] + 160.0 - mod40(pos.x)));
     }
-    
     
     gl_FragColor = tot;
 }
