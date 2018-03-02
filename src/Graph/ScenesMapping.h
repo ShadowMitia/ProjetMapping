@@ -90,8 +90,7 @@ public:
         }
 
         
-        
-        lightSize = 256;
+        //lightSize = 256;
         lightSize = 160;
         ofDisableArbTex();  // <-- Very Important
         lightRender.setup(lightSize,lightSize);
@@ -109,8 +108,6 @@ public:
     
     
 };
-
-
 class Scene2 : public ofx::piMapper::FboSource
 {
 public:

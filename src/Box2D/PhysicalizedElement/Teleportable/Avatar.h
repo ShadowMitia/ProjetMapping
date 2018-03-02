@@ -13,7 +13,7 @@
 #include "Sprite.h"
 #include "Ladder.h"
 
-enum class Deplacement { PLATFORM, TOP, DOWN, LEFT, RIGHT, PLATFORMLADDER, LADDER };
+enum class Deplacement { PLATFORM = 0, TOP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, PLATFORMLADDER, LADDER };
 class Avatar;
 class coyoteTime: public ofThread{
 public:
@@ -39,9 +39,6 @@ public:
     void update();
     void draw() ;
     void setJumping(bool _bool);
-    
-    void keyPressed(int key);
-    void keyReleased(int key);
     
     void setMove(Deplacement move);
 

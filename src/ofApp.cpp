@@ -238,7 +238,7 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key)
 {
     for (int i = 0; i<worlds->avatars.size(); i++) {
-        worlds->avatars[i]->keyPressed(key);
+        //worlds->avatars[i]->keyPressed(key);
     }
     
     if (key == OF_KEY_LEFT || key == 'q')
@@ -278,7 +278,7 @@ void ofApp::keyReleased(int key)
 {
     
     for (int i = 0; i<worlds->avatars.size(); i++) {
-        worlds->avatars[i]->keyReleased(key);
+        //worlds->avatars[i]->keyReleased(key);
     }
     
     if (key == OF_KEY_LEFT || key == 'q')

@@ -195,12 +195,6 @@ void Avatar::setJumping(bool _bool)
 {
     jumping = _bool;
 }
-void Avatar::keyPressed(int key)
-{
-}
-void Avatar::keyReleased(int key)
-{
-}
 /////////////// collision avatar ///////////////
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {

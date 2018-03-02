@@ -108,7 +108,6 @@ void Scene1::draw()
     //fboFaceShadow.draw(0, 0);
 
 }
-
 void Scene1::renderObjects()
 {
     //image.draw(0, 0);

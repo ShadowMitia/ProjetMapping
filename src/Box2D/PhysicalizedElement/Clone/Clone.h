@@ -52,7 +52,6 @@ private:
     void delectCloneAvatar();
     void delectCloneOther();
 
-    
     ObjectGame polygon;
     ofPoint PositionObjSource;
     ofPoint PositionClone;
