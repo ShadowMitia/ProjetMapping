@@ -54,7 +54,7 @@ public:
         return temp;};
 	virtual bool getViewPoint() { return true; };
 
-    int layer,layerIni;
+    int layerId,layerIni;
     ofVec2f positionInit;
     Face* faceIni;
     //b2World* world;
@@ -68,7 +68,7 @@ public:
     AvatarDef(){
         filterAvatar.categoryBits = 0x0010;
         filterAvatar.maskBits = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
-        layerIni = layer =  3;
+        layerIni = layerId =  3;
         color.set(ofColor::orange);
     }
     b2Filter filterAvatar;
@@ -92,7 +92,7 @@ public:
     ObjBlockDef(){
         filterObjBlock.categoryBits = 0x0020;
         filterObjBlock.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 |0x0020 | 0x0040 | 0x0080;
-        layerIni = layer =  2;
+        layerIni = layerId =  2;
     }
     b2Filter filterObjBlock;
     ofImage spriteImage;
@@ -117,7 +117,7 @@ public:
         filterObjPickup.categoryBits = 0x0040;
         filterObjPickup.maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 | 0x0020 | 0x0080;
         radius = 0.2;
-        layerIni = layer =  3;
+        layerIni = layerId =  3;
         color.set(ofColor::yellow);
     }
     b2Filter filterObjPickup;
@@ -141,7 +141,7 @@ public:
     ObjMushroomDef(){
         filterObjMushroom.categoryBits = 0x0080;
         filterObjMushroom.maskBits =  0x0010 | 0x0008 ;
-        layerIni = layer =  4;
+        layerIni = layerId =  4;
     }
     
     b2Filter filterObjMushroom;

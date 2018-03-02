@@ -60,6 +60,9 @@ void ofApp::setup() {
         worlds->createPlatform(platforms[i], 0x0001);
     }
     
+    ofFbo FboTemp;
+    FboTemp.allocate(3*160, 3*160);
+    
     ////   Import Ladder   /////
     imageTemp.load("Map_test_portails_echelles.png");
     std::vector<ofPolyline>  ladders = importImage(imageTemp);
@@ -98,7 +101,7 @@ void ofApp::setup() {
         tempFilter.categoryBits = 0x0100;
         tempFilter.maskBits = tempFilter.maskBits | 0x0100;
         pkup->setFilter(tempFilter);
-        pkup->layer = 7;
+        pkup->layerId = 6;
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
 

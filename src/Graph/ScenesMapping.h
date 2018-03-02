@@ -41,7 +41,7 @@ public:
     
 };
 
-class Scene1 : public ofx::piMapper::FboSource
+class Scene1 : public ofx::piMapper::FboSource, FaceFunction
 {
 public:
     int lightSize;
@@ -58,14 +58,16 @@ public:
     
     ofFbo fboFaceShadow;
     
+    //ofFbo fboFace;
+
     ofFbo layer[nbLayer];
-    ofFbo fboFace;
-    ofMatrix3x3 matrix[3];
+
+    //ofMatrix3x3 matrix[3];
     void fillMatrix(SpriteObj* _sprite);
     void faceToLayer(int layer, int mode);
     void layerToFace(int layer);
-    ofShader ShaderLayerToFace;
-    ofShader ShaderFaceToLayer;
+    //ofShader ShaderLayerToFace;
+    //ofShader ShaderFaceToLayer;
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(Scene1Def def){
@@ -76,36 +78,23 @@ public:
         allocate(background.getWidth(), background.getHeight());
         worldsBox2d =def.worldsBox2d;
         
-        fboFace.allocate(160*3, 160*3);
+        
         fboFaceShadow.allocate(160*3, 160*3);
         for (int i=0; i<nbLayer; ++i) {
             layer[i].allocate(background.getWidth(), background.getHeight());
         }
-        if(!ShaderLayerToFace.load("passTransform.vert", "layerToFace.frag")) {
-            printf("transform.frag\n");
-        }
-        //fboSortie.allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
-        if(!ShaderFaceToLayer.load("passTransform.vert", "faceToLayer.frag")) {
-            printf("transformInv.frag\n");
-        }
-
         
         //lightSize = 256;
         lightSize = 160;
         ofDisableArbTex();  // <-- Very Important
         lightRender.setup(lightSize,lightSize);
         lightRender.setRenderFunction(this, &Scene1::renderPlatform);
-        
         lightRender.setRenderFunction(this, &Scene1::renderObjects);
-        
-        //lightRender.addLight(lightSize/2, lightSize/2);
-        
         mask.allocate(background.getWidth(), background.getHeight());
         mask.begin();
         ofClear(0);
         mask.end();
     }
-    
     
 };
 class Scene2 : public ofx::piMapper::FboSource

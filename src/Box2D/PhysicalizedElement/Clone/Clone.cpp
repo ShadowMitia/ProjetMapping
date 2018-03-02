@@ -49,7 +49,7 @@ CloneBox2d::~CloneBox2d()
         objSource->setVelocity(v);
         objSource->sprite->face = portalDestination->face;
         if (layer > 4 ) { //  deffinir  le layer top
-            objSource->sprite->layer = layer; // je crois c que  est inutil 
+            objSource->sprite->layerId = layer; // je crois c que  est inutil
             b2Filter tempFilter = objSource->sprite->getFilter();
             tempFilter.maskBits = tempFilter.maskBits | 0x0100;
             objSource->sprite->setFilter(tempFilter);
