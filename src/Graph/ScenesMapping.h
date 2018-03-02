@@ -56,18 +56,9 @@ public:
     void renderObjects();
     void renderPlatform();
     
-    ofFbo fboFaceShadow;
     
-    //ofFbo fboFace;
-
+    ofFbo fboFaceShadow;
     ofFbo layer[nbLayer];
-
-    //ofMatrix3x3 matrix[3];
-    void fillMatrix(SpriteObj* _sprite);
-    void faceToLayer(int layer, int mode);
-    void layerToFace(int layer);
-    //ofShader ShaderLayerToFace;
-    //ofShader ShaderFaceToLayer;
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(Scene1Def def){

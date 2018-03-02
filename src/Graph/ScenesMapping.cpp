@@ -36,20 +36,20 @@ void Scene1::draw()
             sprites->at(i)->draw();
             fboFace.end();
             //faceToLayer(sprites->at(i)->layerId,0);
-            faceToLayer2(&layer[sprites->at(i)->layerId], 0);
+            faceToLayer(&layer[sprites->at(i)->layerId], 0);
         }
 
     }
 
     
-    for (int i = sprites->size()-3; i<sprites->size()-1; i++) {
+    for (int i = sprites->size(); i<sprites->size()-1; i++) {
         if (sprites->at(i)->isActif()) {
             fillMatrix(sprites->at(i));
             fboFace.begin();
             ofClear(0,0,0,0);
             fboFace.end();
             
-            layerToFace2(layer[2].getTexture());
+            layerToFace(layer[2].getTexture());
             
             Light* light = dynamic_cast<Light *>(sprites->at(i));
             lightRender.renderLights(&fboFaceShadow, light);
@@ -61,7 +61,7 @@ void Scene1::draw()
             fboFace.end();
             glEnable(GL_BLEND);
             glBlendFunc(GL_ONE, GL_ZERO);
-            faceToLayer2(&layer[1],1);
+            faceToLayer(&layer[1],1);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         }
     }
@@ -71,7 +71,7 @@ void Scene1::draw()
     fboFace.begin();
     ofClear(0,0,0,0);
     fboFace.end();
-    layerToFace2(layer[2].getTexture());
+    layerToFace(layer[2].getTexture());
     
     Light* light = dynamic_cast<Light *>(sprites->at(sprites->size()-1));
     lightRender.renderLights(&fboFaceShadow, light);
@@ -84,7 +84,7 @@ void Scene1::draw()
     fboFace.end();
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ZERO);
-    faceToLayer2(&layer[1],1);
+    faceToLayer(&layer[1],1);
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
     
@@ -120,49 +120,8 @@ void Scene1::update()
 {
     
 }
-void Scene1::fillMatrix(SpriteObj *_sprite)
-{
-    bool i = _sprite->getViewPoint();
-    matrix[0].set(_sprite->face->matrix[i][0]->rect.x, _sprite->face->matrix[i][3]->rect.x, _sprite->face->matrix[i][6]->rect.x,
-                  _sprite->face->matrix[i][1]->rect.x, _sprite->face->matrix[i][4]->rect.x, _sprite->face->matrix[i][7]->rect.x,
-                  _sprite->face->matrix[i][2]->rect.x, _sprite->face->matrix[i][5]->rect.x, _sprite->face->matrix[i][8]->rect.x);
-    matrix[1].set(_sprite->face->matrix[i][0]->rect.y, _sprite->face->matrix[i][3]->rect.y, _sprite->face->matrix[i][6]->rect.y,
-                 _sprite->face->matrix[i][1]->rect.y, _sprite->face->matrix[i][4]->rect.y, _sprite->face->matrix[i][7]->rect.y,
-                 _sprite->face->matrix[i][2]->rect.y, _sprite->face->matrix[i][5]->rect.y, _sprite->face->matrix[i][8]->rect.y);
-    matrix[2] = _sprite->face->matrixR[i];
-
-}
-/*void Scene1::faceToLayer(int _layer, int mode)
-{
-    layer[_layer].begin();
-    ShaderFaceToLayer.begin();
-    ShaderFaceToLayer.setUniform1i("mode", mode);
-    ShaderFaceToLayer.setUniformTexture("u_texture_src", layer[_layer].getTexture(), 1);
-    ShaderFaceToLayer.setUniformTexture("u_texture", fboFace.getTexture(), 0);
-    ShaderFaceToLayer.setUniformMatrix3f("matrixX", matrix[0]);
-    ShaderFaceToLayer.setUniformMatrix3f("matrixY", matrix[1]);
-    ShaderFaceToLayer.setUniformMatrix3f("matrixR", matrix[2]);
-    ofDrawRectangle(ofPoint(0,0), layer[_layer].getWidth(), layer[_layer].getHeight());
-    ShaderFaceToLayer.end();
-    layer[_layer].end();
-    
-}*/
 
 
-/*void Scene1::layerToFace(int _layer)
-{
-    fboFace.begin();
-    ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
-    ShaderLayerToFace.begin();
-    ShaderLayerToFace.setUniformTexture("u_texture", layer[_layer].getTexture(), 0);
-    ShaderLayerToFace.setUniformMatrix3f("matrixX", matrix[0]);
-    ShaderLayerToFace.setUniformMatrix3f("matrixY", matrix[1]);
-    ShaderLayerToFace.setUniformMatrix3f("matrixR", matrix[2]);
-    ofSetColor(ofColor::white, 0);
-    ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
-    ShaderLayerToFace.end();
-    fboFace.end();
-}*/
 
 void Scene2::draw()
 {

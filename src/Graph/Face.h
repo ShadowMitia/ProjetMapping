@@ -24,10 +24,10 @@ public:
     ofMatrix3x3 matrix[3];
     ofShader ShaderLayerToFace;
     ofShader ShaderFaceToLayer;
+
     ofFbo fboFace;
     
     FaceFunction(){
-        
         fboFace.allocate(160*3, 160*3);
         if(!ShaderLayerToFace.load("passTransform.vert", "layerToFace.frag")) {
             printf("transform.frag\n");
@@ -38,7 +38,7 @@ public:
         }
     }
     
-    void faceToLayer2(ofFbo *layer, int mode){
+    void faceToLayer(ofFbo *layer, int mode){
         layer->begin();
         //ofSetColor(ofColor::white);
         ShaderFaceToLayer.begin();
@@ -52,9 +52,7 @@ public:
         ShaderFaceToLayer.end();
         layer->end();
     }
-    
-    void layerToFace2(ofTexture texture)
-    {
+    void layerToFace(ofTexture texture){
         fboFace.begin();
         ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
         ShaderLayerToFace.begin();
@@ -66,5 +64,25 @@ public:
         ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
         ShaderLayerToFace.end();
         fboFace.end();
+    }
+    void fillMatrix(SpriteObj* _sprite){
+        bool i = _sprite->getViewPoint();
+        matrix[0].set(_sprite->face->matrix[i][0]->rect.x, _sprite->face->matrix[i][3]->rect.x, _sprite->face->matrix[i][6]->rect.x,
+                      _sprite->face->matrix[i][1]->rect.x, _sprite->face->matrix[i][4]->rect.x, _sprite->face->matrix[i][7]->rect.x,
+                      _sprite->face->matrix[i][2]->rect.x, _sprite->face->matrix[i][5]->rect.x, _sprite->face->matrix[i][8]->rect.x);
+        matrix[1].set(_sprite->face->matrix[i][0]->rect.y, _sprite->face->matrix[i][3]->rect.y, _sprite->face->matrix[i][6]->rect.y,
+                      _sprite->face->matrix[i][1]->rect.y, _sprite->face->matrix[i][4]->rect.y, _sprite->face->matrix[i][7]->rect.y,
+                      _sprite->face->matrix[i][2]->rect.y, _sprite->face->matrix[i][5]->rect.y, _sprite->face->matrix[i][8]->rect.y);
+        matrix[2] = _sprite->face->matrixR[i];
+    };
+    void fillMatrix(Face* face, int i){
+        
+        matrix[0].set(face->matrix[i][0]->rect.x, face->matrix[i][3]->rect.x, face->matrix[i][6]->rect.x,
+                      face->matrix[i][1]->rect.x, face->matrix[i][4]->rect.x, face->matrix[i][7]->rect.x,
+                      face->matrix[i][2]->rect.x, face->matrix[i][5]->rect.x, face->matrix[i][8]->rect.x);
+        matrix[1].set(face->matrix[i][0]->rect.y, face->matrix[i][3]->rect.y, face->matrix[i][6]->rect.y,
+                      face->matrix[i][1]->rect.y, face->matrix[i][4]->rect.y, face->matrix[i][7]->rect.y,
+                      face->matrix[i][2]->rect.y, face->matrix[i][5]->rect.y, face->matrix[i][8]->rect.y);
+        matrix[2] =   face->matrixR[i];
     }
 };

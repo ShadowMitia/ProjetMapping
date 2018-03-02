@@ -1,9 +1,12 @@
 #include "ofApp.h"
 #include "b2Contact.h"
 
-vector<ofPolyline> importImage(ofImage image){
+vector<ofPolyline> importImage(ofTexture _image){
     std::vector<ofPolyline> poly;
-    
+    ofImage image;
+    image.allocate(_image.getWidth(), _image.getHeight(), ofImageType::OF_IMAGE_COLOR_ALPHA);
+    image.getTexture() = _image;
+    image.update();
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
     contourFinder.setMaxAreaRadius(100000); //1000 max
@@ -55,17 +58,24 @@ void ofApp::setup() {
     worlds->platforms.clear();
     ofImage imageTemp;
     imageTemp.load("Map_test_portails_plateformes.png");
-    std::vector<ofPolyline>  platforms = importImage(imageTemp);
+    std::vector<ofPolyline>  platforms = importImage(imageTemp.getTexture());
     for (std::size_t i = 0; i < platforms.size() ; i++) {
+        //worlds->createPlatform(platforms[i], 0x0001);
+    }
+    
+    //ofFbo FboTemp;
+    //FboTemp.allocate(3*160, 3*160);
+    fillMatrix(&faces[1], 0);
+    layerToFace(imageTemp.getTexture());
+    std::vector<ofPolyline>  platforms2 = importImage(fboFace.getTexture());
+    for (std::size_t i = 0; i < platforms2.size() ; i++) {
         worlds->createPlatform(platforms[i], 0x0001);
     }
     
-    ofFbo FboTemp;
-    FboTemp.allocate(3*160, 3*160);
     
     ////   Import Ladder   /////
     imageTemp.load("Map_test_portails_echelles.png");
-    std::vector<ofPolyline>  ladders = importImage(imageTemp);
+    std::vector<ofPolyline>  ladders = importImage(imageTemp.getTexture());
     for (std::size_t i =0; i< ladders.size() ; i++) {
         worlds->createLadder(ladders[i]);
     }
