@@ -21,7 +21,7 @@ void Scene1::draw()
             plaforms.draw(0, 0);
         }
         if (i==nbLayer-1) {
-            //worldsBox2d->draw(); //non alex
+            worldsBox2d->draw(); //non alex
         }
         layer[i].end();
     }
@@ -103,7 +103,6 @@ void Scene1::draw()
     //worldsBox2d->draw();
     
     //fboFace.draw(0, 0);
-    
     //layer[0].draw(0, 0);
     //fboFaceShadow.draw(0, 0);
 

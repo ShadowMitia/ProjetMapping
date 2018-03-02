@@ -183,9 +183,9 @@ void WorldsBox2d::update(){
     
     //warterfalls->update();
 }
-void WorldsBox2d::createPlatform(ofPolyline polyline){
+void WorldsBox2d::createPlatform(ofPolyline polyline, uint16 mask){
     Platform* edge = new Platform;
-    edge->create(world.getWorld(), polyline);
+    edge->create(world.getWorld(), polyline, mask);
     platforms.push_back(edge);
 }
 void WorldsBox2d::createLadder(ofPolyline polyline){

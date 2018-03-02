@@ -50,7 +50,7 @@ public:
     void createMushroom(ObjMushroomDef* _objMushroomDef);
     void createPickUp(ObjPickupDef* _objPickupDef);
     
-    void createPlatform(ofPolyline _polyline);
+    void createPlatform(ofPolyline _polyline, uint16 mask);
     void createPortal(Face *input);
     void createLadder(ofPolyline _polyline);
 

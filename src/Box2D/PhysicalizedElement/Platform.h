@@ -15,6 +15,6 @@ class Platform : public PhysicalizedElement {
 public:
     ofxBox2dEdge ground;
 public:
-    void create(b2World* _b2World, ofPolyline _groundLine);
+    void create(b2World* _b2World, ofPolyline _groundLine, uint16 mask);
     void draw();
 };

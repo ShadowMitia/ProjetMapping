@@ -19,7 +19,7 @@
  MUSHROOM : 0x0080
  */
 
-void Platform::create(b2World *_b2World, ofPolyline _groundLine){
+void Platform::create(b2World *_b2World, ofPolyline _groundLine, uint16 mask){
     
     //ground.clear();
     ground.addVertexes(_groundLine);
@@ -32,7 +32,7 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine){
     data->physicalizedElement = this;
 
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0001;
+    tempFilter.categoryBits = mask;
     tempFilter.maskBits = 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
     ground.setFilterData(tempFilter);
 }

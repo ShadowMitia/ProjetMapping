@@ -1,14 +1,9 @@
 #include "ofApp.h"
 #include "b2Contact.h"
 
-vector<ofPolyline> importImage(const string& path){
-    ofImage image;
+vector<ofPolyline> importImage(ofImage image){
     std::vector<ofPolyline> poly;
     
-    if (!image.load(path))
-    {
-        throw std::invalid_argument(path);
-    }
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
     contourFinder.setMaxAreaRadius(100000); //1000 max
@@ -53,22 +48,26 @@ void ofApp::setup() {
     mapping.registerFboSource(scene2);
     mapping.setup();
     
+    
+    generateFaces();
+
     ////   Import Platform   /////
     worlds->platforms.clear();
-    std::vector<ofPolyline>  platforms = importImage("Map_test_portails_plateformes.png");
+    ofImage imageTemp;
+    imageTemp.load("Map_test_portails_plateformes.png");
+    std::vector<ofPolyline>  platforms = importImage(imageTemp);
     for (std::size_t i = 0; i < platforms.size() ; i++) {
-        worlds->createPlatform(platforms[i]);
+        worlds->createPlatform(platforms[i], 0x0001);
     }
     
     ////   Import Ladder   /////
-    std::vector<ofPolyline>  ladders = importImage("Map_test_portails_echelles.png");
+    imageTemp.load("Map_test_portails_echelles.png");
+    std::vector<ofPolyline>  ladders = importImage(imageTemp);
     for (std::size_t i =0; i< ladders.size() ; i++) {
         worlds->createLadder(ladders[i]);
     }
     
     
-    
-    generateFaces();
     worlds->createPortal(faces);
     
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();

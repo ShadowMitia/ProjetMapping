@@ -19,6 +19,7 @@
 #ifdef USE_WIIMOTE
 #include "ofxWiiuse.h"
 #endif
+
 #define nbFace  13
 
 #ifdef USE_WIIMOTE
