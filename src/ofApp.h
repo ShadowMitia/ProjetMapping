@@ -31,6 +31,10 @@ class ofApp : public ofBaseApp, public ofxWiiuseListener, public FaceFunction {
         
     public:
         
+        ofImage imageTemp;
+        ofFbo FboTemp;
+
+        
         int tempI = 0;
         Face faces[nbFace];
         vector<SpriteObj*> sprites;

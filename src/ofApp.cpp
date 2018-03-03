@@ -4,8 +4,10 @@
 vector<ofPolyline> importImage(ofTexture _image){
     std::vector<ofPolyline> poly;
     ofImage image;
+    ofPixels temp;
     image.allocate(_image.getWidth(), _image.getHeight(), ofImageType::OF_IMAGE_COLOR_ALPHA);
-    image.getTexture() = _image;
+    _image.readToPixels(temp);
+    image.setFromPixels(temp);
     image.update();
     ofxCv::ContourFinder contourFinder;
     contourFinder.setMinAreaRadius(0);
@@ -43,44 +45,47 @@ void ofApp::setup() {
     def.worldsBox2d = worlds;
     def.background_name = "Map_test_portails_back.png";
     def.plaforms_name = "Map_plateformes.png";
-    scene1 = new Scene1(def);
-
-    scene2 = new Scene2(worlds);
     
-    mapping.registerFboSource(scene1);
-    mapping.registerFboSource(scene2);
-    mapping.setup();
+
+
     
     
     generateFaces();
 
     ////   Import Platform   /////
     worlds->platforms.clear();
-    ofImage imageTemp;
+    
     imageTemp.load("Map_test_portails_plateformes.png");
     std::vector<ofPolyline>  platforms = importImage(imageTemp.getTexture());
     for (std::size_t i = 0; i < platforms.size() ; i++) {
-        //worlds->createPlatform(platforms[i], 0x0001);
-    }
-    
-    //ofFbo FboTemp;
-    //FboTemp.allocate(3*160, 3*160);
-    fillMatrix(&faces[1], 0);
-    layerToFace(imageTemp.getTexture());
-    std::vector<ofPolyline>  platforms2 = importImage(fboFace.getTexture());
-    for (std::size_t i = 0; i < platforms2.size() ; i++) {
         worlds->createPlatform(platforms[i], 0x0001);
     }
     
+    imageTemp.load("Map_plateformes.png");
+    //ofDisableArbTex();
+    //ofEnableArbTex();
+    fillMatrix( &faces[1], 0);
+    layerToFace(imageTemp.getTexture());
     
-    ////   Import Ladder   /////
+    FboTemp.allocate(imageTemp.getWidth(), imageTemp.getHeight(),GL_RGBA);
+    FboTemp.begin();
+    ofClear(0,0, 0, 0);
+    ofBackground(ofColor::white);
+    fboFace.draw(0, 0);
+    FboTemp.end();
+    
+    std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
+    for (std::size_t i = 0; i < platforms2.size() ; i++) {
+        worlds->createPlatform(platforms2[i], 0x0001);
+    }
+    
+    /*////   Import Ladder   /////
     imageTemp.load("Map_test_portails_echelles.png");
     std::vector<ofPolyline>  ladders = importImage(imageTemp.getTexture());
     for (std::size_t i =0; i< ladders.size() ; i++) {
         worlds->createLadder(ladders[i]);
     }
-    
-    
+    */
     worlds->createPortal(faces);
     
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
@@ -213,6 +218,13 @@ void ofApp::setup() {
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
     
+    scene1 = new Scene1(def);
+    scene2 = new Scene2(worlds);
+    
+    mapping.registerFboSource(scene1);
+    mapping.registerFboSource(scene2);
+    mapping.setup();
+    
 #ifdef CUSTOM_BOX2D_TIM
     ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
     ofAddListener(worlds->world.PreSolveEvents, this, &ofApp::PreSolve);
@@ -242,8 +254,11 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     //scene1->draw();
-    ofBackground(ofColor::black);
+    //ofBackground(ofColor::black);
     mapping.draw();
+    //imageTemp.draw(0, 0);
+    //FboTemp.draw(0,0);
+    //fboFace.draw(0, 0);
 }
 
 //--------------------------------------------------------------

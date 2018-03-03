@@ -27,6 +27,7 @@ void main(void) {
     
     if (matrixR[i][j] == 0.0) {
          tot = texture2DRect(u_texture,vec2(matrixX[i][j] + mod40(pos.x),matrixY[i][j] + mod40(pos.y)));
+        //tot = vec4(1.0, 0.0 , 0.0, 1.0);
     }
     if (matrixR[i][j]== 90.0) {
         tot = texture2DRect(u_texture,vec2( matrixX[i][j] + 160.0 - mod40(pos.y), matrixY[i][j] + mod40(pos.x)));
@@ -38,6 +39,12 @@ void main(void) {
     if (matrixR[i][j]== 270.0) {
          tot = texture2DRect(u_texture,vec2( matrixX[i][j] + mod40(pos.y), matrixY[i][j] + 160.0 - mod40(pos.x)));
     }
+    
+    /*if (tot.a == 1.0) {
+        tot = vec4(1.0, 0.0 , 0.0, 1.0);
+    }else{
+        tot = vec4(0.0, 1.0 , 0.0, 1.0);
+    }*/
     
     gl_FragColor = tot;
 }

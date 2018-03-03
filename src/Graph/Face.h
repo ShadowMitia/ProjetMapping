@@ -18,7 +18,6 @@ struct Face{
     ofMatrix3x3 matrixR[2];
 
 };
-
 class FaceFunction{
 public:
     ofMatrix3x3 matrix[3];
@@ -55,16 +54,36 @@ public:
     void layerToFace(ofTexture texture){
         fboFace.begin();
         ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
+        //ofBackground(ofColor::blue);
         ShaderLayerToFace.begin();
         ShaderLayerToFace.setUniformTexture("u_texture", texture, 0);
         ShaderLayerToFace.setUniformMatrix3f("matrixX", matrix[0]);
         ShaderLayerToFace.setUniformMatrix3f("matrixY", matrix[1]);
         ShaderLayerToFace.setUniformMatrix3f("matrixR", matrix[2]);
-        ofSetColor(ofColor::white, 0);
+        //ofSetColor(ofColor::white, 0);
         ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
         ShaderLayerToFace.end();
+        //texture.draw(0,0, 3*160, 3*160);
         fboFace.end();
     }
+    
+    void layerToFace(ofFbo texture){
+        fboFace.begin();
+        ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
+        //ofBackground(ofColor::blue);
+        ShaderLayerToFace.begin();
+        ShaderLayerToFace.setUniformMatrix3f("matrixX", matrix[0]);
+        ShaderLayerToFace.setUniformMatrix3f("matrixY", matrix[1]);
+        ShaderLayerToFace.setUniformMatrix3f("matrixR", matrix[2]);
+        ShaderLayerToFace.setUniformTexture("u_texture", texture.getTexture(), 0);
+
+        //ofSetColor(ofColor::white, 0);
+        ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
+        ShaderLayerToFace.end();
+        //texture.draw(0,0, 3*160, 3*160);
+        fboFace.end();
+    }
+    
     void fillMatrix(SpriteObj* _sprite){
         bool i = _sprite->getViewPoint();
         matrix[0].set(_sprite->face->matrix[i][0]->rect.x, _sprite->face->matrix[i][3]->rect.x, _sprite->face->matrix[i][6]->rect.x,

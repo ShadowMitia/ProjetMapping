@@ -68,9 +68,11 @@ void Scene1::draw()
     
     
     fillMatrix(sprites->at(sprites->size()-1));
+    ////
     fboFace.begin();
-    ofClear(0,0,0,0);
+    ofClear(0,0,0,0);//// je crois qu'il y a pas besion de ça 
     fboFace.end();
+    ////
     layerToFace(layer[2].getTexture());
     
     Light* light = dynamic_cast<Light *>(sprites->at(sprites->size()-1));
