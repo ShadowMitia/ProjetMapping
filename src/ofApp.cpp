@@ -63,7 +63,7 @@ void ofApp::setup() {
     
     imageTemp.load("Map_plateformes.png");
     //ofDisableArbTex();
-    //ofEnableArbTex();
+    ofEnableArbTex(); // <-- Very Important
     fillMatrix( &faces[1], 0);
     layerToFace(imageTemp.getTexture());
     
@@ -71,11 +71,17 @@ void ofApp::setup() {
     FboTemp.begin();
     ofClear(0,0, 0, 0);
     ofBackground(ofColor::white);
-    fboFace.draw(0, 0);
+    //fboFace.draw(0, 0);
+    fboFace.getTexture().drawSubsection(160, 160 - 12 , 160, 12, 160, 160 - 12);
     FboTemp.end();
     
     std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
     for (std::size_t i = 0; i < platforms2.size() ; i++) {
+        
+        for (int j=0; j<platforms2[i].getVertices().size(); j++) {
+            platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(160, 160) + faces[1].rect.position;
+        }
+        
         worlds->createPlatform(platforms2[i], 0x0001);
     }
     
@@ -86,6 +92,7 @@ void ofApp::setup() {
         worlds->createLadder(ladders[i]);
     }
     */
+    
     worlds->createPortal(faces);
     
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();

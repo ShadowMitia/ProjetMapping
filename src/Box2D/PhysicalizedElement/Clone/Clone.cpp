@@ -67,7 +67,7 @@ void CloneBox2d::create()
     polygon.create(portalSource->getb2World(),false);
     b2Filter tempFilter;
     tempFilter.categoryBits = 0x0008;
-    tempFilter.maskBits = 0x0001| 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
+    tempFilter.maskBits = 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
     polygon.body->GetFixtureList()->SetFilterData(tempFilter);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
