@@ -72,7 +72,12 @@ void ofApp::setup() {
     ofClear(0,0, 0, 0);
     ofBackground(ofColor::white);
     //fboFace.draw(0, 0);
-    fboFace.getTexture().drawSubsection(160, 160 - 12 , 160, 12, 160, 160 - 12);
+    int unit = 12;
+    fboFace.getTexture().drawSubsection(160, 160 - unit , 160, unit, 160, 160 - unit);
+    fboFace.getTexture().drawSubsection(160, 160*2 , 160, unit, 160, 160*2);
+    fboFace.getTexture().drawSubsection(160 - unit, 160  , unit,160 , 160 - unit, 160 );
+    fboFace.getTexture().drawSubsection(160*2, 160 , unit, 160, 160*2, 160);
+
     FboTemp.end();
     
     std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
