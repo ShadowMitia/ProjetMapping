@@ -64,30 +64,38 @@ void ofApp::setup() {
     imageTemp.load("Map_plateformes.png");
     //ofDisableArbTex();
     ofEnableArbTex(); // <-- Very Important
-    fillMatrix( &faces[1], 0);
-    layerToFace(imageTemp.getTexture());
     
-    FboTemp.allocate(imageTemp.getWidth(), imageTemp.getHeight(),GL_RGBA);
-    FboTemp.begin();
-    ofClear(0,0, 0, 0);
-    ofBackground(ofColor::white);
-    //fboFace.draw(0, 0);
-    int unit = 12;
-    fboFace.getTexture().drawSubsection(160, 160 - unit , 160, unit, 160, 160 - unit);
-    fboFace.getTexture().drawSubsection(160, 160*2 , 160, unit, 160, 160*2);
-    fboFace.getTexture().drawSubsection(160 - unit, 160  , unit,160 , 160 - unit, 160 );
-    fboFace.getTexture().drawSubsection(160*2, 160 , unit, 160, 160*2, 160);
+    for (int faceNb = 0; faceNb < nbFace; faceNb++) {
+        for(int site = 0; site < 2; site++){
+            
+            fillMatrix( &faces[faceNb], site);
+            layerToFace(imageTemp.getTexture());
+            FboTemp.allocate(imageTemp.getWidth(), imageTemp.getHeight(),GL_RGBA);
+            FboTemp.begin();
+            ofClear(0,0, 0, 0);
+            ofBackground(ofColor::white);
+            int unit = 12;
+            fboFace.getTexture().drawSubsection(160, 160 - unit , 160, unit, 160, 160 - unit);
+            fboFace.getTexture().drawSubsection(160, 160*2 , 160, unit, 160, 160*2);
+            fboFace.getTexture().drawSubsection(160 - unit, 160  , unit,160 , 160 - unit, 160 );
+            fboFace.getTexture().drawSubsection(160*2, 160 , unit, 160, 160*2, 160);
+            FboTemp.end();
+            std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
+            for (std::size_t i = 0; i < platforms2.size() ; i++) {
+                
+                for (int j=0; j<platforms2[i].getVertices().size(); j++) {
+                    platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(160, 160) + faces[faceNb].rect.position;
+                }
+                if (site==0) {
+                    worlds->createPlatform(platforms2[i], 0x0001);
 
-    FboTemp.end();
-    
-    std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
-    for (std::size_t i = 0; i < platforms2.size() ; i++) {
-        
-        for (int j=0; j<platforms2[i].getVertices().size(); j++) {
-            platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(160, 160) + faces[1].rect.position;
+                }else{
+                    worlds->createPlatform(platforms2[i], 0x0001);
+
+                }
+            }
+
         }
-        
-        worlds->createPlatform(platforms2[i], 0x0001);
     }
     
     /*////   Import Ladder   /////
