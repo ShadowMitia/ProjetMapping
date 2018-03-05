@@ -131,11 +131,13 @@ void ofApp::setup() {
         pkup->world = worlds;
         pkup->positionInit = ofVec2f(1228, 228);
         pkup->face = & faces[10];
+        
         pkup->create();
+        /*
         b2Filter tempFilter = pkup->getFilter();
         tempFilter.categoryBits = 0x0100;
         tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        pkup->setFilter(tempFilter);
+        pkup->setFilter(tempFilter);*/
         pkup->layerId = 6;
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
@@ -145,11 +147,6 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(196, 356);
         pkup->face = & faces[1];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
@@ -158,11 +155,7 @@ void ofApp::setup() {
     pkup->positionInit = ofVec2f(164, 452);
     pkup->face = & faces[2];
     pkup->create();
-    b2Filter tempFilter = pkup->getFilter();
-    tempFilter.categoryBits = 0x0100;
-    tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-    //pkup->setFilter(tempFilter);
-    //pkup->layer = 6;
+
     sprites.push_back(static_cast<SpriteObj*>(pkup));
     spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
@@ -171,11 +164,6 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(396, 228);
         pkup->face = & faces[3];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
@@ -184,11 +172,7 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(500, 244);
         pkup->face = & faces[5];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
+
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
@@ -197,11 +181,7 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(708, 244);
         pkup->face = & faces[7];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
+
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
 
@@ -210,11 +190,7 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(284, 524);
         pkup->face = & faces[4];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
+
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     

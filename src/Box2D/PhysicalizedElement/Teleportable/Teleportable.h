@@ -26,8 +26,11 @@ public:
     ofVec2f getVelocity();
     void setPosition(ofVec2f p);
     void setVelocity(ofVec2f v);
-    
     void SetGravityScale(float32 scale);
     bool viewPoint = false;
+    uint16 getMaskBits();
+    void setFilter(uint16 maskBits);
+    b2Filter filter;
+    //uint16 maskBits;
     
 };

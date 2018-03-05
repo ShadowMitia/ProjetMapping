@@ -23,9 +23,7 @@ PICKUP   : 0x0040
 MUSHROOM : 0x0080
 */
 
-void AvatarDef::setFilter(b2Filter filter){
-    a->polygon.body->GetFixtureList()->SetFilterData(filter);
-}
+
 void AvatarDef::draw(){
     ofRectangle temp;
     temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
@@ -54,9 +52,7 @@ bool AvatarDef::getViewPoint(){
 }
 
 
-void ObjBlockDef::setFilter(b2Filter filter){
-    b->polygon.body->GetFixtureList()->SetFilterData(filter);
-}
+
 ofVec2f ObjBlockDef::getPositionTranform(){
     return b->getPosition() - face->rect.getPosition() + 160;
 }
@@ -83,9 +79,6 @@ bool ObjBlockDef::getViewPoint(){
     return b->viewPoint;
 }
 
-void ObjPickupDef::setFilter(b2Filter filter){
-    pkup->polygon.body->GetFixtureList()->SetFilterData(filter);
-}
 ofVec2f ObjPickupDef::getPositionTranform(){
     return pkup->getPosition() - face->rect.getPosition() + 160;
 

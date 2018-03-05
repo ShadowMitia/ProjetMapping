@@ -146,7 +146,7 @@ void ObjMushroom::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSpr
     else{
         Teleportable* telport = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
         telport->sprite->layerId = telport->sprite->layerIni;
-        telport->sprite->setFilter(telport->sprite->getFilter());
-        telport->sprite->setFilter( telport->sprite->getFilter());
+        telport->setFilter(telport->sprite->maskBits);// ajout platform 2 ou 3;
+        
     }
 }

@@ -50,9 +50,9 @@ CloneBox2d::~CloneBox2d()
         objSource->sprite->face = portalDestination->face;
         if (layer > 4 ) { //  deffinir  le layer top
             objSource->sprite->layerId = layer; // je crois c que  est inutil
-            b2Filter tempFilter = objSource->sprite->getFilter();
-            tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-            objSource->sprite->setFilter(tempFilter);
+            
+            objSource->setFilter(objSource->getMaskBits()| 0x0100);
+
         }
         (*this.*delectClone)();
         
@@ -74,9 +74,9 @@ void CloneBox2d::create()
     
     
     if (layer == 6) { //  deffinir  le layer top
-        b2Filter tempFilter = objSource->sprite->getFilter();
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        objSource->sprite->setFilter(tempFilter);
+
+        objSource->setFilter(objSource->getMaskBits()| 0x0100);
+
     }
     
     if (data!=nullptr) { // cela ne regle pas la question danger !!!!!!!!!! sleep

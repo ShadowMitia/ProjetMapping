@@ -18,6 +18,15 @@ void Teleportable::setVelocity(ofVec2f v){
     polygon.setVelocity(v);
 }
 
+uint16 Teleportable::getMaskBits(){
+    return filter.maskBits;
+}
+
+void Teleportable::setFilter(uint16 maskBits){
+    filter.categoryBits = maskBits;
+    //polygon.setFilterDataSide(filter);
+    polygon.body->GetFixtureList()->SetFilterData(filter);
+}
 std::vector<ofPoint> loadPoints(const std::string& file)
 {
     std::vector<ofPoint> pts;
