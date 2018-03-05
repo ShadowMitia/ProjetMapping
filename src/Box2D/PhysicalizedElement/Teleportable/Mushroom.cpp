@@ -11,14 +11,16 @@
 #include "Clone.h"
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
 
 void ObjectGame::createObjMushroom(b2World * b2dworld, bool _detectSide){
@@ -112,8 +114,8 @@ ObjMushroom::ObjMushroom(ObjMushroomDef *_ObjMushroomDef){
     
     polygon.addVertices(pts);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.FilterDataObjet.categoryBits = 0x0080;
-    polygon.FilterDataObjet.maskBits =  0x0010 | 0x0008 ;
+    //polygon.FilterDataObjet.categoryBits = 0x0080;
+    //polygon.FilterDataObjet.maskBits =  0x0010 | 0x0008 ;
     
     polygon.createObjMushroom(_ObjMushroomDef->world->world.getWorld(), false);
     

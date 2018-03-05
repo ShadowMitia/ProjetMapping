@@ -13,14 +13,16 @@
 
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
 
 Avatar::Avatar(AvatarDef* _avatarDef)
@@ -38,7 +40,7 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     filter.categoryBits = _avatarDef->categoryBits;
     //filter.maskBits = _avatarDef->maskBits; // mettre plaform 2 ou 3
    
-    setFilter(_avatarDef->maskBits); // ici mask 
+    setFilter(_avatarDef->maskBits | Category::PLATFORM_1); // ici mask
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;
@@ -73,7 +75,12 @@ void Avatar::update()
         clicJump = false;
     }
 ////////////////////////////////////
-    viewPoint = s->b;
+    if (s->b!=viewPoint) {
+        viewPoint = s->b;
+        if (viewPoint) setFilter(sprite->maskBits|Category::PLATFORM_2);
+        else setFilter(sprite->maskBits|Category::PLATFORM_1);
+
+    }
     (*this.*preMove)(s);
     polygon.setVelocity(moveInputX, moveInputY);
     

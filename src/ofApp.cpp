@@ -87,10 +87,10 @@ void ofApp::setup() {
                     platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(160, 160) + faces[faceNb].rect.position;
                 }
                 if (site==0) {
-                    worlds->createPlatform(platforms2[i], 0x0001);
+                    worlds->createPlatform(platforms2[i], 0x0002);
 
                 }else{
-                    worlds->createPlatform(platforms2[i], 0x0001);
+                    worlds->createPlatform(platforms2[i], 0x0004);
 
                 }
             }

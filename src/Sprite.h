@@ -13,17 +13,37 @@
 #include "b2Fixture.h"
 #include "Light.h"
 
+
+enum Category {
+    
+    PLATFORM       = 0x0001,
+    PLATFORM_1     = 0x0002,
+    PLATFORM_2     = 0x0004,
+    PORTAL         = 0x0008,
+    LADDER         = 0x0010,
+    AVATAR         = 0x0020,
+    AVATAR_top     = 0x0040,
+    OBJ            = 0x0080,
+    OBJ_top        = 0x0100,
+    MUSHROOM_top   = 0x0200,
+    
+    
+};
+
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
+
 
 /* Layer
  Layer 0 -> background
@@ -65,8 +85,8 @@ class Avatar;
 class AvatarDef: public SpriteObj, public Light{
 public:
     AvatarDef(){
-        categoryBits = 0x0010;
-        maskBits  = 0x0001 | 0x0002 | 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
+        categoryBits = Category::AVATAR;
+        maskBits  = Category::PLATFORM | Category::PORTAL | Category::LADDER | Category::AVATAR | Category::OBJ ;
         layerIni = layerId =  3;
         color.set(ofColor::orange);
     }
@@ -87,8 +107,8 @@ class ObjBlock;
 class ObjBlockDef: public SpriteObj{
 public:
     ObjBlockDef(){
-        categoryBits = 0x0020;
-        maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 |0x0020 | 0x0040 | 0x0080;
+        categoryBits = Category::OBJ;
+        maskBits = Category::PLATFORM | Category::PORTAL | Category::AVATAR | Category::OBJ;
         layerIni = layerId =  2;
     }
     ofImage spriteImage;
@@ -108,8 +128,8 @@ class ObjPickupDef: public SpriteObj, public Light {
 public:
     
     ObjPickupDef(){
-        categoryBits = 0x0040;
-        maskBits = 0x0001 | 0x0002 | 0x0008 | 0x0010 | 0x0020 | 0x0080;
+        categoryBits = Category::OBJ;
+        maskBits = Category::PLATFORM | Category::PORTAL | Category::AVATAR | Category::OBJ;
         radius = 0.2;
         layerIni = layerId =  3;
         color.set(ofColor::yellow);
@@ -130,8 +150,8 @@ class ObjMushroom;
 class ObjMushroomDef: public SpriteObj{
 public:
     ObjMushroomDef(){
-        categoryBits = 0x0080;
-        maskBits =  0x0010 | 0x0008 ;
+        categoryBits = Category::MUSHROOM_top;
+        maskBits =  0x0200 | 0x0008 ;
         layerIni = layerId =  4;
     }
     

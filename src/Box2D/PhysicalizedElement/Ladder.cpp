@@ -9,17 +9,22 @@
 #include "Ladder.h"
 #include "Avatar.h"
 
+
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
+
+
 void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     
     //ground.clear();
@@ -33,8 +38,8 @@ void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     data->physicalizedElement = this;
     
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0004;
-    tempFilter.maskBits = 0x0010 | 0x0008;
+    tempFilter.categoryBits = Category::LADDER;
+    tempFilter.maskBits = Category::AVATAR;
     polygon.setFilterData(tempFilter);
     
 }
