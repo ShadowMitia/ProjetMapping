@@ -161,7 +161,10 @@ void WorldsBox2d::update(){
 
     //world.update();
     
-
+    for (int i = 0; i < avatars.size(); ++i){
+        avatars[i]->presUpdate();
+    }
+    
     // delect clone
     // ne pas touché
     for (int i = 0; i< clones.size(); ++i) {

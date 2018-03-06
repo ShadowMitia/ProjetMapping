@@ -85,7 +85,7 @@ public:
     }
     
     void fillMatrix(SpriteObj* _sprite){
-        bool i = _sprite->getViewPoint();
+        bool i = _sprite->ViewPoint; //_sprite->getViewPoint();
         matrix[0].set(_sprite->face->matrix[i][0]->rect.x, _sprite->face->matrix[i][3]->rect.x, _sprite->face->matrix[i][6]->rect.x,
                       _sprite->face->matrix[i][1]->rect.x, _sprite->face->matrix[i][4]->rect.x, _sprite->face->matrix[i][7]->rect.x,
                       _sprite->face->matrix[i][2]->rect.x, _sprite->face->matrix[i][5]->rect.x, _sprite->face->matrix[i][8]->rect.x);

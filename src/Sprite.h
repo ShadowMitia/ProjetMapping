@@ -77,7 +77,7 @@ public:
     WorldsBox2d* world;
     uint16 categoryBits;
     uint16 maskBits;
-
+    bool ViewPoint =  false;
     
 };
 
@@ -86,7 +86,7 @@ class AvatarDef: public SpriteObj, public Light{
 public:
     AvatarDef(){
         categoryBits = Category::AVATAR;
-        maskBits  = Category::PLATFORM | Category::PORTAL | Category::LADDER | Category::AVATAR | Category::OBJ ;
+        maskBits  =  Category::PORTAL | Category::LADDER | Category::AVATAR | Category::OBJ ;
         layerIni = layerId =  3;
         color.set(ofColor::orange);
     }
@@ -163,8 +163,10 @@ public:
     void reset() ;
     bool isActif();
     bool getViewPoint(){return false;};
-    
-    
 };
 
+class ObjTrampoline;
+class ObjTrampolineDef: public SpriteObj{
+    
+};
 

@@ -68,8 +68,9 @@ void CloneBox2d::create()
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.create(portalSource->getb2World(),false);
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0008;
-    tempFilter.maskBits = 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
+    //cout << objSource->sprite->categoryBits << endl; /// il y a un bug ici
+    //tempFilter.categoryBits = objSource->sprite->categoryBits;
+    tempFilter.maskBits =  objSource->sprite->maskBits; // - platform
     polygon.body->GetFixtureList()->SetFilterData(tempFilter);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
@@ -123,10 +124,17 @@ void CloneBox2d::update()
         Portal *tempPortal = portalDestination;
         if (!objSource->viewPoint){
             portalView = false;
-            portalDestination = portalSource->linkedPortal[portalView];}
+            portalDestination = portalSource->linkedPortal[portalView];
+            objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_1 | Category::PLATFORM);
+            objSource->sprite->ViewPoint = false;
+        }
         else{
             portalView = true;
-            portalDestination = portalSource->linkedPortal[portalView];}
+            portalDestination = portalSource->linkedPortal[portalView];
+            objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_2 | Category::PLATFORM);
+            objSource->sprite->ViewPoint = true;
+
+        }
         if (tempPortal != portalDestination) {
             for (int i = 1; i<5; ++i) {
                 polygon.tabCollision[i] = 0;
@@ -134,6 +142,8 @@ void CloneBox2d::update()
         }
     }else objSource->viewPoint=portalView;
     
+    //if (viewPoint) setFilter(sprite->maskBits|Category::PLATFORM_2 | Category::PLATFORM);
+    //else setFilter(sprite->maskBits|Category::PLATFORM_1 | Category::PLATFORM);
     
     
     

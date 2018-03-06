@@ -40,7 +40,7 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     filter.categoryBits = _avatarDef->categoryBits;
     //filter.maskBits = _avatarDef->maskBits; // mettre plaform 2 ou 3
    
-    setFilter(_avatarDef->maskBits | Category::PLATFORM_1); // ici mask
+    setFilter(_avatarDef->maskBits | Category::PLATFORM | Category::PLATFORM_1); // ici mask
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::AVATAR;
@@ -59,7 +59,8 @@ Avatar::Avatar(AvatarDef* _avatarDef)
 }
 void Avatar::presUpdate()
 {
-
+        //sprite->ViewPoint = viewPoint;
+    
 }
 void Avatar::update()
 {
@@ -75,12 +76,9 @@ void Avatar::update()
         clicJump = false;
     }
 ////////////////////////////////////
-    if (s->b!=viewPoint) {
-        viewPoint = s->b;
-        if (viewPoint) setFilter(sprite->maskBits|Category::PLATFORM_2);
-        else setFilter(sprite->maskBits|Category::PLATFORM_1);
+    viewPoint = s->b;
 
-    }
+    
     (*this.*preMove)(s);
     polygon.setVelocity(moveInputX, moveInputY);
     
