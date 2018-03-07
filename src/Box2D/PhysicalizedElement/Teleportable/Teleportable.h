@@ -28,6 +28,7 @@ public:
     void setVelocity(ofVec2f v);
     void SetGravityScale(float32 scale);
     bool viewPoint = false;
+    bool viewPointLock = false;
     uint16 getMaskBits();
     void setFilter(uint16 maskBits);
     b2Filter filter;

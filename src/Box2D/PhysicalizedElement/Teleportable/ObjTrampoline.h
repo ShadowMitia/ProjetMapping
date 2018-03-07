@@ -13,7 +13,7 @@
 
 class ObjTrampoline: public Teleportable{
 public:
-    ObjTrampoline(ObjPickupDef* _objPickupDef);
+    ObjTrampoline(ObjTrampolineDef* _objTrampolineDef);
     void draw();
 private:
     

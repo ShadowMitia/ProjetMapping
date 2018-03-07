@@ -59,6 +59,7 @@ CloneBox2d::~CloneBox2d()
         (*this.*delectClone)();
         
     }
+    objSource->viewPointLock=false;
 }
 void CloneBox2d::create()
 {
@@ -121,18 +122,18 @@ void CloneBox2d::update()
     ofPoint t = (portalSource->*f)(objSource->getPosition());
     t = t*portalSource->orient;
     if (t.x < - 3  || t.y < -3) {
+        objSource->viewPointLock = true;
         Portal *tempPortal = portalDestination;
         if (!objSource->viewPoint){
             portalView = false;
             portalDestination = portalSource->linkedPortal[portalView];
             objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_1 | Category::PLATFORM);
-            objSource->sprite->ViewPoint = false;
+            
         }
         else{
             portalView = true;
             portalDestination = portalSource->linkedPortal[portalView];
             objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_2 | Category::PLATFORM);
-            objSource->sprite->ViewPoint = true;
 
         }
         if (tempPortal != portalDestination) {

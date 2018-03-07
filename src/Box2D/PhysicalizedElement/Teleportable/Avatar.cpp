@@ -59,7 +59,6 @@ Avatar::Avatar(AvatarDef* _avatarDef)
 }
 void Avatar::presUpdate()
 {
-        //sprite->ViewPoint = viewPoint;
     
 }
 void Avatar::update()
@@ -76,7 +75,10 @@ void Avatar::update()
         clicJump = false;
     }
 ////////////////////////////////////
-    viewPoint = s->b;
+    if (!viewPointLock) {
+        viewPoint = s->b;
+        sprite->ViewPoint = viewPoint;
+    }
 
     
     (*this.*preMove)(s);
