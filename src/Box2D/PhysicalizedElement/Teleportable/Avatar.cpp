@@ -40,7 +40,7 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     teleportableFilter.categoryBits = _avatarDef->categoryBits;
     
     cout << "1: " << _avatarDef->maskBits <<  "   " << teleportableFilter.maskBits<< endl;
-    setFilter(_avatarDef->maskBits | Category::PLATFORM_1); // maskFilter
+    setFilter(_avatarDef->maskBits | Category::PLATFORM | Category::PLATFORM_1); // maskFilter
     cout << "2: " << teleportableFilter.maskBits << "  " << polygon.body->GetFixtureList()->GetFilterData().maskBits << endl;
     
     polygon.setData(new dataSprite());

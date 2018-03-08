@@ -39,7 +39,7 @@ ObjPickup::ObjPickup(ObjPickupDef* _objPickupDef){
     polygon.body->SetFixedRotation(true);
     
     teleportableFilter.categoryBits = _objPickupDef->categoryBits;
-    setFilter(_objPickupDef->maskBits | Category::PLATFORM_1);
+    setFilter(_objPickupDef->maskBits | Category::PLATFORM |Category::PLATFORM_1);
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();

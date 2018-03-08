@@ -69,10 +69,7 @@ void CloneBox2d::create()
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.create(portalSource->getb2World(),false);
     
-    cout   << " je suis dans create clone : "<< objSource->sprite->categoryBits << endl; /// il y a un bug ici
-    //tempFilter.categoryBits = objSource->sprite->categoryBits;
     tempFilter.categoryBits = Category::CLONE;
-    //tempFilter.maskBits =  objSource->sprite->maskBits ;//| Category::MUSHROOM_top; // - platform
     tempFilter.maskBits = objSource->sprite->maskBits | Category::MUSHROOM_top;
     polygon.body->GetFixtureList()->SetFilterData(tempFilter);
     polygon.setData(new dataSprite());
@@ -130,13 +127,13 @@ void CloneBox2d::update()
         if (!objSource->viewPoint){
             portalView = false;
             portalDestination = portalSource->linkedPortal[portalView];
-            objSource->setFilter(objSource->sprite->maskBits | Category::PLATFORM_1  );
+            objSource->setFilter(objSource->sprite->maskBits | Category::PLATFORM |Category::PLATFORM_1  );
             
         }
         else{
             portalView = true;
             portalDestination = portalSource->linkedPortal[portalView];
-            objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_2 );
+            objSource->setFilter(objSource->sprite->maskBits| Category::PLATFORM |Category::PLATFORM_2 );
 
         }
         if (tempPortal != portalDestination) {

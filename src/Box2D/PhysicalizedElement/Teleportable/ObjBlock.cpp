@@ -34,7 +34,7 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     polygon.body->SetFixedRotation(true);
     
     teleportableFilter.categoryBits = _objBlockDef->categoryBits ;
-    setFilter(_objBlockDef->maskBits | Category::PLATFORM_1);
+    setFilter(_objBlockDef->maskBits | Category::PLATFORM |Category::PLATFORM_1);
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
