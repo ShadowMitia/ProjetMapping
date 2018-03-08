@@ -56,6 +56,6 @@ public:
         ofDrawCircle(shape->m_vertices[3].x*30, shape->m_vertices[3].y*30 , 1);
     };
     
-    void contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite);
-    void contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite);
+    void contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite) override;
+    void contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite) override;
 };

@@ -145,6 +145,7 @@
 		B896EC05CFBC0EDFDEC784F5 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 14D739EB782E84E421105278 /* Sprite.cpp */; };
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
 		BC3AD760204F4F2A00571C0F /* ObjTrampoline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC3AD75E204F4F2A00571C0F /* ObjTrampoline.cpp */; };
+		BC3AD7632051F5DA00571C0F /* bumper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC3AD7612051F5DA00571C0F /* bumper.cpp */; };
 		BCF9C663202D194B001D2269 /* ObjPickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF9C661202D194B001D2269 /* ObjPickup.cpp */; };
 		BCF9C666203242A6001D2269 /* Mushroom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF9C664203242A6001D2269 /* Mushroom.cpp */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
@@ -627,6 +628,8 @@
 		BBAF9D981351C596CA67CAF9 /* hybridtracker.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = hybridtracker.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/contrib/hybridtracker.hpp; sourceTree = SOURCE_ROOT; };
 		BC3AD75E204F4F2A00571C0F /* ObjTrampoline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjTrampoline.cpp; path = Box2D/PhysicalizedElement/Teleportable/ObjTrampoline.cpp; sourceTree = "<group>"; };
 		BC3AD75F204F4F2A00571C0F /* ObjTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ObjTrampoline.h; path = Box2D/PhysicalizedElement/Teleportable/ObjTrampoline.h; sourceTree = "<group>"; };
+		BC3AD7612051F5DA00571C0F /* bumper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bumper.cpp; path = Box2D/PhysicalizedElement/bumper.cpp; sourceTree = "<group>"; };
+		BC3AD7622051F5DA00571C0F /* bumper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bumper.h; path = Box2D/PhysicalizedElement/bumper.h; sourceTree = "<group>"; };
 		BCB571865BB25BC586CF80EC /* SetPresetCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SetPresetCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/SetPresetCmd.h; sourceTree = SOURCE_ROOT; };
 		BCBB74B9531974E1D5DA019B /* HexagonSurface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = HexagonSurface.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/HexagonSurface.cpp; sourceTree = SOURCE_ROOT; };
 		BCF9C661202D194B001D2269 /* ObjPickup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ObjPickup.cpp; path = Box2D/PhysicalizedElement/Teleportable/ObjPickup.cpp; sourceTree = "<group>"; };
@@ -1344,6 +1347,8 @@
 				DD6886BE6922252FABE36532 /* Platform.h */,
 				8F838F4E7CAA51F25637E45D /* PlatformLadder.cpp */,
 				88E5E6A37304881C87C809C1 /* PlatformLadder.h */,
+				BC3AD7612051F5DA00571C0F /* bumper.cpp */,
+				BC3AD7622051F5DA00571C0F /* bumper.h */,
 			);
 			name = PhysicalizedElement;
 			sourceTree = "<group>";
@@ -2271,6 +2276,7 @@
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				E212C821D1064B92DD953A42 /* ofxCvHaarFinder.cpp in Sources */,
+				BC3AD7632051F5DA00571C0F /* bumper.cpp in Sources */,
 				63020F16C7E8DED980111241 /* ofxCvImage.cpp in Sources */,
 				D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */,
 				401140F3B7FA4412935BB121 /* Application.cpp in Sources */,

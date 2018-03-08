@@ -52,7 +52,8 @@ CloneBox2d::~CloneBox2d()
         objSource->sprite->face = portalDestination->face;
         if (layer > 4 ) { //  deffinir  le layer top
             objSource->sprite->layerId = layer; // je crois c que  est inutil
-            
+            objSource->teleportableFilter.categoryBits = Category::OBJ_top;
+            objSource->setFilter(Category::OBJ_top| Category::CLONE | Category::MUSHROOM_top);
             //objSource->setFilter(objSource->getMaskBits()| 0x0100);
 
         }

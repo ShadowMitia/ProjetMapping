@@ -135,9 +135,7 @@ void ObjMushroom::draw(){
     ofSetColor(ofColor::white);
 }
 void ObjMushroom::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
-    cout << " je suis dans le Mushroom: " << polygon.body->GetFixtureList()->GetFilterData().maskBits <<endl;
     if (OtherSprite->sprite == Sprite::CLONE) {
-        cout << " ici" << endl;
         CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
         clone->objSource->sprite->layerId = clone->objSource->sprite->layerId + 4;
         clone->layer = clone->objSource->sprite->layerId;
@@ -150,8 +148,10 @@ void ObjMushroom::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSpr
         clone->layer = clone->layer = clone->objSource->sprite->layerIni;
     }
     else{
+        
         Teleportable* telport = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
         telport->sprite->layerId = telport->sprite->layerIni;
-        telport->setFilter(telport->sprite->maskBits);// ajout platform 2 ou 3;
+        telport->teleportableFilter.categoryBits = telport->sprite->categoryBits;
+        telport->setFilter(telport->sprite->maskBits| Category::PLATFORM |Category::PLATFORM_1);// ajout platform 2 ou 3;
     }
 }

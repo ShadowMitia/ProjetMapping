@@ -64,7 +64,6 @@ void ofApp::setup() {
     imageTemp.load("Map_plateformes.png");
     //ofDisableArbTex();
     ofEnableArbTex(); // <-- Very Important
-    
     for (int faceNb = 0; faceNb < nbFace; faceNb++) {
         for(int site = 0; site < 2; site++){
             
@@ -106,6 +105,7 @@ void ofApp::setup() {
     }
     
     
+    
     worlds->createPortal(faces);
     
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
@@ -125,31 +125,21 @@ void ofApp::setup() {
     sprites.push_back(static_cast<SpriteObj*>(block));
     spritesSolide.push_back(static_cast<SpriteObj*>(block));
     
-  
     
-
-
-    
-
-    
-    
-    /*
     ///    ObjPickupDef
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
-        pkup->positionInit = ofVec2f(1228, 228);
-        pkup->face = & faces[10];
-        
+        pkup->positionInit = ofVec2f(816, 474);
+        pkup->face = & faces[8];
         pkup->create();
-        
         //b2Filter tempFilter = pkup->getFilter();
         //tempFilter.categoryBits = 0x0100;
         //tempFilter.maskBits = tempFilter.maskBits | 0x0100;
         //pkup->setFilter(tempFilter);
-        pkup->layerId = 6;
+        //pkup->layerId = 6;
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
-
+/*
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
         pkup->positionInit = ofVec2f(196, 356);
@@ -209,9 +199,9 @@ void ofApp::setup() {
     // Avatar
     AvatarDef *avatarDef = new AvatarDef();
     avatarDef->world = worlds;
-    avatarDef->positionInit=ofVec2f(150.513, 226.55);
+    avatarDef->positionInit=ofVec2f(801.1, 434.474);
     avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[1];
+    avatarDef->face = &faces[8];
     avatarDef->create();
     sprites.push_back(static_cast<SpriteObj*>(avatarDef));
     spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));

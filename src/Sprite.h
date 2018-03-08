@@ -22,10 +22,10 @@ enum Category {
     PORTAL         = 0x0008,
     LADDER         = 0x0010,
     AVATAR         = 0x0020,
-    CLONE           = 0x0040,
+    CLONE          = 0x0040,
     OBJ            = 0x0080,
     OBJ_top        = 0x0100,
-    MUSHROOM_top    = 0x0200,
+    MUSHROOM_top   = 0x0200,
        //= 0x0400,
     
     
@@ -151,9 +151,9 @@ class ObjMushroom;
 class ObjMushroomDef: public SpriteObj{
 public:
     ObjMushroomDef(){
-        categoryBits = Category::OBJ;
+        categoryBits = Category::MUSHROOM_top;
         //maskBits =  Category::AVATAR | Category::OBJ | Category::CLONE ;
-        maskBits = Category::CLONE ;
+        maskBits = Category::CLONE | Category::OBJ_top;
         layerIni = layerId =  4;
     }
     

@@ -21,7 +21,7 @@ void Scene1::draw()
             plaforms.draw(0, 0);
         }
         if (i==nbLayer-1) {
-            worldsBox2d->draw(); //non alex
+            //worldsBox2d->draw(); //non alex
         }
         layer[i].end();
     }
