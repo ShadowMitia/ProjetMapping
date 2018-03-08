@@ -53,7 +53,7 @@ CloneBox2d::~CloneBox2d()
         if (layer > 4 ) { //  deffinir  le layer top
             objSource->sprite->layerId = layer; // je crois c que  est inutil
             
-            objSource->setFilter(objSource->getMaskBits()| 0x0100);
+            //objSource->setFilter(objSource->getMaskBits()| 0x0100);
 
         }
         (*this.*delectClone)();
@@ -68,10 +68,12 @@ void CloneBox2d::create()
     //polygon.setPhysics(10.f, 0, 0);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.create(portalSource->getb2World(),false);
-    b2Filter tempFilter;
-    //cout << objSource->sprite->categoryBits << endl; /// il y a un bug ici
+    
+    cout   << " je suis dans create clone : "<< objSource->sprite->categoryBits << endl; /// il y a un bug ici
     //tempFilter.categoryBits = objSource->sprite->categoryBits;
-    tempFilter.maskBits =  objSource->sprite->maskBits; // - platform
+    tempFilter.categoryBits = Category::CLONE;
+    //tempFilter.maskBits =  objSource->sprite->maskBits ;//| Category::MUSHROOM_top; // - platform
+    tempFilter.maskBits = objSource->sprite->maskBits | Category::MUSHROOM_top;
     polygon.body->GetFixtureList()->SetFilterData(tempFilter);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
@@ -79,7 +81,8 @@ void CloneBox2d::create()
     
     if (layer == 6) { //  deffinir  le layer top
 
-        objSource->setFilter(objSource->getMaskBits()| 0x0100);
+        //objSource->setFilter(objSource->getMaskBits()| 0x0100);
+        //objSource->setFilter(objSource->getMaskBits());
 
     }
     
@@ -127,13 +130,13 @@ void CloneBox2d::update()
         if (!objSource->viewPoint){
             portalView = false;
             portalDestination = portalSource->linkedPortal[portalView];
-            objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_1 | Category::PLATFORM);
+            objSource->setFilter(objSource->sprite->maskBits | Category::PLATFORM_1  );
             
         }
         else{
             portalView = true;
             portalDestination = portalSource->linkedPortal[portalView];
-            objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_2 | Category::PLATFORM);
+            objSource->setFilter(objSource->sprite->maskBits|Category::PLATFORM_2 );
 
         }
         if (tempPortal != portalDestination) {

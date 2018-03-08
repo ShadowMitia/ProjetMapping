@@ -22,10 +22,11 @@ enum Category {
     PORTAL         = 0x0008,
     LADDER         = 0x0010,
     AVATAR         = 0x0020,
-    AVATAR_top     = 0x0040,
+    CLONE           = 0x0040,
     OBJ            = 0x0080,
     OBJ_top        = 0x0100,
-    MUSHROOM_top   = 0x0200,
+    MUSHROOM_top    = 0x0200,
+       //= 0x0400,
     
     
 };
@@ -86,7 +87,7 @@ class AvatarDef: public SpriteObj, public Light{
 public:
     AvatarDef(){
         categoryBits = Category::AVATAR;
-        maskBits  =  Category::PORTAL | Category::LADDER | Category::AVATAR | Category::OBJ ;
+        maskBits  =  Category::AVATAR | Category::PLATFORM | Category::PORTAL | Category::LADDER |Category::OBJ;
         layerIni = layerId =  3;
         color.set(ofColor::orange);
     }
@@ -108,7 +109,7 @@ class ObjBlockDef: public SpriteObj{
 public:
     ObjBlockDef(){
         categoryBits = Category::OBJ;
-        maskBits = Category::PLATFORM | Category::PORTAL | Category::AVATAR | Category::OBJ;
+        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ | Category::PLATFORM ;
         layerIni = layerId =  2;
     }
     ofImage spriteImage;
@@ -129,7 +130,7 @@ public:
     
     ObjPickupDef(){
         categoryBits = Category::OBJ;
-        maskBits = Category::PLATFORM | Category::PORTAL | Category::AVATAR | Category::OBJ;
+        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ | Category::PLATFORM;
         radius = 0.2;
         layerIni = layerId =  3;
         color.set(ofColor::yellow);
@@ -150,8 +151,9 @@ class ObjMushroom;
 class ObjMushroomDef: public SpriteObj{
 public:
     ObjMushroomDef(){
-        categoryBits = Category::MUSHROOM_top;
-        maskBits =  0x0200 | 0x0008 ;
+        categoryBits = Category::OBJ;
+        //maskBits =  Category::AVATAR | Category::OBJ | Category::CLONE ;
+        maskBits = Category::CLONE ;
         layerIni = layerId =  4;
     }
     
@@ -167,6 +169,19 @@ public:
 
 class ObjTrampoline;
 class ObjTrampolineDef: public SpriteObj{
+    ObjTrampolineDef(){
+        categoryBits = Category::OBJ;
+        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ | Category::PLATFORM;
+        layerIni = layerId =  2;
+    }
+    
+    void draw() override;
+    ofVec2f getPositionTranform() override;
+    void create() override;
+    void reset() override;
+    bool isActif() override;
+    bool getViewPoint() override;
+    
     
 };
 

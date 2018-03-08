@@ -128,10 +128,13 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
     alive = true;
 }
 void ObjectGame::setFilterDataObjet(b2Filter _filter){
+    cout << "setFilterDataObjet" << endl;
     b2Fixture * f = body->GetFixtureList();
     f->SetFilterData(_filter);
 }
 void ObjectGame::setFilterDataSide(b2Filter _filter){
+    cout << "setFilterDataSide" << endl;
+
         int i = 0;
         for( b2Fixture * f = body->GetFixtureList(); f; f = f->GetNext() ){
             if (i!=0) {

@@ -17,4 +17,5 @@ public:
 public:
     void create(b2World* _b2World, ofPolyline _groundLine, uint16 mask);
     void draw();
+    void contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite);
 };

@@ -58,7 +58,7 @@ void ofApp::setup() {
     imageTemp.load("Map_test_portails_plateformes.png");
     std::vector<ofPolyline>  platforms = importImage(imageTemp.getTexture());
     for (std::size_t i = 0; i < platforms.size() ; i++) {
-        worlds->createPlatform(platforms[i], 0x0001);
+        worlds->createPlatform(platforms[i], Category::PLATFORM);
     }
     
     imageTemp.load("Map_plateformes.png");
@@ -87,10 +87,10 @@ void ofApp::setup() {
                     platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(160, 160) + faces[faceNb].rect.position;
                 }
                 if (site==0) {
-                    worlds->createPlatform(platforms2[i], 0x0002);
+                    worlds->createPlatform(platforms2[i], Category::PLATFORM_1);
 
                 }else{
-                    worlds->createPlatform(platforms2[i], 0x0004);
+                    worlds->createPlatform(platforms2[i], Category::PLATFORM_2);
 
                 }
             }
@@ -98,13 +98,13 @@ void ofApp::setup() {
         }
     }
     
-    /*////   Import Ladder   /////
+    ////   Import Ladder   /////
     imageTemp.load("Map_test_portails_echelles.png");
     std::vector<ofPolyline>  ladders = importImage(imageTemp.getTexture());
     for (std::size_t i =0; i< ladders.size() ; i++) {
         worlds->createLadder(ladders[i]);
     }
-    */
+    
     
     worlds->createPortal(faces);
     
@@ -119,13 +119,21 @@ void ofApp::setup() {
     
     ObjBlockDef *block = new ObjBlockDef();
     block->world=worlds;
-    block->positionInit =ofVec2f(1004, 252);
-    block->face =&faces[9];
+    block->positionInit =ofVec2f(774.251, 552.55);
+    block->face =&faces[8];
     block->create();
     sprites.push_back(static_cast<SpriteObj*>(block));
     spritesSolide.push_back(static_cast<SpriteObj*>(block));
     
   
+    
+
+
+    
+
+    
+    
+    /*
     ///    ObjPickupDef
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
@@ -133,11 +141,11 @@ void ofApp::setup() {
         pkup->face = & faces[10];
         
         pkup->create();
-        /*
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        pkup->setFilter(tempFilter);*/
+        
+        //b2Filter tempFilter = pkup->getFilter();
+        //tempFilter.categoryBits = 0x0100;
+        //tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        //pkup->setFilter(tempFilter);
         pkup->layerId = 6;
         sprites.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
@@ -195,7 +203,7 @@ void ofApp::setup() {
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     
-
+*/
     
     
     // Avatar

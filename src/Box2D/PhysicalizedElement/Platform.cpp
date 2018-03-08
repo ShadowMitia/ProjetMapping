@@ -7,6 +7,7 @@
 //
 
 #include "Platform.h"
+#include "Sprite.h"
 /*
  Category bits:
  PLATFORM       : 0x0001
@@ -34,7 +35,7 @@ void Platform::create(b2World *_b2World, ofPolyline _groundLine, uint16 mask){
 
     b2Filter tempFilter;
     tempFilter.categoryBits = mask;
-    tempFilter.maskBits =   mask;
+    tempFilter.maskBits =   Category::AVATAR | Category::OBJ;
     ground.setFilterData(tempFilter);
 }
 
@@ -42,3 +43,6 @@ void Platform::draw(){
     ground.draw();
 }
 
+void Platform::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
+
+}

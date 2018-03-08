@@ -167,6 +167,7 @@ void WorldsBox2d::update(){
     
     // delect clone
     // ne pas touché
+    //cout << "nb de clones:  " << clones.size() << endl;
     for (int i = 0; i< clones.size(); ++i) {
         if (clones[i]->statut>1) {
             // téléportation

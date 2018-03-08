@@ -31,7 +31,6 @@ public:
     bool viewPointLock = false;
     uint16 getMaskBits();
     void setFilter(uint16 maskBits);
-    b2Filter filter;
-    //uint16 maskBits;
+    b2Filter teleportableFilter;
     
 };

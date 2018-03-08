@@ -8,7 +8,7 @@
 #pragma once
 
 
-#define nbLayer 7
+#define nbLayer 8
 
 namespace VarConst
 {

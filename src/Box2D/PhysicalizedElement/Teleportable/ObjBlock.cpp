@@ -33,8 +33,8 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     polygon.create(_objBlockDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
     
-    filter.categoryBits = _objBlockDef->categoryBits;
-    setFilter(_objBlockDef->maskBits);
+    teleportableFilter.categoryBits = _objBlockDef->categoryBits ;
+    setFilter(_objBlockDef->maskBits | Category::PLATFORM_1);
     
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
@@ -56,8 +56,15 @@ void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSpri
     if (OtherSprite->sprite == Sprite::AVATAR) {
         Avatar * a = dynamic_cast<Avatar*>(OtherSprite->physicalizedElement);
         //cout << "viewPoint: " << viewPoint <<  " a->viewPoint: " <<   a->viewPoint << endl;
-        viewPoint = a->viewPoint;
+        viewPoint = a->viewPoint; // attention  << ici
+        cout << e.contact->GetManifold()->localNormal.y << endl;
+        if (e.contact->GetManifold()->localNormal.y == -1) { // voici la code pour le Trampoline
+            a->setVelocity(ofVec2f(a->getVelocity().x, -a->getVelocity().y));
+            a->polygon.addForce(ofVec2f(0, -1), 200);
+            
+        }
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
+        
     }
     if (OtherSprite->sprite == Sprite::CLONE) {
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());

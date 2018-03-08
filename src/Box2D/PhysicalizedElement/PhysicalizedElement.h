@@ -41,6 +41,6 @@ public:
     void    create(b2World * b2dworld, bool _detectSide);
     void    setFilterDataObjet(b2Filter _filter);
     void    setFilterDataSide(b2Filter _filter);
-    b2Filter FilterDataObjet,FilterDataSide;
+    //b2Filter FilterDataObjet,FilterDataSide;
     int tabCollision[5] = {0}; //faire un pt tab ou new tab[1] ou new tab[5];
 };

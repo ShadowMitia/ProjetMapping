@@ -38,8 +38,9 @@ ObjPickup::ObjPickup(ObjPickupDef* _objPickupDef){
     polygon.create(_objPickupDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
     
-    filter.categoryBits = _objPickupDef->categoryBits;
-    setFilter(_objPickupDef->maskBits);
+    teleportableFilter.categoryBits = _objPickupDef->categoryBits;
+    setFilter(_objPickupDef->maskBits | Category::PLATFORM_1);
+    
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::PICKUP;

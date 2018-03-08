@@ -24,6 +24,7 @@
  */
 
 void ObjectGame::createObjMushroom(b2World * b2dworld, bool _detectSide){
+    
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());
         return;
@@ -86,7 +87,7 @@ void ObjectGame::createObjMushroom(b2World * b2dworld, bool _detectSide){
         body->CreateFixture(&fixture);
     }
     
-    setFilterDataObjet(FilterDataObjet);
+    //setFilterDataObjet(FilterDataObjet);
     
     vector<ofPoint> pts = ofPolyline::getVertices();
     mesh.clear();
@@ -109,15 +110,17 @@ ObjMushroom::ObjMushroom(ObjMushroomDef *_ObjMushroomDef){
     ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("Mushroom.dat");
     for (int i= 0; i<pts.size(); ++i) {
-        pts[i].scale(23);
+        //pts[i].scale(23);
     }
     
     polygon.addVertices(pts);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    //polygon.FilterDataObjet.categoryBits = 0x0080;
-    //polygon.FilterDataObjet.maskBits =  0x0010 | 0x0008 ;
     
     polygon.createObjMushroom(_ObjMushroomDef->world->world.getWorld(), false);
+    
+    teleportableFilter.categoryBits = _ObjMushroomDef->categoryBits;
+    setFilter(_ObjMushroomDef->maskBits);
+    
     
     polygon.body->SetFixedRotation(true);
     polygon.setData(new dataSprite());
@@ -132,11 +135,12 @@ void ObjMushroom::draw(){
     ofSetColor(ofColor::white);
 }
 void ObjMushroom::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
+    cout << " je suis dans le Mushroom: " << polygon.body->GetFixtureList()->GetFilterData().maskBits <<endl;
     if (OtherSprite->sprite == Sprite::CLONE) {
+        cout << " ici" << endl;
         CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
         clone->objSource->sprite->layerId = clone->objSource->sprite->layerId + 4;
         clone->layer = clone->objSource->sprite->layerId;
-
     }
     
 }
@@ -149,6 +153,5 @@ void ObjMushroom::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSpr
         Teleportable* telport = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
         telport->sprite->layerId = telport->sprite->layerIni;
         telport->setFilter(telport->sprite->maskBits);// ajout platform 2 ou 3;
-        
     }
 }
