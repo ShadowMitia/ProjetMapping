@@ -134,16 +134,43 @@ void ofApp::setup() {
     sprites.push_back(static_cast<SpriteObj*>(block));
     spritesSolide.push_back(static_cast<SpriteObj*>(block));}
     
+    {ObjBlockDef *block = new ObjBlockDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(1204.45, 336.191);
+        block->face =&faces[11];
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}
+    
+    {ObjBlockDef *block = new ObjBlockDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(1177.5, 484.19);
+        block->face =&faces[12];
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}
+    
     
     // Avatar
-    AvatarDef *avatarDef = new AvatarDef();
+    {AvatarDef *avatarDef = new AvatarDef();
     avatarDef->world = worlds;
     avatarDef->positionInit=ofVec2f(801.1, 434.474);
     avatarDef->s= &inputButton[0];
     avatarDef->face = &faces[8];
     avatarDef->create();
     spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
-    spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
+        spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));}
+    
+    
+    {AvatarDef *avatarDef = new AvatarDef();
+        avatarDef->world = worlds;
+        avatarDef->positionInit=ofVec2f(337.997, 562.55);
+        avatarDef->s= &inputButton[1];
+        avatarDef->face = &faces[4];
+        avatarDef->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
+        spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
+    }
     
     ///    ObjPickupDef
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -178,11 +205,15 @@ void ofApp::setup() {
     
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
-        pkup->positionInit = ofVec2f(396, 228);
-        pkup->face = & faces[3];
+        pkup->positionInit = ofVec2f(985.358, 452.69);
+        pkup->face = & faces[10];
         pkup->create();
+        pkup->categoryBits= Category::OBJ_top;
+        pkup->pkup->setFilter(Category::CLONE | Category::OBJ_top | Category::MUSHROOM_top);
+        pkup->layerIni = pkup->layerId = 6;
         spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
-        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+        //spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+    }
     
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
@@ -239,6 +270,9 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update(){
     //input();
+#ifdef USE_WIIMOTE
+    wiiuse.update();
+#endif
     scene1->update();
     if (!worlds->isThreadRunning()) {
         worlds->update();
@@ -321,8 +355,6 @@ void ofApp::keyReleased(int key)
     else if (key ==' '){
         inputButton[0].a = false;
     }
-    
-    
     
     
     //mapping.keyReleased(key);
@@ -482,10 +514,7 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 #endif //CUSTOM_BOX2D_TIM
 
 void ofApp::input() {
-    
-#ifdef USE_WIIMOTE
-    wiiuse.update();
-#endif
+
     
     ofxGLFWJoystick::one().update();
 
