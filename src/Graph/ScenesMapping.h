@@ -36,7 +36,7 @@ public:
     WorldsBox2d* worldsBox2d;
     string background_name;
     string plaforms_name;
-    vector<SpriteObj*>* _sprites;
+    vector<SpriteObj*>* _spritesSolide;
     vector<SpriteObj*>* _spritesLight;
     
 };
@@ -47,7 +47,9 @@ public:
     int lightSize;
     LightRender lightRender;
     ofImage background, plaforms;
-    vector<SpriteObj*>* sprites;
+    vector<SpriteObj*>*  _spritesSolide;
+    vector<SpriteObj*>*  _spritesLight;
+
     
     WorldsBox2d* worldsBox2d;
     ofFbo mask;
@@ -63,7 +65,8 @@ public:
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(Scene1Def def){
         name = "Scene One FBO Source";
-        sprites= def._sprites;
+        _spritesSolide= def._spritesSolide;
+        _spritesLight = def._spritesLight;
         background.load(def.background_name);
         plaforms.load(def.plaforms_name);
         allocate(background.getWidth(), background.getHeight());

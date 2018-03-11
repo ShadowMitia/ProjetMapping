@@ -59,9 +59,9 @@ ofVec2f ObjBlockDef::getPositionTranform(){
 }
 void ObjBlockDef::draw(){
         ofRectangle temp;
-        temp.setFromCenter(160*3/2, 160*3/2, 18, 18);
+        //temp.setFromCenter(160*3/2, 160*3/2, 48, 48);
         ofVec2f tempP = getPositionTranform();
-        temp.setFromCenter(tempP.x, tempP.y, 18, 18);
+        temp.setFromCenter(tempP.x, tempP.y, 28, 28);
         ofSetColor(ofColor::red);
         ofDrawRectangle(temp);
 

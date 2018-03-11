@@ -13,7 +13,7 @@ ObjTrampoline::ObjTrampoline(ObjTrampolineDef* _objTrampolineDef){
     
     sprite = static_cast<SpriteObj*>(_objTrampolineDef);
     _objTrampolineDef->t = this;
-    std::vector<ofPoint> pts = loadPoints("ObjBlock.dat");
+    std::vector<ofPoint> pts = loadPoints("Trampline.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);

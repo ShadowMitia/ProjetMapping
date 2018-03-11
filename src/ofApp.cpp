@@ -41,7 +41,8 @@ void ofApp::setup() {
     worlds->world.enableEvents();
     worlds->world.getWorld();
     Scene1Def def;
-    def._sprites = &sprites;
+    def._spritesSolide = &spritesSolide;
+    def._spritesLight = &spritesLight;
     def.worldsBox2d = worlds;
     def.background_name = "Map_test_portails_back.png";
     def.plaforms_name = "Map_plateformes.png";
@@ -133,6 +134,17 @@ void ofApp::setup() {
     sprites.push_back(static_cast<SpriteObj*>(block));
     spritesSolide.push_back(static_cast<SpriteObj*>(block));}
     
+    
+    // Avatar
+    AvatarDef *avatarDef = new AvatarDef();
+    avatarDef->world = worlds;
+    avatarDef->positionInit=ofVec2f(801.1, 434.474);
+    avatarDef->s= &inputButton[0];
+    avatarDef->face = &faces[8];
+    avatarDef->create();
+    spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
+    spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
+    
     ///    ObjPickupDef
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
@@ -144,15 +156,15 @@ void ofApp::setup() {
         //tempFilter.maskBits = tempFilter.maskBits | 0x0100;
         //pkup->setFilter(tempFilter);
         //pkup->layerId = 6;
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
-/*
+
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
         pkup->positionInit = ofVec2f(196, 356);
         pkup->face = & faces[1];
         pkup->create();
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -161,7 +173,7 @@ void ofApp::setup() {
     pkup->face = & faces[2];
     pkup->create();
 
-    sprites.push_back(static_cast<SpriteObj*>(pkup));
+    spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
     spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -169,7 +181,7 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(396, 228);
         pkup->face = & faces[3];
         pkup->create();
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -178,7 +190,7 @@ void ofApp::setup() {
         pkup->face = & faces[5];
         pkup->create();
 
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -187,33 +199,17 @@ void ofApp::setup() {
         pkup->face = & faces[7];
         pkup->create();
 
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
 
-    {ObjPickupDef *pkup = new ObjPickupDef();
+   /*{ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
         pkup->positionInit = ofVec2f(284, 524);
         pkup->face = & faces[4];
-        pkup->create();
+        //pkup->create();
 
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
-        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
-    
-    
-*/
-    
-    
-    // Avatar
-    AvatarDef *avatarDef = new AvatarDef();
-    avatarDef->world = worlds;
-    avatarDef->positionInit=ofVec2f(801.1, 434.474);
-    avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[8];
-    avatarDef->create();
-    sprites.push_back(static_cast<SpriteObj*>(avatarDef));
-    spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
-
-    
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}*/
     
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);

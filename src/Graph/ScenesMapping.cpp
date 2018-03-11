@@ -31,30 +31,31 @@ void Scene1::draw()
 
     // Affiche tout les sprites
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    for (int i = 0; i<sprites->size(); ++i) {
-        if (sprites->at(i)->isActif()) {
-            fillMatrix(sprites->at(i));
+    // solide
+    for (int i = 0; i<_spritesSolide->size(); ++i) {
+        if (_spritesSolide->at(i)->isActif()) {
+            fillMatrix(_spritesSolide->at(i));
             fboFace.begin();
             ofClear(0,0,0,0);
-            sprites->at(i)->draw();
+            _spritesSolide->at(i)->draw();
             fboFace.end();
             //faceToLayer(sprites->at(i)->layerId,0);
-            faceToLayer(&layer[sprites->at(i)->layerId], 0);
+            faceToLayer(&layer[_spritesSolide->at(i)->layerId], 0);
         }
 
     }
 
-    
-    for (int i = sprites->size(); i<sprites->size()-1; i++) {
-        if (sprites->at(i)->isActif()) {
-            fillMatrix(sprites->at(i));
+    // light
+    for (int i = 0; i< _spritesLight->size(); i++) {
+        if (_spritesLight->at(i)->isActif()) {
+            fillMatrix(_spritesLight->at(i));
             fboFace.begin();
             ofClear(0,0,0,0);
             fboFace.end();
             
             layerToFace(layer[2].getTexture());
             
-            Light* light = dynamic_cast<Light *>(sprites->at(i));
+            Light* light = dynamic_cast<Light *>(_spritesLight->at(i));
             lightRender.renderLights(&fboFaceShadow, light);
             fboFace.begin();
             ofClear(0,0,0,0);
@@ -66,19 +67,20 @@ void Scene1::draw()
             glBlendFunc(GL_ONE, GL_ZERO);
             faceToLayer(&layer[1],1);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            
         }
     }
     
     
-    fillMatrix(sprites->at(sprites->size()-1));
+    fillMatrix(_spritesLight->at(_spritesLight->size()-1));
     ////
     fboFace.begin();
     ofClear(0,0,0,0);//// je crois qu'il y a pas besion de ça 
     fboFace.end();
-    ////
+    
     layerToFace(layer[2].getTexture());
     
-    Light* light = dynamic_cast<Light *>(sprites->at(sprites->size()-1));
+    Light* light = dynamic_cast<Light *>(_spritesLight->at(_spritesLight->size()-1));
     lightRender.renderLights(&fboFaceShadow, light);
     
     fboFace.begin();
