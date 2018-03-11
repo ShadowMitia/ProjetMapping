@@ -52,17 +52,17 @@ void ObjBlock::draw(){
     ofSetColor(ofColor::white);
 }
 
-void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
+void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite *OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         Avatar * a = dynamic_cast<Avatar*>(OtherSprite->physicalizedElement);
         //cout << "viewPoint: " << viewPoint <<  " a->viewPoint: " <<   a->viewPoint << endl;
         viewPoint = a->viewPoint; // attention  << ici
-        cout << e.contact->GetManifold()->localNormal.y << endl;
+        /*cout << e.contact->GetManifold()->localNormal.y << endl;
         if (e.contact->GetManifold()->localNormal.y == -1) { // voici la code pour le Trampoline
             a->setVelocity(ofVec2f(a->getVelocity().x, -a->getVelocity().y));
-            a->polygon.addForce(ofVec2f(0, -1), 200);
+            a->polygon.addForce(ofVec2f(0, -1), 400);
             
-        }
+        }*/
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());
         
     }
@@ -71,6 +71,7 @@ void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSpri
     }
     //rT->stopThread();
 }
+
 void ObjBlock::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
         polygon.body->SetLinearVelocity(b2Vec2(0, 0));
@@ -87,5 +88,4 @@ void resteTime::threadedFunction(){
     time.waitNext();
     b->sprite->reset();
     cout << "Fin " << endl;
-
 }

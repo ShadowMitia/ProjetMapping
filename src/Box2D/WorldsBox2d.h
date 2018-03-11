@@ -21,6 +21,7 @@
 #include "Mushroom.h"
 #include <vector>
 #include "shift.h"
+#include "ObjTrampoline.h"
 
 class WorldsBox2d :public ofThread{
 public:
@@ -37,6 +38,7 @@ public:
     std::vector<ObjPickup*> pickups;
     std::vector<ObjBlock *> blocks;
     std::vector<ObjMushroom *> Mushrooms;
+    std::vector<ObjTrampoline*> trampolines;
     
     
     Waterfalls*               warterfalls;
@@ -46,6 +48,8 @@ public:
     void update();
     
     void creataBlock( ObjBlockDef * _objBlockDef);
+    void creataBlock( ObjTrampolineDef * _objBlockDef);
+
     void createAvatar(AvatarDef* _avatarDef);
     void createMushroom(ObjMushroomDef* _objMushroomDef);
     void createPickUp(ObjPickupDef* _objPickupDef);

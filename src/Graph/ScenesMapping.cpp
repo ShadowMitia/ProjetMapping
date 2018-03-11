@@ -17,6 +17,9 @@ void Scene1::draw()
     for (int i=0; i<nbLayer; ++i) {
         layer[i].begin();
         ofClear(0, 0, 0, 0);
+        if (i==0) {
+            //background.draw(0, 0);
+        }
         if (i==2) {
             plaforms.draw(0, 0);
         }
@@ -90,8 +93,8 @@ void Scene1::draw()
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
 
     
-    //background.draw(0, 0);
-    ofBackground(ofColor::white);
+    background.draw(0, 0);
+    //ofBackground(ofColor::white);
     ofSetColor(ofColor::white);
     
     for (int i=1; i<nbLayer; ++i) {
@@ -122,9 +125,6 @@ void Scene1::update()
 {
     
 }
-
-
-
 void Scene2::draw()
 {
     ofSetColor(ofColor::white);

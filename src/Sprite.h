@@ -87,7 +87,7 @@ class AvatarDef: public SpriteObj, public Light{
 public:
     AvatarDef(){
         categoryBits = Category::AVATAR;
-        maskBits  =  Category::AVATAR  | Category::PORTAL | Category::LADDER |Category::OBJ;
+        maskBits  =  Category::AVATAR  | Category::PORTAL | Category::LADDER |Category::OBJ | Category::CLONE;
         layerIni = layerId =  3;
         color.set(ofColor::orange);
     }
@@ -109,7 +109,7 @@ class ObjBlockDef: public SpriteObj{
 public:
     ObjBlockDef(){
         categoryBits = Category::OBJ;
-        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ ;
+        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ | Category::CLONE ;
         layerIni = layerId =  2;
     }
     ofImage spriteImage;
@@ -130,7 +130,7 @@ public:
     
     ObjPickupDef(){
         categoryBits = Category::OBJ;
-        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ ;
+        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ  | Category::CLONE;
         radius = 0.2;
         layerIni = layerId =  3;
         color.set(ofColor::yellow);
@@ -169,12 +169,14 @@ public:
 
 class ObjTrampoline;
 class ObjTrampolineDef: public SpriteObj{
+public:
     ObjTrampolineDef(){
         categoryBits = Category::OBJ;
-        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ ;
+        maskBits = Category::PORTAL | Category::AVATAR | Category::OBJ  | Category::CLONE;
         layerIni = layerId =  2;
     }
     
+    ObjTrampoline * t;
     void draw() override;
     ofVec2f getPositionTranform() override;
     void create() override;

@@ -117,14 +117,21 @@ void ofApp::setup() {
     spritesSolide.push_back(static_cast<SpriteObj*>(objMushroomDef));
     
     
-    ObjBlockDef *block = new ObjBlockDef();
+    {ObjTrampolineDef *block = new ObjTrampolineDef();
     block->world=worlds;
     block->positionInit =ofVec2f(774.251, 552.55);
     block->face =&faces[8];
     block->create();
     sprites.push_back(static_cast<SpriteObj*>(block));
-    spritesSolide.push_back(static_cast<SpriteObj*>(block));
+    spritesSolide.push_back(static_cast<SpriteObj*>(block));}
     
+    {ObjBlockDef *block = new ObjBlockDef();
+    block->world=worlds;
+    block->positionInit =ofVec2f(1145.4, 292.062);
+    block->face =&faces[11];
+    block->create();
+    sprites.push_back(static_cast<SpriteObj*>(block));
+    spritesSolide.push_back(static_cast<SpriteObj*>(block));}
     
     ///    ObjPickupDef
     {ObjPickupDef *pkup = new ObjPickupDef();

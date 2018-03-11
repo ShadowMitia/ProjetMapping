@@ -205,6 +205,11 @@ void WorldsBox2d::creataBlock(ObjBlockDef * _objBlockDef){
     block->setPosition(_objBlockDef->positionInit);
     blocks.push_back(block);
 }
+void WorldsBox2d::creataBlock(ObjTrampolineDef * _objBlockDef){
+    ObjTrampoline * block = new ObjTrampoline( _objBlockDef);
+    block->setPosition(_objBlockDef->positionInit);
+    trampolines.push_back(block);
+}
 void WorldsBox2d::createMushroom(ObjMushroomDef *_objMushroomDef){
     ObjMushroom *mroom = new ObjMushroom(_objMushroomDef);
     mroom->setPosition(_objMushroomDef->positionInit);

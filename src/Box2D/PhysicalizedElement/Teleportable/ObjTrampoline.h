@@ -5,6 +5,7 @@
 //  Created by FatDazz_mac on 06/03/2018.
 //
 //
+#pragma once
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
