@@ -47,8 +47,6 @@ void ofApp::setup() {
     def.background_name = "Map_test_portails_back.png";
     def.plaforms_name = "Map_plateformes.png";
     
-
-
     
     
     generateFaces();
@@ -109,6 +107,39 @@ void ofApp::setup() {
     
     worlds->createPortal(faces);
     
+    {AvatarDef *avatarDef = new AvatarDef();
+        avatarDef->world = worlds;
+        avatarDef->positionInit=ofVec2f(130, 80);
+        avatarDef->s= &inputButton[0];
+        avatarDef->face = &faces[1];
+        avatarDef->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
+        spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));}
+    
+    
+    for (int i = 0; i< 10; i++) {
+        for (int j = 0; j<2; j++) {
+            ObjPickupDef *pkup = new ObjPickupDef();
+            pkup->world = worlds;
+            pkup->positionInit = ofVec2f(102+20+48 + (160+48)*i, 80 + (160+48)*j);
+            pkup->face = & faces[i+1 + j*10];
+            pkup->create();
+            spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+            spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+            pkup = new ObjPickupDef();
+            pkup->world = worlds;
+            pkup->positionInit = ofVec2f(102+40+48 + (160+48)*i, 80 + (160+48)*j);
+            pkup->face = & faces[i+1 + j*10];
+            pkup->create();
+            spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+            spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        }
+        
+    }
+    
+    
+   
+    /*
     ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
     objMushroomDef->world= worlds;
     objMushroomDef->positionInit = ofVec2f(968, 440);
@@ -231,7 +262,7 @@ void ofApp::setup() {
         pkup->create();
 
         spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
-        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}*/
 
    /*{ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
@@ -324,8 +355,8 @@ void ofApp::keyPressed(int key)
     if (key == 'm') {
         //tempI++;
         //cout << "tempI: " << tempI << endl;
-        cout << "position avatar: " << sprites[sprites.size()-1]->world->avatars[0]->getPosition() << endl;
-        cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
+        //cout << "position avatar: " << sprites[sprites.size()-1]->world->avatars[0]->getPosition() << endl;
+        //cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
         
     }
     
@@ -647,7 +678,7 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
         }
         case OFXWIIUSE_BUTTON_TWO_RELEASED:
         {
-            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
+            //worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
             inputButton[args.first - 1].b = false;
             break;
         }
@@ -670,6 +701,7 @@ void ofApp::onWiiuseIRTrackingEvent(ofxWiiuseIRTrackingEventArgs& args)
 
 void ofApp::generateFaces()
 {
+    
     std::vector<std::vector<std::string>> f = readCSV(ofToDataPath("faces.csv"));
     for (std::size_t i = 0; i <nbFace*2; i += 2)
     {
@@ -708,5 +740,6 @@ void ofApp::generateFaces()
                                   std::atoi(f[i+1][10].c_str()), std::atoi(f[i+1][16].c_str()), std::atoi(f[i+1][22].c_str()),
                                   std::atoi(f[i+1][12].c_str()), std::atoi(f[i+1][18].c_str()), std::atoi(f[i+1][24].c_str()));
     }
+  
     
 }

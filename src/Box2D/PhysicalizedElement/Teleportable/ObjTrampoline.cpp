@@ -48,7 +48,7 @@ void ObjTrampoline::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dat
         cout << e.contact->GetManifold()->localNormal.y << endl;
         if (e.contact->GetManifold()->localNormal.y == -1) { // voici la code pour le Trampoline
             a->setVelocity(ofVec2f(a->getVelocity().x, -a->getVelocity().y));
-            a->polygon.addForce(ofVec2f(0, -1), 300);
+            //a->polygon.addForce(ofVec2f(0, -1), 300);
             
         }
         polygon.body->SetLinearVelocity(_fixture->GetBody()->GetLinearVelocity());

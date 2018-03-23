@@ -71,7 +71,7 @@ void Scene1::draw()
         }
     }
     
-    
+/*  vire a pour
     fillMatrix(_spritesLight->at(_spritesLight->size()-1));
     ////
     fboFace.begin();
@@ -93,7 +93,7 @@ void Scene1::draw()
     glBlendFunc(GL_ONE, GL_ZERO);
     faceToLayer(&layer[1],1);
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-
+*/
     
     background.draw(0, 0);
     //ofBackground(ofColor::white);
