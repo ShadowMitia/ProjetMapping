@@ -287,6 +287,7 @@ void ofApp::setup() {
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
     
+    
     scene1 = new Scene1(def);
     scene2 = new Scene2(worlds);
     
@@ -683,13 +684,14 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
         case OFXWIIUSE_BUTTON_TWO_PRESSED:
         {
             //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT_CONTROL);
-            inputButton[args.first - 1].b = true;
+            //inputButton[args.first - 1].b = true;
+            inputButton[args.first - 1].b = !inputButton[args.first - 1].b;
             break;
         }
         case OFXWIIUSE_BUTTON_TWO_RELEASED:
         {
-            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
-            inputButton[args.first - 1].b = false;
+            //worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
+            //inputButton[args.first - 1].b = false;
             break;
         }
             
