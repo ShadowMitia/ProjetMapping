@@ -12,6 +12,7 @@
 #include "ObjPickup.h"
 #include "ObjTrampoline.h"
 #include "WorldsBox2d.h"
+#include "SpriteAvatar.h"
 /*
 Category bits:
 PLATFORM : 0x0001
@@ -33,7 +34,10 @@ void AvatarDef::draw(){
     ofSetColor(ofColor::orange);
     ofDrawRectangle(temp);
     ofSetColor(ofColor::white);
+    drawMove(tempP);
 }
+
+
 ofVec2f AvatarDef::getPositionTranform(){
     return  a->getPosition() - face->rect.getPosition() + 160;
 }

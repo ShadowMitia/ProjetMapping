@@ -90,6 +90,11 @@ public:
         maskBits  =  Category::AVATAR  | Category::PORTAL | Category::LADDER |Category::OBJ | Category::CLONE;
         layerIni = layerId =  3;
         color.set(ofColor::orange);
+        moveImages[0].load("ava_1.png");
+        moveImages[0].mirror(false, false);
+        moveImages[1].load("ava_2.png");
+        moveImages[2].load("ava_3.png");
+        moveImages[3].load("ava_4.png");
     }
     ofImage spriteImage;
     Shift* s;
@@ -100,6 +105,15 @@ public:
     void reset() override;
     bool isActif() override;
     bool getViewPoint() override;
+    
+    
+    void drawMove(ofVec2f p);
+    void drawjump();
+    
+    float n;
+    ofImage moveImages[4];
+    ofImage jumpImage[3];
+    ofImage jadderImage[3];
 
     
 };
@@ -139,6 +153,9 @@ public:
     ofImage spriteImage;
     ObjPickup * pkup;
     void draw() override;
+
+    
+
     ofVec2f getPositionTranform() override;
     void create() override;
     void reset() override;
