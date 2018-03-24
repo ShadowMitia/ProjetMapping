@@ -19,7 +19,7 @@
 
 
 
-enum class Sprite {UNKNOWN, AVATAR, CLONE, PLATFORM, BLOCK, PICKUP, PORTAL ,LADDER, MUSHROOM};
+enum class Sprite {UNKNOWN, AVATAR, CLONE, PLATFORM, BLOCK, PICKUP, PORTAL ,LADDER, MUSHROOM, sensorAVATAR};
 class PhysicalizedElement;
 
 struct dataSprite {

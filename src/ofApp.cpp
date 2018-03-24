@@ -105,12 +105,7 @@ void ofApp::setup() {
         worlds->createLadder(ladders[i]);
     }
     
-    
-    
-    
-    
-    
-    
+
     worlds->createPortal(faces);
     
     
@@ -124,6 +119,14 @@ void ofApp::setup() {
         spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
         spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
     }
+    
+    {ObjBlockDef *block = new ObjBlockDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(1204.45, 336.191);
+        block->face =&faces[11];
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}
     
     for (int i = 0; i< 0; i++) {
         for (int j = 0; j<0; j++) {
@@ -423,7 +426,7 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    mapping.mouseReleased(x, y, button);
+    //mapping.mouseReleased(x, y, button);
 }
 
 //--------------------------------------------------------------

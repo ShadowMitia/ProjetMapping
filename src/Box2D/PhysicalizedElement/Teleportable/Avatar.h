@@ -13,6 +13,7 @@
 #include "Sprite.h"
 #include "Ladder.h"
 
+
 enum class Deplacement { PLATFORM = 0, TOP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, PLATFORMLADDER, LADDER };
 class Avatar;
 class coyoteTime: public ofThread{
@@ -27,6 +28,7 @@ public:
 };
 class Avatar : public Teleportable {
 public:
+    ofxBox2dCircle sensor;
     Avatar(AvatarDef* _avatarDef);
     Shift *s;
     bool jumping;

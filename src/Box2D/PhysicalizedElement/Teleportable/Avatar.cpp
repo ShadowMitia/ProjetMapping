@@ -48,7 +48,17 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     data->sprite = Sprite::AVATAR;
     data->physicalizedElement = this;
     /////////////// FOOT ///////////////
-    
+    sensor.setPhysics(0, 0, 0);
+    sensor.setup(_avatarDef->world->world.getWorld(), 0, 0, 30);
+    sensor.body->GetFixtureList()->SetSensor(true);
+    sensor.setData(new dataSprite());
+    dataSprite* sentorData = (dataSprite*)sensor.getData();
+    sentorData->sprite = Sprite::sensorAVATAR;
+    sentorData->physicalizedElement = this;
+    b2Filter filterS;
+    filterS.categoryBits = Category::AVATAR;
+    filterS.maskBits = Category::OBJ;
+    sensor.body->GetFixtureList()->SetFilterData(filterS);
     
     moveInputX = 0.0f;
     setJumping(false);
@@ -66,6 +76,7 @@ void Avatar::presUpdate()
 void Avatar::update()
 {
 //////////////JUMP///////////////////
+    sensor.setPosition(polygon.getPosition());
     if (s->a && !clicJump) {
         clicJump = true;
         jump();
@@ -211,6 +222,15 @@ void Avatar::setJumping(bool _bool)
 /////////////// collision avatar ///////////////
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
+    //cout << "alex1 " << endl;
+
+    
+    dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
+    dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
+    if (aSprite->sprite== Sprite::sensorAVATAR || bSprite->sprite== Sprite::sensorAVATAR) {
+        cout << "alex " << endl;
+    }
+    
     if (OtherSprite->sprite==Sprite::BLOCK) {
         if (e.contact->GetManifold()->localNormal.y == 1) {
             setJumping(false);
@@ -240,6 +260,14 @@ void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
 }
 void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
+
+    dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
+    dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
+    if (aSprite->sprite== Sprite::sensorAVATAR || bSprite->sprite== Sprite::sensorAVATAR) {
+        cout << "alex s " << endl;
+        
+    }
+    
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
             polygon.tabCollision[2]--;
@@ -271,7 +299,6 @@ void Avatar::PreSolve(b2Fixture* _fixture,dataSprite* OtherSprite,ofxBox2dPreCon
             setJumping(false);
         }
     }
-    
 }
 void coyoteTime::threadedFunction()
 {
