@@ -20,7 +20,7 @@
 #include "ofxWiiuse.h"
 #endif
 
-#define nbFace  51 //13
+#define nbFace  13
 
 #ifdef USE_WIIMOTE
 class ofApp : public ofBaseApp, public ofxWiiuseListener, public FaceFunction {
