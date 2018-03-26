@@ -113,9 +113,9 @@ void ofApp::setup() {
     
     {AvatarDef *avatarDef = new AvatarDef();
         avatarDef->world = worlds;
-        avatarDef->positionInit=ofVec2f(337.997, 562.55);
+        avatarDef->positionInit=ofVec2f(130, 80);
         avatarDef->s= &inputButton[0];
-        avatarDef->face = &faces[4];
+        avatarDef->face = &faces[1];
         avatarDef->create();
         spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
         spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
