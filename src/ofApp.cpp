@@ -61,6 +61,7 @@ void ofApp::setup() {
     for (std::size_t i = 0; i < platforms.size() ; i++) {
         worlds->createPlatform(platforms[i], Category::PLATFORM);
     }
+    def.platforms = platforms;
     
     imageTemp.load("Map_plateformes.png");
     //ofDisableArbTex();

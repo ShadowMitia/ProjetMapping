@@ -34,6 +34,7 @@
 class Scene1Def{
 public:
     WorldsBox2d* worldsBox2d;
+    vector<ofPolyline>  platforms;
     string background_name;
     string plaforms_name;
     vector<SpriteObj*>* _spritesSolide;
@@ -61,6 +62,7 @@ public:
     
     ofFbo fboFaceShadow;
     ofFbo layer[nbLayer];
+    ofFbo layerPlatform;
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(Scene1Def def);
