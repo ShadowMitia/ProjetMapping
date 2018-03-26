@@ -49,8 +49,6 @@ void ofApp::setup() {
     
 
 
-    
-    
     generateFaces();
 
     ////   Import Platform   /////
@@ -128,6 +126,19 @@ void ofApp::setup() {
         block->create();
         sprites.push_back(static_cast<SpriteObj*>(block));
         spritesSolide.push_back(static_cast<SpriteObj*>(block));}
+    
+    
+    
+    /*{
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(337.997-50, 562.55);
+        pkup->face = & faces[4];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+
+    }*/
     
     for (int i = 0; i< 0; i++) {
         for (int j = 0; j<0; j++) {

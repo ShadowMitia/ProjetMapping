@@ -178,6 +178,7 @@ void Avatar::setMove(Deplacement _move)
             //cout << "PLATFORM" << endl;
             modeDeplace = Deplacement::PLATFORM;
             preMove=&Avatar::movePlatform;
+            //(this->sprite->setMouve(platform))
             //move=&Avatar::moveNord;
             break;
         case Deplacement::TOP :
