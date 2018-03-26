@@ -8,7 +8,7 @@
 
 enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 #include "ScenesMapping.h"
-
+#include "fctGraph.h"
 
 void Scene1::draw()
 {
@@ -21,7 +21,7 @@ void Scene1::draw()
             background.draw(0, 0);
         }
         if (i==2) {
-            plaforms.draw(0, 0);
+            layerPlatform.draw(0, 0);
         }
         if (i==nbLayer-1) {
             //worldsBox2d->draw(); //non alex
@@ -160,7 +160,7 @@ Scene1::Scene1(Scene1Def def){
     for (int i=0; i<nbLayer; ++i) {
         layer[i].allocate(background.getWidth(), background.getHeight());
     }
-    
+    layerPlatform.allocate(background.getWidth(), background.getHeight());
     //lightSize = 256;
     lightSize = 160;
     ofDisableArbTex();  // <-- Very Important
@@ -173,6 +173,20 @@ Scene1::Scene1(Scene1Def def){
     mask.end();
     
     
+    vector<ofPolyline> BezierPlatform;
+    for (int i = 0; i< def.platforms.size(); i++) {
+        BezierPlatform.push_back(fctBezier(def.platforms[i], ofPoint(3,3), 2));
+    }
+    cout << " nb de plateporme : " << BezierPlatform.size()  << endl;
+    layerPlatform.begin();
+    ofClear(0, 0, 0, 0);
+    for (int i =0; i<BezierPlatform.size(); i++) {
+        ofSetColor(ofColor::black);
+        BezierPlatform[i].draw();
+    }
+    layerPlatform.end();
+    ofSetColor(ofColor::white);
+
 }
 
 
