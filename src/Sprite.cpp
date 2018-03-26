@@ -34,7 +34,7 @@ void AvatarDef::draw(){
     ofSetColor(ofColor::orange);
     ofDrawRectangle(temp);
     ofSetColor(ofColor::white);
-    drawMove(tempP);
+    //drawMove(tempP);
 }
 
 

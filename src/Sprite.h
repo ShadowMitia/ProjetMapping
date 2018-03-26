@@ -91,10 +91,11 @@ public:
         layerIni = layerId =  3;
         color.set(ofColor::orange);
         moveImages[0].load("ava_1.png");
-        moveImages[0].mirror(false, false);
+        //moveImages[0].mirror(false, false);
         moveImages[1].load("ava_2.png");
         moveImages[2].load("ava_3.png");
         moveImages[3].load("ava_4.png");
+        
     }
     ofImage spriteImage;
     Shift* s;

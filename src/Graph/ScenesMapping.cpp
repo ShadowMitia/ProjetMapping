@@ -18,13 +18,14 @@ void Scene1::draw()
         layer[i].begin();
         ofClear(0, 0, 0, 0);
         if (i==0) {
-            //background.draw(0, 0);
+            background.draw(0, 0);
         }
         if (i==2) {
             plaforms.draw(0, 0);
         }
         if (i==nbLayer-1) {
             //worldsBox2d->draw(); //non alex
+            ofBackground(ofColor::black);
         }
         layer[i].end();
     }
@@ -68,11 +69,28 @@ void Scene1::draw()
             faceToLayer(&layer[1],1);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             
+            
+            fboFace.begin();
+            ofClear(0,0,0,0);
+            ofBackground(ofColor::black);
+            ofPushMatrix();
+            ofTranslate(light->getPositionTranform().x , light->getPositionTranform().y);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_ONE, GL_ZERO);
+            ofSetColor(ofColor::white);
+            ofDrawCircle(0, 0, 82);
+            fboFace.end();
+            
+            ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+            faceToLayer(&layer[nbLayer-1], 2);
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            
+            
         }
     }
     
     
-    fillMatrix(_spritesLight->at(_spritesLight->size()-1));
+    /*fillMatrix(_spritesLight->at(_spritesLight->size()-1));
     ////
     fboFace.begin();
     ofClear(0,0,0,0);//// je crois qu'il y a pas besion de ça 
@@ -92,14 +110,14 @@ void Scene1::draw()
     glEnable(GL_BLEND);
     glBlendFunc(GL_ONE, GL_ZERO);
     faceToLayer(&layer[1],1);
-    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);*/
 
     
-    background.draw(0, 0);
+    //background.draw(0, 0);
     //ofBackground(ofColor::white);
     ofSetColor(ofColor::white);
     
-    for (int i=1; i<nbLayer; ++i) {
+    for (int i=0; i<nbLayer; ++i) {
         if (i!=20) {
             layer[i].draw(0, 0);
 
@@ -127,6 +145,37 @@ void Scene1::update()
 {
     
 }
+
+Scene1::Scene1(Scene1Def def){
+    name = "Scene One FBO Source";
+    _spritesSolide= def._spritesSolide;
+    _spritesLight = def._spritesLight;
+    background.load(def.background_name);
+    plaforms.load(def.plaforms_name);
+    allocate(background.getWidth(), background.getHeight());
+    worldsBox2d =def.worldsBox2d;
+    
+    
+    fboFaceShadow.allocate(160*3, 160*3);
+    for (int i=0; i<nbLayer; ++i) {
+        layer[i].allocate(background.getWidth(), background.getHeight());
+    }
+    
+    //lightSize = 256;
+    lightSize = 160;
+    ofDisableArbTex();  // <-- Very Important
+    lightRender.setup(lightSize,lightSize);
+    lightRender.setRenderFunction(this, &Scene1::renderPlatform);
+    lightRender.setRenderFunction(this, &Scene1::renderObjects);
+    mask.allocate(background.getWidth(), background.getHeight());
+    mask.begin();
+    ofClear(0);
+    mask.end();
+    
+    
+}
+
+
 void Scene2::draw()
 {
     ofSetColor(ofColor::white);

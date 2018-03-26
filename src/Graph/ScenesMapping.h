@@ -63,32 +63,7 @@ public:
     ofFbo layer[nbLayer];
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
-    Scene1(Scene1Def def){
-        name = "Scene One FBO Source";
-        _spritesSolide= def._spritesSolide;
-        _spritesLight = def._spritesLight;
-        background.load(def.background_name);
-        plaforms.load(def.plaforms_name);
-        allocate(background.getWidth(), background.getHeight());
-        worldsBox2d =def.worldsBox2d;
-        
-        
-        fboFaceShadow.allocate(160*3, 160*3);
-        for (int i=0; i<nbLayer; ++i) {
-            layer[i].allocate(background.getWidth(), background.getHeight());
-        }
-        
-        //lightSize = 256;
-        lightSize = 160;
-        ofDisableArbTex();  // <-- Very Important
-        lightRender.setup(lightSize,lightSize);
-        lightRender.setRenderFunction(this, &Scene1::renderPlatform);
-        lightRender.setRenderFunction(this, &Scene1::renderObjects);
-        mask.allocate(background.getWidth(), background.getHeight());
-        mask.begin();
-        ofClear(0);
-        mask.end();
-    }
+    Scene1(Scene1Def def);
     
 };
 class Scene2 : public ofx::piMapper::FboSource
