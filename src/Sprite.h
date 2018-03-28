@@ -90,6 +90,7 @@ public:
         maskBits  =  Category::AVATAR  | Category::PORTAL | Category::LADDER |Category::OBJ | Category::CLONE;
         layerIni = layerId =  3;
         color.set(ofColor::orange);
+        drawMove = &AvatarDef::drawMovePlaform;
         moveImages[0].load("ava_1.png");
         //moveImages[0].mirror(false, false);
         moveImages[1].load("ava_2.png");
@@ -108,7 +109,13 @@ public:
     bool getViewPoint() override;
     
     
-    void drawMove(ofVec2f p);
+    void setMove(int i);//Deplacement move);
+    void drawMovePlaform(ofVec2f p);
+    void drawMoveTop(ofVec2f p);
+
+    void(AvatarDef::*drawMove)(ofVec2f p);
+
+    
     void drawjump();
     
     float n;

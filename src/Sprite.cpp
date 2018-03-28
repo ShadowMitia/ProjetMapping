@@ -26,36 +26,6 @@ MUSHROOM : 0x0080
 */
 
 
-void AvatarDef::draw(){
-    ofRectangle temp;
-    temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
-    ofVec2f tempP = getPositionTranform();
-    temp.setFromCenter(tempP.x, tempP.y, 12, 12);
-    ofSetColor(ofColor::orange);
-    ofDrawRectangle(temp);
-    ofSetColor(ofColor::white);
-    //drawMove(tempP);
-}
-
-
-ofVec2f AvatarDef::getPositionTranform(){
-    return  a->getPosition() - face->rect.getPosition() + 160;
-}
-void AvatarDef::create(){
-    world->createAvatar(this);
-}
-void AvatarDef::reset(){
-    a->setPosition(positionInit);
-    face = faceIni;
-    a->setMove(Deplacement::PLATFORM);
-}
-bool AvatarDef::isActif(){
-    return a->polygon.body->IsActive();
-}
-bool AvatarDef::getViewPoint(){
-    return a->viewPoint;
-}
-
 
 
 ofVec2f ObjBlockDef::getPositionTranform(){
