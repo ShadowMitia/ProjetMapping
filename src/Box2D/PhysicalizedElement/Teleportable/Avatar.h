@@ -46,6 +46,8 @@ public:
 
 private:
     
+    vector<Teleportable*> objsSensor;
+    
     float moveInputX;
     float moveInputY;
     coyoteTime* ct;

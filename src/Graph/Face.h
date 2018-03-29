@@ -32,7 +32,7 @@ public:
             printf("transform.frag\n");
         }
         //fboSortie.allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
-        if(!ShaderFaceToLayer.load("passTransform.vert", "faceToLayer.frag")) {
+        if(!ShaderFaceToLayer.load("passTransform.vert", "faceToLayer2.frag")) {
             printf("transformInv.frag\n");
         }
     }
@@ -51,6 +51,17 @@ public:
         ShaderFaceToLayer.end();
         layer->end();
     }
+    void faceToLayer2(ofFbo *layer, int mode){
+        layer->begin();
+        for (int i = 0; i<3; ++i) {
+            for (int j = 0; j<3; ++j) {
+                fboFace.getTexture().drawSubsection(matrix[0][i + j*3],matrix[1][i + j*3] , 160, 160, 160*i, 160*j);
+            }
+        }
+        layer->end();
+    }
+    
+    
     void layerToFace(ofTexture texture){
         fboFace.begin();
         ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0

@@ -323,6 +323,8 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    ofSetWindowTitle(ofToString((int)ofGetFrameRate()));
+
     //input();
 #ifdef USE_WIIMOTE
     wiiuse.update();

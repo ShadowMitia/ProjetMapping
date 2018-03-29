@@ -111,7 +111,12 @@ void Portal::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite
     //PhysicalizedElement::contactStart(_fixture, OtherSprite);
     CloneBox2d *temp;
     Teleportable *objSource = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
-
+    if (OtherSprite->sprite == Sprite::AVATAR) {
+        if (true) {
+            cout << " je suis la " << endl;
+        }
+    }
+    
     temp  = new CloneBox2d(objSource, this, nullptr);
     worldsBox2d->clones.push_back(temp);
     clones.push_back(temp);

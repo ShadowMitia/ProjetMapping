@@ -34,7 +34,7 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     polygon.addVertices(pts);
     
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.create(_avatarDef->world->world.getWorld(), false);
+    polygon.create(_avatarDef->world->world.getWorld(), true);
     polygon.body->SetFixedRotation(true);
     ////////////////////////////////////////////_avatarDef->setFilter(_avatarDef->filter);
     teleportableFilter.categoryBits = _avatarDef->categoryBits;
@@ -48,17 +48,24 @@ Avatar::Avatar(AvatarDef* _avatarDef)
     data->sprite = Sprite::AVATAR;
     data->physicalizedElement = this;
     /////////////// FOOT ///////////////
-    sensor.setPhysics(0, 0, 0);
-    sensor.setup(_avatarDef->world->world.getWorld(), 0, 0, 30);
-    sensor.body->GetFixtureList()->SetSensor(true);
-    sensor.setData(new dataSprite());
-    dataSprite* sentorData = (dataSprite*)sensor.getData();
-    sentorData->sprite = Sprite::sensorAVATAR;
-    sentorData->physicalizedElement = this;
-    b2Filter filterS;
-    filterS.categoryBits = Category::AVATAR;
-    filterS.maskBits = Category::OBJ;
-    sensor.body->GetFixtureList()->SetFilterData(filterS);
+    
+    
+    
+    //sensor.setPhysics(0, 0, 0);
+    //sensor.setup(_avatarDef->world->world.getWorld(), 0, 0, 30);
+    //sensor.body->GetFixtureList()->SetSensor(true);
+    //sensor.setData(new dataSprite());
+    //dataSprite* sentorData = (dataSprite*)sensor.getData();
+    //sentorData->sprite = Sprite::sensorAVATAR;
+    //sentorData->physicalizedElement = this;
+    //b2Filter filterS;
+    //filterS.categoryBits = Category::AVATAR;
+    //filterS.maskBits = Category::OBJ;
+    //sensor.body->GetFixtureList()->SetFilterData(filterS);
+    b2Filter filter;
+    filter.categoryBits = Category::AVATAR;
+    filter.maskBits = Category::OBJ;
+    polygon.body->GetFixtureList()->GetNext()->SetFilterData(filter);
     
     moveInputX = 0.0f;
     setJumping(false);
@@ -92,7 +99,10 @@ void Avatar::update()
         viewPoint = s->b;
         sprite->ViewPoint = viewPoint;
     }
-
+    
+    for (int i = 0; i< objsSensor.size(); ++i) {
+        objsSensor[i]->viewPoint = viewPoint;
+    }
     
     (*this.*preMove)(s);
     polygon.setVelocity(moveInputX, moveInputY);
@@ -223,20 +233,18 @@ void Avatar::setJumping(bool _bool)
 /////////////// collision avatar ///////////////
 void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
-    //cout << "alex1 " << endl;
 
-    
-    dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
-    dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
-    if (aSprite->sprite== Sprite::sensorAVATAR || bSprite->sprite== Sprite::sensorAVATAR) {
-        cout << "alex " << endl;
+    if (_fixture == polygon.body->GetFixtureList()->GetNext()) {
+        cout << " Start  " << ofGetElapsedTimeMillis()<< endl;
+        
     }
     
-    if (OtherSprite->sprite==Sprite::BLOCK) {
+    
+    //if (OtherSprite->sprite==Sprite::BLOCK) {
         if (e.contact->GetManifold()->localNormal.y == 1) {
             setJumping(false);
         }
-    }
+    //}
     
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {
         if (e.contact->GetManifold()->localNormal.y < 0.f) {
@@ -262,11 +270,8 @@ void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
 void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* OtherSprite)
 {
 
-    dataSprite* aSprite = (dataSprite*)e.a->GetBody()->GetUserData();
-    dataSprite* bSprite = (dataSprite*)e.b->GetBody()->GetUserData();
-    if (aSprite->sprite== Sprite::sensorAVATAR || bSprite->sprite== Sprite::sensorAVATAR) {
-        cout << "alex s " << endl;
-        
+    if (_fixture == polygon.body->GetFixtureList()->GetNext()) {
+        cout << " end  " << ofGetElapsedTimeMillis()<< endl;
     }
     
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {

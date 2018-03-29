@@ -62,7 +62,19 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         fixtureSide.shape = &shape;
         body->CreateFixture(&fixtureSide);        
     }*/
-
+    if (_detectSide) {
+        b2CircleShape shape;
+        shape.m_radius		= 30 / OFX_BOX2D_SCALE;
+        
+        b2FixtureDef fixtureSide;
+        fixtureSide.shape		= &shape;
+        fixtureSide.density		= 0;
+        fixtureSide.friction	= 0;
+        fixtureSide.restitution	= 0;
+        fixtureSide.isSensor    = true;
+        body->CreateFixture(&fixtureSide);
+    }
+    
     if(ofxBox2dPolygon::bIsTriangulated) {
         
         b2PolygonShape	shape;
@@ -108,8 +120,7 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         body->CreateFixture(&fixture);
     }
     
-    //setFilterDataObjet(FilterDataObjet);
-    //setFilterDataSide(FilterDataSide);
+    
     
     
     vector<ofPoint> pts = ofPolyline::getVertices();
