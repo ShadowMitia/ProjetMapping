@@ -10,7 +10,7 @@
 #include "ofMain.h"
 #include "Teleportable.h"
 #include "shift.h"
-#include "Sprite.h"
+#include "SpriteAvatar.h"
 #include "Ladder.h"
 
 

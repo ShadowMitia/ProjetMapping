@@ -25,60 +25,6 @@ PICKUP   : 0x0040
 MUSHROOM : 0x0080
 */
 
-
-
-
-ofVec2f ObjBlockDef::getPositionTranform(){
-    return b->getPosition() - face->rect.getPosition() + 160;
-}
-void ObjBlockDef::draw(){
-        ofRectangle temp;
-        //temp.setFromCenter(160*3/2, 160*3/2, 48, 48);
-        ofVec2f tempP = getPositionTranform();
-        temp.setFromCenter(tempP.x, tempP.y, 28, 28);
-        ofSetColor(ofColor::red);
-        ofDrawRectangle(temp);
-
-}
-void ObjBlockDef::reset(){
-    b->polygon.body->SetActive(true);
-    b->setPosition(positionInit);
-}
-bool ObjBlockDef::isActif(){
-    return b->polygon.body->IsActive();
-}
-void ObjBlockDef::create(){
-    world->creataBlock(this);
-}
-bool ObjBlockDef::getViewPoint(){
-    return b->viewPoint;
-}
-
-ofVec2f ObjPickupDef::getPositionTranform(){
-    return pkup->getPosition() - face->rect.getPosition() + 160;
-
-}
-void ObjPickupDef::draw(){
-    if (actif) {
-        ofRectangle temp;
-        temp.setFromCenter(160*3/2, 160*3/2, 8, 8);
-        ofVec2f tempP = getPositionTranform();
-        temp.setFromCenter(tempP.x, tempP.y, 8, 8);
-        ofSetColor(ofColor::yellow);
-        ofDrawRectangle(temp);
-    }
-}
-void ObjPickupDef::reset(){}
-bool ObjPickupDef::isActif(){
-    return pkup->polygon.body->IsActive();
-}
-void ObjPickupDef::create(){
-    world->createPickUp(this);
-}
-bool ObjPickupDef::getViewPoint(){
-    return pkup->viewPoint;
-}
-
 ofVec2f ObjMushroomDef::getPositionTranform(){
     return mroom->getPosition() - face->rect.getPosition() + 160;
     

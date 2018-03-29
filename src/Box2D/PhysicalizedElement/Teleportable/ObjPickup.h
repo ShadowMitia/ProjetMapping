@@ -11,7 +11,7 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Teleportable.h"
-#include "Sprite.h"
+#include "AllSprite.h"
 class ObjPickup;
 class deActive: public ofThread{
 public:

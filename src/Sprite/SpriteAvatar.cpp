@@ -1,21 +1,19 @@
 //
-//  SpriteAvatar.h
+//  SpriteAvatar.cpp
 //  ProjetMapping
 //
-//  Created by FatDazz_mac on 24/03/2018.
+//  Created by FatDazz_mac on 30/03/2018.
 //
 //
-
 #pragma once
-
 #include "ofMain.h"
+#include "SpriteAvatar.h"
+#include "WorldsBox2d.h"
 #include "Sprite.h"
 #include "Avatar.h"
 
-
 void AvatarDef::draw(){
     ofRectangle temp;
-    temp.setFromCenter(160*3/2, 160*3/2, 12, 12);
     ofVec2f tempP = getPositionTranform();
     temp.setFromCenter(tempP.x, tempP.y, 12, 12);
     ofSetColor(ofColor::orange);
@@ -94,7 +92,7 @@ void AvatarDef::setMove(int i){
         case 0:
             drawMove = &AvatarDef::drawMovePlaform;
             break;
-        
+            
         case 1:
             drawMove = &AvatarDef::drawMoveTop;
             break;

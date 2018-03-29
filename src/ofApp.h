@@ -12,7 +12,7 @@
 #include "ofxGLFWJoystick.h"
 #include "shift.h"
 #include "Face.h"
-#include "Sprite.h"
+#include "AllSprite.h"
 
 //#define USE_WIIMOTE
 
