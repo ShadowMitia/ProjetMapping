@@ -172,18 +172,25 @@ Scene1::Scene1(Scene1Def def){
     ofClear(0);
     mask.end();
     
-    
-    vector<ofPolyline> BezierPlatform;
+    ofTessellator t;
+    vector<ofPolyline> BezierPlatform, mousePlatform;
     for (int i = 0; i< def.platforms.size(); i++) {
         BezierPlatform.push_back(fctBezier(def.platforms[i], ofPoint(3,3), 2));
+        Append(mousePlatform, mouse(def.platforms[i], ofPoint(3,3),2));
+
     }
     cout << " nb de plateporme : " << BezierPlatform.size()  << endl;
+    ofMesh BezierPlatformMesh,mousePlatformMesh;
+    t.tessellateToMesh(BezierPlatform, ofPolyWindingMode::OF_POLY_WINDING_ODD, BezierPlatformMesh);
+    t.tessellateToMesh(mousePlatform, ofPolyWindingMode::OF_POLY_WINDING_ODD, mousePlatformMesh);
+ 
+    
     layerPlatform.begin();
     ofClear(0, 0, 0, 0);
-    for (int i =0; i<BezierPlatform.size(); i++) {
-        ofSetColor(ofColor::black);
-        BezierPlatform[i].draw();
-    }
+    ofSetColor(ofColor::brown);
+    BezierPlatformMesh.draw();
+    ofSetColor(ofColor::paleGreen);
+    mousePlatformMesh.draw();
     layerPlatform.end();
     ofSetColor(ofColor::white);
 
