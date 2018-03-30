@@ -380,9 +380,10 @@ void ofApp::keyPressed(int key)
     if (key == 'm') {
         //tempI++;
         //cout << "tempI: " << tempI << endl;
-        cout << "position avatar: " << sprites[sprites.size()-1]->world->avatars[0]->getPosition() << endl;
-        cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
+        //cout << "position avatar: " << sprites[sprites.size()-1]->world->avatars[0]->getPosition() << endl;
+        //cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
         
+        cout << " [0]:"  << spritesSolide[0]->getViewPoint() << " [1]:" << spritesSolide[1]->getViewPoint()<<  endl;
     }
     
     //mapping.keyPressed(key);

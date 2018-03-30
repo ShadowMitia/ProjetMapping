@@ -29,6 +29,7 @@ public:
 class Avatar : public Teleportable {
 public:
     ofxBox2dCircle sensor;
+    vector<Teleportable*> spriteForSensor;
     Avatar(AvatarDef* _avatarDef);
     Shift *s;
     bool jumping;
@@ -46,7 +47,6 @@ public:
 
 private:
     
-    vector<Teleportable*> objsSensor;
     
     float moveInputX;
     float moveInputY;

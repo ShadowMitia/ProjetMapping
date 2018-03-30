@@ -10,6 +10,7 @@
 //#include "PickUp.h"
 #include "Portal.h"
 #include "WorldsBox2d.h"
+#include "Sprite.h"
 
 /*
  Category bits:
@@ -100,9 +101,12 @@ void Avatar::update()
         sprite->ViewPoint = viewPoint;
     }
     
-    for (int i = 0; i< objsSensor.size(); ++i) {
-        objsSensor[i]->viewPoint = viewPoint;
+    
+    for (int i= 0; i<spriteForSensor.size(); ++i) {
+        spriteForSensor[i]->viewPoint=viewPoint;
     }
+    
+
     
     (*this.*preMove)(s);
     polygon.setVelocity(moveInputX, moveInputY);
@@ -236,6 +240,8 @@ void Avatar::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
 
     if (_fixture == polygon.body->GetFixtureList()->GetNext()) {
         cout << " Start  " << ofGetElapsedTimeMillis()<< endl;
+        Teleportable* t = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
+        spriteForSensor.push_back(t);
         
     }
     
@@ -272,6 +278,13 @@ void Avatar::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
 
     if (_fixture == polygon.body->GetFixtureList()->GetNext()) {
         cout << " end  " << ofGetElapsedTimeMillis()<< endl;
+        Teleportable* t = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
+        for (int i = 0; i< spriteForSensor.size(); ++i) {
+            if (t == spriteForSensor[i] ) {
+                spriteForSensor.erase(spriteForSensor.begin()+i);
+                i = spriteForSensor.size();
+            }
+        }
     }
     
     if (abs(e.contact->GetManifold()->localPoint.x) != 0.2f && abs(e.contact->GetManifold()->localPoint.y) != 0.2f) {

@@ -11,7 +11,9 @@ uniform mat3 matrixY;
 uniform mat3 matrixR;
 
 //alpha threshold for our occlusion map
-
+float mod40(float x){
+    return x - floor(x * (1.0 / 160.0)) * 160.0;
+}
 
 void main(void) {
     float contrast = 0.95;

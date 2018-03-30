@@ -117,7 +117,7 @@ void Scene1::draw()
     //ofBackground(ofColor::white);
     ofSetColor(ofColor::white);
     
-    for (int i=0; i<nbLayer; ++i) {
+    for (int i=0; i<nbLayer-1; ++i) {
         if (i!=20) {
             layer[i].draw(0, 0);
 
