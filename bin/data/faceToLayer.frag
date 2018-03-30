@@ -17,7 +17,7 @@ float mod40(float x){
 }
 
 void main(void) {
-    float contrast = 0.95;
+    float contrast = 0.70;
     vec4 shadow = vec4(0.0,0.0,0.0,0.0);
     for (int i = 0; i<3; ++i) {
         for (int j = 0 ; j<3; ++j) {

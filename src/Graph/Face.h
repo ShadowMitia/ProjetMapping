@@ -23,6 +23,8 @@ public:
     ofMatrix3x3 matrix[3];
     ofShader ShaderLayerToFace;
     ofShader ShaderFaceToLayer;
+    ofShader ShaderFaceToLayer2;
+
 
     ofFbo fboFace;
     
@@ -60,7 +62,17 @@ public:
         }
         layer->end();
     }
-    
+    void faceToLayer3(ofFbo *layer, int mode){
+        layer->begin();
+        ShaderFaceToLayer2.begin();
+        ShaderFaceToLayer2.setUniformMatrix3f("matrixX", matrix[0]);
+        ShaderFaceToLayer2.setUniformMatrix3f("matrixY", matrix[1]);
+        ShaderFaceToLayer2.setUniformMatrix3f("matrixR", matrix[2]);
+        
+        ShaderFaceToLayer2.end();
+        layer->end();
+
+    }
     
     void layerToFace(ofTexture texture){
         fboFace.begin();

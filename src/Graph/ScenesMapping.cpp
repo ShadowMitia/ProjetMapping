@@ -66,7 +66,7 @@ void Scene1::draw()
             fboFace.end();
             glEnable(GL_BLEND);
             glBlendFunc(GL_ONE, GL_ZERO);
-            faceToLayer(&layer[1],1);
+            faceToLayer(&layer[2],1);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             
             
