@@ -10,7 +10,7 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 #include "Teleportable.h"
-#include "Sprite.h"
+#include "AllSprite.h"
 
 class ObjTrampoline: public Teleportable{
 public:
