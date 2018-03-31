@@ -5,12 +5,14 @@
 //  Created by FatDazz_mac on 22/07/2017.
 //
 //
+#pragma once
 #include "Avatar.h"
 #include "Platform.h"
 //#include "PickUp.h"
 #include "Portal.h"
 #include "WorldsBox2d.h"
 #include "Sprite.h"
+
 
 /*
  Category bits:

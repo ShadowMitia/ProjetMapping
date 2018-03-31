@@ -153,6 +153,7 @@
 		B6840996567E78436F7ECFAB /* ETF.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B047FF96258DC01792B272DB /* ETF.cpp */; };
 		B9654D0EF43BCA228B330ED7 /* SelPrevVertexCmd.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B29C3846BA06080344C1D1E /* SelPrevVertexCmd.cpp */; };
 		BC09191C206E3B7D0056334B /* SpriteTrampoline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC09191A206E3B7C0056334B /* SpriteTrampoline.cpp */; };
+		BC091921206F9F070056334B /* SpritePlatforMove.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC09191F206F9F070056334B /* SpritePlatforMove.cpp */; };
 		BECF964DBFA7ED2BC5CC2E18 /* b2Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9FF6CA47D39B4F848C497092 /* b2Timer.cpp */; };
 		BF2CFA915EDBB99B0F92489A /* b2ChainShape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52E6BAAF72BF7CDFDF5F9C /* b2ChainShape.cpp */; };
 		BF30D7A362CEBF9286D087FD /* b2WorldCallbacks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F1325975A2867C7088859835 /* b2WorldCallbacks.cpp */; };
@@ -653,6 +654,8 @@
 		BBAF9D981351C596CA67CAF9 /* hybridtracker.hpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = hybridtracker.hpp; path = ../../../addons/ofxOpenCv/libs/opencv/include/opencv2/contrib/hybridtracker.hpp; sourceTree = SOURCE_ROOT; };
 		BC09191A206E3B7C0056334B /* SpriteTrampoline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpriteTrampoline.cpp; path = Sprite/SpriteTrampoline.cpp; sourceTree = "<group>"; };
 		BC09191B206E3B7D0056334B /* SpriteTrampoline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpriteTrampoline.h; path = Sprite/SpriteTrampoline.h; sourceTree = "<group>"; };
+		BC09191F206F9F070056334B /* SpritePlatforMove.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpritePlatforMove.cpp; path = Sprite/SpritePlatforMove.cpp; sourceTree = "<group>"; };
+		BC091920206F9F070056334B /* SpritePlatforMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpritePlatforMove.h; path = Sprite/SpritePlatforMove.h; sourceTree = "<group>"; };
 		BCB571865BB25BC586CF80EC /* SetPresetCmd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SetPresetCmd.h; path = ../../../addons/ofxPiMapper/src/Commands/SetPresetCmd.h; sourceTree = SOURCE_ROOT; };
 		BCBB74B9531974E1D5DA019B /* HexagonSurface.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = HexagonSurface.cpp; path = ../../../addons/ofxPiMapper/src/Surfaces/HexagonSurface.cpp; sourceTree = SOURCE_ROOT; };
 		BDBE053980FA01FAD543D782 /* CmdManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = CmdManager.cpp; path = ../../../addons/ofxPiMapper/src/Commands/CmdManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -1732,6 +1735,8 @@
 				C3124B0CAE959B5A2A84361D /* SpritePickup.h */,
 				BC09191A206E3B7C0056334B /* SpriteTrampoline.cpp */,
 				BC09191B206E3B7D0056334B /* SpriteTrampoline.h */,
+				BC09191F206F9F070056334B /* SpritePlatforMove.cpp */,
+				BC091920206F9F070056334B /* SpritePlatforMove.h */,
 			);
 			name = Sprite;
 			sourceTree = "<group>";
@@ -2358,6 +2363,7 @@
 				25F5CD753AF35B53464E56AE /* MvTexCoordCmd.cpp in Sources */,
 				82643E358DF270B9EC939699 /* RmGridColCmd.cpp in Sources */,
 				5826FF4F63DC430E90AFDA5E /* RmGridRowCmd.cpp in Sources */,
+				BC091921206F9F070056334B /* SpritePlatforMove.cpp in Sources */,
 				B01F972DDDA5F21EF4C8B99D /* RmSurfaceCmd.cpp in Sources */,
 				36A98A331EAE1D0A19998A59 /* SaveTexCoordPosCmd.cpp in Sources */,
 				E327ACE85A208BAFACD1B7C7 /* ScaleSurfaceFromToCmd.cpp in Sources */,

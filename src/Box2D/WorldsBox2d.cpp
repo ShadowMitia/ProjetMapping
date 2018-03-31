@@ -6,6 +6,7 @@
 //
 //
 
+
 #include "WorldsBox2d.h"
 #include "utils.h"
 #include <cstdlib>
@@ -105,6 +106,10 @@ void WorldsBox2d::setup(){
     world.setFPS(60.0);
     warterfalls = new Waterfalls(&world);
     
+    
+    new ObjSignageSign(world.getWorld(),ofVec2f(0, -20), ofVec2f(284.051, 562.55)); // virŽ 
+    //284.051, 562.55
+    
 }
 void WorldsBox2d::draw(){
     
@@ -155,6 +160,12 @@ void WorldsBox2d::createPickUp(ObjPickupDef *_objPickupDef){
     ObjPickup * pkup = new ObjPickup(_objPickupDef);
     pkup->setPosition(_objPickupDef->positionInit);
     pickups.push_back(pkup);
+}
+
+void WorldsBox2d::createPlatforMove(ObjPlatforMoveDef *_objPlatforMoveDef){
+    ObjPlatforMove * pM = new ObjPlatforMove(_objPlatforMoveDef);
+    pM->setPosition(_objPlatforMoveDef->positionInit);
+    platforMoves.push_back(pM);
     
 }
 void WorldsBox2d::update(){

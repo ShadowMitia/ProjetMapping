@@ -11,10 +11,12 @@
 #include "../Constant.h"
 #include "PhysicalizedElement.h"
 #include "Face.h"
+//#include "utils.h"
 
 
 
-std::vector<ofPoint> loadPoints(const std::string& file);
+
+//std::vector<ofPoint> loadPoints(const std::string& file);
 
 class SpriteObj;
 class Teleportable : public PhysicalizedElement {

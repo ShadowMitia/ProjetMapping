@@ -119,10 +119,19 @@ void ofApp::setup() {
         spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
     }
     
-    {ObjBlockDef *block = new ObjBlockDef();
+    /*{ObjBlockDef *block = new ObjBlockDef();
         block->world=worlds;
         block->positionInit =ofVec2f(1204.45, 336.191);
         block->face =&faces[11];
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}*/
+    
+    {ObjPlatforMoveDef *block = new ObjPlatforMoveDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(1204.45, 336.191);
+        block->face =&faces[11];
+        block->vitesse = ofVec2f(-20, 0);
         block->create();
         sprites.push_back(static_cast<SpriteObj*>(block));
         spritesSolide.push_back(static_cast<SpriteObj*>(block));}
@@ -324,7 +333,6 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update(){
     ofSetWindowTitle(ofToString((int)ofGetFrameRate()));
-
     //input();
 #ifdef USE_WIIMOTE
     wiiuse.update();
@@ -335,7 +343,6 @@ void ofApp::update(){
         worlds->startThread();
     }else cout << "ATTENTION BOX2D RAM" << endl;
     mapping.update();
-    
 }
 
 //--------------------------------------------------------------
@@ -384,6 +391,11 @@ void ofApp::keyPressed(int key)
         //cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
         
         cout << " [0]:"  << spritesSolide[0]->getViewPoint() << " [1]:" << spritesSolide[1]->getViewPoint()<<  endl;
+        AvatarDef* a  = static_cast<AvatarDef*>(spritesSolide[0]);
+        cout << " [0] posision:" << a->a->getPosition() << endl;
+        ObjPlatforMoveDef* pM = static_cast<ObjPlatforMoveDef*>(spritesSolide[1]);
+        cout << "[1] vitesse: " << pM->pM->getVelocity() << "   "<<pM->vitesse << endl;
+        pM->pM->setVelocity(ofVec2f(-20, 0));
     }
     
     //mapping.keyPressed(key);

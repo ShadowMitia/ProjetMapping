@@ -22,6 +22,9 @@
 #include <vector>
 #include "shift.h"
 #include "ObjTrampoline.h"
+#include "ObjSignageSign.h"
+#include "ObjPlatforMove.h"
+
 
 class WorldsBox2d :public ofThread{
 public:
@@ -39,6 +42,7 @@ public:
     std::vector<ObjBlock *> blocks;
     std::vector<ObjMushroom *> Mushrooms;
     std::vector<ObjTrampoline*> trampolines;
+    std::vector<ObjPlatforMove*> platforMoves;
     
     
     Waterfalls*               warterfalls;
@@ -53,6 +57,8 @@ public:
     void createAvatar(AvatarDef* _avatarDef);
     void createMushroom(ObjMushroomDef* _objMushroomDef);
     void createPickUp(ObjPickupDef* _objPickupDef);
+    void createPlatforMove(ObjPlatforMoveDef* _objPlatforMoveDef);
+    
     
     void createPlatform(ofPolyline _polyline, uint16 mask);
     void createPortal(Face *input);

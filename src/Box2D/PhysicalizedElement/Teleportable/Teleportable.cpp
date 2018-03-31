@@ -1,4 +1,6 @@
 #include "Teleportable.h"
+//#include "utils.h"
+
 
 ofVec2f Teleportable::getPosition(){
     return polygon.getPosition();
@@ -27,7 +29,7 @@ void Teleportable::setFilter(uint16 maskBits){
     //polygon.setFilterDataSide(filter);
     polygon.body->GetFixtureList()->SetFilterData(teleportableFilter);
 }
-std::vector<ofPoint> loadPoints(const std::string& file)
+/*std::vector<ofPoint> loadPoints(const std::string& file)
 {
     std::vector<ofPoint> pts;
     std::vector <std::string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
@@ -37,4 +39,4 @@ std::vector<ofPoint> loadPoints(const std::string& file)
         pts.push_back(ofPoint(x, y));
     }
     return pts;
-}
+}*/

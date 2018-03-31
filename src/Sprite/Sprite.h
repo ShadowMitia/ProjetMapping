@@ -26,6 +26,7 @@ enum Category {
     OBJ            = 0x0080,
     OBJ_top        = 0x0100,
     MUSHROOM_top   = 0x0200,
+    SignageSign    = 0x0400
        //= 0x0400,
     
     

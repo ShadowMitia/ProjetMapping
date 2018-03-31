@@ -5,9 +5,11 @@
 //  Created by FatDazz_mac on 06/03/2018.
 //
 //
-
+#pragma once
 #include "ObjTrampoline.h"
 #include "WorldsBox2d.h"
+
+
 
 ObjTrampoline::ObjTrampoline(ObjTrampolineDef* _objTrampolineDef){
     
@@ -23,14 +25,11 @@ ObjTrampoline::ObjTrampoline(ObjTrampolineDef* _objTrampolineDef){
     
     teleportableFilter.categoryBits = _objTrampolineDef->categoryBits ;
     setFilter(_objTrampolineDef->maskBits | Category::PLATFORM |Category::PLATFORM_1);
-    
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::BLOCK;
     data->physicalizedElement = this;
-    
     polygon.body->SetGravityScale(1.0);
-    
    
 }
 

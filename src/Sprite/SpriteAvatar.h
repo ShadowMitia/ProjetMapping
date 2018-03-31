@@ -18,7 +18,7 @@ class AvatarDef: public SpriteObj, public Light{
 public:
     AvatarDef(){
         categoryBits = Category::AVATAR;
-        maskBits  =  Category::AVATAR  | Category::PORTAL | Category::LADDER |Category::OBJ | Category::CLONE;
+        maskBits  =  Category::AVATAR  | Category::PORTAL | Category::LADDER |Category::OBJ | Category::CLONE | Category::SignageSign;
         layerIni = layerId =  3;
         color.set(ofColor::orange);
         drawMove = &AvatarDef::drawMovePlaform;

@@ -10,6 +10,7 @@
 #include "Teleportable.h"
 
 void ObjSignageSign::contactStart(ofxBox2dContactArgs e, b2Fixture *_fixture, dataSprite *OtherSprite){
+    cout << " ObjSignageSign.h" << endl;
     Teleportable * t = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
     t->setVelocity(vitesse);
 }

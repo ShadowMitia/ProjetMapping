@@ -5,8 +5,11 @@
 //  Created by FatDazz_mac on 02/02/2018.
 //
 //
+#pragma once
 #include "ObjBlock.h"
 #include "WorldsBox2d.h"
+
+
 /*
  Category bits:
  PLATFORM       : 0x0001

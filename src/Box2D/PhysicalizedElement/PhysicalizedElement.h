@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
-
 /*
  Category bits:
  PLATFORM       : 0x0001
@@ -17,9 +16,10 @@
  MUSHROOM-top   : 0x0200
  */
 
+std::vector<ofPoint> loadPoints(const std::string& file);
 
 
-enum class Sprite {UNKNOWN, AVATAR, CLONE, PLATFORM, BLOCK, PICKUP, PORTAL ,LADDER, MUSHROOM, sensorAVATAR};
+enum class Sprite {UNKNOWN, AVATAR, CLONE, PLATFORM, BLOCK, PICKUP, PORTAL ,LADDER, MUSHROOM, sensorAVATAR, SignageSign};
 class PhysicalizedElement;
 
 struct dataSprite {

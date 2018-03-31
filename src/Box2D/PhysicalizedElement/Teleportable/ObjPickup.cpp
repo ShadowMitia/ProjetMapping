@@ -5,9 +5,11 @@
 //  Created by FatDazz_mac on 09/02/2018.
 //
 //
-
+#pragma once
 #include "ObjPickup.h"
 #include "WorldsBox2d.h"
+
+
 
 /*
  Category bits:

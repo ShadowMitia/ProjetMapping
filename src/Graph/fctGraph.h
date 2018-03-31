@@ -154,7 +154,6 @@ vector<ofPolyline> mouse(ofPolyline poly, ofPoint decalPtOri, float coef)
             vector<ofPoint> ps;
             ps.push_back(tempMouse[0]);
             ps.push_back(tempMouse[tempMouse.size()-1]);
-            cout << "p[0] " << ps[0] << "p[fin]"<<ps[1] << endl;
             
             recursionPoint(&ps, ps[0], ps[1], tempMouse[tempMouse.size()-1].y);
             triVector(&ps);
@@ -163,7 +162,7 @@ vector<ofPolyline> mouse(ofPolyline poly, ofPoint decalPtOri, float coef)
                 b=1;
             }else{
                 b=-1;
-                cout << " t " <<endl;
+                //cout << " t " <<endl;
             }
             float y;
             for (int i= 0; i<ps.size()-1; i++) {
@@ -186,7 +185,7 @@ vector<ofPolyline> mouse(ofPolyline poly, ofPoint decalPtOri, float coef)
                 
             }
             
-            cout << "sortie" << endl;
+            //cout << "sortie" << endl;
             
             //tempMouse.close();
             mouses.push_back(tempMouse);

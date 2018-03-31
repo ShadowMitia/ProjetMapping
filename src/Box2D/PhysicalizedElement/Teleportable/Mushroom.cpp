@@ -5,10 +5,12 @@
 //  Created by FatDazz_mac on 12/02/2018.
 //
 //
-
+#pragma once
 #include "Mushroom.h"
 #include "WorldsBox2d.h"
 #include "Clone.h"
+
+
 /*
  Category bits:
  PLATFORM       : 0x0001

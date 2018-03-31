@@ -1,5 +1,7 @@
-#include "utils.h"
 
+#pragma once
+#include "ofMain.h"
+#include "utils.h"
 #include <iterator>
 #include <fstream>
 #include <iostream>
@@ -43,3 +45,16 @@ std::vector<std::vector<std::string>> readCSV(std::string const& csvFile)
     }
   return values;
   }
+
+
+/*std::vector<ofPoint> loadPoints(const std::string& file)
+{
+    std::vector<ofPoint> pts;
+    std::vector <std::string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
+    for (unsigned int i = 0; i < ptsStr.size(); i += 2) {
+        float x = ofToFloat(ptsStr[i]);
+        float y = ofToFloat(ptsStr[i+1]);
+        pts.push_back(ofPoint(x, y));
+    }
+    return pts;
+}*/
