@@ -22,7 +22,7 @@ namespace VarConst
     constexpr const float speedAvatarMax = 1.80f; // v max
     constexpr const float densityAvatar = 20.0f;
     constexpr const float bounceAvatar = 0.0001f;
-    constexpr const float frictionAvatar = 0.0f;
+    constexpr const float frictionAvatar = 10.0f;
     constexpr const float impulseJumpAvatarMAX = 5.9f;			// impulsion de base pour les sauts
     constexpr const float impulseJumpAvatarMIN = 2.6f;
     constexpr const float speedAvatarAirControlMax = 1.5f;

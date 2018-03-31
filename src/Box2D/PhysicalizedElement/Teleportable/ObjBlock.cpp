@@ -28,7 +28,7 @@ ObjBlock::ObjBlock(ObjBlockDef* _objBlockDef){
     std::vector<ofPoint> pts = loadPoints("ObjBlock.dat");
     polygon.addVertices(pts);
     //polygon.triangulatePoly();
-    polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
+    polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, VarConst::frictionAvatar);
     //polygon.create(box2d);
     polygon.create(_objBlockDef->world->world.getWorld(), false);
     polygon.body->SetFixedRotation(true);
@@ -74,10 +74,10 @@ void ObjBlock::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSpri
 
 void ObjBlock::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::AVATAR) {
-        polygon.body->SetLinearVelocity(b2Vec2(0, 0));
+        //polygon.body->SetLinearVelocity(b2Vec2(0, 0));
     }
     if (OtherSprite->sprite == Sprite::CLONE) {
-        polygon.body->SetLinearVelocity(b2Vec2(0, 0));
+        //polygon.body->SetLinearVelocity(b2Vec2(0, 0));
     }
     //rT->startThread();
 }
