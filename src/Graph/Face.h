@@ -29,7 +29,7 @@ public:
     ofFbo fboFace;
     
     FaceFunction(){
-        fboFace.allocate(160*3, 160*3);
+        fboFace.allocate(320*3, 320*3);
         if(!ShaderLayerToFace.load("passTransform.vert", "layerToFace.frag")) {
             printf("transform.frag\n");
         }
@@ -52,7 +52,7 @@ public:
             ShaderFaceToLayer2.setUniformTexture("u_texture", fboFace.getTexture(), 0);
             ShaderFaceToLayer2.setUniformTexture("u_texture_src", layer->getTexture(), 1);
             ShaderFaceToLayer2.setUniform3f("posAng", posAng);
-            ofDrawRectangle(ofPoint(0,0), 160, 160);
+            ofDrawRectangle(ofPoint(0,0), 320, 320);
             ShaderFaceToLayer2.end();
         }
         layer->end();
@@ -69,9 +69,9 @@ public:
         ShaderLayerToFace.setUniformMatrix3f("matrixY", matrix[1]);
         ShaderLayerToFace.setUniformMatrix3f("matrixR", matrix[2]);
         //ofSetColor(ofColor::white, 0);
-        ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
+        ofDrawRectangle(ofPoint(0,0), 3*320, 3*320);
         ShaderLayerToFace.end();
-        //texture.draw(0,0, 3*160, 3*160);
+        //texture.draw(0,0, 3*320, 3*320);
         fboFace.end();
     }
     
@@ -86,9 +86,9 @@ public:
         ShaderLayerToFace.setUniformTexture("u_texture", texture.getTexture(), 0);
 
         //ofSetColor(ofColor::white, 0);
-        ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
+        ofDrawRectangle(ofPoint(0,0), 3*320, 3*320);
         ShaderLayerToFace.end();
-        //texture.draw(0,0, 3*160, 3*160);
+        //texture.draw(0,0, 3*320, 3*320);
         fboFace.end();
     }
     

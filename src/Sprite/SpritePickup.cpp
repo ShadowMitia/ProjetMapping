@@ -14,13 +14,13 @@
 #include "ObjPickup.h"
 
 ofVec2f ObjPickupDef::getPositionTranform(){
-    return pkup->getPosition() - face->rect.getPosition() + 160;
+    return pkup->getPosition() - face->rect.getPosition() + 320;
     
 }
 void ObjPickupDef::draw(){
     if (actif) {
         ofRectangle temp;
-        temp.setFromCenter(160*3/2, 160*3/2, 8, 8);
+        temp.setFromCenter(320*3/2, 320*3/2, 8, 8);
         ofVec2f tempP = getPositionTranform();
         temp.setFromCenter(tempP.x, tempP.y, 8, 8);
         ofSetColor(ofColor::yellow);

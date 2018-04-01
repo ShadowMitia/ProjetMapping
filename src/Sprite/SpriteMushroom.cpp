@@ -15,7 +15,7 @@
 #include "Mushroom.h"
 
 ofVec2f ObjMushroomDef::getPositionTranform(){
-    return mroom->getPosition() - face->rect.getPosition() + 160;
+    return mroom->getPosition() - face->rect.getPosition() + 320;
     
 }
 void ObjMushroomDef::draw(){

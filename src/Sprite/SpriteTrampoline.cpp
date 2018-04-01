@@ -14,11 +14,11 @@
 #include "ObjTrampoline.h"
 
 ofVec2f ObjTrampolineDef::getPositionTranform(){
-    return t->getPosition() - face->rect.getPosition() + 160;
+    return t->getPosition() - face->rect.getPosition() + 320;
 }
 void ObjTrampolineDef::draw(){
     ofRectangle temp;
-    temp.setFromCenter(160*3/2, 160*3/2, 18, 18);
+    temp.setFromCenter(320*3/2, 320*3/2, 18, 18);
     ofVec2f tempP = getPositionTranform();
     temp.setFromCenter(tempP.x, tempP.y, 18, 18);
     ofSetColor(ofColor::mediumVioletRed);

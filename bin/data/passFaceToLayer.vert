@@ -20,19 +20,19 @@ void main(void)
     
     vec4 pos = gl_ModelViewProjectionMatrix * gl_Vertex ;
     if (posAng.z == 0.0) {
-        posFace =  vec2(gl_Vertex.x + 160.0*X, gl_Vertex.y + 160.0*Y );//gl_Vertex.xy;
+        posFace =  vec2(gl_Vertex.x + 320.0*X, gl_Vertex.y + 320.0*Y );//gl_Vertex.xy;
         //vColor = vec4(0.0,0.0,1.0,1.0);
     }
     if (posAng.z == 90.0) {
-        posFace =  vec2(gl_Vertex.y + 160.0*X, 160 - gl_Vertex.x + 160.0*Y );//gl_Vertex.xy;
+        posFace =  vec2(gl_Vertex.y + 320.0*X, 320 - gl_Vertex.x + 320.0*Y );//gl_Vertex.xy;
         //vColor = vec4(0.0,1.0,1.0,1.0);
     }
     if (posAng.z == 180.0) {
-        posFace =  vec2(160 - gl_Vertex.x + 160.0*X, 160 - gl_Vertex.y + 160.0*Y );//gl_Vertex.xy;
+        posFace =  vec2(320 - gl_Vertex.x + 320.0*X, 320 - gl_Vertex.y + 320.0*Y );//gl_Vertex.xy;
         //vColor = vec4(0.0,1.0,1.0,1.0);
     }
     if (posAng.z == 270.0) {
-        posFace =  vec2( 160 - gl_Vertex.y + 160.0*X, gl_Vertex.x + 160.0*Y );//gl_Vertex.xy;
+        posFace =  vec2( 320 - gl_Vertex.y + 320.0*X, gl_Vertex.x + 320.0*Y );//gl_Vertex.xy;
         //vColor = vec4(0.0,1.0,1.0,1.0);
     }
     

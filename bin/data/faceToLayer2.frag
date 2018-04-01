@@ -15,7 +15,7 @@ uniform float Y;
 
 //alpha threshold for our occlusion map
 float mod40(float x){
-    return x - floor(x * (1.0 / 160.0)) * 160.0;
+    return x - floor(x * (1.0 / 320.0)) * 320.0;
 }
 
 void main(void) {

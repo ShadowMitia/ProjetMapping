@@ -16,7 +16,7 @@
 
 
 ofVec2f ObjBlockDef::getPositionTranform(){
-    return b->getPosition() - face->rect.getPosition() + 160;
+    return b->getPosition() - face->rect.getPosition() + 320;
 }
 void ObjBlockDef::draw(){
     ofRectangle temp;

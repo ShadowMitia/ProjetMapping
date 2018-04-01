@@ -74,16 +74,16 @@ void ofApp::setup() {
             ofClear(0,0, 0, 0);
             ofBackground(ofColor::white);
             int unit = 12;
-            fboFace.getTexture().drawSubsection(160, 160 - unit , 160, unit, 160, 160 - unit);
-            fboFace.getTexture().drawSubsection(160, 160*2 , 160, unit, 160, 160*2);
-            fboFace.getTexture().drawSubsection(160 - unit, 160  , unit,160 , 160 - unit, 160 );
-            fboFace.getTexture().drawSubsection(160*2, 160 , unit, 160, 160*2, 160);
+            fboFace.getTexture().drawSubsection(320, 320 - unit , 320, unit, 320, 320 - unit);
+            fboFace.getTexture().drawSubsection(320, 320*2 , 320, unit, 320, 320*2);
+            fboFace.getTexture().drawSubsection(320 - unit, 320  , unit,160 , 320 - unit, 320 );
+            fboFace.getTexture().drawSubsection(320*2, 320 , unit, 320, 320*2, 320);
             FboTemp.end();
             std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
             for (std::size_t i = 0; i < platforms2.size() ; i++) {
                 
                 for (int j=0; j<platforms2[i].getVertices().size(); j++) {
-                    platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(160, 160) + faces[faceNb].rect.position;
+                    platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(320, 320) + faces[faceNb].rect.position;
                 }
                 if (site==0) {
                     worlds->createPlatform(platforms2[i], Category::PLATFORM_1);
@@ -111,7 +111,7 @@ void ofApp::setup() {
     
     {AvatarDef *avatarDef = new AvatarDef();
         avatarDef->world = worlds;
-        avatarDef->positionInit=ofVec2f(366.899, 490.55);
+        avatarDef->positionInit=ofVec2f(2*366.899, 2*490.55);
         avatarDef->s= &inputButton[0];
         avatarDef->face = &faces[4];
         avatarDef->create();
@@ -129,7 +129,7 @@ void ofApp::setup() {
     
     {ObjPlatforMoveDef *block = new ObjPlatforMoveDef();
         block->world=worlds;
-        block->positionInit =ofVec2f(1204.45, 336.191);
+        block->positionInit =ofVec2f(2*1204.45, 2*336.191);
         block->face =&faces[11];
         block->vitesse = ofVec2f(-20, 0);
         block->create();
@@ -140,7 +140,7 @@ void ofApp::setup() {
     {
         ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
-        pkup->positionInit = ofVec2f(1204.45, 346.191);
+        pkup->positionInit = ofVec2f(2*1204.45, 2*346.191);
         pkup->face = & faces[11];
         pkup->create();
         //spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
@@ -153,14 +153,14 @@ void ofApp::setup() {
         for (int j = 0; j<0; j++) {
             ObjPickupDef *pkup = new ObjPickupDef();
             pkup->world = worlds;
-            pkup->positionInit = ofVec2f(102+20+48 + (160+48)*i, 80 + (160+48)*j);
+            pkup->positionInit = ofVec2f(102+20+48 + (320+48)*i, 80 + (320+48)*j);
             pkup->face = & faces[i+1 + j*10];
             pkup->create();
             spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
             spritesLight.push_back(static_cast<SpriteObj*>(pkup));
             pkup = new ObjPickupDef();
             pkup->world = worlds;
-            pkup->positionInit = ofVec2f(102+40+48 + (160+48)*i, 80 + (160+48)*j);
+            pkup->positionInit = ofVec2f(102+40+48 + (320+48)*i, 80 + (320+48)*j);
             pkup->face = & faces[i+1 + j*10];
             pkup->create();
             spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
@@ -749,7 +749,8 @@ void ofApp::generateFaces()
         float w1 = std::atof(f[i][5].c_str());
         float h1 = std::atof(f[i][6].c_str());
         
-        faces[id1].rect = ofRectangle(x1, y1, w1, h1);
+        int coef = 2;
+        faces[id1].rect = ofRectangle(coef * x1,coef *  y1, coef * w1,coef *  h1);
         //cout << " id1 " << id1 << " id2 " << id2 << endl;
         faces[id1].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
         faces[id1].matrix[0][1] = &faces[std::atoi(f[i][9].c_str())];

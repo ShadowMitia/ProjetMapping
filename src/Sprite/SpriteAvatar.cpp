@@ -24,7 +24,7 @@ void AvatarDef::draw(){
 
 
 ofVec2f AvatarDef::getPositionTranform(){
-    return  a->getPosition() - face->rect.getPosition() + 160;
+    return  a->getPosition() - face->rect.getPosition() + 320;
 }
 void AvatarDef::create(){
     world->createAvatar(this);
@@ -45,8 +45,8 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
     ofPushView();
     n = n + 1/10.0;
     ofRectangle temp;
-    temp.setFromCenter(p.x, p.y, 12, 12);
-    temp.setFromCenter(0, 0, 12, 12);
+    temp.setFromCenter(p.x, p.y, 36, 36);
+    temp.setFromCenter(0, 0, 36, 36);
     ofTranslate(p.x, p.y);
     ofRotate(a->polygon.getRotation());
     ofVec2f v = a->getVelocity();

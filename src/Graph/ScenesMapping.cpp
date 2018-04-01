@@ -47,7 +47,7 @@ void Scene1::draw()
     }
 
     // light
-    for (int i = 0; i< _spritesLight->size(); i++) {
+    /*for (int i = 0; i< _spritesLight->size(); i++) {
         if (_spritesLight->at(i)->isActif()) {
             fillMatrix(_spritesLight->at(i));
             fboFace.begin();
@@ -89,14 +89,14 @@ void Scene1::draw()
             
             
         }
-    }
+    }*/
     
     
 
     ofSetColor(ofColor::white);
 
     
-    for (int i=0; i<nbLayer; ++i) {
+    for (int i=0; i<nbLayer-1; ++i) {
         if (i!=20) {
             layer[i].draw(0, 0);
 
@@ -137,13 +137,13 @@ Scene1::Scene1(Scene1Def def){
     worldsBox2d =def.worldsBox2d;
     
     
-    fboFaceShadow.allocate(160*3, 160*3);
+    fboFaceShadow.allocate(320*3, 320*3);
     for (int i=0; i<nbLayer; ++i) {
         layer[i].allocate(background.getWidth(), background.getHeight());
     }
     layerPlatform.allocate(background.getWidth(), background.getHeight());
     //lightSize = 256;
-    lightSize = 160;
+    lightSize = 320;
     ofDisableArbTex();  // <-- Very Important
     lightRender.setup(lightSize,lightSize);
     lightRender.setRenderFunction(this, &Scene1::renderPlatform);

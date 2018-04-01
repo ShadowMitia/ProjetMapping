@@ -84,7 +84,8 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 
     int idFace = std::atoi(parameters[i][11].c_str());
         //cout << "salut  "<< idFace << endl;
-      portals.push_back(new Portal(ofRectangle(x, y, w, h), world, d, co, &input[idFace]));
+        int coef = 2;
+      portals.push_back(new Portal(ofRectangle(coef * x, coef * y, coef * w, coef * h), world, d, co, &input[idFace]));
     }
 
   for (std::size_t i = 0; i < portals.size(); ++i)
