@@ -41,7 +41,7 @@ void Scene1::draw()
             _spritesSolide->at(i)->draw();
             fboFace.end();
             //faceToLayer(sprites->at(i)->layerId,0);
-            faceToLayer(&layer[_spritesSolide->at(i)->layerId], 0);
+            faceToLayer3(&layer[_spritesSolide->at(i)->layerId], 0);
         }
 
     }
@@ -66,7 +66,7 @@ void Scene1::draw()
             fboFace.end();
             glEnable(GL_BLEND);
             glBlendFunc(GL_ONE, GL_ZERO);
-            faceToLayer(&layer[2],1);
+            faceToLayer3(&layer[2],1);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             
             
@@ -82,7 +82,7 @@ void Scene1::draw()
             fboFace.end();
             
             ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
-            faceToLayer(&layer[nbLayer-1], 2);
+            faceToLayer3(&layer[nbLayer-1], 2);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             
             
@@ -90,39 +90,18 @@ void Scene1::draw()
     }
     
     
-    /*fillMatrix(_spritesLight->at(_spritesLight->size()-1));
-    ////
-    fboFace.begin();
-    ofClear(0,0,0,0);//// je crois qu'il y a pas besion de ça 
-    fboFace.end();
-    
-    layerToFace(layer[2].getTexture());
-    
-    Light* light = dynamic_cast<Light *>(_spritesLight->at(_spritesLight->size()-1));
-    lightRender.renderLights(&fboFaceShadow, light);
-    
-    fboFace.begin();
-    ofClear(0,0,0,0);
-    ofPushMatrix();
-    ofTranslate(light->getPositionTranform().x - lightSize/2, light->getPositionTranform().y-lightSize/2);
-    fboFaceShadow.draw(0, 0);
-    fboFace.end();
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ZERO);
-    faceToLayer(&layer[1],1);
-    ofEnableBlendMode(OF_BLENDMODE_ALPHA);*/
+
+    ofSetColor(ofColor::white);
 
     
-    //background.draw(0, 0);
-    //ofBackground(ofColor::white);
-    ofSetColor(ofColor::white);
-    
-    for (int i=0; i<nbLayer-1; ++i) {
+    for (int i=0; i<nbLayer; ++i) {
         if (i!=20) {
             layer[i].draw(0, 0);
 
         }
     }
+
+
 
     // debug mode
     ofPopMatrix();
@@ -184,7 +163,6 @@ Scene1::Scene1(Scene1Def def){
     t.tessellateToMesh(BezierPlatform, ofPolyWindingMode::OF_POLY_WINDING_ODD, BezierPlatformMesh);
     t.tessellateToMesh(mousePlatform, ofPolyWindingMode::OF_POLY_WINDING_ODD, mousePlatformMesh);
  
-    
     layerPlatform.begin();
     ofClear(0, 0, 0, 0);
     ofSetColor(ofColor::brown);

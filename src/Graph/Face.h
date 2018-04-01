@@ -34,7 +34,7 @@ public:
             printf("transform.frag\n");
         }
         //fboSortie.allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
-        if(!ShaderFaceToLayer.load("passTransform.vert", "faceToLayer2.frag")) {
+        if(!ShaderFaceToLayer2.load("passFaceToLayer.vert", "faceToLayer2.frag")) {
             printf("transformInv.frag\n");
         }
     }
@@ -63,13 +63,20 @@ public:
         layer->end();
     }
     void faceToLayer3(ofFbo *layer, int mode){
+        ofVec3f posAng;
         layer->begin();
-        ShaderFaceToLayer2.begin();
-        ShaderFaceToLayer2.setUniformMatrix3f("matrixX", matrix[0]);
-        ShaderFaceToLayer2.setUniformMatrix3f("matrixY", matrix[1]);
-        ShaderFaceToLayer2.setUniformMatrix3f("matrixR", matrix[2]);
-        
-        ShaderFaceToLayer2.end();
+        for (int i=0; i<9; ++i) {
+            posAng = ofVec3f(matrix[0][i], matrix[1][i], matrix[2][i]);
+            ShaderFaceToLayer2.begin();
+            ShaderFaceToLayer2.setUniform1i("mode", mode);
+            ShaderFaceToLayer2.setUniform1i("X",  (int) i/3);
+            ShaderFaceToLayer2.setUniform1f("Y", (i/3.0 - i/3)*3);
+            ShaderFaceToLayer2.setUniformTexture("u_texture", fboFace.getTexture(), 0);
+            ShaderFaceToLayer2.setUniformTexture("u_texture_src", layer->getTexture(), 1);
+            ShaderFaceToLayer2.setUniform3f("posAng", posAng);
+            ofDrawRectangle(ofPoint(0,0), 160, 160);
+            ShaderFaceToLayer2.end();
+        }
         layer->end();
 
     }
