@@ -111,7 +111,7 @@ void ofApp::setup() {
     
     {AvatarDef *avatarDef = new AvatarDef();
         avatarDef->world = worlds;
-        avatarDef->positionInit=ofVec2f(337.997, 562.55);
+        avatarDef->positionInit=ofVec2f(366.899, 490.55);
         avatarDef->s= &inputButton[0];
         avatarDef->face = &faces[4];
         avatarDef->create();
@@ -137,17 +137,168 @@ void ofApp::setup() {
         spritesSolide.push_back(static_cast<SpriteObj*>(block));}
     
     
-    
-    /*{
+    {
         ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
-        pkup->positionInit = ofVec2f(337.997-50, 562.55);
-        pkup->face = & faces[4];
+        pkup->positionInit = ofVec2f(1204.45, 346.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1204.45, 356.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1204.45, 336.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    
+    
+    
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1194.45, 346.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1184.45, 356.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1174.45, 336.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1184.45, 356.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1174.45, 336.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    
+    
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(64.449, 317.808);
+        pkup->face = & faces[1];
         pkup->create();
         spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));
 
-    }*/
+    }
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(74.449, 317.808);
+        pkup->face = & faces[1];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(84.449, 317.808);
+        pkup->face = & faces[1];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    } {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1184.45, 356.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(1174.45, 336.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    
+    
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(64.449, 317.808);
+        pkup->face = & faces[1];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(74.449, 317.808);
+        pkup->face = & faces[1];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(84.449, 317.808);
+        pkup->face = & faces[1];
+        pkup->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
     
     for (int i = 0; i< 0; i++) {
         for (int j = 0; j<0; j++) {

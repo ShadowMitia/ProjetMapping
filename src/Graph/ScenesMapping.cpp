@@ -47,7 +47,7 @@ void Scene1::draw()
     }
 
     // light
-    /*for (int i = 0; i< _spritesLight->size(); i++) {
+    for (int i = 0; i< _spritesLight->size(); i++) {
         if (_spritesLight->at(i)->isActif()) {
             fillMatrix(_spritesLight->at(i));
             fboFace.begin();
@@ -87,18 +87,21 @@ void Scene1::draw()
             
             
         }
-    }*/
+    }
     
     
 
     ofSetColor(ofColor::white);
+
     
-    for (int i=0; i<nbLayer-1; ++i) {
+    for (int i=0; i<nbLayer; ++i) {
         if (i!=20) {
             layer[i].draw(0, 0);
 
         }
     }
+
+
 
     // debug mode
     ofPopMatrix();

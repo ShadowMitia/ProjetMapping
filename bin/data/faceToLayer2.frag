@@ -1,18 +1,17 @@
 #version 120
 
-varying vec3 posLayer;
-varying vec2 V;
-varying vec2 div;
+varying vec2 posLayer;
 varying vec2 posFace;
+varying vec4 vColor;
 
 //uniform values
 uniform sampler2DRect u_texture;
 uniform sampler2DRect u_texture_src;
 
 uniform int mode;
-uniform mat3 matrixX;
-uniform mat3 matrixY;
-uniform mat3 matrixR;
+uniform vec3 posAng;
+uniform int X;
+uniform float Y;
 
 //alpha threshold for our occlusion map
 float mod40(float x){
@@ -20,56 +19,12 @@ float mod40(float x){
 }
 
 void main(void) {
-    float contrast = 0.95;
-    vec4 shadow = vec4(0.0,0.0,0.0,0.0);
+    float contrast = 0.70;
+    vec4 shadow = texture2DRect(u_texture,posFace.xy);
 
-    /*if (matrixR[i][j]== 0.0) {
-        float x = matrixX[i][j] - posLayer.x;
-        float y = matrixY[i][j] - posLayer.y;
-        x = mod40(x);
-        y = mod40(y);
-        shadow = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
-        //shadow = vec4(1.0,1.0,0.0,1.0);
-        break;
-    }
-    if (matrixR[i][j]== 90.0) {
-        float x = matrixX[i][j] - posLayer.x;
-        float y = matrixY[i][j] - posLayer.y;
-        x = mod40(x);
-        y = mod40(y);
-        shadow = texture2DRect(u_texture,vec2(160.0*(i+1) - y,160.0*j+ x));
-        //shadow = vec4(1.0,0.0,0.0,1.0);
-        
-        break;
-    }
-    if (matrixR[i][j]== 180.0) {
-        float x = matrixX[i][j] - posLayer.x;
-        float y = matrixY[i][j] - posLayer.y;
-        x = mod40(x);
-        y = mod40(y);
-        shadow = texture2DRect(u_texture,vec2(160.0*(i+1) - x,160.0*(j+1) - y));
-        //shadow = vec4(1.0,1.0,0.0,1.0);
-        
-        break;
-    }
-    if (matrixR[i][j]== 270.0) {
-        float x = matrixX[i][j] - posLayer.x;
-        float y = matrixY[i][j] - posLayer.y;
-        x = mod40(x);
-        y = mod40(y);
-        shadow = texture2DRect(u_texture,vec2(160.0*i + y,160.0*(j+1) - x));
-        //shadow = vec4(0.0,0.0,1.0,1.0);
-        break;
-    }*/
-    
-    shadow = texture2DRect(u_texture,posFace.xy);
-    
-    
-    
-    //gl_FragColor = shadow;
     vec4 src  =  texture2DRect(u_texture_src,posLayer.xy);
     
-    /*if (mode == 0) {
+    if (mode == 0) {
         gl_FragColor = shadow;
         
     }
@@ -107,8 +62,10 @@ void main(void) {
         else{
             gl_FragColor = vec4(0.0,1.0,1.0,0.0);
         }
-    }*/
+    }
     
-    gl_FragColor = vec4(0.0,0.0,1.0,1.0);
+    //gl_FragColor = vec4(0.0,0.0,1.0,1.0);
+    //gl_FragColor = shadow;
+    //gl_FragColor = vColor;
 
 }
