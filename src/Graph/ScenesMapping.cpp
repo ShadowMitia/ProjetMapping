@@ -55,15 +55,17 @@ void Scene1::draw()
             fboFace.end();
             
             layerToFace(layer[2].getTexture());
-            
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             Light* light = dynamic_cast<Light *>(_spritesLight->at(i));
             lightRender.renderLights(&fboFaceShadow, light);
             fboFace.begin();
             ofClear(0,0,0,0);
             ofPushMatrix();
             ofTranslate(light->getPositionTranform().x - lightSize/2, light->getPositionTranform().y-lightSize/2);
-            fboFaceShadow.draw(0, 0);
+            //fboFaceShadow.draw(0, 0);
+            //_spritesLight->at(i)->draw();
             fboFace.end();
+            
             glEnable(GL_BLEND);
             glBlendFunc(GL_ONE, GL_ZERO);
             faceToLayer(&layer[2],1);
