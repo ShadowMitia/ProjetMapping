@@ -41,7 +41,7 @@ void Scene1::draw()
             _spritesSolide->at(i)->draw();
             fboFace.end();
             //faceToLayer(sprites->at(i)->layerId,0);
-            faceToLayer3(&layer[_spritesSolide->at(i)->layerId], 0);
+            faceToLayer(&layer[_spritesSolide->at(i)->layerId], 0);
         }
 
     }
@@ -66,7 +66,7 @@ void Scene1::draw()
             fboFace.end();
             glEnable(GL_BLEND);
             glBlendFunc(GL_ONE, GL_ZERO);
-            faceToLayer3(&layer[2],1);
+            faceToLayer(&layer[2],1);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             
             
@@ -82,7 +82,7 @@ void Scene1::draw()
             fboFace.end();
             
             ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
-            faceToLayer3(&layer[nbLayer-1], 2);
+            faceToLayer(&layer[nbLayer-1], 2);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
             
             

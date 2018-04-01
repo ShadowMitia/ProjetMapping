@@ -39,30 +39,8 @@ public:
         }
     }
     
+
     void faceToLayer(ofFbo *layer, int mode){
-        layer->begin();
-        //ofSetColor(ofColor::white);
-        ShaderFaceToLayer.begin();
-        ShaderFaceToLayer.setUniform1i("mode", mode);
-        ShaderFaceToLayer.setUniformTexture("u_texture", fboFace.getTexture(), 0);
-        ShaderFaceToLayer.setUniformTexture("u_texture_src", layer->getTexture(), 1);
-        ShaderFaceToLayer.setUniformMatrix3f("matrixX", matrix[0]);
-        ShaderFaceToLayer.setUniformMatrix3f("matrixY", matrix[1]);
-        ShaderFaceToLayer.setUniformMatrix3f("matrixR", matrix[2]);
-        ofDrawRectangle(ofPoint(0,0), layer->getWidth(), layer->getHeight());
-        ShaderFaceToLayer.end();
-        layer->end();
-    }
-    void faceToLayer2(ofFbo *layer, int mode){
-        layer->begin();
-        for (int i = 0; i<3; ++i) {
-            for (int j = 0; j<3; ++j) {
-                fboFace.getTexture().drawSubsection(matrix[0][i + j*3],matrix[1][i + j*3] , 160, 160, 160*i, 160*j);
-            }
-        }
-        layer->end();
-    }
-    void faceToLayer3(ofFbo *layer, int mode){
         ofVec3f posAng;
         layer->begin();
         for (int i=0; i<9; ++i) {
