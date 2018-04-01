@@ -42,10 +42,13 @@ bool AvatarDef::getViewPoint(){
 }
 
 void AvatarDef::drawMovePlaform(ofVec2f p){
+    ofPushView();
     n = n + 1/10.0;
     ofRectangle temp;
     temp.setFromCenter(p.x, p.y, 12, 12);
-    
+    temp.setFromCenter(0, 0, 12, 12);
+    ofTranslate(p.x, p.y);
+    ofRotate(a->polygon.getRotation());
     ofVec2f v = a->getVelocity();
     if (v.y > 0) {
         ofSetColor(ofColor::orange);
@@ -78,6 +81,9 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
     }else{
         
     }
+    
+    ofPopView();
+
     
     //moveImages[((int)floor(n)) % 4].draw(p);
 }

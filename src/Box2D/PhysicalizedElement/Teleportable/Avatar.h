@@ -56,6 +56,8 @@ private:
     void(Avatar::*preMove)(Shift *s);
     void movePlatform(Shift *s);
     void moveNord(Shift *s);
+    void moveTop(Shift *s);
+    
     void moveSud(Shift *s);
     void moveEst(Shift *s);
     void moveOuest(Shift *s);

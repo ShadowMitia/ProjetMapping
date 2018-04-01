@@ -128,6 +128,7 @@ void Avatar::draw()
 /////////////// move avatar ///////////////
 void Avatar::movePlatform(Shift *s)
 {
+    polygon.setRotation(0); // mettre a dans setMove();
     moveInputX = s->directionalCross[1] - s->directionalCross[0];
     moveInputY = polygon.body->GetLinearVelocity().y;
 
@@ -151,6 +152,21 @@ void Avatar::moveNord(Shift *s)
 
     //polygon.body->SetLinearVelocity(b2Vec2( -inputX * speedMax, -inputY * speedMax));
 }
+
+void Avatar::moveTop(Shift *s)
+{
+    float speed = VarConst::speedAvatar;
+    float speedMax = VarConst::speedAvatarMax;
+    float rotationMax = 1;
+    polygon.setRotation(polygon.getRotation()+ (s->directionalCross[1] - s->directionalCross[0])*rotationMax);
+    
+    moveInputX = (s->directionalCross[3] - s->directionalCross[2]) * speedMax * sin(ofDegToRad( (int) abs(polygon.getRotation())%360) );
+    moveInputY = (s->directionalCross[3] - s->directionalCross[2]) * speedMax * cos(ofDegToRad( (int) abs(polygon.getRotation())%360) ) ;
+    cout << (int) abs(polygon.getRotation())%360 << " <<<<rotation "<< endl;
+
+    //polygon.body->SetLinearVelocity(b2Vec2( + inputX * speedMax,  + inputY * speedMax));
+}
+
 void Avatar::moveSud(Shift *s)
 {
     float speed = VarConst::speedAvatar;
@@ -159,6 +175,9 @@ void Avatar::moveSud(Shift *s)
     moveInputY = (s->directionalCross[3] - s->directionalCross[2]) * speedMax;
     //polygon.body->SetLinearVelocity(b2Vec2( + inputX * speedMax,  + inputY * speedMax));
 }
+
+
+
 void Avatar::moveOuest(Shift *s)
 {
     float speed = VarConst::speedAvatar;
@@ -201,21 +220,25 @@ void Avatar::setMove(Deplacement _move)
             //cout << "Nord" << endl;
             modeDeplace = Deplacement::TOP;
             preMove=&Avatar::moveNord;
+            preMove=&Avatar::moveTop;
             break;
         case Deplacement::DOWN :
             //cout << "Sud" << endl;
             modeDeplace = Deplacement::DOWN;
             preMove=&Avatar::moveSud;
+            preMove=&Avatar::moveTop;
             break;
         case Deplacement::LEFT :
             //cout << "Ouest" << endl;
             modeDeplace = Deplacement::LEFT;
             preMove=&Avatar::moveOuest;
+            preMove=&Avatar::moveTop;
             break;
         case Deplacement::RIGHT :
             //cout << "Est" << endl;
             modeDeplace = Deplacement::RIGHT;
             preMove=&Avatar::moveEst;
+            preMove=&Avatar::moveTop;
             break;
         case Deplacement::LADDER:
             modeDeplace = Deplacement::LADDER;
