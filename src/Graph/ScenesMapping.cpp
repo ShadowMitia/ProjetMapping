@@ -6,7 +6,6 @@
 //
 //
 
-#define Code_Size
 
 
 enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};

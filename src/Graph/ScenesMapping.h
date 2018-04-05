@@ -16,7 +16,7 @@
 #include "Light.h"
 #include "Face.h"
 #include "utils.h"
-
+#include "AllSprite.h"
 //#include "Sprite.h"
 
 

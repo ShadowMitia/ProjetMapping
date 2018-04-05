@@ -14,6 +14,8 @@
 #include "Light.h"
 
 
+#define Code_Size
+
 enum Category {
     
     PLATFORM       = 0x0001,

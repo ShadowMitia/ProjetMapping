@@ -43,7 +43,7 @@ bool AvatarDef::getViewPoint(){
 
 void AvatarDef::drawMovePlaform(ofVec2f p){
     ofPushView();
-    n = n + 1/10.0;
+    n = n + 1/2.0;
     ofRectangle temp;
     temp.setFromCenter(p.x, p.y, 36, 36);
     temp.setFromCenter(0, 0, 36/2, 36/2);
@@ -62,16 +62,23 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
     else  {
         if (v.x > 0) {
             ofSetColor(ofColor::red);
-            ofDrawRectangle(temp);
+            //ofDrawRectangle(temp);
+            moveImages[((int)floor(n)) % 12][0].draw(-moveImages[((int)floor(n)) % 12][0].getWidth()/4, -moveImages[((int)floor(n)) % 12][0].getHeight()/4 -10/2, moveImages[((int)floor(n)) % 12][0].getWidth()/2, moveImages[((int)floor(n)) % 12][0].getHeight()/2);
         }
         else if(v.x < 0){
             ofSetColor(ofColor::blueSteel);
-            ofDrawRectangle(temp);
+            //ofDrawRectangle(temp);
+            moveImages[((int)floor(n)) % 12][1].draw(-moveImages[((int)floor(n)) % 12][1].getWidth()/4, -moveImages[((int)floor(n)) % 12][1].getHeight()/4 -10/2, moveImages[((int)floor(n)) % 12][1].getWidth()/2, moveImages[((int)floor(n)) % 12][1].getHeight()/2);
+
         }
         else{
+            
+            ofSetColor(ofColor::blueSteel);
+            ofDrawRectangle(temp);
             ofSetColor(ofColor::violet);
-            //ofDrawRectangle(temp);
-            moveImages[0].draw(-moveImages[0].getWidth()/4, -moveImages[0].getHeight()/4, moveImages[0].getWidth()/2, moveImages[0].getHeight()/2);
+            ofDrawRectangle(temp);
+            //moveImages[0].draw(-moveImages[0].getWidth()/4, -moveImages[0].getHeight()/4 -10/2, moveImages[0].getWidth()/2, moveImages[0].getHeight()/2);
+            //moveImages[((int)floor(n)) % 12].draw(-moveImages[((int)floor(n)) % 12].getWidth()/2, -moveImages[((int)floor(n)) % 12].getHeight()/2 -10/2, moveImages[((int)floor(n)) % 12].getWidth(), moveImages[((int)floor(n)) % 12].getHeight());
         }
     }
     
