@@ -22,7 +22,7 @@ public:
         layerIni = layerId =  3;
         color.set(ofColor::orange);
         drawMove = &AvatarDef::drawMovePlaform;
-        moveImages[0].load("ava_1.png");
+        moveImages[0].load("Avatar/pixel_00002.png");
         //moveImages[0].mirror(false, false);
         moveImages[1].load("ava_2.png");
         moveImages[2].load("ava_3.png");

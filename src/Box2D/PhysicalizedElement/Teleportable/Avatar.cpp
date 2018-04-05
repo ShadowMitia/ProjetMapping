@@ -132,12 +132,10 @@ void Avatar::movePlatform(Shift *s)
     moveInputX = s->directionalCross[1] - s->directionalCross[0];
     moveInputY = polygon.body->GetLinearVelocity().y;
 
-    float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     if (jumping)
     {
-        speed = VarConst::speedAvatarAirControl;
-        speedMax = VarConst::speedAvatarAirControlMax;
+        //speedMax = VarConst::speedAvatarAirControlMax;
     }
     moveInputX = moveInputX* speedMax;
     
@@ -145,7 +143,6 @@ void Avatar::movePlatform(Shift *s)
 }
 void Avatar::moveNord(Shift *s)
 {
-    float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     moveInputX = (s->directionalCross[1] - s->directionalCross[0]) * speedMax;
     moveInputY = (s->directionalCross[2] - s->directionalCross[3]) * speedMax;
@@ -155,7 +152,6 @@ void Avatar::moveNord(Shift *s)
 
 void Avatar::moveTop(Shift *s)
 {
-    float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     float rotationMax = 1;
     polygon.setRotation(polygon.getRotation()+ (s->directionalCross[1] - s->directionalCross[0])*rotationMax);
@@ -169,7 +165,6 @@ void Avatar::moveTop(Shift *s)
 
 void Avatar::moveSud(Shift *s)
 {
-    float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     moveInputX = (s->directionalCross[1] - s->directionalCross[0]) * speedMax;
     moveInputY = (s->directionalCross[3] - s->directionalCross[2]) * speedMax;
@@ -180,7 +175,6 @@ void Avatar::moveSud(Shift *s)
 
 void Avatar::moveOuest(Shift *s)
 {
-    float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     moveInputX = (s->directionalCross[2] - s->directionalCross[3]) * speedMax;
     moveInputY = (s->directionalCross[1] - s->directionalCross[0]) * speedMax;
@@ -188,7 +182,6 @@ void Avatar::moveOuest(Shift *s)
 }
 void Avatar::moveEst(Shift *s)
 {
-    float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     moveInputX = (s->directionalCross[3] - s->directionalCross[2]) * speedMax;
     moveInputY = (s->directionalCross[0] - s->directionalCross[1]) * speedMax;
@@ -198,7 +191,6 @@ void Avatar::moveLadder(Shift *s)
 {
     moveInputX = s->directionalCross[1] - s->directionalCross[0];
     moveInputY = s->directionalCross[3] - s->directionalCross[2];
-    float speed = VarConst::speedAvatar;
     float speedMax = VarConst::speedAvatarMax;
     moveInputX = moveInputX * speedMax;
     //if ((s->directionalCross[3] - s->directionalCross[2])==0) moveInputY = polygon.body->GetLinearVelocity().y;
@@ -220,25 +212,25 @@ void Avatar::setMove(Deplacement _move)
             //cout << "Nord" << endl;
             modeDeplace = Deplacement::TOP;
             preMove=&Avatar::moveNord;
-            preMove=&Avatar::moveTop;
+            //preMove=&Avatar::moveTop;
             break;
         case Deplacement::DOWN :
             //cout << "Sud" << endl;
             modeDeplace = Deplacement::DOWN;
             preMove=&Avatar::moveSud;
-            preMove=&Avatar::moveTop;
+            //preMove=&Avatar::moveTop;
             break;
         case Deplacement::LEFT :
             //cout << "Ouest" << endl;
             modeDeplace = Deplacement::LEFT;
             preMove=&Avatar::moveOuest;
-            preMove=&Avatar::moveTop;
+            //preMove=&Avatar::moveTop;
             break;
         case Deplacement::RIGHT :
             //cout << "Est" << endl;
             modeDeplace = Deplacement::RIGHT;
             preMove=&Avatar::moveEst;
-            preMove=&Avatar::moveTop;
+            //preMove=&Avatar::moveTop;
             break;
         case Deplacement::LADDER:
             modeDeplace = Deplacement::LADDER;

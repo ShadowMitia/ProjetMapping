@@ -15,6 +15,8 @@
 #include "Avatar.h"
 #include "Light.h"
 #include "Face.h"
+#include "utils.h"
+
 //#include "Sprite.h"
 
 
@@ -34,7 +36,6 @@
 class Scene1Def{
 public:
     WorldsBox2d* worldsBox2d;
-    vector<ofPolyline>  platforms;
     string background_name;
     string plaforms_name;
     vector<SpriteObj*>* _spritesSolide;

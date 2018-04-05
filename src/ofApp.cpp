@@ -1,33 +1,7 @@
 #include "ofApp.h"
 #include "b2Contact.h"
 
-vector<ofPolyline> importImage(ofTexture _image){
-    std::vector<ofPolyline> poly;
-    ofImage image;
-    ofPixels temp;
-    image.allocate(_image.getWidth(), _image.getHeight(), ofImageType::OF_IMAGE_COLOR_ALPHA);
-    _image.readToPixels(temp);
-    image.setFromPixels(temp);
-    image.update();
-    ofxCv::ContourFinder contourFinder;
-    contourFinder.setMinAreaRadius(0);
-    contourFinder.setMaxAreaRadius(100000); //1000 max
-    contourFinder.setThreshold(100);
-    contourFinder.setInvert(true);
-    contourFinder.setFindHoles(false);
-    contourFinder.findContours(image);
-    
-    for (int i = 0 ; i < contourFinder.getPolylines().size(); i++){
-        ofPolyline tempPoly;
-        for (int j = 0; j<contourFinder.getPolyline(i).getVertices().size(); j++) {
-            tempPoly.addVertex(contourFinder.getPolyline(i).getVertices()[j] + ofPoint(1,1));
-        }
-        //tempPoly = contourFinder.getPolyline(i);
-        tempPoly.addVertex(tempPoly.getVertices().at(0));
-        poly.push_back(tempPoly);
-    }
-    return poly;
-}
+
 //--------------------------------------------------------------
 void ofApp::setup() {
     
@@ -40,12 +14,13 @@ void ofApp::setup() {
     worlds->setup();
     worlds->world.enableEvents();
     worlds->world.getWorld();
+    
     Scene1Def def;
     def._spritesSolide = &spritesSolide;
     def._spritesLight = &spritesLight;
     def.worldsBox2d = worlds;
     def.background_name = "Map_test_portails_back.png";
-    def.plaforms_name = "Map_plateformes.png";
+    def.plaforms_name = "Map_test_portails_plateformes.png";
     
 
 
@@ -59,7 +34,6 @@ void ofApp::setup() {
     for (std::size_t i = 0; i < platforms.size() ; i++) {
         worlds->createPlatform(platforms[i], Category::PLATFORM);
     }
-    def.platforms = platforms;
     
     imageTemp.load("Map_plateformes.png");
     //ofDisableArbTex();
@@ -73,10 +47,10 @@ void ofApp::setup() {
             FboTemp.begin();
             ofClear(0,0, 0, 0);
             ofBackground(ofColor::white);
-            int unit = 12;
+            int unit = 35;
             fboFace.getTexture().drawSubsection(320, 320 - unit , 320, unit, 320, 320 - unit);
             fboFace.getTexture().drawSubsection(320, 320*2 , 320, unit, 320, 320*2);
-            fboFace.getTexture().drawSubsection(320 - unit, 320  , unit,160 , 320 - unit, 320 );
+            fboFace.getTexture().drawSubsection(320 - unit, 320  , unit,320 , 320 - unit, 320 );
             fboFace.getTexture().drawSubsection(320*2, 320 , unit, 320, 320*2, 320);
             FboTemp.end();
             std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
@@ -310,10 +284,7 @@ void ofApp::setup() {
     
     
     scene1 = new Scene1(def);
-    scene2 = new Scene2(worlds);
-    
     mapping.registerFboSource(scene1);
-    mapping.registerFboSource(scene2);
     mapping.setup();
     
 #ifdef CUSTOM_BOX2D_TIM

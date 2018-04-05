@@ -6,6 +6,9 @@
 //
 //
 
+#define Code_Size
+
+
 enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 #include "ScenesMapping.h"
 #include "fctGraph.h"
@@ -25,7 +28,7 @@ void Scene1::draw()
         }
         if (i==nbLayer-1) {
             //worldsBox2d->draw(); //non alex
-            ofBackground(ofColor::black);
+            //ofBackground(ofColor::black);
         }
         layer[i].end();
     }
@@ -35,7 +38,11 @@ void Scene1::draw()
     // solide
     for (int i = 0; i<_spritesSolide->size(); ++i) {
         if (_spritesSolide->at(i)->isActif()) {
+            #ifdef Code_Size
+            fillMatrixTo160(_spritesSolide->at(i));
+            #else
             fillMatrix(_spritesSolide->at(i));
+            #endif
             fboFace.begin();
             ofClear(0,0,0,0);
             _spritesSolide->at(i)->draw();
@@ -96,7 +103,7 @@ void Scene1::draw()
     ofSetColor(ofColor::white);
 
     
-    for (int i=0; i<nbLayer-1; ++i) {
+    for (int i=0; i<nbLayer; ++i) {
         if (i!=20) {
             layer[i].draw(0, 0);
 
@@ -106,7 +113,7 @@ void Scene1::draw()
 
 
     // debug mode
-    ofPopMatrix();
+    //ofPopMatrix();
     //worldsBox2d->draw();
     
     //fboFace.draw(0, 0);
@@ -133,17 +140,37 @@ Scene1::Scene1(Scene1Def def){
     _spritesLight = def._spritesLight;
     background.load(def.background_name);
     plaforms.load(def.plaforms_name);
+    #ifdef Code_Size
+    background.load(def.background_name);
+    plaforms.load(def.plaforms_name);
+    background.resize(background.getWidth()/2, background.getHeight()/2);
+    plaforms.resize(plaforms.getWidth()/2, plaforms.getHeight()/2);
+    FaceFunction::setup(160.0);
+    #else
+    background.load(def.background_name);
+    plaforms.load(def.plaforms_name);
+    #endif
+    
     allocate(background.getWidth(), background.getHeight());
     worldsBox2d =def.worldsBox2d;
     
     
+    
+    #ifdef Code_Size
+    fboFaceShadow.allocate(160*3, 160*3);
+    #else
     fboFaceShadow.allocate(320*3, 320*3);
+    #endif
     for (int i=0; i<nbLayer; ++i) {
         layer[i].allocate(background.getWidth(), background.getHeight());
     }
     layerPlatform.allocate(background.getWidth(), background.getHeight());
-    //lightSize = 256;
+    
+    #ifdef Code_Size
+    lightSize = 160;
+    #else
     lightSize = 320;
+    #endif
     ofDisableArbTex();  // <-- Very Important
     lightRender.setup(lightSize,lightSize);
     lightRender.setRenderFunction(this, &Scene1::renderPlatform);
@@ -155,9 +182,10 @@ Scene1::Scene1(Scene1Def def){
     
     ofTessellator t;
     vector<ofPolyline> BezierPlatform, mousePlatform;
-    for (int i = 0; i< def.platforms.size(); i++) {
-        BezierPlatform.push_back(fctBezier(def.platforms[i], ofPoint(3,3), 2));
-        Append(mousePlatform, mouse(def.platforms[i], ofPoint(3,3),2));
+    vector<ofPolyline>  platforms = importImage(plaforms.getTexture());
+    for (int i = 0; i< platforms.size(); i++) {
+        BezierPlatform.push_back(fctBezier(platforms[i], ofPoint(3,3), 2));
+        Append(mousePlatform, mouse(platforms[i], ofPoint(3,3),2));
 
     }
     cout << " nb de plateporme : " << BezierPlatform.size()  << endl;

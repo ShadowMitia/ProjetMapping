@@ -108,7 +108,7 @@ void WorldsBox2d::setup(){
     warterfalls = new Waterfalls(&world);
     
     
-    new ObjSignageSign(world.getWorld(),ofVec2f(0, -20), ofVec2f(284.051, 562.55)); // viré 
+    //new ObjSignageSign(world.getWorld(),ofVec2f(0, -20), ofVec2f(284.051, 562.55)); // viré
     //284.051, 562.55
     
 }

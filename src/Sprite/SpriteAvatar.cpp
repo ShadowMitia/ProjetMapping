@@ -13,11 +13,11 @@
 #include "Avatar.h"
 
 void AvatarDef::draw(){
-    ofRectangle temp;
-    ofVec2f tempP = getPositionTranform();
-    temp.setFromCenter(tempP.x, tempP.y, 12, 12);
-    ofSetColor(ofColor::orange);
-    ofDrawRectangle(temp);
+    //ofRectangle temp;
+    //ofVec2f tempP = getPositionTranform();
+    //temp.setFromCenter(tempP.x, tempP.y, 12, 12);
+    //ofSetColor(ofColor::orange);
+    //ofDrawRectangle(temp);
     ofSetColor(ofColor::white);
     drawMovePlaform(getPositionTranform());
 }
@@ -46,8 +46,8 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
     n = n + 1/10.0;
     ofRectangle temp;
     temp.setFromCenter(p.x, p.y, 36, 36);
-    temp.setFromCenter(0, 0, 36, 36);
-    ofTranslate(p.x, p.y);
+    temp.setFromCenter(0, 0, 36/2, 36/2);
+    ofTranslate(p.x/2, p.y/2);
     ofRotate(a->polygon.getRotation());
     ofVec2f v = a->getVelocity();
     if (v.y > 0) {
@@ -70,7 +70,8 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
         }
         else{
             ofSetColor(ofColor::violet);
-            ofDrawRectangle(temp);
+            //ofDrawRectangle(temp);
+            moveImages[0].draw(-moveImages[0].getWidth()/4, -moveImages[0].getHeight()/4, moveImages[0].getWidth()/2, moveImages[0].getHeight()/2);
         }
     }
     
