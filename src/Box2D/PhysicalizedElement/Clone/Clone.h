@@ -33,6 +33,7 @@ public:
     void contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite) override;
     
 private:
+    b2Filter tempFilter;
     bool portalView;
     void (CloneBox2d::*collisionFonction)();
     void collisionFonctionAvatar();

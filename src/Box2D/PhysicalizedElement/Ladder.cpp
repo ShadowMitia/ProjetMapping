@@ -9,32 +9,37 @@
 #include "Ladder.h"
 #include "Avatar.h"
 
+
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
+
+
 void Ladder::create(b2World *_b2World, ofPolyline _groundLine){
     
     //ground.clear();
     polygon.addVertexes(_groundLine);
     polygon.setPhysics(0, 0, 0.5f); // (0.0, 0.1, 0.7)
-    polygon.create(_b2World);
-    
+    polygon.create(_b2World,false);
+    polygon.body->GetFixtureList()->SetSensor(true);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     data->sprite = Sprite::LADDER;
     data->physicalizedElement = this;
     
     b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0004;
-    tempFilter.maskBits = 0x0010 | 0x0008;
+    tempFilter.categoryBits = Category::LADDER;
+    tempFilter.maskBits = Category::AVATAR;
     polygon.setFilterData(tempFilter);
     
 }
@@ -42,7 +47,7 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
     if (OtherSprite->sprite==Sprite::AVATAR) {
         Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
         b2Fixture* f = polygon.body->GetFixtureList();
-        if (_fixture == f) {
+        /*if (_fixture == f) {
             cout << "Start Ladder " << endl;
             objSource->lockLadder.ladder = true;
             if (objSource->lockLadder.ladderTop) {
@@ -65,7 +70,9 @@ void Ladder::contactStart(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite*
             objSource->polygon.body->SetLinearVelocity(b2Vec2(0.f, 0.f));
             objSource->setJumping(false);
             objSource->setMove(Deplacement::LADDER);
-        }
+        }*/
+        objSource->SetGravityScale(.0f);
+        objSource->setMove(Deplacement::LADDER);
     }
     
     // pour les Clone voir dans contactStart du clone ( Avatar )
@@ -76,7 +83,7 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
         Avatar *objSource = static_cast<Avatar*>(OtherSprite->physicalizedElement);
         
         b2Fixture* f = polygon.body->GetFixtureList();
-        if (_fixture == f) {
+        /*if (_fixture == f) {
             objSource->lockLadder.ladder = false;
             cout << "End Ladder " << endl;
             if (!objSource->lockLadder.ladderTop) {
@@ -98,13 +105,17 @@ void Ladder::contactEnd(ofxBox2dContactArgs e,b2Fixture* _fixture, dataSprite* O
             }
             objSource->lockLadder.ladderTop = false;
             
-        }
+        }*/
+        objSource->SetGravityScale(1.0f);
+        objSource->setMove(Deplacement::PLATFORM); /// regardé la
+
     }
     
     // pour les Clone voir dans contactStart du clone ( Avatar )
 }
 
 // Code ObjectLadder //
+/*
 void ObjectLadder::create(b2World * b2dworld){
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());
@@ -165,7 +176,7 @@ void ObjectLadder::create(b2World * b2dworld){
         
     }
 }
-
+*/
 void ObjectPlatformLadder::create(b2World * b2dworld){
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());

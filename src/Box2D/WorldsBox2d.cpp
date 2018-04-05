@@ -6,6 +6,7 @@
 //
 //
 
+
 #include "WorldsBox2d.h"
 #include "utils.h"
 #include <cstdlib>
@@ -83,7 +84,8 @@ std::vector<Portal*> generatePortals(std::vector<std::vector<std::string>> const
 
     int idFace = std::atoi(parameters[i][11].c_str());
         //cout << "salut  "<< idFace << endl;
-      portals.push_back(new Portal(ofRectangle(x, y, w, h), world, d, co, &input[idFace]));
+        int coef = 2;
+      portals.push_back(new Portal(ofRectangle(coef * x, coef * y, coef * w, coef * h), world, d, co, &input[idFace]));
     }
 
   for (std::size_t i = 0; i < portals.size(); ++i)
@@ -104,6 +106,10 @@ void WorldsBox2d::setup(){
     world.setGravity(0, VarConst::gravity);
     world.setFPS(60.0);
     warterfalls = new Waterfalls(&world);
+    
+    
+    //new ObjSignageSign(world.getWorld(),ofVec2f(0, -20), ofVec2f(284.051, 562.55)); // viré
+    //284.051, 562.55
     
 }
 void WorldsBox2d::draw(){
@@ -155,15 +161,25 @@ void WorldsBox2d::createPickUp(ObjPickupDef *_objPickupDef){
     ObjPickup * pkup = new ObjPickup(_objPickupDef);
     pkup->setPosition(_objPickupDef->positionInit);
     pickups.push_back(pkup);
+}
+
+void WorldsBox2d::createPlatforMove(ObjPlatforMoveDef *_objPlatforMoveDef){
+    ObjPlatforMove * pM = new ObjPlatforMove(_objPlatforMoveDef);
+    pM->setPosition(_objPlatforMoveDef->positionInit);
+    platforMoves.push_back(pM);
     
 }
 void WorldsBox2d::update(){
 
     //world.update();
     
-
+    for (int i = 0; i < avatars.size(); ++i){
+        avatars[i]->presUpdate();
+    }
+    
     // delect clone
     // ne pas touché
+    //cout << "nb de clones:  " << clones.size() << endl;
     for (int i = 0; i< clones.size(); ++i) {
         if (clones[i]->statut>1) {
             // téléportation
@@ -183,9 +199,9 @@ void WorldsBox2d::update(){
     
     //warterfalls->update();
 }
-void WorldsBox2d::createPlatform(ofPolyline polyline){
+void WorldsBox2d::createPlatform(ofPolyline polyline, uint16 mask){
     Platform* edge = new Platform;
-    edge->create(world.getWorld(), polyline);
+    edge->create(world.getWorld(), polyline, mask);
     platforms.push_back(edge);
 }
 void WorldsBox2d::createLadder(ofPolyline polyline){
@@ -200,6 +216,11 @@ void WorldsBox2d::creataBlock(ObjBlockDef * _objBlockDef){
     ObjBlock * block = new ObjBlock( _objBlockDef);
     block->setPosition(_objBlockDef->positionInit);
     blocks.push_back(block);
+}
+void WorldsBox2d::creataBlock(ObjTrampolineDef * _objBlockDef){
+    ObjTrampoline * block = new ObjTrampoline( _objBlockDef);
+    block->setPosition(_objBlockDef->positionInit);
+    trampolines.push_back(block);
 }
 void WorldsBox2d::createMushroom(ObjMushroomDef *_objMushroomDef){
     ObjMushroom *mroom = new ObjMushroom(_objMushroomDef);

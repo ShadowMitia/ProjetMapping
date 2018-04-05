@@ -12,23 +12,28 @@
 #include "ofxGLFWJoystick.h"
 #include "shift.h"
 #include "Face.h"
-#include "Sprite.h"
+#include "AllSprite.h"
 
 //#define USE_WIIMOTE
 
 #ifdef USE_WIIMOTE
 #include "ofxWiiuse.h"
 #endif
+
+
 #define nbFace  13
 
 #ifdef USE_WIIMOTE
-class ofApp : public ofBaseApp, public ofxWiiuseListener {
+class ofApp : public ofBaseApp, public ofxWiiuseListener, public FaceFunction {
 #else
-    class ofApp : public ofBaseApp {
+    class ofApp : public ofBaseApp, public FaceFunction {
 #endif
         
-        
     public:
+        
+        ofImage imageTemp;
+        ofFbo FboTemp;
+
         
         int tempI = 0;
         Face faces[nbFace];

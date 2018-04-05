@@ -14,14 +14,16 @@
 
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
 
 ofVec2f CloneBox2d::multyMatrix(ofVec2f v)
@@ -49,14 +51,16 @@ CloneBox2d::~CloneBox2d()
         objSource->setVelocity(v);
         objSource->sprite->face = portalDestination->face;
         if (layer > 4 ) { //  deffinir  le layer top
-            objSource->sprite->layer = layer; // je crois c que  est inutil 
-            b2Filter tempFilter = objSource->sprite->getFilter();
-            tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-            objSource->sprite->setFilter(tempFilter);
+            objSource->sprite->layerId = layer; // je crois c que  est inutil
+            objSource->teleportableFilter.categoryBits = Category::OBJ_top;
+            objSource->setFilter(Category::OBJ_top| Category::CLONE | Category::MUSHROOM_top);
+            //objSource->setFilter(objSource->getMaskBits()| 0x0100);
+
         }
         (*this.*delectClone)();
         
     }
+    objSource->viewPointLock=false;
 }
 void CloneBox2d::create()
 {
@@ -65,18 +69,19 @@ void CloneBox2d::create()
     //polygon.setPhysics(10.f, 0, 0);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
     polygon.create(portalSource->getb2World(),false);
-    b2Filter tempFilter;
-    tempFilter.categoryBits = 0x0008;
-    tempFilter.maskBits = 0x0001| 0x0004 | 0x0008 | 0x0010 | 0x0020 | 0x0040 | 0x0080;
+    
+    tempFilter.categoryBits = Category::CLONE;
+    tempFilter.maskBits = objSource->sprite->maskBits | Category::MUSHROOM_top;
     polygon.body->GetFixtureList()->SetFilterData(tempFilter);
     polygon.setData(new dataSprite());
     dataSprite* data = (dataSprite*)polygon.getData();
     
     
     if (layer == 6) { //  deffinir  le layer top
-        b2Filter tempFilter = objSource->sprite->getFilter();
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        objSource->sprite->setFilter(tempFilter);
+
+        //objSource->setFilter(objSource->getMaskBits()| 0x0100);
+        //objSource->setFilter(objSource->getMaskBits());
+
     }
     
     if (data!=nullptr) { // cela ne regle pas la question danger !!!!!!!!!! sleep
@@ -118,13 +123,20 @@ void CloneBox2d::update()
     ofPoint t = (portalSource->*f)(objSource->getPosition());
     t = t*portalSource->orient;
     if (t.x < - 3  || t.y < -3) {
+        objSource->viewPointLock = true;
         Portal *tempPortal = portalDestination;
         if (!objSource->viewPoint){
             portalView = false;
-            portalDestination = portalSource->linkedPortal[portalView];}
+            portalDestination = portalSource->linkedPortal[portalView];
+            objSource->setFilter(objSource->sprite->maskBits | Category::PLATFORM |Category::PLATFORM_1  );
+            
+        }
         else{
             portalView = true;
-            portalDestination = portalSource->linkedPortal[portalView];}
+            portalDestination = portalSource->linkedPortal[portalView];
+            objSource->setFilter(objSource->sprite->maskBits| Category::PLATFORM |Category::PLATFORM_2 );
+
+        }
         if (tempPortal != portalDestination) {
             for (int i = 1; i<5; ++i) {
                 polygon.tabCollision[i] = 0;
@@ -132,6 +144,8 @@ void CloneBox2d::update()
         }
     }else objSource->viewPoint=portalView;
     
+    //if (viewPoint) setFilter(sprite->maskBits|Category::PLATFORM_2 | Category::PLATFORM);
+    //else setFilter(sprite->maskBits|Category::PLATFORM_1 | Category::PLATFORM);
     
     
     

@@ -145,7 +145,6 @@ public:
          callRenderRunction();
          objectsFBO.end();
          */
-
         end->begin();
         ofClear(0, 0, 0);
         ofBackground(ofColor::black); // bug de la ligne

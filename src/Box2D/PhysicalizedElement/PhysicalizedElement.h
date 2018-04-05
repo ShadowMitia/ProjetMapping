@@ -2,19 +2,24 @@
 
 #include "ofMain.h"
 #include "ofxBox2d.h"
-
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
-enum class Sprite {UNKNOWN, AVATAR, CLONE, PLATFORM, BLOCK, PICKUP, PORTAL ,LADDER, MUSHROOM};
+
+std::vector<ofPoint> loadPoints(const std::string& file);
+
+
+enum class Sprite {UNKNOWN, AVATAR, CLONE, PLATFORM, BLOCK, PICKUP, PORTAL ,LADDER, MUSHROOM, sensorAVATAR, SignageSign};
 class PhysicalizedElement;
 
 struct dataSprite {
@@ -36,6 +41,6 @@ public:
     void    create(b2World * b2dworld, bool _detectSide);
     void    setFilterDataObjet(b2Filter _filter);
     void    setFilterDataSide(b2Filter _filter);
-    b2Filter FilterDataObjet,FilterDataSide;
+    //b2Filter FilterDataObjet,FilterDataSide;
     int tabCollision[5] = {0}; //faire un pt tab ou new tab[1] ou new tab[5];
 };

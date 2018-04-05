@@ -10,8 +10,9 @@
 #include "ofMain.h"
 #include "Teleportable.h"
 #include "shift.h"
-#include "Sprite.h"
+#include "SpriteAvatar.h"
 #include "Ladder.h"
+
 
 enum class Deplacement { PLATFORM = 0, TOP = 1, DOWN = 2, LEFT = 3, RIGHT = 4, PLATFORMLADDER, LADDER };
 class Avatar;
@@ -27,6 +28,8 @@ public:
 };
 class Avatar : public Teleportable {
 public:
+    ofxBox2dCircle sensor;
+    vector<Teleportable*> spriteForSensor;
     Avatar(AvatarDef* _avatarDef);
     Shift *s;
     bool jumping;
@@ -44,6 +47,7 @@ public:
 
 private:
     
+    
     float moveInputX;
     float moveInputY;
     coyoteTime* ct;
@@ -52,6 +56,8 @@ private:
     void(Avatar::*preMove)(Shift *s);
     void movePlatform(Shift *s);
     void moveNord(Shift *s);
+    void moveTop(Shift *s);
+    
     void moveSud(Shift *s);
     void moveEst(Shift *s);
     void moveOuest(Shift *s);

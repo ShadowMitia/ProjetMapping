@@ -6,9 +6,12 @@
 //
 //
 
+#define Code_Size
+
+
 enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 #include "ScenesMapping.h"
-
+#include "fctGraph.h"
 
 void Scene1::draw()
 {
@@ -17,93 +20,103 @@ void Scene1::draw()
     for (int i=0; i<nbLayer; ++i) {
         layer[i].begin();
         ofClear(0, 0, 0, 0);
+        if (i==0) {
+            background.draw(0, 0);
+        }
         if (i==2) {
-            plaforms.draw(0, 0);
+            layerPlatform.draw(0, 0);
         }
         if (i==nbLayer-1) {
             //worldsBox2d->draw(); //non alex
+            //ofBackground(ofColor::black);
         }
         layer[i].end();
     }
 
     // Affiche tout les sprites
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    for (int i = 0; i<sprites->size(); ++i) {
-        if (sprites->at(i)->isActif()) {
-            fillMatrix(sprites->at(i));
+    // solide
+    for (int i = 0; i<_spritesSolide->size(); ++i) {
+        if (_spritesSolide->at(i)->isActif()) {
+            #ifdef Code_Size
+            fillMatrixTo160(_spritesSolide->at(i));
+            #else
+            fillMatrix(_spritesSolide->at(i));
+            #endif
             fboFace.begin();
             ofClear(0,0,0,0);
-            sprites->at(i)->draw();
+            _spritesSolide->at(i)->draw();
             fboFace.end();
-            faceToLayer(sprites->at(i)->layer,0);
+            //faceToLayer(sprites->at(i)->layerId,0);
+            faceToLayer(&layer[_spritesSolide->at(i)->layerId], 0);
         }
 
     }
 
-    
-    for (int i = sprites->size(); i<sprites->size()-1; i++) {
-        if (sprites->at(i)->isActif()) {
-            fillMatrix(sprites->at(i));
+    // light
+    /*for (int i = 0; i< _spritesLight->size(); i++) {
+        if (_spritesLight->at(i)->isActif()) {
+            fillMatrix(_spritesLight->at(i));
             fboFace.begin();
             ofClear(0,0,0,0);
             fboFace.end();
             
-            layerToFace(2);
-            
-            Light* light = dynamic_cast<Light *>(sprites->at(i));
+            layerToFace(layer[2].getTexture());
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            Light* light = dynamic_cast<Light *>(_spritesLight->at(i));
             lightRender.renderLights(&fboFaceShadow, light);
             fboFace.begin();
             ofClear(0,0,0,0);
             ofPushMatrix();
             ofTranslate(light->getPositionTranform().x - lightSize/2, light->getPositionTranform().y-lightSize/2);
-            fboFaceShadow.draw(0, 0);
+            //fboFaceShadow.draw(0, 0);
+            //_spritesLight->at(i)->draw();
             fboFace.end();
+            
             glEnable(GL_BLEND);
             glBlendFunc(GL_ONE, GL_ZERO);
-            faceToLayer(1,1);
+            faceToLayer(&layer[2],1);
             ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            
+            
+            fboFace.begin();
+            ofClear(0,0,0,0);
+            ofBackground(ofColor::black);
+            ofPushMatrix();
+            ofTranslate(light->getPositionTranform().x , light->getPositionTranform().y);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_ONE, GL_ZERO);
+            ofSetColor(ofColor::white);
+            ofDrawCircle(0, 0, 82);
+            fboFace.end();
+            
+            ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+            faceToLayer(&layer[nbLayer-1], 2);
+            ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+            
+            
         }
-    }
+    }*/
     
     
-    fillMatrix(sprites->at(sprites->size()-1));
-    fboFace.begin();
-    ofClear(0,0,0,0);
-    fboFace.end();
-    layerToFace(2);
-    
-    Light* light = dynamic_cast<Light *>(sprites->at(sprites->size()-1));
-    lightRender.renderLights(&fboFaceShadow, light);
-    
-    fboFace.begin();
-    ofClear(0,0,0,0);
-    ofPushMatrix();
-    ofTranslate(light->getPositionTranform().x - lightSize/2, light->getPositionTranform().y-lightSize/2);
-    fboFaceShadow.draw(0, 0);
-    fboFace.end();
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_ZERO);
-    faceToLayer(1,1);
-    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
+
+    ofSetColor(ofColor::white);
 
     
-    //background.draw(0, 0);
-    ofBackground(ofColor::white);
-    ofSetColor(ofColor::white);
-    
-    for (int i=1; i<nbLayer; ++i) {
+    for (int i=0; i<nbLayer; ++i) {
         if (i!=20) {
             layer[i].draw(0, 0);
 
         }
     }
 
+
+
     // debug mode
-    ofPopMatrix();
+    //ofPopMatrix();
     //worldsBox2d->draw();
     
     //fboFace.draw(0, 0);
-    
     //layer[0].draw(0, 0);
     //fboFaceShadow.draw(0, 0);
 
@@ -120,49 +133,78 @@ void Scene1::update()
 {
     
 }
-void Scene1::fillMatrix(SpriteObj *_sprite)
-{
-    bool i = _sprite->getViewPoint();
-    matrix[0].set(_sprite->face->matrix[i][0]->rect.x, _sprite->face->matrix[i][3]->rect.x, _sprite->face->matrix[i][6]->rect.x,
-                  _sprite->face->matrix[i][1]->rect.x, _sprite->face->matrix[i][4]->rect.x, _sprite->face->matrix[i][7]->rect.x,
-                  _sprite->face->matrix[i][2]->rect.x, _sprite->face->matrix[i][5]->rect.x, _sprite->face->matrix[i][8]->rect.x);
-    matrix[1].set(_sprite->face->matrix[i][0]->rect.y, _sprite->face->matrix[i][3]->rect.y, _sprite->face->matrix[i][6]->rect.y,
-                 _sprite->face->matrix[i][1]->rect.y, _sprite->face->matrix[i][4]->rect.y, _sprite->face->matrix[i][7]->rect.y,
-                 _sprite->face->matrix[i][2]->rect.y, _sprite->face->matrix[i][5]->rect.y, _sprite->face->matrix[i][8]->rect.y);
-    matrix[2] = _sprite->face->matrixR[i];
 
-}
-void Scene1::faceToLayer(int _layer, int mode)
-{
-
-    layer[_layer].begin();
-    //ofSetColor(ofColor::white);
-    ShaderFaceToLayer.begin();
-    ShaderFaceToLayer.setUniform1i("mode", mode);
-    ShaderFaceToLayer.setUniformTexture("u_texture", fboFace.getTexture(), 0);
-    ShaderFaceToLayer.setUniformTexture("u_texture_src", layer[_layer].getTexture(), 1);
-    ShaderFaceToLayer.setUniformMatrix3f("matrixX", matrix[0]);
-    ShaderFaceToLayer.setUniformMatrix3f("matrixY", matrix[1]);
-    ShaderFaceToLayer.setUniformMatrix3f("matrixR", matrix[2]);
-    ofDrawRectangle(ofPoint(0,0), layer[_layer].getWidth(), layer[_layer].getHeight());
-    ShaderFaceToLayer.end();
-    layer[_layer].end();
+Scene1::Scene1(Scene1Def def){
+    name = "Scene One FBO Source";
+    _spritesSolide= def._spritesSolide;
+    _spritesLight = def._spritesLight;
+    background.load(def.background_name);
+    plaforms.load(def.plaforms_name);
+    #ifdef Code_Size
+    background.load(def.background_name);
+    plaforms.load(def.plaforms_name);
+    background.resize(background.getWidth()/2, background.getHeight()/2);
+    plaforms.resize(plaforms.getWidth()/2, plaforms.getHeight()/2);
+    FaceFunction::setup(160.0);
+    #else
+    background.load(def.background_name);
+    plaforms.load(def.plaforms_name);
+    #endif
     
+    allocate(background.getWidth(), background.getHeight());
+    worldsBox2d =def.worldsBox2d;
+    
+    
+    
+    #ifdef Code_Size
+    fboFaceShadow.allocate(160*3, 160*3);
+    #else
+    fboFaceShadow.allocate(320*3, 320*3);
+    #endif
+    for (int i=0; i<nbLayer; ++i) {
+        layer[i].allocate(background.getWidth(), background.getHeight());
+    }
+    layerPlatform.allocate(background.getWidth(), background.getHeight());
+    
+    #ifdef Code_Size
+    lightSize = 160;
+    #else
+    lightSize = 320;
+    #endif
+    ofDisableArbTex();  // <-- Very Important
+    lightRender.setup(lightSize,lightSize);
+    lightRender.setRenderFunction(this, &Scene1::renderPlatform);
+    lightRender.setRenderFunction(this, &Scene1::renderObjects);
+    mask.allocate(background.getWidth(), background.getHeight());
+    mask.begin();
+    ofClear(0);
+    mask.end();
+    
+    ofTessellator t;
+    vector<ofPolyline> BezierPlatform, mousePlatform;
+    vector<ofPolyline>  platforms = importImage(plaforms.getTexture());
+    for (int i = 0; i< platforms.size(); i++) {
+        BezierPlatform.push_back(fctBezier(platforms[i], ofPoint(3,3), 2));
+        Append(mousePlatform, mouse(platforms[i], ofPoint(3,3),2));
+
+    }
+    cout << " nb de plateporme : " << BezierPlatform.size()  << endl;
+    ofMesh BezierPlatformMesh,mousePlatformMesh;
+    t.tessellateToMesh(BezierPlatform, ofPolyWindingMode::OF_POLY_WINDING_ODD, BezierPlatformMesh);
+    t.tessellateToMesh(mousePlatform, ofPolyWindingMode::OF_POLY_WINDING_ODD, mousePlatformMesh);
+ 
+    layerPlatform.begin();
+    ofClear(0, 0, 0, 0);
+    ofSetColor(ofColor::brown);
+    BezierPlatformMesh.draw();
+    ofSetColor(ofColor::paleGreen);
+    mousePlatformMesh.draw();
+    layerPlatform.end();
+    ofSetColor(ofColor::white);
+
 }
-void Scene1::layerToFace(int _layer)
-{
-    fboFace.begin();
-    ofClear(0,0,0,0);  //Attantion c est pas remis ˆ 0
-    ShaderLayerToFace.begin();
-    ShaderLayerToFace.setUniformTexture("u_texture", layer[_layer].getTexture(), 0);
-    ShaderLayerToFace.setUniformMatrix3f("matrixX", matrix[0]);
-    ShaderLayerToFace.setUniformMatrix3f("matrixY", matrix[1]);
-    ShaderLayerToFace.setUniformMatrix3f("matrixR", matrix[2]);
-    ofSetColor(ofColor::white, 0);
-    ofDrawRectangle(ofPoint(0,0), 3*160, 3*160);
-    ShaderLayerToFace.end();
-    fboFace.end();
-}
+
+
 void Scene2::draw()
 {
     ofSetColor(ofColor::white);

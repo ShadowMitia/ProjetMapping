@@ -1,5 +1,17 @@
 #include "PhysicalizedElement.h"
 
+std::vector<ofPoint> loadPoints(const std::string& file)
+ {
+ std::vector<ofPoint> pts;
+ std::vector <std::string>  ptsStr = ofSplitString(ofBufferFromFile(file).getText(), ",");
+ for (unsigned int i = 0; i < ptsStr.size(); i += 2) {
+ float x = ofToFloat(ptsStr[i]);
+ float y = ofToFloat(ptsStr[i+1]);
+ pts.push_back(ofPoint(x, y));
+ }
+ return pts;
+ }
+
 
 
 void PhysicalizedElement::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
@@ -62,7 +74,19 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         fixtureSide.shape = &shape;
         body->CreateFixture(&fixtureSide);        
     }*/
-
+    if (_detectSide) {
+        b2CircleShape shape;
+        shape.m_radius		= 30 / OFX_BOX2D_SCALE;
+        
+        b2FixtureDef fixtureSide;
+        fixtureSide.shape		= &shape;
+        fixtureSide.density		= 0;
+        fixtureSide.friction	= 0;
+        fixtureSide.restitution	= 0;
+        fixtureSide.isSensor    = true;
+        body->CreateFixture(&fixtureSide);
+    }
+    
     if(ofxBox2dPolygon::bIsTriangulated) {
         
         b2PolygonShape	shape;
@@ -104,12 +128,12 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         fixture.density		= density;
         fixture.restitution = bounce;
         fixture.friction	= friction;
+        cout << " friction " << friction << endl;
         fixture.isSensor    = false;
         body->CreateFixture(&fixture);
     }
     
-    //setFilterDataObjet(FilterDataObjet);
-    //setFilterDataSide(FilterDataSide);
+    
     
     
     vector<ofPoint> pts = ofPolyline::getVertices();
@@ -128,10 +152,13 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
     alive = true;
 }
 void ObjectGame::setFilterDataObjet(b2Filter _filter){
+    cout << "setFilterDataObjet" << endl;
     b2Fixture * f = body->GetFixtureList();
     f->SetFilterData(_filter);
 }
 void ObjectGame::setFilterDataSide(b2Filter _filter){
+    cout << "setFilterDataSide" << endl;
+
         int i = 0;
         for( b2Fixture * f = body->GetFixtureList(); f; f = f->GetNext() ){
             if (i!=0) {

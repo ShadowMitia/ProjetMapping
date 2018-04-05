@@ -5,23 +5,28 @@
 //  Created by FatDazz_mac on 12/02/2018.
 //
 //
-
+#pragma once
 #include "Mushroom.h"
 #include "WorldsBox2d.h"
 #include "Clone.h"
+
+
 /*
  Category bits:
- PLATFORM : 0x0001
- PORTAL   : 0x0002
- LADDER   : 0x0004
- CLONE    : 0x0008
- AVATAR   : 0x0010
- BLOCK    : 0x0020
- PICKUP   : 0x0040
- MUSHROOM : 0x0080
+ PLATFORM       : 0x0001
+ PLATFORM-1     : 0x0002
+ PLATFORM-2     : 0x0004
+ PORTAL         : 0x0008
+ LADDER         : 0x0010
+ AVATAR         : 0x0020
+ AVATAR-top     : 0x0040
+ OBJ            : 0x0080
+ OBJ-top        : 0x0100
+ MUSHROOM-top   : 0x0200
  */
 
 void ObjectGame::createObjMushroom(b2World * b2dworld, bool _detectSide){
+    
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());
         return;
@@ -84,7 +89,7 @@ void ObjectGame::createObjMushroom(b2World * b2dworld, bool _detectSide){
         body->CreateFixture(&fixture);
     }
     
-    setFilterDataObjet(FilterDataObjet);
+    //setFilterDataObjet(FilterDataObjet);
     
     vector<ofPoint> pts = ofPolyline::getVertices();
     mesh.clear();
@@ -107,15 +112,17 @@ ObjMushroom::ObjMushroom(ObjMushroomDef *_ObjMushroomDef){
     ////////// POLYGONE ///////////////////
     std::vector<ofPoint> pts = loadPoints("Mushroom.dat");
     for (int i= 0; i<pts.size(); ++i) {
-        pts[i].scale(23);
+        //pts[i].scale(23);
     }
     
     polygon.addVertices(pts);
     polygon.setPhysics(VarConst::densityAvatar, VarConst::bounceAvatar, 0);
-    polygon.FilterDataObjet.categoryBits = 0x0080;
-    polygon.FilterDataObjet.maskBits =  0x0010 | 0x0008 ;
     
     polygon.createObjMushroom(_ObjMushroomDef->world->world.getWorld(), false);
+    
+    teleportableFilter.categoryBits = _ObjMushroomDef->categoryBits;
+    setFilter(_ObjMushroomDef->maskBits);
+    
     
     polygon.body->SetFixedRotation(true);
     polygon.setData(new dataSprite());
@@ -132,9 +139,8 @@ void ObjMushroom::draw(){
 void ObjMushroom::contactStart(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSprite* OtherSprite){
     if (OtherSprite->sprite == Sprite::CLONE) {
         CloneBox2d* clone = static_cast<CloneBox2d*>(OtherSprite->physicalizedElement);
-        clone->objSource->sprite->layer = clone->objSource->sprite->layer + 4;
-        clone->layer = clone->objSource->sprite->layer;
-
+        clone->objSource->sprite->layerId = clone->objSource->sprite->layerId + 4;
+        clone->layer = clone->objSource->sprite->layerId;
     }
     
 }
@@ -144,9 +150,10 @@ void ObjMushroom::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture, dataSpr
         clone->layer = clone->layer = clone->objSource->sprite->layerIni;
     }
     else{
+        
         Teleportable* telport = static_cast<Teleportable*>(OtherSprite->physicalizedElement);
-        telport->sprite->layer = telport->sprite->layerIni;
-        telport->sprite->setFilter(telport->sprite->getFilter());
-        telport->sprite->setFilter( telport->sprite->getFilter());
+        telport->sprite->layerId = telport->sprite->layerIni;
+        telport->teleportableFilter.categoryBits = telport->sprite->categoryBits;
+        telport->setFilter(telport->sprite->maskBits| Category::PLATFORM |Category::PLATFORM_1);// ajout platform 2 ou 3;
     }
 }

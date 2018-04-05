@@ -1,33 +1,7 @@
 #include "ofApp.h"
 #include "b2Contact.h"
 
-vector<ofPolyline> importImage(const string& path){
-    ofImage image;
-    std::vector<ofPolyline> poly;
-    
-    if (!image.load(path))
-    {
-        throw std::invalid_argument(path);
-    }
-    ofxCv::ContourFinder contourFinder;
-    contourFinder.setMinAreaRadius(0);
-    contourFinder.setMaxAreaRadius(100000); //1000 max
-    contourFinder.setThreshold(100);
-    contourFinder.setInvert(true);
-    contourFinder.setFindHoles(false);
-    contourFinder.findContours(image);
-    
-    for (int i = 0 ; i < contourFinder.getPolylines().size(); i++){
-        ofPolyline tempPoly;
-        for (int j = 0; j<contourFinder.getPolyline(i).getVertices().size(); j++) {
-            tempPoly.addVertex(contourFinder.getPolyline(i).getVertices()[j] + ofPoint(1,1));
-        }
-        //tempPoly = contourFinder.getPolyline(i);
-        tempPoly.addVertex(tempPoly.getVertices().at(0));
-        poly.push_back(tempPoly);
-    }
-    return poly;
-}
+
 //--------------------------------------------------------------
 void ofApp::setup() {
     
@@ -40,38 +14,137 @@ void ofApp::setup() {
     worlds->setup();
     worlds->world.enableEvents();
     worlds->world.getWorld();
+    
     Scene1Def def;
-    def._sprites = &sprites;
+    def._spritesSolide = &spritesSolide;
+    def._spritesLight = &spritesLight;
     def.worldsBox2d = worlds;
     def.background_name = "Map_test_portails_back.png";
-    def.plaforms_name = "Map_plateformes.png";
-    scene1 = new Scene1(def);
+    def.plaforms_name = "Map_test_portails_plateformes.png";
+    
 
-    scene2 = new Scene2(worlds);
-    
-    mapping.registerFboSource(scene1);
-    mapping.registerFboSource(scene2);
-    mapping.setup();
-    
+
+    generateFaces();
+
     ////   Import Platform   /////
     worlds->platforms.clear();
-    std::vector<ofPolyline>  platforms = importImage("Map_test_portails_plateformes.png");
+    
+    imageTemp.load("Map_test_portails_plateformes.png");
+    std::vector<ofPolyline>  platforms = importImage(imageTemp.getTexture());
     for (std::size_t i = 0; i < platforms.size() ; i++) {
-        worlds->createPlatform(platforms[i]);
+        worlds->createPlatform(platforms[i], Category::PLATFORM);
+    }
+    
+    imageTemp.load("Map_plateformes.png");
+    //ofDisableArbTex();
+    ofEnableArbTex(); // <-- Very Important
+    for (int faceNb = 0; faceNb < nbFace; faceNb++) {
+        for(int site = 0; site < 2; site++){
+            
+            fillMatrix( &faces[faceNb], site);
+            layerToFace(imageTemp.getTexture());
+            FboTemp.allocate(imageTemp.getWidth(), imageTemp.getHeight(),GL_RGBA);
+            FboTemp.begin();
+            ofClear(0,0, 0, 0);
+            ofBackground(ofColor::white);
+            int unit = 35;
+            fboFace.getTexture().drawSubsection(320, 320 - unit , 320, unit, 320, 320 - unit);
+            fboFace.getTexture().drawSubsection(320, 320*2 , 320, unit, 320, 320*2);
+            fboFace.getTexture().drawSubsection(320 - unit, 320  , unit,320 , 320 - unit, 320 );
+            fboFace.getTexture().drawSubsection(320*2, 320 , unit, 320, 320*2, 320);
+            FboTemp.end();
+            std::vector<ofPolyline>  platforms2 = importImage(FboTemp.getTexture());
+            for (std::size_t i = 0; i < platforms2.size() ; i++) {
+                
+                for (int j=0; j<platforms2[i].getVertices().size(); j++) {
+                    platforms2[i].getVertices()[j]= platforms2[i].getVertices()[j] - ofVec2f(320, 320) + faces[faceNb].rect.position;
+                }
+                if (site==0) {
+                    worlds->createPlatform(platforms2[i], Category::PLATFORM_1);
+
+                }else{
+                    worlds->createPlatform(platforms2[i], Category::PLATFORM_2);
+
+                }
+            }
+
+        }
     }
     
     ////   Import Ladder   /////
-    std::vector<ofPolyline>  ladders = importImage("Map_test_portails_echelles.png");
+    imageTemp.load("Map_test_portails_echelles.png");
+    std::vector<ofPolyline>  ladders = importImage(imageTemp.getTexture());
     for (std::size_t i =0; i< ladders.size() ; i++) {
         worlds->createLadder(ladders[i]);
     }
     
-    
-    
-    generateFaces();
+
     worlds->createPortal(faces);
     
-    ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
+    
+    
+    {AvatarDef *avatarDef = new AvatarDef();
+        avatarDef->world = worlds;
+        avatarDef->positionInit=ofVec2f(2*366.899, 2*490.55);
+        avatarDef->s= &inputButton[0];
+        avatarDef->face = &faces[4];
+        avatarDef->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
+        spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
+    }
+    
+    /*{ObjBlockDef *block = new ObjBlockDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(1204.45, 336.191);
+        block->face =&faces[11];
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}*/
+    
+    {ObjPlatforMoveDef *block = new ObjPlatforMoveDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(2*1204.45, 2*336.191);
+        block->face =&faces[11];
+        block->vitesse = ofVec2f(-20, 0);
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}
+    
+    
+    {
+        ObjPickupDef *pkup = new ObjPickupDef();
+        pkup->world = worlds;
+        pkup->positionInit = ofVec2f(2*1204.45, 2*346.191);
+        pkup->face = & faces[11];
+        pkup->create();
+        //spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        
+    }
+   
+    
+    for (int i = 0; i< 0; i++) {
+        for (int j = 0; j<0; j++) {
+            ObjPickupDef *pkup = new ObjPickupDef();
+            pkup->world = worlds;
+            pkup->positionInit = ofVec2f(102+20+48 + (320+48)*i, 80 + (320+48)*j);
+            pkup->face = & faces[i+1 + j*10];
+            pkup->create();
+            spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+            spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+            pkup = new ObjPickupDef();
+            pkup->world = worlds;
+            pkup->positionInit = ofVec2f(102+40+48 + (320+48)*i, 80 + (320+48)*j);
+            pkup->face = & faces[i+1 + j*10];
+            pkup->create();
+            spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+            spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+        }
+        
+    }
+
+    
+    /*ObjMushroomDef *objMushroomDef = new ObjMushroomDef();
     objMushroomDef->world= worlds;
     objMushroomDef->positionInit = ofVec2f(968, 440);
     objMushroomDef->face = &faces[10];
@@ -80,27 +153,72 @@ void ofApp::setup() {
     spritesSolide.push_back(static_cast<SpriteObj*>(objMushroomDef));
     
     
-    ObjBlockDef *block = new ObjBlockDef();
+    {ObjTrampolineDef *block = new ObjTrampolineDef();
     block->world=worlds;
-    block->positionInit =ofVec2f(1004, 252);
-    block->face =&faces[9];
+    block->positionInit =ofVec2f(774.251, 552.55);
+    block->face =&faces[8];
     block->create();
     sprites.push_back(static_cast<SpriteObj*>(block));
-    spritesSolide.push_back(static_cast<SpriteObj*>(block));
+    spritesSolide.push_back(static_cast<SpriteObj*>(block));}
     
-  
+    {ObjBlockDef *block = new ObjBlockDef();
+    block->world=worlds;
+    block->positionInit =ofVec2f(1145.4, 292.062);
+    block->face =&faces[11];
+    block->create();
+    sprites.push_back(static_cast<SpriteObj*>(block));
+    spritesSolide.push_back(static_cast<SpriteObj*>(block));}
+    
+    {ObjBlockDef *block = new ObjBlockDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(1204.45, 336.191);
+        block->face =&faces[11];
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}
+    
+    {ObjBlockDef *block = new ObjBlockDef();
+        block->world=worlds;
+        block->positionInit =ofVec2f(1177.5, 484.19);
+        block->face =&faces[12];
+        block->create();
+        sprites.push_back(static_cast<SpriteObj*>(block));
+        spritesSolide.push_back(static_cast<SpriteObj*>(block));}
+    
+    
+    // Avatar
+    {AvatarDef *avatarDef = new AvatarDef();
+    avatarDef->world = worlds;
+    avatarDef->positionInit=ofVec2f(801.1, 434.474);
+    avatarDef->s= &inputButton[0];
+    avatarDef->face = &faces[8];
+    avatarDef->create();
+    spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
+        spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));}
+    
+    
+    {AvatarDef *avatarDef = new AvatarDef();
+        avatarDef->world = worlds;
+        avatarDef->positionInit=ofVec2f(337.997, 562.55);
+        avatarDef->s= &inputButton[1];
+        avatarDef->face = &faces[4];
+        avatarDef->create();
+        spritesSolide.push_back(static_cast<SpriteObj*>(avatarDef));
+        spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
+    }
+    
     ///    ObjPickupDef
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
-        pkup->positionInit = ofVec2f(1228, 228);
-        pkup->face = & faces[10];
+        pkup->positionInit = ofVec2f(816, 474);
+        pkup->face = & faces[8];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        pkup->setFilter(tempFilter);
-        pkup->layer = 7;
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        //b2Filter tempFilter = pkup->getFilter();
+        //tempFilter.categoryBits = 0x0100;
+        //tempFilter.maskBits = tempFilter.maskBits | 0x0100;
+        //pkup->setFilter(tempFilter);
+        //pkup->layerId = 6;
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
 
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -108,12 +226,7 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(196, 356);
         pkup->face = & faces[1];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -121,38 +234,29 @@ void ofApp::setup() {
     pkup->positionInit = ofVec2f(164, 452);
     pkup->face = & faces[2];
     pkup->create();
-    b2Filter tempFilter = pkup->getFilter();
-    tempFilter.categoryBits = 0x0100;
-    tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-    //pkup->setFilter(tempFilter);
-    //pkup->layer = 6;
-    sprites.push_back(static_cast<SpriteObj*>(pkup));
+
+    spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
     spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
-        pkup->positionInit = ofVec2f(396, 228);
-        pkup->face = & faces[3];
+        pkup->positionInit = ofVec2f(985.358, 452.69);
+        pkup->face = & faces[10];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
-        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
+        pkup->categoryBits= Category::OBJ_top;
+        pkup->pkup->setFilter(Category::CLONE | Category::OBJ_top | Category::MUSHROOM_top);
+        pkup->layerIni = pkup->layerId = 6;
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        //spritesLight.push_back(static_cast<SpriteObj*>(pkup));
+    }
     
     {ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
         pkup->positionInit = ofVec2f(500, 244);
         pkup->face = & faces[5];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
     
     {ObjPickupDef *pkup = new ObjPickupDef();
@@ -160,46 +264,28 @@ void ofApp::setup() {
         pkup->positionInit = ofVec2f(708, 244);
         pkup->face = & faces[7];
         pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
+
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
         spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
 
-    {ObjPickupDef *pkup = new ObjPickupDef();
+     */
+     /*{ObjPickupDef *pkup = new ObjPickupDef();
         pkup->world = worlds;
         pkup->positionInit = ofVec2f(284, 524);
         pkup->face = & faces[4];
-        pkup->create();
-        b2Filter tempFilter = pkup->getFilter();
-        tempFilter.categoryBits = 0x0100;
-        tempFilter.maskBits = tempFilter.maskBits | 0x0100;
-        //pkup->setFilter(tempFilter);
-        //pkup->layer = 6;
-        sprites.push_back(static_cast<SpriteObj*>(pkup));
-        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}
-    
-    
+        //pkup->create();
 
-    
-    
-    // Avatar
-    AvatarDef *avatarDef = new AvatarDef();
-    avatarDef->world = worlds;
-    avatarDef->positionInit=ofVec2f(150.513, 226.55);
-    avatarDef->s= &inputButton[0];
-    avatarDef->face = &faces[1];
-    avatarDef->create();
-    sprites.push_back(static_cast<SpriteObj*>(avatarDef));
-    spritesLight.push_back(static_cast<SpriteObj*>(avatarDef));
-
-    
+        spritesSolide.push_back(static_cast<SpriteObj*>(pkup));
+        spritesLight.push_back(static_cast<SpriteObj*>(pkup));}*/
     
     
     ofAddListener(worlds->world.contactStartEvents, this, &ofApp::contactStart);
     ofAddListener(worlds->world.contactEndEvents, this, &ofApp::contactEnd);
+    
+    
+    scene1 = new Scene1(def);
+    mapping.registerFboSource(scene1);
+    mapping.setup();
     
 #ifdef CUSTOM_BOX2D_TIM
     ofAddListener(worlds->world.PostSolveEvents, this, &ofApp::PostSolve);
@@ -217,21 +303,27 @@ void ofApp::setup() {
 
 //--------------------------------------------------------------
 void ofApp::update(){
+    ofSetWindowTitle(ofToString((int)ofGetFrameRate()));
     //input();
+#ifdef USE_WIIMOTE
+    wiiuse.update();
+#endif
     scene1->update();
     if (!worlds->isThreadRunning()) {
         worlds->update();
         worlds->startThread();
     }else cout << "ATTENTION BOX2D RAM" << endl;
     mapping.update();
-    
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
     //scene1->draw();
-    ofBackground(ofColor::black);
+    //ofBackground(ofColor::black);
     mapping.draw();
+    //imageTemp.draw(0, 0);
+    //FboTemp.draw(0,0);
+    //fboFace.draw(0, 0);
 }
 
 //--------------------------------------------------------------
@@ -266,9 +358,15 @@ void ofApp::keyPressed(int key)
     if (key == 'm') {
         //tempI++;
         //cout << "tempI: " << tempI << endl;
-        cout << "position avatar: " << sprites[sprites.size()-1]->world->avatars[0]->getPosition() << endl;
-        cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
+        //cout << "position avatar: " << sprites[sprites.size()-1]->world->avatars[0]->getPosition() << endl;
+        //cout << "top avatar: " << sprites[sprites.size()-1]->face->idFace << endl;
         
+        cout << " [0]:"  << spritesSolide[0]->getViewPoint() << " [1]:" << spritesSolide[1]->getViewPoint()<<  endl;
+        AvatarDef* a  = static_cast<AvatarDef*>(spritesSolide[0]);
+        cout << " [0] posision:" << a->a->getPosition() << endl;
+        ObjPlatforMoveDef* pM = static_cast<ObjPlatforMoveDef*>(spritesSolide[1]);
+        cout << "[1] vitesse: " << pM->pM->getVelocity() << "   "<<pM->vitesse << endl;
+        pM->pM->setVelocity(ofVec2f(-20, 0));
     }
     
     //mapping.keyPressed(key);
@@ -299,8 +397,6 @@ void ofApp::keyReleased(int key)
     }
     
     
-    
-    
     //mapping.keyReleased(key);
     
     if (key == 'f')
@@ -329,7 +425,7 @@ void ofApp::mousePressed(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mouseReleased(int x, int y, int button){
-    mapping.mouseReleased(x, y, button);
+    //mapping.mouseReleased(x, y, button);
 }
 
 //--------------------------------------------------------------
@@ -458,10 +554,7 @@ void ofApp::PostSolve(ofxBox2dPostContactArgs &e)
 #endif //CUSTOM_BOX2D_TIM
 
 void ofApp::input() {
-    
-#ifdef USE_WIIMOTE
-    wiiuse.update();
-#endif
+
     
     ofxGLFWJoystick::one().update();
 
@@ -589,13 +682,14 @@ void ofApp::onWiiuseButtonEvent(ofxWiiuseButtonEventArgs& args)
         case OFXWIIUSE_BUTTON_TWO_PRESSED:
         {
             //            worlds->avatars[args.first - 1]->keyPressed(OF_KEY_LEFT_CONTROL);
-            inputButton[args.first - 1].b = true;
+            //inputButton[args.first - 1].b = true;
+            inputButton[args.first - 1].b = !inputButton[args.first - 1].b;
             break;
         }
         case OFXWIIUSE_BUTTON_TWO_RELEASED:
         {
-            worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
-            inputButton[args.first - 1].b = false;
+            //worlds->avatars[args.first - 1]->keyReleased(OF_KEY_LEFT_CONTROL);
+            //inputButton[args.first - 1].b = false;
             break;
         }
             
@@ -626,7 +720,8 @@ void ofApp::generateFaces()
         float w1 = std::atof(f[i][5].c_str());
         float h1 = std::atof(f[i][6].c_str());
         
-        faces[id1].rect = ofRectangle(x1, y1, w1, h1);
+        int coef = 2;
+        faces[id1].rect = ofRectangle(coef * x1,coef *  y1, coef * w1,coef *  h1);
         //cout << " id1 " << id1 << " id2 " << id2 << endl;
         faces[id1].matrix[0][0] = &faces[std::atoi(f[i][7].c_str())];
         faces[id1].matrix[0][1] = &faces[std::atoi(f[i][9].c_str())];
