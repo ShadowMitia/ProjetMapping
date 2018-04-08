@@ -48,6 +48,8 @@ public:
         moveImages[9][1].load("Avatar/pixel_00011.png");
         moveImages[10][1].load("Avatar/pixel_00012.png");
         moveImages[11][1].load("Avatar/pixel_00013.png");
+        motionlessImage.load("Avatar/pixel_00000.png");
+        
         for (int i =0; i<12; i++) {
             moveImages[i][1].mirror(false, true);
         }
@@ -75,6 +77,7 @@ public:
     
     float n;
     ofImage moveImages[12][2];
+    ofImage motionlessImage;
     ofImage jumpImage[3];
     ofImage jadderImage[3];
     

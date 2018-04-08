@@ -11,6 +11,7 @@
 #include "WorldsBox2d.h"
 #include "Sprite.h"
 #include "Avatar.h"
+#include "shift.h"
 
 void AvatarDef::draw(){
     //ofRectangle temp;
@@ -50,6 +51,7 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
     ofTranslate(p.x/2, p.y/2);
     ofRotate(a->polygon.getRotation());
     ofVec2f v = a->getVelocity();
+    /*
     if (v.y > 0) {
         ofSetColor(ofColor::orange);
         ofDrawRectangle(temp);
@@ -61,7 +63,9 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
     }
     else  {
         if (v.x > 0) {
+            
             ofSetColor(ofColor::red);
+            ofSetColor(ofColor::blueSteel);
             //ofDrawRectangle(temp);
             moveImages[((int)floor(n)) % 12][0].draw(-moveImages[((int)floor(n)) % 12][0].getWidth()/4, -moveImages[((int)floor(n)) % 12][0].getHeight()/4 -10/2, moveImages[((int)floor(n)) % 12][0].getWidth()/2, moveImages[((int)floor(n)) % 12][0].getHeight()/2);
         }
@@ -89,6 +93,19 @@ void AvatarDef::drawMovePlaform(ofVec2f p){
     }else{
         
     }
+    */
+    ofSetColor(ofColor::violet);
+    int InputX  = a->s->directionalCross[1] - a->s->directionalCross[0];
+    if (InputX == -1) {
+        moveImages[((int)floor(n)) % 12][1].draw(-moveImages[((int)floor(n)) % 12][1].getWidth()/4, -moveImages[((int)floor(n)) % 12][1].getHeight()/4 -10/2, moveImages[((int)floor(n)) % 12][1].getWidth()/2, moveImages[((int)floor(n)) % 12][1].getHeight()/2);
+    }
+    else if (InputX == 1){
+        moveImages[((int)floor(n)) % 12][0].draw(-moveImages[((int)floor(n)) % 12][0].getWidth()/4, -moveImages[((int)floor(n)) % 12][0].getHeight()/4 -10/2, moveImages[((int)floor(n)) % 12][0].getWidth()/2, moveImages[((int)floor(n)) % 12][0].getHeight()/2);
+    }
+    else{
+        motionlessImage.draw(-motionlessImage.getWidth()/4, -motionlessImage.getHeight()/4 -10/2, motionlessImage.getWidth()/2,motionlessImage.getHeight()/2);
+    }
+
     
     ofPopView();
 
