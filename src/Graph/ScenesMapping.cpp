@@ -6,28 +6,42 @@
 //
 //
 
-
+#define nbFace  13
 
 enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 #include "ScenesMapping.h"
 #include "fctGraph.h"
-
+#include "Face.h"
 void Scene1::draw()
 {
+    
 
     //ofClear(0);
     for (int i=0; i<nbLayer; ++i) {
         layer[i].begin();
-        ofClear(0, 0, 0, 0);
-        if (i==0) {
-            background.draw(0, 0);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_ZERO,GL_ONE);
+        for (int j = 0; j < nbFace; j++) {
+            ofSetColor(ofColor::black,0);
+            ofDrawRectangle(faces[j].rect.getX()/2, faces[j].rect.getY()/2, 160, 160);
         }
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
         if (i==2) {
-            layerPlatform.draw(0, 0);
+            //layerPlatform.draw(0, 0);
         }
+        
         if (i==nbLayer-1) {
+            #ifdef Code_Size
+            ofPushView();
+            ofScale(0.5, 0.5);
+            #endif
+            
             //worldsBox2d->draw(); //non alex
             //ofBackground(ofColor::black);
+            #ifdef Code_Size
+            ofPopView();
+            #endif
+
         }
         layer[i].end();
     }
@@ -47,7 +61,9 @@ void Scene1::draw()
             _spritesSolide->at(i)->draw();
             fboFace.end();
             //faceToLayer(sprites->at(i)->layerId,0);
-            faceToLayer(&layer[_spritesSolide->at(i)->layerId], 0);
+            //faceToLayer(&layer[_spritesSolide->at(i)->layerId], 0); ecriture sur un layer
+            faceToLayer(&layer[1], 0);
+
         }
 
     }
@@ -110,7 +126,6 @@ void Scene1::draw()
     }
 
 
-
     // debug mode
     //ofPopMatrix();
     //worldsBox2d->draw();
@@ -165,10 +180,23 @@ Scene1::Scene1(Scene1Def def){
     }
     layerPlatform.allocate(background.getWidth(), background.getHeight());
     
+    layer[0].begin();
+    background.draw(0, 0, background.getWidth(), background.getHeight());
+    layer[0].end();
+    
     #ifdef Code_Size
     lightSize = 160;
+    fboClear.allocate(lightSize, lightSize);
+    fboClear.begin();
+    ofClear(0, 0, 0, 0);
+    ofBackground(ofColor::yellowGreen);
+    fboClear.end();
     #else
     lightSize = 320;
+    fboClear.allocate(lightSize, lightSize);
+    fboClear.begin();
+    ofClear(0, 0, 0, 0);
+    fboClear.end();
     #endif
     ofDisableArbTex();  // <-- Very Important
     lightRender.setup(lightSize,lightSize);
@@ -200,6 +228,7 @@ Scene1::Scene1(Scene1Def def){
     mousePlatformMesh.draw();
     layerPlatform.end();
     ofSetColor(ofColor::white);
+    faces = def.faces;
 
 }
 

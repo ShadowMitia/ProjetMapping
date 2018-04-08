@@ -55,11 +55,11 @@ void CloneBox2d::collisionFonctionAvatar(){
         temp = portalDestination->portalRect.getCenter() -  multyMatrix(temp);
         polygon.setPosition(temp);  // *this.*contactStartFonction
     }
-    
+
 }
 
 void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
-    Avatar *obj = static_cast<Avatar*>(objSource);
+    Avatar *objAvatar = static_cast<Avatar*>(objSource);
     if (OtherSprite->sprite==Sprite::LADDER) {
         Ladder *l = static_cast<Ladder*>(OtherSprite->physicalizedElement);
         ladderTouch = true;
@@ -67,7 +67,7 @@ void CloneBox2d::contactStartAvatar(b2Fixture *_fixture, dataSprite *OtherSprite
 }
 
 void CloneBox2d::contactEndAvatar(b2Fixture *_fixture, dataSprite *OtherSprite){
-    Avatar *obj = static_cast<Avatar*>(objSource);
+    Avatar *objAvatar = static_cast<Avatar*>(objSource);
     if (OtherSprite->sprite==Sprite::LADDER) {
         ladderTouch = false;
     }

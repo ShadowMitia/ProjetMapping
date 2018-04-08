@@ -22,7 +22,7 @@ void PhysicalizedElement::contactEnd(ofxBox2dContactArgs e, b2Fixture* _fixture,
 }
 
 // code ObjetGame 
-void ObjectGame::create(b2World * b2dworld, bool _detectSide){
+void ObjectGame::create(b2World * b2dworld, bool circleActiv){
     if(size() <= 3) {
         ofLog(OF_LOG_NOTICE, "need at least 3 points: %i\n", (int)size());
         return;
@@ -74,7 +74,7 @@ void ObjectGame::create(b2World * b2dworld, bool _detectSide){
         fixtureSide.shape = &shape;
         body->CreateFixture(&fixtureSide);        
     }*/
-    if (_detectSide) {
+    if (circleActiv) {
         b2CircleShape shape;
         shape.m_radius		= 30 / OFX_BOX2D_SCALE;
         

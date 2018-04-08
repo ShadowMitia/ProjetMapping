@@ -38,7 +38,7 @@ public:
 class ObjectGame: public ofxBox2dPolygon{
 public:
     void    createObjMushroom(b2World * b2dworld, bool _detectSide);
-    void    create(b2World * b2dworld, bool _detectSide);
+    void    create(b2World * b2dworld, bool circleActiv);
     void    setFilterDataObjet(b2Filter _filter);
     void    setFilterDataSide(b2Filter _filter);
     //b2Filter FilterDataObjet,FilterDataSide;

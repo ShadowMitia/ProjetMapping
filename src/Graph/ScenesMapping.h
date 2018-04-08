@@ -40,6 +40,7 @@ public:
     string plaforms_name;
     vector<SpriteObj*>* _spritesSolide;
     vector<SpriteObj*>* _spritesLight;
+    Face* faces;
     
 };
 
@@ -67,6 +68,9 @@ public:
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(Scene1Def def);
+private:
+    Face* faces;
+    ofFbo fboClear;
     
 };
 class Scene2 : public ofx::piMapper::FboSource
@@ -78,7 +82,7 @@ public:
     : worldsBox2d(worldsBox2d)
     {
         name = "Scene Two FBO Source";
-        allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
+        //allocate(VarConst::WidthWorld2D, VarConst::HeightWorld2D);
     }
     
     void draw();

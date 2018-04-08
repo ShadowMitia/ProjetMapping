@@ -8,15 +8,11 @@
 #pragma once
 
 
-#define nbLayer 8
+#define nbLayer 3 //8
 
 namespace VarConst
 {
-    constexpr const int UNIT = 240;
-    //constexpr const int WidthWorld2D = 20 * UNIT;
-    //constexpr const int HeightWorld2D = 4 * UNIT;
-    constexpr const int WidthWorld2D = 464;
-    constexpr const int HeightWorld2D = 464;
+
     
     constexpr const float gravity = 13.0f;
     constexpr const float speedAvatarMax = 1.80; // v max

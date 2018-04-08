@@ -25,6 +25,7 @@ void ofApp::setup() {
 
 
     generateFaces();
+    def.faces = faces;
 
     ////   Import Platform   /////
     worlds->platforms.clear();
