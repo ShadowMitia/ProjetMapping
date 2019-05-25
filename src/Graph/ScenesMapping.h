@@ -61,10 +61,13 @@ public:
     void renderObjects();
     void renderPlatform();
     
+    ofFbo imageMonde;
     
     ofFbo fboFaceShadow;
     ofFbo layer[nbLayer];
     ofFbo layerPlatform;
+    
+    ofFbo layer1D;
     
     //Scene1(vector<SpriteObj*>* _sprites, string path){
     Scene1(Scene1Def def);

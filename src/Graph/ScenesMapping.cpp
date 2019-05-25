@@ -6,7 +6,6 @@
 //
 //
 
-#define nbFace  13
 
 enum  BLENDMODES{BlendNormal = 0, BlendDarkenf = 1};
 #include "ScenesMapping.h"
@@ -186,18 +185,13 @@ Scene1::Scene1(Scene1Def def){
     
     #ifdef Code_Size
     lightSize = 160;
-    fboClear.allocate(lightSize, lightSize);
-    fboClear.begin();
-    ofClear(0, 0, 0, 0);
-    ofBackground(ofColor::yellowGreen);
-    fboClear.end();
     #else
     lightSize = 320;
-    fboClear.allocate(lightSize, lightSize);
-    fboClear.begin();
-    ofClear(0, 0, 0, 0);
-    fboClear.end();
     #endif
+    
+    layer1D.allocate(nbFace * lightSize, lightSize);
+    
+    
     ofDisableArbTex();  // <-- Very Important
     lightRender.setup(lightSize,lightSize);
     lightRender.setRenderFunction(this, &Scene1::renderPlatform);

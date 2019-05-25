@@ -21,7 +21,6 @@
 #endif
 
 
-#define nbFace  13
 
 #ifdef USE_WIIMOTE
 class ofApp : public ofBaseApp, public ofxWiiuseListener, public FaceFunction {
